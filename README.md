@@ -12,10 +12,10 @@
 -官网：http://cooljs.vip
 -聊天模板：http://uni-chat.cool-admin.com
 
-![cool-uni-chat](https://cool-comm.oss-cn-shenzhen.aliyuncs.com/cool-ui/uni-chat-show.png)
+![cool-uni-chat](https://cool-comm.oss-cn-shenzhen.aliyuncs.com/cool-ui/uni-chat-show.png?x-oss-process=image/resize,w_600)
 
 ![cool-uni](
-https://cool-comm.oss-cn-shenzhen.aliyuncs.com/cool-ui/COOL-UNI.png)
+https://cool-comm.oss-cn-shenzhen.aliyuncs.com/cool-ui/COOL-UNI.png?x-oss-process=image/resize,w_600)
 
 ## 运行
 
