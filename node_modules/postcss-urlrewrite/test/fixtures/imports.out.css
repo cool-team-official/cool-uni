@@ -1,0 +1,5 @@
+@import "global/style.css";
+
+.rule {
+    background: url( "local/image.png" );
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Checkbox 多选框",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-checkbox": "/cool/ui/components/checkbox/checkbox",
+    "cl-checkbox-group": "/cool/ui/components/checkbox-group/checkbox-group"
+  }
+}

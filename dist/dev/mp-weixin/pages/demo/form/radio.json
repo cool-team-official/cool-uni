@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Radio 单选框",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-radio": "/cool/ui/components/radio/radio",
+    "cl-radio-group": "/cool/ui/components/radio-group/radio-group"
+  }
+}

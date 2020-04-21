@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Noticebar 通知栏",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-noticebar": "/cool/ui/components/noticebar/noticebar",
+    "cl-avatar": "/cool/ui/components/avatar/avatar"
+  }
+}

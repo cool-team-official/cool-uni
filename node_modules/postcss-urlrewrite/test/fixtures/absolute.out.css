@@ -1,0 +1,11 @@
+.web-one { background: url("http://yandex.ru/images/srpr/logo3w.png"); }
+
+.web-two { background: url(http://yandex.ru/images/srpr/logo3w.png); }
+
+.web-three { background: url('http://yandex.ru/images/srpr/logo3w.png'); }
+
+.absolute-one { background: url("http://mysite.com/resources.png"); }
+
+.absolute-two { background: url(http://mysite.com/resources.png); }
+
+.absolute-three { background: url('http://mysite.com/resources.png'); }

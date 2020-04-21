@@ -1,0 +1,11 @@
+.rule1 {
+    background: url( 'local/test' );
+}
+
+.rule2 {
+    background: url( 'global/test' );
+}
+
+.rule3 {
+    background: url( 'test' );
+}

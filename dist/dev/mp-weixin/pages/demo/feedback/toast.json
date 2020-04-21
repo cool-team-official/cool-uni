@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Toast 提示",
+  "usingComponents": {
+    "cl-toast": "/cool/ui/components/toast/toast",
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

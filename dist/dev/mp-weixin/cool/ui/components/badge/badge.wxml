@@ -1,0 +1,1 @@
+<view hidden="{{!($slots.default)}}" class="cl-badge"><slot></slot><text hidden="{{!(!hidden&&(content||content===0||isDot))}}" class="{{['cl-badge__content','cl-badge__content--'+type,[(isDot)?'is-dot':'']]}}">{{''+content+''}}</text></view>

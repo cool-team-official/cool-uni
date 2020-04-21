@@ -1,0 +1,123 @@
+@font-face {
+	font-family: 'cl-iconfont'; /* project id 1725188 */
+	src: url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot');
+	src: url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot?#iefix') format('embedded-opentype'),
+		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.svg#iconfont') format('svg');
+}
+
+[class*='cl-icon-'] {
+	font-family: 'cl-iconfont';
+	font-size: inherit;
+	font-style: normal;
+}
+
+.cl-icon-notification:before {
+	content: '\e808';
+}
+
+.cl-icon-notification-fill:before {
+	content: '\e807';
+}
+
+.cl-icon-info-fill:before {
+	content: '\e72a';
+}
+
+.cl-icon-info:before {
+	content: '\e72b';
+}
+
+.cl-icon-question-fill:before {
+	content: '\e72c';
+}
+
+.cl-icon-question:before {
+	content: '\e72d';
+}
+
+.cl-icon-arrow-bottom:before {
+	content: '\e661';
+}
+
+.cl-icon-arrow-top:before {
+	content: '\e6de';
+}
+
+.cl-icon-toast-waiting:before {
+	content: '\e62a';
+}
+
+.cl-icon-toast-warning:before {
+	content: '\e62b';
+}
+
+.cl-icon-avatar:before {
+	content: '\e6a2';
+}
+
+.cl-icon-add:before {
+	content: '\e767';
+}
+
+.cl-icon-remove:before {
+	content: '\e768';
+}
+
+.cl-icon-image:before {
+	content: '\e604';
+}
+
+.cl-icon-toast-success:before {
+	content: '\e642';
+}
+
+.cl-icon-toast-error:before {
+	content: '\e644';
+}
+
+.cl-icon-arrow-left:before {
+	content: '\e7ed';
+}
+
+.cl-icon-arrow-right:before {
+	content: '\e806';
+}
+
+.cl-icon-check:before {
+	content: '\e645';
+}
+
+.cl-icon-close:before {
+	content: '\e646';
+}
+
+.cl-icon-emoji:before {
+	content: '\e64a';
+}
+
+.cl-icon-favor-fill:before {
+	content: '\e64b';
+}
+
+.cl-icon-round-check-fill:before {
+	content: '\e656';
+}
+
+.cl-icon-round-check:before {
+	content: '\e657';
+}
+
+.cl-icon-round-close-fill:before {
+	content: '\e658';
+}
+
+.cl-icon-round-close:before {
+	content: '\e659';
+}
+
+.cl-icon-search:before {
+	content: '\e65c';
+}

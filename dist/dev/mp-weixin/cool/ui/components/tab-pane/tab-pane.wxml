@@ -1,0 +1,1 @@
+<block wx:if="{{visible}}"><view class="cl-tab-pane"><scroll-view class="cl-tab-pane__scroller" scroll-y><slot></slot></scroll-view></view></block>

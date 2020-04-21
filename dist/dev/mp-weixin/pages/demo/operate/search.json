@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "Search 搜索",
+  "usingComponents": {
+    "cl-toast": "/cool/ui/components/toast/toast",
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-search": "/cool/ui/components/search/search",
+    "cl-avatar": "/cool/ui/components/avatar/avatar",
+    "cl-select": "/cool/ui/components/select/select",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

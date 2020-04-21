@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "Loading 加载",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-loading-mask": "/cool/ui/components/loading-mask/loading-mask",
+    "cl-form": "/cool/ui/components/form/form",
+    "cl-form-item": "/cool/ui/components/form-item/form-item",
+    "cl-input": "/cool/ui/components/input/input",
+    "cl-loading": "/cool/ui/components/loading/loading",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

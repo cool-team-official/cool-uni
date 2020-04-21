@@ -1,0 +1,3 @@
+.multiple {
+    background: url('global/one.jpg'), url('global/two.jpg'), url('global/three.jpg');
+}

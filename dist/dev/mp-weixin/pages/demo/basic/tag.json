@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Tag 标签",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-tag": "/cool/ui/components/tag/tag"
+  }
+}

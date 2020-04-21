@@ -1,0 +1,18 @@
+.cl-confirm {
+	&__footer {
+		display: flex;
+		width: 100%;
+
+		.cl-confirm__button {
+			border: 0;
+			border-radius: 0;
+			flex: 1;
+			position: relative;
+			font-size: 26rpx;
+
+			&.is-confirm {
+				color: $color-primary;
+			}
+		}
+	}
+}

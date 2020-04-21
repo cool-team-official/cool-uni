@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cl-dialog": "/cool/ui/components/dialog/dialog"
+  },
+  "component": true
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Progress 进度条",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-progress": "/cool/ui/components/progress/progress",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

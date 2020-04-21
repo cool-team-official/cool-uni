@@ -1,0 +1,87 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/demo/basic",
+      "pages": [
+        "button",
+        "input",
+        "image",
+        "icon",
+        "tag",
+        "divider"
+      ]
+    },
+    {
+      "root": "pages/demo/feedback",
+      "pages": [
+        "toast",
+        "message",
+        "loading"
+      ]
+    },
+    {
+      "root": "pages/demo/form",
+      "pages": [
+        "radio",
+        "switch",
+        "checkbox",
+        "select",
+        "upload",
+        "rate",
+        "rules"
+      ]
+    },
+    {
+      "root": "pages/demo/operate",
+      "pages": [
+        "loadmore",
+        "modal",
+        "action-sheet",
+        "search"
+      ]
+    },
+    {
+      "root": "pages/demo/nav",
+      "pages": [
+        "tabs"
+      ]
+    },
+    {
+      "root": "pages/demo/layout",
+      "pages": [
+        "flex",
+        "grid",
+        "waterfall",
+        "list"
+      ]
+    },
+    {
+      "root": "pages/demo/view",
+      "pages": [
+        "popup",
+        "swiper",
+        "badge",
+        "avatar",
+        "slider",
+        "progress",
+        "noticebar"
+      ]
+    },
+    {
+      "root": "pages/demo/advanced",
+      "pages": [
+        "list-index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "cool-uni",
+    "navigationBarBackgroundColor": "#fff"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,11 @@
+.web-one { background: url("http://www.google.com/images/srpr/logo3w.png"); }
+
+.web-two { background: url(http://www.google.com/images/srpr/logo3w.png); }
+
+.web-three { background: url('http://www.google.com/images/srpr/logo3w.png'); }
+
+.absolute-one { background: url("/resources.png"); }
+
+.absolute-two { background: url(/resources.png); }
+
+.absolute-three { background: url('/resources.png'); }

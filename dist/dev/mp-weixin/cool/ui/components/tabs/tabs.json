@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "component": true,
+  "componentGenerics": {
+    "scoped-slots-default": true
+  }
+}

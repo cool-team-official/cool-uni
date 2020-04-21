@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "waterfall-cl-waterfall-default": "/pages/demo/layout/waterfall-cl-waterfall-default"
+  }
+}

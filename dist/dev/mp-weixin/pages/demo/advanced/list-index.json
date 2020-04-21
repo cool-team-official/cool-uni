@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "List-Index 索引列表",
+  "usingComponents": {
+    "cl-list-index": "/cool/ui/components/list-index/list-index"
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "node": true,
+
+    "maxparams": 5,
+    "maxdepth": 5,
+    "maxstatements": 40,
+    "maxcomplexity": 10,
+
+    "bitwise": false,
+    "boss" : false,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "globalstrict": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": "nofunc",
+    "laxcomma": true,
+    "loopfunc": true,
+    "nonew": true,
+    "multistr": true,
+    "newcap": true,
+    "quotmark": true,
+    "strict": true,
+    "trailing": true,
+    "undef": true,
+    "unused": true
+}

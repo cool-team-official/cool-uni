@@ -1,0 +1,1 @@
+<view class="cl-grid-item" style="{{'width:'+(width)+';'}}"><slot></slot></view>

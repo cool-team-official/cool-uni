@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "Input 输入框",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-input": "/cool/ui/components/input/input",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-select": "/cool/ui/components/select/select",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

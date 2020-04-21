@@ -1,0 +1,280 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				},
+				"navigationBarBackgroundColor": "#6295FF",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages/demo/basic",
+			"pages": [
+				{
+					"path": "button",
+					"style": {
+						"navigationBarTitleText": "Button 按钮"
+					}
+				},
+				{
+					"path": "input",
+					"style": {
+						"navigationBarTitleText": "Input 输入框"
+					}
+				},
+				{
+					"path": "image",
+					"style": {
+						"navigationBarTitleText": "Image 图片"
+					}
+				},
+				{
+					"path": "icon",
+					"style": {
+						"navigationBarTitleText": "Icon 图标"
+					}
+				},
+				{
+					"path": "tag",
+					"style": {
+						"navigationBarTitleText": "Tag 标签"
+					}
+				},
+				{
+					"path": "divider",
+					"style": {
+						"navigationBarTitleText": "Divider 分割线"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/feedback",
+			"pages": [
+				{
+					"path": "toast",
+					"style": {
+						"navigationBarTitleText": "Toast 提示"
+					}
+				},
+				{
+					"path": "message",
+					"style": {
+						"navigationBarTitleText": "Message 消息提醒"
+					}
+				},
+				{
+					"path": "loading",
+					"style": {
+						"navigationBarTitleText": "Loading 加载"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/form",
+			"pages": [
+				{
+					"path": "radio",
+					"style": {
+						"navigationBarTitleText": "Radio 单选框"
+					}
+				},
+				{
+					"path": "switch",
+					"style": {
+						"navigationBarTitleText": "Switch 开关"
+					}
+				},
+				{
+					"path": "checkbox",
+					"style": {
+						"navigationBarTitleText": "Checkbox 多选框"
+					}
+				},
+				{
+					"path": "select",
+					"style": {
+						"navigationBarTitleText": "Select 下拉框"
+					}
+				},
+				{
+					"path": "upload",
+					"style": {
+						"navigationBarTitleText": "Upload 上传"
+					}
+				},
+				{
+					"path": "rate",
+					"style": {
+						"navigationBarTitleText": "Rate 评分"
+					}
+				},
+				{
+					"path": "rules",
+					"style": {
+						"navigationBarTitleText": "Rules 校验"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/operate",
+			"pages": [
+				{
+					"path": "loadmore",
+					"style": {
+						"navigationBarTitleText": "LoadMore 页底提示"
+					}
+				},
+				{
+					"path": "modal",
+					"style": {
+						"navigationBarTitleText": "Modal 模态框"
+					}
+				},
+				{
+					"path": "action-sheet",
+					"style": {
+						"navigationBarTitleText": "ActionSheet 底部菜单"
+					}
+				},
+				{
+					"path": "search",
+					"style": {
+						"navigationBarTitleText": "Search 搜索"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/nav",
+			"pages": [
+				{
+					"path": "tabs",
+					"style": {
+						"navigationBarTitleText": "Tabs 选项卡"
+					}
+				},
+				{
+					"path": "topbar",
+					"style": {
+						"navigationBarTitleText": "Topbar 顶部导航"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/layout",
+			"pages": [
+				{
+					"path": "flex",
+					"style": {
+						"navigationBarTitleText": "Flex 布局"
+					}
+				},
+				{
+					"path": "grid",
+					"style": {
+						"navigationBarTitleText": "Grid 宫格"
+					}
+				},
+				{
+					"path": "waterfall",
+					"style": {
+						"navigationBarTitleText": "Waterfall 瀑布流"
+					}
+				},
+				{
+					"path": "list",
+					"style": {
+						"navigationBarTitleText": "List 列表"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/view",
+			"pages": [
+				{
+					"path": "popup",
+					"style": {
+						"navigationBarTitleText": "Popup 弹出层"
+					}
+				},
+				{
+					"path": "swiper",
+					"style": {
+						"navigationBarTitleText": "Swiper 滑块视图"
+					}
+				},
+				{
+					"path": "badge",
+					"style": {
+						"navigationBarTitleText": "Badge 标记"
+					}
+				},
+				{
+					"path": "avatar",
+					"style": {
+						"navigationBarTitleText": "Avatar 头像"
+					}
+				},
+				{
+					"path": "slider",
+					"style": {
+						"navigationBarTitleText": "Slider 滑块",
+						"app-plus": {
+							"softinputNavBar": "none"
+						}
+					}
+				},
+				{
+					"path": "progress",
+					"style": {
+						"navigationBarTitleText": "Progress 进度条",
+						"app-plus": {
+							"softinputNavBar": "none"
+						}
+					}
+				},
+				{
+					"path": "noticebar",
+					"style": {
+						"navigationBarTitleText": "Noticebar 通知栏",
+						"app-plus": {
+							"softinputNavBar": "none"
+						}
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo/advanced",
+			"pages": [
+				{
+					"path": "list-index",
+					"style": {
+						"navigationBarTitleText": "List-Index 索引列表"
+					}
+				}
+			]
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "cool-uni",
+		"navigationBarBackgroundColor": "#fff"
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
+		}
+	}
+}

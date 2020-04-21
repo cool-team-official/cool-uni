@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "Modal 模态框",
+  "usingComponents": {
+    "cl-message": "/cool/ui/components/message/message",
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-dialog": "/cool/ui/components/dialog/dialog",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-button": "/cool/ui/components/button/button",
+    "cl-confirm": "/cool/ui/components/confirm/confirm",
+    "cl-avatar": "/cool/ui/components/avatar/avatar"
+  }
+}

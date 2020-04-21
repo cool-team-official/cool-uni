@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Avatar 头像",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-avatar": "/cool/ui/components/avatar/avatar",
+    "cl-avatar-group": "/cool/ui/components/avatar-group/avatar-group"
+  }
+}

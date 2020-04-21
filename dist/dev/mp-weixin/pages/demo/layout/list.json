@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "List 列表",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-list": "/cool/ui/components/list/list",
+    "cl-avatar": "/cool/ui/components/avatar/avatar",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

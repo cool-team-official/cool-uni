@@ -1,0 +1,9 @@
+.png { background: url(global/resources.png); }
+
+.gif { background: url("global/resources.gif"); }
+
+.svg { background: url('global/resources.svg'); }
+
+.jpg { background: url('global/resources.jpg'); }
+
+.jpeg { background: url('global/resources.jpeg'); }

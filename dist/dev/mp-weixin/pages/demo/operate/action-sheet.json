@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "ActionSheet 底部菜单",
+  "usingComponents": {
+    "cl-toast": "/cool/ui/components/toast/toast",
+    "cl-action-sheet": "/cool/ui/components/action-sheet/action-sheet",
+    "cl-confirm": "/cool/ui/components/confirm/confirm",
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

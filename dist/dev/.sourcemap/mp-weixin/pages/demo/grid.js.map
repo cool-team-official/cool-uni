@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;;;AAAA;;AAAmB;;AAEnB;;AACA;;;;AACAA,UAAU,CAACC,aAAD,CAAV,C","file":"pages/demo/grid.js","sourcesContent":["import 'uni-pages';import '@dcloudio/uni-stat';\n\nimport Vue from 'vue'\nimport Page from './pages/demo/grid.vue'\ncreatePage(Page)"],"sourceRoot":""}

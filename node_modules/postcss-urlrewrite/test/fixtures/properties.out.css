@@ -1,0 +1,9 @@
+.properties {
+    background-image: url('global/file');
+    content: url('global/file');
+    cue-after: url('global/file');
+    cue-before: url('global/file');
+    cursor: url('global/file'), url('global/file2');
+    list-style-image: url('global/file');
+    play-during: url('global/file');
+}

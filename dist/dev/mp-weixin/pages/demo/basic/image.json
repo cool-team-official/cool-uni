@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "Image 图片",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-col": "/cool/ui/components/col/col",
+    "cl-image": "/cool/ui/components/image/image",
+    "cl-button": "/cool/ui/components/button/button"
+  }
+}

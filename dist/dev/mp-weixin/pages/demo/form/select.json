@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Select 下拉框",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-select": "/cool/ui/components/select/select",
+    "cl-select-region": "/cool/ui/components/select-region/select-region"
+  }
+}

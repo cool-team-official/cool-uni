@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cl-loading": "/cool/ui/components/loading/loading"
+  },
+  "component": true
+}

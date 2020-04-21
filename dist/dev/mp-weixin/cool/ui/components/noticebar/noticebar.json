@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cl-icon": "/cool/ui/components/icon/icon"
+  },
+  "component": true
+}

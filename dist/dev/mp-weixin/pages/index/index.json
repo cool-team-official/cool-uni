@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#6295FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "cl-toast": "/cool/ui/components/toast/toast"
+  }
+}

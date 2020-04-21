@@ -1,0 +1,3 @@
+.multiple {
+    background: url('local/one.jpg'), url('local/two.jpg'), url('local/three.jpg');
+}

@@ -1,0 +1,74 @@
+.cl-tabs {
+	height: 100%;
+	width: 100%;
+
+	&__bar {
+		box-sizing: border-box;
+		white-space: nowrap;
+		text-align: center;
+		background-color: #fff;
+		border-bottom: 1rpx solid #eee;
+
+		.uni-scroll-view::-webkit-scrollbar {
+			display: none;
+		}
+
+		&-li {
+			display: inline-block;
+			height: 80rpx;
+			line-height: 80rpx;
+			margin: 0 20rpx;
+			font-size: 28rpx;
+			box-sizing: border-box;
+			border-bottom-style: solid;
+			border-bottom-width: 4rpx;
+			border-bottom-color: transparent;
+			transition: all 0.2s;
+
+			&.active {
+				color: $color-primary;
+				border-bottom-color: currentColor;
+			}
+
+			.cl-tabs__icon {
+				font-size: 30rpx;
+
+				&--prefix {
+					margin-right: 10rpx;
+				}
+
+				&--suffix {
+					margin-left: 10rpx;
+				}
+			}
+		}
+	}
+
+	&__pane {
+		height: calc(100% - 80rpx);
+		background-color: #fff;
+
+		.cl-tab-pane {
+			height: 100%;
+
+			&__scroller {
+				height: 100%;
+			}
+		}
+	}
+
+	&__swiper {
+		height: 100%;
+		&-scroller {
+			height: 100%;
+		}
+	}
+
+	&--sticky {
+		.cl-tabs__bar {
+			position: sticky;
+			top: 90rpx;
+			z-index: 9;
+		}
+	}
+}

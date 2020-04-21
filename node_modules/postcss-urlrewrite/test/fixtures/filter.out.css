@@ -1,0 +1,9 @@
+.filter {
+    background-image: url('local/file');
+    content: url('global/file');
+    cue-after: url('local/file');
+    cue-before: url('local/file');
+    cursor: url('global/file'), url('global/file2');
+    list-style-image: url('local/file');
+    play-during: url('local/file');
+}

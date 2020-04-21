@@ -1,0 +1,31 @@
+0.1.0:
+  date: 2014-08-08
+  changes:
+    - Initial release.
+0.1.1:
+  date: 2014-08-11
+  changes:
+    - Make regexps public.
+    - Fixed bug with URIs that contains ?#iefix. Normally urijs normalizes such urls and removes "?" part, but only in this exact syntax it is now preserved as is.
+
+0.2.0:
+  date: 2014-08-12
+  changes:
+    - Added UrlHelper.getOriginalURI() method.
+    - Added UrlsHelper.getOriginalURIS() method.
+    - Added ImportHelper.getOriginalURI() method.
+    - Added ImportHelper.getOriginalMediaQuery() method.
+    - Added ImportHelper.getMediaQuery() method.
+    - Added ImportHelper.setMediaQuery() method.
+0.3.0:
+  date: 2015-12-20
+  changes:
+    - Updated dependencies
+0.3.1:
+    date: 2015-12-20
+    changes:
+      - Updated forgotten urijs references
+0.3.2
+    date: 2017-08-31
+    changes:
+      - Resolved blank url() case https://github.com/iAdramelk/postcss-urlrewrite/issues/4#issuecomment-325940126

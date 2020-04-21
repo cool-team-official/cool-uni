@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Rate 评分",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-row": "/cool/ui/components/row/row",
+    "cl-rate": "/cool/ui/components/rate/rate"
+  }
+}

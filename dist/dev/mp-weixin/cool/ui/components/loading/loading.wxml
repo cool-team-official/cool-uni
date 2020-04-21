@@ -1,0 +1,1 @@
+<view class="cl-loading" style="{{'height:'+(size+'px')+';'+('width:'+(size+'px')+';')}}"><view class="cl-loading__mp" style="{{'color:'+(color2)+';'}}"></view></view>

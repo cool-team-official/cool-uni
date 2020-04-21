@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cl-popup": "/cool/ui/components/popup/popup"
+  },
+  "component": true
+}

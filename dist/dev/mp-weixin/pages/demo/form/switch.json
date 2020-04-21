@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Switch 开关",
+  "usingComponents": {
+    "cl-card": "/cool/ui/components/card/card",
+    "cl-switch": "/cool/ui/components/switch/switch"
+  }
+}
