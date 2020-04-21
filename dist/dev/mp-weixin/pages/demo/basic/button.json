@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Button 按钮",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-button": "/cool/ui/components/button/button"
-  }
-}

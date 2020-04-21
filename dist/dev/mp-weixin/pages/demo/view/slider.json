@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Slider 滑块",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-slider": "/cool/ui/components/slider/slider"
-  }
-}

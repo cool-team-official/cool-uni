@@ -1,1 +1,0 @@
-<view class="{{['cl-col',classList]}}" style="{{'padding-left:'+(padding)+';'+('padding-right:'+(padding)+';')}}"><slot></slot></view>

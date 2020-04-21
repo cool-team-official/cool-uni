@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "Swiper 滑块视图",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card"
-  }
-}

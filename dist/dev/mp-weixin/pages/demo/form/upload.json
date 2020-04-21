@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Upload 上传",
-  "usingComponents": {
-    "cl-toast": "/cool/ui/components/toast/toast",
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-upload": "/cool/ui/components/upload/upload"
-  }
-}

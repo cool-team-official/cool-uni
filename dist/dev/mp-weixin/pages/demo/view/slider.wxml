@@ -1,1 +1,0 @@
-<view class="demo-slider"><cl-card vue-id="c846a4a4-1" label="基本用法" bind:__l="__l" vue-slots="{{['default']}}"><cl-slider bind:input="__e" vue-id="{{('c846a4a4-2')+','+('c846a4a4-1')}}" show-value value="{{val}}" data-event-opts="{{[['^input',[['__set_model',['','val','$event',[]]]]]]}}" bind:__l="__l"></cl-slider></cl-card></view>

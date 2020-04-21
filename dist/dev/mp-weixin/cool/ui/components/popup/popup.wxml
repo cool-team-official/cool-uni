@@ -1,1 +1,0 @@
-<view class="{{['cl-popup__wrapper','cl-popup__wrapper--'+direction,[(visible)?'is-show':'']]}}"><view data-event-opts="{{[['tap',[['modalClose',['$event']]]]]}}" class="cl-popup__modal" bindtap="__e"></view><view class="{{['cl-popup']}}" style="{{'height:'+(height)+';'+('width:'+(width)+';')}}"><view class="cl-popup__container"><slot></slot></view></view></view>

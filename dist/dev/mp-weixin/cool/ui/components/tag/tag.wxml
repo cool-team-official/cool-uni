@@ -1,1 +1,0 @@
-<block wx:if="{{visible}}"><view data-event-opts="{{[['tap',[['click',['$event']]]]]}}" class="{{['data-v-3ab804da','cl-tag',classList]}}" bindtap="__e"><slot></slot><text data-event-opts="{{[['tap',[['close',['$event']]]]]}}" hidden="{{!(closable)}}" class="cl-tag__close cl-icon-close data-v-3ab804da" catchtap="__e"></text></view></block>

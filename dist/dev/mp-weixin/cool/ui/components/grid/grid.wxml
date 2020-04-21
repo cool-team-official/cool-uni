@@ -1,1 +1,0 @@
-<view class="{{['cl-grid',[(border)?'cl-grid--border':''],'cl-grid__column-'+column]}}" style="{{'border:'+(border)+';'}}"><slot></slot></view>

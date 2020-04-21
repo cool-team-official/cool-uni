@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Flex 布局",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-row": "/cool/ui/components/row/row",
-    "cl-col": "/cool/ui/components/col/col"
-  }
-}

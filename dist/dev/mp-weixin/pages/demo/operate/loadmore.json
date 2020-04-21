@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "LoadMore 页底提示",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-row": "/cool/ui/components/row/row",
-    "cl-loadmore": "/cool/ui/components/loadmore/loadmore",
-    "cl-button": "/cool/ui/components/button/button"
-  }
-}

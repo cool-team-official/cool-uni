@@ -1,1 +1,0 @@
-<view data-event-opts="{{[['tap',[['change',['$event']]]]]}}" class="{{['cl-radio',isChecked,isBorder,isDisabled]}}" bindtap="__e"><view class="cl-radio__input"><text hidden="{{!(checked)}}" class="cl-icon-toast-success"></text></view><text class="cl-radio__label"><slot></slot></text></view>

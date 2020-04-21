@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cl-loading-mask": "/cool/ui/components/loading-mask/loading-mask",
-    "cl-toast": "/cool/ui/components/toast/toast"
-  },
-  "component": true
-}

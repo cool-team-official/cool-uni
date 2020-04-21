@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cl-divider": "/cool/ui/components/divider/divider",
-    "cl-loading": "/cool/ui/components/loading/loading"
-  },
-  "component": true
-}

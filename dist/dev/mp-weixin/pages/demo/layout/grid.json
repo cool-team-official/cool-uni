@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Grid 宫格",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-grid": "/cool/ui/components/grid/grid",
-    "cl-grid-item": "/cool/ui/components/grid-item/grid-item"
-  }
-}

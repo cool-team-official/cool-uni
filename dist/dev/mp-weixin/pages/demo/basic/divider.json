@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Divider 分割线",
-  "usingComponents": {
-    "cl-card": "/cool/ui/components/card/card",
-    "cl-divider": "/cool/ui/components/divider/divider"
-  }
-}

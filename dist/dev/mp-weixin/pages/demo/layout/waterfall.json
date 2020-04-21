@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Waterfall 瀑布流",
-  "usingComponents": {
-    "cl-waterfall": "/cool/ui/components/waterfall/waterfall",
-    "cl-loadmore": "/cool/ui/components/loadmore/loadmore",
-    "waterfall-cl-waterfall-default": "/pages/demo/layout/waterfall-cl-waterfall-default"
-  }
-}

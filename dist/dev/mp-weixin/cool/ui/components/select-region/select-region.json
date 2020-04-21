@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "cl-select": "/cool/ui/components/select/select"
-  },
-  "component": true
-}

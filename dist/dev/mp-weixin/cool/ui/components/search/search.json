@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cl-input": "/cool/ui/components/input/input",
-    "cl-button": "/cool/ui/components/button/button"
-  },
-  "component": true
-}

@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "cl-search": "/cool/ui/components/search/search"
-  },
-  "component": true
-}

@@ -1,1 +1,0 @@
-<view class="{{['cl-row',classList]}}" style="{{'margin-left:'+(marginLeft)+';'+('margin-right:'+(marginRight)+';')}}"><slot></slot></view>

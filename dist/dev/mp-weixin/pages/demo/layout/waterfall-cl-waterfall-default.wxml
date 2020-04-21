@@ -1,1 +1,0 @@
-<view class="{{['data-v-2072dec5','h','h-'+item]}}">{{''+item+''}}</view>

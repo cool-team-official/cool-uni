@@ -1,1 +1,0 @@
-<view class="{{['cl-form',isLabelPosition,isBorder]}}"><slot></slot></view>

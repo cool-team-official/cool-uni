@@ -1,1 +1,0 @@
-<switch class="cl-switch" checked="{{checked}}" disabled="{{disabled}}" color="{{color}}" data-event-opts="{{[['change',[['onChange',['$event']]]]]}}" bindchange="__e"></switch>
