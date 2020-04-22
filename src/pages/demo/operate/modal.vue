@@ -11,13 +11,15 @@
 				:show-confirm-button="false"
 			>
 				<view>
-					<text>云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。</text>
+					<text
+						>云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。</text
+					>
 				</view>
 			</cl-dialog>
 
 			<cl-row>
-				<cl-button  @tap="open('def')">
-					默认
+				<cl-button @tap="open('def')">
+					<text>默认</text>
 				</cl-button>
 			</cl-row>
 		</cl-card>
@@ -26,8 +28,8 @@
 			<!-- 确认框 -->
 			<cl-confirm ref="cl-confirm"></cl-confirm>
 
-			<cl-button  @tap="openConfirm">
-				确认框
+			<cl-button @tap="openConfirm">
+				<text>确认框</text>
 			</cl-button>
 		</cl-card>
 
@@ -49,13 +51,17 @@
 				</view>
 
 				<template slot="footer">
-					<cl-button  size="small" @tap="close('cs')">取消</cl-button>
-					<cl-button  type="primary" size="small">下一步</cl-button>
+					<cl-button size="small" @tap="close('cs')">
+						<text>取消</text>
+					</cl-button>
+					<cl-button type="primary" size="small">
+						<text>下一步</text>
+					</cl-button>
 				</template>
 			</cl-dialog>
 
-			<cl-button  @tap="open('cs')">
-				自定义
+			<cl-button @tap="open('cs')">
+				<text>自定义</text>
 			</cl-button>
 		</cl-card>
 	</view>
@@ -85,15 +91,19 @@ export default {
 			this.dialog[key] = true;
 		},
 		openConfirm() {
-			this.$refs['cl-confirm'].open({
-				title: '提示',
-				message: '你已成功下载COOL-UNI组件， 祝你有个愉快的体验~',
+			this.$refs["cl-confirm"].open({
+				title: "提示",
+				message: "你已成功下载COOL-UNI组件， 祝你有个愉快的体验~",
 				callback: ({ action }) => {
-					this.$refs['cl-message'].open({
-						type: 'info',
+					this.$refs["cl-message"].open({
+						type: "info",
 						message:
-							'点击了' +
-							(action === 'cancel' ? '取消' : action === 'close' ? '关闭' : '确认')
+							"点击了" +
+							(action === "cancel"
+								? "取消"
+								: action === "close"
+								? "关闭"
+								: "确认")
 					});
 				}
 			});

@@ -1,16 +1,21 @@
 <template>
 	<view class="demo-tabs">
-		<!-- #ifdef H5 -->
+		<!-- #ifndef MP -->
 		<cl-tabs v-model="tabIndex" type="swiper" lazy :labels="labels">
 			<template v-slot="{ index }">
-				<cl-list :label="`${item}`" class="block" v-for="item in list[index]" :key="item">
+				<cl-list
+					:label="`${item}`"
+					class="block"
+					v-for="item in list[index]"
+					:key="item"
+				>
 					<cl-icon name="cl-icon-arrow-right"></cl-icon>
 				</cl-list>
 			</template>
 		</cl-tabs>
 		<!-- #endif -->
 
-		<!-- #ifndef H5 -->
+		<!-- #ifdef MP -->
 		<cl-tabs v-model="tabIndex" lazy>
 			<cl-tab-pane
 				v-for="(item, index) in labels"
@@ -18,7 +23,11 @@
 				:label="item.label"
 				:name="index"
 			>
-				<cl-list v-for="(item2, index2) in list[index]" :key="index2" :label="`${item2}`">
+				<cl-list
+					v-for="(item2, index2) in list[index]"
+					:key="index2"
+					:label="`${item2}`"
+				>
 					<cl-icon name="cl-icon-arrow-right"></cl-icon>
 				</cl-list>
 			</cl-tab-pane>
@@ -34,28 +43,30 @@ export default {
 			tabIndex: 1,
 			labels: [
 				{
-					label: 'A'
+					label: "A"
 				},
 				{
-					label: 'B'
+					label: "B"
 				},
 				{
-					label: 'C'
+					label: "C"
 				},
 				{
-					label: 'D'
+					label: "D"
 				},
 				{
-					label: 'E'
+					label: "E"
 				},
 				{
-					label: 'F'
+					label: "F"
 				},
 				{
-					label: 'G'
+					label: "G"
 				}
 			],
-			list: new Array(7).fill(1).map(() => parseInt(Math.random() * 10) + 10)
+			list: new Array(7)
+				.fill(1)
+				.map(() => parseInt(Math.random() * 10) + 10)
 		};
 	}
 };

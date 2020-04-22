@@ -1,7 +1,7 @@
 <template>
 	<view class="page-index">
 		<view class="header">
-			<image :src="require('@/assets/icon/logo.png')" class="logo" alt />
+			<image src="@/assets/icon/logo.png" class="logo" alt />
 			<view class="desc">简洁高效的uni-app组件库</view>
 		</view>
 
@@ -18,7 +18,10 @@
 							@tap="toDemo(item, item2)"
 						>
 							<text class="label">{{ item2.label }}</text>
-							<text class="cl-icon-arrow-right" v-if="item2.path"></text>
+							<text
+								class="cl-icon-arrow-right"
+								v-if="item2.path"
+							></text>
 							<text class="cl-icon-close" v-else></text>
 						</view>
 					</view>
@@ -36,219 +39,219 @@ export default {
 		return {
 			list: [
 				{
-					label: 'Basic 基础组件',
-					key: 'basic',
+					label: "Basic 基础组件",
+					key: "basic",
 					children: [
 						{
-							label: 'Button 按钮',
-							path: 'button'
+							label: "Button 按钮",
+							path: "button"
 						},
 						{
-							label: 'Input 输入框',
-							path: 'input'
+							label: "Input 输入框",
+							path: "input"
 						},
 						{
-							label: 'Image 图片',
-							path: 'image'
+							label: "Image 图片",
+							path: "image"
 						},
 						{
-							label: 'Icon 图标',
-							path: 'icon'
+							label: "Icon 图标",
+							path: "icon"
 						},
 						{
-							label: 'Tag 标签',
-							path: 'tag'
+							label: "Tag 标签",
+							path: "tag"
 						},
 						{
-							label: 'Divider 分割线',
-							path: 'divider'
+							label: "Divider 分割线",
+							path: "divider"
 						}
 					]
 				},
 				{
-					label: 'Feedback 反馈组件',
-					key: 'feedback',
+					label: "Feedback 反馈组件",
+					key: "feedback",
 					children: [
 						{
-							label: 'Toast 提示',
-							path: 'toast'
+							label: "Toast 提示",
+							path: "toast"
 						},
 						{
-							label: 'Message 消息',
-							path: 'message'
+							label: "Message 消息",
+							path: "message"
 						},
 						{
-							label: 'Loading 加载',
-							path: 'loading'
+							label: "Loading 加载",
+							path: "loading"
 						}
 					]
 				},
 				{
-					label: 'Form 表单组件',
-					key: 'form',
+					label: "Form 表单组件",
+					key: "form",
 					children: [
 						{
-							label: 'Radio 单选框',
-							path: 'radio'
+							label: "Radio 单选框",
+							path: "radio"
 						},
 						{
-							label: 'Switch 开关',
-							path: 'switch'
+							label: "Switch 开关",
+							path: "switch"
 						},
 						{
-							label: 'Checkbox 多选框',
-							path: 'checkbox'
+							label: "Checkbox 多选框",
+							path: "checkbox"
 						},
 						{
-							label: 'Select 下拉框',
-							path: 'select'
+							label: "Select 下拉框",
+							path: "select"
 						},
 						{
-							label: 'Upload 上传',
-							path: 'upload'
+							label: "Upload 上传",
+							path: "upload"
 						},
 						{
-							label: 'Rate 评分',
-							path: 'rate'
+							label: "Rate 评分",
+							path: "rate"
 						},
 						{
-							label: 'Rules 校验',
-							path: 'rules'
+							label: "Rules 校验",
+							path: "rules"
 						}
 					]
 				},
 				{
-					label: 'Operate 操作',
-					key: 'operate',
+					label: "Operate 操作",
+					key: "operate",
 					children: [
 						{
-							label: 'LoadMore 页底提示',
-							path: 'loadmore'
+							label: "LoadMore 页底提示",
+							path: "loadmore"
 						},
 						{
-							label: 'Steps 步骤'
+							label: "Steps 步骤"
 						},
 						{
-							label: 'Modal 模态框',
-							path: 'modal'
+							label: "Modal 模态框",
+							path: "modal"
 						},
 						{
-							label: 'ActionSheet 底部菜单',
-							path: 'action-sheet'
+							label: "ActionSheet 底部菜单",
+							path: "action-sheet"
 						},
 						{
-							label: 'Search 搜索',
-							path: 'search'
+							label: "Search 搜索",
+							path: "search"
 						}
 					]
 				},
 				{
-					label: 'Nav 导航组件',
-					key: 'nav',
+					label: "Nav 导航组件",
+					key: "nav",
 					children: [
 						{
-							label: 'Tabs 选项卡',
-							path: 'tabs'
+							label: "Tabs 选项卡",
+							path: "tabs"
 						},
 						{
-							label: 'BottomBar 底部导航'
+							label: "BottomBar 底部导航"
 						},
 						{
-							label: 'TopBar 顶部导航',
-							path: 'topbar'
+							label: "TopBar 顶部导航",
+							path: "topbar"
 						}
 					]
 				},
 				{
-					label: 'Layout 布局',
-					key: 'layout',
+					label: "Layout 布局",
+					key: "layout",
 					children: [
 						{
-							label: 'Flex 柔性',
-							path: 'flex'
+							label: "Flex 柔性",
+							path: "flex"
 						},
 						{
-							label: 'Grid 宫格',
-							path: 'grid'
+							label: "Grid 宫格",
+							path: "grid"
 						},
 						{
-							label: 'WaterFall 瀑布流',
-							path: 'waterfall'
+							label: "WaterFall 瀑布流",
+							path: "waterfall"
 						},
 						{
-							label: 'List 列表',
-							path: 'list'
+							label: "List 列表",
+							path: "list"
 						}
 					]
 				},
 				{
-					label: 'View 视图',
-					key: 'view',
+					label: "View 视图",
+					key: "view",
 					children: [
 						{
-							label: 'Popup 弹出层',
-							path: 'popup'
+							label: "Popup 弹出层",
+							path: "popup"
 						},
 						{
-							label: 'Badge 角标',
-							path: 'badge'
+							label: "Badge 角标",
+							path: "badge"
 						},
 						{
-							label: 'Avatar 头像',
-							path: 'avatar'
+							label: "Avatar 头像",
+							path: "avatar"
 						},
 						{
-							label: 'CountDown 倒计时'
+							label: "CountDown 倒计时"
 						},
 						{
-							label: 'NoticeBar 通知公告栏',
-							path: 'noticebar'
+							label: "NoticeBar 通知公告栏",
+							path: "noticebar"
 						},
 						{
-							label: 'Progress 进度条',
-							path: 'progress'
+							label: "Progress 进度条",
+							path: "progress"
 						},
 						{
-							label: 'Slider 滑块',
-							path: 'slider'
+							label: "Slider 滑块",
+							path: "slider"
 						},
 						{
-							label: 'TimeLine 时间轴'
+							label: "TimeLine 时间轴"
 						},
 						{
-							label: 'Swiper 轮播图',
-							path: 'swiper'
+							label: "Swiper 轮播图",
+							path: "swiper"
 						}
 					]
 				},
 				{
-					label: 'Advanced 高级组件',
-					key: 'advanced',
+					label: "Advanced 高级组件",
+					key: "advanced",
 					children: [
 						{
-							label: 'Ceiling 吸顶'
+							label: "Ceiling 吸顶"
 						},
 						{
-							label: 'Drag 拖动排序'
+							label: "Drag 拖动排序"
 						},
 						{
-							label: 'Crop 图片裁剪'
+							label: "Crop 图片裁剪"
 						},
 						{
-							label: 'Ticket 优惠券'
+							label: "Ticket 优惠券"
 						},
 						{
-							label: 'Guide 操作引导'
+							label: "Guide 操作引导"
 						},
 						{
-							label: 'RichText 富文本'
+							label: "RichText 富文本"
 						},
 						{
-							label: 'IndexList 索引列表',
-							path: 'list-index'
+							label: "IndexList 索引列表",
+							path: "list-index"
 						},
 						{
-							label: 'Calendar 日历'
+							label: "Calendar 日历"
 						}
 					]
 				}
@@ -263,7 +266,7 @@ export default {
 					url: `/pages/demo/${key}/${item.path}`
 				});
 			} else {
-				this.$refs['toast'].open(`${item.label}开发中`);
+				this.$refs["toast"].open(`${item.label}开发中`);
 			}
 		}
 	}
@@ -276,6 +279,8 @@ page {
 }
 
 .page-index {
+	padding-top: env(safe-area-inset-top);
+	padding-bottom: env(safe-area-inset-bottom);
 	.header {
 		padding: 20rpx 50rpx;
 

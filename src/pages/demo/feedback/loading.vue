@@ -44,7 +44,9 @@
 				color="#000"
 				fullscreen
 			></cl-loading-mask>
-			<cl-button  @tap="open()" size="small">全屏</cl-button>
+			<cl-button @tap="open()" size="small">
+				<text>全屏</text>
+			</cl-button>
 		</cl-card>
 	</view>
 </template>

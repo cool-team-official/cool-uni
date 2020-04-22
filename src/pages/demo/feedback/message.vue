@@ -1,19 +1,19 @@
 <template>
 	<view class="demo-message">
-		<cl-message ref="cl-message"></cl-message>
+		<cl-message ref="message"></cl-message>
 
 		<cl-card label="不同类型">
-			<cl-button  @tap="open('success')">
-				成功
+			<cl-button @tap="open('success')">
+				<text>成功</text>
 			</cl-button>
-			<cl-button  @tap="open('cancel')">
-				失败
+			<cl-button @tap="open('cancel')">
+				<text>失败</text>
 			</cl-button>
-			<cl-button  @tap="open('warn')">
-				警告
+			<cl-button @tap="open('warn')">
+				<text>警告</text>
 			</cl-button>
-			<cl-button  @tap="open('info')">
-				消息
+			<cl-button @tap="open('info')">
+				<text>消息</text>
 			</cl-button>
 		</cl-card>
 	</view>
@@ -23,7 +23,7 @@
 export default {
 	methods: {
 		open(type) {
-			this.$message({ type, message: '这是一条消息' });
+			this.$refs["message"].open({ type, message: "这是一条消息" });
 		}
 	}
 };

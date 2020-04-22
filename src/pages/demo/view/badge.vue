@@ -29,22 +29,30 @@
 			<cl-row>
 				<cl-col span="6">
 					<cl-badge type="primary" is-dot>
-						<cl-button type="text" size="mini">消息</cl-button>
+						<cl-button type="text" size="mini">
+							<text>消息</text>
+						</cl-button>
 					</cl-badge>
 				</cl-col>
 				<cl-col span="6">
 					<cl-badge type="success" is-dot>
-						<cl-button type="text" size="mini">消息</cl-button>
+						<cl-button type="text" size="mini">
+							<text>消息</text>
+						</cl-button>
 					</cl-badge>
 				</cl-col>
 				<cl-col span="6">
 					<cl-badge type="error" is-dot>
-						<cl-button type="text" size="mini">消息</cl-button>
+						<cl-button type="text" size="mini">
+							<text>消息</text>
+						</cl-button>
 					</cl-badge>
 				</cl-col>
 				<cl-col span="6">
 					<cl-badge type="info" is-dot>
-						<cl-button type="text" size="mini">消息</cl-button>
+						<cl-button type="text" size="mini">
+							<text>消息</text>
+						</cl-button>
 					</cl-badge>
 				</cl-col>
 			</cl-row>

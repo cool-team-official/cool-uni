@@ -4,7 +4,8 @@
 			<cl-row>
 				<cl-col span="8" v-for="(item, index) in mode" :key="index">
 					<view class="block">
-						<cl-image size="150rpx" :mode="item" :src="url.mode"> </cl-image>
+						<cl-image size="150rpx" :mode="item" :src="url.mode">
+						</cl-image>
 						<text>{{ item }}</text>
 					</view>
 				</cl-col>
@@ -31,8 +32,12 @@
 					<view class="block">
 						<cl-image size="150rpx" :src="url.placeholder">
 							<view class="placeholder" slot="error">
-								<cl-button type="error" size="mini" @tap="changeImage">
-									替换
+								<cl-button
+									type="error"
+									size="mini"
+									@tap="changeImage"
+								>
+									<text>替换</text>
 								</cl-button>
 							</view>
 						</cl-image>
@@ -52,7 +57,8 @@
 				</cl-col>
 				<cl-col span="6">
 					<view class="block">
-						<cl-image :size="100" round :src="url.avatar"> </cl-image>
+						<cl-image :size="100" round :src="url.avatar">
+						</cl-image>
 						<text>圆角</text>
 					</view>
 				</cl-col>
@@ -77,12 +83,19 @@
 export default {
 	data() {
 		return {
-			mode: ['scaleToFill', 'aspectFit', 'aspectFill', 'heightFix', 'widthFix'],
+			mode: [
+				"scaleToFill",
+				"aspectFit",
+				"aspectFill",
+				"heightFix",
+				"widthFix"
+			],
 			url: {
-				placeholder: 'http://',
+				placeholder: "http://",
 				mode:
-					'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2419550195,2445223670&fm=26&gp=0.jpg',
-				avatar: 'https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg'
+					"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2419550195,2445223670&fm=26&gp=0.jpg",
+				avatar:
+					"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg"
 			}
 		};
 	},

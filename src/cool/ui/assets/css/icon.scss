@@ -1,123 +1,128 @@
 @font-face {
-	font-family: 'cl-iconfont'; /* project id 1725188 */
-	src: url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot');
-	src: url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot?#iefix') format('embedded-opentype'),
-		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff2') format('woff2'),
-		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff') format('woff'),
-		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.ttf') format('truetype'),
-		url('//at.alicdn.com/t/font_1725188_0oozwe4gla0l.svg#iconfont') format('svg');
+	font-family: "cl-iconfont"; /* project id 1725188 */
+	src: url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot");
+	src: url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.eot?#iefix")
+			format("embedded-opentype"),
+		url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff2")
+			format("woff2"),
+		url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.woff")
+			format("woff"),
+		url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.ttf")
+			format("truetype"),
+		url("https://at.alicdn.com/t/font_1725188_0oozwe4gla0l.svg#iconfont")
+			format("svg");
 }
 
-[class*='cl-icon-'] {
-	font-family: 'cl-iconfont';
+[class*="cl-icon-"] {
+	font-family: "cl-iconfont";
 	font-size: inherit;
 	font-style: normal;
 }
 
 .cl-icon-notification:before {
-	content: '\e808';
+	content: "\e808";
 }
 
 .cl-icon-notification-fill:before {
-	content: '\e807';
+	content: "\e807";
 }
 
 .cl-icon-info-fill:before {
-	content: '\e72a';
+	content: "\e72a";
 }
 
 .cl-icon-info:before {
-	content: '\e72b';
+	content: "\e72b";
 }
 
 .cl-icon-question-fill:before {
-	content: '\e72c';
+	content: "\e72c";
 }
 
 .cl-icon-question:before {
-	content: '\e72d';
+	content: "\e72d";
 }
 
 .cl-icon-arrow-bottom:before {
-	content: '\e661';
+	content: "\e661";
 }
 
 .cl-icon-arrow-top:before {
-	content: '\e6de';
+	content: "\e6de";
 }
 
 .cl-icon-toast-waiting:before {
-	content: '\e62a';
+	content: "\e62a";
 }
 
 .cl-icon-toast-warning:before {
-	content: '\e62b';
+	content: "\e62b";
 }
 
 .cl-icon-avatar:before {
-	content: '\e6a2';
+	content: "\e6a2";
 }
 
 .cl-icon-add:before {
-	content: '\e767';
+	content: "\e767";
 }
 
 .cl-icon-remove:before {
-	content: '\e768';
+	content: "\e768";
 }
 
 .cl-icon-image:before {
-	content: '\e604';
+	content: "\e604";
 }
 
 .cl-icon-toast-success:before {
-	content: '\e642';
+	content: "\e642";
 }
 
 .cl-icon-toast-error:before {
-	content: '\e644';
+	content: "\e644";
 }
 
 .cl-icon-arrow-left:before {
-	content: '\e7ed';
+	content: "\e7ed";
 }
 
 .cl-icon-arrow-right:before {
-	content: '\e806';
+	content: "\e806";
 }
 
 .cl-icon-check:before {
-	content: '\e645';
+	content: "\e645";
 }
 
 .cl-icon-close:before {
-	content: '\e646';
+	content: "\e646";
 }
 
 .cl-icon-emoji:before {
-	content: '\e64a';
+	content: "\e64a";
 }
 
 .cl-icon-favor-fill:before {
-	content: '\e64b';
+	content: "\e64b";
 }
 
 .cl-icon-round-check-fill:before {
-	content: '\e656';
+	content: "\e656";
 }
 
 .cl-icon-round-check:before {
-	content: '\e657';
+	content: "\e657";
 }
 
 .cl-icon-round-close-fill:before {
-	content: '\e658';
+	content: "\e658";
 }
 
 .cl-icon-round-close:before {
-	content: '\e659';
+	content: "\e659";
 }
 
 .cl-icon-search:before {
-	content: '\e65c';
+	content: "\e65c";
 }

@@ -5,9 +5,7 @@
 			"style": {
 				"app-plus": {
 					"titleNView": false
-				},
-				"navigationBarBackgroundColor": "#6295FF",
-				"navigationBarTextStyle": "white"
+				}
 			}
 		}
 	],

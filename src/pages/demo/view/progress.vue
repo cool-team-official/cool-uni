@@ -18,11 +18,18 @@
 
 		<cl-card label="可调节颜色">
 			<cl-row>
-				<cl-progress :value="val1" :color="['#F56C6C', '#E6A23C', '#67C23A']"></cl-progress>
+				<cl-progress
+					:value="val1"
+					:color="['#F56C6C', '#E6A23C', '#67C23A']"
+				></cl-progress>
 			</cl-row>
 
-			<cl-button  size="mini" @tap="val1 += 10">增</cl-button>
-			<cl-button  size="mini" @tap="val1 -= 10">减</cl-button>
+			<cl-button size="mini" @tap="val1 += 10">
+				<text>增</text>
+			</cl-button>
+			<cl-button size="mini" @tap="val1 -= 10">
+				<text>减</text>
+			</cl-button>
 		</cl-card>
 
 		<cl-card label="自定义">
@@ -37,8 +44,12 @@
 				</cl-progress>
 			</cl-row>
 
-			<cl-button  size="mini" @tap="val2 += 10">增</cl-button>
-			<cl-button  size="mini" @tap="val2 -= 10">减</cl-button>
+			<cl-button size="mini" @tap="val2 += 10">
+				<text>增</text>
+			</cl-button>
+			<cl-button size="mini" @tap="val2 -= 10">
+				<text>减</text>
+			</cl-button>
 		</cl-card>
 	</view>
 </template>

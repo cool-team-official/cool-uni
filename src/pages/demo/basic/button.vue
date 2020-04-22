@@ -1,33 +1,47 @@
 <template>
 	<view class="demo-button">
 		<cl-card label="默认按钮">
-			<cl-button :type="item.value" v-for="(item, index) in list" :key="index">
+			<cl-button
+				:type="item.value"
+				v-for="(item, index) in list"
+				:key="index"
+			>
 				<text>{{ item.label }}</text>
 			</cl-button>
 		</cl-card>
 
 		<cl-card label="朴素按钮">
-			<cl-button :type="item.value" plain v-for="(item, index) in list" :key="index">
+			<cl-button
+				:type="item.value"
+				plain
+				v-for="(item, index) in list"
+				:key="index"
+			>
 				{{ item.label }}
 			</cl-button>
 		</cl-card>
 
 		<cl-card label="圆角按钮">
-			<cl-button :type="item.value" round v-for="(item, index) in list" :key="index">
+			<cl-button
+				:type="item.value"
+				round
+				v-for="(item, index) in list"
+				:key="index"
+			>
 				{{ item.label }}
 			</cl-button>
 		</cl-card>
 
 		<cl-card label="图标按钮">
 			<cl-button type="primary" icon="cl-icon-arrow-left">
-				上一页
+				<text>上一页</text>
 			</cl-button>
 			<cl-button type="primary">
-				下一页
+				<text>下一页</text>
 				<text class="cl-icon-arrow-right"></text>
 			</cl-button>
 			<cl-button type="primary" icon="cl-icon-search">
-				搜索
+				<text>搜索</text>
 			</cl-button>
 		</cl-card>
 
@@ -49,10 +63,10 @@
 
 		<cl-card label="其他按钮">
 			<cl-button disabled>
-				禁用按钮
+				<text>禁用按钮</text>
 			</cl-button>
 			<cl-button type="success" loading>
-				加载中
+				<text>加载中</text>
 			</cl-button>
 		</cl-card>
 
@@ -78,28 +92,28 @@ export default {
 		return {
 			list: [
 				{
-					label: '默认按钮',
-					value: ''
+					label: "默认按钮",
+					value: ""
 				},
 				{
-					label: '主要按钮',
-					value: 'primary'
+					label: "主要按钮",
+					value: "primary"
 				},
 				{
-					label: '成功按钮',
-					value: 'success'
+					label: "成功按钮",
+					value: "success"
 				},
 				{
-					label: '失败按钮',
-					value: 'error'
+					label: "失败按钮",
+					value: "error"
 				},
 				{
-					label: '警告按钮',
-					value: 'warning'
+					label: "警告按钮",
+					value: "warning"
 				},
 				{
-					label: '信息按钮',
-					value: 'info'
+					label: "信息按钮",
+					value: "info"
 				}
 			]
 		};
