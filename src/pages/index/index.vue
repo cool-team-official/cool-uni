@@ -142,6 +142,10 @@ export default {
 						{
 							label: "Search 搜索",
 							path: "search"
+						},
+						{
+							label: "Dropdown 下拉框",
+							path: "dropdown"
 						}
 					]
 				},

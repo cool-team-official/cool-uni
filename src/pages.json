@@ -147,6 +147,12 @@
 					"style": {
 						"navigationBarTitleText": "Search 搜索"
 					}
+				},
+				{
+					"path": "dropdown",
+					"style": {
+						"navigationBarTitleText": "Dropdown 下拉框"
+					}
 				}
 			]
 		},
