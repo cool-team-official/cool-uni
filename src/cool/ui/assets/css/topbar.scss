@@ -32,9 +32,8 @@
 	&__append {
 		display: flex;
 		align-items: center;
-		height: 100%;
+		height: 90rpx;
 		position: absolute;
-		top: env(safe-area-inset-top);
 	}
 
 	&__prepend {
@@ -51,7 +50,7 @@
 		justify-content: center;
 		height: 100%;
 		width: 90rpx;
-		
+
 		&:active {
 			background-color: #f7f7f7;
 		}
