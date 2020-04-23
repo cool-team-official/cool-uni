@@ -8,7 +8,7 @@
 		<view
 			class="cl-list__swiper"
 			:style="{
-				transform: `translateX(${left}rpx)`
+				transform: translateX
 			}"
 		>
 			<view class="cl-list__container">
@@ -16,7 +16,9 @@
 					<slot name="icon"></slot>
 				</view>
 
-				<text class="cl-list__label" v-if="label && label != 'true'">{{ label }}</text>
+				<text class="cl-list__label" v-if="label && label != 'true'">{{
+					label
+				}}</text>
 
 				<view :class="['cl-list__content', isJustify, isColor]">
 					<slot></slot>
@@ -52,13 +54,13 @@ export default {
 		type: String,
 		justify: {
 			type: String,
-			default: 'end'
+			default: "end"
 		},
 		swipe: {
 			type: String,
-			default: 'none',
+			default: "none",
 			validator: val => {
-				return ['none', 'left', 'right'].indexOf(val) !== -1;
+				return ["none", "left", "right"].indexOf(val) !== -1;
 			}
 		}
 	},
@@ -69,7 +71,7 @@ export default {
 				start: 0,
 				end: 0,
 				x: 0,
-				direction: 'left',
+				direction: "left",
 				lock: true
 			},
 
@@ -81,27 +83,27 @@ export default {
 
 	computed: {
 		isColor() {
-			return this.type ? `is-color-${this.type}` : '';
+			return this.type ? `is-color-${this.type}` : "";
 		},
 
 		isBorder() {
-			return this.border ? `is-border` : '';
+			return this.border ? `is-border` : "";
 		},
 
 		isJustify() {
-			return this.justify !== 'start' ? `is-justify-${this.justify}` : '';
+			return this.justify !== "start" ? `is-justify-${this.justify}` : "";
 		},
 
 		isSuffix() {
-			return this.$scopedSlots.suffix ? 'cl-list--suffix' : '';
+			return this.$scopedSlots.suffix ? "cl-list--suffix" : "";
 		},
 
 		isDisabled() {
-			return this.disabled ? 'cl-list--disabled' : '';
+			return this.disabled ? "cl-list--disabled" : "";
 		},
 
-		left() {
-			return this.touch.end + this.touch.x;
+		translateX() {
+			return `translateX(${this.touch.x}px)`;
 		}
 	},
 
@@ -117,7 +119,7 @@ export default {
 
 	methods: {
 		onTouchStart(e) {
-			if (this.swipe != 'none') {
+			if (this.swipe != "none") {
 				this.touch.start = e.touches[0].pageX;
 				this.touch.lock = false;
 			}
@@ -128,7 +130,7 @@ export default {
 			if (!lock) {
 				let offsetX = e.touches[0].pageX - start;
 
-				this.touch.direction = offsetX > 0 ? 'right' : 'left';
+				this.touch.direction = offsetX > 0 ? "right" : "left";
 				this.touch.x = end + offsetX;
 
 				offsetX = null;
@@ -138,7 +140,8 @@ export default {
 			const { direction, x, end, lock } = this.touch;
 
 			if (!lock) {
-				const maxX = this.menu.width * (this.swipe === 'right' ? -1 : 1);
+				const maxX =
+					this.menu.width * (this.swipe === "right" ? -1 : 1);
 
 				if (Math.abs(x - end) > 50) {
 					if (direction === this.swipe) {
@@ -156,14 +159,14 @@ export default {
 			}
 		},
 		setMenu() {
-			if (this.swipe != 'none') {
+			if (this.swipe != "none") {
 				const query = uni.createSelectorQuery().in(this);
 
 				query
 					.select(`.cl-list__menu-${this.swipe}`)
 					.boundingClientRect(data => {
 						if (data) {
-							this.menu.width = data.width - (platform == 'ios' ? 15 : 0);
+							this.menu.width = data.width;
 						}
 					})
 					.exec();

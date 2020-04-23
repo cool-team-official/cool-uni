@@ -1,35 +1,33 @@
 <template>
 	<view class="demo-button">
 		<cl-card label="默认按钮">
-			<cl-button
-				:type="item.value"
-				v-for="(item, index) in list"
-				:key="index"
-			>
-				<text>{{ item.label }}</text>
-			</cl-button>
+			<cl-row>
+				<cl-col v-for="(item, index) in list" :key="index" :span="6">
+					<cl-button :type="item.value">
+						<text>{{ item.label }}</text>
+					</cl-button>
+				</cl-col>
+			</cl-row>
 		</cl-card>
 
 		<cl-card label="朴素按钮">
-			<cl-button
-				:type="item.value"
-				plain
-				v-for="(item, index) in list"
-				:key="index"
-			>
-				{{ item.label }}
-			</cl-button>
+			<cl-row>
+				<cl-col v-for="(item, index) in list" :key="index" :span="6">
+					<cl-button :type="item.value" plain>
+						<text>{{ item.label }}</text>
+					</cl-button>
+				</cl-col>
+			</cl-row>
 		</cl-card>
 
 		<cl-card label="圆角按钮">
-			<cl-button
-				:type="item.value"
-				round
-				v-for="(item, index) in list"
-				:key="index"
-			>
-				{{ item.label }}
-			</cl-button>
+			<cl-row>
+				<cl-col v-for="(item, index) in list" :key="index" :span="6">
+					<cl-button :type="item.value" round>
+						<text>{{ item.label }}</text>
+					</cl-button>
+				</cl-col>
+			</cl-row>
 		</cl-card>
 
 		<cl-card label="图标按钮">

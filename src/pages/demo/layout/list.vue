@@ -6,20 +6,32 @@
 
 		<cl-card label="带图标" padding="0">
 			<cl-list label="总资产">
-				<image slot="icon" :src="require('@/assets/icon/all.png')" alt="" />
+				<image
+					slot="icon"
+					:src="require('@/assets/icon/all.png')"
+					alt=""
+				/>
 				<text slot="suffix" class="cl-icon-arrow-right"></text>
 			</cl-list>
 		</cl-card>
 
 		<cl-card label="带描述" padding="0">
 			<cl-list label="余额">
-				<image slot="icon" :src="require('@/assets/icon/balance.png')" alt="" />
+				<image
+					slot="icon"
+					:src="require('@/assets/icon/balance.png')"
+					alt=""
+				/>
 				0.00元
 				<text slot="suffix" class="cl-icon-arrow-right"></text>
 			</cl-list>
 
 			<cl-list label="昨日收益" type="success">
-				<image slot="icon" :src="require('@/assets/icon/stats.png')" alt="" />
+				<image
+					slot="icon"
+					:src="require('@/assets/icon/stats.png')"
+					alt=""
+				/>
 				-264.08元
 				<text slot="suffix" class="cl-icon-arrow-right"></text>
 			</cl-list>
@@ -27,7 +39,11 @@
 
 		<cl-card label="禁用" padding="0">
 			<cl-list label="银行卡" disabled>
-				<image slot="icon" :src="require('@/assets/icon/bank-card.png')" alt="" />
+				<image
+					slot="icon"
+					:src="require('@/assets/icon/bank-card.png')"
+					alt=""
+				/>
 				<text>兴业银行(***1113)</text>
 				<text slot="suffix" class="cl-icon-arrow-right"></text>
 			</cl-list>
@@ -61,7 +77,9 @@
 				</view>
 
 				<view class="append" slot="suffix">
-					<cl-button type="primary" @tap="chooseImage">修改头像</cl-button>
+					<cl-button type="primary" @tap="chooseImage"
+						>修改头像</cl-button
+					>
 				</view>
 			</cl-list>
 		</cl-card>
@@ -72,7 +90,7 @@
 export default {
 	data() {
 		return {
-			avatarUrl: require('@/assets/images/avatar.jpg')
+			avatarUrl: require("@/assets/images/avatar.jpg")
 		};
 	},
 
@@ -81,7 +99,7 @@ export default {
 			uni.chooseImage({
 				count: 1,
 				success: res => {
-					this.$refs['cs-list'].restore();
+					this.$refs["cs-list"].restore();
 					this.avatarUrl = res.tempFilePaths[0];
 				}
 			});

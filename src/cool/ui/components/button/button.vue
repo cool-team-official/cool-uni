@@ -14,7 +14,6 @@
 		]"
 		:size="size"
 		:type="type"
-		:plain="plain"
 		:disabled="disabled"
 		:form-type="formType"
 		:open-type="openType"

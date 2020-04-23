@@ -9,7 +9,7 @@
 	padding: 0 30rpx;
 
 	&::after {
-		border: 0;
+		border-width: 0;
 	}
 
 	&.is-loading {
@@ -64,14 +64,6 @@
 
 	[class^="cl-icon-"]:last-child {
 		margin-left: 10rpx;
-	}
-
-	/* 朴素按钮 */
-
-	&.is-plain {
-		border-color: #dcdfe6;
-		border-style: solid;
-		border-width: 1rpx;
 	}
 
 	/* 圆角按钮 */
