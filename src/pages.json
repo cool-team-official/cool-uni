@@ -232,28 +232,25 @@
 				{
 					"path": "slider",
 					"style": {
-						"navigationBarTitleText": "Slider 滑块",
-						"app-plus": {
-							"softinputNavBar": "none"
-						}
+						"navigationBarTitleText": "Slider 滑块"
 					}
 				},
 				{
 					"path": "progress",
 					"style": {
-						"navigationBarTitleText": "Progress 进度条",
-						"app-plus": {
-							"softinputNavBar": "none"
-						}
+						"navigationBarTitleText": "Progress 进度条"
 					}
 				},
 				{
 					"path": "noticebar",
 					"style": {
-						"navigationBarTitleText": "Noticebar 通知栏",
-						"app-plus": {
-							"softinputNavBar": "none"
-						}
+						"navigationBarTitleText": "Noticebar 通知栏"
+					}
+				},
+				{
+					"path": "countdown",
+					"style": {
+						"navigationBarTitleText": "Countdown 倒计时"
 					}
 				}
 			]

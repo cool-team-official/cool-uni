@@ -19,14 +19,6 @@
 
 		&.is-show {
 			opacity: 1;
-
-			/* #ifdef H5 */
-			top: 120rpx;
-			/* #endif */
-
-			/* #ifndef H5 */
-			top: 50rpx;
-			/* #endif */
 		}
 
 		&__icon {

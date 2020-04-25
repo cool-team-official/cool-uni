@@ -6,9 +6,12 @@
 			:class="[
 				'cl-message',
 				{
-					'is-show': item.visible
-				}
+					'is-show': item.visible,
+				},
 			]"
+			:style="{
+				top: item.visible ? item.top : '-200rpx',
+			}"
 		>
 			<icon
 				class="cl-message__icon"
@@ -24,14 +27,14 @@
 </template>
 
 <script>
-import { isObject, isString, isFunction } from '../../utils';
+import { isObject, isString, isFunction } from "../../utils";
 
 let id = 0;
 
 export default {
 	data() {
 		return {
-			list: []
+			list: [],
 		};
 	},
 
@@ -41,11 +44,12 @@ export default {
 				id: id++,
 				visible: false,
 				closed: false,
-				message: '',
-				type: 'success',
+				message: "",
+				type: "success",
 				duration: 3000,
 				onClose: null,
-				iconSize: 22
+				iconSize: 22,
+				top: "120rpx",
 			};
 
 			if (isObject(d)) {
@@ -79,7 +83,7 @@ export default {
 					this.close(item);
 				}, duration);
 			}
-		}
-	}
+		},
+	},
 };
 </script>
