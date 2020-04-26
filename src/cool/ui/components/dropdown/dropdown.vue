@@ -8,16 +8,16 @@
 			class="cl-dropdown__wrapper"
 			:class="[
 				{
-					'is-show': visible
-				}
+					'is-show': visible,
+				},
 			]"
 		>
-			<!-- <view class="cl-dropdown__modal" @tap="close"></view> -->
+			<view class="cl-dropdown__modal" @tap="close"></view>
 			<view
 				class="cl-dropdown"
 				:style="{
 					left: offset.left + 'px',
-					top: offset.top + 'px'
+					top: offset.top + 'px',
 				}"
 			>
 				<slot name="dropdown"></slot>
@@ -31,17 +31,17 @@ export default {
 	props: {
 		customClass: {
 			type: String,
-			default: "default"
-		}
+			default: "default",
+		},
 	},
 
 	data() {
 		return {
 			offset: {
 				left: 0,
-				top: 0
+				top: 0,
 			},
-			visible: false
+			visible: false,
 		};
 	},
 
@@ -50,10 +50,10 @@ export default {
 
 		query
 			.select(`.cl-dropdown__target`)
-			.boundingClientRect(res => {
+			.boundingClientRect((res) => {
 				this.offset = {
 					left: res.left + res.width / 2 - 16,
-					top: res.top + res.height + 12
+					top: res.top + res.height + 12,
 				};
 
 				console.log(this.offset, res);
@@ -68,7 +68,7 @@ export default {
 
 		close() {
 			this.visible = false;
-		}
-	}
+		},
+	},
 };
 </script>
