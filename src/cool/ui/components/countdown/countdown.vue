@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-countdown">
+	<view class="cl-countdown" :class="[customClass]">
 		<template v-for="(item, index) in list">
 			<view class="cl-countdown-item" :key="index" v-if="item.visible">
 				<text class="cl-countdown__number">{{ item.value }}</text>
@@ -46,7 +46,8 @@ export default {
 			type: Number,
 			default: 0
 		},
-		datetime: [Date, String]
+		datetime: [Date, String],
+		customClass: String
 	},
 
 	data() {
@@ -226,6 +227,11 @@ export default {
 						break;
 					case "en":
 						arr = ["Day", "Hour", "Minute", "Second"];
+						break;
+					case "":
+					case false:
+					case null:
+						arr = ["", "", "", ""];
 						break;
 					case "default":
 					default:

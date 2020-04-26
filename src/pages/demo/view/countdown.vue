@@ -89,6 +89,15 @@
 			</cl-progress>
 		</cl-card>
 
+		<cl-card label="自定义样式">
+			<cl-countdown
+				:hour="2"
+				custom-class="cs-countdown"
+				splitor=""
+				:layout="['hour', 'minute', 'second']"
+			></cl-countdown>
+		</cl-card>
+
 		<cl-toast ref="toast"></cl-toast>
 	</view>
 </template>
@@ -98,7 +107,7 @@ export default {
 	data() {
 		return {
 			progress: 100,
-			countdown: 5,
+			countdown: 5
 		};
 	},
 
@@ -110,15 +119,29 @@ export default {
 		onDone() {
 			this.$refs["toast"].open("Game Over");
 			this.$refs["cd"].start({ second: 10 });
-		},
-	},
+		}
+	}
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .demo-countdown {
 	.font-24 {
 		font-size: 24rpx;
+	}
+
+	.cs-countdown {
+		/deep/.cl-countdown__number {
+			height: 100rpx;
+			line-height: 100rpx;
+			min-width: 80rpx;
+			font-size: 50rpx;
+			font-weight: bold;
+			background-color: #fff;
+			border: 1rpx solid #eee;
+			border-radius: 10rpx;
+			color: $uni-color-primary;
+		}
 	}
 }
 </style>
