@@ -12,9 +12,11 @@
 		>
 			<text class="cl-select__value"
 				>{{ text
-				}}<text class="cl-select__placeholder" v-show="showPlaceholder">{{
-					placeholder
-				}}</text></text
+				}}<text
+					class="cl-select__placeholder"
+					v-show="showPlaceholder"
+					>{{ placeholder }}</text
+				></text
 			>
 			<text class="cl-select__icon cl-icon-arrow-bottom"></text>
 		</picker>
@@ -22,36 +24,36 @@
 </template>
 
 <script>
-import { isArray, isEmpty, compareValue } from '../../utils/index';
+import { isArray, isEmpty, compareValue } from "../../utils/index";
 
 export default {
 	props: {
 		mode: {
 			type: String,
-			default: 'selector'
+			default: "selector"
 		},
 		placeholder: {
 			type: String,
-			default: '请选择'
+			default: "请选择"
 		},
 		value: null,
 		options: Array,
 		labelKey: {
 			type: String,
-			default: 'label'
+			default: "label"
 		},
 		valueKey: {
 			type: String,
-			default: 'value'
+			default: "value"
 		},
 		separator: {
 			type: String,
-			default: '/'
+			default: "/"
 		},
 		disabled: Boolean,
 		fields: {
 			type: String,
-			default: 'day'
+			default: "day"
 		},
 		start: String,
 		end: String
@@ -60,7 +62,7 @@ export default {
 	data() {
 		return {
 			index: [],
-			text: ''
+			text: ""
 		};
 	},
 
@@ -76,7 +78,7 @@ export default {
 
 	computed: {
 		rangeKey() {
-			return this.mode == 'region' ? '' : this.labelKey;
+			return this.mode == "region" ? "" : this.labelKey;
 		},
 
 		showPlaceholder() {
@@ -84,7 +86,7 @@ export default {
 		},
 
 		isDisabled() {
-			return this.disabled ? 'is-disabled' : '';
+			return this.disabled ? "is-disabled" : "";
 		}
 	},
 
@@ -93,9 +95,11 @@ export default {
 			// 取下标
 			this.index = (() => {
 				switch (this.mode) {
-					case 'selector':
-						return this.options.findIndex(e => compareValue(e[this.valueKey], val));
-					case 'multiSelector':
+					case "selector":
+						return this.options.findIndex(e =>
+							compareValue(e[this.valueKey], val)
+						);
+					case "multiSelector":
 						return (isArray(val) ? val : [val]).map((v, i) => {
 							return this.options[i].findIndex(e =>
 								compareValue(e[this.valueKey], v)
@@ -109,17 +113,17 @@ export default {
 			// 取文本值
 			this.text = (() => {
 				switch (this.mode) {
-					case 'selector':
+					case "selector":
 						return this.options[this.index]
 							? this.options[this.index][this.labelKey]
-							: '';
-					case 'multiSelector':
+							: "";
+					case "multiSelector":
 						return this.index
 							.filter(v => v >= 0)
 							.map((v, i) => this.options[i][v][this.labelKey])
 							.join(this.separator);
-					case 'region':
-						console.warn('请使用 cl-select-region 代替');
+					case "region":
+						console.warn("请使用 cl-select-region 代替");
 					default:
 						return this.index;
 				}
@@ -128,9 +132,9 @@ export default {
 		onChange({ detail }) {
 			const value = (() => {
 				switch (this.mode) {
-					case 'selector':
+					case "selector":
 						return this.options[detail.value][this.valueKey];
-					case 'multiSelector':
+					case "multiSelector":
 						return detail.value
 							.map(v => (v < 0 ? 0 : v))
 							.map((v, i) => this.options[i][v][this.valueKey]);
@@ -139,18 +143,18 @@ export default {
 				}
 			})();
 
-			this.$emit('change', value);
-			this.$emit('input', value);
+			this.$emit("change", value);
+			this.$emit("input", value);
 		},
 		onColumnChange({ detail }) {
 			this.index = this.index.map((v, i) =>
 				i < detail.column ? v : i === detail.column ? detail.value : 0
 			);
 
-			this.$emit('column-change', { ...detail, selects: this.index });
+			this.$emit("column-change", { ...detail, selects: this.index });
 		},
 		onCancel() {
-			this.$emit('cancel');
+			this.$emit("cancel");
 		}
 	}
 };

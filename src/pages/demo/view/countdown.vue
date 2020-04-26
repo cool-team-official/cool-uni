@@ -8,7 +8,7 @@
 
 			<cl-row>
 				<view class="font-24">距离儿童节还有(datetime)：</view>
-				<cl-countdown datetime="2020-6-1 00:00:00"></cl-countdown>
+				<cl-countdown datetime="2020-06-01"></cl-countdown>
 			</cl-row>
 		</cl-card>
 

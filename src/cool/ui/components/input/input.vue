@@ -18,8 +18,16 @@
 		</view>
 
 		<view class="cl-input__wrap">
-			<text class="cl-input__icon" :class="[prefixIcon]" v-if="prefixIcon"></text>
-			<text class="cl-input__icon" :class="[suffixIcon]" v-if="suffixIcon"></text>
+			<text
+				class="cl-input__icon"
+				:class="[prefixIcon]"
+				v-if="prefixIcon"
+			></text>
+			<text
+				class="cl-input__icon"
+				:class="[suffixIcon]"
+				v-if="suffixIcon"
+			></text>
 
 			<input
 				v-model="value2"
@@ -46,6 +54,7 @@
 			<text
 				class="cl-input__clear cl-icon-round-close-fill"
 				@tap="clear"
+				v-if="isFocus && clearable"
 			></text>
 		</view>
 
@@ -61,7 +70,7 @@ export default {
 		value: [String, Number],
 		type: {
 			type: String,
-			default: 'text'
+			default: "text"
 		},
 		password: Boolean,
 		placeholder: String,
@@ -86,7 +95,7 @@ export default {
 		},
 		confirmType: {
 			type: String,
-			default: 'done'
+			default: "done"
 		},
 		confirmHold: Boolean,
 		adjustPosition: {
@@ -119,17 +128,17 @@ export default {
 
 	methods: {
 		onInput() {
-			this.$emit('input', this.value2);
-			this.$emit('change', this.value2);
+			this.$emit("input", this.value2);
+			this.$emit("change", this.value2);
 		},
 
 		onFocus(e) {
-			this.$emit('focus', e);
+			this.$emit("focus", e);
 			this.isFocus = true;
 		},
 
 		onBlur(e) {
-			this.$emit('blur', e);
+			this.$emit("blur", e);
 
 			setTimeout(() => {
 				this.isFocus = false;
@@ -137,22 +146,22 @@ export default {
 		},
 
 		onConfirm(e) {
-			this.$emit('confirm', e);
+			this.$emit("confirm", e);
 			this.search();
 		},
 
 		onKeyboardheightchange(e) {
-			this.$emit('keyboardheightchange', e);
+			this.$emit("keyboardheightchange", e);
 		},
 
 		search() {
-			this.$emit('search', this.value2);
+			this.$emit("search", this.value2);
 		},
 
 		clear() {
-			this.value2 = '';
-			this.$emit('input', '');
-			this.$emit('change', '');
+			this.value2 = "";
+			this.$emit("input", "");
+			this.$emit("change", "");
 		}
 	}
 };

@@ -9,7 +9,11 @@
 		</cl-card>
 
 		<cl-card label="可清空">
-			<cl-input v-model="val2" placeholder="请输入内容" clearable></cl-input>
+			<cl-input
+				v-model="val2"
+				placeholder="请输入内容"
+				clearable
+			></cl-input>
 		</cl-card>
 
 		<cl-card label="带icon">
@@ -46,9 +50,14 @@
 			<cl-row>
 				<cl-input placeholder="请输入内容">
 					<view slot="prepend">
-						<cl-select v-model="val5" :options="options.city"></cl-select>
+						<cl-select
+							v-model="val5"
+							:options="options.city"
+						></cl-select>
 					</view>
-					<cl-button type="primary" size="mini" slot="append">搜索</cl-button>
+					<cl-button type="primary" size="mini" slot="append"
+						>搜索</cl-button
+					>
 				</cl-input>
 			</cl-row>
 		</cl-card>
@@ -59,24 +68,24 @@
 export default {
 	data() {
 		return {
-			val1: '',
-			val2: '',
-			val3: '',
-			val4: '',
-			val5: '',
+			val1: "",
+			val2: "",
+			val3: "",
+			val4: "",
+			val5: 1,
 			options: {
 				city: [
 					{
-						label: '厦门市',
+						label: "厦门市",
+						value: 0
+					},
+					{
+						label: "福州市",
 						value: 1
 					},
 					{
-						label: '福州市',
+						label: "龙岩市",
 						value: 2
-					},
-					{
-						label: '龙岩市',
-						value: 3
 					}
 				]
 			}

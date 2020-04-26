@@ -44,29 +44,29 @@ export default {
 					children: [
 						{
 							label: "Button 按钮",
-							path: "button",
+							path: "button"
 						},
 						{
 							label: "Input 输入框",
-							path: "input",
+							path: "input"
 						},
 						{
 							label: "Image 图片",
-							path: "image",
+							path: "image"
 						},
 						{
 							label: "Icon 图标",
-							path: "icon",
+							path: "icon"
 						},
 						{
 							label: "Tag 标签",
-							path: "tag",
+							path: "tag"
 						},
 						{
 							label: "Divider 分割线",
-							path: "divider",
-						},
-					],
+							path: "divider"
+						}
+					]
 				},
 				{
 					label: "Feedback 反馈组件",
@@ -74,17 +74,17 @@ export default {
 					children: [
 						{
 							label: "Toast 提示",
-							path: "toast",
+							path: "toast"
 						},
 						{
 							label: "Message 消息",
-							path: "message",
+							path: "message"
 						},
 						{
 							label: "Loading 加载",
-							path: "loading",
-						},
-					],
+							path: "loading"
+						}
+					]
 				},
 				{
 					label: "Form 表单组件",
@@ -92,33 +92,33 @@ export default {
 					children: [
 						{
 							label: "Radio 单选框",
-							path: "radio",
+							path: "radio"
 						},
 						{
 							label: "Switch 开关",
-							path: "switch",
+							path: "switch"
 						},
 						{
 							label: "Checkbox 多选框",
-							path: "checkbox",
+							path: "checkbox"
 						},
 						{
 							label: "Select 下拉框",
-							path: "select",
+							path: "select"
 						},
 						{
 							label: "Upload 上传",
-							path: "upload",
+							path: "upload"
 						},
 						{
 							label: "Rate 评分",
-							path: "rate",
+							path: "rate"
 						},
 						{
 							label: "Rules 校验",
-							path: "rules",
-						},
-					],
+							path: "rules"
+						}
+					]
 				},
 				{
 					label: "Operate 操作",
@@ -126,28 +126,27 @@ export default {
 					children: [
 						{
 							label: "LoadMore 页底提示",
-							path: "loadmore",
+							path: "loadmore"
 						},
 						{
-							label: "Steps 步骤",
+							label: "Steps 步骤"
 						},
 						{
 							label: "Modal 模态框",
-							path: "modal",
+							path: "modal"
 						},
 						{
 							label: "ActionSheet 底部菜单",
-							path: "action-sheet",
+							path: "action-sheet"
 						},
 						{
 							label: "Search 搜索",
-							path: "search",
+							path: "search"
 						},
 						{
-							label: "Dropdown 下拉框",
-							path: "dropdown",
-						},
-					],
+							label: "Dropdown 下拉框"
+						}
+					]
 				},
 				{
 					label: "Nav 导航组件",
@@ -155,16 +154,16 @@ export default {
 					children: [
 						{
 							label: "Tabs 选项卡",
-							path: "tabs",
+							path: "tabs"
 						},
 						{
-							label: "BottomBar 底部导航",
+							label: "BottomBar 底部导航"
 						},
 						{
 							label: "TopBar 顶部导航",
-							path: "topbar",
-						},
-					],
+							path: "topbar"
+						}
+					]
 				},
 				{
 					label: "Layout 布局",
@@ -172,21 +171,21 @@ export default {
 					children: [
 						{
 							label: "Flex 柔性",
-							path: "flex",
+							path: "flex"
 						},
 						{
 							label: "Grid 宫格",
-							path: "grid",
+							path: "grid"
 						},
 						{
 							label: "WaterFall 瀑布流",
-							path: "waterfall",
+							path: "waterfall"
 						},
 						{
 							label: "List 列表",
-							path: "list",
-						},
-					],
+							path: "list"
+						}
+					]
 				},
 				{
 					label: "View 视图",
@@ -194,73 +193,73 @@ export default {
 					children: [
 						{
 							label: "Popup 弹出层",
-							path: "popup",
+							path: "popup"
 						},
 						{
 							label: "Badge 角标",
-							path: "badge",
+							path: "badge"
 						},
 						{
 							label: "Avatar 头像",
-							path: "avatar",
+							path: "avatar"
 						},
 						{
 							label: "CountDown 倒计时",
-							path: "countdown",
+							path: "countdown"
 						},
 						{
 							label: "NoticeBar 通知公告栏",
-							path: "noticebar",
+							path: "noticebar"
 						},
 						{
 							label: "Progress 进度条",
-							path: "progress",
+							path: "progress"
 						},
 						{
 							label: "Slider 滑块",
-							path: "slider",
+							path: "slider"
 						},
 						{
-							label: "TimeLine 时间轴",
+							label: "TimeLine 时间轴"
 						},
 						{
 							label: "Swiper 轮播图",
-							path: "swiper",
-						},
-					],
+							path: "swiper"
+						}
+					]
 				},
 				{
 					label: "Advanced 高级组件",
 					key: "advanced",
 					children: [
 						{
-							label: "Ceiling 吸顶",
+							label: "Ceiling 吸顶"
 						},
 						{
-							label: "Drag 拖动排序",
+							label: "Drag 拖动排序"
 						},
 						{
-							label: "Crop 图片裁剪",
+							label: "Crop 图片裁剪"
 						},
 						{
-							label: "Ticket 优惠券",
+							label: "Ticket 优惠券"
 						},
 						{
-							label: "Guide 操作引导",
+							label: "Guide 操作引导"
 						},
 						{
-							label: "RichText 富文本",
+							label: "RichText 富文本"
 						},
 						{
 							label: "IndexList 索引列表",
-							path: "list-index",
+							path: "list-index"
 						},
 						{
-							label: "Calendar 日历",
-						},
-					],
-				},
-			],
+							label: "Calendar 日历"
+						}
+					]
+				}
+			]
 		};
 	},
 
@@ -268,13 +267,13 @@ export default {
 		toDemo({ key }, item) {
 			if (item.path) {
 				uni.navigateTo({
-					url: `/pages/demo/${key}/${item.path}`,
+					url: `/pages/demo/${key}/${item.path}`
 				});
 			} else {
 				this.$refs["toast"].open(`${item.label}开发中`);
 			}
-		},
-	},
+		}
+	}
 };
 </script>
 
