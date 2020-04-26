@@ -1,0 +1,83 @@
+.cl-dialog__wrapper {
+	z-index: 3010;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	opacity: 0;
+	transition: all 0.2s;
+	pointer-events: none;
+
+	&.show {
+		opacity: 1;
+		pointer-events: auto;
+
+		.cl-dialog {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+
+	&::after {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		width: 0;
+		vertical-align: middle;
+	}
+
+	.cl-dialog__modal {
+		height: 100%;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.cl-dialog {
+		display: inline-block;
+		margin: auto;
+		border-radius: 10rpx;
+		background-color: #fff;
+		position: relative;
+		transition: all 0.3s;
+		transform: translate3d(0, -40rpx, 0);
+		opacity: 0;
+
+		&__header {
+			position: relative;
+			padding: 20rpx 20rpx 10rpx 20rpx;
+			text-align: center;
+		}
+
+		&__title {
+			font-size: 32rpx;
+			font-weight: 500;
+		}
+
+		&__container {
+			position: relative;
+			padding: 20rpx 40rpx 40rpx 40rpx;
+			color: #666;
+			font-size: 26rpx;
+		}
+
+		&__message {
+			text-align: center;
+			font-size: 28rpx;
+			color: #666;
+			line-height: 50rpx;
+		}
+
+		&__footer {
+			display: flex;
+			justify-content: flex-end;
+			padding: 20rpx;
+		}
+	}
+}

@@ -1,0 +1,97 @@
+.cl-swiper {
+	&--card {
+		.cl-swiper-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: 100%;
+			border-radius: 10rpx;
+			background-color: #f7f7f7;
+			transform: scale(0.95, 0.9);
+			transition: all 0.2s ease-in 0s;
+
+			&.active {
+				transform: none;
+				transition: all 0.2s ease-in 0s;
+			}
+		}
+
+		.wx-swiper-dot,
+		.a-swiper-dot,
+		.uni-swiper-dot {
+			background-color: #ddd;
+			opacity: 0.5;
+			width: 10rpx;
+			height: 10rpx;
+			border-radius: 10rpx;
+			margin: 0 6rpx;
+			border-color: transparent;
+			border-width: 1px;
+			border-style: solid;
+		}
+
+		.wx-swiper-dot-active,
+		.a-swiper-dot-active,
+		.uni-swiper-dot-active {
+			background-color: #fff;
+			opacity: 1;
+			border-color: $color-primary;
+		}
+	}
+
+	&--chain {
+		.cl-swiper-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: calc(100% - 20rpx);
+			border-radius: 10rpx;
+			background-color: #f7f7f7;
+			margin: 0 10rpx;
+		}
+
+		.wx-swiper-dot,
+		.a-swiper-dot,
+		.uni-swiper-dot {
+			background-color: #ddd;
+			height: 8rpx;
+			width: 10rpx;
+			margin: 0 2rpx;
+			border-radius: 0;
+		}
+
+		.wx-swiper-dot-active,
+		.a-swiper-dot-active,
+		.uni-swiper-dot-active {
+			background-color: $color-primary;
+			width: 30rpx;
+		}
+
+		.cl-swiper__labels {
+			display: flex;
+			align-items: center;
+			padding: 0 30rpx;
+			height: 60rpx;
+			margin-top: 30rpx;
+
+			.block {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #f7f7f7;
+				margin-right: 20rpx;
+				border-radius: 60rpx;
+				height: 60rpx;
+				width: 60rpx;
+				transition: width 0.2s;
+				font-size: 24rpx;
+
+				&.active {
+					width: 150rpx;
+				}
+			}
+		}
+	}
+}

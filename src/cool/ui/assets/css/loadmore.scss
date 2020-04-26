@@ -1,0 +1,19 @@
+.cl-loadmore__wrap {
+	.cl-loadmore {
+		display: flex;
+		align-items: center;
+
+		&__text {
+			font-size: 26rpx;
+			color: #666;
+		}
+
+		.cl-loading {
+			position: relative;
+			/* #ifndef H5 */
+			top: 4rpx;
+			/* #endif */
+			right: 14rpx;
+		}
+	}
+}

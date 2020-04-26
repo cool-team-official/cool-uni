@@ -1,0 +1,45 @@
+.cl-search {
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	padding: 15rpx 20rpx;
+	box-sizing: border-box;
+	margin-bottom: 20rpx;
+
+	&__input {
+		flex: 1;
+		position: relative;
+
+		.cl-input {
+			border-radius: 70rpx !important;
+			overflow: hidden;
+		}
+
+		&-btn {
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 9;
+		}
+
+		.cl-button {
+			height: 70rpx;
+			line-height: 68rpx;
+		}
+	}
+
+	&__prefix,
+	&__suffix {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__prefix {
+		margin-right: 20rpx;
+	}
+
+	&__suffix {
+		margin-left: 20rpx;
+	}
+}

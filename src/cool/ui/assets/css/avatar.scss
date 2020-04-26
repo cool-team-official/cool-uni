@@ -1,0 +1,49 @@
+.cl-avatar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #c0c4cc;
+	font-size: 28rpx;
+	color: #fff;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	&--circle {
+		border-radius: 100%;
+	}
+
+	&--square {
+		border-radius: 10rpx;
+	}
+
+	&__target {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.cl-avatar-group {
+	display: flex;
+
+	.cl-avatar {
+		margin-left: -20rpx;
+		border: 4rpx solid rgba(255, 255, 255, 0.2);
+		position: relative;
+	}
+
+	&__more {
+		background-color: $color-primary;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+
+		&::before {
+			content: '+';
+			position: relative;
+			top: -2rpx;
+			right: 2rpx;
+		}
+	}
+}

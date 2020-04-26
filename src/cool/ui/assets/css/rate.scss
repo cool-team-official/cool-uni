@@ -1,0 +1,21 @@
+.cl-rate {
+	display: flex;
+	align-items: center;
+
+	&__icon {
+		position: relative;
+		margin-right: 10rpx;
+	}
+
+	&__icon-active {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+	}
+
+	&__text {
+		font-size: 26rpx;
+		margin-left: 10rpx;
+	}
+}

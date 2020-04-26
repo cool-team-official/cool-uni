@@ -1,0 +1,17 @@
+.group {
+	margin-bottom: 20rpx;
+	background-color: #fff;
+
+	.header {
+		padding: 20rpx;
+		font-size: 28rpx;
+	}
+
+	.container {
+		padding: 10px;
+
+		&.no-padding {
+			padding: 0;
+		}
+	}
+}

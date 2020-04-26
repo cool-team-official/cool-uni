@@ -1,0 +1,49 @@
+.cl-grid {
+	box-sizing: border-box;
+
+	&::after,
+	&::before {
+		content: '';
+		display: table;
+	}
+
+	&::after {
+		clear: both;
+	}
+
+	&-item {
+		float: left;
+		box-sizing: border-box;
+		position: relative;
+	}
+
+	&--border {
+		border: 1rpx solid $color-default;
+		border-bottom: 0;
+		border-right: 0;
+
+		.cl-grid-item {
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				display: block;
+				background-color: $color-default;
+			}
+
+			&::before {
+				bottom: 0;
+				left: 0;
+				height: 1rpx;
+				width: 100%;
+			}
+
+			&::after {
+				right: 0;
+				top: 0;
+				height: 100%;
+				width: 1rpx;
+			}
+		}
+	}
+}

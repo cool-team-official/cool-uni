@@ -1,0 +1,134 @@
+.cl-button {
+	display: inline-block;
+	color: #666;
+	border: 1rpx solid $color-default;
+	box-sizing: border-box;
+	background-color: #fff;
+	font-size: 26rpx;
+	white-space: nowrap;
+	padding: 0 30rpx;
+
+	&::after {
+		border-width: 0;
+	}
+
+	&.is-loading {
+		opacity: 0.8;
+
+		.cl-loading {
+			float: left;
+			position: relative;
+			top: 16rpx;
+			color: #fff;
+		}
+
+		.cl-button__text {
+			margin-left: 15rpx;
+		}
+	}
+
+	&.is-fill {
+		display: block;
+		width: 100%;
+	}
+
+	&[size="small"] {
+		height: 60rpx;
+		line-height: 58rpx;
+
+		.cl-loading {
+			top: 12rpx;
+		}
+	}
+
+	&[size="mini"] {
+		height: 50rpx;
+		line-height: 48rpx;
+		font-size: 24rpx;
+		padding: 0 20rpx;
+
+		.cl-loading {
+			top: 8rpx;
+		}
+	}
+
+	.button-hover:not(.is-loading) {
+		background-color: #f7f7f7;
+	}
+
+	/* 图标 */
+
+	&__icon {
+		margin-right: 10rpx;
+	}
+
+	[class^="cl-icon-"]:last-child {
+		margin-left: 10rpx;
+	}
+
+	/* 圆角按钮 */
+
+	&--round {
+		border-radius: 40rpx;
+	}
+
+	/* 文字按钮 */
+
+	&--text {
+		border-color: transparent;
+		color: $color-primary;
+
+		&.button-hover {
+			background-color: #f7f7f7;
+		}
+	}
+
+	@mixin color($type, $color, $color-focus) {
+		&.cl-button--#{$type} {
+			background-color: $color;
+			border-color: $color;
+
+			.cl-button__text {
+				color: #fff;
+			}
+
+			&.is-plain {
+				border-color: $color-focus;
+				background-color: #fff;
+
+				.cl-button__text {
+					color: $color-focus;
+				}
+			}
+
+			&.button-hover {
+				background-color: $color-focus;
+
+				&.is-plain {
+					.cl-button__text {
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		&--shadow {
+			box-shadow: 2rpx 4rpx 14rpx $color;
+		}
+
+		&[disabled] {
+			color: #c0c4cc;
+		}
+	}
+
+	@include color(primary, $color-primary, $color-focus-primary);
+	@include color(success, $color-success, $color-focus-success);
+	@include color(error, $color-error, $color-focus-error);
+	@include color(warning, $color-warning, $color-focus-warning);
+	@include color(info, $color-info, $color-focus-info);
+}
+
+.cl-button + .cl-button,
+cl-button + cl-button {
+	margin-left: 20rpx;
+}

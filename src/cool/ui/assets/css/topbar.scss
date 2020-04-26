@@ -1,0 +1,71 @@
+.cl-topbar {
+	display: flex;
+	align-items: center;
+	height: 90rpx;
+	width: 100%;
+	position: relative;
+	background-color: #fff;
+	padding-top: env(safe-area-inset-top);
+
+	&__content {
+		width: 100%;
+	}
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	&__title {
+		font-size: 28rpx;
+		font-weight: bold;
+	}
+
+	&__description {
+		font-size: 22rpx;
+		color: #999;
+	}
+
+	&__prepend,
+	&__append {
+		display: flex;
+		align-items: center;
+		height: 90rpx;
+		position: absolute;
+	}
+
+	&__prepend {
+		left: 0;
+	}
+
+	&__append {
+		right: 0;
+	}
+
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		width: 90rpx;
+
+		&:active {
+			background-color: #f7f7f7;
+		}
+	}
+
+	&.is-border {
+		border-bottom: 1rpx solid #f7f7f7;
+	}
+
+	&.is-android {
+		padding-top: 44rpx;
+
+		&__prepend,
+		&__append {
+			top: 44rpx;
+		}
+	}
+}

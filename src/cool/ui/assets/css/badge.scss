@@ -1,0 +1,48 @@
+.cl-badge {
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	z-index: 9;
+
+	&__content {
+		display: inline-block;
+		height: 16rpx;
+		min-width: 16rpx;
+		line-height: 16rpx;
+		position: absolute;
+		top: -8rpx;
+		right: -8rpx;
+		background-color: $color-error;
+		color: #fff;
+		font-size: 24rpx;
+		text-align: center;
+		white-space: nowrap;
+		border: 4rpx solid rgba(255, 255, 255, 1);
+		border-radius: 20rpx;
+		padding: 8rpx;
+		transform: scale(0.9);
+
+		&.is-dot {
+			height: 20rpx;
+			min-width: 20rpx;
+			padding: 0;
+			border-radius: 50%;
+		}
+
+		&--primary {
+			background-color: $color-primary;
+		}
+		&--success {
+			background-color: $color-success;
+		}
+		&--warning {
+			background-color: $color-warning;
+		}
+		&--info {
+			background-color: $color-info;
+		}
+		&--error {
+			background-color: $color-error;
+		}
+	}
+}
