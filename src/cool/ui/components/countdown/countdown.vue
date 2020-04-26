@@ -18,35 +18,35 @@ export default {
 		// 分隔符 [day, hour, minute, second]
 		splitor: {
 			type: [String, Array],
-			default: "default",
+			default: "default"
 		},
 		// 布局
 		layout: {
 			type: Array,
-			default: () => ["day", "hour", "minute", "second"],
+			default: () => ["day", "hour", "minute", "second"]
 		},
 		// simple 精简：为00时自动隐藏
 		mode: {
 			type: String,
-			default: "default",
+			default: "default"
 		},
 		day: {
 			type: Number,
-			default: 0,
+			default: 0
 		},
 		hour: {
 			type: Number,
-			default: 0,
+			default: 0
 		},
 		minute: {
 			type: Number,
-			default: 0,
+			default: 0
 		},
 		second: {
 			type: Number,
-			default: 0,
+			default: 0
 		},
-		datetime: [Date, String],
+		datetime: [Date, String]
 	},
 
 	data() {
@@ -54,7 +54,7 @@ export default {
 			timer: null,
 			syncFlag: false,
 			seconds: 0,
-			list: [],
+			list: []
 		};
 	},
 
@@ -73,7 +73,7 @@ export default {
 		},
 		datetime() {
 			this.changeFlag();
-		},
+		}
 	},
 
 	beforeDestroy() {
@@ -140,6 +140,11 @@ export default {
 			}, 1000);
 		},
 
+		stop() {
+			clearInterval(this.timer);
+			this.$emit("stop");
+		},
+
 		done() {
 			clearInterval(this.timer);
 			this.$emit("done");
@@ -179,7 +184,7 @@ export default {
 				day,
 				hour,
 				minute,
-				second,
+				second
 			};
 
 			let flag = day === "00";
@@ -193,7 +198,7 @@ export default {
 							? flag
 								? obj[e] !== "00"
 								: true
-							: true,
+							: true
 				};
 
 				if (flag) {
@@ -205,7 +210,7 @@ export default {
 
 			this.$emit(
 				"change",
-				this.list.map((e) => e.value)
+				this.list.map(e => e.value)
 			);
 		},
 
@@ -237,8 +242,8 @@ export default {
 				this.start();
 				this.syncFlag = true;
 			}
-		},
-	},
+		}
+	}
 };
 </script>
 
