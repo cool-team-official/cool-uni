@@ -7,6 +7,7 @@
 				'is-show': visible
 			}
 		]"
+		v-if="forceUpdate ? visible : true"
 	>
 		<view class="cl-popup__modal" @tap="modalClose"></view>
 
@@ -26,7 +27,7 @@ export default {
 		modal: Boolean,
 		direction: {
 			type: String,
-			default: 'left'
+			default: "left"
 		},
 		wrapperClosable: {
 			type: Boolean,
@@ -34,31 +35,32 @@ export default {
 		},
 		size: {
 			type: String,
-			default: 'auto'
-		}
+			default: "auto"
+		},
+		forceUpdate: Boolean
 	},
 
 	computed: {
 		height() {
 			switch (this.direction) {
-				case 'top':
-				case 'bottom':
-				case 'center':
+				case "top":
+				case "bottom":
+				case "center":
 					return this.size;
-				case 'left':
-				case 'right':
-					return '100%';
+				case "left":
+				case "right":
+					return "100%";
 			}
 		},
 
 		width() {
 			switch (this.direction) {
-				case 'top':
-				case 'bottom':
-					return '100%';
-				case 'left':
-				case 'right':
-				case 'center':
+				case "top":
+				case "bottom":
+					return "100%";
+				case "left":
+				case "right":
+				case "center":
 					return this.size;
 			}
 		}
@@ -75,12 +77,12 @@ export default {
 	methods: {
 		close() {
 			if (this.beforeClose) {
-				this.$emit('close', () => {
-					this.$emit('update:visible', false);
+				this.$emit("close", () => {
+					this.$emit("update:visible", false);
 				});
 			} else {
-				this.$emit('update:visible', false);
-				this.$emit('close');
+				this.$emit("update:visible", false);
+				this.$emit("close");
 			}
 		},
 
