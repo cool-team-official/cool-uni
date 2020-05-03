@@ -34,6 +34,12 @@
 		align-items: center;
 		height: 90rpx;
 		position: absolute;
+
+		// # ifdef MP
+		& > view {
+			display: flex;
+		}
+		// # endif
 	}
 
 	&__prepend {
