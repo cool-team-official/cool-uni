@@ -6,6 +6,9 @@
 			:range="options"
 			:range-key="rangeKey"
 			:disabled="disabled"
+			:end="end"
+			:start="start"
+			:fields="fields"
 			@change="onChange"
 			@columnchange="onColumnChange"
 			@cancel="onCancel"
@@ -30,39 +33,39 @@ export default {
 	props: {
 		mode: {
 			type: String,
-			default: "selector"
+			default: "selector",
 		},
 		placeholder: {
 			type: String,
-			default: "请选择"
+			default: "请选择",
 		},
 		value: null,
 		options: Array,
 		labelKey: {
 			type: String,
-			default: "label"
+			default: "label",
 		},
 		valueKey: {
 			type: String,
-			default: "value"
+			default: "value",
 		},
 		separator: {
 			type: String,
-			default: "/"
+			default: "/",
 		},
 		disabled: Boolean,
 		fields: {
 			type: String,
-			default: "day"
+			default: "day",
 		},
 		start: String,
-		end: String
+		end: String,
 	},
 
 	data() {
 		return {
 			index: [],
-			text: ""
+			text: "",
 		};
 	},
 
@@ -73,7 +76,7 @@ export default {
 	watch: {
 		value(val) {
 			this.parse(val);
-		}
+		},
 	},
 
 	computed: {
@@ -87,7 +90,7 @@ export default {
 
 		isDisabled() {
 			return this.disabled ? "is-disabled" : "";
-		}
+		},
 	},
 
 	methods: {
@@ -96,12 +99,12 @@ export default {
 			this.index = (() => {
 				switch (this.mode) {
 					case "selector":
-						return this.options.findIndex(e =>
+						return this.options.findIndex((e) =>
 							compareValue(e[this.valueKey], val)
 						);
 					case "multiSelector":
 						return (isArray(val) ? val : [val]).map((v, i) => {
-							return this.options[i].findIndex(e =>
+							return this.options[i].findIndex((e) =>
 								compareValue(e[this.valueKey], v)
 							);
 						});
@@ -119,7 +122,7 @@ export default {
 							: "";
 					case "multiSelector":
 						return this.index
-							.filter(v => v >= 0)
+							.filter((v) => v >= 0)
 							.map((v, i) => this.options[i][v][this.labelKey])
 							.join(this.separator);
 					case "region":
@@ -136,7 +139,7 @@ export default {
 						return this.options[detail.value][this.valueKey];
 					case "multiSelector":
 						return detail.value
-							.map(v => (v < 0 ? 0 : v))
+							.map((v) => (v < 0 ? 0 : v))
 							.map((v, i) => this.options[i][v][this.valueKey]);
 					default:
 						return detail.value;
@@ -155,8 +158,8 @@ export default {
 		},
 		onCancel() {
 			this.$emit("cancel");
-		}
-	}
+		},
+	},
 };
 </script>
 

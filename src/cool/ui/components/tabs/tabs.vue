@@ -3,7 +3,7 @@
 		<scroll-view
 			class="cl-tabs__bar"
 			:style="{
-				top: stickyTop
+				top: stickyTop,
 			}"
 			scroll-with-animation
 			scroll-x
@@ -15,18 +15,26 @@
 				:class="[
 					'cl-tabs__bar-li',
 					{
-						active: value == item.name
-					}
+						active: value == item.name,
+					},
 				]"
 				@tap="change(index)"
 			>
 				<text
-					:class="['cl-tabs__icon', 'cl-tabs__icon--prefix', item.prefixIcon]"
+					:class="[
+						'cl-tabs__icon',
+						'cl-tabs__icon--prefix',
+						item.prefixIcon,
+					]"
 					v-if="item.prefixIcon"
 				></text>
 				<text class="cl-tabs__label">{{ item.label }}</text>
 				<text
-					:class="['cl-tabs__icon', 'cl-tabs__icon--suffix', item.suffixIcon]"
+					:class="[
+						'cl-tabs__icon',
+						'cl-tabs__icon--suffix',
+						item.suffixIcon,
+					]"
 					v-if="item.suffixIcon"
 				></text>
 			</view>
@@ -46,7 +54,11 @@
 							enable-back-to-top
 							:class="[`cl-tabs__swiper-scroller`]"
 						>
-							<slot :item="item" :index="index" v-if="item.visible"></slot>
+							<slot
+								:item="item"
+								:index="index"
+								v-if="item.visible"
+							></slot>
 						</scroll-view>
 					</swiper-item>
 				</swiper>
@@ -60,11 +72,11 @@
 </template>
 
 <script>
-import Emitter from '../../mixins/emitter';
-import { isNumber } from '../../utils';
+import Emitter from "../../mixins/emitter";
+import { isNumber } from "../../utils";
 
 export default {
-	componentName: 'ClTabs',
+	componentName: "ClTabs",
 
 	props: {
 		value: [String, Number],
@@ -79,13 +91,13 @@ export default {
 		// 吸顶顶部距离
 		stickyTop: {
 			type: [Number],
-			default: 0
+			default: 0,
 		},
 		// 类型，default: 默认，swiper: 滑动
 		type: {
 			type: String,
-			default: 'default'
-		}
+			default: "default",
+		},
 	},
 
 	mixins: [Emitter],
@@ -94,7 +106,7 @@ export default {
 		return {
 			list: [],
 			scrollLeft: 0,
-			current: 0
+			current: 0,
 		};
 	},
 
@@ -103,8 +115,8 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.current = val;
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
@@ -119,18 +131,18 @@ export default {
 		},
 
 		isSticky() {
-			return this.sticky ? 'cl-tabs--sticky' : '';
-		}
+			return this.sticky ? "cl-tabs--sticky" : "";
+		},
 	},
 
 	created() {
-		this.$on('tabs.addPane', data => {
+		this.$on("tabs.addPane", (data) => {
 			this.list.push(data);
 		});
 	},
 
 	mounted() {
-		this.broadcast('ClTabPane', 'tabs.change', this.value);
+		this.broadcast("ClTabPane", "tabs.change", this.value);
 	},
 
 	methods: {
@@ -148,7 +160,7 @@ export default {
 			if (this.beforeLeave) {
 				const fn = this.beforeLeave(name);
 
-				if (!!fn && typeof fn.then === 'function') {
+				if (!!fn && typeof fn.then === "function") {
 					flag = !!(await fn.catch(() => null));
 				} else {
 					flag = fn;
@@ -156,14 +168,14 @@ export default {
 			}
 
 			if (flag) {
-				this.$emit('input', name);
-				this.$emit('tab-change', name);
-				this.broadcast('ClTabPane', 'tabs.change', name);
+				this.$emit("input", name);
+				this.$emit("tab-change", name);
+				this.broadcast("ClTabPane", "tabs.change", name);
 				this.scrollLeft = (index - 1) * 60;
 				this.current = index;
 				this.list2[index].visible = true;
 			}
-		}
-	}
+		},
+	},
 };
 </script>

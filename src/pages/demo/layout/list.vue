@@ -11,7 +11,7 @@
 					:src="require('@/assets/icon/all.png')"
 					alt=""
 				/>
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 			</cl-list>
 		</cl-card>
 
@@ -23,7 +23,7 @@
 					alt=""
 				/>
 				0.00元
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 			</cl-list>
 
 			<cl-list label="昨日收益" type="success">
@@ -33,7 +33,7 @@
 					alt=""
 				/>
 				-264.08元
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 			</cl-list>
 		</cl-card>
 
@@ -45,13 +45,13 @@
 					alt=""
 				/>
 				<text>兴业银行(***1113)</text>
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 			</cl-list>
 		</cl-card>
 
 		<cl-card label="滑动" padding="0">
 			<cl-list label="右滑动" swipe="left">
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 
 				<view class="append" slot="menu">
 					<button class="primary-btn">置顶</button>
@@ -60,7 +60,7 @@
 			</cl-list>
 
 			<cl-list label="左滑动" swipe="right">
-				<text slot="suffix" class="cl-icon-arrow-right"></text>
+				<text slot="append" class="cl-icon-arrow-right"></text>
 
 				<view class="append" slot="menu">
 					<button class="primary-btn">置顶</button>
@@ -76,7 +76,7 @@
 					<text>神仙都没用</text>
 				</view>
 
-				<view class="append" slot="suffix">
+				<view class="append" slot="append">
 					<cl-button type="primary" @tap="chooseImage"
 						>修改头像</cl-button
 					>
@@ -90,7 +90,7 @@
 export default {
 	data() {
 		return {
-			avatarUrl: require("@/assets/images/avatar.jpg")
+			avatarUrl: require("@/assets/images/avatar.jpg"),
 		};
 	},
 
@@ -98,13 +98,13 @@ export default {
 		chooseImage() {
 			uni.chooseImage({
 				count: 1,
-				success: res => {
+				success: (res) => {
 					this.$refs["cs-list"].restore();
 					this.avatarUrl = res.tempFilePaths[0];
-				}
+				},
 			});
-		}
-	}
+		},
+	},
 };
 </script>
 

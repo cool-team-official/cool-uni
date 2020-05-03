@@ -5,47 +5,54 @@
 </template>
 
 <script>
-import AsyncValidator from '../../utils/async-validator';
-import { isArray, isObject, isString, isBoolean, isEmpty, diffForm } from '../../utils';
+import AsyncValidator from "../../utils/async-validator";
+import {
+	isArray,
+	isObject,
+	isString,
+	isBoolean,
+	isEmpty,
+	diffForm,
+} from "../../utils";
 
 export default {
-	componentName: 'ClForm',
+	componentName: "ClForm",
 
 	props: {
 		model: {
 			type: Object,
 			default: () => {
 				return {};
-			}
+			},
 		},
 		rules: Object,
 		border: Boolean,
 		showMessage: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		showToast: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		labelWidth: {
 			type: String,
-			default: '150rpx'
+			default: "150rpx",
 		},
 		labelPosition: {
 			type: String,
-			default: 'right'
+			default: "right",
 		},
 		validateOnValueChange: {
 			type: Boolean,
-			default: true
-		}
+			default: true,
+		},
 	},
 
 	data() {
 		return {
 			subscrible: [],
-			rules2: []
+			rules2: [],
 		};
 	},
 
@@ -54,15 +61,15 @@ export default {
 			handler(newV, oldV) {
 				this.publish({
 					props: diffForm(newV, oldV),
-					action: 'validate'
+					action: "validate",
 				});
 			},
-			deep: true
+			deep: true,
 		},
 
 		rules(val) {
 			this.setRules(val);
-		}
+		},
 	},
 
 	computed: {
@@ -71,12 +78,12 @@ export default {
 		},
 
 		isLabelPosition() {
-			return this.labelPosition ? `cl-form--${this.labelPosition}` : '';
+			return this.labelPosition ? `cl-form--${this.labelPosition}` : "";
 		},
 
 		isBorder() {
-			return this.border ? 'cl-form--border' : '';
-		}
+			return this.border ? "cl-form--border" : "";
+		},
 	},
 
 	created() {
@@ -96,11 +103,22 @@ export default {
 
 		// 根据字段校验表单
 		validateField(props, callback) {
+			if (!props) {
+				console.warn(`Props 为空`);
+				return false;
+			}
+
+			if (!isArray(props)) {
+				props = [props];
+			}
+
 			let rules = {};
 
 			for (let i in this.rules2) {
-				if (this.subscrible.find(e => e.prop == i)) {
-					rules[i] = this.rules2[i];
+				if (props.includes(i)) {
+					if (this.subscrible.find((e) => e.prop == i)) {
+						rules[i] = this.rules2[i];
+					}
 				}
 			}
 
@@ -108,12 +126,12 @@ export default {
 
 			let form = {};
 
-			props.forEach(e => {
+			props.forEach((e) => {
 				form[e] = this.model[e];
 			});
 
 			validator.validate(form, (errors, fields) => {
-				this.publish({ props, action: 'validate' });
+				this.publish({ props, action: "validate" });
 
 				if (callback) {
 					callback(!errors, errors);
@@ -138,7 +156,7 @@ export default {
 				} else if (isObject(val)) {
 					form[i] = {};
 				} else if (isString(val)) {
-					form[i] = '';
+					form[i] = "";
 				} else if (isBoolean(val)) {
 					form[i] = false;
 				} else {
@@ -147,7 +165,7 @@ export default {
 			}
 
 			if (flag) {
-				this.$emit('update:model', form);
+				this.$emit("update:model", form);
 			}
 
 			this.clearValidate();
@@ -156,27 +174,27 @@ export default {
 		// 移除表单校验结果
 		clearValidate(props) {
 			this.$nextTick(() => {
-				this.publish({ props, action: 'clear' });
+				this.publish({ props, action: "clear" });
 			});
 		},
 
 		// 添加字段，监听事件
 		addField(prop, callback) {
-			let item = this.subscrible.find(e => e.prop == prop);
+			let item = this.subscrible.find((e) => e.prop == prop);
 
 			if (item) {
 				item.handler = callback;
 			} else {
 				this.subscrible.push({
 					prop,
-					handler: callback
+					handler: callback,
 				});
 			}
 		},
 
 		// 移除字段和事件
 		removeField(prop) {
-			const i = this.subscrible.findIndex(e => e.prop == prop);
+			const i = this.subscrible.findIndex((e) => e.prop == prop);
 			this.subscrible.splice(i, 1);
 		},
 
@@ -188,14 +206,14 @@ export default {
 				props = Object.keys(this.model);
 			}
 
-			props.forEach(k => {
-				item = this.subscrible.find(e => e.prop == k);
+			props.forEach((k) => {
+				item = this.subscrible.find((e) => e.prop == k);
 
 				if (item) {
 					item.handler({ action, value: this.model[k] });
 				}
 			});
-		}
-	}
+		},
+	},
 };
 </script>

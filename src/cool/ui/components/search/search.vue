@@ -1,11 +1,11 @@
 <template>
 	<view class="cl-search">
-		<view class="cl-search__prefix" v-if="$slots.prefix">
-			<slot name="prefix"></slot>
+		<view class="cl-search__prepend" v-if="$slots.prepend">
+			<slot name="prepend"></slot>
 		</view>
 		<view class="cl-search__input">
 			<cl-input
-				prefix-icon="cl-icon-search"
+				:prefix-icon="searchIcon"
 				v-model="value2"
 				:type="type"
 				:placeholder="placeholder"
@@ -35,8 +35,8 @@
 				{{ searchButtonText }}
 			</cl-button>
 		</view>
-		<view class="cl-search__suffix" v-if="$slots.suffix">
-			<slot name="suffix"></slot>
+		<view class="cl-search__append" v-if="$slots.append">
+			<slot name="append"></slot>
 		</view>
 	</view>
 </template>
@@ -47,7 +47,7 @@ export default {
 		value: [String, Number],
 		type: {
 			type: String,
-			default: 'text'
+			default: "text",
 		},
 		password: Boolean,
 		placeholder: String,
@@ -57,43 +57,43 @@ export default {
 		focus: Boolean,
 		maxlength: {
 			type: Number,
-			default: 140
+			default: 140,
 		},
 		cursorSpacing: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		confirmType: {
 			type: String,
-			default: 'done'
+			default: "done",
 		},
 		confirmHold: Boolean,
 		adjustPosition: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		holdKeyboard: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		searchIcon: {
 			type: String,
-			default: 'cl-icon-search'
+			default: "cl-icon-search",
 		},
 		showSearchButton: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		searchButtonText: {
 			type: String,
-			default: '搜索'
-		}
+			default: "搜索",
+		},
 	},
 
 	data() {
 		return {
 			value2: null,
-			focus2: false
+			focus2: false,
 		};
 	},
 
@@ -102,42 +102,42 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
+			},
 		},
 
 		focus: {
 			immediate: true,
 			handler(val) {
 				this.focus2 = val;
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
 		onInput(e) {
-			this.$emit('input', e);
+			this.$emit("input", e);
 		},
 
 		onFocus(e) {
-			this.$emit('focus', e);
+			this.$emit("focus", e);
 		},
 
 		onBlur(e) {
-			this.$emit('blur', e);
+			this.$emit("blur", e);
 		},
 
 		onConfirm(e) {
-			this.$emit('confirm', e);
+			this.$emit("confirm", e);
 			this.search();
 		},
 
 		onKeyboardheightchange(e) {
-			this.$emit('keyboardheightchange', e);
+			this.$emit("keyboardheightchange", e);
 		},
 
 		search() {
-			this.$emit('search', this.value2);
-		}
-	}
+			this.$emit("search", this.value2);
+		},
+	},
 };
 </script>

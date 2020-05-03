@@ -3,8 +3,8 @@
 		class="cl-dialog__wrapper"
 		:class="[
 			{
-				show: visible
-			}
+				show: visible,
+			},
 		]"
 	>
 		<!-- 遮罩层 -->
@@ -14,7 +14,7 @@
 		<view
 			class="cl-dialog"
 			:style="{
-				width
+				width,
 			}"
 		>
 			<view class="cl-dialog__header" v-if="title">
@@ -41,32 +41,30 @@ export default {
 		visible: Boolean,
 		// 标题
 		title: String,
-		// 类型
-		type: String,
 		// 宽度
 		width: {
 			type: String,
-			default: '80%'
+			default: "80%",
 		},
 		// 点击遮罩层是否关闭
 		closeOnClickModal: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 关闭前
-		beforeClose: Boolean
+		beforeClose: Boolean,
 	},
 
 	methods: {
 		close(action) {
 			const done = () => {
-				this.$emit('update:visible', false);
+				this.$emit("update:visible", false);
 			};
 
 			if (this.beforeClose) {
-				this.$emit('close', { action, done });
+				this.$emit("close", { action, done });
 			} else {
-				this.$emit('close', { action });
+				this.$emit("close", { action });
 				done();
 			}
 		},
@@ -76,8 +74,8 @@ export default {
 				return false;
 			}
 
-			this.close('close');
-		}
-	}
+			this.close("close");
+		},
+	},
 };
 </script>

@@ -28,18 +28,18 @@
 		}
 	}
 
-	&__prefix,
-	&__suffix {
+	&__prepend,
+	&__append {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	&__prefix {
+	&__prepend {
 		margin-right: 20rpx;
 	}
 
-	&__suffix {
+	&__append {
 		margin-left: 20rpx;
 	}
 }

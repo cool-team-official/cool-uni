@@ -1,6 +1,6 @@
 <template>
 	<view
-		:class="['cl-list', isSuffix, isDisabled, isBorder]"
+		:class="['cl-list', isAppend, isDisabled, isBorder]"
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
@@ -8,7 +8,7 @@
 		<view
 			class="cl-list__swiper"
 			:style="{
-				transform: translateX
+				transform: translateX,
 			}"
 		>
 			<view class="cl-list__container">
@@ -24,8 +24,8 @@
 					<slot></slot>
 				</view>
 
-				<view class="cl-list__suffix">
-					<slot name="suffix"></slot>
+				<view class="cl-list__append">
+					<slot name="append"></slot>
 				</view>
 			</view>
 
@@ -44,25 +44,24 @@ const { platform } = uni.getSystemInfoSync();
 
 export default {
 	props: {
-		prop: String,
 		label: String,
 		disabled: Boolean,
 		border: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		type: String,
 		justify: {
 			type: String,
-			default: "end"
+			default: "end",
 		},
 		swipe: {
 			type: String,
 			default: "none",
-			validator: val => {
+			validator: (val) => {
 				return ["none", "left", "right"].indexOf(val) !== -1;
-			}
-		}
+			},
+		},
 	},
 
 	data() {
@@ -72,12 +71,12 @@ export default {
 				end: 0,
 				x: 0,
 				direction: "left",
-				lock: true
+				lock: true,
 			},
 
 			menu: {
-				width: 0
-			}
+				width: 0,
+			},
 		};
 	},
 
@@ -94,8 +93,8 @@ export default {
 			return this.justify !== "start" ? `is-justify-${this.justify}` : "";
 		},
 
-		isSuffix() {
-			return this.$scopedSlots.suffix ? "cl-list--suffix" : "";
+		isAppend() {
+			return this.$scopedSlots.append ? "cl-list--append" : "";
 		},
 
 		isDisabled() {
@@ -104,13 +103,13 @@ export default {
 
 		translateX() {
 			return `translateX(${this.touch.x}px)`;
-		}
+		},
 	},
 
 	watch: {
 		swipe() {
 			this.setMenu();
-		}
+		},
 	},
 
 	mounted() {
@@ -164,7 +163,7 @@ export default {
 
 				query
 					.select(`.cl-list__menu-${this.swipe}`)
-					.boundingClientRect(data => {
+					.boundingClientRect((data) => {
 						if (data) {
 							this.menu.width = data.width;
 						}
@@ -177,7 +176,7 @@ export default {
 			this.touch.end = 0;
 			this.touch.lock = true;
 			this.touch.x = 0;
-		}
-	}
+		},
+	},
 };
 </script>

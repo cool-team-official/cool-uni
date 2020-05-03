@@ -4,8 +4,8 @@
 		:class="[
 			`cl-popup__wrapper--${direction}`,
 			{
-				'is-show': visible
-			}
+				'is-show': visible,
+			},
 		]"
 		v-if="forceUpdate ? visible : true"
 	>
@@ -24,20 +24,19 @@ export default {
 	props: {
 		visible: Boolean,
 		beforeClose: Boolean,
-		modal: Boolean,
 		direction: {
 			type: String,
-			default: "left"
+			default: "left",
 		},
 		wrapperClosable: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		size: {
 			type: String,
-			default: "auto"
+			default: "auto",
 		},
-		forceUpdate: Boolean
+		forceUpdate: Boolean,
 	},
 
 	computed: {
@@ -63,7 +62,7 @@ export default {
 				case "center":
 					return this.size;
 			}
-		}
+		},
 	},
 
 	watch: {
@@ -71,7 +70,7 @@ export default {
 			if (!flag) {
 				this.close();
 			}
-		}
+		},
 	},
 
 	methods: {
@@ -92,7 +91,7 @@ export default {
 			}
 
 			this.close();
-		}
-	}
+		},
+	},
 };
 </script>

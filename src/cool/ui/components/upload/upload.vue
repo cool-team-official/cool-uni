@@ -1,7 +1,6 @@
 <template>
 	<view class="cl-upload-list" :class="[isDisabled]">
 		<cl-loading-mask :loading="loading" text="上传图片中"></cl-loading-mask>
-		<cl-toast ref="toast"></cl-toast>
 
 		<view
 			class="cl-upload"
@@ -10,10 +9,15 @@
 			@tap="choose(index)"
 			:style="{
 				height: size[0],
-				width: size[1]
+				width: size[1],
 			}"
 		>
-			<image class="cl-upload__target" v-show="url" :src="url" :mode="imageMode"></image>
+			<image
+				class="cl-upload__target"
+				v-show="url"
+				:src="url"
+				:mode="imageMode"
+			></image>
 			<text
 				class="cl-upload__remove cl-icon-round-close-fill"
 				@tap.stop="remove(index)"
@@ -26,7 +30,7 @@
 			@tap="choose()"
 			:style="{
 				height: size[0],
-				width: size[1]
+				width: size[1],
 			}"
 		>
 			<text class="cl-upload__add cl-icon-add"></text>
@@ -35,60 +39,60 @@
 </template>
 
 <script>
-import { isArray, isString } from '../../utils';
+import { isArray, isString } from "../../utils";
 
 export default {
 	props: {
 		value: [String, Array],
 		count: {
 			type: Number,
-			default: 9
+			default: 9,
 		},
 		sizeType: {
 			type: Array,
-			default: () => ['original', 'compressed']
+			default: () => ["original", "compressed"],
 		},
 		sourceType: {
 			type: Array,
-			default: () => ['album', 'camera']
+			default: () => ["album", "camera"],
 		},
 		success: Function,
 		fail: Function,
 		complete: Function,
 		size: {
 			type: Array,
-			default: () => ['200rpx', '200rpx']
+			default: () => ["200rpx", "200rpx"],
 		},
 		imageMode: {
 			type: String,
-			default: 'aspectFill'
+			default: "aspectFill",
 		},
 		multiple: Boolean,
 		limit: {
 			type: Number,
-			default: 9
+			default: 9,
 		},
 		action: String,
 		headers: Object,
 		data: Object,
 		name: {
 			type: String,
-			default: 'file'
+			default: "file",
 		},
 		beforeUpload: {
-			type: Function
+			type: Function,
 		},
 		disabled: Boolean,
 		test: {
 			type: Boolean,
-			default: true
-		}
+			default: true,
+		},
 	},
 
 	data() {
 		return {
 			loading: false,
-			urls: []
+			urls: [],
 		};
 	},
 
@@ -99,17 +103,17 @@ export default {
 				this.urls = isArray(this.value)
 					? this.value
 					: isString(this.value)
-					? this.value.split(',').filter(Boolean)
+					? this.value.split(",").filter(Boolean)
 					: [];
-			}
+			},
 		},
 
 		urls(val) {
 			let data = this.multiple ? val : val[0];
-			this.$emit('input', data);
-			this.$emit('change', data);
+			this.$emit("input", data);
+			this.$emit("change", data);
 			data = null;
-		}
+		},
 	},
 
 	computed: {
@@ -118,8 +122,8 @@ export default {
 		},
 
 		isDisabled() {
-			return this.disabled ? 'is-disabled' : '';
-		}
+			return this.disabled ? "is-disabled" : "";
+		},
 	},
 
 	methods: {
@@ -134,7 +138,7 @@ export default {
 				count: isAppend ? this.count : 1,
 				sizeType: this.sizeType,
 				sourceType: this.sourceType,
-				success: async res => {
+				success: async (res) => {
 					// 文件信息
 					const file = res.tempFiles[0];
 
@@ -168,7 +172,7 @@ export default {
 						name: this.name,
 						header: this.headers,
 						formData: this.data,
-						success: res => {
+						success: (res) => {
 							try {
 								const { data } = JSON.parse(res.data);
 
@@ -181,17 +185,18 @@ export default {
 								isAppend = null;
 							} catch (err) {
 								console.error(err);
-								this.$refs['toast'].open('上传失败，格式异常');
 							}
+
+							this.$emit("success", res);
 						},
-						fail: err => {
-							this.$refs['toast'].open(err);
+						fail: (err) => {
+							this.$emit("error", err);
 						},
 						complete: () => {
 							this.loading = false;
-						}
+						},
 					});
-				}
+				},
 			});
 		},
 
@@ -201,7 +206,7 @@ export default {
 			}
 
 			this.urls.splice(index, 1);
-		}
-	}
+		},
+	},
 };
 </script>

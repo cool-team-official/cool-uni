@@ -29,7 +29,7 @@
 
 			<!-- 表单 -->
 			<cl-form
-				ref="cl-form"
+				ref="form"
 				:model.sync="form"
 				:rules="rules"
 				:label-position="labelAlign"
@@ -122,74 +122,74 @@ export default {
 				resource: 0,
 				desc: "",
 				date: "",
-				cover: ""
+				cover: "",
 			},
 			rules: {
 				name: {
 					required: true,
-					message: "活动名称不能为空"
+					message: "活动名称不能为空",
 				},
 				region: {
 					required: true,
-					message: "活动地区不能为空"
+					message: "活动地区不能为空",
 				},
 				date: {
 					required: true,
-					message: "活动时间不能为空"
-				}
+					message: "活动时间不能为空",
+				},
 			},
 			options: {
 				type: [
 					{
 						label: "美食/餐厅线上活动",
-						value: 0
+						value: 0,
 					},
 					{
 						label: "地推活动",
-						value: 1
+						value: 1,
 					},
 					{
 						label: "线下主题活动",
-						value: 2
+						value: 2,
 					},
 					{
 						label: "单纯品牌曝光",
-						value: 3
-					}
+						value: 3,
+					},
 				],
 				region: [
 					{
 						label: "不限",
-						value: 0
+						value: 0,
 					},
 					{
 						label: "区域一",
-						value: 1
+						value: 1,
 					},
 					{
 						label: "区域二",
-						value: 2
-					}
+						value: 2,
+					},
 				],
 				resource: [
 					{
 						label: "线上品牌商赞助",
-						value: 0
+						value: 0,
 					},
 					{
 						label: "线下场地免费",
-						value: 1
+						value: 1,
 					},
 					{
 						label: "其他",
-						value: 2
-					}
-				]
+						value: 2,
+					},
+				],
 			},
 			labelAlign: "right",
 			labelWidth: "150rpx",
 			isRule: true,
-			showMessage: true
+			showMessage: true,
 		};
 	},
 
@@ -208,22 +208,22 @@ export default {
 			this.showMessage = !this.showMessage;
 		},
 		onSubmit() {
-			this.$refs["cl-form"].validate((valid, errors) => {
+			this.$refs["form"].validate((valid, errors) => {
 				if (valid) {
 					this.$refs["message"].open({ message: "提交成功" });
 					console.log(this.form);
 				} else {
 					this.$refs["message"].open({
 						message: errors[0].message,
-						type: "cancel"
+						type: "cancel",
 					});
 				}
 			});
 		},
 		onReset() {
-			this.$refs["cl-form"].resetFields();
-		}
-	}
+			this.$refs["form"].resetFields();
+		},
+	},
 };
 </script>
 

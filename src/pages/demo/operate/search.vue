@@ -19,7 +19,7 @@
 			>
 				<cl-avatar
 					:src="avatarUrl"
-					slot="suffix"
+					slot="append"
 					:size="60"
 				></cl-avatar>
 			</cl-search>
@@ -35,7 +35,7 @@
 				<cl-select
 					v-model="val5"
 					:options="options.city"
-					slot="prefix"
+					slot="prepend"
 				></cl-select>
 			</cl-search>
 		</cl-card>
@@ -46,7 +46,7 @@
 				placeholder="搜索图片、文章、链接"
 				:show-search-button="false"
 			>
-				<cl-button slot="suffix" type="error" @tap="onSearch2">
+				<cl-button slot="append" type="error" @tap="onSearch2">
 					<text>搜索</text>
 				</cl-button>
 			</cl-search>
@@ -70,18 +70,18 @@ export default {
 				city: [
 					{
 						label: "厦门市",
-						value: 1
+						value: 1,
 					},
 					{
 						label: "福州市",
-						value: 2
+						value: 2,
 					},
 					{
 						label: "龙岩市",
-						value: 3
-					}
-				]
-			}
+						value: 3,
+					},
+				],
+			},
 		};
 	},
 
@@ -96,7 +96,7 @@ export default {
 			if (this.val4) {
 				this.$refs["cl-toast"].open(`搜索的是：${this.val4}`);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

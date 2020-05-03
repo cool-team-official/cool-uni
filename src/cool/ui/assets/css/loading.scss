@@ -38,7 +38,8 @@
 		}
 	}
 
-	&__mp {
+	&__mp,
+	&__app {
 		height: 100%;
 		width: 100%;
 		border-radius: 100%;
@@ -46,6 +47,11 @@
 		border-bottom: 4rpx solid currentColor;
 		box-sizing: border-box;
 		animation: loading-rotate 1s linear infinite;
+	}
+
+	&__app {
+		position: relative;
+		top: -4rpx;
 	}
 }
 

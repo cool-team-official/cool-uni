@@ -3,7 +3,7 @@
 		<cl-waterfall ref="waterfall" :value="list" :column="2" :gutter="20">
 			<template v-slot="{ item }">
 				<view :class="['h', `h-${item}`]">
-					{{ item }}
+					{{ format() }}
 				</view>
 			</template>
 		</cl-waterfall>
@@ -19,7 +19,7 @@ export default {
 			list: [],
 			loading: false,
 			finish: false,
-			page: 1
+			page: 1,
 		};
 	},
 
@@ -41,7 +41,7 @@ export default {
 				this.page += 1;
 
 				setTimeout(() => {
-					this.$refs['waterfall'].append(this.rdList());
+					this.$refs["waterfall"].append(this.rdList());
 					this.loading = false;
 				}, 1500);
 			}
@@ -51,8 +51,12 @@ export default {
 			return new Array(10).fill(1).map(() => {
 				return parseInt(Math.random() * 10) + 1;
 			});
-		}
-	}
+		},
+
+		format() {
+			return 1;
+		},
+	},
 };
 </script>
 

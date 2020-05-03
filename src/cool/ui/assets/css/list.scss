@@ -5,7 +5,7 @@
 	overflow: hidden;
 	background-color: #fff;
 
-	&--suffix {
+	&--append {
 		.cl-list__content {
 			margin-right: 20rpx;
 		}
@@ -37,13 +37,13 @@
 
 	&__icon,
 	&__label,
-	&__suffix {
+	&__append {
 		flex-shrink: 0;
 	}
 
 	&__label,
 	&__content,
-	&__suffix {
+	&__append {
 		display: flex;
 		align-items: center;
 		min-height: 80rpx;
@@ -131,7 +131,7 @@
 		}
 	}
 
-	&__suffix {
+	&__append {
 		i {
 			display: inline-block;
 		}

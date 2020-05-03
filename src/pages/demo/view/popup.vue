@@ -3,7 +3,6 @@
 		<cl-card label="基本用法">
 			<cl-row v-for="(item, index) in dirs" :key="index">
 				<cl-popup
-					:with-header="false"
 					:size="item.size"
 					:visible.sync="item.visible"
 					:direction="item.value"
@@ -20,11 +19,7 @@
 		<cl-card label="自定义内容">
 			<cl-confirm ref="confirm"></cl-confirm>
 
-			<cl-popup
-				:visible.sync="visible"
-				:with-header="false"
-				direction="bottom"
-			>
+			<cl-popup :visible.sync="visible" direction="bottom">
 				<cl-form>
 					<cl-form-item label="名称">
 						<cl-input
@@ -71,33 +66,33 @@ export default {
 					label: "顶部弹出",
 					value: "top",
 					visible: false,
-					size: "auto"
+					size: "auto",
 				},
 				{
 					label: "右侧弹出",
 					value: "right",
 					visible: false,
-					size: "auto"
+					size: "auto",
 				},
 				{
 					label: "底部弹出",
 					value: "bottom",
 					visible: false,
-					size: "auto"
+					size: "auto",
 				},
 				{
 					label: "左侧弹出",
 					value: "left",
 					visible: false,
-					size: "auto"
+					size: "auto",
 				},
 				{
 					label: "中间弹出",
 					value: "center",
 					visible: false,
-					size: "auto"
-				}
-			]
+					size: "auto",
+				},
+			],
 		};
 	},
 
@@ -113,10 +108,10 @@ export default {
 					if (action === "confirm") {
 						this.visible = false;
 					}
-				}
+				},
 			});
-		}
-	}
+		},
+	},
 };
 </script>
 
