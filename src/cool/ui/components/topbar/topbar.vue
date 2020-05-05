@@ -19,12 +19,9 @@
 			</slot>
 		</view>
 
-		<view
-			class="cl-topbar__prepend"
-			:style="{
+		<view class="cl-topbar__prepend" :style="{
 				top
-			}"
-		>
+			}">
 			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
 				<text class="cl-icon-arrow-left"></text>
 			</view>
@@ -32,12 +29,9 @@
 			<slot name="prepend"></slot>
 		</view>
 
-		<view
-			class="cl-topbar__append"
-			:style="{
+		<view class="cl-topbar__append" :style="{
 				top
-			}"
-		>
+			}">
 			<slot name="append"></slot>
 		</view>
 	</view>
@@ -62,17 +56,21 @@ export default {
 
 	computed: {
 		top() {
-			return platform === 'android' ? `${statusBarHeight}px` : 'env(safe-area-inset-top)';
+			return platform === "android"
+				? `${statusBarHeight}px`
+				: "env(safe-area-inset-top)";
 		}
 	},
 
 	methods: {
 		back() {
-			uni.navigateBack();
+			uni.navigateBack({
+				delta: 1
+			});
 		},
 
 		tapText(e) {
-			this.$emit('click', e);
+			this.$emit("click", e);
 		}
 	}
 };

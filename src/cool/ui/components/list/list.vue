@@ -4,21 +4,21 @@
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
+		@tap="onTap"
 	>
-		<view
-			class="cl-list__swiper"
-			:style="{
+		<view class="cl-list__swiper" :style="{
 				transform: translateX,
-			}"
-		>
+			}">
 			<view class="cl-list__container">
 				<view class="cl-list__icon" v-if="$slots.icon">
 					<slot name="icon"></slot>
 				</view>
 
-				<text class="cl-list__label" v-if="label && label != 'true'">{{
+				<text class="cl-list__label" v-if="label && label != 'true'">
+					{{
 					label
-				}}</text>
+					}}
+				</text>
 
 				<view :class="['cl-list__content', isJustify, isColor]">
 					<slot></slot>
@@ -32,7 +32,7 @@
 			<!-- 后菜单 -->
 			<template v-if="swipe != 'none'">
 				<view :class="[`cl-list__menu-${swipe}`]">
-					<slot name="menu"> </slot>
+					<slot name="menu"></slot>
 				</view>
 			</template>
 		</view>
@@ -48,20 +48,20 @@ export default {
 		disabled: Boolean,
 		border: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		type: String,
 		justify: {
 			type: String,
-			default: "end",
+			default: "end"
 		},
 		swipe: {
 			type: String,
 			default: "none",
-			validator: (val) => {
+			validator: val => {
 				return ["none", "left", "right"].indexOf(val) !== -1;
-			},
-		},
+			}
+		}
 	},
 
 	data() {
@@ -71,12 +71,12 @@ export default {
 				end: 0,
 				x: 0,
 				direction: "left",
-				lock: true,
+				lock: true
 			},
 
 			menu: {
-				width: 0,
-			},
+				width: 0
+			}
 		};
 	},
 
@@ -103,13 +103,13 @@ export default {
 
 		translateX() {
 			return `translateX(${this.touch.x}px)`;
-		},
+		}
 	},
 
 	watch: {
 		swipe() {
 			this.setMenu();
-		},
+		}
 	},
 
 	mounted() {
@@ -117,6 +117,9 @@ export default {
 	},
 
 	methods: {
+		onTap(e) {
+			this.$emit("click", e);
+		},
 		onTouchStart(e) {
 			if (this.swipe != "none") {
 				this.touch.start = e.touches[0].pageX;
@@ -163,7 +166,7 @@ export default {
 
 				query
 					.select(`.cl-list__menu-${this.swipe}`)
-					.boundingClientRect((data) => {
+					.boundingClientRect(data => {
 						if (data) {
 							this.menu.width = data.width;
 						}
@@ -176,7 +179,7 @@ export default {
 			this.touch.end = 0;
 			this.touch.lock = true;
 			this.touch.x = 0;
-		},
-	},
+		}
+	}
 };
 </script>

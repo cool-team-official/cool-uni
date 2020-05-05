@@ -17,7 +17,7 @@
 
 		&:after {
 			display: block;
-			content: '';
+			content: "";
 			background-color: rgba(0, 0, 0, 0.1);
 			position: absolute;
 			left: 0;
@@ -25,10 +25,6 @@
 			right: 0;
 			bottom: 0;
 		}
-	}
-
-	&:not(&--disabled):active {
-		background-color: #f7f7f7;
 	}
 
 	&.is-border {
@@ -60,10 +56,13 @@
 	&__container {
 		display: flex;
 		align-items: center;
-		width: calc(100% - 20rpx);
-		margin-left: 20rpx;
-		padding-right: 20rpx;
+		width: 100%;
+		padding: 0 20rpx;
 		box-sizing: border-box;
+
+		&:active {
+			background-color: #f7f7f7;
+		}
 	}
 
 	&__icon {
@@ -136,7 +135,7 @@
 			display: inline-block;
 		}
 
-		[class^='cl-icon-'] {
+		[class^="cl-icon-"] {
 			font-size: 30rpx;
 		}
 	}

@@ -33,11 +33,13 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		@tap="tap"
+		@tap.stop="tap"
 	>
 		<cl-loading v-if="loading" :size="18" :color="type ? '#fff' : ''"></cl-loading>
 		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
-		<text class="cl-button__text"><slot></slot></text>
+		<text class="cl-button__text">
+			<slot></slot>
+		</text>
 	</button>
 </template>
 
@@ -65,7 +67,7 @@ export default {
 		openType: String,
 		hoverClass: {
 			type: String,
-			default: 'button-hover'
+			default: "button-hover"
 		},
 		hoverStartTime: {
 			type: Number,
@@ -79,7 +81,7 @@ export default {
 		hoverStopPropagation: Boolean,
 		lang: {
 			type: String,
-			default: 'en'
+			default: "en"
 		},
 		sessionForm: String,
 		sendMessageTitle: String,
@@ -90,22 +92,22 @@ export default {
 
 	methods: {
 		getphonenumber(e) {
-			this.$emit('getphonenumber', e);
+			this.$emit("getphonenumber", e);
 		},
 		getuserinfo(e) {
-			this.$emit('getuserinfo', e);
+			this.$emit("getuserinfo", e);
 		},
 		error(e) {
-			this.$emit('error', e);
+			this.$emit("error", e);
 		},
 		opensetting(e) {
-			this.$emit('opensetting', e);
+			this.$emit("opensetting", e);
 		},
 		launchapp(e) {
-			this.$emit('launchapp', e);
+			this.$emit("launchapp", e);
 		},
 		tap(e) {
-			this.$emit('click', e);
+			this.$emit("click", e);
 		}
 	}
 };

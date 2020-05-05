@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import cities from './data';
+import cities from "./data";
 
 export default {
 	props: {
@@ -23,15 +23,15 @@ export default {
 		disabled: Boolean,
 		labelKey: {
 			type: String,
-			default: 'label'
+			default: "label"
 		},
 		valueKey: {
 			type: String,
-			default: 'value'
+			default: "value"
 		},
 		separator: {
 			type: String,
-			default: '-'
+			default: "-"
 		}
 	},
 
@@ -54,7 +54,7 @@ export default {
 
 	methods: {
 		onChange(arr) {
-			this.$emit('input', (this.sel = arr));
+			this.$emit("input", (this.sel = arr));
 		},
 
 		onUpdate([x, y, z]) {
@@ -75,11 +75,15 @@ export default {
 		},
 
 		onColumnChange({ selects, column }) {
-			this.updateList(selects);
+			this.updateList(selects.map(e => (e < 0 ? 0 : e)));
 		},
 
 		updateList([a, b]) {
-			this.list = [cities, cities[a].children, cities[a].children[b].children];
+			this.list = [
+				cities,
+				cities[a].children,
+				cities[a].children[b].children
+			];
 		}
 	}
 };
