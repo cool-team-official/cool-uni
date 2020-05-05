@@ -4,7 +4,7 @@
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
-		@tap="onTap"
+		@tap.stop="onTap"
 	>
 		<view class="cl-list__swiper" :style="{
 				transform: translateX,
