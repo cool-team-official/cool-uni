@@ -1,5 +1,23 @@
 <template>
 	<view class="page-index">
+		<cl-skeleton>
+			<view class="header">
+				<view class="cl-skeleton-item logo"></view>
+				<view class="cl-skeleton-item desc"></view>
+			</view>
+
+			<view class="container">
+				<view class="group">
+					<view class="item">
+						<view class="item__label cl-skeleton-item"></view>
+						<view class="item__container">
+							<view class="block cl-skeleton-item" v-for="(item, index) in 5" :key="index"></view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</cl-skeleton>
+
 		<view class="header">
 			<image src="@/assets/icon/logo.png" class="logo" alt />
 			<view class="desc">简洁高效的uni-app组件库</view>
@@ -18,10 +36,7 @@
 							@tap="toDemo(item, item2)"
 						>
 							<text class="label">{{ item2.label }}</text>
-							<text
-								class="cl-icon-arrow-right"
-								v-if="item2.path"
-							></text>
+							<text class="cl-icon-arrow-right" v-if="item2.path"></text>
 							<text class="cl-icon-close" v-else></text>
 						</view>
 					</view>
@@ -297,21 +312,25 @@ page {
 		.desc {
 			font-size: 28rpx;
 			color: #909ca2;
+			height: 50rpx;
 		}
 	}
 
 	.container {
 		padding: 20rpx 33rpx;
 		box-sizing: border-box;
+		width: 100%;
 
 		.item {
 			&__label {
 				display: inline-block;
 				height: 70rpx;
 				line-height: 70rpx;
+				width: 100%;
 				padding: 0 30rpx;
 				font-size: 28rpx;
 				color: #909ca2;
+				box-sizing: border-box;
 			}
 
 			&__container {

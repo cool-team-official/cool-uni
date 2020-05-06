@@ -14,11 +14,7 @@
 					<slot name="icon"></slot>
 				</view>
 
-				<text class="cl-list__label" v-if="label && label != 'true'">
-					{{
-					label
-					}}
-				</text>
+				<text class="cl-list__label" v-if="label && label != 'true'">{{ label }}</text>
 
 				<view :class="['cl-list__content', isJustify, isColor]">
 					<slot></slot>

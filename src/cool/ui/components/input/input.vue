@@ -18,21 +18,14 @@
 		</view>
 
 		<view class="cl-input__wrap">
-			<text
-				class="cl-input__icon"
-				:class="[prefixIcon]"
-				v-if="prefixIcon"
-			></text>
-			<text
-				class="cl-input__icon"
-				:class="[suffixIcon]"
-				v-if="suffixIcon"
-			></text>
+			<text class="cl-input__icon" :class="[prefixIcon]" v-if="prefixIcon"></text>
+			<text class="cl-input__icon" :class="[suffixIcon]" v-if="suffixIcon"></text>
 
 			<input
 				v-model="value2"
 				class="cl-input__inner"
 				:type="type"
+				:password="password"
 				:placeholder="placeholder"
 				:disabled="disabled"
 				:focus="focus"
@@ -51,11 +44,7 @@
 				@keyboardheightchange="onKeyboardheightchange"
 			/>
 
-			<text
-				class="cl-input__clear cl-icon-round-close-fill"
-				@tap="clear"
-				v-if="isFocus && clearable"
-			></text>
+			<text class="cl-input__clear cl-icon-round-close-fill" @tap="clear" v-if="isFocus && clearable"></text>
 		</view>
 
 		<view class="cl-input__append" v-if="$slots.append">
