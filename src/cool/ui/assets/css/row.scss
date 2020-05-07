@@ -2,11 +2,10 @@
 	position: relative;
 	box-sizing: border-box;
 	margin-bottom: 20rpx;
-	width: 100%;
 
 	&::after,
 	&::before {
-		content: '';
+		content: "";
 		display: table;
 	}
 

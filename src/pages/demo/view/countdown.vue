@@ -25,10 +25,7 @@
 
 			<cl-row>
 				<view class="font-24">自定义：</view>
-				<cl-countdown
-					:minute="10"
-					:splitor="['Tian', 'Shi', 'Fen', 'Miao']"
-				></cl-countdown>
+				<cl-countdown :minute="10" :splitor="['Tian', 'Shi', 'Fen', 'Miao']"></cl-countdown>
 			</cl-row>
 		</cl-card>
 
@@ -40,32 +37,19 @@
 
 			<cl-row>
 				<view class="font-24">精简：</view>
-				<cl-countdown
-					:hour="1"
-					:minute="0"
-					:second="5"
-					mode="simple"
-				></cl-countdown>
+				<cl-countdown :hour="1" :minute="0" :second="5" mode="simple"></cl-countdown>
 			</cl-row>
 		</cl-card>
 
 		<cl-card label="不同布局">
 			<cl-row>
 				<view class="font-24">只显示分秒：</view>
-				<cl-countdown
-					datetime="2020-06-01"
-					:layout="['minute', 'second']"
-					:splitor="['分', '秒']"
-				></cl-countdown>
+				<cl-countdown datetime="2020-06-01" :layout="['minute', 'second']" :splitor="['分', '秒']"></cl-countdown>
 			</cl-row>
 
 			<cl-row>
 				<view class="font-24">分秒倒序：</view>
-				<cl-countdown
-					datetime="2020-06-01"
-					:layout="['second', 'minute']"
-					:splitor="['秒', '分']"
-				></cl-countdown>
+				<cl-countdown datetime="2020-06-01" :layout="['second', 'minute']" :splitor="['秒', '分']"></cl-countdown>
 			</cl-row>
 		</cl-card>
 
@@ -81,19 +65,14 @@
 				ref="cd"
 			></cl-countdown>
 
-			<cl-progress
-				:value="progress"
-				:color="['#F56C6C', '#E6A23C', '#67C23A']"
-				:show-text="false"
-			>
-			</cl-progress>
+			<cl-progress :value="progress" :color="['#F56C6C', '#E6A23C', '#67C23A']" :show-text="false"></cl-progress>
 		</cl-card>
 
 		<cl-card label="自定义样式">
 			<cl-countdown
 				:hour="2"
 				custom-class="cs-countdown"
-				splitor=""
+				:splitor="[]"
 				:layout="['hour', 'minute', 'second']"
 			></cl-countdown>
 		</cl-card>
@@ -128,6 +107,7 @@ export default {
 .demo-countdown {
 	.font-24 {
 		font-size: 24rpx;
+		margin-bottom: 10rpx;
 	}
 
 	.cs-countdown {
