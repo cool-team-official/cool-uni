@@ -37,9 +37,9 @@
 	>
 		<cl-loading v-if="loading" :size="18" :color="type ? '#fff' : ''"></cl-loading>
 		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
-		<text class="cl-button__text">
+		<view class="cl-button__text">
 			<slot></slot>
-		</text>
+		</view>
 	</button>
 </template>
 

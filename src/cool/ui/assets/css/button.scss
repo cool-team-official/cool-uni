@@ -9,6 +9,10 @@
 	padding: 0 30rpx;
 	margin: 0;
 
+	&__text {
+		display: inline;
+	}
+
 	&::after {
 		border-width: 0;
 	}
