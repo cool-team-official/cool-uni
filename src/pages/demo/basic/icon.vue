@@ -79,12 +79,12 @@ export default {
 					value: 'cl-icon-avatar'
 				},
 				{
-					label: 'add',
-					value: 'cl-icon-add'
+					label: 'plus',
+					value: 'cl-icon-plus'
 				},
 				{
-					label: 'remove',
-					value: 'cl-icon-remove'
+					label: 'minus',
+					value: 'cl-icon-minus'
 				},
 				{
 					label: 'image',

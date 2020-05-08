@@ -1,0 +1,37 @@
+.cl-input-number {
+	display: flex;
+	align-items: center;
+
+	&__plus,
+	&__minus {
+		height: 40rpx;
+		width: 40rpx;
+		line-height: 40rpx;
+		margin: 0;
+		padding: 0;
+		border-radius: 6rpx;
+		font-size: 28rpx;
+
+		&::after {
+			border: 0;
+		}
+
+		&:active {
+			opacity: 0.8;
+		}
+	}
+
+	&__plus {
+		background-color: $uni-color-primary;
+		color: #fff;
+	}
+
+	&__minus {
+		background-color: #eee;
+	}
+
+	&__value {
+		font-size: 26rpx;
+		margin: 0 20rpx;
+	}
+}
