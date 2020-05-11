@@ -12,18 +12,18 @@
 
 <script>
 export default {
-	name: 'ClRow',
-	componentName: 'ClRow',
+	name: "ClRow",
+	componentName: "ClRow",
 	props: {
 		gutter: [Number, String],
 		type: String,
 		justify: {
 			type: String,
-			default: 'start'
+			default: "start"
 		},
 		align: {
 			type: String,
-			default: 'top'
+			default: "top"
 		},
 		wrap: Boolean
 	},
@@ -31,16 +31,16 @@ export default {
 		classList() {
 			let list = [];
 
-			if (this.justify !== 'start') {
+			if (this.justify !== "start") {
 				list.push(`is-justify-${this.justify}`);
 			}
 
-			if (this.align !== 'top') {
+			if (this.align !== "top") {
 				list.push(`is-align-${this.align}`);
 			}
 
 			if (this.wrap) {
-				list.push('is-wrap');
+				list.push("is-wrap");
 			}
 
 			switch (this.type) {
