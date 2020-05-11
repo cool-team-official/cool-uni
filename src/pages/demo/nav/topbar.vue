@@ -17,7 +17,7 @@
 		</cl-card>
 
 		<cl-card label="不需要返回键" padding="0">
-			<cl-topbar title="标题" :show-back="false"> </cl-topbar>
+			<cl-topbar title="标题" :show-back="false"></cl-topbar>
 		</cl-card>
 
 		<cl-card label="多个按钮" padding="0">

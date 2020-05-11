@@ -1,23 +1,5 @@
 <template>
 	<view class="page-index">
-		<cl-skeleton>
-			<view class="header">
-				<view class="cl-skeleton-item logo"></view>
-				<view class="cl-skeleton-item desc"></view>
-			</view>
-
-			<view class="container">
-				<view class="group">
-					<view class="item">
-						<view class="item__label cl-skeleton-item"></view>
-						<view class="item__container">
-							<view class="block cl-skeleton-item" v-for="(item, index) in 5" :key="index"></view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</cl-skeleton>
-
 		<view class="header">
 			<image src="@/assets/icon/logo.png" class="logo" alt />
 			<view class="desc">简洁高效的uni-app组件库</view>

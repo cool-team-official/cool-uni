@@ -3,7 +3,8 @@
 		class="cl-topbar"
 		:class="[
 			{
-				'is-border': border
+				'is-border': border,
+				'is-fixed': fixed
 			}
 		]"
 		:style="{
@@ -51,7 +52,8 @@ export default {
 		showBack: {
 			type: Boolean,
 			default: true
-		}
+		},
+		fixed: Boolean
 	},
 
 	computed: {

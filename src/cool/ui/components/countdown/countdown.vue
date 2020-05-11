@@ -255,14 +255,14 @@ export default {
 
 <style lang="scss" scoped>
 .cl-countdown {
-	display: inline-block;
+	display: flex;
 
 	&__number {
 		display: inline-block;
 		height: 50rpx;
+		line-height: 50rpx;
 		min-width: 40rpx;
 		text-align: center;
-		line-height: 50rpx;
 		background-color: #eee;
 		padding: 0 10rpx;
 		margin: 0 14rpx;
@@ -275,7 +275,8 @@ export default {
 	}
 
 	&-item {
-		display: inline-block;
+		display: flex;
+		align-items: center;
 
 		&:first-child {
 			.cl-countdown__number {

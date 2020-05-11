@@ -33,7 +33,7 @@
 				width: size[1],
 			}"
 		>
-			<text class="cl-upload__add cl-icon-add"></text>
+			<text class="cl-upload__add cl-icon-plus"></text>
 		</view>
 	</view>
 </template>

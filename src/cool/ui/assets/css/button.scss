@@ -7,6 +7,11 @@
 	font-size: 26rpx;
 	white-space: nowrap;
 	padding: 0 30rpx;
+	margin: 0;
+
+	&__text {
+		display: inline;
+	}
 
 	&::after {
 		border-width: 0;
@@ -77,10 +82,7 @@
 	&--text {
 		border-color: transparent;
 		color: $color-primary;
-
-		&.button-hover {
-			background-color: #f7f7f7;
-		}
+		background-color: transparent;
 	}
 
 	@mixin color($type, $color, $color-focus) {
