@@ -12,7 +12,7 @@
 
 <script>
 export default {
-	name: 'ClCol',
+	name: "ClCol",
 	props: {
 		span: {
 			type: [Number, String],
@@ -25,24 +25,28 @@ export default {
 	computed: {
 		gutter() {
 			let parent = this.$parent;
-			while (parent && parent.$options.componentName !== 'ClRow') {
+			while (parent && parent.$options.componentName !== "ClRow") {
 				parent = parent.$parent;
 			}
 			return parent ? parent.gutter : 0;
 		},
 
 		padding() {
-			return this.gutter / 2 + 'rpx';
+			return this.gutter / 2 + "rpx";
 		},
 
 		classList() {
 			let list = [];
 
-			['span', 'offset', 'pull', 'push'].forEach(prop => {
+			["span", "offset", "pull", "push"].forEach(prop => {
 				let value = this[prop];
 
 				if (value || value === 0) {
-					list.push(prop !== 'span' ? `cl-col-${prop}-${value}` : `cl-col-${value}`);
+					list.push(
+						prop !== "span"
+							? `cl-col-${prop}-${value}`
+							: `cl-col-${value}`
+					);
 				}
 			});
 

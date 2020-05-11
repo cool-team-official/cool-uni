@@ -3,12 +3,12 @@
 	box-sizing: border-box;
 
 	&::before {
-		content: '';
+		content: "";
 		display: block;
 	}
 }
 
-[class*='cl-col-'] {
+[class*="cl-col-"] {
 	float: left;
 	box-sizing: border-box;
 }
