@@ -21,28 +21,126 @@
 			<text class="cl-input__icon" :class="[prefixIcon]" v-if="prefixIcon"></text>
 			<text class="cl-input__icon" :class="[suffixIcon]" v-if="suffixIcon"></text>
 
-			<input
-				v-model="value2"
-				class="cl-input__inner"
-				:type="type"
-				:password="password"
-				:placeholder="placeholder"
-				:disabled="disabled"
-				:focus="focus"
-				:placeholder-style="placeholderStyle"
-				:placeholder-class="placeholderClass"
-				:maxlength="maxlength"
-				:cursor-spacing="cursorSpacing"
-				:confirm-type="confirmType"
-				:confirm-hold="confirmHold"
-				:adjust-position="adjustPosition"
-				:holdKeyboard="holdKeyboard"
-				@input="onInput"
-				@focus="onFocus"
-				@blur="onBlur"
-				@confirm="onConfirm"
-				@keyboardheightchange="onKeyboardheightchange"
-			/>
+			<template v-if="type == 'password'">
+				<input
+					class="cl-input__inner"
+					v-model="value2"
+					type="password"
+					:password="password"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:focus="focus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@keyboardheightchange="onKeyboardheightchange"
+				/>
+			</template>
+
+			<template v-else-if="type == 'number'">
+				<input
+					class="cl-input__inner"
+					v-model="value2"
+					type="number"
+					:password="password"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:focus="focus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@keyboardheightchange="onKeyboardheightchange"
+				/>
+			</template>
+
+			<template v-else-if="type == 'idcard'">
+				<input
+					class="cl-input__inner"
+					v-model="value2"
+					type="idcard"
+					:password="password"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:focus="focus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@keyboardheightchange="onKeyboardheightchange"
+				/>
+			</template>
+
+			<template v-else-if="type == 'digit'">
+				<input
+					class="cl-input__inner"
+					v-model="value2"
+					type="digit"
+					:password="password"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:focus="focus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@keyboardheightchange="onKeyboardheightchange"
+				/>
+			</template>
+
+			<template v-else>
+				<input
+					class="cl-input__inner"
+					v-model="value2"
+					type="text"
+					:password="password"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:focus="focus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-type="confirmType"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@keyboardheightchange="onKeyboardheightchange"
+				/>
+			</template>
 
 			<text class="cl-input__clear cl-icon-round-close-fill" @tap="clear" v-if="isFocus && clearable"></text>
 		</view>

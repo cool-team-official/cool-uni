@@ -7,7 +7,7 @@
 		@tap.stop="onTap"
 	>
 		<view class="cl-list__swiper" :style="{
-				transform: translateX,
+				transform: translateX
 			}">
 			<view class="cl-list__container">
 				<view class="cl-list__icon" v-if="$slots.icon">
@@ -115,6 +115,7 @@ export default {
 	methods: {
 		onTap(e) {
 			this.$emit("click", e);
+			this.$emit("tap", e);
 		},
 		onTouchStart(e) {
 			if (this.swipe != "none") {
