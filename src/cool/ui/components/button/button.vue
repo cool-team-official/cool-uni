@@ -108,6 +108,7 @@ export default {
 		},
 		tap(e) {
 			this.$emit("click", e);
+			this.$emit("tap", e);
 		}
 	}
 };

@@ -1,7 +1,7 @@
 <template>
 	<view class="page-index">
 		<view class="header">
-			<image src="@/assets/icon/logo.png" class="logo" alt />
+			<image src="@/static/icon/logo.png" class="logo" alt />
 			<view class="desc">简洁高效的uni-app组件库</view>
 		</view>
 

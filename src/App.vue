@@ -13,8 +13,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./cool/ui/assets/css/index.scss";
-@import "./assets/css/index.scss";
+@import "./cool/ui/static/css/index.scss";
+@import "./static/css/index.scss";
 page {
 	background-color: #f7f7f7;
 }
