@@ -18,8 +18,16 @@
 		</view>
 
 		<view class="cl-input__wrap">
-			<text class="cl-input__icon" :class="[prefixIcon]" v-if="prefixIcon"></text>
-			<text class="cl-input__icon" :class="[suffixIcon]" v-if="suffixIcon"></text>
+			<text
+				class="cl-input__icon"
+				:class="[prefixIcon]"
+				v-if="prefixIcon"
+			></text>
+			<text
+				class="cl-input__icon"
+				:class="[suffixIcon]"
+				v-if="suffixIcon"
+			></text>
 
 			<template v-if="type == 'password'">
 				<input
@@ -142,7 +150,11 @@
 				/>
 			</template>
 
-			<text class="cl-input__clear cl-icon-round-close-fill" @tap="clear" v-if="isFocus && clearable"></text>
+			<text
+				class="cl-input__clear cl-icon-round-close-fill"
+				@tap="clear"
+				v-if="isFocus && clearable"
+			></text>
 		</view>
 
 		<view class="cl-input__append" v-if="$slots.append">
@@ -214,9 +226,9 @@ export default {
 	},
 
 	methods: {
-		onInput() {
-			this.$emit("input", this.value2);
-			this.$emit("change", this.value2);
+		onInput(e) {
+			this.$emit("input", e.detail.value);
+			this.$emit("change", e.detail.value);
 		},
 
 		onFocus(e) {
