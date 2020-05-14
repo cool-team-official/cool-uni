@@ -1,5 +1,5 @@
 <template>
-	<view :class="['cl-form', isLabelPosition, isBorder]">
+	<view :class="['cl-form', isBorder]">
 		<slot></slot>
 	</view>
 </template>
@@ -12,7 +12,7 @@ import {
 	isString,
 	isBoolean,
 	isEmpty,
-	diffForm,
+	diffForm
 } from "../../utils";
 
 export default {
@@ -23,36 +23,36 @@ export default {
 			type: Object,
 			default: () => {
 				return {};
-			},
+			}
 		},
 		rules: Object,
 		border: Boolean,
 		showMessage: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		showToast: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		labelWidth: {
 			type: String,
-			default: "150rpx",
+			default: "150rpx"
 		},
 		labelPosition: {
 			type: String,
-			default: "right",
+			default: "right"
 		},
 		validateOnValueChange: {
 			type: Boolean,
-			default: true,
-		},
+			default: true
+		}
 	},
 
 	data() {
 		return {
 			subscrible: [],
-			rules2: [],
+			rules2: []
 		};
 	},
 
@@ -61,15 +61,15 @@ export default {
 			handler(newV, oldV) {
 				this.publish({
 					props: diffForm(newV, oldV),
-					action: "validate",
+					action: "validate"
 				});
 			},
-			deep: true,
+			deep: true
 		},
 
 		rules(val) {
 			this.setRules(val);
-		},
+		}
 	},
 
 	computed: {
@@ -77,13 +77,9 @@ export default {
 			return JSON.parse(JSON.stringify(this.model));
 		},
 
-		isLabelPosition() {
-			return this.labelPosition ? `cl-form--${this.labelPosition}` : "";
-		},
-
 		isBorder() {
 			return this.border ? "cl-form--border" : "";
-		},
+		}
 	},
 
 	created() {
@@ -116,7 +112,7 @@ export default {
 
 			for (let i in this.rules2) {
 				if (props.includes(i)) {
-					if (this.subscrible.find((e) => e.prop == i)) {
+					if (this.subscrible.find(e => e.prop == i)) {
 						rules[i] = this.rules2[i];
 					}
 				}
@@ -126,7 +122,7 @@ export default {
 
 			let form = {};
 
-			props.forEach((e) => {
+			props.forEach(e => {
 				form[e] = this.model[e];
 			});
 
@@ -180,21 +176,21 @@ export default {
 
 		// 添加字段，监听事件
 		addField(prop, callback) {
-			let item = this.subscrible.find((e) => e.prop == prop);
+			let item = this.subscrible.find(e => e.prop == prop);
 
 			if (item) {
 				item.handler = callback;
 			} else {
 				this.subscrible.push({
 					prop,
-					handler: callback,
+					handler: callback
 				});
 			}
 		},
 
 		// 移除字段和事件
 		removeField(prop) {
-			const i = this.subscrible.findIndex((e) => e.prop == prop);
+			const i = this.subscrible.findIndex(e => e.prop == prop);
 			this.subscrible.splice(i, 1);
 		},
 
@@ -206,14 +202,14 @@ export default {
 				props = Object.keys(this.model);
 			}
 
-			props.forEach((k) => {
-				item = this.subscrible.find((e) => e.prop == k);
+			props.forEach(k => {
+				item = this.subscrible.find(e => e.prop == k);
 
 				if (item) {
 					item.handler({ action, value: this.model[k] });
 				}
 			});
-		},
-	},
+		}
+	}
 };
 </script>

@@ -6,7 +6,7 @@
 
 		&--required {
 			.cl-form-item__label::before {
-				content: '*';
+				content: "*";
 				color: $color-error;
 				margin-right: 10rpx;
 			}
@@ -120,29 +120,25 @@
 		}
 	}
 
-	&--top {
-		.cl-form-item {
+	.cl-form-item {
+		&--top {
 			padding: 0 0 20rpx 0;
 
-			&__label {
+			.cl-form-item__label {
 				padding: 0 0 10rpx 0;
 				float: none;
 				text-align: left;
 			}
 		}
-	}
 
-	&--left {
-		.cl-form-item {
-			&__label {
+		&--left {
+			.cl-form-item__label {
 				text-align: left;
 			}
 		}
-	}
 
-	&--right {
-		.cl-form-item {
-			&__label {
+		&--right {
+			.cl-form-item__label {
 				text-align: right;
 			}
 		}

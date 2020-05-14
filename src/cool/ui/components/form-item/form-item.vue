@@ -1,8 +1,20 @@
 <template>
-	<view :class="['cl-form-item', isRequired, isError, isSuffix, isDisabled]">
-		<view :class="['cl-form-item__label']" :style="{ width: labelWidth2 }" v-if="label2">{{
-			label2
-		}}</view>
+	<view
+		:class="[
+			'cl-form-item',
+			isLabelPosition,
+			isRequired,
+			isError,
+			isSuffix,
+			isDisabled
+		]"
+	>
+		<view
+			:class="['cl-form-item__label']"
+			:style="{ width: labelWidth2 }"
+			v-if="label2"
+			>{{ label2 }}</view
+		>
 
 		<view class="cl-form-item__container">
 			<view :class="['cl-form-item__content', isJustify]">
@@ -13,13 +25,15 @@
 			</view>
 		</view>
 
-		<text :class="['cl-form-item__message']" v-if="showMessage2">{{ message }}</text>
+		<text :class="['cl-form-item__message']" v-if="showMessage2">{{
+			message
+		}}</text>
 	</view>
 </template>
 
 <script>
-import AsyncValidator from '../../utils/async-validator';
-import { getParent } from '../../utils';
+import AsyncValidator from "../../utils/async-validator";
+import { getParent } from "../../utils";
 
 export default {
 	props: {
@@ -27,13 +41,17 @@ export default {
 		label: String,
 		disabled: Boolean,
 		labelWidth: String,
+		labelPosition: {
+			type: String,
+			default: "right"
+		},
 		showMessage: {
 			type: Boolean,
 			default: false
 		},
 		justify: {
 			type: String,
-			default: 'start'
+			default: "start"
 		},
 		validateOnValueChange: {
 			type: Boolean,
@@ -52,11 +70,15 @@ export default {
 
 	computed: {
 		label2() {
-			return this.label == 'true' ? '' : this.label;
+			return this.label == "true" ? "" : this.label;
 		},
 
 		labelWidth2() {
 			return this.labelWidth || this.parent.labelWidth;
+		},
+
+		labelPosition2() {
+			return this.labelPosition || this.parent.labelPosition;
 		},
 
 		showMessage2() {
@@ -68,34 +90,40 @@ export default {
 		},
 
 		isJustify() {
-			return this.justify !== 'start' ? `is-justify-${this.justify}` : '';
+			return this.justify !== "start" ? `is-justify-${this.justify}` : "";
 		},
 
 		isRequired() {
-			return this.required ? 'cl-form-item--required' : '';
+			return this.required ? "cl-form-item--required" : "";
 		},
 
 		isError() {
-			return this.error ? 'cl-form-item--error' : '';
+			return this.error ? "cl-form-item--error" : "";
 		},
 
 		isSuffix() {
-			return this.$scopedSlots.suffix ? 'cl-form-item--suffix' : '';
+			return this.$scopedSlots.suffix ? "cl-form-item--suffix" : "";
 		},
 
 		isDisabled() {
-			return this.disabled ? 'cl-form-item--disabled' : '';
+			return this.disabled ? "cl-form-item--disabled" : "";
+		},
+
+		isLabelPosition() {
+			return this.labelPosition2
+				? `cl-form-item--${this.labelPosition2}`
+				: "";
 		},
 
 		parent() {
-			let parent = getParent.call(this, 'ClForm', [
-				'labelWidth',
-				'showMessage',
-				'model',
-				'addField',
-				'removeField',
-				'validateOnValueChange',
-				'rules2'
+			let parent = getParent.call(this, "ClForm", [
+				"labelWidth",
+				"showMessage",
+				"model",
+				"addField",
+				"removeField",
+				"validateOnValueChange",
+				"rules2"
 			]);
 
 			parent.rules = parent.rules2;
@@ -122,7 +150,7 @@ export default {
 
 			if (rule) {
 				this.required = false;
-				this.message = '';
+				this.message = "";
 
 				if (rule instanceof Array) {
 					rule.forEach(e => {
@@ -151,12 +179,15 @@ export default {
 
 		onResponse({ value, action }) {
 			this.$nextTick(() => {
-				if (action == 'clear') {
+				if (action == "clear") {
 					this.error = false;
 				}
 
-				if (action == 'validate') {
-					if (this.validateOnValueChange || this.parent.validateOnValueChange) {
+				if (action == "validate") {
+					if (
+						this.validateOnValueChange ||
+						this.parent.validateOnValueChange
+					) {
 						this.validate(value);
 					}
 				}
