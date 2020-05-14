@@ -1,7 +1,7 @@
 .cl-topbar {
 	display: flex;
 	align-items: center;
-	height: 90rpx;
+	height: 88rpx;
 	width: 100%;
 	position: relative;
 	background-color: #fff;
@@ -19,8 +19,7 @@
 	}
 
 	&__title {
-		font-size: 28rpx;
-		font-weight: bold;
+		font-size: 32rpx;
 	}
 
 	&__description {
@@ -55,10 +54,14 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		width: 90rpx;
+		width: 80rpx;
 
 		&:active {
 			background-color: #f7f7f7;
+		}
+
+		.cl-icon-arrow-left {
+			font-size: 46rpx;
 		}
 	}
 
