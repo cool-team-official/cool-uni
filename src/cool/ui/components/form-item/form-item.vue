@@ -41,10 +41,7 @@ export default {
 		label: String,
 		disabled: Boolean,
 		labelWidth: String,
-		labelPosition: {
-			type: String,
-			default: "right"
-		},
+		labelPosition: String,
 		showMessage: {
 			type: Boolean,
 			default: false
@@ -118,6 +115,7 @@ export default {
 		parent() {
 			let parent = getParent.call(this, "ClForm", [
 				"labelWidth",
+				"labelPosition",
 				"showMessage",
 				"model",
 				"addField",
