@@ -5,6 +5,7 @@
 	padding: 15rpx 20rpx;
 	box-sizing: border-box;
 	margin-bottom: 20rpx;
+	padding-top: env(safe-area-inset-top);
 
 	&__input {
 		flex: 1;
