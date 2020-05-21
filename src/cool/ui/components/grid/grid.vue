@@ -16,8 +16,10 @@
 </template>
 
 <script>
+import Emitter from "../../mixins/emitter";
+
 export default {
-	componentName: 'ClGrid',
+	componentName: "ClGrid",
 
 	props: {
 		column: {
@@ -25,6 +27,14 @@ export default {
 			default: 2
 		},
 		border: Boolean
+	},
+
+	mixins: [Emitter],
+
+	mounted() {
+		this.$on("grid.tap", index => {
+			this.$emit("change", index);
+		});
 	}
 };
 </script>
