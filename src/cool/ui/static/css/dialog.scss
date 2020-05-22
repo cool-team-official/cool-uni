@@ -1,5 +1,5 @@
 .cl-dialog__wrapper {
-	z-index: 3010;
+	z-index: 310;
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -21,7 +21,7 @@
 	}
 
 	&::after {
-		content: '';
+		content: "";
 		display: inline-block;
 		height: 100%;
 		width: 0;
