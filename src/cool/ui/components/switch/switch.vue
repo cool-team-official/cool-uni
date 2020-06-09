@@ -49,7 +49,9 @@ export default {
 
 	methods: {
 		onChange(e) {
-			this.$emit('input', e.detail.value ? this.activeValue : this.inactiveValue);
+			const d = e.detail.value ? this.activeValue : this.inactiveValue
+			this.$emit('input', d);
+			this.$emit('change', d);
 		}
 	}
 };
