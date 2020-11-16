@@ -1,0 +1,28 @@
+.cl-switch {
+	position: relative;
+
+	.uni-switch-input {
+		height: 64rpx;
+		width: 104rpx;
+		border-radius: 64rpx;
+
+		&::after {
+			height: 64rpx;
+			width: 64rpx;
+			border-radius: 100%;
+			transform: translateX(0);
+		}
+
+		&::before {
+			height: 64rpx;
+			width: 104rpx;
+			border-radius: 64rpx;
+		}
+
+		&.uni-switch-input-checked {
+			&::after {
+				transform: translateX(40rpx);
+			}
+		}
+	}
+}

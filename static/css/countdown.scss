@@ -1,0 +1,27 @@
+.cl-countdown {
+	display: inline-flex;
+
+	&__number {
+		display: inline-block;
+		height: 50rpx;
+		line-height: 50rpx;
+		min-width: 40rpx;
+		text-align: center;
+		border-radius: 6rpx;
+	}
+
+	&__splitor {
+		font-size: 24rpx;
+	}
+
+	&-item {
+		display: flex;
+		align-items: center;
+
+		&:first-child {
+			.cl-countdown__number {
+				margin-left: 0;
+			}
+		}
+	}
+}

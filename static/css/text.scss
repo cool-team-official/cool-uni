@@ -1,0 +1,42 @@
+.cl-text {
+	display: inline-block;
+	white-space: normal;
+	word-break: break-all;
+	word-wrap: break-word;
+	line-height: 1;
+
+	&.is-bold {
+		font-weight: 500;
+	}
+
+	&.is-block {
+		display: block;
+	}
+
+	&.is-price {
+		top: 2rpx;
+	}
+
+	&.is-phone {
+		top: 1rpx;
+	}
+
+	&.is-line-through {
+		text-decoration: line-through;
+	}
+
+	&.is-ellipsis {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+	}
+
+	&__symbol--price {
+		font-size: 22rpx;
+	}
+
+	&__precision {
+		font-size: 24rpx;
+	}
+}

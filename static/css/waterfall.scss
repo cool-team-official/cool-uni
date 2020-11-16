@@ -1,0 +1,9 @@
+.cl-waterfall {
+	width: 100%;
+	box-sizing: border-box;
+
+	&__col {
+		float: left;
+		break-inside: avoid;
+	}
+}

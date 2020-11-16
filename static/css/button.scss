@@ -1,0 +1,143 @@
+.cl-button {
+	display: inline-block;
+	height: 66rpx;
+	line-height: 66rpx;
+	color: #666;
+	border: 1rpx solid $color-default;
+	box-sizing: border-box;
+	background-color: #fff;
+	font-size: 26rpx;
+	white-space: nowrap;
+	padding: 0 30rpx;
+	margin: 0;
+	overflow: visible;
+
+	&__text {
+		display: inline;
+	}
+
+	&::after {
+		border-width: 0;
+		transform: scale(1);
+		height: 100%;
+		width: 100%;
+		border-radius: 0;
+	}
+
+	&__loading {
+		display: inline-block;
+		position: relative;
+		top: -4rpx;
+
+		.cl-loading {
+			color: #fff;
+			vertical-align: middle;
+		}
+	}
+
+	&.is-loading {
+		opacity: 0.8;
+
+		.cl-button__text {
+			margin-left: 15rpx;
+		}
+	}
+
+	&.is-fill {
+		width: 100%;
+	}
+
+	&[size="small"] {
+		height: 60rpx;
+		line-height: 60rpx;
+	}
+
+	&[size="mini"] {
+		height: 50rpx;
+		line-height: 50rpx;
+		font-size: 24rpx;
+		padding: 0 20rpx;
+	}
+
+	.button-hover:not(.is-loading) {
+		background-color: #f7f7f7;
+	}
+
+	/* 图标 */
+
+	&__icon {
+		margin-right: 10rpx;
+	}
+
+	[class^="cl-icon-"]:last-child {
+		margin-left: 10rpx;
+	}
+
+	/* 圆角按钮 */
+
+	&--round {
+		border-radius: 40rpx;
+	}
+
+	/* 文字按钮 */
+
+	&--text {
+		border-color: transparent;
+		color: $color-primary;
+		background-color: transparent;
+
+		&.is-disabled {
+			color: #999;
+		}
+	}
+
+	@mixin color($type, $color) {
+		&.cl-button--#{$type} {
+			background-color: $color;
+			border-color: $color;
+
+			.cl-button__text {
+				color: #fff;
+			}
+
+			&.is-plain {
+				border-color: rgba($color, 0.8);
+				background-color: #fff;
+
+				.cl-button__text {
+					color: rgba($color, 0.8);
+				}
+			}
+
+			&.is-disabled {
+				opacity: 0.3;
+				background-color: rgba($color, 0.8);
+			}
+
+			&.button-hover {
+				background-color: rgba($color, 0.8);
+
+				&.is-plain {
+					.cl-button__text {
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		&--shadow {
+			box-shadow: 2rpx 4rpx 14rpx $color;
+		}
+	}
+
+	@include color(primary, $color-primary);
+	@include color(success, $color-success);
+	@include color(error, $color-error);
+	@include color(warning, $color-warning);
+	@include color(info, $color-info);
+}
+
+.cl-button + .cl-button,
+cl-button + cl-button {
+	margin-left: 20rpx;
+}

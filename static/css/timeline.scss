@@ -1,0 +1,72 @@
+.cl-timeline {
+	&-item {
+		display: flex;
+		width: 100%;
+		position: relative;
+		padding-bottom: 60rpx;
+
+		&.is-last {
+			.cl-timeline-item__line {
+				display: none;
+			}
+		}
+
+		&__line {
+			height: calc(100% - 30rpx);
+			width: 6rpx;
+			background-color: #eee;
+			position: absolute;
+			top: 36rpx;
+			border-radius: 6rpx;
+		}
+
+		&__timestamp {
+			font-size: 24rpx;
+			width: 100rpx;
+			margin: 0 20rpx;
+			text-align: center;
+		}
+
+		&__date {
+			display: block;
+			font-size: 22rpx;
+			text-align: right;
+		}
+
+		&__time {
+			display: block;
+			font-size: 22rpx;
+			text-align: right;
+			margin-right: 6rpx;
+		}
+
+		&__node {
+			position: relative;
+			top: -4rpx;
+			width: 50rpx;
+			text-align: center;
+
+			&-dot {
+				display: inline-block;
+				height: 16rpx;
+				width: 16rpx;
+				border-radius: 16rpx;
+				z-index: 9;
+				position: relative;
+			}
+
+			&-icon {
+				display: inline-block;
+				height: 46rpx;
+				width: 46rpx;
+				z-index: 9;
+			}
+		}
+
+		&__content {
+			font-size: 24rpx;
+			flex: 1;
+			margin: 0 20rpx;
+		}
+	}
+}

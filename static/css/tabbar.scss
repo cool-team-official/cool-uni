@@ -1,0 +1,57 @@
+.cl-tabbar {
+	height: 100%;
+	width: 100%;
+
+	&-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100rpx;
+		float: left;
+		box-sizing: border-box;
+		position: relative;
+
+		&__block {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__label {
+			font-size: 24rpx;
+		}
+
+		.cl-badge {
+			padding: 3rpx 10rpx;
+		}
+	}
+
+	&__container {
+		height: calc(100% - 102rpx - env(safe-area-inset-bottom));
+		width: 100%;
+
+		& > view {
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	&__footer {
+		height: 100rpx;
+		width: 100%;
+		z-index: 100;
+		position: relative;
+		border-top-width: 1rpx;
+		border-top-style: solid;
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+}
+
+.cl-tab-page {
+	display: none;
+	height: 100%;
+	width: 100%;
+
+	&.is-show {
+		display: block;
+	}
+}
