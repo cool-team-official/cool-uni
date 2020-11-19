@@ -1,32 +1,24 @@
 .cl-input {
 	display: flex;
-	align-items: center;
 	height: 70rpx;
 	width: 100%;
-	line-height: 68rpx;
-	background-color: #fff;
+	vertical-align: middle;
 	position: relative;
 	border-radius: 8rpx;
 	box-sizing: border-box;
 	transition: border-color 0.2s;
 	padding: 0 20rpx;
+	background-color: #fff;
 
 	&--focus {
 		border-color: rgba($color-primary, 0.7);
 	}
 
-	&.is-disabled {
-		background-color: #f5f7fa;
-	}
-
-	&.is-border {
-		border: 1rpx solid #dcdfe6;
-	}
-
 	&__wrap {
 		display: flex;
+		align-items: center;
 		flex: 1;
-		height: calc(100% - 2rpx);
+		height: 100%;
 		position: relative;
 	}
 
@@ -42,8 +34,9 @@
 
 	&__prepend,
 	&__append {
+		display: flex;
+		align-items: center;
 		font-size: 26rpx;
-		line-height: normal;
 	}
 
 	&__prepend {
@@ -75,15 +68,13 @@
 
 		.cl-input__icon {
 			position: absolute;
-			top: 0;
-			width: 35rpx;
 			text-align: center;
 		}
 	}
 
 	&--prefix {
 		.cl-input__wrap {
-			padding-left: 55rpx;
+			padding-left: 46rpx;
 		}
 
 		.cl-input__icon {
@@ -93,12 +84,20 @@
 
 	&--suffix {
 		.cl-input__wrap {
-			padding-right: 50rpx;
+			padding-right: 46rpx;
 		}
 
 		.cl-input__icon {
 			right: 0;
 		}
+	}
+
+	&.is-disabled {
+		background-color: #f5f7fa;
+	}
+
+	&.is-border {
+		border: 1rpx solid #dcdfe6;
 	}
 
 	&.is-disabled {

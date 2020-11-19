@@ -9,6 +9,10 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0 10rpx;
+
+		[class^="cl-icon"] {
+			font-size: 40rpx;
+		}
 	}
 
 	&__close {

@@ -4,9 +4,10 @@
 		:class="[
 			`cl-button--${type}`,
 			`cl-button--${size}`,
+			`is-${platform}`,
 			{
-				'cl-button--round': round,
-				'cl-button--shadow': shadow,
+				'is-round': round,
+				'is-shadow': shadow,
 				'is-loading': loading,
 				'is-plain': plain,
 				'is-fill': fill,
@@ -37,7 +38,7 @@
 		@tap.stop="tap"
 	>
 		<view class="cl-button__loading">
-			<cl-loading v-if="loading" :size="18" :color="type ? '#fff' : ''"></cl-loading>
+			<cl-loading v-if="loading" :size="16" :color="type ? '#fff' : ''"></cl-loading>
 		</view>
 
 		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
@@ -49,6 +50,8 @@
 </template>
 
 <script>
+const { platform } = uni.getSystemInfoSync();
+
 export default {
 	name: "cl-button",
 	props: {
@@ -95,6 +98,11 @@ export default {
 		sendMessagePath: String,
 		sendMessageImg: String,
 		showMessageCard: Boolean,
+	},
+	data() {
+		return {
+			platform,
+		};
 	},
 	methods: {
 		getphonenumber(e) {

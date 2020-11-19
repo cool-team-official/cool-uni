@@ -1,17 +1,20 @@
 <template>
 	<view
+		v-if="show"
 		:class="[
 			'cl-popup__wrapper',
 			`cl-popup__wrapper--${direction}`,
 			`is-${status ? 'open' : 'close'}`,
 		]"
 		@touchmove.stop.prevent
-		v-if="show"
 	>
 		<view class="cl-popup__modal" @tap="modalClose"></view>
 
-		<view :class="['cl-popup']" :style="{ height, width, backgroundColor, borderRadius }">
-			<view class="cl-popup__container" :style="{ padding }">
+		<view
+			:class="['cl-popup']"
+			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
+		>
+			<view class="cl-popup__container" :style="{ padding: parseRpx(padding) }">
 				<slot></slot>
 			</view>
 		</view>
@@ -19,6 +22,8 @@
 </template>
 
 <script>
+import { parseRpx } from "../../utils/style";
+
 export default {
 	props: {
 		visible: Boolean,
@@ -27,22 +32,22 @@ export default {
 			type: String,
 			default: "left",
 		},
-		wrapperClosable: {
+		closeOnClickModal: {
 			type: Boolean,
 			default: true,
 		},
 		size: {
-			type: String,
+			type: [String, Number],
 			default: "auto",
 		},
-		borderRadius: String,
 		backgroundColor: {
 			type: String,
 			default: "#fff",
 		},
+		borderRadius: [String, Number],
 		padding: {
-			type: String,
-			default: "20rpx",
+			type: [String, Number],
+			default: 20,
 		},
 	},
 
@@ -59,7 +64,7 @@ export default {
 			switch (this.direction) {
 				case "top":
 				case "bottom":
-					return this.size;
+					return parseRpx(this.size);
 				case "left":
 				case "right":
 					return "100%";
@@ -74,7 +79,7 @@ export default {
 				case "left":
 				case "right":
 				case "center":
-					return this.size;
+					return parseRpx(this.size);
 			}
 		},
 	},
@@ -90,6 +95,8 @@ export default {
 	},
 
 	methods: {
+		parseRpx,
+
 		open() {
 			if (!this.show) {
 				this.show = true;
@@ -129,7 +136,7 @@ export default {
 		},
 
 		modalClose() {
-			if (!this.wrapperClosable) {
+			if (!this.closeOnClickModal) {
 				return false;
 			}
 

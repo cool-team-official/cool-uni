@@ -2,26 +2,25 @@
 	<text
 		:class="['cl-icon', name]"
 		:style="{
-			fontSize,
-			color
+			fontSize: parseRpx(size),
+			color,
 		}"
 	></text>
 </template>
 
 <script>
-import { isNumber } from '../../utils';
+import { isNumber } from "../../utils";
+import { parseRpx } from "../../utils/style";
 
 export default {
 	props: {
 		name: String,
 		size: [String, Number],
-		color: String
+		color: String,
 	},
 
-	computed: {
-		fontSize() {
-			return isNumber(this.size) ? `${this.size}rpx` : this.size;
-		}
-	}
+	methods: {
+		parseRpx,
+	},
 };
 </script>

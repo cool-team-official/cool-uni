@@ -1,10 +1,15 @@
 <template>
 	<view
+		class="cl-image"
 		:style="{
-			height: height2 || size2,
-			width: width2 || size2,
+			height: size2[0],
+			width: size2[1],
 		}"
-		:class="['cl-image', isRound]"
+		:class="[
+			{
+				'is-round': round,
+			},
+		]"
 		@tap.stop="onPreview"
 	>
 		<slot name="placeholder" v-if="!src">
@@ -31,12 +36,11 @@
 </template>
 
 <script>
-import { isNumber } from "../../utils";
-import Style from "../../mixins/style";
+import { isNumber, isArray, isString } from "../../utils";
+import { parseRpx } from "../../utils/style";
 
 export default {
 	name: "cl-image",
-	mixins: [Style],
 	props: {
 		src: String,
 		mode: String,
@@ -48,7 +52,7 @@ export default {
 		webp: Boolean,
 		showMenuByLongpress: Boolean,
 		size: {
-			type: [String, Number],
+			type: [String, Number, Array],
 			default: "100%",
 		},
 		round: Boolean,
@@ -60,11 +64,16 @@ export default {
 		};
 	},
 	computed: {
-		isRound() {
-			return this.round ? "cl-image--round" : "";
-		},
 		size2() {
-			return this.parse_rpx(this.size);
+			let size = ["100%", "100%"];
+
+			if (isString(this.size) || isNumber(this.size)) {
+				size = [this.size, this.size];
+			} else if (isArray(this.size)) {
+				size = this.size;
+			}
+
+			return size.map(parseRpx);
 		},
 	},
 	methods: {

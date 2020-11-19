@@ -2,11 +2,11 @@
 	<view
 		:class="['cl-column', `cl-column--${type}`, `is-justify-${justify}`, `is-align-${align}`]"
 		:style="{
-			height: height2,
-			width: width2,
-			padding: padding2,
-			margin: margin2,
-			borderRadius: borderRadius2,
+			height: parseRpx(height),
+			width: parseRpx(width),
+			padding: parseRpx(padding),
+			margin: parseRpx(margin),
+			borderRadius: parseRpx(borderRadius),
 			border,
 			backgroundColor,
 		}"
@@ -16,12 +16,11 @@
 </template>
 
 <script>
-import Style from "../../mixins/style";
+import { parseRpx } from "../../utils/style";
 
 export default {
 	name: "cl-column",
 	componentName: "ClColumn",
-	mixins: [Style],
 	props: {
 		type: String,
 		border: String,
@@ -35,6 +34,14 @@ export default {
 			type: String,
 			default: "top",
 		},
+		height: [String, Number],
+		width: [String, Number],
+		padding: [String, Number, Array],
+		margin: [String, Number, Array],
+		borderRadius: [String, Number],
+	},
+	methods: {
+		parseRpx,
 	},
 };
 </script>

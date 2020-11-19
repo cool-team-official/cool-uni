@@ -1,42 +1,75 @@
 .cl-button {
-	display: inline-block;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
 	height: 66rpx;
-	line-height: 66rpx;
-	color: #666;
-	border: 1rpx solid $color-default;
+	line-height: 1;
+	vertical-align: middle;
 	box-sizing: border-box;
-	background-color: #fff;
 	font-size: 26rpx;
 	white-space: nowrap;
-	padding: 0 30rpx;
 	margin: 0;
+	padding: 0rpx 30rpx;
 	overflow: visible;
+	background-color: #fff;
 
 	&__text {
 		display: inline;
+		color: #666;
 	}
 
-	&::after {
-		border-width: 0;
-		transform: scale(1);
-		height: 100%;
-		width: 100%;
-		border-radius: 0;
+	&__icon {
+		margin-right: 10rpx;
 	}
 
-	&__loading {
-		display: inline-block;
-		position: relative;
-		top: -4rpx;
+	&.button-hover:not(&--text) {
+		background-color: #f7f7f7;
+	}
 
-		.cl-loading {
-			color: #fff;
-			vertical-align: middle;
+	[class^="cl-icon-"]:last-child {
+		margin-left: 10rpx;
+	}
+
+	&[size="small"] {
+		height: 60rpx;
+		padding: 0rpx 24rpx;
+	}
+
+	&[size="mini"] {
+		font-size: 24rpx;
+		padding: 0 14rpx;
+		height: 54rpx;
+	}
+
+	&.is-round {
+		border-radius: 100rpx;
+
+		&::after {
+			border-radius: 100rpx;
+		}
+	}
+
+	&--text {
+		background-color: transparent;
+
+		.cl-button__text {
+			color: $color-primary;
+		}
+
+		&::after {
+			border-width: 0;
 		}
 	}
 
 	&.is-loading {
-		opacity: 0.8;
+		opacity: 0.7;
+
+		// #ifdef MP
+		.cl-button__loading {
+			position: relative;
+			top: 2rpx;
+		}
+		// #endif
 
 		.cl-button__text {
 			margin-left: 15rpx;
@@ -47,48 +80,14 @@
 		width: 100%;
 	}
 
-	&[size="small"] {
-		height: 60rpx;
-		line-height: 60rpx;
-	}
-
-	&[size="mini"] {
-		height: 50rpx;
-		line-height: 50rpx;
-		font-size: 24rpx;
-		padding: 0 20rpx;
-	}
-
-	.button-hover:not(.is-loading) {
-		background-color: #f7f7f7;
-	}
-
-	/* 图标 */
-
-	&__icon {
-		margin-right: 10rpx;
-	}
-
-	[class^="cl-icon-"]:last-child {
-		margin-left: 10rpx;
-	}
-
-	/* 圆角按钮 */
-
-	&--round {
-		border-radius: 40rpx;
-	}
-
-	/* 文字按钮 */
-
-	&--text {
-		border-color: transparent;
-		color: $color-primary;
-		background-color: transparent;
-
-		&.is-disabled {
-			color: #999;
+	&.is-plain {
+		&::after {
+			border-width: 1px;
 		}
+	}
+
+	&.is-disabled {
+		opacity: 0.5;
 	}
 
 	@mixin color($type, $color) {
@@ -100,18 +99,21 @@
 				color: #fff;
 			}
 
+			&::after {
+				border-width: 0;
+			}
+
 			&.is-plain {
-				border-color: rgba($color, 0.8);
 				background-color: #fff;
 
 				.cl-button__text {
 					color: rgba($color, 0.8);
 				}
-			}
 
-			&.is-disabled {
-				opacity: 0.3;
-				background-color: rgba($color, 0.8);
+				&::after {
+					border-width: 1px;
+					border-color: rgba($color, 0.8);
+				}
 			}
 
 			&.button-hover {
@@ -125,7 +127,7 @@
 			}
 		}
 
-		&--shadow {
+		&.is-shadow {
 			box-shadow: 2rpx 4rpx 14rpx $color;
 		}
 	}

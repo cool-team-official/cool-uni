@@ -10,6 +10,7 @@
 		:style="{
 			'padding-top': top,
 			'background-color': backgroundColor,
+			color,
 		}"
 	>
 		<view

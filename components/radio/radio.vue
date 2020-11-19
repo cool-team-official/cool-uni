@@ -3,10 +3,10 @@
 		class="cl-radio"
 		:class="[
 			{
-				'cl-radio--border': isBorder,
+				'is-border': isBorder,
 				'is-disabled': isDisabled,
-				'is-checked': checked
-			}
+				'is-checked': checked,
+			},
 		]"
 		@tap="change"
 	>
@@ -31,14 +31,14 @@ export default {
 		label: [String, Number],
 		value: [String, Number],
 		disabled: Boolean,
-		border: Boolean
+		border: Boolean,
 	},
 
 	mixins: [Emitter],
 
 	data() {
 		return {
-			checked: false
+			checked: false,
 		};
 	},
 
@@ -47,8 +47,8 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.checked = val === this.label;
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
@@ -66,11 +66,11 @@ export default {
 
 		parent() {
 			return getParent.call(this, "ClRadioGroup", ["border", "disabled"]);
-		}
+		},
 	},
 
 	created() {
-		this.$on("radio-group.change", label => {
+		this.$on("radio-group.change", (label) => {
 			this.checked = label === this.label;
 		});
 	},
@@ -89,7 +89,7 @@ export default {
 				this.$emit("input", this.label);
 				this.$emit("change", this.label);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

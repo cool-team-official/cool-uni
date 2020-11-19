@@ -10,11 +10,11 @@
 			},
 		]"
 		:style="{
-			height: height2,
-			width: width2,
-			padding: padding2,
+			height: parseRpx(height),
+			width: parseRpx(width),
+			padding: parseRpx(padding),
 			margin: margin2,
-			borderRadius: borderRadius2,
+			borderRadius: parseRpx(borderRadius),
 			border,
 			backgroundColor,
 		}"
@@ -24,13 +24,12 @@
 </template>
 
 <script>
-import Style from "../../mixins/style";
+import { parseRpx } from "../../utils/style";
 import { isArray, isNumber } from "../../utils";
 
 export default {
 	name: "cl-row",
 	componentName: "ClRow",
-	mixins: [Style],
 	props: {
 		type: String,
 		wrap: Boolean,
@@ -46,11 +45,19 @@ export default {
 			type: String,
 			default: "top",
 		},
+		height: [String, Number],
+		width: [String, Number],
+		padding: [String, Number, Array],
+		margin: [String, Number, Array],
+		borderRadius: [String, Number],
 	},
 	computed: {
 		margin2() {
-			return this.margin ? this.parse_prop(this.margin) : `0 -${this.gutter / 2}rpx`;
+			return this.margin ? parseRpx(this.margin) : `0 -${this.gutter / 2}rpx`;
 		},
+	},
+	methods: {
+		parseRpx,
 	},
 };
 </script>

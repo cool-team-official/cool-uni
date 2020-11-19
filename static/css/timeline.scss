@@ -3,33 +3,16 @@
 		display: flex;
 		width: 100%;
 		position: relative;
-		padding-bottom: 60rpx;
-
-		&.is-last {
-			.cl-timeline-item__line {
-				display: none;
-			}
-		}
-
-		&__line {
-			height: calc(100% - 30rpx);
-			width: 6rpx;
-			background-color: #eee;
-			position: absolute;
-			top: 36rpx;
-			border-radius: 6rpx;
-		}
 
 		&__timestamp {
 			font-size: 24rpx;
-			width: 100rpx;
 			margin: 0 20rpx;
 			text-align: center;
 		}
 
 		&__date {
 			display: block;
-			font-size: 22rpx;
+			font-size: 24rpx;
 			text-align: right;
 		}
 
@@ -37,36 +20,62 @@
 			display: block;
 			font-size: 22rpx;
 			text-align: right;
-			margin-right: 6rpx;
+			color: #666;
 		}
 
 		&__node {
+			display: flex;
+			justify-content: center;
 			position: relative;
-			top: -4rpx;
-			width: 50rpx;
-			text-align: center;
+			width: 52rpx;
 
-			&-dot {
-				display: inline-block;
-				height: 16rpx;
-				width: 16rpx;
-				border-radius: 16rpx;
-				z-index: 9;
-				position: relative;
+			&::after {
+				content: "";
+				display: block;
+				height: calc(100% - 32rpx);
+				width: 2px;
+				background-color: #f2f2f2;
+				transform: scaleX(1);
+				position: absolute;
+				top: 32rpx;
+				border-radius: 10rpx;
 			}
 
-			&-icon {
-				display: inline-block;
-				height: 46rpx;
-				width: 46rpx;
-				z-index: 9;
+			&-box {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 32rpx;
+				width: 32rpx;
 			}
+		}
+
+		&__dot {
+			display: block;
+			height: 16rpx;
+			width: 16rpx;
+			z-index: 9;
+			border-radius: 18rpx;
+		}
+
+		&__icon {
+			font-size: 40rpx;
+			z-index: 2;
+			position: relative;
 		}
 
 		&__content {
 			font-size: 24rpx;
 			flex: 1;
 			margin: 0 20rpx;
+			position: relative;
+			padding-bottom: 60rpx;
+		}
+
+		&.show-line {
+			.cl-timeline-item__node::after {
+				display: none;
+			}
 		}
 	}
 }

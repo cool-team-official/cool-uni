@@ -7,6 +7,7 @@
 			class="cl-avatar__target"
 			v-else
 			:src="src"
+			:mode="mode"
 			@error="handleError"
 			@load="handleLoad"
 		></image>
@@ -20,12 +21,16 @@ export default {
 		lazyLoad: Boolean,
 		size: {
 			type: Number,
-			default: 80
+			default: 80,
 		},
 		shape: {
 			type: String,
-			default: "circle"
-		}
+			default: "circle",
+		},
+		mode: {
+			type: String,
+			default: "scaleToFill",
+		},
 	},
 
 	computed: {
@@ -43,7 +48,7 @@ export default {
 
 		fontSize() {
 			return this.size / 1.7 + "rpx";
-		}
+		},
 	},
 
 	methods: {
@@ -53,7 +58,7 @@ export default {
 
 		handleError(e) {
 			this.$emit("load", e);
-		}
-	}
+		},
+	},
 };
 </script>

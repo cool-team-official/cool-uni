@@ -9,12 +9,13 @@
 				'is-ellipsis': ellipsis > 0,
 			},
 			`is-${type}`,
+			`is-color-${color}`,
 		]"
 		:style="{
-			margin: margin2,
+			margin: parseRpx(margin),
 			color,
 			'font-size': '26rpx',
-			'letter-spacing': parse_rpx(letterSpacing),
+			'letter-spacing': parseRpx(letterSpacing),
 			'-webkit-line-clamp': ellipsis,
 		}"
 	>
@@ -22,7 +23,7 @@
 		<text
 			class="cl-text__value"
 			:style="{
-				fontSize: parse_rpx(size),
+				fontSize: parseRpx(size),
 			}"
 			>{{ d.value }}</text
 		>
@@ -34,7 +35,7 @@
 
 <script>
 import { isNumber, isArray } from "../../utils";
-import Style from "../../mixins/style";
+import { parseRpx } from "../../utils/style";
 
 export default {
 	props: {
@@ -44,6 +45,11 @@ export default {
 		type: {
 			type: String,
 			default: "text",
+		},
+		// 是否加密
+		encrypt: {
+			type: Boolean,
+			default: true,
 		},
 		// 是否粗体 500
 		bold: Boolean,
@@ -75,8 +81,6 @@ export default {
 		},
 	},
 
-	mixins: [Style],
-
 	computed: {
 		d() {
 			if (this.type == "price") {
@@ -98,7 +102,7 @@ export default {
 				const str = String(this.value);
 
 				return {
-					value: str.substr(0, 3) + "******" + str.substr(8),
+					value: this.encrypt ? str.substr(0, 3) + "****" + str.substr(7) : str,
 				};
 			} else {
 				return {
@@ -106,6 +110,10 @@ export default {
 				};
 			}
 		},
+	},
+
+	methods: {
+		parseRpx,
 	},
 };
 </script>

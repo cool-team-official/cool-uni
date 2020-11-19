@@ -5,26 +5,6 @@
 	font-size: 26rpx;
 	margin-right: 20rpx;
 
-	&.is-checked {
-		.cl-radio__input {
-			background-color: $color-primary;
-			border-color: $color-primary;
-			color: #fff;
-		}
-	}
-
-	&.is-disabled {
-		.cl-radio__input {
-			background-color: #f5f7fa;
-			border-color: #e4e7ed;
-			color: #c0c4cc;
-		}
-
-		.cl-radio__label {
-			color: #c0c4cc;
-		}
-	}
-
 	.cl-radio__input {
 		display: inline-block;
 		vertical-align: middle;
@@ -47,7 +27,27 @@
 		}
 	}
 
-	&--border {
+	&.is-checked {
+		.cl-radio__input {
+			background-color: $color-primary;
+			border-color: $color-primary;
+			color: #fff;
+		}
+	}
+
+	&.is-disabled {
+		.cl-radio__input {
+			background-color: #f5f7fa;
+			border-color: #e4e7ed;
+			color: #c0c4cc;
+		}
+
+		.cl-radio__label {
+			color: #c0c4cc;
+		}
+	}
+
+	&.is-border {
 		border-radius: 10rpx;
 		padding: 14rpx 20rpx;
 		border: 1rpx solid #ddd;

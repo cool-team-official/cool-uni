@@ -32,6 +32,26 @@
 		-webkit-box-orient: vertical;
 	}
 
+	&.is-color-primary {
+		color: $uni-color-primary;
+	}
+
+	&.is-color-success {
+		color: $uni-color-success;
+	}
+
+	&.is-color-error {
+		color: $uni-color-error;
+	}
+
+	&.is-color-warning {
+		color: $uni-color-warning;
+	}
+
+	&.is-color-info {
+		color: $uni-color-info;
+	}
+
 	&__symbol--price {
 		font-size: 22rpx;
 	}

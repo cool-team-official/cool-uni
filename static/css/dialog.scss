@@ -1,18 +1,11 @@
 .cl-dialog__wrapper {
-	.cl-popup {
-		border-radius: 16rpx;
-
-		&__container {
-			padding: 0;
-		}
-	}
-
 	.cl-dialog {
+		position: relative;
+
 		&__header {
 			position: relative;
-			padding: 20rpx 20rpx 10rpx;
 			text-align: center;
-			line-height: 1;
+			padding-top: 20rpx;
 		}
 
 		&__title {
@@ -22,7 +15,7 @@
 
 		&__container {
 			position: relative;
-			padding: 20rpx 40rpx;
+			padding: 20rpx 40rpx 30rpx 40rpx;
 		}
 
 		&__message {
@@ -36,6 +29,24 @@
 			display: flex;
 			justify-content: flex-end;
 			padding: 20rpx;
+		}
+
+		&__close {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			height: 50rpx;
+			width: 50rpx;
+			position: absolute;
+			bottom: -80rpx;
+			left: calc(50% - 25rpx);
+			color: #ddd;
+			border-radius: 50rpx;
+			border: 1rpx solid #ddd;
+
+			text {
+				font-size: 32rpx;
+			}
 		}
 	}
 }

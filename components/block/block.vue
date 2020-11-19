@@ -2,11 +2,11 @@
 	<view
 		class="cl-block"
 		:style="{
-			height: height2,
-			width: width2,
-			padding: padding2,
-			margin: margin2,
-			borderRadius: borderRadius2,
+			height: parseRpx(height),
+			width: parseRpx(width),
+			padding: parseRpx(padding),
+			margin: parseRpx(margin),
+			borderRadius: parseRpx(borderRadius),
 			border,
 			backgroundColor,
 		}"
@@ -16,18 +16,25 @@
 </template>
 
 <script>
-import Style from "../../mixins/style";
+import { parseRpx } from "../../untils/style";
 
 export default {
 	name: "cl-block",
 	componentName: "ClBlock",
-	mixins: [Style],
 	props: {
 		backgroundColor: String,
 		lineHeight: String,
 		textAlign: String,
 		border: String,
 		boxSizing: String,
+		height: [String, Number],
+		width: [String, Number],
+		padding: [String, Number, Array],
+		margin: [String, Number, Array],
+		borderRadius: [String, Number],
+	},
+	methods: {
+		parseRpx,
 	},
 };
 </script>

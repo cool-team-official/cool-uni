@@ -1,7 +1,19 @@
 <template>
-	<view :class="['cl-tag', classList]" @tap="click" v-if="visible">
+	<view
+		class="cl-tag"
+		:class="[
+			`cl-tag--${type}`,
+			`cl-tag--${size}`,
+			{
+				'is-plain': plain,
+				'is-round': round,
+			},
+		]"
+		v-if="visible"
+		@tap="click"
+	>
 		<slot></slot>
-		<text class="cl-tag__close cl-icon-close" @tap.stop="close" v-show="closable"></text>
+		<text class="cl-tag__close cl-icon-close" v-show="closable" @tap.stop="close"></text>
 	</view>
 </template>
 
@@ -10,54 +22,36 @@ export default {
 	props: {
 		type: {
 			type: String,
-			default: 'primary'
+			default: "primary",
 		},
 		plain: Boolean,
 		size: {
 			type: String,
-			default: 'small'
+			default: "small",
 		},
 		closable: Boolean,
-		round: Boolean
+		round: Boolean,
 	},
 
 	data() {
 		return {
-			visible: true
+			visible: true,
 		};
-	},
-
-	computed: {
-		classList() {
-			let list = [];
-
-			['type', 'plain', 'size', 'round'].forEach(k => {
-				if (this[k]) {
-					switch (k) {
-						case 'plain':
-						case 'round':
-							list.push(`cl-tag--${k}`);
-							break;
-						default:
-							list.push(`cl-tag--${this[k]}`);
-							break;
-					}
-				}
-			});
-
-			return list;
-		}
 	},
 
 	methods: {
 		click() {
-			this.$emit('click');
+			this.$emit("click");
+		},
+
+		open() {
+			this.visible = true;
 		},
 
 		close() {
 			this.visible = false;
-			this.$emit('close');
-		}
-	}
+			this.$emit("close");
+		},
+	},
 };
 </script>

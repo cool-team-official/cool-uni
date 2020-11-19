@@ -17,29 +17,31 @@ export default {
 		disabled: Boolean,
 		activeValue: {
 			type: [Boolean, String, Number],
-			default: true
+			default: true,
 		},
 		inactiveValue: {
 			type: [Boolean, String, Number],
-			default: false
+			default: false,
 		},
 		activeColor: {
 			type: String,
-			default: "$color-primary"
-		}
+			default: "#409eff",
+		},
 	},
 
 	computed: {
 		checked() {
 			return this.value === this.activeValue;
-		}
+		},
 	},
 
 	methods: {
 		onChange(e) {
-			this.$emit("input", e.detail.value ? this.activeValue : this.inactiveValue);
-			this.$emit("change", e.detail.value ? this.activeValue : this.inactiveValue);
-		}
-	}
+			let d = e.detail.value ? this.activeValue : this.inactiveValue;
+
+			this.$emit("input", d);
+			this.$emit("change", d);
+		},
+	},
 };
 </script>

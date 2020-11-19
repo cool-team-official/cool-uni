@@ -3,14 +3,14 @@
 		class="cl-timeline-item"
 		:class="[
 			{
-				'is-last': last
-			}
+				'show-line': showLine,
+			},
 		]"
 	>
 		<view
 			class="cl-timeline-item__timestamp"
 			:style="{
-				width: `${parent.timestampWidth}rpx`
+				width: `${parent.timestampWidth}rpx`,
 			}"
 		>
 			<slot name="timestamp">
@@ -18,22 +18,28 @@
 				<text class="cl-timeline-item__time">{{ timestampText[1] }}</text>
 			</slot>
 		</view>
+
 		<view class="cl-timeline-item__node">
-			<slot name="icon">
-				<text
-					class="cl-timeline-item__node-dot"
-					:style="{
-						'background-color': color
-					}"
-				></text>
-			</slot>
+			<view class="cl-timeline-item__node-box">
+				<slot name="icon">
+					<text
+						v-if="icon"
+						class="cl-timeline-item__icon"
+						:class="[icon]"
+						:style="{ color }"
+					></text>
+
+					<text
+						v-else
+						class="cl-timeline-item__dot"
+						:style="{
+							'background-color': color || '#999',
+						}"
+					></text>
+				</slot>
+			</view>
 		</view>
-		<view
-			class="cl-timeline-item__line"
-			:style="{
-				left: `${parent.timestampWidth + 62}rpx`
-			}"
-		></view>
+
 		<view class="cl-timeline-item__content">
 			<slot name="content">{{ content }}</slot>
 		</view>
@@ -48,11 +54,12 @@ export default {
 	props: {
 		timestamp: String,
 		content: String,
-		last: Boolean,
+		showLine: Boolean,
+		icon: String,
 		color: {
 			type: String,
-			default: "#999"
-		}
+			default: "#999",
+		},
 	},
 	computed: {
 		parent() {
@@ -60,7 +67,7 @@ export default {
 		},
 		timestampText() {
 			return (this.timestamp || "").split(" ");
-		}
-	}
+		},
+	},
 };
 </script>

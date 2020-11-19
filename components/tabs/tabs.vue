@@ -1,99 +1,134 @@
 <template>
-	<view class="cl-tabs" :class="[`cl-tabs--${type}`, isSticky]">
-		<scroll-view
-			class="cl-tabs__bar"
+	<view
+		class="cl-tabs"
+		:class="[
+			{
+				'is-content': $slots.default,
+				'is-sticky': sticky,
+				'is-fill': fill,
+				'is-border': border,
+			},
+		]"
+	>
+		<view
+			class="cl-tabs__header"
 			:style="{
-				top: stickyTop
+				top: stickyTop,
 			}"
-			scroll-with-animation
-			scroll-x
-			:scroll-left="scrollLeft"
 		>
-			<view
-				v-for="(item, index) in list2"
-				:key="index"
-				:class="[
-					'cl-tabs__bar-li',
-					{
-						active: value === item.name
-					}
-				]"
-				@tap="change(index)"
+			<scroll-view
+				class="cl-tabs__bar"
+				scroll-with-animation
+				scroll-x
+				:scroll-left="scrollLeft"
 			>
-				<text
-					:class="['cl-tabs__icon', 'cl-tabs__icon--prefix', item.prefixIcon]"
-					v-if="item.prefixIcon"
-				></text>
-				<text class="cl-tabs__label">{{ item.label }}</text>
-				<text
-					:class="['cl-tabs__icon', 'cl-tabs__icon--suffix', item.suffixIcon]"
-					v-if="item.suffixIcon"
-				></text>
-			</view>
-		</scroll-view>
+				<view class="cl-tabs__bar-box">
+					<view
+						class="cl-tabs__bar-item"
+						v-for="(item, index) in tabs"
+						:key="index"
+						:class="[
+							{
+								'is-active': value === item.name,
+							},
+						]"
+						:style="{
+							padding: `0 ${gutter}rpx`,
+						}"
+						@tap="change(index)"
+					>
+						<text
+							v-if="item.prefixIcon"
+							class="cl-tabs__icon cl-tabs__icon--prefix"
+							:class="[item.prefixIcon]"
+						></text>
+						<text class="cl-tabs__label">{{ item.label }}</text>
+						<text
+							v-if="item.suffixIcon"
+							class="cl-tabs__icon cl-tabs__icon--suffix"
+							:class="[item.suffixIcon]"
+						></text>
+					</view>
 
-		<view class="cl-tabs__pane">
-			<template v-if="type === 'swiper'">
-				<swiper
-					class="cl-tabs__swiper"
-					circular
-					@change="onChangeSwiper"
-					:current="current"
-				>
-					<swiper-item v-for="(item, index) in list2" :key="index">
-						<scroll-view
-							scroll-y
-							enable-back-to-top
-							:class="[`cl-tabs__swiper-scroller`]"
-						>
-							<slot :item="item" :index="index" v-if="item.visible"></slot>
-						</scroll-view>
-					</swiper-item>
-				</swiper>
-			</template>
+					<view
+						class="cl-tabs__line"
+						v-if="lineLeft > 0"
+						:style="{
+							left: lineLeft + 'px',
+						}"
+					></view>
+				</view>
+			</scroll-view>
+		</view>
 
-			<template v-else>
-				<slot></slot>
-			</template>
+		<view
+			class="cl-tabs__container"
+			ref="pane"
+			@touchstart="onTouchStart"
+			@touchend="onTouchEnd"
+		>
+			<slot></slot>
 		</view>
 	</view>
 </template>
 
 <script>
-import Emitter from "../../mixins/emitter";
 import { isNumber } from "../../utils";
 
 export default {
 	componentName: "ClTabs",
 
 	props: {
+		// 绑定值
 		value: [String, Number],
 		// 离开前
 		beforeLeave: Function,
 		// 标签
 		labels: null,
-		// 是否懒加载
-		lazy: Boolean,
+		// 是否循环显示
+		loop: {
+			type: Boolean,
+			default: true,
+		},
+		// 是否滑动
+		swipeable: Boolean,
+		// 滑动阈值
+		swipeThreshold: {
+			type: Number,
+			default: 60,
+		},
 		// 是否吸顶
 		sticky: Boolean,
 		// 吸顶顶部距离
-		stickyTop: {
-			type: String,
-			default: "0"
+		stickyTop: String,
+		// 是否滚动视图
+		scrollView: {
+			type: Boolean,
+			default: true,
 		},
-		// 类型，default: 默认，swiper: 滑动
-		type: {
-			type: String,
-			default: "default"
-		}
+		// 是否填充
+		fill: Boolean,
+		// 是否带有边框
+		border: {
+			type: Boolean,
+			default: true,
+		},
+		// 选项栏间隔
+		gutter: {
+			type: Number,
+			default: 20,
+		},
 	},
-
-	mixins: [Emitter],
 
 	data() {
 		return {
 			list: [],
-			current: 0
+			current: 0,
+			lineLeft: 0,
+			scrollLeft: 0,
+			clientX: "",
+			clientY: "",
+			width: 375,
 		};
 	},
 
@@ -102,49 +137,77 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.current = val;
-			}
-		}
+			},
+		},
+
+		current(val) {
+			this.onOffset(val);
+		},
 	},
 
 	computed: {
-		list2() {
-			return (this.labels || this.list).map((e, i) => {
-				e.name = e.name !== undefined ? e.name : i;
-				if (!e.visible) {
-					e.visible = this.lazy ? this.value == e.name : true;
-				}
-				return e;
-			});
+		tabs() {
+			return this.labels || this.list;
 		},
 
 		isSticky() {
 			return this.sticky ? "cl-tabs--sticky" : "";
 		},
-
-		scrollLeft() {
-			return (this.current - 1) * 60;
-		}
-	},
-
-	created() {
-		this.$on("tabs.addPane", data => {
-			this.list.push(data);
-		});
 	},
 
 	mounted() {
-		this.broadcast("ClTabPane", "tabs.change", this.value);
+		// #ifdef H5
+		let children = this.$refs.pane.$children;
+		// #endif
+
+		// #ifndef H5
+		let children = this.$children;
+		// #endif
+
+		this.list = children.map((e, i) => {
+			return {
+				name: e.name || i,
+				label: e.label,
+				prefixIcon: e.prefixIcon,
+				suffixIcon: e.suffixIcon,
+				lazy: e.lazy,
+			};
+		});
+
+		// 获取选项卡宽度
+		uni.createSelectorQuery()
+			.in(this)
+			.select(".cl-tabs")
+			.fields({ size: true }, (d) => {
+				this.width = d.width;
+				this.getRect();
+			})
+			.exec();
 	},
 
 	methods: {
-		onChangeSwiper(e) {
-			if (e.detail.current !== this.current) {
-				this.change(e.detail.current);
+		onTouchStart(e) {
+			this.clientX = e.changedTouches[0].clientX;
+			this.clientY = e.changedTouches[0].clientY;
+		},
+
+		onTouchEnd(e) {
+			const subX = e.changedTouches[0].clientX - this.clientX;
+			const subY = e.changedTouches[0].clientY - this.clientY;
+
+			if (this.swipeable) {
+				if (subY < 50 && subY > -50) {
+					if (subX > this.swipeThreshold) {
+						this.prev();
+					} else if (subX < -this.swipeThreshold) {
+						this.next();
+					}
+				}
 			}
 		},
 
 		async change(index) {
-			const { name } = this.list2[index];
+			const { name } = this.tabs[index];
 
 			let flag = true;
 
@@ -161,11 +224,57 @@ export default {
 			if (flag) {
 				this.$emit("input", name);
 				this.$emit("tab-change", name);
-				this.broadcast("ClTabPane", "tabs.change", name);
-				this.current = index;
-				this.list2[index].visible = true;
+				this.current = name;
 			}
-		}
-	}
+		},
+
+		getIndex() {
+			return this.tabs.findIndex((e) => e.name == this.current);
+		},
+
+		prev() {
+			let index = this.getIndex();
+
+			this.change(index <= 0 ? (this.loop ? this.list.length - 1 : 0) : index - 1);
+		},
+
+		next() {
+			let index = this.getIndex();
+
+			this.change(
+				index >= this.list.length - 1 ? (this.loop ? 0 : this.list.length - 1) : index + 1
+			);
+		},
+
+		getRect() {
+			this.$nextTick(() => {
+				uni.createSelectorQuery()
+					.in(this)
+					.selectAll(".cl-tabs__bar-item")
+					.fields({ rect: true, size: true })
+					.exec((d) => {
+						this.tabRect = d[0];
+						this.onOffset();
+					});
+			});
+		},
+
+		onOffset() {
+			this.$nextTick(() => {
+				let item = this.tabRect[this.getIndex()];
+
+				if (item) {
+					let scrollLeft = item.left - (this.width - item.width) / 2;
+
+					if (scrollLeft < 0) {
+						scrollLeft = 0;
+					}
+
+					this.scrollLeft = scrollLeft;
+					this.lineLeft = item.left + item.width / 2 - 8;
+				}
+			});
+		},
+	},
 };
 </script>

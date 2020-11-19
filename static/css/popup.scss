@@ -42,13 +42,10 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #fff;
-		overflow: hidden;
 		position: absolute;
 		transition: all 0.3s;
 
 		&__container {
-			flex: 1;
-			overflow: auto;
 			box-sizing: border-box;
 		}
 	}
@@ -74,7 +71,20 @@
 			transform: translateY(-100%);
 			left: 0;
 			top: 0;
+		}
+	}
+
+	&--top,
+	&--left,
+	&--right {
+		.cl-popup {
+			/* #ifdef H5 */
+			padding-top: 44px;
+			/* #endif */
+
+			/* #ifndef H5 */
 			padding-top: env(safe-area-inset-top);
+			/* #endif */
 		}
 	}
 

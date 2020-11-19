@@ -1,7 +1,7 @@
 <template>
 	<view class="cl-confirm">
 		<cl-dialog :visible.sync="visible" :title="title" :width="width" @close="onClose">
-			<view class="cl-confirm__message" v-if="message">{{ message }}</view>
+			<view class="cl-confirm__message" v-if="message && !$slots.default">{{ message }}</view>
 			<slot v-else></slot>
 
 			<view class="cl-confirm__footer" slot="footer">
@@ -33,6 +33,7 @@ export default {
 	data() {
 		return {
 			visible: false,
+			closed: false,
 			title: null,
 			message: null,
 			width: null,
@@ -46,9 +47,9 @@ export default {
 			duration: null,
 			promise: {
 				resolve: null,
-				reject: null
+				reject: null,
 			},
-			timer: null
+			timer: null,
 		};
 	},
 
@@ -64,15 +65,16 @@ export default {
 			closeOnClickModal = true,
 			callback,
 			duration,
-			beforeClose
+			beforeClose,
 		}) {
 			return new Promise((resolve, reject) => {
 				this.promise = {
 					resolve,
-					reject
+					reject,
 				};
 
 				this.visible = true;
+				this.closed = false;
 
 				this.$nextTick(() => {
 					this.title = title;
@@ -99,10 +101,6 @@ export default {
 		},
 
 		close(action = "close") {
-			if (!this.visible) {
-				return false;
-			}
-
 			const done = () => {
 				if (this.callback) {
 					this.callback({ action });
@@ -116,6 +114,7 @@ export default {
 
 				this.$nextTick(() => {
 					this.visible = false;
+					this.closed = true;
 				});
 			};
 
@@ -127,8 +126,10 @@ export default {
 		},
 
 		onClose(action) {
-			this.close(action);
-		}
-	}
+			if (!this.closed) {
+				this.close(action);
+			}
+		},
+	},
 };
 </script>

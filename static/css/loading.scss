@@ -11,35 +11,6 @@
 		}
 	}
 
-	@keyframes loading-dash {
-		0% {
-			stroke-dasharray: 1, 200;
-			stroke-dashoffset: 0;
-		}
-		50% {
-			stroke-dasharray: 90, 150;
-			stroke-dashoffset: -40;
-		}
-		100% {
-			stroke-dasharray: 90, 150;
-			stroke-dashoffset: -120;
-		}
-	}
-
-	&__svg {
-		animation: loading-rotate 2s linear infinite;
-		transform-origin: center center;
-
-		circle {
-			display: inline-block;
-			animation: loading-dash 1.5s ease-in-out infinite;
-			stroke: currentColor;
-			stroke-linecap: round;
-			-webkit-backface-visibility: hidden;
-			-webkit-transform-style: preserve-3d;
-		}
-	}
-
 	&__mp,
 	&__app {
 		height: 100%;

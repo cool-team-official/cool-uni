@@ -9,7 +9,7 @@
 			:background-color="backgroundColor"
 			:block-size="blockSize"
 			:show-value="showValue"
-            :disabled='disabled'
+			:disabled="disabled"
 			@change="onChange"
 			@changing="onChanging"
 		></slider>
@@ -21,39 +21,39 @@ export default {
 	props: {
 		value: Number,
 		disabled: {
-            type: Boolean,
-            default: false
-        },
+			type: Boolean,
+			default: false,
+		},
 		min: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		max: {
 			type: Number,
-			default: 100
+			default: 100,
 		},
 		step: {
 			type: Number,
-			default: 1
+			default: 1,
 		},
 		activeColor: String,
 		backgroundColor: {
 			type: String,
-			default: '#e9e9e9'
+			default: "#e9e9e9",
 		},
 		blockSize: {
 			type: Number,
-			default: 20
+			default: 20,
 		},
 		showValue: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
 
 	data() {
 		return {
-			value2: 0
+			value2: 0,
 		};
 	},
 
@@ -62,20 +62,20 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
 		onChange(e) {
-			this.$emit('input', e.detail.value);
-			this.$emit('change', e);
+			this.$emit("input", e.detail.value);
+			this.$emit("change", e);
 		},
 
 		onChanging(e) {
-			this.$emit('input', e.detail.value);
-			this.$emit('changing', e);
-		}
-	}
+			this.$emit("input", e.detail.value);
+			this.$emit("changing", e);
+		},
+	},
 };
 </script>

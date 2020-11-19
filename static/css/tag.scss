@@ -1,7 +1,7 @@
 @mixin color($color) {
 	background-color: $color;
 
-	&.cl-tag--plain {
+	&.is-plain {
 		color: $color;
 		border-collapse: $color;
 		background-color: #fff;
@@ -17,6 +17,10 @@
 	color: #fff;
 	display: inline-block;
 
+	.cl-tag__close {
+		margin-left: 10rpx;
+	}
+
 	&--small {
 		height: 56rpx;
 		line-height: 56rpx;
@@ -28,11 +32,11 @@
 		font-size: 24rpx;
 	}
 
-	&--round {
+	&.is-round {
 		border-radius: 48rpx;
 	}
 
-	&--plain {
+	&.is-plain {
 		border-width: 1rpx;
 		border-style: solid;
 	}
@@ -55,10 +59,6 @@
 
 	&--info {
 		@include color($color-info);
-	}
-
-	.cl-tag__close {
-		margin-left: 10rpx;
 	}
 }
 

@@ -5,7 +5,7 @@
 			size="auto"
 			:visible.sync="visible"
 			:with-header="false"
-			:wrapper-closable="wrapperClosable"
+			:close-on-click-modal="closeOnClickModal"
 		>
 			<button
 				class="cl-action-sheet__item"
@@ -13,12 +13,12 @@
 				:key="index"
 				:class="[
 					{
-						'is-disabled': item.disabled
-					}
+						'is-disabled': item.disabled,
+					},
 				]"
 				:style="{
 					color: item.color,
-					fontSize: item.size
+					fontSize: item.size,
 				}"
 				:open-type="item.openType"
 				@getphonenumber="onEvent(item, 'getphonenumber')"
@@ -48,24 +48,24 @@ export default {
 		return {
 			visible: false,
 			list: [],
-			wrapperClosable: true,
+			closeOnClickModal: true,
 			callback: null,
 			beforeClose: null,
 			showCancel: true,
-			cancelText: null
+			cancelText: null,
 		};
 	},
 
 	methods: {
 		open({
 			list = [],
-			wrapperClosable = true,
+			closeOnClickModal = true,
 			callback,
 			beforeClose,
-			cancelText = '取消',
-			showCancel = true
+			cancelText = "取消",
+			showCancel = true,
 		}) {
-			this.wrapperClosable = wrapperClosable;
+			this.closeOnClickModal = closeOnClickModal;
 			this.list = list;
 			this.callback = callback;
 			this.beforeClose = beforeClose;
@@ -109,7 +109,7 @@ export default {
 			if (item[name]) {
 				item[name]();
 			}
-		}
-	}
+		},
+	},
 };
 </script>

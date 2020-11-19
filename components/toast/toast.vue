@@ -1,38 +1,44 @@
 <template>
 	<view class="cl-toast__wrap">
-		<view
-			class="cl-toast"
-			v-for="(item, index) in list"
-			:key="index"
-			:class="[
-				`cl-toast--${item.type}`,
-				`is-${item.position}`,
-				{
-					'is-show': item.visible,
-					'is-icon': item.icon
-				}
-			]"
-		>
-			<view class="cl-toast__icon" v-if="item.icon">
-				<cl-icon :name="`cl-icon-toast-${item.icon}`"></cl-icon>
-			</view>
+		<template v-for="(item, index) in list">
+			<view
+				class="cl-toast"
+				v-if="!item.closed"
+				:key="item.id"
+				:class="[
+					`cl-toast--${item.type}`,
+					`is-${item.position}`,
+					{
+						'is-show': item.visible,
+						'is-icon': item.icon,
+					},
+				]"
+			>
+				<view class="cl-toast__icon" v-if="item.icon">
+					<cl-icon :name="`cl-icon-toast-${item.icon}`"></cl-icon>
+				</view>
 
-			<slot>
-				<text class="cl-toast__content">{{ item.message }}</text>
-			</slot>
-		</view>
+				<slot>
+					<text class="cl-toast__content">{{ item.message }}</text>
+				</slot>
+			</view>
+		</template>
 	</view>
 </template>
 
 <script>
-import { isObject, isString, isFunction } from '../../utils';
+import { isObject, isString, isFunction } from "../../utils";
 
 let id = 0;
 
 export default {
+	props: {
+		single: Boolean,
+	},
+
 	data() {
 		return {
-			list: []
+			list: [],
 		};
 	},
 
@@ -42,13 +48,14 @@ export default {
 				id: id++,
 				visible: false,
 				closed: false,
-				icon: '',
-				message: '',
+				icon: "",
+				message: "",
 				duration: 2000,
-				type: 'default',
-				position: 'bottom',
+				type: "default",
+				position: "bottom",
+				timer: null,
 				onClose: null,
-				iconSize: 22
+				iconSize: 22,
 			};
 
 			if (isObject(d)) {
@@ -57,7 +64,11 @@ export default {
 				options.message = d;
 			}
 
-			this.list.push(options);
+			if (this.single) {
+				this.list = [options];
+			} else {
+				this.list.push(options);
+			}
 
 			setTimeout(() => {
 				this.create(options);
@@ -65,12 +76,17 @@ export default {
 		},
 
 		close(item) {
+			clearTimeout(item.timer);
+
 			item.visible = false;
-			item.closed = true;
 
 			if (isFunction(item.onClose)) {
 				item.onClose(this);
 			}
+
+			setTimeout(() => {
+				item.closed = true;
+			}, 300);
 		},
 
 		create(item) {
@@ -78,11 +94,12 @@ export default {
 
 			if (duration > 0) {
 				item.visible = true;
-				setTimeout(() => {
+
+				item.timer = setTimeout(() => {
 					this.close(item);
 				}, duration);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

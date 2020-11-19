@@ -9,7 +9,7 @@
 		<view
 			class="cl-list-item__swiper"
 			:style="{
-				transform: translateX
+				transform: translateX,
 			}"
 		>
 			<view class="cl-list-item__container">
@@ -28,7 +28,6 @@
 				</view>
 			</view>
 
-			<!-- 后菜单 -->
 			<template v-if="swipe != 'none'">
 				<view :class="[`cl-list-item__menu-${swipe}`]">
 					<slot name="menu"></slot>
@@ -51,20 +50,20 @@ export default {
 		disabled: Boolean,
 		border: {
 			type: Boolean,
-			default: null
+			default: null,
 		},
 		type: String,
 		justify: {
 			type: String,
-			default: "end"
+			default: "end",
 		},
 		swipe: {
 			type: String,
 			default: "none",
-			validator: val => {
+			validator: (val) => {
 				return ["none", "left", "right"].indexOf(val) !== -1;
-			}
-		}
+			},
+		},
 	},
 
 	data() {
@@ -74,12 +73,12 @@ export default {
 				end: 0,
 				x: 0,
 				direction: "left",
-				lock: true
+				lock: true,
 			},
 
 			menu: {
-				width: 0
-			}
+				width: 0,
+			},
 		};
 	},
 
@@ -118,13 +117,13 @@ export default {
 
 		parent() {
 			return getParent.call(this, "ClList", ["disabled", "justify", "border"]) || {};
-		}
+		},
 	},
 
 	watch: {
 		swipe() {
 			this.setMenu();
-		}
+		},
 	},
 
 	mounted() {
@@ -181,7 +180,7 @@ export default {
 
 				query
 					.select(`.cl-list-item__menu-${this.swipe}`)
-					.boundingClientRect(data => {
+					.boundingClientRect((data) => {
 						if (data) {
 							this.menu.width = data.width;
 						}
@@ -200,7 +199,7 @@ export default {
 					callback();
 				}, 300);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

@@ -6,11 +6,12 @@
 				:key="index"
 				:size="size"
 				:shape="shape"
+				:mode="mode"
 				:src="item"
 			></cl-avatar>
 		</template>
 
-		<cl-avatar :size="size" :shape="shape" src="" v-if="overLen > 0">
+		<cl-avatar :size="size" :shape="shape" src="" v-if="overLen > 0 && showMore">
 			<view class="cl-avatar-group__more"> {{ overLen }} </view>
 		</cl-avatar>
 	</view>
@@ -22,21 +23,29 @@ export default {
 		urls: Array,
 		size: {
 			type: Number,
-			default: 80
+			default: 80,
 		},
 		max: {
 			type: Number,
-			default: 5
+			default: 5,
 		},
 		shape: {
 			type: String,
-			default: 'circle'
-		}
+			default: "circle",
+		},
+		showMore: {
+			type: Boolean,
+			default: true,
+		},
+		mode: {
+			type: String,
+			default: "scaleToFill",
+		},
 	},
 	computed: {
 		overLen() {
 			return this.urls.length - this.max;
-		}
-	}
+		},
+	},
 };
 </script>

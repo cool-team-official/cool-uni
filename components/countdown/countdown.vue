@@ -1,18 +1,18 @@
 <template>
-	<div class="cl-countdown">
+	<view class="cl-countdown">
 		<template v-for="(item, index) in list">
-			<div class="cl-countdown-item" :key="index" v-if="item.visible">
-				<span class="cl-countdown__number" :style="{ fontSize: fontSize + 'rpx' }">{{
-					item.value
-				}}</span>
-				<span class="cl-countdown__splitor">{{ item.splitor }}</span>
-			</div>
+			<view class="cl-countdown-item" :key="index" :style="[customStyle]" v-if="item.visible">
+				<text class="cl-countdown__number" :style="[numberStyle]">{{ item.value }}</text>
+				<text class="cl-countdown__splitor" :style="[splitorStyle]">{{
+					item.splitor
+				}}</text>
+			</view>
 		</template>
 
-		<div class="cl-countdown-item" v-if="isMillisecond">
-			<span class="cl-countdown__number">{{ millisecond }}</span>
-		</div>
-	</div>
+		<view class="cl-countdown-item" v-if="isMillisecond">
+			<text class="cl-countdown__number">{{ millisecond }}</text>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -54,10 +54,9 @@ export default {
 		},
 		datetime: [Date, String],
 		isMillisecond: Boolean,
-		fontSize: {
-			type: Number,
-			default: 30,
-		},
+		customStyle: Object,
+		numberStyle: Object,
+		splitorStyle: Object,
 	},
 
 	data() {
@@ -68,6 +67,7 @@ export default {
 			seconds: 0,
 			list: [],
 			millisecond: 9,
+			status: false,
 		};
 	},
 
@@ -139,13 +139,21 @@ export default {
 				datetime,
 			});
 
+			this.next();
+		},
+
+		next() {
 			if (this.seconds <= 0) {
 				return;
 			}
 
-			// Start coundown
-			this.countDown();
+			if (this.status) {
+				return;
+			}
 
+			this.status = true;
+
+			// Start coundown
 			const next = () => {
 				this.countDown();
 
@@ -184,7 +192,6 @@ export default {
 		},
 
 		done() {
-			console.log("done");
 			this.clear();
 			this.$emit("done");
 		},
@@ -195,6 +202,7 @@ export default {
 
 			this.timer = null;
 			this.millisecondTimer = null;
+			this.status = false;
 		},
 
 		countDown() {

@@ -10,8 +10,8 @@ export default {
 	props: {
 		timestampWidth: {
 			type: Number,
-			default: 140
-		}
-	}
+			default: 140,
+		},
+	},
 };
 </script>

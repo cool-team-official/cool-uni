@@ -6,7 +6,8 @@
 			:before-close="beforeClose"
 			:close-on-click-modal="closeOnClickModal"
 			:size="width"
-			@close="close"
+			:border-radius="16"
+			:padding="0"
 		>
 			<view class="cl-dialog">
 				<view class="cl-dialog__header" v-if="title">
@@ -21,6 +22,10 @@
 
 				<view class="cl-dialog__footer" v-if="$slots.footer">
 					<slot name="footer"> </slot>
+				</view>
+
+				<view class="cl-dialog__close" v-if="showCloseBtn" @tap="close">
+					<text class="cl-icon-close"></text>
 				</view>
 			</view>
 		</cl-popup>
@@ -37,40 +42,47 @@ export default {
 		// 宽度
 		width: {
 			type: String,
-			default: "80%"
+			default: "80%",
 		},
 		// 点击遮罩层是否关闭
 		closeOnClickModal: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 关闭回调
-		beforeClose: Function
+		beforeClose: Function,
+		// 显示关闭按钮
+		showCloseBtn: Boolean,
 	},
 
 	data() {
 		return {
-			visible2: false
+			visible2: this.visible,
 		};
 	},
 
 	watch: {
 		visible: {
-			immediate: true,
 			handler(val) {
 				this.visible2 = val;
-			}
+
+				if (val) {
+					this.$emit("open");
+				} else {
+					this.$emit("close", "close");
+				}
+			},
 		},
 
 		visible2(val) {
 			this.$emit("update:visible", val);
-		}
+		},
 	},
 
 	methods: {
 		close() {
-			this.$emit("close");
-		}
-	}
+			this.visible2 = false;
+		},
+	},
 };
 </script>
