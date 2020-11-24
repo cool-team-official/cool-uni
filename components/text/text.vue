@@ -34,8 +34,7 @@
 </template>
 
 <script>
-import { isNumber, isArray } from "../../utils";
-import { parseRpx } from "../../utils/style";
+import { parseRpx } from "../../utils";
 
 export default {
 	props: {
@@ -79,6 +78,8 @@ export default {
 			type: [String, Number],
 			default: 0,
 		},
+		// 外间距
+		margin: [String, Number, Array],
 	},
 
 	computed: {

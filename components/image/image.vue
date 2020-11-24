@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import { isNumber, isArray, isString } from "../../utils";
-import { parseRpx } from "../../utils/style";
+import { isNumber, isArray, isString, parseRpx } from "../../utils";
 
 export default {
 	name: "cl-image",

@@ -44,9 +44,10 @@
 		background-color: #fff;
 		position: absolute;
 		transition: all 0.3s;
+		box-sizing: border-box;
 
 		&__container {
-			box-sizing: border-box;
+			height: 100%;
 		}
 	}
 

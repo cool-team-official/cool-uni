@@ -1,12 +1,12 @@
 @font-face {
 	font-family: "cl-iconfont"; /* project id 1725188 */
-	src: url("https://at.alicdn.com/t/font_1725188_456u05oboeq.eot");
-	src: url("https://at.alicdn.com/t/font_1725188_456u05oboeq.eot?#iefix")
+	src: url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.eot");
+	src: url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.eot?#iefix")
 			format("embedded-opentype"),
-		url("https://at.alicdn.com/t/font_1725188_456u05oboeq.woff2") format("woff2"),
-		url("https://at.alicdn.com/t/font_1725188_456u05oboeq.woff") format("woff"),
-		url("https://at.alicdn.com/t/font_1725188_456u05oboeq.ttf") format("truetype"),
-		url("https://at.alicdn.com/t/font_1725188_456u05oboeq.svg#iconfont") format("svg");
+		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.woff2") format("woff2"),
+		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.woff") format("woff"),
+		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.ttf") format("truetype"),
+		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.svg#iconfont") format("svg");
 }
 
 [class*="cl-icon-"] {
@@ -129,4 +129,8 @@
 
 .cl-icon-search:before {
 	content: "\e65c";
+}
+
+.cl-icon-rotate:before {
+	content: "\e7dd";
 }

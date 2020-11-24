@@ -12,7 +12,15 @@
 		/>
 
 		<view class="cl-captcha__code">
-			<view class="cl-captcha__item" v-for="(item, index) in length" :key="index">
+			<view
+				class="cl-captcha__item"
+				:style="{
+					height: parseRpx(height),
+					margin: `0 ${gutter}rpx`,
+				}"
+				v-for="(item, index) in length"
+				:key="index"
+			>
 				<text class="cl-captcha__value">{{ value2[index] }}</text>
 				<view class="cl-captcha__cursor" v-if="value2.length == index && focus2"></view>
 			</view>
@@ -21,13 +29,23 @@
 </template>
 
 <script>
+import { parseRpx } from "../../utils";
+
 export default {
 	props: {
 		value: String,
 		focus: Boolean,
+		height: {
+			type: [String, Number],
+			default: "120rpx",
+		},
 		length: {
 			type: Number,
 			default: 4,
+		},
+		gutter: {
+			type: Number,
+			default: 20,
 		},
 	},
 
@@ -48,6 +66,8 @@ export default {
 	},
 
 	methods: {
+		parseRpx,
+
 		onFocus() {
 			this.focus2 = true;
 		},

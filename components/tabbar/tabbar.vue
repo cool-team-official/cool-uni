@@ -1,26 +1,27 @@
 <template>
-	<view class="cl-tabbar">
-		<view class="cl-tabbar__container">
-			<slot name="container"></slot>
-		</view>
-
-		<view
-			class="cl-tabbar__footer"
-			:style="{
-				backgroundColor,
-				borderTopColor: borderStyle,
-			}"
-		>
-			<slot name="footer"></slot>
-		</view>
+	<view
+		class="cl-tabbar"
+		:style="{
+			height,
+			backgroundColor,
+			borderTopColor: borderStyle,
+		}"
+	>
+		<slot></slot>
 	</view>
 </template>
 
 <script>
+import { parseRpx } from "../../utils";
+
 export default {
 	componentName: "ClTabbar",
 	props: {
 		value: [String, Number],
+		height: {
+			type: String,
+			default: "100rpx",
+		},
 		color: {
 			type: String,
 			default: "#7A7E83",
@@ -37,12 +38,13 @@ export default {
 			type: String,
 			default: "#ffffff",
 		},
+		beforeSwitch: Function,
 	},
 
 	data() {
 		return {
 			name: null,
-			tabs: [],
+			lock: false,
 		};
 	},
 
@@ -60,14 +62,20 @@ export default {
 	},
 
 	created() {
-		this.tabs = [];
-
 		this.$on("change", (name) => {
-			this.name = name;
-		});
+			if (!this.lock) {
+				let next = (n2) => {
+					this.name = n2 || name;
+					this.lock = false;
+				};
 
-		this.$on("insert", (name) => {
-			this.tabs.push(name);
+				if (this.beforeSwitch) {
+					this.lock = true;
+					this.beforeSwitch(name, next);
+				} else {
+					next(name);
+				}
+			}
 		});
 	},
 };

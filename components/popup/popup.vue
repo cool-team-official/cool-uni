@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { parseRpx } from "../../utils/style";
+import { parseRpx } from "../../utils";
 
 export default {
 	props: {

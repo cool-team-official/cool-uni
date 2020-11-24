@@ -24,8 +24,7 @@
 </template>
 
 <script>
-import { parseRpx } from "../../utils/style";
-import { isArray, isNumber } from "../../utils";
+import { isArray, isNumber, parseRpx } from "../../utils";
 
 export default {
 	name: "cl-row",

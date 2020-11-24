@@ -1,14 +1,15 @@
 <template>
 	<view class="cl-li">
 		<!-- 搜索栏 -->
-		<view class="cl-li__search">
+		<view class="cl-li__search" v-if="filterable">
 			<cl-input
-				v-model="LI.keyWord"
+				v-model="keyWord"
 				:border="false"
 				prefix-icon="cl-icon-search"
 				round
 				placeholder="搜索关键字"
 				clearable
+				@search="onSearch"
 			></cl-input>
 		</view>
 
@@ -18,7 +19,7 @@
 			scroll-y
 			enable-back-to-top
 			scroll-with-animation
-			:scroll-into-view="`index-${LI.label}`"
+			:scroll-into-view="`index-${label}`"
 			@scroll="onScroll"
 		>
 			<template v-for="(item, index) in flist">
@@ -27,20 +28,25 @@
 					<view
 						:class="[
 							'cl-li__header',
-							'cl-sticky',
 							{
-								'is-active': LI.curr.label == item.label,
+								'is-active': curr.label == item.label,
 							},
 						]"
 					>
-						<text>{{ item.label }}</text>
+						<!-- 头部插槽 -->
+						<slot name="header" :item="item" :isActive="curr.label == item.label">
+							<text>{{ item.label }}</text>
+						</slot>
 					</view>
 					<!-- 数据列表 -->
 					<view class="cl-li__container">
 						<template v-for="(item2, index2) in item.children">
 							<view class="cl-li__item" :key="index2" @tap="selectRow(item2)">
-								<cl-avatar :src="item2.avatarUrl"></cl-avatar>
-								<cl-text :margin="[0, 0, 0, 20]" :value="item2.name"></cl-text>
+								<!-- 内容插槽 -->
+								<slot :item="item2" :parent="item">
+									<cl-avatar :src="item2.avatarUrl"></cl-avatar>
+									<cl-text :margin="[0, 0, 0, 20]" :value="item2.name"></cl-text>
+								</slot>
 							</view>
 						</template>
 					</view>
@@ -56,7 +62,7 @@
 						:class="[
 							'cl-li__bar-block',
 							{
-								'is-active': LI.curr.label == item.label,
+								'is-active': curr.label == item.label,
 							},
 						]"
 						:key="index"
@@ -70,33 +76,58 @@
 		</view>
 
 		<!-- 索引关键字 -->
-		<view class="cl-li__alert" v-show="LI.alert">{{ LI.curr.label }}</view>
+		<view class="cl-li__alert" v-show="alert">{{ curr.label }}</view>
 	</view>
 </template>
 
 <script>
+import { last } from "../../utils";
+
 export default {
+	props: {
+		index: {
+			type: Number,
+			default: 0,
+		},
+		list: Array,
+		filterable: {
+			type: Boolean,
+			default: true,
+		},
+	},
+
 	data() {
 		return {
-			LI: {
-				keyWord: "",
-				label: "",
-				alert: false,
-				data: [],
-				curr: {},
-				bar: {
-					top: 0,
-					itemH: 0,
-				},
+			keyWord: "",
+			label: "",
+			alert: false,
+			curr: {},
+			bar: {
+				top: 0,
+				itemH: 0,
 			},
+			tops: [],
 		};
+	},
+
+	watch: {
+		index: {
+			immediate: true,
+			handler: "setData",
+		},
+
+		curr: {
+			handler(val) {
+				this.$emit("change", val);
+			},
+		},
 	},
 
 	computed: {
 		flist() {
-			const match = (d) => d.name.includes(this.LI.keyWord);
+			const match = (d) => (d ? d.name.includes(this.keyWord) : false);
 
-			return this.LI.data
+			return this.list
 				.filter((e) => e.children && e.children.find(match))
 				.map((e) => {
 					e.children = e.children.filter(match);
@@ -105,164 +136,43 @@ export default {
 		},
 	},
 
-	created() {
-		this.LI.data = [
-			{
-				label: "A",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/1.jpg",
-						name: "阿雪",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/3.jpg",
-						name: "阿良",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/2.jpg",
-						name: "阿绵",
-					},
-				],
-			},
-
-			{
-				label: "C",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/5.jpg",
-						name: "陈杨",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/6.jpg",
-						name: "陈飞",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/7.jpg",
-						name: "陈品如",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/4.jpg",
-						name: "陈逸",
-					},
-				],
-			},
-			{
-				label: "D",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/10.jpg",
-						name: "道天",
-					},
-				],
-			},
-			{
-				label: "H",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/9.jpg",
-						name: "韩琦",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/10.jpg",
-						name: "韩重",
-					},
-				],
-			},
-			{
-				label: "J",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/3.jpg",
-						name: "江澄",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/7.jpg",
-						name: "江厌离",
-					},
-				],
-			},
-			{
-				label: "S",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/2.jpg",
-						name: "苏三",
-					},
-					,
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/4.jpg",
-						name: "沈道",
-					},
-				],
-			},
-			{
-				label: "Z",
-				children: [
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/4.jpg",
-						name: "周蓓蓓",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/2.jpg",
-						name: "朱勇",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/3.jpg",
-						name: "朱鸣",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/1.jpg",
-						name: "张伟",
-					},
-					{
-						avatarUrl:
-							"https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/chat/avatar/9.jpg",
-						name: "郑金榜",
-					},
-				],
-			},
-		];
-	},
-
 	mounted() {
-		const query = uni.createSelectorQuery().in(this);
-
-		query
-			.select(`.cl-li__bar-list`)
-			.boundingClientRect((res) => {
-				this.LI.bar.top = res.top;
-				this.LI.bar.itemH = parseInt(res.height / this.LI.data.length);
-			})
-			.exec();
+		this.doLayout();
 	},
 
 	methods: {
+		onSearch(val) {
+			this.$emit("search", val);
+		},
+
+		onScroll(e) {
+			let top = e.detail.scrollTop;
+			let num = this.tops.filter((e) => top >= e - 60).length;
+
+			if (num < 0) {
+				num = 0;
+			}
+
+			this.curr = this.list[num - 1];
+		},
+
+		selectRow(item) {
+			this.$emit("select", item);
+		},
+
+		setData(index) {
+			this.curr = this.list[index] || {};
+			this.label = this.curr.label;
+		},
+
 		toRow(e) {
-			this.LI.alert = true;
-			this.LI.curr = e;
+			this.alert = true;
+			this.curr = e;
 		},
 
 		barMove(e) {
-			const max = this.LI.data.length;
-			let index = parseInt((e.touches[0].clientY - this.LI.bar.top) / this.LI.bar.itemH);
+			const max = this.list.length;
+			let index = parseInt((e.touches[0].clientY - this.bar.top) / this.bar.itemH);
 
 			if (index >= max) {
 				index = max - 1;
@@ -272,30 +182,33 @@ export default {
 				index = 0;
 			}
 
-			this.LI.curr = this.LI.data[index];
+			this.curr = this.list[index];
 		},
 
 		barEnd() {
-			this.LI.label = this.LI.curr.label;
-			this.LI.alert = false;
+			this.label = this.curr.label;
+			this.alert = false;
 		},
 
-		selectRow(item) {
-			console.log(item);
-		},
+		doLayout() {
+			// 获取索引栏大小
+			uni.createSelectorQuery()
+				.in(this)
+				.select(`.cl-li__bar-list`)
+				.boundingClientRect((res) => {
+					this.bar.top = res.top;
+					this.bar.itemH = parseInt(res.height / this.list.length);
+				})
+				.exec();
 
-		onScroll() {
-			this.LI.data.forEach((e) => {
-				uni.createSelectorQuery()
-					.in(this)
-					.select(`#index-${e.label} .cl-li__header`)
-					.boundingClientRect((res) => {
-						if (res.top < 60) {
-							this.LI.curr = e;
-						}
-					})
-					.exec();
-			});
+			// 获取距离顶部的高度
+			uni.createSelectorQuery()
+				.in(this)
+				.selectAll(".cl-li__header")
+				.fields({ rect: true })
+				.exec((d) => {
+					this.tops = d[0].map((e) => e.top);
+				});
 		},
 	},
 };

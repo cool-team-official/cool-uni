@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import { isNumber } from "../../utils";
-import { parseRpx } from "../../utils/style";
+import { isNumber, parseRpx } from "../../utils";
 
 export default {
 	props: {

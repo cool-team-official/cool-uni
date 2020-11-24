@@ -1,7 +1,7 @@
 .cl-topbar {
 	display: flex;
 	align-items: center;
-	height: 88rpx;
+	height: 44px;
 	width: 100%;
 	position: relative;
 	padding-top: env(safe-area-inset-top);
@@ -30,7 +30,7 @@
 	&__append {
 		display: flex;
 		align-items: center;
-		height: 88rpx;
+		height: 44px;
 		position: absolute;
 
 		// # ifdef MP
@@ -54,13 +54,14 @@
 		justify-content: center;
 		height: 100%;
 		width: 80rpx;
+		font-size: 40rpx;
 
 		&:active {
 			background-color: #f7f7f7;
 		}
 
 		.cl-icon-arrow-left {
-			font-size: 46rpx;
+			font-size: 44rpx;
 		}
 	}
 

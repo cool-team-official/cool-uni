@@ -116,6 +116,10 @@
 				}
 			}
 
+			&.is-disabled {
+				background-color: $color;
+			}
+
 			&.button-hover {
 				background-color: rgba($color, 0.8);
 

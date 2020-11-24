@@ -28,7 +28,7 @@
 
 			&.is-active {
 				.cl-filter-bar-sort__label {
-					color: $uni-color-primary;
+					color: $color-primary;
 				}
 			}
 		}
@@ -43,13 +43,13 @@
 
 			&.is-asc {
 				.cl-filter-bar-sort__asc {
-					border-bottom-color: $uni-color-primary;
+					border-bottom-color: $color-primary;
 				}
 			}
 
 			&.is-desc {
 				.cl-filter-bar-sort__desc {
-					border-top-color: $uni-color-primary;
+					border-top-color: $color-primary;
 				}
 			}
 		}

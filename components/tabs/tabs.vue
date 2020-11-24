@@ -22,7 +22,12 @@
 				scroll-x
 				:scroll-left="scrollLeft"
 			>
-				<view class="cl-tabs__bar-box">
+				<view
+					class="cl-tabs__bar-box"
+					:style="{
+						'justify-content': justify,
+					}"
+				>
 					<view
 						class="cl-tabs__bar-item"
 						v-for="(item, index) in tabs"
@@ -37,12 +42,17 @@
 						}"
 						@tap="change(index)"
 					>
+						<!-- 前缀图标 -->
 						<text
 							v-if="item.prefixIcon"
 							class="cl-tabs__icon cl-tabs__icon--prefix"
 							:class="[item.prefixIcon]"
 						></text>
+
+						<!-- 文本内容 -->
 						<text class="cl-tabs__label">{{ item.label }}</text>
+
+						<!-- 后缀图标 -->
 						<text
 							v-if="item.suffixIcon"
 							class="cl-tabs__icon cl-tabs__icon--suffix"
@@ -50,6 +60,7 @@
 						></text>
 					</view>
 
+					<!-- 活动线条 -->
 					<view
 						class="cl-tabs__line"
 						v-if="lineLeft > 0"
@@ -108,6 +119,8 @@ export default {
 		},
 		// 是否填充
 		fill: Boolean,
+		// 水平布局
+		justify: String,
 		// 是否带有边框
 		border: {
 			type: Boolean,
@@ -147,7 +160,10 @@ export default {
 
 	computed: {
 		tabs() {
-			return this.labels || this.list;
+			return (this.labels || this.list).map((e, i) => {
+				e.name = e.name || i;
+				return e;
+			});
 		},
 
 		isSticky() {
@@ -166,7 +182,6 @@ export default {
 
 		this.list = children.map((e, i) => {
 			return {
-				name: e.name || i,
 				label: e.label,
 				prefixIcon: e.prefixIcon,
 				suffixIcon: e.suffixIcon,

@@ -1,4 +1,7 @@
 .cl-confirm {
+	position: relative;
+	z-index: 310;
+
 	.cl-dialog {
 		&__footer {
 			padding: 0 !important;

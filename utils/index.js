@@ -79,6 +79,14 @@ export function cloneDeep(v) {
 }
 
 /**
+ * 解析rpx
+ * @param {*} val 
+ */
+export function parseRpx(val) {
+	return isArray(val) ? val.map(parseRpx).join(" ") : (isNumber(val) ? val + "rpx" : val);
+}
+
+/**
  * 获取父级节点
  * @param {*} name componentName
  * @param {*} keys 保留的参数，避免 computed 非 H5 解析失败

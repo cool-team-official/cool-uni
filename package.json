@@ -1,6 +1,6 @@
 {
 	"name": "cl-uni",
-	"version": "0.5.5",
+	"version": "1.0.8",
 	"description": "cool-uni: button、form ...",
 	"main": "index.js",
 	"scripts": {},
@@ -12,6 +12,6 @@
 		"vue",
 		"ui"
 	],
-	"homepage": "https://github.com/icssoa/cl-uni",
+	"homepage": "https://github.com/cool-team-official/cool-uni",
 	"sideEffects": false
 }

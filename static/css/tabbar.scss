@@ -1,57 +1,54 @@
 .cl-tabbar {
-	height: 100%;
 	width: 100%;
+	z-index: 100;
+	display: flex;
+	position: relative;
+	border-top-width: 1rpx;
+	border-top-style: solid;
+	padding-bottom: env(safe-area-inset-bottom);
+
+	cl-tabbar-item {
+		flex: 1;
+	}
 
 	&-item {
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		height: 100rpx;
-		float: left;
+		width: 100%;
 		box-sizing: border-box;
 		position: relative;
 
 		&__block {
 			display: flex;
 			flex-direction: column;
+			align-items: center;
 		}
 
 		&__label {
 			font-size: 24rpx;
 		}
 
+		&__image {
+			&.selected-icon-path {
+				display: none;
+			}
+		}
+
 		.cl-badge {
 			padding: 3rpx 10rpx;
 		}
-	}
 
-	&__container {
-		height: calc(100% - 102rpx - env(safe-area-inset-bottom));
-		width: 100%;
+		&.is-active {
+			.cl-tabbar-item__image {
+				&.selected-icon-path {
+					display: block;
+				}
 
-		& > view {
-			height: 100%;
-			width: 100%;
+				&.icon-path {
+					display: none;
+				}
+			}
 		}
-	}
-
-	&__footer {
-		height: 100rpx;
-		width: 100%;
-		z-index: 100;
-		position: relative;
-		border-top-width: 1rpx;
-		border-top-style: solid;
-		padding-bottom: env(safe-area-inset-bottom);
-	}
-}
-
-.cl-tab-page {
-	display: none;
-	height: 100%;
-	width: 100%;
-
-	&.is-show {
-		display: block;
 	}
 }

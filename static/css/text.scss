@@ -3,7 +3,6 @@
 	white-space: normal;
 	word-break: break-all;
 	word-wrap: break-word;
-	line-height: 1;
 
 	&.is-bold {
 		font-weight: 500;
@@ -33,23 +32,23 @@
 	}
 
 	&.is-color-primary {
-		color: $uni-color-primary;
+		color: $color-primary;
 	}
 
 	&.is-color-success {
-		color: $uni-color-success;
+		color: $color-success;
 	}
 
 	&.is-color-error {
-		color: $uni-color-error;
+		color: $color-error;
 	}
 
 	&.is-color-warning {
-		color: $uni-color-warning;
+		color: $color-warning;
 	}
 
 	&.is-color-info {
-		color: $uni-color-info;
+		color: $color-info;
 	}
 
 	&__symbol--price {

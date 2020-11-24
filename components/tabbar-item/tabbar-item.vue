@@ -1,19 +1,35 @@
 <template>
 	<view
 		class="cl-tabbar-item"
+		:class="[
+			{
+				'is-active': isActive,
+			},
+		]"
 		:style="[
 			{
-				width,
+				height: parent.height,
 			},
 		]"
 		@tap="tapItem"
 	>
-		<cl-badge :value="badge">
+		<!-- 处理小程序slot异常 -->
+		<slot v-if="$slots.$default || $slots.default"></slot>
+		<!-- 默认内容 -->
+		<cl-badge :value="badge" v-else>
 			<view class="cl-tabbar-item__block">
 				<image
-					v-if="src"
-					class="cl-tabbar-item__image"
-					:src="src"
+					class="cl-tabbar-item__image icon-path"
+					:src="iconPath"
+					:style="{
+						height: size,
+						width: size,
+					}"
+				/>
+
+				<image
+					class="cl-tabbar-item__image selected-icon-path"
+					:src="selectedIconPath"
 					:style="{
 						height: size,
 						width: size,
@@ -21,7 +37,7 @@
 				/>
 
 				<text
-					v-if="text"
+					v-show="text"
 					class="cl-tabbar-item__label"
 					:style="{
 						color,
@@ -35,14 +51,17 @@
 
 <script>
 import Emitter from "../../mixins/emitter";
-import { getParent } from "../../utils";
+import { getParent, parseRpx } from "../../utils";
 
 export default {
 	componentName: "ClTabbarItem",
 
 	props: {
 		text: String,
-		name: [String, Number],
+		name: {
+			type: [String, Number],
+			required: true,
+		},
 		iconPath: String,
 		selectedIconPath: String,
 		iconSize: {
@@ -50,7 +69,7 @@ export default {
 			default: 50,
 		},
 		badge: {
-			type: Number,
+			type: [Number, String],
 			default: 0,
 		},
 	},
@@ -59,11 +78,7 @@ export default {
 
 	computed: {
 		size() {
-			return this.iconSize + "rpx";
-		},
-
-		width() {
-			return parseFloat(100 / this.parent.tabs.length).toFixed(2) + "%";
+			return parseRpx(this.iconSize);
 		},
 
 		color() {
@@ -79,12 +94,8 @@ export default {
 		},
 
 		parent() {
-			return getParent.call(this, "ClTabbar", ["name", "color", "selectedColor", "tabs"]);
+			return getParent.call(this, "ClTabbar", ["name", "color", "selectedColor", "height"]);
 		},
-	},
-
-	created() {
-		this.dispatch("ClTabbar", "insert", this.name);
 	},
 
 	methods: {
