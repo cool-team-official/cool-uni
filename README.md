@@ -1,8 +1,8 @@
 ## 文档地址
 
-[https://docs-uni.cool-js.com](https://docs-uni.cool-js.com)
+[https://docs.cool-js.com](https://docs.cool-js.com)
 
-[http://uni.cool-admin.com](http://uni.cool-admin.com)
+[http://uni.cool-js.com](http://uni.cool-js.com)
 
 ## 官网
 
