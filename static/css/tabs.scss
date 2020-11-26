@@ -26,7 +26,7 @@
 			box-sizing: border-box;
 
 			&.is-active {
-				color: $color-primary;
+				color: $cl-color-primary;
 			}
 
 			.cl-tabs__icon {
@@ -51,7 +51,7 @@
 	&__line {
 		height: 4rpx;
 		width: 16px;
-		background-color: $color-primary;
+		background-color: $cl-color-primary;
 		position: absolute;
 		bottom: 2rpx;
 		border-radius: 20rpx;

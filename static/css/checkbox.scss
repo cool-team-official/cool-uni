@@ -28,8 +28,8 @@
 
 	&.is-checked {
 		.cl-checkbox__input {
-			background-color: $color-primary;
-			border-color: $color-primary;
+			background-color: $cl-color-primary;
+			border-color: $cl-color-primary;
 			color: #fff;
 		}
 	}
@@ -61,8 +61,8 @@
 		}
 
 		&.is-checked {
-			border: 1rpx solid $color-primary;
-			background-color: $color-primary;
+			border: 1rpx solid $cl-color-primary;
+			background-color: $cl-color-primary;
 			color: #fff;
 		}
 	}

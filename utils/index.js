@@ -1,3 +1,4 @@
+// 是否Array类型
 export function isArray(value) {
 	if (typeof Array.isArray === "function") {
 		return Array.isArray(value);
@@ -6,36 +7,44 @@ export function isArray(value) {
 	}
 }
 
+// 是否Object类型
 export function isObject(value) {
 	return Object.prototype.toString.call(value) === "[object Object]";
 }
 
+// 是否Function类型
 export function isFunction(value) {
 	return typeof value === "function";
 }
 
+// 是否String类型
 export function isString(value) {
 	return typeof value === "string";
 }
 
+// 是否null类型
 export function isNull(value) {
 	return !value && value !== 0;
 }
 
+// 是否Boolean类型
 export function isBoolean(value) {
 	return typeof value === "boolean";
 }
 
+// 是否数字类型
 export function isNumber(value) {
 	return typeof value === "number" && !isNaN(value);
 }
 
+// 是否Promise类型
 export function isPromise(obj) {
 	obj !== null &&
 		(typeof obj === "object" || typeof obj === "function") &&
 		typeof obj.then === "function";
 }
 
+// 是否为空
 export function isEmpty(value) {
 	if (isArray(value)) {
 		return value.length === 0;
@@ -48,16 +57,19 @@ export function isEmpty(value) {
 	return value === "" || value === undefined || value === null;
 }
 
+// 取最后一个值
 export function last(data) {
 	if (isArray(data) || isString(data)) {
 		return data[data.length - 1];
 	}
 }
 
+// 比较值
 export function compareValue(a, b) {
 	return String(a) === String(b);
 }
 
+// 深拷贝
 export function cloneDeep(v) {
 	let d = v;
 
@@ -76,6 +88,32 @@ export function cloneDeep(v) {
 	}
 
 	return d;
+}
+
+// 深度合并
+export function deepMerge(a, b) {
+	let k;
+	for (k in b) {
+		a[k] =
+			a[k] && a[k].toString() === "[object Object]" ? deepMerge(a[k], b[k]) : (a[k] = b[k]);
+	}
+	return a;
+}
+
+// 获取当前页面信息
+export function getCurrentPage() {
+	const { route, $page, options, $route } = last(getCurrentPages());
+
+	return {
+		path: `/${route}`,
+		fullPath: $page.fullPath,
+		// #ifdef MP
+		query: options,
+		// #endif
+		// #ifdef H5
+		query: $route.params
+		// #endif
+	};
 }
 
 /**

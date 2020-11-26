@@ -18,7 +18,7 @@
 	}
 
 	&--border {
-		border: 1rpx solid $color-default;
+		border: 1rpx solid $cl-color-default;
 		border-bottom: 0;
 		border-right: 0;
 
@@ -28,7 +28,7 @@
 				content: '';
 				position: absolute;
 				display: block;
-				background-color: $color-default;
+				background-color: $cl-color-default;
 			}
 
 			&::before {

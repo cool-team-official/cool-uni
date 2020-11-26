@@ -20,7 +20,7 @@
 			left: 0;
 			top: 0;
 			height: 100%;
-			background-color: $color-primary;
+			background-color: $cl-color-primary;
 			text-align: right;
 			border-radius: 50rpx;
 			line-height: 1;
@@ -45,31 +45,31 @@
 
 	&.is-success {
 		.cl-progress-bar__inner {
-			background-color: $color-success;
+			background-color: $cl-color-success;
 		}
 
 		.cl-progress__text {
-			color: $color-success;
+			color: $cl-color-success;
 		}
 	}
 
 	&.is-warning {
 		.cl-progress-bar__inner {
-			background-color: $color-warning;
+			background-color: $cl-color-warning;
 		}
 
 		.cl-progress__text {
-			color: $color-warning;
+			color: $cl-color-warning;
 		}
 	}
 
 	&.is-error {
 		.cl-progress-bar__inner {
-			background-color: $color-error;
+			background-color: $cl-color-error;
 		}
 
 		.cl-progress__text {
-			color: $color-error;
+			color: $cl-color-error;
 		}
 	}
 }

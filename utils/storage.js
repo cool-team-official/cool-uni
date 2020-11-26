@@ -1,8 +1,12 @@
 const __stoage_timer = {};
 
 export default {
+	// 后缀标识
 	suffix: "_deadtime",
 
+	/**
+	 * 判断是否过期
+	 */
 	isExpired() {
 		const { keys } = uni.getStorageInfoSync();
 		const nowTime = Date.parse(new Date());
@@ -23,6 +27,12 @@ export default {
 		});
 	},
 
+	/**
+	 * 设置缓存
+	 * @param {*} key 关键字
+	 * @param {*} value 值
+	 * @param {*} expires 过期时间
+	 */
 	set(key, value, expires) {
 		uni.setStorageSync(key, value);
 

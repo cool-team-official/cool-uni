@@ -7,7 +7,7 @@
 		&--required {
 			.cl-form-item__label::before {
 				content: "*";
-				color: $color-error;
+				color: $cl-color-error;
 				margin-right: 10rpx;
 			}
 		}
@@ -105,7 +105,7 @@
 
 		&__message {
 			display: block;
-			color: $color-error;
+			color: $cl-color-error;
 			font-size: 24rpx;
 			text-align: right;
 		}

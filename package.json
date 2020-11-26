@@ -1,6 +1,6 @@
 {
 	"name": "cl-uni",
-	"version": "1.0.8",
+	"version": "1.1.0",
 	"description": "cool-uni: button、form ...",
 	"main": "index.js",
 	"scripts": {},
@@ -10,7 +10,13 @@
 		"uni",
 		"cool",
 		"vue",
-		"ui"
+		"ui",
+		"uniapp",
+		"tabbar",
+		"cropper",
+		"timeline",
+		"form",
+		"upload"
 	],
 	"homepage": "https://github.com/cool-team-official/cool-uni",
 	"sideEffects": false

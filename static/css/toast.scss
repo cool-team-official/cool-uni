@@ -39,23 +39,23 @@
 	}
 
 	&--primary {
-		background-color: $color-primary;
+		background-color: $cl-color-primary;
 	}
 
 	&--success {
-		background-color: $color-success;
+		background-color: $cl-color-success;
 	}
 
 	&--error {
-		background-color: $color-error;
+		background-color: $cl-color-error;
 	}
 
 	&--warning {
-		background-color: $color-warning;
+		background-color: $cl-color-warning;
 	}
 
 	&--info {
-		background-color: $color-info;
+		background-color: $cl-color-info;
 	}
 
 	&.is-show {

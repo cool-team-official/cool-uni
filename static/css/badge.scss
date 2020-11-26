@@ -12,7 +12,7 @@
 		position: absolute;
 		top: -8rpx;
 		right: -8rpx;
-		background-color: $color-error;
+		background-color: $cl-color-error;
 		color: #fff;
 		font-size: 24rpx;
 		text-align: center;
@@ -30,19 +30,19 @@
 		}
 
 		&--primary {
-			background-color: $color-primary;
+			background-color: $cl-color-primary;
 		}
 		&--success {
-			background-color: $color-success;
+			background-color: $cl-color-success;
 		}
 		&--warning {
-			background-color: $color-warning;
+			background-color: $cl-color-warning;
 		}
 		&--info {
-			background-color: $color-info;
+			background-color: $cl-color-info;
 		}
 		&--error {
-			background-color: $color-error;
+			background-color: $cl-color-error;
 		}
 	}
 }

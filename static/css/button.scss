@@ -53,7 +53,7 @@
 		background-color: transparent;
 
 		.cl-button__text {
-			color: $color-primary;
+			color: $cl-color-primary;
 		}
 
 		&::after {
@@ -136,11 +136,11 @@
 		}
 	}
 
-	@include color(primary, $color-primary);
-	@include color(success, $color-success);
-	@include color(error, $color-error);
-	@include color(warning, $color-warning);
-	@include color(info, $color-info);
+	@include color(primary, $cl-color-primary);
+	@include color(success, $cl-color-success);
+	@include color(error, $cl-color-error);
+	@include color(warning, $cl-color-warning);
+	@include color(info, $cl-color-info);
 }
 
 .cl-button + .cl-button,

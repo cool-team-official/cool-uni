@@ -1,0 +1,61 @@
+.cl-steps {
+	padding: 20rpx 0;
+	box-sizing: border-box;
+
+	&::after,
+	&::before {
+		content: "";
+		display: table;
+	}
+
+	&::after {
+		clear: both;
+	}
+}
+
+.cl-step {
+	width: 25%;
+	float: left;
+	box-sizing: border-box;
+	position: relative;
+
+	&:not(.is-last)::after {
+		content: "";
+		display: block;
+		height: 6rpx;
+		width: calc(100% - 36rpx);
+		position: absolute;
+		top: calc(50% - 3rpx);
+		left: calc(50% + 18rpx);
+		background-color: #dfdfdf;
+		border-radius: 6rpx;
+	}
+
+	&__title {
+		font-size: 24rpx;
+	}
+
+	&__value {
+		display: inline-block;
+		height: 20rpx;
+		width: 20rpx;
+		border-radius: 50rpx;
+		background-color: #dfdfdf;
+		margin: 20rpx 0;
+		justify-content: space-between;
+	}
+
+	&__description {
+		font-size: 24rpx;
+	}
+
+	&.is-active {
+		.cl-step__value {
+			background-color: $uni-color-primary;
+		}
+
+		&:after {
+			background-color: $uni-color-primary;
+		}
+	}
+}

@@ -42,23 +42,23 @@
 	}
 
 	&--primary {
-		@include color($color-primary);
+		@include color($cl-color-primary);
 	}
 
 	&--success {
-		@include color($color-success);
+		@include color($cl-color-success);
 	}
 
 	&--warning {
-		@include color($color-warning);
+		@include color($cl-color-warning);
 	}
 
 	&--error {
-		@include color($color-error);
+		@include color($cl-color-error);
 	}
 
 	&--info {
-		@include color($color-info);
+		@include color($cl-color-info);
 	}
 }
 
