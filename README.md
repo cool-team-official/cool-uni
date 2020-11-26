@@ -1,8 +1,12 @@
+## 演示小程序 | H5
+
+<img src="https://cool-show.oss-cn-shanghai.aliyuncs.com/comm/cool-uni.jpg?x-oss-process=image/resize,w_300,m_lfit" style="width: 260px"/>  <img src="https://cool-show.oss-cn-shanghai.aliyuncs.com/comm/uni-h5.png?x-oss-process=image/resize,w_300,m_lfit" style="width: 260px"/>
+
 ## 文档地址
 
-[https://docs-uni.cool-js.com](https://docs-uni.cool-js.com)
+[https://docs.cool-js.com](https://docs.cool-js.com)
 
-[http://uni.cool-admin.com](http://uni.cool-admin.com)
+[https://uni.cool-js.com](https://uni.cool-js.com)
 
 ## 官网
 
@@ -58,10 +62,10 @@
 
 ## COOL产品系列
 
-#### [COOL-AI 基于Electron多应用开发](https://docs-ai.cool-js.com)
+#### [COOL-AI 基于Electron多应用开发](https://docs.cool-js.com/ai/)
 
 #### [COOL-UNI uni-app简洁易用的UI框架](https://ext.dcloud.net.cn/plugin?id=1691)
 
-#### [COOL-ADMIN-PRO Egg.js、mysql、Element-UI一个很酷的后台权限管理系统开发框架](https://docs-admin-pro.cool-js.com)
+#### [COOL-ADMIN-PRO Egg.js、mysql、Element-UI一个很酷的后台权限管理系统开发框架](https://docs.cool-js.com/admin/)
 
-#### [COOL-MALL 可能是比较好看的uni-app商城系统](https://cool-js.com)
+#### [COOL-MALL 可能是比较好看的uni-app商城系统](https://docs.cool-js.com/mall/)
