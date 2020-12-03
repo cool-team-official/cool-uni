@@ -6,14 +6,14 @@
 				'is-content': $slots.default,
 				'is-sticky': sticky,
 				'is-fill': fill,
-				'is-border': border
-			}
+				'is-border': border,
+			},
 		]"
 	>
 		<view
 			class="cl-tabs__header"
 			:style="{
-				top: stickyTop
+				top: stickyTop,
 			}"
 		>
 			<scroll-view
@@ -25,7 +25,7 @@
 				<view
 					class="cl-tabs__bar-box"
 					:style="{
-						'justify-content': justify
+						'justify-content': justify,
 					}"
 				>
 					<view
@@ -34,11 +34,11 @@
 						:key="index"
 						:class="[
 							{
-								'is-active': value === item.name
-							}
+								'is-active': value === item.name,
+							},
 						]"
 						:style="{
-							padding: `0 ${gutter}rpx`
+							padding: `0 ${gutter}rpx`,
 						}"
 						@tap="change(index)"
 					>
@@ -65,7 +65,7 @@
 						class="cl-tabs__line"
 						v-if="lineLeft > 0"
 						:style="{
-							left: lineLeft + 'px'
+							left: lineLeft + 'px',
 						}"
 					></view>
 				</view>
@@ -116,18 +116,21 @@ export default {
 		// 离开前
 		beforeLeave: Function,
 		// 标签列表
-		labels: Array,
+		labels: {
+			type: Array,
+			default: null,
+		},
 		// 是否循环显示
 		loop: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 是否滑动
 		swipeable: Boolean,
 		// 滑动阈值
 		swipeThreshold: {
 			type: Number,
-			default: 60
+			default: 60,
 		},
 		// 是否吸顶
 		sticky: Boolean,
@@ -136,7 +139,7 @@ export default {
 		// 是否滚动视图
 		scrollView: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 标签是否填充
 		fill: Boolean,
@@ -145,13 +148,13 @@ export default {
 		// 是否带有下边框
 		border: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 标签间隔
 		gutter: {
 			type: Number,
-			default: 20
-		}
+			default: 20,
+		},
 	},
 
 	data() {
@@ -162,7 +165,7 @@ export default {
 			scrollLeft: 0,
 			clientX: "",
 			clientY: "",
-			width: 375
+			width: 375,
 		};
 	},
 
@@ -171,12 +174,12 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.current = val;
-			}
+			},
 		},
 
 		current(val) {
 			this.onOffset(val);
-		}
+		},
 	},
 
 	computed: {
@@ -189,7 +192,7 @@ export default {
 
 		isSticky() {
 			return this.sticky ? "cl-tabs--sticky" : "";
-		}
+		},
 	},
 
 	mounted() {
@@ -206,7 +209,7 @@ export default {
 				label: e.label,
 				prefixIcon: e.prefixIcon,
 				suffixIcon: e.suffixIcon,
-				lazy: e.lazy
+				lazy: e.lazy,
 			};
 		});
 
@@ -214,7 +217,7 @@ export default {
 		uni.createSelectorQuery()
 			.in(this)
 			.select(".cl-tabs")
-			.fields({ size: true }, d => {
+			.fields({ size: true }, (d) => {
 				this.width = d.width;
 				this.getRect();
 			})
@@ -266,7 +269,7 @@ export default {
 		},
 
 		getIndex() {
-			return this.tabs.findIndex(e => e.name == this.current);
+			return this.tabs.findIndex((e) => e.name == this.current);
 		},
 
 		prev() {
@@ -289,7 +292,7 @@ export default {
 					.in(this)
 					.selectAll(".cl-tabs__bar-item")
 					.fields({ rect: true, size: true })
-					.exec(d => {
+					.exec((d) => {
 						this.tabRect = d[0];
 						this.onOffset();
 					});
@@ -311,7 +314,7 @@ export default {
 					this.lineLeft = item.left + item.width / 2 - 8;
 				}
 			});
-		}
-	}
+		},
+	},
 };
 </script>

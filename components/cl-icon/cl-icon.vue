@@ -1,9 +1,9 @@
 <template>
 	<text
-		:class="['cl-icon', name]"
+		:class="['cl-icon', `cl-icon-${name}`]"
 		:style="{
 			fontSize: parseRpx(size),
-			color
+			color,
 		}"
 	></text>
 </template>
@@ -27,11 +27,11 @@ export default {
 	props: {
 		name: String,
 		size: [String, Number],
-		color: String
+		color: String,
 	},
 
 	methods: {
-		parseRpx
-	}
+		parseRpx,
+	},
 };
 </script>

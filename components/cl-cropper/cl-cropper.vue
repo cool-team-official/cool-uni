@@ -7,8 +7,8 @@
 					class="cl-cropper__image"
 					:class="[
 						{
-							'is-filter-blur': filterBlur
-						}
+							'is-filter-blur': filterBlur,
+						},
 					]"
 					:style="[imageSize, imageTransform]"
 					@touchstart.stop.prevent="onTouchStart"
@@ -23,8 +23,8 @@
 					class="cl-cropper__view"
 					:class="[
 						{
-							'is-round': round
-						}
+							'is-round': round,
+						},
 					]"
 					:style="[cropStyle]"
 				>
@@ -35,13 +35,13 @@
 				<view class="cl-cropper__tools">
 					<!-- 选择图片 -->
 					<view class="cl-cropper__tools-item" @tap="chooseImage">
-						<text class="cl-icon-image"></text>
+						<cl-icon name="image" :size="30"></cl-icon>
 						<text>选择图片</text>
 					</view>
 
 					<!-- 旋转 -->
 					<view class="cl-cropper__tools-item" @tap="rotateImage">
-						<text class="cl-icon-rotate"></text>
+						<cl-icon name="refresh" :size="30"></cl-icon>
 						<text>旋转</text>
 					</view>
 				</view>
@@ -99,24 +99,24 @@ export default {
 		// 图片宽度
 		imageWidth: {
 			type: Number,
-			default: 320
+			default: 320,
 		},
 		// 裁剪高度
 		cropHeight: {
 			type: Number,
-			default: 200
+			default: 200,
 		},
 		// 裁剪宽度
 		cropWidth: {
 			type: Number,
-			default: 200
+			default: 200,
 		},
 		// 底色
 		backgroundColor: String,
 		// 是否圆形
 		round: Boolean,
 		// 高斯模糊
-		filterBlur: Boolean
+		filterBlur: Boolean,
 	},
 
 	data() {
@@ -131,20 +131,20 @@ export default {
 				top: 0,
 				scale: 1,
 				rotate: 0,
-				url: ""
+				url: "",
 			},
 			crop: {
 				height: this.cropHeight,
 				width: this.cropWidth,
 				left: 0,
-				top: 0
+				top: 0,
 			},
 			start: {
 				x: 0,
 				y: 0,
 				hyp: 0,
-				scale: 1
-			}
+				scale: 1,
+			},
 		};
 	},
 
@@ -152,7 +152,7 @@ export default {
 		imageSize() {
 			return {
 				height: `${this.image.height}px`,
-				width: `${this.image.width}px`
+				width: `${this.image.width}px`,
 			};
 		},
 
@@ -160,7 +160,7 @@ export default {
 			return {
 				height: `${this.crop.height}px`,
 				width: `${this.crop.width}px`,
-				backgroundColor: this.backgroundColor
+				backgroundColor: this.backgroundColor,
 			};
 		},
 
@@ -168,8 +168,9 @@ export default {
 			let { scale, rotate, left, top } = this.image;
 
 			return {
-				transform: `scale(${scale}, ${scale}) translate3d(${left / scale}px, ${top /
-					scale}px, 0) rotateZ(${rotate}deg)`
+				transform: `scale(${scale}, ${scale}) translate3d(${left / scale}px, ${
+					top / scale
+				}px, 0) rotateZ(${rotate}deg)`,
 			};
 		},
 
@@ -177,10 +178,11 @@ export default {
 			let { scale, rotate, left, top } = this.image;
 
 			return {
-				transform: `scale(${scale}, ${scale}) translate(${(left - this.crop.left) /
-					scale}px, ${(top - this.crop.top) / scale}px) rotateZ(${rotate}deg)`
+				transform: `scale(${scale}, ${scale}) translate(${
+					(left - this.crop.left) / scale
+				}px, ${(top - this.crop.top) / scale}px) rotateZ(${rotate}deg)`,
 			};
-		}
+		},
 	},
 
 	methods: {
@@ -207,7 +209,7 @@ export default {
 
 			uni.getImageInfo({
 				src: this.image.url,
-				success: res => {
+				success: (res) => {
 					// 图片大小位置
 					this.image.width = this.imageWidth * this.image.scale;
 					this.image.height = (this.image.width / res.width) * res.height;
@@ -217,17 +219,17 @@ export default {
 					// 裁剪框的位置
 					this.crop.left = (windowWidth - this.crop.width) / 2;
 					this.crop.top = (windowHeight - this.crop.height) / 2;
-				}
+				},
 			});
 		},
 
 		chooseImage() {
 			uni.chooseImage({
-				success: res => {
+				success: (res) => {
 					this.image.rotate = 0;
 					this.image.scale = 1;
 					this.setImage(res.tempFilePaths[0]);
-				}
+				},
 			});
 		},
 
@@ -323,15 +325,15 @@ export default {
 						canvasId: "canvas",
 						destWidth: this.crop.width * pixelRatio,
 						destHeight: this.crop.height * pixelRatio,
-						success: res => {
+						success: (res) => {
 							this.$emit("success", res.tempFilePath);
 							this.close();
 						},
-						fail: e => {
+						fail: (e) => {
 							this.loading = false;
 							this.$refs.toast.open(e.errMsg);
 							this.$emit("fail", e.errMsg);
-						}
+						},
 					},
 					this
 				);
@@ -363,7 +365,7 @@ export default {
 
 			return {
 				x,
-				y
+				y,
 			};
 		},
 
@@ -430,7 +432,7 @@ export default {
 
 		onTouchEnd(e) {
 			this.lock = false;
-		}
-	}
+		},
+	},
 };
 </script>

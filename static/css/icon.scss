@@ -1,18 +1,38 @@
 @font-face {
 	font-family: "cl-iconfont"; /* project id 1725188 */
-	src: url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.eot");
-	src: url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.eot?#iefix")
+	src: url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.eot");
+	src: url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.eot?#iefix")
 			format("embedded-opentype"),
-		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.woff2") format("woff2"),
-		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.woff") format("woff"),
-		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.ttf") format("truetype"),
-		url("https://at.alicdn.com/t/font_1725188_xxj11f88tsq.svg#iconfont") format("svg");
+		url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.woff2") format("woff2"),
+		url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.woff") format("woff"),
+		url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.ttf") format("truetype"),
+		url("https://at.alicdn.com/t/font_1725188_m1nh2gca0n.svg#iconfont") format("svg");
 }
 
 [class*="cl-icon-"] {
 	font-family: "cl-iconfont";
 	font-size: inherit;
 	font-style: normal;
+}
+
+.cl-icon-toast-waiting:before {
+	content: "\e62a";
+}
+
+.cl-icon-toast-success:before {
+	content: "\e642";
+}
+
+.cl-icon-toast-error:before {
+	content: "\e644";
+}
+
+.cl-icon-notification-fill:before {
+	content: "\e807";
+}
+
+.cl-icon-toast-warning:before {
+	content: "\e62b";
 }
 
 .cl-icon-caret-bottom:before {
@@ -23,28 +43,64 @@
 	content: "\e798";
 }
 
-.cl-icon-notification:before {
-	content: "\e808";
+.cl-icon-clock-fill:before {
+	content: "\e8cc";
 }
 
-.cl-icon-notification-fill:before {
-	content: "\e807";
+.cl-icon-favor-fill:before {
+	content: "\e8ce";
 }
 
-.cl-icon-info-fill:before {
-	content: "\e72a";
+.cl-icon-help-fill:before {
+	content: "\e8cf";
 }
 
-.cl-icon-info:before {
-	content: "\e72b";
+.cl-icon-history-fill:before {
+	content: "\e8d0";
 }
 
-.cl-icon-question-fill:before {
-	content: "\e72c";
+.cl-icon-smile-fill:before {
+	content: "\e8d1";
 }
 
-.cl-icon-question:before {
-	content: "\e72d";
+.cl-icon-success-fill:before {
+	content: "\e8d2";
+}
+
+.cl-icon-map-fill:before {
+	content: "\e8d3";
+}
+
+.cl-icon-warning-fill:before {
+	content: "\e8d4";
+}
+
+.cl-icon-meh-fill:before {
+	content: "\e8d5";
+}
+
+.cl-icon-cry-fill:before {
+	content: "\e8d6";
+}
+
+.cl-icon-delete-fill:before {
+	content: "\e8d7";
+}
+
+.cl-icon-like-fill:before {
+	content: "\e8df";
+}
+
+.cl-icon-check:before {
+	content: "\e645";
+}
+
+.cl-icon-close:before {
+	content: "\e646";
+}
+
+.cl-icon-search:before {
+	content: "\e65c";
 }
 
 .cl-icon-arrow-bottom:before {
@@ -55,16 +111,16 @@
 	content: "\e6de";
 }
 
-.cl-icon-toast-waiting:before {
-	content: "\e62a";
+.cl-icon-arrow-left:before {
+	content: "\e7ed";
 }
 
-.cl-icon-toast-warning:before {
-	content: "\e62b";
+.cl-icon-arrow-right:before {
+	content: "\e806";
 }
 
-.cl-icon-avatar:before {
-	content: "\e6a2";
+.cl-icon-notification:before {
+	content: "\e808";
 }
 
 .cl-icon-plus:before {
@@ -76,61 +132,197 @@
 }
 
 .cl-icon-image:before {
-	content: "\e604";
+	content: "\e8ac";
 }
 
-.cl-icon-toast-success:before {
-	content: "\e642";
+.cl-icon-refresh:before {
+	content: "\e8ad";
 }
 
-.cl-icon-toast-error:before {
-	content: "\e644";
+.cl-icon-plus-border:before {
+	content: "\e8ae";
 }
 
-.cl-icon-arrow-left:before {
-	content: "\e7ed";
+.cl-icon-minus-border:before {
+	content: "\e8af";
 }
 
-.cl-icon-arrow-right:before {
-	content: "\e806";
+.cl-icon-check-border:before {
+	content: "\e8b0";
 }
 
-.cl-icon-check:before {
-	content: "\e645";
+.cl-icon-close-border:before {
+	content: "\e8b1";
 }
 
-.cl-icon-close:before {
-	content: "\e646";
+.cl-icon-help-border:before {
+	content: "\e8b2";
 }
 
-.cl-icon-emoji:before {
-	content: "\e64a";
+.cl-icon-warning-border:before {
+	content: "\e8b3";
 }
 
-.cl-icon-favor-fill:before {
-	content: "\e64b";
+.cl-icon-wait-border:before {
+	content: "\e8b5";
 }
 
-.cl-icon-round-check-fill:before {
-	content: "\e656";
+.cl-icon-meh-border:before {
+	content: "\e8b6";
 }
 
-.cl-icon-round-check:before {
-	content: "\e657";
+.cl-icon-cry-border:before {
+	content: "\e8b7";
 }
 
-.cl-icon-round-close-fill:before {
-	content: "\e658";
+.cl-icon-smile-border:before {
+	content: "\e8b8";
 }
 
-.cl-icon-round-close:before {
-	content: "\e659";
+.cl-icon-back-top:before {
+	content: "\e8bb";
 }
 
-.cl-icon-search:before {
-	content: "\e65c";
+.cl-icon-calendar:before {
+	content: "\e8bd";
 }
 
-.cl-icon-rotate:before {
-	content: "\e7dd";
+.cl-icon-customer-service:before {
+	content: "\e8be";
+}
+
+.cl-icon-scan:before {
+	content: "\e8bf";
+}
+
+.cl-icon-pay:before {
+	content: "\e8c0";
+}
+
+.cl-icon-stop:before {
+	content: "\e8c4";
+}
+
+.cl-icon-play:before {
+	content: "\e8c5";
+}
+
+.cl-icon-more:before {
+	content: "\e8c6";
+}
+
+.cl-icon-map:before {
+	content: "\e8c7";
+}
+
+.cl-icon-keyboard-9:before {
+	content: "\e8c8";
+}
+
+.cl-icon-keyboard-26:before {
+	content: "\e8c9";
+}
+
+.cl-icon-edit:before {
+	content: "\e8ca";
+}
+
+.cl-icon-chart-bar:before {
+	content: "\e8d8";
+}
+
+.cl-icon-cloud-upload:before {
+	content: "\e8da";
+}
+
+.cl-icon-cloud-download:before {
+	content: "\e8db";
+}
+
+.cl-icon-eye-open:before {
+	content: "\e8dc";
+}
+
+.cl-icon-eye-close:before {
+	content: "\e8de";
+}
+
+.cl-icon-like:before {
+	content: "\e8e0";
+}
+
+.cl-icon-my:before {
+	content: "\e8e1";
+}
+
+.cl-icon-friend:before {
+	content: "\e8e2";
+}
+
+.cl-icon-set:before {
+	content: "\e8e4";
+}
+
+.cl-icon-chart-pie:before {
+	content: "\e8e6";
+}
+
+.cl-icon-arrow-double-left:before {
+	content: "\e8e7";
+}
+
+.cl-icon-arrow-double-right:before {
+	content: "\e8e8";
+}
+
+.cl-icon-top:before {
+	content: "\e8ea";
+}
+
+.cl-icon-upgrade:before {
+	content: "\e8eb";
+}
+
+.cl-icon-rise:before {
+	content: "\e8ec";
+}
+
+.cl-icon-decline:before {
+	content: "\e8ed";
+}
+
+.cl-icon-active:before {
+	content: "\e8ee";
+}
+
+.cl-icon-fullscreen:before {
+	content: "\e8ef";
+}
+
+.cl-icon-enlarge:before {
+	content: "\e8f0";
+}
+
+.cl-icon-shrink:before {
+	content: "\e8f1";
+}
+
+.cl-icon-cropper:before {
+	content: "\e8f2";
+}
+
+.cl-icon-share:before {
+	content: "\e8f3";
+}
+
+.cl-icon-link:before {
+	content: "\e8f4";
+}
+
+.cl-icon-back:before {
+	content: "\e8f5";
+}
+
+.cl-icon-enter:before {
+	content: "\e8f6";
 }
