@@ -3,8 +3,8 @@
 		class="cl-filter-bar"
 		:class="[
 			{
-				'is-sticky': isSticky
-			}
+				'is-sticky': isSticky,
+			},
 		]"
 	>
 		<view class="cl-filter-bar-sort">
@@ -13,7 +13,7 @@
 				v-for="(item, index) in list2"
 				:key="index"
 				:class="{
-					'is-active': item.value == prop
+					'is-active': item.value == prop,
 				}"
 				@tap="changeOrder(item)"
 			>
@@ -53,13 +53,13 @@ export default {
 		// 列表数据
 		list: Array,
 		// 是否吸顶
-		isSticky: Boolean
+		isSticky: Boolean,
 	},
 
 	data() {
 		return {
 			prop: this.value,
-			list2: this.list
+			list2: this.list,
 		};
 	},
 
@@ -74,13 +74,13 @@ export default {
 					item.order = "desc";
 				} else if (item.order == "desc") {
 					item.order = "";
-					this.prop = "";
+					this.prop = undefined;
 				}
 			} else {
-				this.prop = this.prop == item.value ? "" : item.value;
+				this.prop = this.prop == item.value ? undefined : item.value;
 			}
 
-			this.list2.map(e => {
+			this.list2.map((e) => {
 				if (e.order !== undefined) {
 					e.order = e.value == item.value ? e.order : "";
 				}
@@ -88,14 +88,14 @@ export default {
 
 			let params = {
 				order: "",
-				prop: ""
+				prop: "",
 			};
 
 			// 根据 prop(字段名) 和 order(排序方式) 的格式返回
 			if (this.prop) {
 				params = {
 					order: item.order,
-					prop: item.value
+					prop: item.value,
 				};
 
 				if (params.prop && params.order) {
@@ -106,7 +106,7 @@ export default {
 
 			this.$emit("input", params.prop);
 			this.$emit("change", params);
-		}
-	}
+		},
+	},
 };
 </script>

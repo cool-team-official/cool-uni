@@ -8,8 +8,8 @@
 				'cl-input--focus': isFocus,
 				'is-disabled': disabled,
 				'is-round': round,
-				'is-border': border
-			}
+				'is-border': border,
+			},
 		]"
 	>
 		<view class="cl-input__prepend" v-if="$slots.prepend">
@@ -17,8 +17,18 @@
 		</view>
 
 		<view class="cl-input__wrap">
-			<text class="cl-input__icon" :class="[prefixIcon]" v-if="prefixIcon"></text>
-			<text class="cl-input__icon" :class="[suffixIcon]" v-if="suffixIcon"></text>
+			<text
+				class="cl-input__icon"
+				:class="[prefixIcon]"
+				v-if="prefixIcon"
+				@tap="prefixIconTap"
+			></text>
+			<text
+				class="cl-input__icon"
+				:class="[suffixIcon]"
+				v-if="suffixIcon"
+				@tap="suffixIconTap"
+			></text>
 
 			<template v-if="type == 'password'">
 				<input
@@ -142,7 +152,7 @@
 			</template>
 
 			<text
-				class="cl-input__clear cl-icon-round-close-fill"
+				class="cl-input__clear cl-icon-close-border"
 				@tap="clear"
 				v-if="isFocus && clearable"
 			></text>
@@ -166,6 +176,8 @@
  * @event {Function} change 值发生改变时触发
  * @event {Function} search 搜索时触发
  * @event {Function} clear 清空值时触发
+ * @event {Function} prefix-icon-tap 前缀图标点击时
+ * @event {Function} suffix-icon-tap 后缀图标点击时
  * @example <cl-input v-model="val"></cl-input>
  */
 
@@ -176,7 +188,7 @@ export default {
 		value: [String, Number],
 		type: {
 			type: String,
-			default: "text"
+			default: "text",
 		},
 		password: Boolean,
 		placeholder: String,
@@ -187,38 +199,38 @@ export default {
 		round: Boolean,
 		border: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		focus: Boolean,
 		maxlength: {
 			type: [Number, String],
-			default: 140
+			default: 140,
 		},
 		cursorSpacing: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		confirmType: {
 			type: String,
-			default: "done"
+			default: "done",
 		},
 		confirmHold: Boolean,
 		adjustPosition: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		holdKeyboard: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		prefixIcon: String,
-		suffixIcon: String
+		suffixIcon: String,
 	},
 
 	data() {
 		return {
 			value2: null,
-			isFocus: false
+			isFocus: false,
 		};
 	},
 
@@ -227,8 +239,8 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
@@ -268,7 +280,15 @@ export default {
 			this.$emit("input", "");
 			this.$emit("change", "");
 			this.$emit("clear");
-		}
-	}
+		},
+
+		prefixIconTap() {
+			this.$emit("prefix-icon-tap", this.value2);
+		},
+
+		suffixIconTap() {
+			this.$emit("suffix-icon-tap", this.value2);
+		},
+	},
 };
 </script>

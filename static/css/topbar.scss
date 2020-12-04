@@ -5,6 +5,7 @@
 	width: 100%;
 	position: relative;
 	padding-top: env(safe-area-inset-top);
+	box-sizing: border-box;
 
 	&__content {
 		width: 100%;

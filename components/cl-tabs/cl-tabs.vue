@@ -32,12 +32,8 @@
 						class="cl-tabs__bar-item"
 						v-for="(item, index) in tabs"
 						:key="index"
-						:class="[
-							{
-								'is-active': value === item.name,
-							},
-						]"
 						:style="{
+							color: value === item.name ? color : '',
 							padding: `0 ${gutter}rpx`,
 						}"
 						@tap="change(index)"
@@ -65,6 +61,7 @@
 						class="cl-tabs__line"
 						v-if="lineLeft > 0"
 						:style="{
+							'background-color': color,
 							left: lineLeft + 'px',
 						}"
 					></view>
@@ -85,6 +82,7 @@
 
 <script>
 import { isNumber } from "../../utils";
+import { color } from "../../theme";
 
 /**
  * tabs 选项卡
@@ -102,6 +100,7 @@ import { isNumber } from "../../utils";
  * @property {String} justify 水平布局
  * @property {Boolean} border 是否带有下边框，默认true
  * @property {Number} gutter 标签间隔，默认20
+ * @property {String} color 字体及浮标颜色，默认主色
  * @example 见教程
  */
 
@@ -154,6 +153,11 @@ export default {
 		gutter: {
 			type: Number,
 			default: 20,
+		},
+		// 字体及浮标颜色，默认主色
+		color: {
+			type: String,
+			default: color.primary,
 		},
 	},
 

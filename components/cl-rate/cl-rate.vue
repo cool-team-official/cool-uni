@@ -6,7 +6,7 @@
 			<view
 				class="cl-rate__icon-active"
 				:style="{
-					width: item.width
+					width: item.width,
 				}"
 			>
 				<cl-icon :name="icon" :size="size" :color="item.color"></cl-icon>
@@ -46,41 +46,41 @@ export default {
 		// 绑定值
 		value: {
 			type: [Number, String],
-			default: 0
+			default: 0,
 		},
 		// 评分图标
 		icon: {
 			type: String,
-			default: "cl-icon-favor-fill"
+			default: "favor-fill",
 		},
 		// 选中颜色
 		color: {
 			type: [String, Array],
-			default: color.primary
+			default: color.primary,
 		},
 		// 未选中颜色
 		voidColor: {
 			type: String,
-			default: "#C6D1DE"
+			default: "#C6D1DE",
 		},
 		// 图标大小
 		size: {
 			type: [Number, String],
-			default: 40
+			default: 40,
 		},
 		// 最大值
 		max: {
 			type: [Number, String],
-			default: 5
+			default: 5,
 		},
 		// 是否禁用
 		disabled: Boolean,
 		// 是否显示分数
-		showText: Boolean
+		showText: Boolean,
 	},
 	data() {
 		return {
-			value2: 0
+			value2: 0,
 		};
 	},
 	watch: {
@@ -88,8 +88,8 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
-		}
+			},
+		},
 	},
 	computed: {
 		list() {
@@ -103,11 +103,11 @@ export default {
 					color: getCurrentColor({
 						value: this.value2,
 						color: this.color,
-						max: this.max
-					})
+						max: this.max,
+					}),
 				};
 			});
-		}
+		},
 	},
 	methods: {
 		onTap(index) {
@@ -119,7 +119,7 @@ export default {
 
 			this.$emit("input", this.value2);
 			this.$emit("change", this.value2);
-		}
-	}
+		},
+	},
 };
 </script>

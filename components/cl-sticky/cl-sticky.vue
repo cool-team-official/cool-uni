@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	name: 'cl-sticky'
+	name: "cl-sticky",
 
 	props: {
 		zIndex: {

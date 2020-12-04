@@ -6,7 +6,8 @@
 				'is-bold': bold,
 				'is-block': block,
 				'is-line-through': lineThrough,
-				'is-ellipsis': ellipsis > 0
+				'is-underline': underline,
+				'is-ellipsis': ellipsis > 0,
 			},
 			`is-${type}`,
 			`is-color-${color}`
@@ -18,18 +19,31 @@
 			'letter-spacing': parseRpx(letterSpacing),
 			'-webkit-line-clamp': ellipsis
 		}"
+		@tap="onTap"
 	>
+		<!-- 价格 -->
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
+		
+		<!-- 前缀图标 -->
+		<text class="cl-text__prefix-icon" v-if="prefixIcon">
+			<cl-icon :name="prefixIcon" :size="fontSize"></cl-icon>
+		</text>
+
 		<text
 			class="cl-text__value"
 			:style="{
-				fontSize: parseRpx(size)
+				fontSize
 			}"
 			>{{ d.value }}</text
 		>
 		<text class="cl-text__precision" v-if="type == 'price' && precision"
 			>.{{ d.precision }}</text
 		>
+
+		<!-- 后缀图标 -->
+		<text class="cl-text__suffix-icon" v-if="suffixIcon">
+			<cl-icon :name="suffixIcon" :size="fontSize"></cl-icon>
+		</text>
 	</view>
 </template>
 
@@ -50,8 +64,11 @@ import { parseRpx } from "../../utils";
  * @property {Number, String} size 字体大小，默认24
  * @property {Boolean} precision 价格小数点，默认true
  * @property {Boolean} lineThrough 穿过文本下的一条线
+ * @property {Boolean} underline 文本下的一条线
  * @property {String, Number} letterSpacing 文本水平间隔
  * @property {String, Number, Array} margin 外间距
+ * @property {String} prefixIcon 前缀图标
+ * @property {String} suffixIcon 后缀图标
  * @example <cl-text value="Hello, Cool uni" />
  */
 
@@ -94,13 +111,19 @@ export default {
 		},
 		// 穿过文本下的一条线
 		lineThrough: Boolean,
+		// 文本下的一条线
+		underline: Boolean,
 		// 文本水平间隔
 		letterSpacing: {
 			type: [String, Number],
 			default: 0
 		},
 		// 外间距
-		margin: [String, Number, Array]
+		margin: [String, Number, Array],
+		// 前缀图标
+		prefixIcon: String,
+		// 后缀图标
+		suffixIcon: String,
 	},
 
 	computed: {
@@ -131,11 +154,20 @@ export default {
 					value: this.value
 				};
 			}
+		},
+
+		fontSize() {
+			return parseRpx(this.size)
 		}
 	},
 
 	methods: {
-		parseRpx
+		parseRpx,
+
+		onTap(e) {
+			this.$emit("click", e);
+			this.$emit("tap", e);
+		}
 	}
 };
 </script>

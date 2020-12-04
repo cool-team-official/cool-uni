@@ -1,6 +1,6 @@
 <template>
 	<text
-		:class="['cl-icon', `cl-icon-${name}`]"
+		:class="['cl-icon', `cl-icon-${name2}`]"
 		:style="{
 			fontSize: parseRpx(size),
 			color,
@@ -28,6 +28,12 @@ export default {
 		name: String,
 		size: [String, Number],
 		color: String,
+	},
+
+	computed: {
+		name2() {
+			return this.name.replace("cl-icon-", "");
+		},
 	},
 
 	methods: {
