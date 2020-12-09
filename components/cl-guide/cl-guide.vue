@@ -159,12 +159,9 @@ export default {
 					.in(this)
 					.select(".cl-guide__tools")
 					.boundingClientRect((res) => {
-						console.log(res);
-
 						let _top = top + height;
 
 						if (top + height + res.height > windowHeight) {
-							console.log(111);
 							_top = top - res.height - 10;
 						}
 
