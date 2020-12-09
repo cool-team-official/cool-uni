@@ -1,0 +1,69 @@
+.cl-guide {
+	position: relative;
+	height: 100%;
+
+	&__mask {
+		background-color: rgba(0, 0, 0, 0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		mix-blend-mode: hard-light;
+		z-index: 9;
+	}
+
+	&__display {
+		background-color: gray;
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&__content {
+		display: inline-block;
+		background-color: #fff;
+		border-radius: 6rpx;
+		margin: 20rpx;
+		padding: 20rpx;
+		color: #000;
+	}
+
+	&__op {
+		margin: 0 20rpx;
+
+		button {
+			display: inline-block;
+			font-size: 26rpx;
+			font-weight: 500;
+			margin-right: 20rpx;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&__image {
+		margin: 20rpx;
+	}
+
+	&__tools {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: absolute;
+		width: 100%;
+
+		&.start {
+			align-items: flex-start;
+		}
+
+		&.center {
+			align-items: center;
+		}
+
+		&.end {
+			align-items: flex-end;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 {
 	"name": "cl-uni",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"description": "cool-uni: button、form ...",
 	"main": "index.js",
 	"scripts": {},
@@ -16,7 +16,9 @@
 		"cropper",
 		"timeline",
 		"form",
-		"upload"
+		"upload",
+		"guide",
+		"cropper"
 	],
 	"homepage": "https://github.com/cool-team-official/cool-uni",
 	"sideEffects": false

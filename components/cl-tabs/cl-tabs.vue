@@ -200,35 +200,41 @@ export default {
 	},
 
 	mounted() {
-		// #ifdef H5
-		let children = this.$refs.pane.$children;
-		// #endif
-
-		// #ifndef H5
-		let children = this.$children;
-		// #endif
-
-		this.list = children.map((e, i) => {
-			return {
-				label: e.label,
-				prefixIcon: e.prefixIcon,
-				suffixIcon: e.suffixIcon,
-				lazy: e.lazy,
-			};
-		});
-
-		// 获取选项卡宽度
-		uni.createSelectorQuery()
-			.in(this)
-			.select(".cl-tabs")
-			.fields({ size: true }, (d) => {
-				this.width = d.width;
-				this.getRect();
-			})
-			.exec();
+		this.refresh();
 	},
 
 	methods: {
+		refresh() {
+			this.$nextTick(() => {
+				// #ifdef H5
+				let children = this.$refs.pane.$children;
+				// #endif
+
+				// #ifndef H5
+				let children = this.$children;
+				// #endif
+
+				this.list = children.map((e, i) => {
+					return {
+						label: e.label,
+						prefixIcon: e.prefixIcon,
+						suffixIcon: e.suffixIcon,
+						lazy: e.lazy,
+					};
+				});
+
+				// 获取选项卡宽度
+				uni.createSelectorQuery()
+					.in(this)
+					.select(".cl-tabs")
+					.fields({ size: true }, (d) => {
+						this.width = d.width;
+						this.getRect();
+					})
+					.exec();
+			});
+		},
+
 		onTouchStart(e) {
 			this.clientX = e.changedTouches[0].clientX;
 			this.clientY = e.changedTouches[0].clientY;
