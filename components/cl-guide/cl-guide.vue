@@ -3,9 +3,19 @@
 		<slot></slot>
 
 		<!-- 遮罩层 -->
-		<view class="cl-guide__mask" v-if="visible">
+		<view
+			class="cl-guide__mask"
+			:style="{
+				'mix-blend-mode': mode,
+			}"
+			v-if="visible"
+		>
 			<!-- 显示区域 -->
-			<view class="cl-guide__display" :style="[mask.style, step.style]" @tap="onTap"></view>
+			<view
+				class="cl-guide__display"
+				:style="[display.style, step.style]"
+				@tap="onTap"
+			></view>
 
 			<!-- 工具 -->
 			<view
@@ -59,6 +69,7 @@ const { windowHeight } = uni.getSystemInfoSync();
  * @description 步骤引导
  * @tutorial https://docs.cool-js.com/uni/components/advanced/guide.html
  * @property {Number} value 当前步骤序号
+ * @property {String} mode mix-blend-mode 选项 hard-light | darken
  * @event {Function} change 切换步骤时触发
  * @event {Function} done 完成时触发
  * @event {Function} skip 跳过时触发
@@ -73,6 +84,10 @@ export default {
 			type: Number,
 			default: 0,
 		},
+		mode: {
+			type: String,
+			default: "hard-light",
+		},
 	},
 
 	data() {
@@ -80,7 +95,7 @@ export default {
 			visible: false,
 			current: 0,
 			steps: [],
-			mask: {
+			display: {
 				style: {},
 			},
 			tools: {
@@ -165,19 +180,20 @@ export default {
 					});
 				})
 			).then(() => {
-				this.updateMask();
+				this.updateStyle();
 			});
 		},
 
-		// 更新遮罩层样式,工具栏样式
-		updateMask() {
+		// 更新显示区域样式,工具栏样式
+		updateStyle() {
 			let { height, width, left, top } = this.step.rect || {};
 
-			this.mask.style = {
+			this.display.style = {
 				height: height + "px",
 				width: width + "px",
 				marginLeft: left + "px",
 				marginTop: top + "px",
+				"background-color": this.mode == "hard-light" ? "gray" : "#fff",
 			};
 
 			this.$nextTick(() => {
@@ -273,7 +289,7 @@ export default {
 
 		// 切换
 		onChange() {
-			this.updateMask();
+			this.updateStyle();
 			this.$emit("change", this.current);
 		},
 	},

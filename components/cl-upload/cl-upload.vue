@@ -11,14 +11,11 @@
 			@tap="choose(index)"
 			:style="{
 				height: size[0],
-				width: size[1]
+				width: size[1],
 			}"
 		>
 			<image class="cl-upload__target" v-show="url" :src="url" :mode="imageMode" />
-			<text
-				class="cl-upload__remove cl-icon-round-close-fill"
-				@tap.stop="remove(index)"
-			></text>
+			<text class="cl-upload__remove cl-icon-delete-fill" @tap.stop="remove(index)"></text>
 		</view>
 
 		<!-- 添加按钮 -->
@@ -27,7 +24,7 @@
 			class="cl-upload"
 			:style="{
 				height: size[0],
-				width: size[1]
+				width: size[1],
 			}"
 			@tap="choose()"
 		>
@@ -73,29 +70,29 @@ export default {
 		// 压缩方式
 		sizeType: {
 			type: Array,
-			default: () => ["original", "compressed"]
+			default: () => ["original", "compressed"],
 		},
 		// 选择方式
 		sourceType: {
 			type: Array,
-			default: () => ["album", "camera"]
+			default: () => ["album", "camera"],
 		},
 		// 图片大小
 		size: {
 			type: Array,
-			default: () => ["200rpx", "200rpx"]
+			default: () => ["200rpx", "200rpx"],
 		},
 		// 图片裁剪、缩放模式
 		imageMode: {
 			type: String,
-			default: "aspectFill"
+			default: "aspectFill",
 		},
 		// 是否支持多选文件
 		multiple: Boolean,
 		// 最大允许上传个数
 		limit: {
 			type: Number,
-			default: 9
+			default: 9,
 		},
 		// 上传的地址
 		action: String,
@@ -106,30 +103,30 @@ export default {
 		// 上传的文件字段名
 		name: {
 			type: String,
-			default: "file"
+			default: "file",
 		},
 		// 上传前钩子
 		beforeUpload: {
-			type: Function
+			type: Function,
 		},
 		// 是否禁用
 		disabled: Boolean,
 		test: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 是否自动上传
 		autoUpload: {
 			type: Boolean,
-			default: true
-		}
+			default: true,
+		},
 	},
 
 	data() {
 		return {
 			loading: false,
 			urls: [],
-			index: undefined
+			index: undefined,
 		};
 	},
 
@@ -142,14 +139,14 @@ export default {
 					: isString(val)
 					? val.split(",").filter(Boolean)
 					: [];
-			}
+			},
 		},
 
 		urls(val) {
 			let d = this.multiple ? val : val[0];
 			this.$emit("input", d);
 			this.$emit("change", d);
-		}
+		},
 	},
 
 	computed: {
@@ -159,7 +156,7 @@ export default {
 
 		isDisabled() {
 			return this.disabled ? "is-disabled" : "";
-		}
+		},
 	},
 
 	methods: {
@@ -183,9 +180,9 @@ export default {
 				count,
 				sizeType: this.sizeType,
 				sourceType: this.sourceType,
-				success: res => {
+				success: (res) => {
 					// 文件信息
-					res.tempFiles.forEach(async file => {
+					res.tempFiles.forEach(async (file) => {
 						// 进度
 						this.loading = true;
 
@@ -214,24 +211,24 @@ export default {
 								name: this.name,
 								header: this.headers,
 								formData: this.data,
-								success: res => {
+								success: (res) => {
 									const { data } = JSON.parse(res.data);
 									this.update(data);
 									this.$emit("success", data);
 								},
-								fail: err => {
+								fail: (err) => {
 									this.$emit("error", err);
 								},
 								complete: () => {
 									this.done();
-								}
+								},
 							});
 						} else {
 							// 自定义上传
 							this.$emit("custom-upload", file);
 						}
 					});
-				}
+				},
 			});
 		},
 
@@ -256,7 +253,7 @@ export default {
 
 		done() {
 			this.loading = false;
-		}
-	}
+		},
+	},
 };
 </script>
