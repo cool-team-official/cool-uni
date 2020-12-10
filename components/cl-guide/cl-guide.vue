@@ -2,36 +2,50 @@
 	<view class="cl-guide">
 		<slot></slot>
 
+		<!-- 遮罩层 -->
 		<view class="cl-guide__mask" v-if="visible">
-			<view class="cl-guide__display" :style="[mask.style, step.style]"></view>
+			<!-- 显示区域 -->
+			<view class="cl-guide__display" :style="[mask.style, step.style]" @tap="onTap"></view>
 
-			<view class="cl-guide__tools" :class="[step.justify]" :style="[tools.style]">
-				<!-- 图片 -->
-				<image
-					class="cl-guide__image"
-					:src="step.image.url"
-					:style="[step.image.style]"
-					v-if="step.image"
-				/>
+			<!-- 工具 -->
+			<view
+				class="cl-guide__tools"
+				:class="[step.justify]"
+				:style="[tools.style]"
+				v-if="step"
+			>
+				<slot name="tools" :step="step" :current="current">
+					<!-- 图片 -->
+					<image
+						class="cl-guide__image"
+						:src="step.image.url"
+						:style="[step.image.style]"
+						v-if="step.image"
+					/>
 
-				<!-- 内容 -->
-				<view class="cl-guide__content" v-if="step.content">
-					{{ step.content }}
-				</view>
+					<!-- 内容 -->
+					<view class="cl-guide__content" v-if="step.content">
+						{{ step.content }}
+					</view>
 
-				<!-- 按钮组 -->
-				<view class="cl-guide__op is-left">
-					<button @tap="toPrev" v-if="isPrev && step.showPrev">
-						{{ step.prevText || "上一步" }}
-					</button>
-					<button @tap="toNext" v-if="isNext && step.showNext">
-						{{ step.nextText || "下一步" }}
-					</button>
-					<button @tap="toSkip" v-if="step.showSkip">
-						{{ step.skipText || "跳过" }}
-					</button>
-					<button @tap="toDone" v-if="!isNext">{{ step.doneText || "完成" }}</button>
-				</view>
+					<!-- 按钮组 -->
+					<view class="cl-guide__op is-left">
+						<!-- 上一步按钮 -->
+						<button @tap="toPrev" v-if="isPrev && step.showPrev">
+							{{ step.prevText || "上一步" }}
+						</button>
+						<!-- 下一步按钮 -->
+						<button @tap="toNext" v-if="isNext && step.showNext">
+							{{ step.nextText || "下一步" }}
+						</button>
+						<!-- 跳过按钮 -->
+						<button @tap="toSkip" v-if="step.showSkip">
+							{{ step.skipText || "跳过" }}
+						</button>
+						<!-- 完成按钮 -->
+						<button @tap="toDone" v-if="!isNext">{{ step.doneText || "完成" }}</button>
+					</view>
+				</slot>
 			</view>
 		</view>
 	</view>
@@ -44,23 +58,17 @@ const { windowHeight } = uni.getSystemInfoSync();
  * guide 操作引导
  * @description 步骤引导
  * @tutorial https://docs.cool-js.com/uni/components/advanced/guide.html
- * @property {Array} steps 步骤列表
  * @property {Number} value 当前步骤序号
  * @event {Function} change 切换步骤时触发
  * @event {Function} done 完成时触发
  * @event {Function} skip 跳过时触发
- * @example <cl-steps :steps="[]" />
+ * @example <cl-guide ref="guide" />
  */
 
 export default {
 	name: "cl-guide",
 
 	props: {
-		steps: {
-			required: true,
-			type: Array,
-			default: [],
-		},
 		value: {
 			type: Number,
 			default: 0,
@@ -71,6 +79,7 @@ export default {
 		return {
 			visible: false,
 			current: 0,
+			steps: [],
 			mask: {
 				style: {},
 			},
@@ -93,12 +102,14 @@ export default {
 		step() {
 			let step = this.steps[this.current];
 
-			if (step.showPrev === undefined) {
-				step.showPrev = true;
-			}
+			if (step) {
+				if (step.showPrev === undefined) {
+					step.showPrev = true;
+				}
 
-			if (step.showNext === undefined) {
-				step.showNext = true;
+				if (step.showNext === undefined) {
+					step.showNext = true;
+				}
 			}
 
 			return step;
@@ -114,20 +125,32 @@ export default {
 	},
 
 	methods: {
-		open() {
+		// 设置数据
+		defineSteps(steps) {
+			this.steps = steps;
+		},
+
+		// 开始
+		start(index) {
 			this.visible = true;
 
 			this.$nextTick(() => {
-				this.init().then(() => {
-					this.updateMask();
-				});
+				this.current = index || 0;
+				this.init();
 			});
 		},
 
+		// 关闭
 		close() {
 			this.visible = false;
 		},
 
+		// 重置
+		reset() {
+			this.current = 0;
+		},
+
+		// 初始化
 		init() {
 			return Promise.all(
 				this.steps.map((e) => {
@@ -141,9 +164,12 @@ export default {
 							.exec();
 					});
 				})
-			);
+			).then(() => {
+				this.updateMask();
+			});
 		},
 
+		// 更新遮罩层样式,工具栏样式
 		updateMask() {
 			let { height, width, left, top } = this.step.rect || {};
 
@@ -173,26 +199,79 @@ export default {
 			});
 		},
 
-		toPrev() {
-			this.current -= 1;
-			this.onChange();
+		// 上一步
+		async toPrev() {
+			let prev = () => {
+				if (this.current > 0) {
+					this.current -= 1;
+					this.onChange();
+				}
+			};
+
+			if (this.step.onPrev) {
+				await this.step.onPrev({
+					prev,
+					next: this.toNext,
+					skip: this.toSkip,
+					done: this.toDone,
+					current: this.current,
+					step: this.step,
+				});
+			} else {
+				prev();
+			}
 		},
 
-		toNext() {
-			this.current += 1;
-			this.onChange();
+		// 下一步
+		async toNext() {
+			let next = () => {
+				if (this.current < this.steps.length - 1) {
+					this.current += 1;
+					this.onChange();
+				}
+			};
+
+			if (this.step.onNext) {
+				await this.step.onNext({
+					next,
+					prev: this.toPrev,
+					skip: this.toSkip,
+					done: this.toDone,
+					current: this.current,
+					step: this.step,
+				});
+			} else {
+				next();
+			}
 		},
 
+		// 跳过
 		toSkip() {
 			this.close();
 			this.$emit("skip", this.current);
 		},
 
+		// 完成
 		toDone() {
 			this.close();
 			this.$emit("done", this.step);
 		},
 
+		// 点击
+		onTap() {
+			if (this.step.onClick) {
+				this.step.onClick({
+					next: this.toNext,
+					prev: this.toPrev,
+					skip: this.toSkip,
+					done: this.toDone,
+					current: this.current,
+					step: this.step,
+				});
+			}
+		},
+
+		// 切换
 		onChange() {
 			this.updateMask();
 			this.$emit("change", this.current);
