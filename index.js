@@ -16,7 +16,7 @@ const install = (Vue, options) => {
 		Storage,
 		color,
 		author: 'cool',
-		version: '1.1.14'
+		version: '1.2.0'
 	}
 
 	Vue.prototype.$cl = uni.$cl = $cl;

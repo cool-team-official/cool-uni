@@ -57,48 +57,51 @@ export default {
 		// 选择器模式
 		mode: {
 			type: String,
-			default: "selector"
+			default: "selector",
 		},
 		// 占位内容
 		placeholder: {
 			type: String,
-			default: "请选择"
+			default: "请选择",
 		},
 		// 数据列表
-		options: Array,
+		options: {
+			type: Array,
+			default: () => [],
+		},
 		// 内容关键字
 		labelKey: {
 			type: String,
-			default: "label"
+			default: "label",
 		},
 		// 值关键字
 		valueKey: {
 			type: String,
-			default: "value"
+			default: "value",
 		},
 		// 分隔符
 		separator: {
 			type: String,
-			default: "/"
+			default: "/",
 		},
 		// 是否禁用
 		disabled: Boolean,
 		// 日期字段，有效值 year | month | day
 		fields: {
 			type: String,
-			default: "day"
+			default: "day",
 		},
 		// 有效日期的开始
 		start: String,
 		// 有效日期的结束
 		end: String,
-		defaultFirstOption: Boolean
+		defaultFirstOption: Boolean,
 	},
 
 	data() {
 		return {
 			index: [],
-			text: ""
+			text: "",
 		};
 	},
 
@@ -107,7 +110,7 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.parse(val);
-			}
+			},
 		},
 		options: {
 			immediate: true,
@@ -117,8 +120,8 @@ export default {
 						this.$emit("input", val[0][this.valueKey]);
 					}
 				}
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
@@ -132,7 +135,7 @@ export default {
 
 		isDisabled() {
 			return this.disabled ? "is-disabled" : "";
-		}
+		},
 	},
 
 	methods: {
@@ -141,10 +144,10 @@ export default {
 			this.index = (() => {
 				switch (this.mode) {
 					case "selector":
-						return this.options.findIndex(e => compareValue(e[this.valueKey], val));
+						return this.options.findIndex((e) => compareValue(e[this.valueKey], val));
 					case "multiSelector":
 						return (isArray(val) ? val : [val]).map((v, i) => {
-							return this.options[i].findIndex(e =>
+							return this.options[i].findIndex((e) =>
 								compareValue(e[this.valueKey], v)
 							);
 						});
@@ -162,7 +165,7 @@ export default {
 							: "";
 					case "multiSelector":
 						return this.index
-							.filter(v => v >= 0)
+							.filter((v) => v >= 0)
 							.map((v, i) => this.options[i][v][this.labelKey])
 							.join(this.separator);
 					case "region":
@@ -180,10 +183,12 @@ export default {
 			const value = (() => {
 				switch (this.mode) {
 					case "selector":
-						return this.options[detail.value][this.valueKey];
+						return this.options[detail.value]
+							? this.options[detail.value][this.valueKey]
+							: null;
 					case "multiSelector":
 						return detail.value
-							.map(v => (v < 0 ? 0 : v))
+							.map((v) => (v < 0 ? 0 : v))
 							.map((v, i) => this.options[i][v][this.valueKey]);
 					default:
 						return detail.value;
@@ -202,7 +207,7 @@ export default {
 		},
 		onCancel() {
 			this.$emit("cancel");
-		}
-	}
+		},
+	},
 };
 </script>
