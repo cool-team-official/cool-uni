@@ -8,6 +8,7 @@
 			:value-key="valueKey"
 			:separator="separator"
 			:disabled="disabled"
+			set-options-is-parse-value
 			@column-change="onColumnChange"
 			@change="onChange"
 		></cl-select>

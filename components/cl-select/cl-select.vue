@@ -95,7 +95,13 @@ export default {
 		start: String,
 		// 有效日期的结束
 		end: String,
-		defaultFirstOption: Boolean,
+		// 是否默认返回第一个
+		defaultFirstOption: {
+			type: Boolean,
+			default: true,
+		},
+		// 设置 options 时是否重新解析 value
+		setOptionsIsParseValue: Boolean,
 	},
 
 	data() {
@@ -114,10 +120,16 @@ export default {
 		},
 		options: {
 			immediate: true,
-			handler(val) {
-				if (val && val.length > 0) {
-					if (!this.value) {
-						this.$emit("input", val[0][this.valueKey]);
+			handler(arr) {
+				// 避免重复设置 options 异常问题
+				if (!this.setOptionsIsParseValue) {
+					this.parse(this.value);
+				}
+
+				// 为空时，默认返回列表第一个
+				if (arr && arr.length > 0 && this.defaultFirstOption) {
+					if (this.value === undefined) {
+						this.$emit("input", arr[0][this.valueKey]);
 					}
 				}
 			},
