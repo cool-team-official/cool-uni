@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-search">
+	<view class="cl-search" :style="[customStyle]">
 		<view class="cl-search__prepend" v-if="$slots.prepend">
 			<slot name="prepend"></slot>
 		</view>
@@ -56,7 +56,7 @@ export default {
 		value: [String, Number],
 		type: {
 			type: String,
-			default: "text"
+			default: "text",
 		},
 		password: Boolean,
 		placeholder: String,
@@ -66,47 +66,48 @@ export default {
 		focus: Boolean,
 		clearable: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		maxlength: {
 			type: Number,
-			default: 140
+			default: 140,
 		},
 		cursorSpacing: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		confirmType: {
 			type: String,
-			default: "done"
+			default: "done",
 		},
 		confirmHold: Boolean,
 		adjustPosition: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		holdKeyboard: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		searchIcon: {
 			type: String,
-			default: "cl-icon-search"
+			default: "cl-icon-search",
 		},
 		showSearchButton: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		searchButtonText: {
 			type: String,
-			default: "搜索"
-		}
+			default: "搜索",
+		},
+		customStyle: Object,
 	},
 
 	data() {
 		return {
 			value2: null,
-			focus2: false
+			focus2: false,
 		};
 	},
 
@@ -115,15 +116,15 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
+			},
 		},
 
 		focus: {
 			immediate: true,
 			handler(val) {
 				this.focus2 = val;
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
@@ -154,7 +155,7 @@ export default {
 
 		search() {
 			this.$emit("search", this.value2);
-		}
-	}
+		},
+	},
 };
 </script>
