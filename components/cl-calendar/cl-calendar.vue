@@ -105,8 +105,6 @@ import Calendar from "./calendar";
  * @property {String} title 标题
  * @property {Array} customList 自定义列表
  * @property {Boolean} lunar 是否显示农历
- * @property {Boolean} round 是否圆形
- * @property {Boolean} filterBlur 高斯模糊
  * @event {Function} change 值改变时触发
  * @event {Function} cancel 取消时时触发
  * @example <cl-calendar ref="calendar" v-model="date" />
