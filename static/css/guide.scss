@@ -50,6 +50,7 @@
 		align-items: flex-start;
 		position: absolute;
 		width: 100%;
+		transition: all 0.3s;
 
 		&.start {
 			align-items: flex-start;

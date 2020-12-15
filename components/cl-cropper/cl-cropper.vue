@@ -356,8 +356,6 @@ export default {
 
 				x = r;
 				y = -r;
-
-				console.log(r);
 			} else {
 				x = ((scale - 1) * width) / 2;
 				y = ((scale - 1) * height) / 2;

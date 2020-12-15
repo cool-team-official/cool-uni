@@ -71,6 +71,13 @@
 		}
 		// #endif
 
+		// #ifdef APP
+		.cl-button__loading {
+			position: relative;
+			top: 6rpx;
+		}
+		// #endif
+
 		.cl-button__text {
 			margin-left: 15rpx;
 		}
