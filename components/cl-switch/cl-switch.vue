@@ -2,13 +2,16 @@
 	<switch
 		class="cl-switch"
 		:checked="checked"
-		:disabled="disabled"
+		:disabled="isDisabled"
 		:color="color"
 		@change="onChange"
 	></switch>
 </template>
 
 <script>
+import Form from "../../mixins/form";
+import { color } from "../../theme";
+
 /**
  * switch 开关
  * @description 开关
@@ -31,24 +34,26 @@ export default {
 		// 打开时的值
 		activeValue: {
 			type: [Boolean, String, Number],
-			default: true
+			default: true,
 		},
 		// 关闭时的值
 		inactiveValue: {
 			type: [Boolean, String, Number],
-			default: false
+			default: false,
 		},
 		// 打开时的背景色
 		color: {
 			type: String,
-			default: "#409eff"
-		}
+			default: color.primary,
+		},
 	},
+
+	mixins: [Form],
 
 	computed: {
 		checked() {
 			return this.value === this.activeValue;
-		}
+		},
 	},
 
 	methods: {
@@ -57,7 +62,7 @@ export default {
 
 			this.$emit("input", d);
 			this.$emit("change", d);
-		}
-	}
+		},
+	},
 };
 </script>

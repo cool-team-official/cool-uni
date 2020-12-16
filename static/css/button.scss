@@ -64,19 +64,14 @@
 	&.is-loading {
 		opacity: 0.7;
 
-		// #ifdef MP
 		.cl-button__loading {
 			position: relative;
 			top: 2rpx;
-		}
-		// #endif
 
-		// #ifdef APP
-		.cl-button__loading {
-			position: relative;
+			/* #ifdef APP */
 			top: 6rpx;
+			/* #endif */
 		}
-		// #endif
 
 		.cl-button__text {
 			margin-left: 15rpx;

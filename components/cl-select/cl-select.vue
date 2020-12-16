@@ -1,11 +1,19 @@
 <template>
-	<view class="cl-select" :class="[isDisabled]">
+	<view
+		class="cl-select"
+		:class="[
+			{
+				'is-disabled': isDisabled,
+				'is-border': border,
+			},
+		]"
+	>
 		<picker
 			:mode="mode"
 			:value="index"
 			:range="options"
 			:range-key="rangeKey"
-			:disabled="disabled"
+			:disabled="isDisabled"
 			:end="end"
 			:start="start"
 			:fields="fields"
@@ -26,6 +34,7 @@
 
 <script>
 import { isArray, isEmpty, compareValue } from "../../utils";
+import Form from "../../mixins/form";
 
 /**
  * select 下拉选择
@@ -39,6 +48,7 @@ import { isArray, isEmpty, compareValue } from "../../utils";
  * @property {String} valueKey 值关键字，默认value
  * @property {String} separator 分隔符，默认 /
  * @property {Boolean} disabled 是否禁用
+ * @property {Boolean} border 是否带有边框
  * @property {Boolean} fields 日期字段，有效值 year | month | day
  * @property {Boolean} start 有效日期的开始
  * @property {Boolean} end 有效日期的结束
@@ -86,6 +96,8 @@ export default {
 		},
 		// 是否禁用
 		disabled: Boolean,
+		// 是否带有边框
+		border: Boolean,
 		// 日期字段，有效值 year | month | day
 		fields: {
 			type: String,
@@ -103,6 +115,8 @@ export default {
 		// 设置 options 时是否重新解析 value
 		setOptionsIsParseValue: Boolean,
 	},
+
+	mixins: [Form],
 
 	data() {
 		return {
@@ -143,10 +157,6 @@ export default {
 
 		showPlaceholder() {
 			return isEmpty(this.text);
-		},
-
-		isDisabled() {
-			return this.disabled ? "is-disabled" : "";
 		},
 	},
 

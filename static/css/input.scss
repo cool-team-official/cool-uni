@@ -105,6 +105,7 @@
 
 		.cl-input__inner {
 			background-color: #f5f7fa !important;
+			color: #c0c4cc;
 		}
 	}
 
@@ -129,14 +130,30 @@
 	width: 100%;
 	box-sizing: border-box;
 	background-color: #fff;
-	font-size: 26rpx;
-	padding: 4rpx 10rpx;
-	line-height: 40rpx;
+	position: relative;
+	padding: 10rpx 10rpx 10rpx 16rpx;
+	line-height: 36rpx;
 
 	textarea {
 		font-size: 24rpx;
-		padding: 10rpx;
 		width: 100%;
 		box-sizing: border-box;
+		font-size: 26rpx;
+	}
+
+	&.is-disabled {
+		background-color: #f5f7fa;
+	}
+
+	&__count {
+		position: absolute;
+		right: 10rpx;
+		bottom: 4rpx;
+		font-size: 24rpx;
+		letter-spacing: 1rpx;
+	}
+
+	&.is-count {
+		padding-bottom: 40rpx;
 	}
 }

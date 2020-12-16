@@ -8,6 +8,7 @@
 			:value-key="valueKey"
 			:separator="separator"
 			:disabled="disabled"
+			:border="border"
 			set-options-is-parse-value
 			@column-change="onColumnChange"
 			@change="onChange"
@@ -26,6 +27,7 @@ let cities = null;
  * @property {String} api 城市数据接口，默认https://cool-uni.oss-cn-shanghai.aliyuncs.com/comm/city.json
  * @property {Array} options 城市数据列表
  * @property {String} disabled 是否禁用
+ * @property {String} border 是否带有边框
  * @property {String} labelKey 内容关键字，默认label
  * @property {String} valueKey 值关键字，默认value
  * @property {String} separator 分隔符，默认 -
@@ -36,21 +38,30 @@ export default {
 	name: "cl-select-region",
 
 	props: {
+		// 绑定值
 		value: Array,
+		// 城市数据接口
 		api: {
 			type: String,
 			default: "https://cool-uni.oss-cn-shanghai.aliyuncs.com/comm/city.json",
 		},
+		// 城市数据列表
 		options: Array,
+		// 是否禁用
 		disabled: Boolean,
+		// 是否带有边框
+		border: Boolean,
+		// 内容关键字，默认label
 		labelKey: {
 			type: String,
 			default: "label",
 		},
+		// 值关键字，默认value
 		valueKey: {
 			type: String,
 			default: "value",
 		},
+		// 分隔符，默认 -
 		separator: {
 			type: String,
 			default: "-",

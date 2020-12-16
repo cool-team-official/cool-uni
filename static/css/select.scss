@@ -1,17 +1,14 @@
 .cl-select {
 	position: relative;
 	width: 100%;
-	padding-right: 40rpx;
+	padding-left: 20rpx;
+	padding-right: 60rpx;
 	font-size: 26rpx;
 	box-sizing: border-box;
 
 	/deep/picker {
 		height: 70rpx;
 		line-height: 70rpx;
-	}
-
-	&.is-disabled {
-		color: #c0c4cc;
 	}
 
 	&__value {
@@ -22,12 +19,29 @@
 
 	&__icon {
 		position: absolute;
-		right: 0;
+		right: 18rpx;
 		top: 0;
 	}
 
 	&__placeholder {
 		color: #999;
+	}
+
+	&.is-disabled {
+		color: #c0c4cc;
+
+		.cl-select__placeholder {
+			color: #c0c4cc;
+		}
+
+		&.is-border {
+			background-color: #f5f7fa;
+		}
+	}
+
+	&.is-border {
+		border: 1rpx solid #dcdfe6;
+		border-radius: 8rpx;
 	}
 }
 

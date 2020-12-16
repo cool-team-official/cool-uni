@@ -1,5 +1,12 @@
 <template>
-	<view class="cl-upload-list" :class="[isDisabled]">
+	<view
+		class="cl-upload-list"
+		:class="[
+			{
+				'is-disabled': isDisabled,
+			},
+		]"
+	>
 		<!-- 加载框 -->
 		<cl-loading-mask :loading="loading" text="上传图片中"></cl-loading-mask>
 
@@ -35,6 +42,7 @@
 
 <script>
 import { isArray, isString } from "../../utils";
+import Form from "../../mixins/form";
 
 /**
  * upload 图片上传
@@ -122,6 +130,8 @@ export default {
 		},
 	},
 
+	mixins: [Form],
+
 	data() {
 		return {
 			loading: false,
@@ -153,15 +163,11 @@ export default {
 		isAppend() {
 			return this.urls.length < (this.multiple ? this.limit : 1);
 		},
-
-		isDisabled() {
-			return this.disabled ? "is-disabled" : "";
-		},
 	},
 
 	methods: {
 		choose(index) {
-			if (this.disabled) {
+			if (this.isDisabled) {
 				return false;
 			}
 

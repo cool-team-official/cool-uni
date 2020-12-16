@@ -1,5 +1,12 @@
 <template>
-	<view :class="['cl-form', isBorder]">
+	<view
+		:class="[
+			'cl-form',
+			{
+				'is-border': border,
+			},
+		]"
+	>
 		<slot></slot>
 	</view>
 </template>
@@ -15,6 +22,7 @@ import { isArray, isObject, isString, isBoolean, isEmpty, diffForm } from "../..
  * @property {Object} model 表单数据对象
  * @property {Object} rules 表单验证规则
  * @property {Boolean} border 是否带有边框
+ * @property {Boolean} disabled 是否禁用
  * @property {Boolean} showMessage 是否显示消息提示
  * @property {String} labelWidth 表单域标签的宽度，默认150rpx
  * @property {String} labelPosition 表单域标签的位置，默认right
@@ -33,38 +41,40 @@ export default {
 			type: Object,
 			default: () => {
 				return {};
-			}
+			},
 		},
 		// 表单验证规则
 		rules: Object,
 		// 是否带有边框
 		border: Boolean,
+		// 是否禁用
+		disabled: Boolean,
 		// 是否显示消息提示
 		showMessage: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 表单域标签的宽度
 		labelWidth: {
 			type: String,
-			default: "150rpx"
+			default: "150rpx",
 		},
 		// 表单域标签的位置
 		labelPosition: {
 			type: String,
-			default: "right"
+			default: "right",
 		},
 		// 是否在 rules 属性改变后立即触发一次验证
 		validateOnValueChange: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
 
 	data() {
 		return {
 			subscrible: [],
-			rules2: []
+			rules2: [],
 		};
 	},
 
@@ -73,25 +83,21 @@ export default {
 			handler(newV, oldV) {
 				this.publish({
 					props: diffForm(newV, oldV),
-					action: "validate"
+					action: "validate",
 				});
 			},
-			deep: true
+			deep: true,
 		},
 
 		rules(val) {
 			this.setRules(val);
-		}
+		},
 	},
 
 	computed: {
 		model2() {
 			return JSON.parse(JSON.stringify(this.model));
 		},
-
-		isBorder() {
-			return this.border ? "cl-form--border" : "";
-		}
 	},
 
 	created() {
@@ -124,7 +130,7 @@ export default {
 
 			for (let i in this.rules2) {
 				if (props.includes(i)) {
-					if (this.subscrible.find(e => e.prop == i)) {
+					if (this.subscrible.find((e) => e.prop == i)) {
 						rules[i] = this.rules2[i];
 					}
 				}
@@ -134,7 +140,7 @@ export default {
 
 			let form = {};
 
-			props.forEach(e => {
+			props.forEach((e) => {
 				form[e] = this.model[e];
 			});
 
@@ -188,21 +194,21 @@ export default {
 
 		// 添加字段，监听事件
 		addField(prop, callback) {
-			let item = this.subscrible.find(e => e.prop == prop);
+			let item = this.subscrible.find((e) => e.prop == prop);
 
 			if (item) {
 				item.handler = callback;
 			} else {
 				this.subscrible.push({
 					prop,
-					handler: callback
+					handler: callback,
 				});
 			}
 		},
 
 		// 移除字段和事件
 		removeField(prop) {
-			const i = this.subscrible.findIndex(e => e.prop == prop);
+			const i = this.subscrible.findIndex((e) => e.prop == prop);
 			this.subscrible.splice(i, 1);
 		},
 
@@ -214,14 +220,14 @@ export default {
 				props = Object.keys(this.model);
 			}
 
-			props.forEach(k => {
-				item = this.subscrible.find(e => e.prop == k);
+			props.forEach((k) => {
+				item = this.subscrible.find((e) => e.prop == k);
 
 				if (item) {
 					item.handler({ action, value: this.model[k] });
 				}
 			});
-		}
-	}
+		},
+	},
 };
 </script>

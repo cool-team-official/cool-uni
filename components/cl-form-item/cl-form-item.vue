@@ -1,5 +1,5 @@
 <template>
-	<view :class="['cl-form-item', isLabelPosition, isRequired, isError, isSuffix, isDisabled]">
+	<view :class="['cl-form-item', isLabelPosition, isRequired, isError, isSuffix]">
 		<view :class="['cl-form-item__label']" :style="{ width: labelWidth2 }" v-if="label2">{{
 			label2
 		}}</view>
@@ -28,7 +28,6 @@ import { getParent } from "../../utils";
  * @property {Object} model 表单数据对象
  * @property {Object} rules 表单验证规则
  * @property {Boolean} border 是否带有边框
- * @property {Boolean} disabled 是否禁用
  * @property {Boolean} showMessage 是否显示消息提示
  * @property {String} labelWidth 表单域标签的宽度，默认150rpx
  * @property {String} labelPosition 表单域标签的位置，默认right
@@ -45,8 +44,6 @@ export default {
 		prop: String,
 		// 标签文本
 		label: String,
-		// 是否禁用
-		disabled: Boolean,
 		// 表单域标签的的宽度
 		labelWidth: String,
 		// 表单域标签的位置
@@ -54,18 +51,18 @@ export default {
 		// 是否显示消息提示
 		showMessage: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 水平布局
 		justify: {
 			type: String,
-			default: "start"
+			default: "start",
 		},
 		// 是否在 rules 属性改变后立即触发一次验证
 		validateOnValueChange: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
 
 	data() {
@@ -73,11 +70,27 @@ export default {
 			required: false,
 			message: null,
 			error: false,
-			validator: null
+			validator: null,
 		};
 	},
 
 	computed: {
+		parent() {
+			let parent = getParent.call(this, "ClForm", [
+				"labelWidth",
+				"labelPosition",
+				"showMessage",
+				"model",
+				"addField",
+				"removeField",
+				"validateOnValueChange",
+				"rules2",
+			]);
+
+			parent.rules = parent.rules2;
+			return parent;
+		},
+
 		label2() {
 			return this.label == "true" ? "" : this.label;
 		},
@@ -107,38 +120,23 @@ export default {
 		},
 
 		isError() {
-			return this.error ? "cl-form-item--error" : "";
+			return this.required && this.error ? "cl-form-item--error" : "";
 		},
 
 		isSuffix() {
 			return this.$scopedSlots.suffix ? "cl-form-item--suffix" : "";
 		},
 
-		isDisabled() {
-			return this.disabled ? "cl-form-item--disabled" : "";
-		},
-
 		isLabelPosition() {
 			return this.labelPosition2 ? `cl-form-item--${this.labelPosition2}` : "";
 		},
+	},
 
-		parent() {
-			let parent = getParent.call(this, "ClForm", [
-				"labelWidth",
-				"labelPosition",
-				"showMessage",
-				"model",
-				"addField",
-				"removeField",
-				"validateOnValueChange",
-				"rules2"
-			]);
-
-			parent.rules = parent.rules2;
-			this.changeRule(parent);
-
-			return parent;
-		}
+	watch: {
+		parent: {
+			deep: true,
+			handler: "changeRule",
+		},
 	},
 
 	destroyed() {
@@ -148,7 +146,7 @@ export default {
 	},
 
 	methods: {
-		changeRule({ rules = {}, addField }) {
+		changeRule({ rules = {}, addField, model }) {
 			if (!rules) {
 				return false;
 			}
@@ -157,10 +155,11 @@ export default {
 
 			if (rule) {
 				this.required = false;
+				// this.error = false;
 				this.message = "";
 
 				if (rule instanceof Array) {
-					rule.forEach(e => {
+					rule.forEach((e) => {
 						if (e.required) {
 							this.required = e.required;
 						}
@@ -176,11 +175,16 @@ export default {
 
 				// 检验器
 				this.validator = new AsyncValidator({
-					[this.prop]: rule
+					[this.prop]: rule,
 				});
 
 				// 响应事件
 				addField(this.prop, this.onResponse);
+
+				// 是否在 rules 属性改变后立即触发一次验证
+				if (this.validateOnValueChange || this.parent.validateOnValueChange) {
+					this.validate(model[this.prop]);
+				}
 			}
 		},
 
@@ -191,9 +195,7 @@ export default {
 				}
 
 				if (action == "validate") {
-					if (this.validateOnValueChange || this.parent.validateOnValueChange) {
-						this.validate(value);
-					}
+					this.validate(value);
 				}
 			});
 		},
@@ -203,22 +205,22 @@ export default {
 				() => {
 					return parent.model[this.prop];
 				},
-				val => {
+				(val) => {
 					this.validate(val);
 				},
 				{
-					deep: false
+					deep: false,
 				}
 			);
-
-			// unwatch();
 		},
 
 		validate(val) {
-			this.validator.validate({ [this.prop]: val }, (errors, fields) => {
-				this.error = errors;
-			});
-		}
-	}
+			if (this.required) {
+				this.validator.validate({ [this.prop]: val }, (errors, fields) => {
+					this.error = errors;
+				});
+			}
+		},
+	},
 };
 </script>

@@ -1,10 +1,18 @@
 <template>
-	<view class="cl-textarea">
+	<view
+		class="cl-textarea"
+		:class="[
+			{
+				'is-disabled': isDisabled,
+				'is-count': count,
+			},
+		]"
+	>
 		<textarea
 			v-model="value2"
 			:style="{ height }"
 			:placeholder="placeholder"
-			:disabled="disabled"
+			:disabled="isDisabled"
 			:focus="focus"
 			:auto-height="autoHeight"
 			:fixed="fixed"
@@ -24,15 +32,20 @@
 			@confirm="onConfirm"
 			@keyboardheightchange="onKeyboardheightchange"
 		></textarea>
+
+		<text class="cl-textarea__count" v-if="count">{{ value2.length }}/{{ maxlength }}</text>
 	</view>
 </template>
 
 <script>
+import Form from "../../mixins/form";
+
 /**
  * textarea 文本域
  * @description 文本域
  * @tutorial https://docs.cool-js.com/uni/components/form/textarea.html
  * @property {String} value 绑定值
+ * @property {Boolean} count 是否显示统计字数
  * @property {String} placeholder 占位内容
  * @property {String} height 输入框高度，默认140rpx
  * @event {Function} change 绑定值改变时触发
@@ -44,50 +57,58 @@ export default {
 
 	props: {
 		// 绑定值
-		value: String,
+		value: {
+			type: String,
+			default: "",
+		},
 		// 占位内容
 		placeholder: String,
 		// 输入框高度
 		height: {
 			type: String,
-			default: "140rpx"
+			default: "140rpx",
 		},
+		// 是否禁用
 		disabled: Boolean,
+		// 是否显示统计字数
+		count: Boolean,
 		focus: Boolean,
 		autoHeight: Boolean,
 		fixed: Boolean,
 		cursorSpacing: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		cursor: Number,
 		showConfirmBar: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		selectionStart: {
 			type: Number,
-			default: -1
+			default: -1,
 		},
 		selectionEnd: {
 			type: Number,
-			default: -1
+			default: -1,
 		},
 		adjustPosition: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		disableDefaultPadding: Boolean,
 		holdKeyboard: Boolean,
 		maxlength: {
 			type: Number,
-			default: 140
-		}
+			default: 140,
+		},
 	},
+
+	mixins: [Form],
 
 	data() {
 		return {
-			value2: ""
+			value2: "",
 		};
 	},
 
@@ -96,8 +117,8 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val;
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
@@ -118,7 +139,7 @@ export default {
 		},
 		onKeyboardheightchange(e) {
 			this.$emit("keyboardheightchange", e);
-		}
-	}
+		},
+	},
 };
 </script>

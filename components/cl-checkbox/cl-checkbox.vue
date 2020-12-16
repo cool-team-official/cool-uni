@@ -7,8 +7,8 @@
 				'cl-checkbox--round': isRound,
 				'is-disabled': isDisabled,
 				'is-checked': checked,
-				'is-fill': fill
-			}
+				'is-fill': fill,
+			},
 		]"
 		@tap="change"
 	>
@@ -24,6 +24,7 @@
 
 <script>
 import Emitter from "../../mixins/emitter";
+import Form from "../../mixins/form";
 import { getParent, isBoolean } from "../../utils";
 
 /**
@@ -57,14 +58,14 @@ export default {
 		// 是否圆角
 		round: Boolean,
 		// 是否宽度填充
-		fill: Boolean
+		fill: Boolean,
 	},
 
-	mixins: [Emitter],
+	mixins: [Emitter, Form],
 
 	data() {
 		return {
-			checked: false
+			checked: false,
 		};
 	},
 
@@ -73,7 +74,7 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.checked = Boolean(val);
-			}
+			},
 		},
 		"parent.value": {
 			immediate: true,
@@ -82,11 +83,15 @@ export default {
 					// 判断当前是否选中
 					this.checked = val.includes(this.label);
 				}
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
+		parent() {
+			return getParent.call(this, "ClCheckboxGroup", ["border", "disabled", "value"]);
+		},
+
 		isGroup() {
 			return Boolean(this.parent);
 		},
@@ -100,12 +105,9 @@ export default {
 		},
 
 		isDisabled() {
-			return this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			return this.$form ? this.$form.disabled || disabled : disabled;
 		},
-
-		parent() {
-			return getParent.call(this, "ClCheckboxGroup", ["border", "disabled", "value"]);
-		}
 	},
 
 	methods: {
@@ -123,7 +125,7 @@ export default {
 				this.$emit("input", this.checked);
 				this.$emit("change", this.checked);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

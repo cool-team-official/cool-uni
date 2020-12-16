@@ -6,7 +6,7 @@
 				'cl-input--prefix': prefixIcon,
 				'cl-input--suffix': suffixIcon,
 				'cl-input--focus': isFocus,
-				'is-disabled': disabled,
+				'is-disabled': isDisabled,
 				'is-round': round,
 				'is-border': border,
 			},
@@ -37,7 +37,7 @@
 					type="password"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -61,7 +61,7 @@
 					type="number"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -85,7 +85,7 @@
 					type="idcard"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -109,7 +109,7 @@
 					type="digit"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -133,7 +133,7 @@
 					type="text"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -165,6 +165,8 @@
 </template>
 
 <script>
+import Form from "../../mixins/form";
+
 /**
  * input 输入框
  * @description 该组件基于官方的 input 组件。参数与官方一致，同时添加新的支持。
@@ -226,6 +228,8 @@ export default {
 		prefixIcon: String,
 		suffixIcon: String,
 	},
+
+	mixins: [Form],
 
 	data() {
 		return {

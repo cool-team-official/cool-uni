@@ -5,8 +5,8 @@
 			{
 				'is-border': isBorder,
 				'is-disabled': isDisabled,
-				'is-checked': checked
-			}
+				'is-checked': checked,
+			},
 		]"
 		@tap="change"
 	>
@@ -22,6 +22,7 @@
 
 <script>
 import Emitter from "../../mixins/emitter";
+import Form from "../../mixins/form";
 import { getParent } from "../../utils";
 
 /**
@@ -49,14 +50,14 @@ export default {
 		// 是否禁用
 		disabled: Boolean,
 		// 是否边框样式
-		border: Boolean
+		border: Boolean,
 	},
 
-	mixins: [Emitter],
+	mixins: [Emitter, Form],
 
 	data() {
 		return {
-			checked: false
+			checked: false,
 		};
 	},
 
@@ -65,11 +66,15 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.checked = val === this.label;
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
+		parent() {
+			return getParent.call(this, "ClRadioGroup", ["border", "disabled"]);
+		},
+
 		isGroup() {
 			return Boolean(this.parent);
 		},
@@ -79,17 +84,14 @@ export default {
 		},
 
 		isDisabled() {
-			return this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			return this.$form ? this.$form.disabled || disabled : disabled;
 		},
-
-		parent() {
-			return getParent.call(this, "ClRadioGroup", ["border", "disabled"]);
-		}
 	},
 
 	created() {
 		// 监听单选框组值的变化
-		this.$on("radio-group.change", label => {
+		this.$on("radio-group.change", (label) => {
 			this.checked = label === this.label;
 		});
 	},
@@ -109,7 +111,7 @@ export default {
 				this.$emit("input", this.label);
 				this.$emit("change", this.label);
 			}
-		}
-	}
+		},
+	},
 };
 </script>
