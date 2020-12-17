@@ -71,9 +71,9 @@ export function compareValue(a, b) {
 
 // 深拷贝
 export function cloneDeep(v) {
-	let d = v;
-
 	if (isObject(v)) {
+		let d = {}
+
 		for (let k in v) {
 			if (v.hasOwnProperty && v.hasOwnProperty(k)) {
 				if (v[k] && typeof v[k] === "object") {
@@ -83,11 +83,13 @@ export function cloneDeep(v) {
 				}
 			}
 		}
-	} else if (isArray(v)) {
-		d = v.map(cloneDeep);
-	}
 
-	return d;
+		return d
+	} else if (isArray(v)) {
+		return v.map(cloneDeep);
+	} else {
+		return v
+	}
 }
 
 // 深度合并
@@ -144,62 +146,6 @@ export function getParent(name, keys) {
 	}
 
 	return null;
-}
-
-/**
- * 检查数据变化的表单
- *
- * @param {*} d1 新数据
- * @param {*} d2 旧数据
- */
-export function diffForm(d1, d2) {
-	const deep = (d1, d2) => {
-		if (isArray(d2)) {
-			if (isArray(d1)) {
-				if (d2.length === d1.length) {
-					return !d2.some((v, i) => {
-						return !deep(d2[i], d1[i]);
-					});
-				}
-			}
-
-			return false;
-		}
-
-		if (isObject(d2)) {
-			if (isObject(d1)) {
-				let flag = true;
-
-				for (let i in d2) {
-					flag = deep(d2[i], d1[i]);
-
-					if (!flag) {
-						return false;
-					}
-				}
-
-				return true;
-			}
-
-			return false;
-		}
-
-		if (isString(d2)) {
-			return d1 === d2;
-		}
-
-		if (isNumber(d2)) {
-			return d1 === d2;
-		}
-
-		if (isBoolean(d2)) {
-			return d1 === d2;
-		}
-	};
-
-	return Object.keys(d2).filter(k => {
-		return !deep(d1[k], d2[k]);
-	});
 }
 
 /**

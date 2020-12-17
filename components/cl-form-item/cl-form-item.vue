@@ -13,13 +13,16 @@
 			</view>
 		</view>
 
-		<text :class="['cl-form-item__message']" v-if="showMessage2">{{ message }}</text>
+		<slot name="error" :message="message" :error="showMessage2">
+			<text :class="['cl-form-item__message']" v-if="showMessage2">{{ message }}</text>
+		</slot>
 	</view>
 </template>
 
 <script>
 import AsyncValidator from "../../utils/async-validator";
-import { getParent } from "../../utils";
+import Emitter from "../../mixins/emitter";
+import { getParent, isArray } from "../../utils";
 
 /**
  * form-item 表单项
@@ -38,6 +41,7 @@ import { getParent } from "../../utils";
 
 export default {
 	name: "cl-form-item",
+	componentName: "ClFormItem",
 
 	props: {
 		// 表单域 model 字段
@@ -65,10 +69,12 @@ export default {
 		},
 	},
 
+	mixins: [Emitter],
+
 	data() {
 		return {
 			required: false,
-			message: null,
+			message: "",
 			error: false,
 			validator: null,
 		};
@@ -132,11 +138,24 @@ export default {
 		},
 	},
 
-	watch: {
-		parent: {
-			deep: true,
-			handler: "changeRule",
-		},
+	created() {
+		this.$on("form.event", ({ props, action, model, rules }) => {
+			if (action == "change-rule") {
+				return this.changeRule(rules);
+			}
+
+			if (props.includes(this.prop)) {
+				switch (action) {
+					case "validate":
+						this.validate(model[this.prop]);
+						break;
+
+					case "clearValidate":
+						this.clearValidate();
+						break;
+				}
+			}
+		});
 	},
 
 	destroyed() {
@@ -146,7 +165,7 @@ export default {
 	},
 
 	methods: {
-		changeRule({ rules = {}, addField, model }) {
+		changeRule(rules) {
 			if (!rules) {
 				return false;
 			}
@@ -155,10 +174,9 @@ export default {
 
 			if (rule) {
 				this.required = false;
-				// this.error = false;
-				this.message = "";
+				this.clearValidate();
 
-				if (rule instanceof Array) {
+				if (isArray(rule)) {
 					rule.forEach((e) => {
 						if (e.required) {
 							this.required = e.required;
@@ -178,48 +196,25 @@ export default {
 					[this.prop]: rule,
 				});
 
-				// 响应事件
-				addField(this.prop, this.onResponse);
-
 				// 是否在 rules 属性改变后立即触发一次验证
 				if (this.validateOnValueChange || this.parent.validateOnValueChange) {
-					this.validate(model[this.prop]);
+					this.validate(this.parent.model[this.prop]);
 				}
 			}
-		},
-
-		onResponse({ value, action }) {
-			this.$nextTick(() => {
-				if (action == "clear") {
-					this.error = false;
-				}
-
-				if (action == "validate") {
-					this.validate(value);
-				}
-			});
-		},
-
-		onListener(parent) {
-			let unwatch = this.$watch(
-				() => {
-					return parent.model[this.prop];
-				},
-				(val) => {
-					this.validate(val);
-				},
-				{
-					deep: false,
-				}
-			);
 		},
 
 		validate(val) {
 			if (this.required) {
 				this.validator.validate({ [this.prop]: val }, (errors, fields) => {
-					this.error = errors;
+					this.error = Boolean(errors);
+					this.message = errors[0].message;
 				});
 			}
+		},
+
+		clearValidate() {
+			this.error = false;
+			this.message = "";
 		},
 	},
 };

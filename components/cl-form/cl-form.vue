@@ -13,7 +13,8 @@
 
 <script>
 import AsyncValidator from "../../utils/async-validator";
-import { isArray, isObject, isString, isBoolean, isEmpty, diffForm } from "../../utils";
+import Emitter from "../../mixins/emitter";
+import { isArray, isObject, isString, isBoolean, isEmpty, isNumber, cloneDeep } from "../../utils";
 
 /**
  * form 表单
@@ -71,37 +72,56 @@ export default {
 		},
 	},
 
+	mixins: [Emitter],
+
 	data() {
 		return {
-			subscrible: [],
 			rules2: [],
+			props: [],
+			_form: {},
 		};
 	},
 
 	watch: {
 		model2: {
+			deep: true,
 			handler(newV, oldV) {
-				this.publish({
-					props: diffForm(newV, oldV),
-					action: "validate",
+				// 数据变化时，通知 form-item 验证
+				this.publish("validate", {
+					props: this.checkProps(newV, oldV),
 				});
 			},
-			deep: true,
 		},
 
 		rules(val) {
 			this.setRules(val);
 		},
+
+		rules2: {
+			deep: true,
+			immediate: true,
+			handler(val) {
+				// 设置字段
+				this.props = Object.keys(val);
+				// 通知 form-item 修改验证规则
+				this.publish("change-rule", { rules: val });
+			},
+		},
 	},
 
 	computed: {
 		model2() {
-			return JSON.parse(JSON.stringify(this.model));
+			// 避免 newValue 与 oldValue 重复
+			return cloneDeep(this.model);
 		},
 	},
 
-	created() {
+	mounted() {
+		// 设置规则
 		this.setRules(this.rules);
+
+		// 设置默认数据
+		this._form = cloneDeep(this.model);
 	},
 
 	methods: {
@@ -112,7 +132,7 @@ export default {
 
 		// 校验表单
 		validate(callback) {
-			this.validateField(Object.keys(this.model), callback);
+			this.validateField(this.props, callback);
 		},
 
 		// 根据字段校验表单
@@ -130,9 +150,7 @@ export default {
 
 			for (let i in this.rules2) {
 				if (props.includes(i)) {
-					if (this.subscrible.find((e) => e.prop == i)) {
-						rules[i] = this.rules2[i];
-					}
+					rules[i] = this.rules2[i];
 				}
 			}
 
@@ -144,8 +162,11 @@ export default {
 				form[e] = this.model[e];
 			});
 
+			// 验证所有prop
 			validator.validate(form, (errors, fields) => {
-				this.publish({ props, action: "validate" });
+				this.publish("validate", {
+					props,
+				});
 
 				if (callback) {
 					callback(!errors, errors);
@@ -155,77 +176,77 @@ export default {
 
 		// 重置表单
 		resetFields() {
-			let form = {};
-			let flag = false;
-
-			for (let i in this.model) {
-				let val = this.model[i];
-
-				if (val) {
-					flag = true;
-				}
-
-				if (isArray(val)) {
-					form[i] = val.map(() => null);
-				} else if (isObject(val)) {
-					form[i] = {};
-				} else if (isString(val)) {
-					form[i] = "";
-				} else if (isBoolean(val)) {
-					form[i] = false;
-				} else {
-					form[i] = undefined;
-				}
-			}
-
-			if (flag) {
-				this.$emit("update:model", form);
-			}
-
-			this.clearValidate();
-		},
-
-		// 移除表单校验结果
-		clearValidate(props) {
+			this.form = cloneDeep(this._form);
+			this.$emit("update:model", this.form);
 			this.$nextTick(() => {
-				this.publish({ props, action: "clear" });
+				this.clearValidate();
 			});
 		},
 
-		// 添加字段，监听事件
-		addField(prop, callback) {
-			let item = this.subscrible.find((e) => e.prop == prop);
-
-			if (item) {
-				item.handler = callback;
-			} else {
-				this.subscrible.push({
-					prop,
-					handler: callback,
-				});
-			}
+		// 移除表单校验结果
+		clearValidate() {
+			this.publish("clearValidate");
 		},
 
-		// 移除字段和事件
+		// 移除字段
 		removeField(prop) {
-			const i = this.subscrible.findIndex((e) => e.prop == prop);
-			this.subscrible.splice(i, 1);
+			this.props.splice(this.props.indexOf(prop), 1);
 		},
 
 		// 发布消息
-		publish({ action, props }) {
-			let item = null;
+		publish(action, options) {
+			let { rules, props = this.props, model = this.model2 } = options || {};
 
-			if (!props) {
-				props = Object.keys(this.model);
-			}
+			this.broadcast("ClFormItem", `form.event`, {
+				rules,
+				props,
+				model,
+				action,
+			});
+		},
 
-			props.forEach((k) => {
-				item = this.subscrible.find((e) => e.prop == k);
+		// 检测是哪个prop引起的变化
+		checkProps(d1, d2) {
+			const deep = (d1, d2) => {
+				if (isArray(d2)) {
+					if (isArray(d1)) {
+						if (d2.length === d1.length) {
+							return !d2.some((v, i) => {
+								return !deep(d2[i], d1[i]);
+							});
+						}
+					}
 
-				if (item) {
-					item.handler({ action, value: this.model[k] });
+					return false;
+				} else if (isObject(d2)) {
+					if (isObject(d1)) {
+						let flag = true;
+
+						for (let i in d2) {
+							flag = deep(d2[i], d1[i]);
+
+							if (!flag) {
+								return false;
+							}
+						}
+
+						return true;
+					}
+
+					return false;
+				} else if (isString(d2)) {
+					return d1 === d2;
+				} else if (isNumber(d2)) {
+					return d1 === d2;
+				} else if (isBoolean(d2)) {
+					return d1 === d2;
+				} else {
+					return true;
 				}
+			};
+
+			return this.props.filter((k) => {
+				return !deep(d1[k], d2[k]);
 			});
 		},
 	},

@@ -11,8 +11,7 @@
 		}
 	}
 
-	&__mp,
-	&__app {
+	&__inner {
 		height: 100%;
 		width: 100%;
 		border-radius: 100%;
@@ -22,9 +21,27 @@
 		animation: loading-rotate 1s linear infinite;
 	}
 
-	&__app {
+	&--spin {
 		position: relative;
-		top: -4rpx;
+		animation: loading-rotate 2s linear infinite;
+	}
+
+	&__spin {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+
+		&-item {
+			background-color: currentColor;
+			position: absolute;
+			border-radius: 5px;
+		}
+
+		&:nth-child(2) {
+			transform: rotate(45deg);
+		}
 	}
 }
 

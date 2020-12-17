@@ -1,12 +1,62 @@
 <template>
-	<view class="cl-loading" :style="{ height: size + 'px', width: size + 'px' }">
-		<!-- #ifndef APP -->
-		<view class="cl-loading__mp" :style="{ color: color2 }"> </view>
-		<!-- #endif -->
+	<view
+		class="cl-loading"
+		:class="[`cl-loading--${theme}`]"
+		:style="{ height: size + 'px', width: size + 'px' }"
+	>
+		<!-- 菊花 -->
+		<template v-if="theme == 'spin'">
+			<view class="cl-loading__spin" v-for="i in 2" :key="i">
+				<text
+					class="cl-loading__spin-item"
+					:style="[
+						spinStyle,
+						{
+							top: 0,
+							left: `calc(50% - ${rw}px)`,
+						},
+					]"
+				></text>
 
-		<!-- #ifdef APP -->
-		<view class="cl-loading__app" :style="{ color: color2 }"> </view>
-		<!-- #endif -->
+				<text
+					class="cl-loading__spin-item"
+					:style="[
+						spinStyle,
+						{
+							top: `calc(50% - ${rh}px)`,
+							right: `${rh - rw}px`,
+							transform: 'rotate(90deg)',
+						},
+					]"
+				></text>
+
+				<text
+					class="cl-loading__spin-item"
+					:style="[
+						spinStyle,
+						{
+							left: `calc(50% - ${rw}px)`,
+							bottom: 0,
+						},
+					]"
+				></text>
+
+				<text
+					class="cl-loading__spin-item"
+					:style="[
+						spinStyle,
+						{
+							left: `${rh - rw}px`,
+							top: `calc(50% - ${rh}px)`,
+							transform: 'rotate(90deg)',
+						},
+					]"
+				></text>
+			</view>
+		</template>
+
+		<!-- 默认 -->
+		<view class="cl-loading__inner" :style="{ color: color2 }" v-else> </view>
 	</view>
 </template>
 
@@ -19,6 +69,7 @@ import { color } from "../../theme";
  * @tutorial https://docs.cool-js.com/uni/components/feedback/loading.html
  * @property {String} color 图标颜色
  * @property {Number} size 图标大小
+ * @property {String} theme 主题，default | spin
  * @example <cl-loading></cl-loading>
  */
 
@@ -27,16 +78,36 @@ export default {
 
 	props: {
 		color: String,
+		theme: {
+			type: String,
+			default: "default",
+		},
 		size: {
 			type: Number,
-			default: 25
-		}
+			default: 25,
+		},
 	},
 
 	computed: {
 		color2() {
 			return this.color || color.primary;
-		}
-	}
+		},
+
+		rh() {
+			return this.size / 8;
+		},
+
+		rw() {
+			return this.size / 20;
+		},
+
+		spinStyle() {
+			return {
+				height: this.rh * 2 + "px",
+				width: this.rw * 2 + "px",
+				color: this.color2,
+			};
+		},
+	},
 };
 </script>

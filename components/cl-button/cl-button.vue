@@ -11,8 +11,8 @@
 				'is-loading': loading,
 				'is-plain': plain,
 				'is-fill': fill,
-				'is-disabled': disabled
-			}
+				'is-disabled': disabled,
+			},
 		]"
 		:size="size"
 		:type="type"
@@ -38,7 +38,12 @@
 		@tap.stop="tap"
 	>
 		<view class="cl-button__loading">
-			<cl-loading v-if="loading" :size="16" :color="type ? '#fff' : ''"></cl-loading>
+			<cl-loading
+				v-if="loading"
+				:size="16"
+				:color="type ? '#fff' : ''"
+				:theme="loadingTheme"
+			></cl-loading>
 		</view>
 
 		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
@@ -56,18 +61,17 @@ const { platform } = uni.getSystemInfoSync();
  * button 按钮
  * @description 该组件基于官方的 button 组件。参数与官方一致，同时添加新的支持。
  * @tutorial https://www.uviewui.com/components/button.html
- * @property {Array<Object>} list 按钮的文字数组，见官方文档示例
- * @property {Object} tips 顶部的提示文字，见官方文档示例
- * @property {String} cancel-text 取消按钮的提示文字
- * @property {Boolean} cancel-btn 是否显示底部的取消按钮（默认true）
- * @property {Number String} border-radius 弹出部分顶部左右的圆角值，单位rpx（默认0）
- * @property {Boolean} mask-close-able 点击遮罩是否可以关闭（默认true）
- * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
- * @property {Number String} z-index z-index值（默认1075）
- * @property {String} cancel-text 取消按钮的提示文字
- * @event {Function} click 点击ActionSheet列表项时触发
- * @event {Function} close 点击取消按钮时触发
- * @example <cl-button></cl-button>
+ * @property {String} size 按钮大小
+ * @property {String} type 按钮类型
+ * @property {Boolean} plain 是否镂空
+ * @property {Boolean} disabled 是否禁用
+ * @property {Boolean} loading 是否加载中
+ * @property {String} loadingTheme loading图标主题
+ * @property {Boolean} round 是否圆角
+ * @property {Boolean} shadow 是否阴影
+ * @property {String} icon 左侧图标
+ * @property {Boolean} fill 是否水平填充
+ * @example <cl-button>按钮</cl-button>
  */
 
 export default {
@@ -84,11 +88,13 @@ export default {
 		disabled: Boolean,
 		// 是否加载中
 		loading: Boolean,
+		// loading图标主题
+		loadingTheme: String,
 		// 是否圆角
 		round: Boolean,
 		// 是否阴影
 		shadow: Boolean,
-		// 图标
+		// 左侧图标
 		icon: String,
 		// 是否水平填充
 		fill: Boolean,
@@ -96,31 +102,31 @@ export default {
 		openType: String,
 		hoverClass: {
 			type: String,
-			default: "button-hover"
+			default: "button-hover",
 		},
 		hoverStartTime: {
 			type: Number,
-			default: 20
+			default: 20,
 		},
 		hoverStayTime: {
 			type: Number,
-			default: 70
+			default: 70,
 		},
 		appParameter: String,
 		hoverStopPropagation: Boolean,
 		lang: {
 			type: String,
-			default: "en"
+			default: "en",
 		},
 		sessionForm: String,
 		sendMessageTitle: String,
 		sendMessagePath: String,
 		sendMessageImg: String,
-		showMessageCard: Boolean
+		showMessageCard: Boolean,
 	},
 	data() {
 		return {
-			platform
+			platform,
 		};
 	},
 	methods: {
@@ -144,7 +150,7 @@ export default {
 				this.$emit("click", e);
 				this.$emit("tap", e);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

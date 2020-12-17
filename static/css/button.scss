@@ -67,10 +67,6 @@
 		.cl-button__loading {
 			position: relative;
 			top: 2rpx;
-
-			/* #ifdef APP */
-			top: 6rpx;
-			/* #endif */
 		}
 
 		.cl-button__text {
