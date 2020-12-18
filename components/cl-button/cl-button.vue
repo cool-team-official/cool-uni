@@ -9,6 +9,7 @@
 				'is-round': round,
 				'is-shadow': shadow,
 				'is-loading': loading,
+				'is-loading-mask': loadingMask,
 				'is-plain': plain,
 				'is-fill': fill,
 				'is-disabled': disabled,
@@ -44,6 +45,10 @@
 				:color="type ? '#fff' : ''"
 				:theme="loadingTheme"
 			></cl-loading>
+
+			<text class="cl-button__loading-text" v-if="loadingText && loadingMask">{{
+				loadingText
+			}}</text>
 		</view>
 
 		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
@@ -66,7 +71,9 @@ const { platform } = uni.getSystemInfoSync();
  * @property {Boolean} plain 是否镂空
  * @property {Boolean} disabled 是否禁用
  * @property {Boolean} loading 是否加载中
- * @property {String} loadingTheme loading图标主题
+ * @property {String} loadingTheme 加载图标主题
+ * @property {String} loadingMask 加载是否遮罩层模式
+ * @property {String} loadingText 加载文案
  * @property {Boolean} round 是否圆角
  * @property {Boolean} shadow 是否阴影
  * @property {String} icon 左侧图标
@@ -88,8 +95,12 @@ export default {
 		disabled: Boolean,
 		// 是否加载中
 		loading: Boolean,
-		// loading图标主题
+		// 加载图标主题
 		loadingTheme: String,
+		// 加载是否遮罩层模式
+		loadingMask: Boolean,
+		// 加载文案
+		loadingText: String,
 		// 是否圆角
 		round: Boolean,
 		// 是否阴影

@@ -88,6 +88,26 @@
 		opacity: 0.5;
 	}
 
+	&.is-loading-mask {
+		&::after {
+			content: "";
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.cl-button__loading {
+			position: absolute;
+			left: auto;
+			top: auto;
+			z-index: 9;
+			display: inline-flex;
+			align-items: center;
+
+			&-text {
+				margin-left: 10rpx;
+			}
+		}
+	}
+
 	@mixin color($type, $color) {
 		&.cl-button--#{$type} {
 			background-color: $color;

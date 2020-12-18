@@ -79,6 +79,7 @@ export default {
 			rules2: [],
 			props: [],
 			_form: {},
+			lock: false,
 		};
 	},
 
@@ -86,10 +87,12 @@ export default {
 		model2: {
 			deep: true,
 			handler(newV, oldV) {
-				// 数据变化时，通知 form-item 验证
-				this.publish("validate", {
-					props: this.checkProps(newV, oldV),
-				});
+				if (!this.lock) {
+					// 数据变化时，通知 form-item 验证
+					this.publish("validate", {
+						props: this.checkProps(newV, oldV),
+					});
+				}
 			},
 		},
 
@@ -176,10 +179,12 @@ export default {
 
 		// 重置表单
 		resetFields() {
+			this.lock = true;
 			this.form = cloneDeep(this._form);
 			this.$emit("update:model", this.form);
 			this.$nextTick(() => {
 				this.clearValidate();
+				this.lock = false;
 			});
 		},
 
