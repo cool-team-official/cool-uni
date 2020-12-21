@@ -6,8 +6,8 @@
 			`is-justify-${justify}`,
 			`is-align-${align}`,
 			{
-				'is-wrap': wrap
-			}
+				'is-wrap': wrap,
+			},
 		]"
 		:style="{
 			height: parseRpx(height),
@@ -16,8 +16,9 @@
 			margin: margin2,
 			borderRadius: parseRpx(borderRadius),
 			border,
-			backgroundColor
+			backgroundColor,
 		}"
+		@tap="onTap"
 	>
 		<slot></slot>
 	</view>
@@ -46,25 +47,29 @@ export default {
 		gutter: [Number, String],
 		justify: {
 			type: String,
-			default: "start"
+			default: "start",
 		},
 		align: {
 			type: String,
-			default: "top"
+			default: "top",
 		},
 		height: [String, Number],
 		width: [String, Number],
 		padding: [String, Number, Array],
 		margin: [String, Number, Array],
-		borderRadius: [String, Number]
+		borderRadius: [String, Number],
 	},
 	computed: {
 		margin2() {
 			return this.margin ? parseRpx(this.margin) : `0 -${this.gutter / 2}rpx`;
-		}
+		},
 	},
 	methods: {
-		parseRpx
-	}
+		parseRpx,
+		onTap(e) {
+			this.$emit("click", e);
+			this.$emit("tap", e);
+		},
+	},
 };
 </script>

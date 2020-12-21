@@ -286,7 +286,7 @@ class ClCanvas {
         let arr = [[]];
         let a = 0
 
-        for (let i = 0, n = text.length; i < n; i++) {
+        for (let i = 0; i < text.length; i++) {
             let b = this.getFontPx(text[i], { fontSize, letterSpace })
 
             if (a + b > width) {
@@ -311,6 +311,10 @@ class ClCanvas {
 
     // 获取单个字体像素大小
     getFontPx(text, { fontSize = 14, letterSpace }) {
+        if (!text) {
+            return fontSize / 2 + fontSize / 14 + letterSpace
+        }
+
         let ch = text.charCodeAt();
 
         if ((ch >= 0x0001 && ch <= 0x007e) || (0xff60 <= ch && ch <= 0xff9f)) {

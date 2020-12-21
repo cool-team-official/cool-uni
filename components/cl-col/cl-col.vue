@@ -3,8 +3,9 @@
 		:class="['cl-col', classList]"
 		:style="{
 			'padding-left': padding,
-			'padding-right': padding
+			'padding-right': padding,
 		}"
+		@tap="onTap"
 	>
 		<slot></slot>
 	</view>
@@ -30,14 +31,14 @@ export default {
 		// 栅格占据的列数
 		span: {
 			type: [Number, String],
-			default: 24
+			default: 24,
 		},
 		// 栅格左侧的间隔格数
 		offset: [Number, String],
 		// 栅格向右移动格数
 		pull: [Number, String],
 		// 栅格向左移动格数
-		push: [Number, String]
+		push: [Number, String],
 	},
 	computed: {
 		parent() {
@@ -55,7 +56,7 @@ export default {
 		classList() {
 			let list = [];
 
-			["span", "offset", "pull", "push"].forEach(prop => {
+			["span", "offset", "pull", "push"].forEach((prop) => {
 				let value = this[prop];
 
 				if (value || value === 0) {
@@ -64,7 +65,13 @@ export default {
 			});
 
 			return list;
-		}
-	}
+		},
+	},
+	methods: {
+		onTap(e) {
+			this.$emit("click", e);
+			this.$emit("tap", e);
+		},
+	},
 };
 </script>
