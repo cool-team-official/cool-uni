@@ -1,15 +1,11 @@
 <template>
 	<view
 		class="cl-tabbar-item"
-		:class="[
-			{
-				'is-active': isActive
-			}
-		]"
+		:class="[classList]"
 		:style="[
 			{
-				height: parent.height
-			}
+				height: parent.height,
+			},
 		]"
 		@tap="tapItem"
 	>
@@ -23,7 +19,7 @@
 					:src="iconPath"
 					:style="{
 						height: size,
-						width: size
+						width: size,
 					}"
 				/>
 
@@ -32,15 +28,15 @@
 					:src="selectedIconPath"
 					:style="{
 						height: size,
-						width: size
+						width: size,
 					}"
 				/>
 
 				<text
-					v-show="text"
+					v-if="text"
 					class="cl-tabbar-item__label"
 					:style="{
-						color
+						color,
 					}"
 					>{{ text }}</text
 				>
@@ -77,7 +73,7 @@ export default {
 		// 唯一标识
 		name: {
 			type: [String, Number],
-			required: true
+			required: true,
 		},
 		// 图标路径
 		iconPath: String,
@@ -86,13 +82,13 @@ export default {
 		// 图标大小
 		iconSize: {
 			type: Number,
-			default: 50
+			default: 50,
 		},
 		// 角标值
 		badge: {
 			type: [Number, String],
-			default: 0
-		}
+			default: 0,
+		},
 	},
 
 	mixins: [Emitter],
@@ -116,13 +112,23 @@ export default {
 
 		parent() {
 			return getParent.call(this, "ClTabbar", ["name", "color", "selectedColor", "height"]);
-		}
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.isActive) {
+				list.push("is-active");
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	methods: {
 		tapItem() {
 			this.dispatch("ClTabbar", "change", this.name);
-		}
-	}
+		},
+	},
 };
 </script>

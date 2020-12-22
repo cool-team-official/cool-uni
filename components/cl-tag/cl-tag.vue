@@ -1,19 +1,7 @@
 <template>
-	<view
-		class="cl-tag"
-		:class="[
-			`cl-tag--${type}`,
-			`cl-tag--${size}`,
-			{
-				'is-plain': plain,
-				'is-round': round
-			}
-		]"
-		v-if="visible"
-		@tap="click"
-	>
+	<view class="cl-tag" :class="classList" @tap="click" v-if="visible">
 		<slot></slot>
-		<text class="cl-tag__close cl-icon-close" v-show="closable" @tap.stop="close"></text>
+		<text class="cl-tag__close cl-icon-close" v-if="closable" @tap.stop="close"></text>
 	</view>
 </template>
 
@@ -39,25 +27,49 @@ export default {
 		// 类型 primary | success | error | warning | info
 		type: {
 			type: String,
-			default: "primary"
+			default: "primary",
 		},
 		// 是否镂空
 		plain: Boolean,
 		// 尺寸 small | mini
 		size: {
 			type: String,
-			default: "small"
+			default: "small",
 		},
 		// 是否可关闭
 		closable: Boolean,
 		// 是否圆角
-		round: Boolean
+		round: Boolean,
 	},
 
 	data() {
 		return {
-			visible: true
+			visible: true,
 		};
+	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.type) {
+				list.push(`cl-tag--${this.type}`);
+			}
+
+			if (this.size) {
+				list.push(`cl-tag--${this.size}`);
+			}
+
+			if (this.plain) {
+				list.push("is-plain");
+			}
+
+			if (this.round) {
+				list.push("is-round");
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	methods: {
@@ -72,7 +84,7 @@ export default {
 		close() {
 			this.visible = false;
 			this.$emit("close");
-		}
-	}
+		},
+	},
 };
 </script>

@@ -10,7 +10,7 @@
 
 		.cl-loading {
 			position: relative;
-			/* #ifndef H5 */
+			/* #ifdef MP-WEIXIN */
 			top: 4rpx;
 			/* #endif */
 			right: 14rpx;

@@ -123,3 +123,8 @@ export default {
 	},
 };
 </script>
+
+<style>
+.cl-rate {
+}
+</style>

@@ -30,12 +30,14 @@
 		margin-left: 10rpx;
 	}
 
-	&[size="small"] {
+	&[size="small"],
+	&--small {
 		height: 60rpx;
 		padding: 0rpx 24rpx;
 	}
 
-	&[size="mini"] {
+	&[size="mini"],
+	&--mini {
 		font-size: 24rpx;
 		padding: 0 14rpx;
 		height: 54rpx;
@@ -89,9 +91,19 @@
 	}
 
 	&.is-loading-mask {
+		position: relative;
+
 		&::after {
 			content: "";
 			background-color: rgba(0, 0, 0, 0.5);
+
+			/* #ifdef MP-ALIPAY */
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			/* #endif */
 		}
 
 		.cl-button__loading {

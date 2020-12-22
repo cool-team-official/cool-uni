@@ -16,9 +16,8 @@
 		border-radius: 10rpx;
 	}
 
-	&__target {
-		height: 100%;
-		width: 100%;
+	.cl-image__placeholder {
+		background-color: #c0c4cc;
 	}
 }
 
@@ -26,13 +25,13 @@
 	display: inline-flex;
 
 	.cl-avatar {
-		margin-left: -20rpx;
 		border: 1rpx solid rgba(255, 255, 255, 0.2);
 		position: relative;
+	}
 
-		&:first-child {
-			margin-left: 0;
-		}
+	.cl-avatar + .cl-avatar,
+	cl-avatar + cl-avatar {
+		margin-left: -20rpx;
 	}
 
 	&__more {

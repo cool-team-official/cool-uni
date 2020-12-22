@@ -1,17 +1,5 @@
 <template>
-	<view
-		class="cl-input"
-		:class="[
-			{
-				'cl-input--prefix': prefixIcon,
-				'cl-input--suffix': suffixIcon,
-				'cl-input--focus': isFocus,
-				'is-disabled': isDisabled,
-				'is-round': round,
-				'is-border': border,
-			},
-		]"
-	>
+	<view class="cl-input" :class="[classList]">
 		<view class="cl-input__prepend" v-if="$slots.prepend">
 			<slot name="prepend"></slot>
 		</view>
@@ -151,11 +139,17 @@
 				/>
 			</template>
 
+			<!-- #ifdef MP-ALIPAY -->
+			<text class="cl-input__clear cl-icon-close-border" @tap="clear" v-if="clearable"></text>
+			<!-- #endif -->
+
+			<!-- #ifndef MP-ALIPAY -->
 			<text
 				class="cl-input__clear cl-icon-close-border"
 				@tap="clear"
 				v-if="isFocus && clearable"
 			></text>
+			<!-- #endif -->
 		</view>
 
 		<view class="cl-input__append" v-if="$slots.append">
@@ -227,6 +221,38 @@ export default {
 		},
 		prefixIcon: String,
 		suffixIcon: String,
+	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.prefixIcon) {
+				list.push("cl-input--prefix");
+			}
+
+			if (this.suffixIcon) {
+				list.push("cl-input--suffix");
+			}
+
+			if (this.isFocus) {
+				list.push("cl-input--focus");
+			}
+
+			if (this.disabled) {
+				list.push("is-disabled");
+			}
+
+			if (this.round) {
+				list.push("is-round");
+			}
+
+			if (this.border) {
+				list.push("is-border");
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	mixins: [Form],

@@ -1,19 +1,7 @@
 <template>
-	<view
-		class="cl-checkbox"
-		:class="[
-			{
-				'cl-checkbox--border': isBorder,
-				'cl-checkbox--round': isRound,
-				'is-disabled': isDisabled,
-				'is-checked': checked,
-				'is-fill': fill,
-			},
-		]"
-		@tap="change"
-	>
+	<view class="cl-checkbox" :class="[classList]" @tap="change">
 		<view class="cl-checkbox__input">
-			<text class="cl-icon-toast-success" v-show="checked"></text>
+			<text class="cl-icon-toast-success" v-if="checked"></text>
 		</view>
 
 		<text class="cl-checkbox__label">
@@ -107,6 +95,32 @@ export default {
 		isDisabled() {
 			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
 			return this.$form ? this.$form.disabled || disabled : disabled;
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.isBorder) {
+				list.push("cl-checkbox--border");
+			}
+
+			if (this.isRound) {
+				list.push("cl-checkbox--round");
+			}
+
+			if (this.isDisabled) {
+				list.push("is-disabled");
+			}
+
+			if (this.checked) {
+				list.push("is-checked");
+			}
+
+			if (this.fill) {
+				list.push("is-fill");
+			}
+
+			return list.join(" ");
 		},
 	},
 

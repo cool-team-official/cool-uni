@@ -2,19 +2,14 @@
 	<view class="cl-loading-mask__wrap">
 		<view
 			class="cl-loading-mask"
-			:class="[
-				{
-					'cl-loading-mask--fixed': fullscreen,
-					'is-show': loading
-				}
-			]"
+			:class="[classList]"
 			:style="{
 				background,
-				color
+				color,
 			}"
 		>
 			<view class="cl-loading-mask__content" v-if="loading">
-				<cl-loading :color="color"></cl-loading>
+				<cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
 				<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
 			</view>
 		</view>
@@ -31,7 +26,8 @@ import { color } from "../../theme";
  * @description 加载区域
  * @tutorial https://docs.cool-js.com/uni/components/feedback/loading.html
  * @property {String} text 加载时文本，默认不显示
- * @property {Boolean} loading 是否加载种
+ * @property {Boolean} loading 是否加载中
+ * @property {Boolean} loadingTheme 加载图标主题
  * @property {Boolean} fullscreen 是否全屏显示
  * @property {String} color 加载图标颜色
  * @property {String} background 背景颜色，默认rgba(255,255,255,0.7)
@@ -44,15 +40,37 @@ export default {
 	props: {
 		text: String,
 		loading: Boolean,
+		loadingTheme: String,
 		fullscreen: Boolean,
 		color: {
 			type: String,
-			default: color.primary
+			default: color.primary,
 		},
 		background: {
 			type: String,
-			default: "rgba(255, 255, 255, 0.7)"
-		}
-	}
+			default: "rgba(255, 255, 255, 0.7)",
+		},
+	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.fullscreen) {
+				list.push("cl-loading-mask--fixed");
+			}
+
+			if (this.loading) {
+				list.push("is-show");
+			}
+
+			return list.join(" ");
+		},
+	},
 };
 </script>
+
+<style scoped>
+.cl-loading-mask {
+}
+</style>

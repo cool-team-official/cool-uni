@@ -5,11 +5,7 @@
 				<!-- 原图片 -->
 				<view
 					class="cl-cropper__image"
-					:class="[
-						{
-							'is-filter-blur': filterBlur,
-						},
-					]"
+					:class="[filterBlur ? 'is-filter-blur' : '']"
 					:style="[imageSize, imageTransform]"
 					@touchstart.stop.prevent="onTouchStart"
 					@touchmove.stop.prevent="onTouchMove"
@@ -21,11 +17,7 @@
 				<!-- 选择框 -->
 				<view
 					class="cl-cropper__view"
-					:class="[
-						{
-							'is-round': round,
-						},
-					]"
+					:class="[round ? 'is-round' : '']"
 					:style="[cropStyle]"
 				>
 					<image :src="image.url" :style="[imageSize, cropTransform]" />

@@ -111,3 +111,8 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.cl-loading {
+}
+</style>

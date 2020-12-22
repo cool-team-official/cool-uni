@@ -5,13 +5,9 @@
 				class="cl-message"
 				v-if="!item.closed"
 				:key="item.id"
-				:class="[
-					{
-						'is-show': item.visible
-					}
-				]"
+				:class="[item.visible ? 'is-show' : '']"
 				:style="{
-					top: item.visible ? item.top : '-200rpx'
+					top: item.visible ? item.top : '-200rpx',
 				}"
 			>
 				<icon
@@ -44,12 +40,12 @@ let id = 0;
 export default {
 	props: {
 		// 是否单个显示
-		single: Boolean
+		single: Boolean,
 	},
 
 	data() {
 		return {
-			list: []
+			list: [],
 		};
 	},
 
@@ -66,7 +62,7 @@ export default {
 				timer: null,
 				onClose: null,
 				iconSize: 22,
-				top: "120rpx"
+				top: "120rpx",
 			};
 
 			// 合并参数
@@ -112,7 +108,7 @@ export default {
 					this.close(item);
 				}, duration);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

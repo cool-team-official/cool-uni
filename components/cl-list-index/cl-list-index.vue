@@ -25,14 +25,7 @@
 			<template v-for="(item, index) in flist">
 				<view class="cl-li__group" :key="index" :id="`index-${item.label}`">
 					<!-- 关键字 -->
-					<view
-						:class="[
-							'cl-li__header',
-							{
-								'is-active': curr.label == item.label
-							}
-						]"
-					>
+					<view :class="['cl-li__header', curr.label == item.label ? 'is-active' : '']">
 						<!-- 头部插槽 -->
 						<slot name="header" :item="item" :isActive="curr.label == item.label">
 							<text>{{ item.label }}</text>
@@ -59,12 +52,7 @@
 			<view class="cl-li__bar-list" @touchmove.stop="barMove" @touchend="barEnd">
 				<template v-for="(item, index) in flist">
 					<view
-						:class="[
-							'cl-li__bar-block',
-							{
-								'is-active': curr.label == item.label
-							}
-						]"
+						:class="['cl-li__bar-block', curr.label == item.label ? 'is-active' : '']"
 						:key="index"
 						:id="index"
 						@touchstart="toRow(item)"
@@ -103,15 +91,15 @@ export default {
 		// 序号
 		index: {
 			type: Number,
-			default: 0
+			default: 0,
 		},
 		// 列表数据
 		list: Array,
 		// 是否带有过滤栏
 		filterable: {
 			type: Boolean,
-			default: true
-		}
+			default: true,
+		},
 	},
 
 	data() {
@@ -122,36 +110,36 @@ export default {
 			curr: {},
 			bar: {
 				top: 0,
-				itemH: 0
+				itemH: 0,
 			},
-			tops: []
+			tops: [],
 		};
 	},
 
 	watch: {
 		index: {
 			immediate: true,
-			handler: "setData"
+			handler: "setData",
 		},
 
 		curr: {
 			handler(val) {
 				this.$emit("change", val);
-			}
-		}
+			},
+		},
 	},
 
 	computed: {
 		flist() {
-			const match = d => (d ? d.name.includes(this.keyWord) : false);
+			const match = (d) => (d ? d.name.includes(this.keyWord) : false);
 
 			return this.list
-				.filter(e => e.children && e.children.find(match))
-				.map(e => {
+				.filter((e) => e.children && e.children.find(match))
+				.map((e) => {
 					e.children = e.children.filter(match);
 					return e;
 				});
-		}
+		},
 	},
 
 	mounted() {
@@ -165,7 +153,7 @@ export default {
 
 		onScroll(e) {
 			let top = e.detail.scrollTop;
-			let num = this.tops.filter(e => top >= e - 60).length;
+			let num = this.tops.filter((e) => top >= e - 60).length;
 
 			if (num < 0) {
 				num = 0;
@@ -215,7 +203,7 @@ export default {
 			uni.createSelectorQuery()
 				.in(this)
 				.select(`.cl-li__bar-list`)
-				.boundingClientRect(res => {
+				.boundingClientRect((res) => {
 					this.bar.top = res.top;
 					this.bar.itemH = parseInt(res.height / this.list.length);
 				})
@@ -226,10 +214,10 @@ export default {
 				.in(this)
 				.selectAll(".cl-li__header")
 				.fields({ rect: true })
-				.exec(d => {
-					this.tops = d[0].map(e => e.top);
+				.exec((d) => {
+					this.tops = d[0].map((e) => e.top);
 				});
-		}
-	}
+		},
+	},
 };
 </script>

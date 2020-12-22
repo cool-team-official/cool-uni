@@ -1,15 +1,5 @@
 <template>
-	<view
-		class="cl-tabs"
-		:class="[
-			{
-				'is-content': $slots.default,
-				'is-sticky': sticky,
-				'is-fill': fill,
-				'is-border': border,
-			},
-		]"
-	>
+	<view class="cl-tabs" :class="[classList]">
 		<view
 			class="cl-tabs__header"
 			:style="{
@@ -25,7 +15,7 @@
 				<view
 					class="cl-tabs__bar-box"
 					:style="{
-						'justify-content': justify,
+						'text-align': justify,
 					}"
 				>
 					<view
@@ -143,7 +133,10 @@ export default {
 		// 标签是否填充
 		fill: Boolean,
 		// 水平布局
-		justify: String,
+		justify: {
+			type: String,
+			default: "center",
+		},
 		// 是否带有下边框
 		border: {
 			type: Boolean,
@@ -197,6 +190,28 @@ export default {
 		isSticky() {
 			return this.sticky ? "cl-tabs--sticky" : "";
 		},
+
+		classList() {
+			let list = [];
+
+			if (this.$slots.default || this.$slots.$default) {
+				list.push("is-content");
+			}
+
+			if (this.sticky) {
+				list.push("is-sticky");
+			}
+
+			if (this.fill) {
+				list.push("is-fill");
+			}
+
+			if (this.border) {
+				list.push("is-border");
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	mounted() {
@@ -225,7 +240,9 @@ export default {
 
 				// 获取选项卡宽度
 				uni.createSelectorQuery()
+					// #ifndef MP-ALIPAY
 					.in(this)
+					// #endif
 					.select(".cl-tabs")
 					.fields({ size: true }, (d) => {
 						this.width = d.width;
@@ -328,3 +345,8 @@ export default {
 	},
 };
 </script>
+
+<style>
+.cl-tabs {
+}
+</style>

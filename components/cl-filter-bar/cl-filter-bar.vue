@@ -1,20 +1,11 @@
 <template>
-	<view
-		class="cl-filter-bar"
-		:class="[
-			{
-				'is-sticky': isSticky,
-			},
-		]"
-	>
+	<view class="cl-filter-bar" :class="[isSticky ? 'is-sticky' : '']">
 		<view class="cl-filter-bar-sort">
 			<view
 				class="cl-filter-bar-sort__field"
 				v-for="(item, index) in list2"
 				:key="index"
-				:class="{
-					'is-active': item.value == prop,
-				}"
+				:class="[item.value == prop ? 'is-active' : '']"
 				@tap="changeOrder(item)"
 			>
 				<text class="cl-filter-bar-sort__label">{{ item.label }}</text>

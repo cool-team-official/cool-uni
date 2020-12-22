@@ -1,29 +1,19 @@
 <template>
 	<view
 		class="cl-text"
-		:class="[
-			{
-				'is-bold': bold,
-				'is-block': block,
-				'is-line-through': lineThrough,
-				'is-underline': underline,
-				'is-ellipsis': ellipsis > 0,
-			},
-			`is-${type}`,
-			`is-color-${color}`
-		]"
+		:class="[classList]"
 		:style="{
 			margin: parseRpx(margin),
 			color,
 			'font-size': '26rpx',
 			'letter-spacing': parseRpx(letterSpacing),
-			'-webkit-line-clamp': ellipsis
+			'-webkit-line-clamp': ellipsis,
 		}"
 		@tap="onTap"
 	>
 		<!-- 价格 -->
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
-		
+
 		<!-- 前缀图标 -->
 		<text class="cl-text__prefix-icon" v-if="prefixIcon">
 			<cl-icon :name="prefixIcon" :size="fontSize"></cl-icon>
@@ -32,7 +22,7 @@
 		<text
 			class="cl-text__value"
 			:style="{
-				fontSize
+				fontSize,
 			}"
 			>{{ d.value }}</text
 		>
@@ -81,12 +71,12 @@ export default {
 		// 类型：text | price | phone
 		type: {
 			type: String,
-			default: "text"
+			default: "text",
 		},
 		// 是否加密
 		encrypt: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 是否粗体 500
 		bold: Boolean,
@@ -97,17 +87,17 @@ export default {
 		// 字体颜色
 		color: {
 			type: String,
-			default: "#444"
+			default: "#444",
 		},
 		// 字体大小
 		size: {
 			type: [String, Number],
-			default: 24
+			default: 24,
 		},
 		// 小数点：price 有效
 		precision: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 穿过文本下的一条线
 		lineThrough: Boolean,
@@ -116,7 +106,7 @@ export default {
 		// 文本水平间隔
 		letterSpacing: {
 			type: [String, Number],
-			default: 0
+			default: 0,
 		},
 		// 外间距
 		margin: [String, Number, Array],
@@ -136,29 +126,63 @@ export default {
 				if (this.precision) {
 					return {
 						value,
-						precision
+						precision,
 					};
 				} else {
 					return {
-						value
+						value,
 					};
 				}
 			} else if (this.type == "phone") {
 				const str = String(this.value);
 
 				return {
-					value: this.encrypt ? str.substr(0, 3) + "****" + str.substr(7) : str
+					value: this.encrypt ? str.substr(0, 3) + "****" + str.substr(7) : str,
 				};
 			} else {
 				return {
-					value: this.value
+					value: this.value,
 				};
 			}
 		},
 
 		fontSize() {
-			return parseRpx(this.size)
-		}
+			return parseRpx(this.size);
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.bold) {
+				list.push("is-bold");
+			}
+
+			if (this.block) {
+				list.push("is-block");
+			}
+
+			if (this.lineThrough) {
+				list.push("is-line-through");
+			}
+
+			if (this.underline) {
+				list.push("is-underline");
+			}
+
+			if (this.ellipsis > 0) {
+				list.push("is-ellipsis");
+			}
+
+			if (this.type) {
+				list.push(`is-${this.type}`);
+			}
+
+			if (this.color) {
+				list.push(`is-color-${this.color}`);
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	methods: {
@@ -167,7 +191,7 @@ export default {
 		onTap(e) {
 			this.$emit("click", e);
 			this.$emit("tap", e);
-		}
-	}
+		},
+	},
 };
 </script>

@@ -1,16 +1,19 @@
 <template>
 	<view :class="['cl-avatar', isShape]" :style="{ height, width }">
-		<slot v-if="!src">
-			<text class="cl-avatar__slot cl-icon-avatar" :style="{ fontSize }"></text>
-		</slot>
-		<image
-			class="cl-avatar__target"
+		<slot v-if="$slots.default || $slots.$default"> </slot>
+
+		<cl-image
 			v-else
 			:src="src"
+			:size="size"
 			:mode="mode"
 			@error="handleError"
 			@load="handleLoad"
-		></image>
+		>
+			<view class="cl-image__placeholder" slot="placeholder">
+				<text class="cl-icon-my" :style="{ fontSize }"></text>
+			</view>
+		</cl-image>
 	</view>
 </template>
 
@@ -34,16 +37,16 @@ export default {
 		lazyLoad: Boolean,
 		size: {
 			type: Number,
-			default: 80
+			default: 80,
 		},
 		shape: {
 			type: String,
-			default: "circle"
+			default: "circle",
 		},
 		mode: {
 			type: String,
-			default: "scaleToFill"
-		}
+			default: "scaleToFill",
+		},
 	},
 
 	computed: {
@@ -61,7 +64,7 @@ export default {
 
 		fontSize() {
 			return this.size / 1.7 + "rpx";
-		}
+		},
 	},
 
 	methods: {
@@ -71,7 +74,7 @@ export default {
 
 		handleError(e) {
 			this.$emit("load", e);
-		}
-	}
+		},
+	},
 };
 </script>

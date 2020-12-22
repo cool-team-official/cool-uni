@@ -1,20 +1,7 @@
 <template>
 	<button
 		class="cl-button"
-		:class="[
-			`cl-button--${type}`,
-			`cl-button--${size}`,
-			`is-${platform}`,
-			{
-				'is-round': round,
-				'is-shadow': shadow,
-				'is-loading': loading,
-				'is-loading-mask': loadingMask,
-				'is-plain': plain,
-				'is-fill': fill,
-				'is-disabled': disabled,
-			},
-		]"
+		:class="[classList]"
 		:size="size"
 		:type="type"
 		:disabled="disabled"
@@ -135,11 +122,61 @@ export default {
 		sendMessageImg: String,
 		showMessageCard: Boolean,
 	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.type) {
+				list.push(`cl-button--${this.type}`);
+			}
+
+			if (this.size) {
+				list.push(`cl-button--${this.size}`);
+			}
+
+			if (this.platform) {
+				list.push(`is-${this.platform}`);
+			}
+
+			if (this.round) {
+				list.push("is-round");
+			}
+
+			if (this.shadow) {
+				list.push("is-shadow");
+			}
+
+			if (this.loading) {
+				list.push("is-loading");
+			}
+
+			if (this.loadingMask) {
+				list.push("is-loading-mask");
+			}
+
+			if (this.plain) {
+				list.push("is-plain");
+			}
+
+			if (this.fill) {
+				list.push("is-fill");
+			}
+
+			if (this.disabled) {
+				list.push("is-disabled");
+			}
+
+			return list.join(" ");
+		},
+	},
+
 	data() {
 		return {
 			platform,
 		};
 	},
+
 	methods: {
 		getphonenumber(e) {
 			this.$emit("getphonenumber", e);

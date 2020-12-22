@@ -1,14 +1,9 @@
 <template>
 	<view
 		class="cl-grid"
-		:class="[
-			{
-				'cl-grid--border': border
-			},
-			`cl-grid__column-${column}`
-		]"
+		:class="[classList]"
 		:style="{
-			border
+			border,
 		}"
 	>
 		<slot></slot>
@@ -33,9 +28,25 @@ export default {
 	props: {
 		column: {
 			type: Number,
-			default: 2
+			default: 2,
 		},
-		border: Boolean
-	}
+		border: Boolean,
+	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.border) {
+				list.push("cl-grid--border");
+			}
+
+			if (this.column) {
+				list.push(`cl-grid__column--${this.column}`);
+			}
+
+			return list.join(" ");
+		},
+	},
 };
 </script>

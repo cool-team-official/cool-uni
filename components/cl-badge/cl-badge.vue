@@ -1,17 +1,7 @@
 <template>
-	<view class="cl-badge" v-show="$slots.default">
+	<view class="cl-badge" v-show="$slots.default || $slots.$default">
 		<slot></slot>
-		<text
-			v-if="!hidden && (content != 0 || isDot)"
-			:class="[
-				'cl-badge__content',
-				'cl-badge__content--' + type,
-				{
-					'is-dot': isDot
-				}
-			]"
-			>{{ content }}</text
-		>
+		<text v-if="!hidden && (content != 0 || isDot)" :class="[classList]">{{ content }}</text>
 	</view>
 </template>
 
@@ -43,7 +33,7 @@ export default {
 		// 是否隐藏
 		hidden: Boolean,
 		// 类型 primary | success | warning | error
-		type: String
+		type: String,
 	},
 
 	computed: {
@@ -58,7 +48,21 @@ export default {
 			}
 
 			return value;
-		}
-	}
+		},
+
+		classList() {
+			let list = ["cl-badge__content"];
+
+			if (this.type) {
+				list.push(`cl-badge__content--${this.type}`);
+			}
+
+			if (this.isDot) {
+				list.push("is-dot");
+			}
+
+			return list.join(" ");
+		},
+	},
 };
 </script>

@@ -1,17 +1,7 @@
 <template>
-	<view
-		class="cl-radio"
-		:class="[
-			{
-				'is-border': isBorder,
-				'is-disabled': isDisabled,
-				'is-checked': checked,
-			},
-		]"
-		@tap="change"
-	>
+	<view class="cl-radio" :class="[classList]" @tap="change">
 		<view class="cl-radio__input">
-			<text class="cl-icon-toast-success" v-show="checked"></text>
+			<text class="cl-icon-toast-success" v-if="checked"></text>
 		</view>
 
 		<text class="cl-radio__label">
@@ -86,6 +76,24 @@ export default {
 		isDisabled() {
 			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
 			return this.$form ? this.$form.disabled || disabled : disabled;
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.isBorder) {
+				list.push("is-border");
+			}
+
+			if (this.isDisabled) {
+				list.push("is-disabled");
+			}
+
+			if (this.checked) {
+				list.push("is-checked");
+			}
+
+			return list.join(" ");
 		},
 	},
 

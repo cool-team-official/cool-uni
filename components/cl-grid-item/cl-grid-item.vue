@@ -26,7 +26,7 @@ export default {
 
 		width() {
 			return 100 / (this.parent.column || 0) + "%";
-		}
-	}
+		},
+	},
 };
 </script>

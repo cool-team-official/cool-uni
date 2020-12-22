@@ -3,7 +3,7 @@
 
 	&::after,
 	&::before {
-		content: '';
+		content: "";
 		display: table;
 	}
 
@@ -18,14 +18,14 @@
 	}
 
 	&--border {
-		border: 1rpx solid $cl-color-default;
+		border: 2rpx solid $cl-color-default;
 		border-bottom: 0;
 		border-right: 0;
 
 		.cl-grid-item {
 			&::before,
 			&::after {
-				content: '';
+				content: "";
 				position: absolute;
 				display: block;
 				background-color: $cl-color-default;
@@ -34,7 +34,7 @@
 			&::before {
 				bottom: 0;
 				left: 0;
-				height: 1rpx;
+				height: 2rpx;
 				width: 100%;
 			}
 
@@ -42,7 +42,7 @@
 				right: 0;
 				top: 0;
 				height: 100%;
-				width: 1rpx;
+				width: 2rpx;
 			}
 		}
 	}

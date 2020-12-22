@@ -8,10 +8,8 @@
 				:class="[
 					`cl-toast--${item.type}`,
 					`is-${item.position}`,
-					{
-						'is-show': item.visible,
-						'is-icon': item.icon
-					}
+					item.visible ? 'is-show' : '',
+					item.icon ? 'is-icon' : '',
 				]"
 			>
 				<view class="cl-toast__icon" v-if="item.icon">
@@ -44,12 +42,12 @@ export default {
 
 	props: {
 		// 是否单个显示
-		single: Boolean
+		single: Boolean,
 	},
 
 	data() {
 		return {
-			list: []
+			list: [],
 		};
 	},
 
@@ -67,7 +65,7 @@ export default {
 				position: "bottom",
 				timer: null,
 				onClose: null,
-				iconSize: 22
+				iconSize: 22,
 			};
 
 			// 合并参数
@@ -114,7 +112,7 @@ export default {
 					this.close(item);
 				}, duration);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

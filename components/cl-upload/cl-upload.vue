@@ -1,12 +1,5 @@
 <template>
-	<view
-		class="cl-upload-list"
-		:class="[
-			{
-				'is-disabled': isDisabled,
-			},
-		]"
-	>
+	<view class="cl-upload-list" :class="[classList]">
 		<!-- 加载框 -->
 		<cl-loading-mask :loading="loading" text="上传图片中"></cl-loading-mask>
 
@@ -162,6 +155,16 @@ export default {
 	computed: {
 		isAppend() {
 			return this.urls.length < (this.multiple ? this.limit : 1);
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.isDisabled) {
+				list.push("is-disabled");
+			}
+
+			return list.join(" ");
 		},
 	},
 

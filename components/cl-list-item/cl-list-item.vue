@@ -9,7 +9,7 @@
 		<view
 			class="cl-list-item__swiper"
 			:style="{
-				transform: translateX
+				transform: translateX,
 			}"
 		>
 			<view class="cl-list-item__container">
@@ -69,23 +69,23 @@ export default {
 		// 是否带有下边框
 		border: {
 			type: Boolean,
-			default: null
+			default: null,
 		},
 		// 类型 primary | success | error | warning | info
 		type: String,
 		// 水平布局方式
 		justify: {
 			type: String,
-			default: "end"
+			default: "end",
 		},
 		// 是否滑动 none | left | right
 		swipe: {
 			type: String,
 			default: "none",
-			validator: val => {
+			validator: (val) => {
 				return ["none", "left", "right"].indexOf(val) !== -1;
-			}
-		}
+			},
+		},
 	},
 
 	data() {
@@ -95,12 +95,12 @@ export default {
 				end: 0,
 				x: 0,
 				direction: "left",
-				lock: true
+				lock: true,
 			},
 
 			menu: {
-				width: 0
-			}
+				width: 0,
+			},
 		};
 	},
 
@@ -126,7 +126,7 @@ export default {
 		},
 
 		isAppend() {
-			return this.$scopedSlots.append ? "cl-list-item--append" : "";
+			return this.$slots.append ? "cl-list-item--append" : "";
 		},
 
 		isDisabled() {
@@ -139,13 +139,13 @@ export default {
 
 		parent() {
 			return getParent.call(this, "ClList", ["disabled", "justify", "border"]) || {};
-		}
+		},
 	},
 
 	watch: {
 		swipe() {
 			this.setMenu();
-		}
+		},
 	},
 
 	mounted() {
@@ -203,7 +203,7 @@ export default {
 
 				query
 					.select(`.cl-list-item__menu-${this.swipe}`)
-					.boundingClientRect(data => {
+					.boundingClientRect((data) => {
 						if (data) {
 							this.menu.width = data.width;
 						}
@@ -223,7 +223,7 @@ export default {
 					callback();
 				}, 300);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

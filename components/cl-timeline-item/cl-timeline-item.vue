@@ -1,16 +1,9 @@
 <template>
-	<view
-		class="cl-timeline-item"
-		:class="[
-			{
-				'show-line': showLine
-			}
-		]"
-	>
+	<view class="cl-timeline-item" :class="[showLine ? 'show-line' : '']">
 		<view
 			class="cl-timeline-item__timestamp"
 			:style="{
-				width: `${parent.timestampWidth}rpx`
+				width: `${parent.timestampWidth}rpx`,
 			}"
 		>
 			<slot name="timestamp">
@@ -33,7 +26,7 @@
 						v-else
 						class="cl-timeline-item__dot"
 						:style="{
-							'background-color': color || '#999'
+							'background-color': color || '#999',
 						}"
 					></text>
 				</slot>
@@ -76,8 +69,8 @@ export default {
 		// 图标颜色，默认#999
 		color: {
 			type: String,
-			default: "#999"
-		}
+			default: "#999",
+		},
 	},
 	computed: {
 		parent() {
@@ -85,7 +78,7 @@ export default {
 		},
 		timestampText() {
 			return (this.timestamp || "").split(" ");
-		}
-	}
+		},
+	},
 };
 </script>

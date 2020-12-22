@@ -1,13 +1,5 @@
 <template>
-	<view
-		class="cl-select"
-		:class="[
-			{
-				'is-disabled': isDisabled,
-				'is-border': border,
-			},
-		]"
-	>
+	<view class="cl-select" :class="[classList]">
 		<picker
 			:mode="mode"
 			:value="index"
@@ -21,13 +13,15 @@
 			@columnchange="onColumnChange"
 			@cancel="onCancel"
 		>
-			<text class="cl-select__value"
-				>{{ text
-				}}<text class="cl-select__placeholder" v-show="showPlaceholder">{{
-					placeholder
-				}}</text></text
-			>
-			<text class="cl-select__icon cl-icon-arrow-bottom"></text>
+			<view class="cl-select__inner">
+				<text class="cl-select__value"
+					>{{ text
+					}}<text class="cl-select__placeholder" v-if="showPlaceholder">{{
+						placeholder
+					}}</text></text
+				>
+				<text class="cl-select__icon cl-icon-arrow-bottom"></text>
+			</view>
 		</picker>
 	</view>
 </template>
@@ -120,7 +114,7 @@ export default {
 
 	data() {
 		return {
-			index: [],
+			index: 0,
 			text: "",
 		};
 	},
@@ -157,6 +151,20 @@ export default {
 
 		showPlaceholder() {
 			return isEmpty(this.text);
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.isDisabled) {
+				list.push("is-disabled");
+			}
+
+			if (this.border) {
+				list.push("is-border");
+			}
+
+			return list.join(" ");
 		},
 	},
 

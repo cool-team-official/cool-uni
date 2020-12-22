@@ -1,22 +1,17 @@
 <template>
 	<view
 		class="cl-topbar"
-		:class="[
-			{
-				'is-border': border,
-				'is-fixed': fixed
-			}
-		]"
+		:class="[classList]"
 		:style="{
 			'padding-top': top,
 			'background-color': backgroundColor,
-			color
+			color,
 		}"
 	>
 		<view
 			class="cl-topbar__content"
 			:style="{
-				color
+				color,
 			}"
 		>
 			<slot>
@@ -30,7 +25,7 @@
 		<view
 			class="cl-topbar__prepend"
 			:style="{
-				top
+				top,
 			}"
 		>
 			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
@@ -43,7 +38,7 @@
 		<view
 			class="cl-topbar__append"
 			:style="{
-				top
+				top,
 			}"
 		>
 			<slot name="append"></slot>
@@ -80,33 +75,47 @@ export default {
 		// 是否带有下边框
 		border: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 是否显示返回按钮
 		showBack: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 背景颜色
 		backgroundColor: {
 			type: String,
-			default: "#fff"
+			default: "#fff",
 		},
 		// 字体颜色
 		color: {
 			type: String,
-			default: "#000"
+			default: "#000",
 		},
 		// 返回路径
 		backPath: String,
 		// 是否固定布局在顶部
-		fixed: Boolean
+		fixed: Boolean,
 	},
 
 	computed: {
 		top() {
 			return platform === "android" ? `${statusBarHeight}px` : "env(safe-area-inset-top)";
-		}
+		},
+
+		classList() {
+			let list = [];
+
+			if (this.border) {
+				list.push("is-border");
+			}
+
+			if (this.fixed) {
+				list.push("is-fixed");
+			}
+
+			return list.join(" ");
+		},
 	},
 
 	methods: {
@@ -116,18 +125,19 @@ export default {
 			if (pages.length == 1) {
 				//  H5页面刷新或者分享页时，页面栈长度只有1。此时逐个验证返回的页面路径
 				uni.reLaunch({
-					url: this.backPath || this.$cl.homePage || this.$store.state.app.info.pages.home
+					url:
+						this.backPath || this.$cl.homePage || this.$store.state.app.info.pages.home,
 				});
 			} else {
 				uni.navigateBack({
-					delta: 1
+					delta: 1,
 				});
 			}
 		},
 
 		tapText(e) {
 			this.$emit("click", e);
-		}
-	}
+		},
+	},
 };
 </script>

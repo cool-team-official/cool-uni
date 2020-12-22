@@ -1,13 +1,5 @@
 <template>
-	<view
-		class="cl-textarea"
-		:class="[
-			{
-				'is-disabled': isDisabled,
-				'is-count': count,
-			},
-		]"
-	>
+	<view class="cl-textarea" :class="[classList]">
 		<textarea
 			v-model="value2"
 			:style="{ height }"
@@ -33,7 +25,9 @@
 			@keyboardheightchange="onKeyboardheightchange"
 		></textarea>
 
+		<!-- #ifndef MP-ALIPAY -->
 		<text class="cl-textarea__count" v-if="count">{{ value2.length }}/{{ maxlength }}</text>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -118,6 +112,22 @@ export default {
 			handler(val) {
 				this.value2 = val;
 			},
+		},
+	},
+
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.isDisabled) {
+				list.push("is-disabled");
+			}
+
+			if (this.count) {
+				list.push("is-count");
+			}
+
+			return list.join(" ");
 		},
 	},
 

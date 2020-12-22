@@ -64,7 +64,7 @@ export default {
 				}
 			});
 
-			return list;
+			return list.join(" ");
 		},
 	},
 	methods: {

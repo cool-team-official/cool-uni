@@ -15,16 +15,13 @@
 			overflow: hidden;
 		}
 
-		&-btn {
+		.cl-button {
+			height: 70rpx;
+			line-height: 70rpx;
 			position: absolute;
 			right: 0;
 			top: 0;
 			z-index: 9;
-		}
-
-		.cl-button {
-			height: 70rpx;
-			line-height: 68rpx;
 		}
 	}
 

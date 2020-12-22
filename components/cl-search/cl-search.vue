@@ -27,13 +27,7 @@
 				@clear="onClear"
 				@keyboardheightchange="onKeyboardheightchange"
 			></cl-input>
-			<cl-button
-				class="cl-search__input-btn"
-				type="primary"
-				round
-				v-if="showSearchButton"
-				@tap="search"
-			>
+			<cl-button type="primary" round v-if="showSearchButton" @tap="search">
 				{{ searchButtonText }}
 			</cl-button>
 		</view>

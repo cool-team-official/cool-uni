@@ -1,14 +1,6 @@
 <template>
 	<view
-		:class="[
-			'cl-row',
-			`cl-row--${type}`,
-			`is-justify-${justify}`,
-			`is-align-${align}`,
-			{
-				'is-wrap': wrap,
-			},
-		]"
+		:class="[classList]"
 		:style="{
 			height: parseRpx(height),
 			width: parseRpx(width),
@@ -62,6 +54,27 @@ export default {
 	computed: {
 		margin2() {
 			return this.margin ? parseRpx(this.margin) : `0 -${this.gutter / 2}rpx`;
+		},
+		classList() {
+			let list = ["cl-row"];
+
+			if (this.type) {
+				list.push(`cl-row--${this.type}`);
+			}
+
+			if (this.justify) {
+				list.push(`is-justify-${this.justify}`);
+			}
+
+			if (this.align) {
+				list.push(`is-align-${this.align}`);
+			}
+
+			if (this.wrap) {
+				list.push("is-wrap");
+			}
+
+			return list.join(" ");
 		},
 	},
 	methods: {

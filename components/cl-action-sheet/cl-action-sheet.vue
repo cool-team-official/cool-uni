@@ -11,14 +11,10 @@
 				class="cl-action-sheet__item"
 				v-for="(item, index) in list"
 				:key="index"
-				:class="[
-					{
-						'is-disabled': item.disabled
-					}
-				]"
+				:class="[item.disabled ? 'is-disabled' : '']"
 				:style="{
 					color: item.color,
-					fontSize: item.size
+					fontSize: item.size,
 				}"
 				:open-type="item.openType"
 				@getphonenumber="onEvent(item, 'getphonenumber')"
@@ -61,7 +57,7 @@ export default {
 			callback: null,
 			beforeClose: null,
 			showCancel: true,
-			cancelText: null
+			cancelText: null,
 		};
 	},
 
@@ -72,7 +68,7 @@ export default {
 			callback,
 			beforeClose,
 			cancelText = "取消",
-			showCancel = true
+			showCancel = true,
 		}) {
 			this.closeOnClickModal = closeOnClickModal;
 			this.list = list;
@@ -90,7 +86,7 @@ export default {
 
 				if (this.callback) {
 					this.callback({
-						action
+						action,
 					});
 				}
 			};
@@ -98,7 +94,7 @@ export default {
 			if (this.beforeClose) {
 				this.beforeClose({
 					action,
-					done
+					done,
 				});
 			} else {
 				done();
@@ -123,7 +119,7 @@ export default {
 			if (item[name]) {
 				item[name]();
 			}
-		}
-	}
+		},
+	},
 };
 </script>

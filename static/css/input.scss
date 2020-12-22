@@ -52,10 +52,12 @@
 		display: inline-block;
 		font-size: 34rpx;
 		color: #999;
+		cursor: pointer;
 	}
 
 	&__clear {
 		color: #c1c1c1;
+		margin-left: 20rpx;
 	}
 
 	&:not(.is-disabled) {

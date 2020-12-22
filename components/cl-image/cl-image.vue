@@ -3,13 +3,9 @@
 		class="cl-image"
 		:style="{
 			height: size2[0],
-			width: size2[1]
+			width: size2[1],
 		}"
-		:class="[
-			{
-				'is-round': round
-			}
-		]"
+		:class="[classList]"
 		@tap.stop="onPreview"
 	>
 		<slot name="placeholder" v-if="!src">
@@ -62,7 +58,7 @@ export default {
 		// 图片大小
 		size: {
 			type: [String, Number, Array],
-			default: "100%"
+			default: "100%",
 		},
 		// 是否圆角
 		round: Boolean,
@@ -71,17 +67,26 @@ export default {
 		lazyLoad: Boolean,
 		fadeShow: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		webp: Boolean,
-		showMenuByLongpress: Boolean
+		showMenuByLongpress: Boolean,
 	},
 	data() {
 		return {
-			isError: null
+			isError: null,
 		};
 	},
 	computed: {
+		classList() {
+			let list = [];
+
+			if (this.round) {
+				list.push("is-round");
+			}
+
+			return list.join(" ");
+		},
 		size2() {
 			let size = ["100%", "100%"];
 
@@ -92,7 +97,7 @@ export default {
 			}
 
 			return size.map(parseRpx);
-		}
+		},
 	},
 	methods: {
 		handleError(e) {
@@ -110,10 +115,10 @@ export default {
 			if (this.previewList) {
 				uni.previewImage({
 					urls: this.previewList,
-					current: this.src
+					current: this.src,
 				});
 			}
-		}
-	}
+		},
+	},
 };
 </script>
