@@ -130,7 +130,7 @@ export default {
 		},
 
 		isSuffix() {
-			return this.$scopedSlots.suffix ? "cl-form-item--suffix" : "";
+			return this.$slots.suffix ? "cl-form-item--suffix" : "";
 		},
 
 		isLabelPosition() {

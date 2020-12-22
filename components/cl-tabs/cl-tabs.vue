@@ -72,7 +72,6 @@
 
 <script>
 import { isNumber } from "../../utils";
-import { color } from "../../theme";
 
 /**
  * tabs 选项卡
@@ -150,7 +149,7 @@ export default {
 		// 字体及浮标颜色，默认主色
 		color: {
 			type: String,
-			default: color.primary,
+			default: uni.$cl.color.primary,
 		},
 	},
 
@@ -345,8 +344,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-.cl-tabs {
-}
-</style>

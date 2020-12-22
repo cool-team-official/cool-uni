@@ -5,11 +5,11 @@
 			:class="[classList]"
 			:style="{
 				background,
-				color,
+				color: color2,
 			}"
 		>
 			<view class="cl-loading-mask__content" v-if="loading">
-				<cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
+				<cl-loading :color="color2" :loading-theme="loadingTheme"></cl-loading>
 				<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
 			</view>
 		</view>
@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { color } from "../../theme";
-
 /**
  * loading-mask 加载区域
  * @description 加载区域
@@ -44,7 +42,7 @@ export default {
 		fullscreen: Boolean,
 		color: {
 			type: String,
-			default: color.primary,
+			default: uni.$cl.color.primary,
 		},
 		background: {
 			type: String,
@@ -66,11 +64,10 @@ export default {
 
 			return list.join(" ");
 		},
+
+		color2() {
+			return this.color || uni.$cl.color.primary;
+		},
 	},
 };
 </script>
-
-<style scoped>
-.cl-loading-mask {
-}
-</style>

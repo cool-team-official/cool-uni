@@ -52,7 +52,7 @@ const { platform } = uni.getSystemInfoSync();
 /**
  * button 按钮
  * @description 该组件基于官方的 button 组件。参数与官方一致，同时添加新的支持。
- * @tutorial https://www.uviewui.com/components/button.html
+ * @tutorial https://docs.cool-js.com/uni/components/basic/button.html
  * @property {String} size 按钮大小
  * @property {String} type 按钮类型
  * @property {Boolean} plain 是否镂空

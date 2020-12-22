@@ -61,8 +61,6 @@
 </template>
 
 <script>
-import { color } from "../../theme";
-
 /**
  * loading 加载图标
  * @description 加载图标
@@ -90,7 +88,7 @@ export default {
 
 	computed: {
 		color2() {
-			return this.color || color.primary;
+			return this.color || uni.$cl.color.primary;
 		},
 
 		rh() {
@@ -111,8 +109,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.cl-loading {
-}
-</style>

@@ -21,7 +21,6 @@
 
 <script>
 import { isNumber, getCurrentColor } from "../../utils";
-import { color } from "../../theme";
 
 /**
  * rate 评分
@@ -56,7 +55,7 @@ export default {
 		// 选中颜色
 		color: {
 			type: [String, Array],
-			default: color.primary,
+			default: uni.$cl.color.primary,
 		},
 		// 未选中颜色
 		voidColor: {
@@ -123,8 +122,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-.cl-rate {
-}
-</style>

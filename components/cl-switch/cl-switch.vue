@@ -10,7 +10,6 @@
 
 <script>
 import Form from "../../mixins/form";
-import { color } from "../../theme";
 
 /**
  * switch 开关
@@ -44,7 +43,7 @@ export default {
 		// 打开时的背景色
 		color: {
 			type: String,
-			default: color.primary,
+			default: uni.$cl.color.primary,
 		},
 	},
 
