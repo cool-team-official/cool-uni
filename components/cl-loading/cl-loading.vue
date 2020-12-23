@@ -56,7 +56,7 @@
 		</template>
 
 		<!-- 默认 -->
-		<view class="cl-loading__inner" :style="{ color: color2 }" v-else> </view>
+		<view class="cl-loading__inner" :style="{ color }" v-else> </view>
 	</view>
 </template>
 
@@ -87,10 +87,6 @@ export default {
 	},
 
 	computed: {
-		color2() {
-			return this.color || uni.$cl.color.primary;
-		},
-
 		rh() {
 			return this.size / 8;
 		},
@@ -103,7 +99,7 @@ export default {
 			return {
 				height: this.rh * 2 + "px",
 				width: this.rw * 2 + "px",
-				color: this.color2,
+				color: this.color,
 			};
 		},
 	},

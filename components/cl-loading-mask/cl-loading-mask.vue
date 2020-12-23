@@ -5,11 +5,11 @@
 			:class="[classList]"
 			:style="{
 				background,
-				color: color2,
+				color,
 			}"
 		>
 			<view class="cl-loading-mask__content" v-if="loading">
-				<cl-loading :color="color2" :loading-theme="loadingTheme"></cl-loading>
+				<cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
 				<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
 			</view>
 		</view>
@@ -40,10 +40,7 @@ export default {
 		loading: Boolean,
 		loadingTheme: String,
 		fullscreen: Boolean,
-		color: {
-			type: String,
-			default: uni.$cl.color.primary,
-		},
+		color: String,
 		background: {
 			type: String,
 			default: "rgba(255, 255, 255, 0.7)",
@@ -63,10 +60,6 @@ export default {
 			}
 
 			return list.join(" ");
-		},
-
-		color2() {
-			return this.color || uni.$cl.color.primary;
 		},
 	},
 };

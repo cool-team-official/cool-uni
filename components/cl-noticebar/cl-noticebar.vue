@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import radioVue from "../../../../pages/demo/form/radio.vue";
 import { isArray } from "../../utils";
 
 /**

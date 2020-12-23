@@ -55,7 +55,7 @@ export default {
 		// 选中颜色
 		color: {
 			type: [String, Array],
-			default: uni.$cl.color.primary,
+			default: "",
 		},
 		// 未选中颜色
 		voidColor: {

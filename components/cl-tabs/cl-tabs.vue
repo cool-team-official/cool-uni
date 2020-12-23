@@ -22,6 +22,9 @@
 						class="cl-tabs__bar-item"
 						v-for="(item, index) in tabs"
 						:key="index"
+						:class="{
+							'is-active': value === item.name,
+						}"
 						:style="{
 							color: value === item.name ? color : '',
 							padding: `0 ${gutter}rpx`,
@@ -147,10 +150,7 @@ export default {
 			default: 20,
 		},
 		// 字体及浮标颜色，默认主色
-		color: {
-			type: String,
-			default: uni.$cl.color.primary,
-		},
+		color: String,
 	},
 
 	data() {

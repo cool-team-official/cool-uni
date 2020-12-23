@@ -41,10 +41,7 @@ export default {
 			default: false,
 		},
 		// 打开时的背景色
-		color: {
-			type: String,
-			default: uni.$cl.color.primary,
-		},
+		color: String,
 	},
 
 	mixins: [Form],

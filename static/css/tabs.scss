@@ -36,6 +36,10 @@
 					margin-left: 10rpx;
 				}
 			}
+
+			&.is-active {
+				color: $cl-color-primary;
+			}
 		}
 
 		&-box {
@@ -50,6 +54,7 @@
 		bottom: 2rpx;
 		border-radius: 20rpx;
 		transition: all 0.5s;
+		background-color: $cl-color-primary;
 	}
 
 	&__container {
