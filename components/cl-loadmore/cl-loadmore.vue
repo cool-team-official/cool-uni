@@ -6,11 +6,16 @@
 			:width="divider ? '400rpx' : '0rpx'"
 		>
 			<view class="cl-loadmore">
-				<cl-loading :color="iconColor" :size="20" v-if="!finish && loading"></cl-loading>
+				<cl-loading
+					:color="iconColor"
+					:loading-theme="loadingTheme"
+					:size="20"
+					v-if="!finish && loading"
+				></cl-loading>
 				<text
 					class="cl-loadmore__text"
 					:style="{
-						color
+						color,
 					}"
 					>{{ finish ? finishText : loading ? loadingText : text }}</text
 				>
@@ -32,6 +37,7 @@
  * @property {String} backgroundColor 背景颜色，默认#f7f7f7
  * @property {String} text 普通状态下显示内容，默认“上拉加载更多”
  * @property {String} loadingText 加载中显示内容，默认“加载中”
+ * @property {String} loadingTheme 加载图标主题
  * @property {String} finishText 加载完成显示内容，默认“没有更多了”
  * @example <cl-loadmore :loading="true" />
  */
@@ -47,35 +53,37 @@ export default {
 		// 是否显示分割符
 		divider: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 字体颜色
 		color: {
 			type: String,
-			default: "#666"
+			default: "#666",
 		},
 		// 图标颜色
 		iconColor: String,
 		// 背景颜色
 		backgroundColor: {
 			type: String,
-			default: "#f7f7f7"
+			default: "#f7f7f7",
 		},
 		// 普通状态下显示内容
 		text: {
 			type: String,
-			default: "上拉加载更多"
+			default: "上拉加载更多",
 		},
 		// 加载中显示内容
 		loadingText: {
 			type: String,
-			default: "加载中"
+			default: "加载中",
 		},
+		// 加载图标主题
+		loadingTheme: String,
 		// 加载完成显示内容
 		finishText: {
 			type: String,
-			default: "没有更多了"
-		}
-	}
+			default: "没有更多了",
+		},
+	},
 };
 </script>

@@ -333,7 +333,7 @@ export default {
 		},
 
 		cancel() {
-			this.visible = false;
+			this.close();
 		},
 
 		// 缩放偏移

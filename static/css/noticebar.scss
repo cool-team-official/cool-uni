@@ -26,11 +26,9 @@
 		line-height: 40rpx;
 		position: relative;
 
-		&.is-horizontal {
-		}
-
 		&.is-vertical {
 			transition: top 0.3s;
+
 			.cl-noticebar__text {
 				display: block;
 				height: 40rpx;

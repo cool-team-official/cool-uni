@@ -20,8 +20,8 @@ export default {
 		// 左侧时间宽度
 		timestampWidth: {
 			type: Number,
-			default: 140
-		}
-	}
+			default: 150,
+		},
+	},
 };
 </script>

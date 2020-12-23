@@ -23,17 +23,14 @@
 				:class="[`is-${direction}`]"
 				:style="{
 					top: scroll.top + 'px',
+					left: scroll.left + 'px',
+					transition,
+					transform: `translateX(-${scroll.translateX}px)`,
 				}"
 			>
-				<text
-					class="cl-noticebar__text"
-					v-for="(item, index) in list"
-					:key="index"
-					:style="{
-						marginLeft: scroll.left + 'px',
-					}"
-					>{{ item }}</text
-				>
+				<text class="cl-noticebar__text" v-for="(item, index) in list" :key="index">{{
+					item
+				}}</text>
 			</view>
 		</view>
 
@@ -42,6 +39,7 @@
 </template>
 
 <script>
+import radioVue from "../../../../pages/demo/form/radio.vue";
 import { isArray } from "../../utils";
 
 /**
@@ -56,7 +54,7 @@ import { isArray } from "../../utils";
  * @property {Boolean} scrollable 能否滚动
  * @property {Boolean} closeable 能否关闭
  * @property {String} icon 图标
- * @property {Number} speed 速度（0-100）越大越快
+ * @property {Number} duration 滑动时长（秒），默认6
  * @example <cl-noticebar text="云想衣裳花想容，春风拂槛露华浓。"></cl-noticebar>
  */
 
@@ -96,10 +94,10 @@ export default {
 		closeable: Boolean,
 		// 图标
 		icon: String,
-		// 速度（0-100）越大越快
-		speed: {
+		// 滑动时长（秒），默认6
+		duration: {
 			type: Number,
-			default: 86,
+			default: 6,
 		},
 	},
 
@@ -108,6 +106,8 @@ export default {
 			scroll: {
 				left: 0,
 				top: 0,
+				translateX: 0,
+				duration: 0,
 			},
 			timer: null,
 			visible: true,
@@ -128,60 +128,87 @@ export default {
 
 			return list.join(" ");
 		},
+
+		transition() {
+			if (this.direction == "horizontal") {
+				return `transform ${this.scroll.duration}s linear`;
+			} else {
+				return `top 0.3s`;
+			}
+		},
 	},
 
 	mounted() {
-		if (this.scrollable) {
-			// 获取盒子大小
-			uni.createSelectorQuery()
-				.in(this)
-				.select(`.cl-noticebar__box`)
-				.boundingClientRect((box) => {
-					// 获取文本大小
-					uni.createSelectorQuery()
-						.in(this)
-						.select(`.cl-noticebar__text`)
-						.boundingClientRect((text) => {
-							// 判断方向
-							if (this.direction == "horizontal") {
-								this.timer = setInterval(() => {
-									if (
-										Math.abs(this.scroll.left) > Math.max(box.width, text.width)
-									) {
-										this.scroll.left = box.width;
-									} else {
-										this.scroll.left -= 1;
-									}
-								}, 100 - this.speed);
-
-								this.scroll.left = box.width;
-							} else {
-								this.timer = setInterval(() => {
-									if (
-										Math.abs(this.scroll.top) >=
-										box.height * (this.list.length - 1)
-									) {
-										this.scroll.top = 0;
-									} else {
-										this.scroll.top -= box.height;
-									}
-								}, 3000);
-							}
-						})
-						.exec();
-				})
-				.exec();
-		}
+		this.refresh();
 	},
 
 	destroyed() {
-		clearInterval(this.timer);
+		this.clear();
 		this.timer = null;
 	},
 
 	methods: {
 		close() {
 			this.visible = false;
+		},
+
+		clear() {
+			clearInterval(this.timer);
+			clearTimeout(this.timer);
+		},
+
+		refresh() {
+			if (this.scrollable) {
+				// 清除定时器
+				this.clear();
+
+				// 获取盒子大小
+				uni.createSelectorQuery()
+					.in(this)
+					.select(`.cl-noticebar__box`)
+					.boundingClientRect((box) => {
+						// 获取文本大小
+						uni.createSelectorQuery()
+							.in(this)
+							.select(`.cl-noticebar__text`)
+							.boundingClientRect((text) => {
+								let duration = this.duration * 1000;
+
+								// 水平滑动
+								if (this.direction == "horizontal") {
+									const fn = () => {
+										this.scroll.duration = this.duration;
+										this.scroll.left = box.width;
+										this.scroll.translateX = text.width + this.scroll.left;
+
+										this.timer = setTimeout(() => {
+											this.scroll.translateX = 0;
+											this.scroll.duration = 0;
+
+											setTimeout(fn, 500);
+										}, duration);
+									};
+
+									fn();
+								}
+								// 垂直滑动
+								else {
+									this.timer = setInterval(() => {
+										if (
+											Math.abs(this.scroll.top) >=
+											box.height * (this.list.length - 1)
+										) {
+											this.scroll.top = 0;
+										} else {
+											this.scroll.top -= box.height;
+										}
+									}, duration);
+								}
+							})
+							.exec();
+					})
+					.exec();
+			}
 		},
 	},
 };

@@ -6,7 +6,12 @@
 	font-size: 26rpx;
 	box-sizing: border-box;
 
-	/deep/picker {
+	picker {
+		height: 70rpx;
+		line-height: 70rpx;
+	}
+
+	&__inner {
 		height: 70rpx;
 		line-height: 70rpx;
 	}

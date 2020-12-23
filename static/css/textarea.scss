@@ -29,6 +29,8 @@
 	}
 
 	&.is-count {
+		/* #ifndef MP-ALIPAY */
 		padding-bottom: 40rpx;
+		/* #endif */
 	}
 }

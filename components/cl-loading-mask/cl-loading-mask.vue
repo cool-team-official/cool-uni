@@ -25,7 +25,7 @@
  * @tutorial https://docs.cool-js.com/uni/components/feedback/loading.html
  * @property {String} text 加载时文本，默认不显示
  * @property {Boolean} loading 是否加载中
- * @property {Boolean} loadingTheme 加载图标主题
+ * @property {String} loadingTheme 加载图标主题
  * @property {Boolean} fullscreen 是否全屏显示
  * @property {String} color 加载图标颜色
  * @property {String} background 背景颜色，默认rgba(255,255,255,0.7)

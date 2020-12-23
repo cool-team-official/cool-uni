@@ -76,16 +76,30 @@ class ClCanvas {
     // 生成图片
     createImage(options) {
         return new Promise(resolve => {
-            uni.canvasToTempFilePath({
+            let data = {
                 canvasId: this.canvasId,
                 ...options,
                 success: (res) => {
+                    // #ifdef MP-ALIPAY
+                    resolve(res.apFilePath)
+                    // #endif
+
+                    // #ifndef MP-ALIPAY
                     resolve(res.tempFilePath)
+                    // #endif
                 },
                 fail: (err) => {
                     reject(err)
                 },
-            }, this.scope)
+            }
+
+            // #ifdef MP-ALIPAY
+            this.ctx.toTempFilePath(data)
+            // #endif
+
+            // #ifndef MP-ALIPAY
+            uni.canvasToTempFilePath(data, this.scope)
+            // #endif
         })
     }
 
@@ -93,33 +107,32 @@ class ClCanvas {
     saveImage(options) {
         uni.showLoading({
             title: '图片下载中...',
-            mask: true,
         });
-        let tempPath = '';
         this.createImage(options)
-            .then(path => {
-                tempPath = path;
-            })
-            .then(() => {
+            .then((path) => {
                 return new Promise(resolve => {
                     uni.hideLoading();
                     uni.saveImageToPhotosAlbum({
-                        filePath: tempPath,
+                        filePath: path,
                         success: () => {
                             uni.showToast({
                                 title: '保存图片成功',
-                                duration: 1500,
-                                mask: false,
                             });
                             resolve()
                         },
-                        fail: () => {
+                        fail: (err) => {
+                            // #ifdef MP-ALIPAY
+                            uni.showToast({
+                                title: '保存图片成功',
+                            });
+                            // #endif
+
+                            // #ifndef MP-ALIPAY
                             uni.showToast({
                                 title: '保存图片失败',
-                                duration: 1500,
-                                mask: false,
                                 icon: 'none'
                             });
+                            // #endif
                         },
                     });
                 })
@@ -150,7 +163,6 @@ class ClCanvas {
                     resolve(result.path)
                 },
                 fail: (err) => {
-                    console.error(err)
                     reject(err)
                 },
             });
@@ -349,7 +361,7 @@ class ClCanvas {
 
     // 渲染文本
     textRender(options) {
-        let { fontSize = 14, color = '#000', x, y, letterSpace } = options || {}
+        let { fontSize = 14, color = '#000', x, y, letterSpace, lineHeight = 14 } = options || {}
 
         this.ctx.save();
 
@@ -362,19 +374,23 @@ class ClCanvas {
         // 获取文本内容
         let rows = this.getTextRows(options);
 
+        // 获取文本行高
+        let lh = lineHeight - fontSize
+
         // 逐行写入
         for (let i = 0; i < rows.length; i++) {
             let d = 0
             if (letterSpace) {
                 for (let j = 0; j < rows[i].length; j++) {
                     // 写入文字
-                    this.ctx.fillText(rows[i][j], x + d, (i + 1) * (fontSize) + y);
+                    this.ctx.fillText(rows[i][j], x + d, (i + 1) * (fontSize) + y + lh * i);
 
                     // 设置偏移
                     d += this.getFontPx(rows[i][j], options)
                 }
             } else {
-                this.ctx.fillText(rows[i], x, (i + 1) * (fontSize) + y);
+                // 写入文字
+                this.ctx.fillText(rows[i], x, (i + 1) * (fontSize) + y + lh * i);
             }
         }
 

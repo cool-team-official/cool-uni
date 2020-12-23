@@ -1,12 +1,14 @@
 .cl-input-number {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 
 	&__plus,
 	&__minus {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		height: 40rpx;
 		width: 40rpx;
-		line-height: 40rpx;
 		margin: 0;
 		padding: 0;
 		border-radius: 6rpx;
