@@ -1,103 +1,191 @@
 <template>
-	<view class="cl-filter-bar" :class="[isSticky ? 'is-sticky' : '']">
-		<view class="cl-filter-bar-sort">
-			<view
-				class="cl-filter-bar-sort__field"
-				v-for="(item, index) in list2"
-				:key="index"
-				:class="[item.value == prop ? 'is-active' : '']"
-				@tap="changeOrder(item)"
-			>
-				<text class="cl-filter-bar-sort__label">{{ item.label }}</text>
+	<view class="demo-filter-bar">
+		<text class="label">下拉框</text>
+		<cl-filter-bar :list="dropdown" @change="onChange"> </cl-filter-bar>
 
-				<view
-					class="cl-filter-bar-sort__order"
-					:class="[`is-${item.order}`]"
-					v-if="item.order !== undefined"
-				>
-					<text class="cl-filter-bar-sort__asc"></text>
-					<text class="cl-filter-bar-sort__desc"></text>
-				</view>
-			</view>
-		</view>
+		<text class="label">排序</text>
+		<cl-filter-bar :list="sort" @change="onChange"> </cl-filter-bar>
+
+		<text class="label">混合</text>
+		<cl-filter-bar :list="mixins" @change="onChange"> </cl-filter-bar>
 	</view>
 </template>
 
 <script>
-/**
- * filter-bar 过滤栏
- * @description 字段升序降序,综合评分
- * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
- * @property {String} value 绑定值
- * @property {Array} list 列表数据
- * @property {Boolean} isSticky 是否吸顶
- * @event {Function} change 绑定值发生改变时触发
- * @example 见教程
- */
-
 export default {
-	name: "cl-filter-bar",
-
-	props: {
-		// 绑定值
-		value: String,
-		// 列表数据
-		list: Array,
-		// 是否吸顶
-		isSticky: Boolean,
-	},
-
 	data() {
 		return {
-			prop: this.value,
-			list2: this.list,
+			val: "rank",
+			dropdown: [
+				{
+					label: "多选",
+					value: "rank",
+					type: "dropdown",
+					multiple: true,
+					children: [
+						{
+							label: "综合排序",
+							value: 1,
+							checked: true,
+						},
+						{
+							label: "距离最近",
+							value: 2,
+						},
+						{
+							label: "好评优先",
+							value: 3,
+						},
+						{
+							label: "起送价最低",
+							value: 4,
+						},
+						{
+							label: "配送最快",
+							value: 5,
+						},
+						{
+							label: "通用排序",
+							value: 6,
+						},
+						{
+							label: "通用排序2",
+							value: 7,
+						},
+					],
+				},
+				{
+					label: "grid主题",
+					value: "rank2",
+					type: "dropdown",
+					multiple: true,
+					theme: "grid",
+					children: [
+						{
+							label: "综合排序",
+							value: 1,
+							checked: true,
+						},
+						{
+							label: "距离最近",
+							value: 2,
+						},
+						{
+							label: "好评优先",
+							value: 3,
+						},
+						{
+							label: "起送价最低",
+							value: 4,
+						},
+						{
+							label: "配送最快",
+							value: 5,
+						},
+						{
+							label: "通用排序",
+							value: 6,
+						},
+						{
+							label: "通用排序2",
+							value: 7,
+						},
+					],
+				},
+				{
+					label: "配送方式",
+					value: "method",
+					type: "dropdown",
+					multiple: false,
+					children: [
+						{
+							label: "申通",
+							value: 1,
+						},
+						{
+							label: "圆通",
+							value: 2,
+						},
+						{
+							label: "顺丰",
+							value: 3,
+						},
+					],
+				},
+			],
+			sort: [
+				{
+					label: "价格",
+					value: "price",
+					order: "desc",
+				},
+				{
+					label: "销售额",
+					value: "sale",
+					order: "",
+				},
+			],
+			mixins: [
+				{
+					label: "下拉框",
+					value: "rank",
+					type: "dropdown",
+					multiple: true,
+					children: [
+						{
+							label: "综合排序",
+							value: 1,
+							checked: true,
+						},
+						{
+							label: "距离最近",
+							value: 2,
+						},
+						{
+							label: "好评优先",
+							value: 3,
+						},
+						{
+							label: "起送价最低",
+							value: 4,
+						},
+						{
+							label: "配送最快",
+							value: 5,
+						},
+						{
+							label: "通用排序",
+							value: 6,
+						},
+						{
+							label: "通用排序2",
+							value: 7,
+						},
+					],
+				},
+				{
+					label: "价格排序",
+					value: "price",
+					order: "desc",
+				},
+			],
 		};
 	},
 
 	methods: {
-		changeOrder(item) {
-			if (item.order !== undefined) {
-				this.prop = item.value;
-
-				if (!item.order) {
-					item.order = "asc";
-				} else if (item.order == "asc") {
-					item.order = "desc";
-				} else if (item.order == "desc") {
-					item.order = "";
-					this.prop = undefined;
-				}
-			} else {
-				this.prop = this.prop == item.value ? undefined : item.value;
-			}
-
-			this.list2.map((e) => {
-				if (e.order !== undefined) {
-					e.order = e.value == item.value ? e.order : "";
-				}
-			});
-
-			let params = {
-				order: "",
-				prop: "",
-			};
-
-			// 根据 prop(字段名) 和 order(排序方式) 的格式返回
-			if (this.prop) {
-				params = {
-					order: item.order,
-					prop: item.value,
-				};
-
-				if (params.prop && params.order) {
-				} else if (params.prop && params.order === undefined) {
-					params.order = "desc";
-				}
-			}
-
-			this.$emit("input", params.prop);
-			this.$emit("change", params);
+		onChange(d) {
+			console.log(d);
 		},
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.demo-filter-bar {
+	.label {
+		display: inline-block;
+		font-size: 28rpx;
+		margin: 20rpx;
+	}
+}
+</style>
