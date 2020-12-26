@@ -16,7 +16,6 @@ import Emitter from "../../mixins/emitter";
  * filter-bar 过滤栏
  * @description 字段升序降序, 下拉框，自定义筛选
  * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
- * @property {Array} list 列表数据
  * @property {Boolean} isSticky 是否吸顶
  * @event {Function} change cl-filter-item 数据发生改变时触发
  * @example 见教程

@@ -71,8 +71,8 @@ import { getParent, cloneDeep } from "../../utils";
  * @description 字段升序降序, 下拉框，自定义筛选
  * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
  * @property {null} value 绑定值，当时下拉多选时，必须是数组
- * @property {String} prop 唯一标识
- * @property {String} type 类型，dropdown | sort
+ * @property {String} prop 唯一标识, change 时返回
+ * @property {String} type 筛选类型，dropdown | sort
  * @property {String} label 标题
  * @property {Boolean} multiple 下拉框是否多选
  * @property {String} theme 下拉框主题，default | grid
