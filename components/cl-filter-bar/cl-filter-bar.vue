@@ -1,191 +1,104 @@
 <template>
-	<view class="demo-filter-bar">
-		<text class="label">下拉框</text>
-		<cl-filter-bar :list="dropdown" @change="onChange"> </cl-filter-bar>
+	<view class="cl-filter-bar__wrap" :class="[isExpand ? 'is-expand' : '']">
+		<view class="cl-filter-bar" :class="[classList]" :style="{ zIndex }">
+			<slot></slot>
+		</view>
 
-		<text class="label">排序</text>
-		<cl-filter-bar :list="sort" @change="onChange"> </cl-filter-bar>
-
-		<text class="label">混合</text>
-		<cl-filter-bar :list="mixins" @change="onChange"> </cl-filter-bar>
+		<!-- 遮罩层 -->
+		<view class="cl-filter-bar__mask" @tap="close"></view>
 	</view>
 </template>
 
 <script>
+import Emitter from "../../mixins/emitter";
+
+/**
+ * filter-bar 过滤栏
+ * @description 字段升序降序, 下拉框，自定义筛选
+ * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
+ * @property {Array} list 列表数据
+ * @property {Boolean} isSticky 是否吸顶
+ * @event {Function} change cl-filter-item 数据发生改变时触发
+ * @example 见教程
+ */
+
 export default {
+	name: "cl-filter-bar",
+
+	componentName: "ClFilterBar",
+
+	props: {
+		// 列表数据
+		list: Array,
+		// 是否吸顶
+		isSticky: Boolean,
+	},
+
+	mixins: [Emitter],
+
 	data() {
 		return {
-			val: "rank",
-			dropdown: [
-				{
-					label: "多选",
-					value: "rank",
-					type: "dropdown",
-					multiple: true,
-					children: [
-						{
-							label: "综合排序",
-							value: 1,
-							checked: true,
-						},
-						{
-							label: "距离最近",
-							value: 2,
-						},
-						{
-							label: "好评优先",
-							value: 3,
-						},
-						{
-							label: "起送价最低",
-							value: 4,
-						},
-						{
-							label: "配送最快",
-							value: 5,
-						},
-						{
-							label: "通用排序",
-							value: 6,
-						},
-						{
-							label: "通用排序2",
-							value: 7,
-						},
-					],
-				},
-				{
-					label: "grid主题",
-					value: "rank2",
-					type: "dropdown",
-					multiple: true,
-					theme: "grid",
-					children: [
-						{
-							label: "综合排序",
-							value: 1,
-							checked: true,
-						},
-						{
-							label: "距离最近",
-							value: 2,
-						},
-						{
-							label: "好评优先",
-							value: 3,
-						},
-						{
-							label: "起送价最低",
-							value: 4,
-						},
-						{
-							label: "配送最快",
-							value: 5,
-						},
-						{
-							label: "通用排序",
-							value: 6,
-						},
-						{
-							label: "通用排序2",
-							value: 7,
-						},
-					],
-				},
-				{
-					label: "配送方式",
-					value: "method",
-					type: "dropdown",
-					multiple: false,
-					children: [
-						{
-							label: "申通",
-							value: 1,
-						},
-						{
-							label: "圆通",
-							value: 2,
-						},
-						{
-							label: "顺丰",
-							value: 3,
-						},
-					],
-				},
-			],
-			sort: [
-				{
-					label: "价格",
-					value: "price",
-					order: "desc",
-				},
-				{
-					label: "销售额",
-					value: "sale",
-					order: "",
-				},
-			],
-			mixins: [
-				{
-					label: "下拉框",
-					value: "rank",
-					type: "dropdown",
-					multiple: true,
-					children: [
-						{
-							label: "综合排序",
-							value: 1,
-							checked: true,
-						},
-						{
-							label: "距离最近",
-							value: 2,
-						},
-						{
-							label: "好评优先",
-							value: 3,
-						},
-						{
-							label: "起送价最低",
-							value: 4,
-						},
-						{
-							label: "配送最快",
-							value: 5,
-						},
-						{
-							label: "通用排序",
-							value: 6,
-						},
-						{
-							label: "通用排序2",
-							value: 7,
-						},
-					],
-				},
-				{
-					label: "价格排序",
-					value: "price",
-					order: "desc",
-				},
-			],
+			_uid: null,
+			zIndex: 1,
+			isExpand: false,
+			timer: null,
 		};
 	},
 
+	computed: {
+		classList() {
+			let list = [];
+
+			if (this.isSticky) {
+				list.push("is-sticky");
+			}
+
+			return list.join(" ");
+		},
+	},
+
 	methods: {
-		onChange(d) {
-			console.log(d);
+		// 设置当前下拉框
+		setDropdown(_uid) {
+			this._uid = _uid;
+
+			// 收起其他下拉框
+			this.setCollapse("other", _uid);
+		},
+
+		// 设置是否展开。收起延迟300，避免动画未结束导致层级低了问题
+		setExpand(f) {
+			clearTimeout(this.timer);
+
+			if (f) {
+				this.zIndex = 999;
+			} else {
+				this.timer = setTimeout(() => {
+					this.zIndex = 1;
+				}, 300);
+			}
+
+			this.isExpand = f;
+		},
+
+		// 设置收起方式 current, other
+		setCollapse(action, _uid) {
+			this.broadcast("ClFilterItem", "filter-bar.collapse", {
+				action,
+				_uid,
+			});
+		},
+
+		// 关闭当前遮罩层及收起下拉框
+		close() {
+			this.setCollapse("current", this._uid);
+			this.setExpand(false);
+		},
+
+		// cl-filter-item 数据发生改变时触发
+		update(data) {
+			this.$emit("change", data);
 		},
 	},
 };
 </script>
-
-<style lang="scss" scoped>
-.demo-filter-bar {
-	.label {
-		display: inline-block;
-		font-size: 28rpx;
-		margin: 20rpx;
-	}
-}
-</style>

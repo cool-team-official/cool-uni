@@ -1,4 +1,7 @@
 .cl-action-sheet {
+	position: relative;
+	z-index: 1000;
+
 	.cl-popup__container {
 		padding: 0 !important;
 		background-color: #f2f2f2;

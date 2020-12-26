@@ -1,6 +1,6 @@
 {
 	"name": "cl-uni",
-	"version": "1.4.4",
+	"version": "1.5.0",
 	"description": "cool-uni: button、form ...",
 	"main": "index.js",
 	"scripts": {},
