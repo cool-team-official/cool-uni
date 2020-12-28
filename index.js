@@ -15,7 +15,7 @@ const install = (Vue, options = {}) => {
 		...deepMerge(data, options),
 		Storage,
 		author: "cool",
-		version: "1.5.0",
+		version: "1.5.1",
 	};
 
 	Vue.prototype.$cl = uni.$cl = $cl;

@@ -50,7 +50,7 @@ cl-filter-item {
 	color: #727272;
 
 	&__label {
-		margin-right: 10rpx;
+		margin-right: 4rpx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -59,6 +59,8 @@ cl-filter-item {
 	&__order {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		width: 32rpx;
 
 		&-asc,
 		&-desc {
@@ -94,6 +96,7 @@ cl-filter-item {
 		&-icon {
 			display: block;
 			transition: transform 0.3s;
+			font-size: 32rpx;
 		}
 
 		&-box {
@@ -124,7 +127,7 @@ cl-filter-item {
 			}
 
 			&__list {
-				max-height: 480rpx;
+				max-height: 460rpx;
 			}
 
 			&.theme-default {
@@ -146,6 +149,10 @@ cl-filter-item {
 								display: block;
 							}
 						}
+
+						&.is-disabled {
+							color: $cl-color-disabled;
+						}
 					}
 				}
 			}
@@ -156,7 +163,7 @@ cl-filter-item {
 						display: flex;
 						flex-wrap: wrap;
 						box-sizing: border-box;
-						padding: 20rpx 20rpx 10rpx 20rpx;
+						padding: 0 20rpx;
 					}
 
 					&__item {
@@ -164,7 +171,6 @@ cl-filter-item {
 						align-items: center;
 						text-align: center;
 						height: 70rpx;
-						width: calc(25% - 20rpx);
 						background-color: #f7f7f7;
 						border-radius: 10rpx;
 						margin: 10rpx;
@@ -179,6 +185,10 @@ cl-filter-item {
 							color: $cl-color-primary;
 							background-color: rgba($cl-color-primary, 0.1);
 						}
+
+						&.is-disabled {
+							color: $cl-color-disabled;
+						}
 					}
 				}
 			}
@@ -186,7 +196,7 @@ cl-filter-item {
 	}
 
 	&.is-expand {
-		.cl-icon-arrow-bottom {
+		.cl-filter-item__dropdown-icon {
 			transform: rotate(180deg);
 		}
 
@@ -206,5 +216,13 @@ cl-filter-item {
 	&.is-only {
 		position: relative;
 		z-index: 9;
+	}
+
+	&.switch--open {
+		color: $cl-color-primary;
+	}
+
+	&.is-disabled {
+		color: $cl-color-disabled;
 	}
 }
