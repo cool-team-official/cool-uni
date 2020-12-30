@@ -8,10 +8,7 @@ export default {
                 "labelPosition",
                 "showMessage",
                 "model",
-                "addField",
-                "removeField",
                 "validateOnValueChange",
-                "rules2",
                 "disabled"
             ]);
         },

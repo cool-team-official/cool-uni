@@ -5,6 +5,7 @@
 		:style="[
 			{
 				height: parent.height,
+				width,
 			},
 		]"
 		@tap="tapItem"
@@ -47,7 +48,8 @@
 
 <script>
 import Emitter from "../../mixins/emitter";
-import { getParent, parseRpx } from "../../utils";
+import Parent from "../../mixins/parent";
+import { parseRpx } from "../../utils";
 
 /**
  * tabbar-item 底部导航项
@@ -91,7 +93,14 @@ export default {
 		},
 	},
 
-	mixins: [Emitter],
+	mixins: [Emitter, Parent],
+
+	data() {
+		return {
+			Keys: ["name", "color", "selectedColor", "height", "width", "number"],
+			ComponentName: "ClTabbar",
+		};
+	},
 
 	computed: {
 		size() {
@@ -106,12 +115,18 @@ export default {
 			return this.isActive ? this.selectedIconPath : this.iconPath;
 		},
 
-		isActive() {
-			return this.name !== null && this.parent.name === this.name;
+		width() {
+			// #ifdef MP-TOUTIAO
+			return parseInt(100 / this.parent.number) + "%";
+			// #endif
+
+			// #ifndef MP-TOUTIAO
+			return "100%";
+			// #endif
 		},
 
-		parent() {
-			return getParent.call(this, "ClTabbar", ["name", "color", "selectedColor", "height"]);
+		isActive() {
+			return this.name !== null && this.parent && this.parent.name === this.name;
 		},
 
 		classList() {

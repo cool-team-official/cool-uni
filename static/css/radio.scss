@@ -3,9 +3,8 @@
 	height: 40rpx;
 	line-height: 40rpx;
 	font-size: 26rpx;
-	margin-right: 20rpx;
 
-	.cl-radio__input {
+	&__input {
 		display: inline-block;
 		vertical-align: middle;
 		height: 40rpx;
@@ -25,6 +24,10 @@
 			position: relative;
 			top: -2rpx;
 		}
+	}
+
+	&__label {
+		display: inline;
 	}
 
 	&.is-checked {
@@ -63,3 +66,14 @@
 		}
 	}
 }
+
+.cl-radio + .cl-radio,
+cl-radio + cl-radio {
+	margin-left: 20rpx;
+}
+
+/* #ifdef MP-TOUTIAO */
+.cl-radio {
+	margin-right: 20rpx;
+}
+/* #endif */

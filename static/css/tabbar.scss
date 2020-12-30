@@ -1,7 +1,9 @@
 .cl-tabbar {
+	/* #ifndef MP-TOUTIAO */
+	display: flex;
+	/* #endif */
 	width: 100%;
 	z-index: 100;
-	display: flex;
 	position: relative;
 	border-top-width: 1rpx;
 	border-top-style: solid;
@@ -15,9 +17,11 @@
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
+		height: 100%;
 		width: 100%;
 		box-sizing: border-box;
 		position: relative;
+		float: left;
 
 		&__block {
 			display: flex;

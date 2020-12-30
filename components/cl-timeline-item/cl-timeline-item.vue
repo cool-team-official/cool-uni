@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * timeline 时间线
@@ -72,10 +72,14 @@ export default {
 			default: "#999",
 		},
 	},
+	mixins: [Parent],
+	data() {
+		return {
+			ComponentName: "ClTimeline",
+			Keys: ["timestampWidth"],
+		};
+	},
 	computed: {
-		parent() {
-			return getParent.call(this, "ClTimeline", ["timestampWidth"]);
-		},
 		timestampText() {
 			return (this.timestamp || "").split(" ");
 		},

@@ -239,7 +239,7 @@ export default {
 				list.push("cl-input--focus");
 			}
 
-			if (this.disabled) {
+			if (this.isDisabled) {
 				list.push("is-disabled");
 			}
 

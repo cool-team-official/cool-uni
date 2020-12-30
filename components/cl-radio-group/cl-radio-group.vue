@@ -30,33 +30,17 @@ export default {
 		// 是否禁用
 		disabled: Boolean,
 		// 是否边框样式
-		border: Boolean
+		border: Boolean,
 	},
 
 	mixins: [Emitter],
 
-	watch: {
-		value(val) {
-			this.change(val);
-		}
-	},
-
 	created() {
 		// 监听单选框的变化
-		this.$on("radio.change", label => {
+		this.$on("radio.change", (label) => {
 			this.$emit("input", label);
 			this.$emit("change", label);
 		});
 	},
-
-	mounted() {
-		this.change(this.value);
-	},
-
-	methods: {
-		change(value) {
-			this.broadcast("ClRadio", "radio-group.change", value);
-		}
-	}
 };
 </script>

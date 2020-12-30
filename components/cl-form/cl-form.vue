@@ -76,7 +76,7 @@ export default {
 
 	data() {
 		return {
-			rules2: [],
+			rules2: {},
 			props: [],
 			_form: {},
 			lock: false,
@@ -96,8 +96,11 @@ export default {
 			},
 		},
 
-		rules(val) {
-			this.setRules(val);
+		rules: {
+			immediate: true,
+			handler(val) {
+				this.setRules(val);
+			},
 		},
 
 		rules2: {
@@ -120,9 +123,6 @@ export default {
 	},
 
 	mounted() {
-		// 设置规则
-		this.setRules(this.rules);
-
 		// 设置默认数据
 		this._form = cloneDeep(this.model);
 	},
@@ -202,7 +202,7 @@ export default {
 		publish(action, options) {
 			let { rules, props = this.props, model = this.model2 } = options || {};
 
-			this.broadcast("ClFormItem", `form.event`, {
+			this.broadcast("ClFormItem", "form.event", {
 				rules,
 				props,
 				model,

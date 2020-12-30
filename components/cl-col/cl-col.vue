@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * col 列
@@ -40,13 +40,16 @@ export default {
 		// 栅格向左移动格数
 		push: [Number, String],
 	},
+	mixins: [Parent],
+	data() {
+		return {
+			Keys: ["gutter"],
+			ComponentName: "ClRow",
+		};
+	},
 	computed: {
-		parent() {
-			return getParent.call(this, "ClRow", ["gutter"]);
-		},
-
 		gutter() {
-			return this.parent ? this.parent.gutter : 0;
+			return this.parent.gutter;
 		},
 
 		padding() {

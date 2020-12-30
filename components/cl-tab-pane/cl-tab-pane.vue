@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * tab-pane 选项卡内容
@@ -54,24 +54,24 @@ export default {
 		// 是否延迟加载
 		lazy: Boolean,
 		// 开启自定义下拉刷新
-		refresherEnabled: Boolean
+		refresherEnabled: Boolean,
 	},
+
+	mixins: [Parent],
 
 	data() {
 		return {
 			loaded: this.lazy ? false : true,
-			triggered: false
+			triggered: false,
+			Keys: ["current", "scrollView"],
+			ComponentName: "ClTabs",
 		};
 	},
 
 	computed: {
-		parent() {
-			return getParent.call(this, "ClTabs", ["current", "scrollView"]);
-		},
-
 		visible() {
-			return this.parent ? this.parent.current == this.name : false;
-		}
+			return this.parent.current == this.name;
+		},
 	},
 
 	watch: {
@@ -81,8 +81,8 @@ export default {
 				if (val) {
 					this.loaded = true;
 				}
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
@@ -95,14 +95,14 @@ export default {
 						setTimeout(() => {
 							this.triggered = false;
 						}, 10);
-					}
+					},
 				});
 			}
 		},
 
 		handleReachBottom() {
 			this.$emit("loadmore");
-		}
-	}
+		},
+	},
 };
 </script>

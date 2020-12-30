@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * grid-item 宫格布局项
@@ -19,11 +19,16 @@ export default {
 
 	componentName: "ClGridItem",
 
-	computed: {
-		parent() {
-			return getParent.call(this, "ClGrid", ["column", "border"]);
-		},
+	mixins: [Parent],
 
+	data() {
+		return {
+			Keys: ["column", "border"],
+			ComponentName: "ClGrid",
+		};
+	},
+
+	computed: {
 		width() {
 			return 100 / (this.parent.column || 0) + "%";
 		},

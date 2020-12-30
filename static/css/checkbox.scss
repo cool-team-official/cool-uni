@@ -4,7 +4,7 @@
 	font-size: 26rpx;
 	transition: all 0.3s;
 
-	.cl-checkbox__input {
+	&__input {
 		display: inline-block;
 		vertical-align: middle;
 		height: 40rpx;
@@ -24,6 +24,10 @@
 			position: relative;
 			top: -2rpx;
 		}
+	}
+
+	&__label {
+		display: inline;
 	}
 
 	&.is-checked {
@@ -78,3 +82,9 @@
 cl-checkbox + cl-checkbox {
 	margin-left: 20rpx;
 }
+
+/* #ifdef MP-TOUTIAO */
+.cl-checkbox {
+	margin-right: 20rpx;
+}
+/* #endif */

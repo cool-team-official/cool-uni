@@ -61,6 +61,7 @@ const { platform, statusBarHeight } = uni.getSystemInfoSync();
  * @property {String} color 字体颜色，默认#000
  * @property {String} backPath 返回路径
  * @property {Boolean} fixed 是否固定布局在顶部
+ * @property {Boolean} isTop 是否添加顶部安全区域
  * @example <cl-topbar title="COOL-UNI" />
  */
 
@@ -96,11 +97,20 @@ export default {
 		backPath: String,
 		// 是否固定布局在顶部
 		fixed: Boolean,
+		// 是否添加顶部安全区域
+		isTop: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	computed: {
 		top() {
-			return platform === "android" ? `${statusBarHeight}px` : "env(safe-area-inset-top)";
+			return this.isTop
+				? platform === "android"
+					? `${statusBarHeight}px`
+					: "env(safe-area-inset-top)"
+				: 0;
 		},
 
 		classList() {

@@ -361,7 +361,7 @@ class ClCanvas {
 
     // 渲染文本
     textRender(options) {
-        let { fontSize = 14, color = '#000', x, y, letterSpace, lineHeight = 14 } = options || {}
+        let { fontSize = 14, color = '#000000', x, y, letterSpace, lineHeight = 14 } = options || {}
 
         this.ctx.save();
 

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 const { platform } = uni.getSystemInfoSync();
 
@@ -88,6 +88,8 @@ export default {
 		},
 	},
 
+	mixins: [Parent],
+
 	data() {
 		return {
 			touch: {
@@ -101,6 +103,10 @@ export default {
 			menu: {
 				width: 0,
 			},
+
+			Keys: ["disabled", "justify", "border"],
+
+			ComponentName: "ClList",
 		};
 	},
 
@@ -135,10 +141,6 @@ export default {
 
 		translateX() {
 			return `translateX(${this.touch.x}px)`;
-		},
-
-		parent() {
-			return getParent.call(this, "ClList", ["disabled", "justify", "border"]) || {};
 		},
 	},
 

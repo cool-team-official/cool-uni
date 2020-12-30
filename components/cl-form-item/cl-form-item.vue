@@ -22,7 +22,8 @@
 <script>
 import AsyncValidator from "../../utils/async-validator";
 import Emitter from "../../mixins/emitter";
-import { getParent, isArray } from "../../utils";
+import Parent from "../../mixins/parent";
+import { isArray } from "../../utils";
 
 /**
  * form-item 表单项
@@ -69,7 +70,7 @@ export default {
 		},
 	},
 
-	mixins: [Emitter],
+	mixins: [Emitter, Parent],
 
 	data() {
 		return {
@@ -77,26 +78,19 @@ export default {
 			message: "",
 			error: false,
 			validator: null,
-		};
-	},
-
-	computed: {
-		parent() {
-			let parent = getParent.call(this, "ClForm", [
+			Keys: [
 				"labelWidth",
 				"labelPosition",
 				"showMessage",
 				"model",
-				"addField",
 				"removeField",
 				"validateOnValueChange",
-				"rules2",
-			]);
+			],
+			ComponentName: "ClForm",
+		};
+	},
 
-			parent.rules = parent.rules2;
-			return parent;
-		},
-
+	computed: {
 		label2() {
 			return this.label == "true" ? "" : this.label;
 		},

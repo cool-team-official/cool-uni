@@ -29,22 +29,22 @@ export default {
 		// 绑定值
 		value: {
 			type: Array,
-			default: () => []
+			default: () => [],
 		},
 		// 是否边框样式
 		border: Boolean,
 		// 是否禁用
 		disabled: Boolean,
 		// 是否圆角
-		round: Boolean
+		round: Boolean,
 	},
 
 	mixins: [Emitter],
 
 	created() {
 		// 监听多选框的变化
-		this.$on("checkbox.change", label => {
-			let index = this.value.findIndex(e => e == label);
+		this.$on("checkbox.change", (label) => {
+			let index = this.value.findIndex((e) => e == label);
 			let list = cloneDeep(this.value);
 
 			if (index >= 0) {
@@ -56,6 +56,6 @@ export default {
 			this.$emit("input", list);
 			this.$emit("change", list);
 		});
-	}
+	},
 };
 </script>

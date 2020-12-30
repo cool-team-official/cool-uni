@@ -4,7 +4,7 @@
 		:style="{
 			height,
 			backgroundColor,
-			borderTopColor: borderStyle
+			borderTopColor: borderStyle,
 		}"
 	>
 		<slot></slot>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { parseRpx } from "../../utils";
+import { parseRpx, isEmpty } from "../../utils";
 
 /**
  * tabbar 底部导航
@@ -39,36 +39,37 @@ export default {
 		// 高度
 		height: {
 			type: String,
-			default: "100rpx"
+			default: "100rpx",
 		},
 		// 字体颜色
 		color: {
 			type: String,
-			default: "#7A7E83"
+			default: "#7A7E83",
 		},
 		// 选中颜色
 		selectedColor: {
 			type: String,
-			default: "#2B2E3D"
+			default: "#2B2E3D",
 		},
 		// 边框颜色
 		borderStyle: {
 			type: String,
-			default: "white"
+			default: "white",
 		},
 		// 背景颜色
 		backgroundColor: {
 			type: String,
-			default: "#ffffff"
+			default: "#ffffff",
 		},
 		// 切换前钩子函数
-		beforeSwitch: Function
+		beforeSwitch: Function,
 	},
 
 	data() {
 		return {
 			name: null,
-			lock: false
+			lock: false,
+			number: 4,
 		};
 	},
 
@@ -77,18 +78,18 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.name = val;
-			}
+			},
 		},
 
 		name(val) {
 			this.$emit("input", val);
-		}
+		},
 	},
 
 	created() {
-		this.$on("change", name => {
+		this.$on("change", (name) => {
 			if (!this.lock) {
-				let next = n2 => {
+				let next = (n2) => {
 					this.name = n2 || name;
 					this.lock = false;
 				};
@@ -101,6 +102,29 @@ export default {
 				}
 			}
 		});
-	}
+	},
+
+	mounted() {
+		this.doLayout();
+	},
+
+	methods: {
+		doLayout() {
+			let timer = null;
+
+			const fn = () => {
+				if (isEmpty(this.$children)) {
+					timer = setTimeout(() => {
+						fn();
+					}, 50);
+				} else {
+					clearTimeout(timer);
+					this.number = this.$children.length;
+				}
+			};
+
+			fn();
+		},
+	},
 };
 </script>

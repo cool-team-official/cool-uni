@@ -4,16 +4,16 @@
 			<text class="cl-icon-toast-success" v-if="checked"></text>
 		</view>
 
-		<text class="cl-radio__label">
+		<view class="cl-radio__label">
 			<slot></slot>
-		</text>
+		</view>
 	</view>
 </template>
 
 <script>
 import Emitter from "../../mixins/emitter";
 import Form from "../../mixins/form";
-import { getParent } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * radio 单选框
@@ -43,11 +43,13 @@ export default {
 		border: Boolean,
 	},
 
-	mixins: [Emitter, Form],
+	mixins: [Emitter, Form, Parent],
 
 	data() {
 		return {
 			checked: false,
+			Keys: ["border", "disabled", "value"],
+			ComponentName: "ClRadioGroup",
 		};
 	},
 
@@ -58,23 +60,23 @@ export default {
 				this.checked = val === this.label;
 			},
 		},
+		parent: {
+			immediate: true,
+			handler(val) {
+				if (val) {
+					this.checked = val.value === this.label;
+				}
+			},
+		},
 	},
 
 	computed: {
-		parent() {
-			return getParent.call(this, "ClRadioGroup", ["border", "disabled"]);
-		},
-
-		isGroup() {
-			return Boolean(this.parent);
-		},
-
 		isBorder() {
-			return this.isGroup ? this.parent.border || this.border : this.border;
+			return this.hasParent ? this.parent.border || this.border : this.border;
 		},
 
 		isDisabled() {
-			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			let disabled = this.hasParent ? this.parent.disabled || this.disabled : this.disabled;
 			return this.$form ? this.$form.disabled || disabled : disabled;
 		},
 
@@ -97,13 +99,6 @@ export default {
 		},
 	},
 
-	created() {
-		// 监听单选框组值的变化
-		this.$on("radio-group.change", (label) => {
-			this.checked = label === this.label;
-		});
-	},
-
 	methods: {
 		change() {
 			if (this.isDisabled) {
@@ -113,7 +108,7 @@ export default {
 			this.checked = true;
 
 			// 回调到组件或者单选框组
-			if (this.isGroup) {
+			if (this.hasParent) {
 				this.dispatch("ClRadioGroup", "radio.change", this.label);
 			} else {
 				this.$emit("input", this.label);

@@ -4,16 +4,17 @@
 			<text class="cl-icon-toast-success" v-if="checked"></text>
 		</view>
 
-		<text class="cl-checkbox__label">
+		<view class="cl-checkbox__label">
 			<slot></slot>
-		</text>
+		</view>
 	</view>
 </template>
 
 <script>
 import Emitter from "../../mixins/emitter";
 import Form from "../../mixins/form";
-import { getParent, isBoolean } from "../../utils";
+import Parent from "../../mixins/parent";
+import { isBoolean } from "../../utils";
 
 /**
  * checkbox 多选框
@@ -49,11 +50,13 @@ export default {
 		fill: Boolean,
 	},
 
-	mixins: [Emitter, Form],
+	mixins: [Emitter, Form, Parent],
 
 	data() {
 		return {
 			checked: false,
+			Keys: ["border", "disabled", "value"],
+			ComponentName: "ClCheckboxGroup",
 		};
 	},
 
@@ -76,24 +79,16 @@ export default {
 	},
 
 	computed: {
-		parent() {
-			return getParent.call(this, "ClCheckboxGroup", ["border", "disabled", "value"]);
-		},
-
-		isGroup() {
-			return Boolean(this.parent);
-		},
-
 		isRound() {
-			return this.isGroup ? this.parent.round || this.round : this.round;
+			return this.hasParent ? this.parent.round || this.round : this.round;
 		},
 
 		isBorder() {
-			return this.isGroup ? this.parent.border || this.border : this.border;
+			return this.hasParent ? this.parent.border || this.border : this.border;
 		},
 
 		isDisabled() {
-			let disabled = this.isGroup ? this.parent.disabled || this.disabled : this.disabled;
+			let disabled = this.hasParent ? this.parent.disabled || this.disabled : this.disabled;
 			return this.$form ? this.$form.disabled || disabled : disabled;
 		},
 
@@ -133,7 +128,7 @@ export default {
 			this.checked = !this.checked;
 
 			// 回调到组件或者多选框组
-			if (this.isGroup) {
+			if (this.hasParent) {
 				this.dispatch("ClCheckboxGroup", "checkbox.change", this.label);
 			} else {
 				this.$emit("input", this.checked);

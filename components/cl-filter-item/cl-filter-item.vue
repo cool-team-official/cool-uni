@@ -77,7 +77,8 @@
 </template>
 
 <script>
-import { getParent, cloneDeep } from "../../utils";
+import { cloneDeep } from "../../utils";
+import Parent from "../../mixins/parent";
 
 /**
  * filter-bar-item 过滤项
@@ -134,6 +135,8 @@ export default {
 		},
 	},
 
+	mixins: [Parent],
+
 	data() {
 		return {
 			name: "",
@@ -141,14 +144,12 @@ export default {
 			order: null,
 			isExpand: false,
 			isOpen: false,
+			Keys: ["setDropdown", "setExpand", "update"],
+			ComponentName: "ClFilterBar",
 		};
 	},
 
 	computed: {
-		parent() {
-			return getParent.call(this, "ClFilterBar", ["setDropdown", "setExpand", "update"]);
-		},
-
 		classList() {
 			let list = [];
 
