@@ -60,11 +60,11 @@ export default {
 				this.checked = val === this.label;
 			},
 		},
-		parent: {
+		"parent.value": {
 			immediate: true,
 			handler(val) {
-				if (val) {
-					this.checked = val.value === this.label;
+				if (this.hasParent) {
+					this.checked = val === this.label;
 				}
 			},
 		},

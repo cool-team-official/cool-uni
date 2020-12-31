@@ -70,8 +70,7 @@ export default {
 		"parent.value": {
 			immediate: true,
 			handler(val) {
-				if (val) {
-					// 判断当前是否选中
+				if (this.hasParent) {
 					this.checked = val.includes(this.label);
 				}
 			},

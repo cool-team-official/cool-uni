@@ -8,11 +8,11 @@
 			<text class="cl-icon-caret-bottom cl-filter-item__dropdown-icon"></text>
 		</template>
 
-		<!-- 排序 -->
+		<!-- 开关 -->
 		<template v-else-if="type == 'switch'"> </template>
 
 		<!-- 排序 -->
-		<template v-else-if="type == 'sort'">
+		<template v-else-if="type == 'order'">
 			<view class="cl-filter-item__order" :class="[`is-${order}`]" v-if="order !== undefined">
 				<!-- 升序，降序图标 -->
 				<text class="cl-filter-item__order-asc"></text>
@@ -86,7 +86,7 @@ import Parent from "../../mixins/parent";
  * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
  * @property {null} value 绑定值，当时下拉多选时，必须是数组
  * @property {String} prop 唯一标识
- * @property {String} type 类型，dropdown | sort
+ * @property {String} type 类型，dropdown | order | switch
  * @property {String} label 标题
  * @property {Boolean} disabled 是否禁用
  * @property {Boolean} multiple 下拉框是否多选
@@ -107,7 +107,7 @@ export default {
 		value: null,
 		// 唯一标识
 		prop: String,
-		// 类型，dropdown | sort | switch(default)
+		// 类型，dropdown | order | switch(default)
 		type: {
 			type: String,
 			default: "switch",
@@ -144,7 +144,7 @@ export default {
 			order: null,
 			isExpand: false,
 			isOpen: false,
-			Keys: ["setDropdown", "setExpand", "update"],
+			Keys: ["setDropdown", "setExpand", "update", "setOrder"],
 			ComponentName: "ClFilterBar",
 		};
 	},
@@ -207,6 +207,13 @@ export default {
 					break;
 			}
 		});
+
+		// 监听排序事件
+		this.$on("filter-bar.clearOrder", () => {
+			if (this.type == "order") {
+				this.update("", true);
+			}
+		});
 	},
 
 	methods: {
@@ -228,7 +235,7 @@ export default {
 					});
 
 					break;
-				case "sort":
+				case "order":
 					this.order = this.value;
 					break;
 				case "switch":
@@ -265,6 +272,9 @@ export default {
 				// 更新数据
 				this.update(this.isOpen);
 			} else {
+				// 设置排序
+				this.parent.setOrder();
+
 				// 修改排序
 				if (!this.order) {
 					this.order = "asc";
@@ -273,6 +283,7 @@ export default {
 				} else if (this.order == "desc") {
 					this.order = "";
 				}
+
 				// 更新数据
 				this.update(this.order);
 			}
@@ -336,15 +347,15 @@ export default {
 		},
 
 		// 更新数据
-		update(val) {
-			this.$emit("input", val);
-			this.$emit("change", val);
+		update(value, scoped) {
+			this.$emit("input", value);
+			this.$emit("change", value);
 
 			// 添加 prop，可区分是哪项数据发送变化
-			if (this.parent) {
+			if (this.parent && !scoped) {
 				this.parent.update({
 					prop: this.prop,
-					value: val,
+					value,
 				});
 			}
 		},

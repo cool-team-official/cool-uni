@@ -75,6 +75,25 @@
 		}
 	}
 
+	&--bottom {
+		.cl-popup {
+			transform: translateY(100%);
+			left: 0;
+			bottom: 0;
+		}
+	}
+
+	&--center {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.cl-popup {
+			transform: scale(1.3);
+		}
+	}
+
 	&--top,
 	&--left,
 	&--right {
@@ -89,23 +108,11 @@
 		}
 	}
 
+	&--left,
+	&--right,
 	&--bottom {
 		.cl-popup {
-			transform: translateY(100%);
-			left: 0;
-			bottom: 0;
 			padding-bottom: env(safe-area-inset-bottom);
-		}
-	}
-
-	&--center {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-
-		.cl-popup {
-			transform: scale(1.3);
 		}
 	}
 }

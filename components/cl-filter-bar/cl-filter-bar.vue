@@ -17,6 +17,7 @@ import Emitter from "../../mixins/emitter";
  * @description 字段升序降序, 下拉框，自定义筛选
  * @tutorial https://docs.cool-js.com/uni/components/advanced/filterbar.html
  * @property {Boolean} isSticky 是否吸顶
+ * @property {Boolean} orderType 排序类型 multiple（默认） | single
  * @event {Function} change cl-filter-item 数据发生改变时触发
  * @example 见教程
  */
@@ -27,10 +28,13 @@ export default {
 	componentName: "ClFilterBar",
 
 	props: {
-		// 列表数据
-		list: Array,
 		// 是否吸顶
 		isSticky: Boolean,
+		// 排序类型 multiple | single
+		orderType: {
+			type: String,
+			default: "multiple",
+		},
 	},
 
 	mixins: [Emitter],
@@ -86,6 +90,18 @@ export default {
 				action,
 				_uid,
 			});
+		},
+
+		// 设置排序
+		setOrder() {
+			if (this.orderType == "single") {
+				this.clearOrder();
+			}
+		},
+
+		// 清空字段的排序
+		clearOrder() {
+			this.broadcast("ClFilterItem", "filter-bar.clearOrder");
 		},
 
 		// 关闭当前遮罩层及收起下拉框
