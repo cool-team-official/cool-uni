@@ -93,6 +93,8 @@ export default {
 						props: this.checkProps(newV, oldV),
 					});
 				}
+
+				this.lock = false;
 			},
 		},
 

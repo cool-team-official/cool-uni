@@ -12,7 +12,6 @@
 			:changing-class="changingClass"
 			:autoplay="autoplay"
 			:current="current"
-			:current-item-id="currentItemId"
 			:interval="interval"
 			:duration="duration"
 			:circular="circular2"
@@ -34,15 +33,15 @@
 					class="cl-swiper-item"
 					:class="[
 						{
-							'is-active': current === index
-						}
+							'is-active': current === index,
+						},
 					]"
 				>
 					<slot :item="item" :index="index">
 						<image
 							class="cl-swiper-item__image"
 							:style="{
-								'border-radius': radius
+								'border-radius': radius,
 							}"
 							:mode="imageMode"
 							:src="item"
@@ -95,42 +94,42 @@ export default {
 		// 图片裁剪, 缩放模式
 		imageMode: {
 			type: String,
-			default: "aspectFill"
+			default: "aspectFill",
 		},
 		// 高度
 		height: {
 			type: String,
-			default: "300rpx"
+			default: "300rpx",
 		},
 		// 圆角
 		radius: {
 			type: String,
-			default: "10rpx"
+			default: "10rpx",
 		},
 		// 外间距
 		margin: {
 			type: Array,
-			default: () => []
+			default: () => [],
 		},
 		// 是否显示指示器
 		indicatorDots: Boolean,
 		// 指示器颜色
 		indicatorColor: {
 			type: String,
-			default: "rgba(0, 0, 0, .3)"
+			default: "rgba(0, 0, 0, .3)",
 		},
 		// 指示器选中颜色
 		indicatorActiveColor: {
 			type: String,
-			default: "#000000"
+			default: "#000000",
 		},
 		// 指示器类型 round | circle | square
 		dotType: {
 			type: String,
 			default: "round",
-			validator: val => {
+			validator: (val) => {
 				return ["round", "circle", "square"].indexOf(val) !== -1;
-			}
+			},
 		},
 		activeClass: String,
 		changingClass: String,
@@ -138,11 +137,11 @@ export default {
 		currentItemId: String,
 		interval: {
 			type: Number,
-			default: 5000
+			default: 5000,
 		},
 		duration: {
 			type: Number,
-			default: 500
+			default: 500,
 		},
 		circular: Boolean,
 		vertical: Boolean,
@@ -150,23 +149,23 @@ export default {
 		disableProgrammaticAnimation: Boolean,
 		displayMultipleItems: {
 			type: Number,
-			default: 1
+			default: 1,
 		},
 		skipHiddenItemLayout: Boolean,
 		disableTouch: Boolean,
 		touchable: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		easingFunction: {
 			type: String,
-			default: "default"
-		}
+			default: "default",
+		},
 	},
 
 	data() {
 		return {
-			current: 0
+			current: 0,
 		};
 	},
 
@@ -175,12 +174,12 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.current = val || 0;
-			}
+			},
 		},
 		current(val) {
 			this.$emit("input", val);
 			this.$emit("change", val);
-		}
+		},
 	},
 
 	computed: {
@@ -241,7 +240,7 @@ export default {
 		},
 		isNext() {
 			return this.current < this.list.length - 1;
-		}
+		},
 	},
 
 	methods: {
@@ -263,7 +262,7 @@ export default {
 
 		onNext() {
 			this.current += this.isNext ? 1 : 0;
-		}
-	}
+		},
+	},
 };
 </script>
