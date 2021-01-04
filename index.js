@@ -5,7 +5,7 @@ import { deepMerge } from "./utils";
 import "./common";
 
 const install = (Vue, options = {}) => {
-	// 配置数据
+	// 默认配置数据
 	let data = {
 		// 首页页面路径
 		homePage: "/",
@@ -15,7 +15,7 @@ const install = (Vue, options = {}) => {
 		...deepMerge(data, options),
 		Storage,
 		author: "cool",
-		version: "1.6.4",
+		version: "1.6.5",
 	};
 
 	Vue.prototype.$cl = uni.$cl = $cl;

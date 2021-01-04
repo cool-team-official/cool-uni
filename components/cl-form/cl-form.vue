@@ -27,7 +27,7 @@ import { isArray, isObject, isString, isBoolean, isEmpty, isNumber, cloneDeep } 
  * @property {Boolean} showMessage 是否显示消息提示
  * @property {String} labelWidth 表单域标签的宽度，默认150rpx
  * @property {String} labelPosition 表单域标签的位置，默认right
- * @property {Boolean} validateOnValueChange 是否在 rules 属性改变后立即触发一次验证，默认true
+ * @property {Boolean} validateOnRuleChange 是否在 rules 属性改变后立即触发一次验证，默认true
  * @example <cl-form model="" rules=""></cl-form>
  */
 
@@ -66,7 +66,7 @@ export default {
 			default: "right",
 		},
 		// 是否在 rules 属性改变后立即触发一次验证
-		validateOnValueChange: {
+		validateOnRuleChange: {
 			type: Boolean,
 			default: false,
 		},
@@ -184,10 +184,7 @@ export default {
 			this.lock = true;
 			this.form = cloneDeep(this._form);
 			this.$emit("update:model", this.form);
-			this.$nextTick(() => {
-				this.clearValidate();
-				this.lock = false;
-			});
+			this.clearValidate();
 		},
 
 		// 移除表单校验结果

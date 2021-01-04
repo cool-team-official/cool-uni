@@ -36,7 +36,7 @@ import { isArray } from "../../utils";
  * @property {String} labelWidth 表单域标签的宽度，默认150rpx
  * @property {String} labelPosition 表单域标签的位置，默认right
  * @property {String} justify 水平布局，默认start
- * @property {String} validateOnValueChange 是否在 rules 属性改变后立即触发一次验证，默认true
+ * @property {String} validateOnRuleChange 是否在 rules 属性改变后立即触发一次验证，默认true
  * @example <cl-form-item prop="name"></cl-form-item>
  */
 
@@ -64,7 +64,7 @@ export default {
 			default: "start",
 		},
 		// 是否在 rules 属性改变后立即触发一次验证
-		validateOnValueChange: {
+		validateOnRuleChange: {
 			type: Boolean,
 			default: false,
 		},
@@ -84,7 +84,8 @@ export default {
 				"showMessage",
 				"model",
 				"removeField",
-				"validateOnValueChange",
+				"rules2",
+				"validateOnRuleChange",
 			],
 			ComponentName: "ClForm",
 		};
@@ -134,22 +135,31 @@ export default {
 
 	created() {
 		this.$on("form.event", ({ props, action, model, rules }) => {
-			if (action == "change-rule") {
-				return this.changeRule(rules);
-			}
+			let isValid = props.includes(this.prop);
 
-			if (props.includes(this.prop)) {
-				switch (action) {
-					case "validate":
+			switch (action) {
+				case "change-rule":
+					this.changeRule(rules);
+					break;
+
+				case "validate":
+					if (isValid) {
 						this.validate(model[this.prop]);
-						break;
+					}
+					break;
 
-					case "clearValidate":
+				case "clearValidate":
+					if (isValid) {
 						this.clearValidate();
-						break;
-				}
+					}
+					break;
 			}
 		});
+	},
+
+	mounted() {
+		// 初始化验证规则
+		this.changeRule(this.parent.rules2);
 	},
 
 	destroyed() {
@@ -191,7 +201,7 @@ export default {
 				});
 
 				// 是否在 rules 属性改变后立即触发一次验证
-				if (this.validateOnValueChange || this.parent.validateOnValueChange) {
+				if (this.validateOnRuleChange || this.parent.validateOnRuleChange) {
 					this.validate(this.parent.model[this.prop]);
 				}
 			}
