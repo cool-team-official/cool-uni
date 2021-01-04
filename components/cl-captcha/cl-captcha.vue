@@ -16,9 +16,9 @@
 				class="cl-captcha__item"
 				:style="{
 					height: parseRpx(height),
-					margin: `0 ${gutter}rpx`
+					margin: `0 ${gutter}rpx`,
 				}"
-				v-for="(item, index) in length"
+				v-for="(item, index) in list"
 				:key="index"
 			>
 				<text class="cl-captcha__value">{{ value2[index] }}</text>
@@ -55,24 +55,24 @@ export default {
 		// 验证码高度
 		height: {
 			type: [String, Number],
-			default: "120rpx"
+			default: "120rpx",
 		},
 		// 验证码位数
 		length: {
 			type: Number,
-			default: 4
+			default: 4,
 		},
 		// 间隔
 		gutter: {
 			type: Number,
-			default: 20
-		}
+			default: 20,
+		},
 	},
 
 	data() {
 		return {
 			value2: null,
-			focus2: false
+			focus2: false,
 		};
 	},
 
@@ -81,8 +81,15 @@ export default {
 			immediate: true,
 			handler(val) {
 				this.value2 = val || "";
-			}
-		}
+			},
+		},
+	},
+
+	computed: {
+		list() {
+			// 头条小程序下，无法 v-for 数字
+			return new Array(this.length).fill(1);
+		},
 	},
 
 	methods: {
@@ -104,7 +111,7 @@ export default {
 			if (val.length === this.length) {
 				this.$emit("done", val);
 			}
-		}
-	}
+		},
+	},
 };
 </script>

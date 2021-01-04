@@ -136,6 +136,7 @@ export default {
 
 				this.timer = setTimeout(() => {
 					this.status = true;
+					this.$emit("opened");
 				}, 50);
 			}
 		},
@@ -144,14 +145,14 @@ export default {
 			if (this.status) {
 				const done = () => {
 					this.status = false;
-
-					this.$emit("update:visible", false);
 					this.$emit("close");
 
 					clearTimeout(this.timer);
 
 					this.timer = setTimeout(() => {
 						this.show = false;
+						this.$emit("update:visible", false);
+						this.$emit("closed");
 					}, 300);
 				};
 

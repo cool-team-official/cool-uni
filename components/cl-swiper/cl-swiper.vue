@@ -3,6 +3,7 @@
 		class="cl-swiper"
 		:class="[`cl-swiper--${type}`, `cl-swiper--dot-${dotType}`]"
 		:style="{ height }"
+		@tap="onTap"
 	>
 		<swiper
 			:indicator-dots="indicatorDots"
@@ -262,6 +263,11 @@ export default {
 
 		onNext() {
 			this.current += this.isNext ? 1 : 0;
+		},
+
+		onTap() {
+			this.$emit("click", this.current);
+			this.$emit("tap", this.current);
 		},
 	},
 };

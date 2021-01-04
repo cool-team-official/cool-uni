@@ -39,12 +39,17 @@
 			/* #ifndef MP-TOUTIAO */
 			display: flex;
 			/* #endif */
+
 			flex: 1;
 			font-size: 26rpx;
 			line-height: 70rpx;
 
 			&.is-justify-center {
 				justify-content: center;
+
+				/* #ifdef MP-TOUTIAO */
+				text-align: left;
+				/* #endif */
 
 				picker {
 					text-align: center;
@@ -54,8 +59,12 @@
 			&.is-justify-end {
 				justify-content: flex-end;
 
+				/* #ifdef MP-TOUTIAO */
+				text-align: right;
+				/* #endif */
+
 				picker {
-					text-align: end;
+					text-align: right;
 				}
 			}
 

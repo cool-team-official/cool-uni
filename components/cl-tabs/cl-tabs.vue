@@ -326,20 +326,22 @@ export default {
 		},
 
 		onOffset() {
-			this.$nextTick(() => {
-				let item = this.tabRect[this.getIndex()];
+			if (this.tabRect) {
+				this.$nextTick(() => {
+					let item = this.tabRect[this.getIndex()];
 
-				if (item) {
-					let scrollLeft = item.left - (this.width - item.width) / 2;
+					if (item) {
+						let scrollLeft = item.left - (this.width - item.width) / 2;
 
-					if (scrollLeft < 0) {
-						scrollLeft = 0;
+						if (scrollLeft < 0) {
+							scrollLeft = 0;
+						}
+
+						this.scrollLeft = scrollLeft;
+						this.lineLeft = item.left + item.width / 2 - 8;
 					}
-
-					this.scrollLeft = scrollLeft;
-					this.lineLeft = item.left + item.width / 2 - 8;
-				}
-			});
+				});
+			}
 		},
 	},
 };
