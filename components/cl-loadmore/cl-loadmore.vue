@@ -8,7 +8,7 @@
 			<view class="cl-loadmore">
 				<cl-loading
 					:color="iconColor"
-					:loading-theme="loadingTheme"
+					:theme="loadingTheme"
 					:size="20"
 					v-if="!finish && loading"
 				></cl-loading>
@@ -17,7 +17,8 @@
 					:style="{
 						color,
 					}"
-					>{{ finish ? finishText : loading ? loadingText : text }}</text
+					v-if="message"
+					>{{ message }}</text
 				>
 			</view>
 		</cl-divider>
@@ -83,6 +84,12 @@ export default {
 		finishText: {
 			type: String,
 			default: "没有更多了",
+		},
+	},
+
+	computed: {
+		message() {
+			return this.finish ? this.finishText : this.loading ? this.loadingText : this.text;
 		},
 	},
 };
