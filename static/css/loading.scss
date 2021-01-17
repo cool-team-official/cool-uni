@@ -15,8 +15,7 @@
 		height: 100%;
 		width: 100%;
 		border-radius: 100%;
-		border: 4rpx solid rgba(0, 0, 0, 0.1);
-		border-bottom: 4rpx solid currentColor;
+		border-style: solid;
 		box-sizing: border-box;
 		animation: loading-rotate 1s linear infinite;
 		color: $cl-color-primary;

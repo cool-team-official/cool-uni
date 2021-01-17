@@ -56,7 +56,17 @@
 		</template>
 
 		<!-- 默认 -->
-		<view class="cl-loading__inner" :style="{ color }" v-else> </view>
+		<view
+			class="cl-loading__inner"
+			:style="{
+				color,
+				borderColor,
+				borderWidth,
+				'border-bottom': `${borderWidth} solid currentColor`,
+			}"
+			v-else
+		>
+		</view>
 	</view>
 </template>
 
@@ -76,6 +86,14 @@ export default {
 
 	props: {
 		color: String,
+		borderColor: {
+			type: String,
+			default: "rgba(0, 0, 0, 0.1)",
+		},
+		borderWidth: {
+			type: String,
+			default: "4rpx",
+		},
 		theme: {
 			type: String,
 			default: "default",
