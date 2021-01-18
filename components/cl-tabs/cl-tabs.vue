@@ -11,6 +11,9 @@
 				scroll-with-animation
 				scroll-x
 				:scroll-left="scrollLeft"
+				:style="{
+					backgroundColor,
+				}"
 			>
 				<view
 					class="cl-tabs__bar-box"
@@ -22,12 +25,12 @@
 						class="cl-tabs__bar-item"
 						v-for="(item, index) in tabs"
 						:key="index"
+						:style="{
+							color: value === item.name ? color : unColor,
+							padding: `0 ${gutter}rpx`,
+						}"
 						:class="{
 							'is-active': value === item.name,
-						}"
-						:style="{
-							color: value === item.name ? color : '',
-							padding: `0 ${gutter}rpx`,
 						}"
 						@tap="change(index)"
 					>
@@ -49,7 +52,7 @@
 						></text>
 					</view>
 
-					<!-- 活动线条 -->
+					<!-- 选中样式 -->
 					<view
 						class="cl-tabs__line"
 						v-if="lineLeft > 0"
@@ -151,6 +154,16 @@ export default {
 		},
 		// 字体及浮标颜色，默认主色
 		color: String,
+		// 未选中字体颜色
+		unColor: {
+			type: String,
+			default: "",
+		},
+		// 背景颜色
+		backgroundColor: {
+			type: String,
+			default: "#fff",
+		},
 	},
 
 	data() {
