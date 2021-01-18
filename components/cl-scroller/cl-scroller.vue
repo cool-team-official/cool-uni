@@ -16,7 +16,7 @@
 			}"
 		>
 			<slot name="loading" :text="text" :status="status" :move="touch.move">
-				<cl-loading :size="20"></cl-loading>
+				<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
 				<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
 			</slot>
 		</view>
@@ -24,8 +24,13 @@
 		<scroll-view
 			class="cl-scroller__view"
 			scroll-y
-			enable-back-to-top
-			:lower-threshold="100"
+			:lower-top="bottom"
+			:scroll-top="scrollTop2"
+			:scroll-into-view="scrollIntoView"
+			:scroll-with-animation="scrollWithAnimation"
+			:enable-back-to-top="enableBackToTop"
+			:show-scrollbar="showScrollbar"
+			:enable-flex="enableFlex"
 			@scroll="onScroll"
 			@scrolltolower="up"
 		>
@@ -38,32 +43,56 @@
 /**
  * scroller 滚动区域
  * @description
- * @tutorial https://docs.cool-js.com/uni/components/layout/grid.html
- * @property {Number} threshold 下拉多少px时触发刷新
- * @property {Number} loadingText 正在刷新
- * @property {Number} pullingText 下拉刷新
- * @property {Number} releaseText 释放刷新
+ * @tutorial https://docs.cool-js.com/uni/components/layout/scroller.html
+ * @property {Number} top 距离顶部多少px触发
+ * @property {Number} bottom 距离底部多少px触发
+ * @property {String} loadingText 正在刷新文案
+ * @property {String} pullingText 下拉刷新文案
+ * @property {String} releaseText 释放刷新文案
+ * @property {Number} scrollTop 滚动条距离顶部位置
+ * @property {String} scrollIntoView 滚动到对应元素id
  * @example 见教程
  */
 
 export default {
 	props: {
-		threshold: {
+		// 距离顶部多少px触发
+		top: {
 			type: Number,
 			default: 80,
 		},
+		// 距离底部多少px触发
+		bottom: {
+			type: Number,
+			default: 100,
+		},
+		// 正在刷新文案
 		loadingText: {
 			type: String,
 			default: "正在刷新",
 		},
+		// 下拉刷新文案
 		pullingText: {
 			type: String,
 			default: "下拉刷新",
 		},
+		// 释放刷新文案
 		releaseText: {
 			type: String,
 			default: "释放刷新",
 		},
+		// 滚动条距离顶部位置
+		scrollTop: Number,
+		// 滚动到对应元素id
+		scrollIntoView: String,
+		// 在设置滚动条位置时使用动画过渡
+		scrollWithAnimation: Boolean,
+		// 滚动条返回顶部
+		enableBackToTop: Boolean,
+		// 控制是否出现滚动条
+		showScrollbar: Boolean,
+		// 启用 flexbox 布局
+		enableFlex: Boolean,
 	},
 
 	data() {
@@ -73,9 +102,18 @@ export default {
 				move: 0,
 			},
 			height: 0,
-			scrollTop: 0,
+			scrollTop2: 0,
 			status: "end", // pulling, loading, end
 		};
+	},
+
+	watch: {
+		scrollTop: {
+			immediate: true,
+			handler(val) {
+				this.scrollTop2 = val || 0;
+			},
+		},
 	},
 
 	mounted() {
@@ -92,7 +130,7 @@ export default {
 		},
 
 		isReleasable() {
-			return this.touch.move >= this.threshold;
+			return this.touch.move >= this.top;
 		},
 
 		text() {
@@ -116,7 +154,7 @@ export default {
 		},
 
 		onTouchMove(e) {
-			if (this.status == "pulling" && this.scrollTop <= 10) {
+			if (this.status == "pulling" && this.scrollTop2 <= 10) {
 				let offset = e.changedTouches[0].clientY - this.touch.start;
 
 				if (offset <= 200) {
@@ -133,8 +171,10 @@ export default {
 			}
 		},
 
+		// 滚动监听
 		onScroll(e) {
-			this.scrollTop = e.detail.scrollTop;
+			this.scrollTop2 = e.detail.scrollTop;
+			this.$emit("scroll", e);
 		},
 
 		// 初始化
