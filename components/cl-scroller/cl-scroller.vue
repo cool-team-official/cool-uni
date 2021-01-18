@@ -1,41 +1,58 @@
 <template>
-	<view
-		class="cl-scroller"
-		:style="{
-			transform,
-			transition,
-		}"
-		@touchmove="onTouchMove"
-		@touchstart="onTouchStart"
-		@touchend="onTouchEnd"
-	>
+	<view class="cl-scroller__wrap">
 		<view
-			class="cl-scroller__loading"
+			class="cl-scroller"
 			:style="{
-				top: `-${height}px`,
+				transform,
+				transition,
 			}"
+			@touchmove="onTouchMove"
+			@touchstart="onTouchStart"
+			@touchend="onTouchEnd"
 		>
-			<slot name="loading" :text="text" :status="status" :move="touch.move">
-				<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
-				<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
-			</slot>
+			<view
+				class="cl-scroller__loading"
+				:style="{
+					top: `-${height}px`,
+				}"
+			>
+				<slot name="loading" :text="text" :status="status" :move="touch.move">
+					<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
+					<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
+				</slot>
+			</view>
+
+			<scroll-view
+				class="cl-scroller__view"
+				scroll-y
+				:lower-top="bottom"
+				:scroll-top="scrollTop2"
+				:scroll-into-view="scrollIntoView"
+				:scroll-with-animation="scrollWithAnimation"
+				:enable-back-to-top="enableBackToTop"
+				:show-scrollbar="showScrollbar"
+				:enable-flex="enableFlex"
+				@scroll="onScroll"
+				@scrolltolower="up"
+			>
+				<slot></slot>
+			</scroll-view>
 		</view>
 
-		<scroll-view
-			class="cl-scroller__view"
-			scroll-y
-			:lower-top="bottom"
-			:scroll-top="scrollTop2"
-			:scroll-into-view="scrollIntoView"
-			:scroll-with-animation="scrollWithAnimation"
-			:enable-back-to-top="enableBackToTop"
-			:show-scrollbar="showScrollbar"
-			:enable-flex="enableFlex"
-			@scroll="onScroll"
-			@scrolltolower="up"
+		<!-- 回到顶部 -->
+		<view
+			class="cl-scroller__back-top"
+			:class="[
+				{
+					fadeIn: backTopButtonFadeIn,
+				},
+			]"
+			@tap="backTop"
+			v-if="showBackTopButton"
 		>
-			<slot></slot>
-		</scroll-view>
+			<cl-icon name="top"></cl-icon>
+			<text class="cl-scroller__back-top-text">顶部</text>
+		</view>
 	</view>
 </template>
 
@@ -86,9 +103,17 @@ export default {
 		// 滚动到对应元素id
 		scrollIntoView: String,
 		// 在设置滚动条位置时使用动画过渡
-		scrollWithAnimation: Boolean,
+		scrollWithAnimation: {
+			type: Boolean,
+			default: true,
+		},
 		// 滚动条返回顶部
 		enableBackToTop: Boolean,
+		// 是否显示回到顶部按钮
+		showBackTopButton: {
+			type: Boolean,
+			default: true,
+		},
 		// 控制是否出现滚动条
 		showScrollbar: Boolean,
 		// 启用 flexbox 布局
@@ -103,6 +128,7 @@ export default {
 			},
 			height: 0,
 			scrollTop2: 0,
+			backTopButtonFadeIn: false,
 			status: "end", // pulling, loading, end
 		};
 	},
@@ -111,7 +137,7 @@ export default {
 		scrollTop: {
 			immediate: true,
 			handler(val) {
-				this.scrollTop2 = val || 0;
+				this.scrollTop2 = val || "";
 			},
 		},
 	},
@@ -173,7 +199,7 @@ export default {
 
 		// 滚动监听
 		onScroll(e) {
-			this.scrollTop2 = e.detail.scrollTop;
+			this.backTopButtonFadeIn = e.detail.scrollTop >= 200;
 			this.$emit("scroll", e);
 		},
 
@@ -205,6 +231,16 @@ export default {
 		end() {
 			this.status = "end";
 			this.touch.move = 0;
+		},
+
+		// 滚动到
+		scrollTo(top) {
+			this.scrollTop2 = top;
+		},
+
+		// 回到顶部
+		backTop() {
+			this.scrollTop2 = Math.random();
 		},
 	},
 };
