@@ -33,15 +33,13 @@
 		justify-content: center;
 		align-items: center;
 		position: fixed;
-		right: 20rpx;
+		right: 30rpx;
 		bottom: 100rpx;
-		margin-bottom: env(safe-area-inset-bottom);
-		background-color: rgba(255, 255, 255, 0.7);
+		background-color: rgba(255, 255, 255, 0.8);
 		border: 1rpx solid #ddd;
 		height: 80rpx;
 		width: 80rpx;
 		border-radius: 80rpx;
-		padding: 6rpx;
 		transform: translateX(160rpx);
 		transition: all 0.3s;
 		opacity: 0;
@@ -55,6 +53,7 @@
 		&-text {
 			font-size: 20rpx;
 			color: #444;
+			margin-top: -4rpx;
 		}
 	}
 }

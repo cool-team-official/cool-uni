@@ -50,7 +50,7 @@
 			@tap="backTop"
 			v-if="showBackTopButton"
 		>
-			<cl-icon name="top"></cl-icon>
+			<cl-icon name="top" color="#666"></cl-icon>
 			<text class="cl-scroller__back-top-text">顶部</text>
 		</view>
 	</view>
