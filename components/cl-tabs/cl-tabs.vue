@@ -174,6 +174,7 @@ export default {
 			scrollLeft: 0,
 			clientX: "",
 			clientY: "",
+			offsetLeft: 0,
 			width: 375,
 		};
 	},
@@ -182,7 +183,7 @@ export default {
 		value: {
 			immediate: true,
 			handler(val) {
-				this.current = val;
+				this.current = val || 0;
 			},
 		},
 
@@ -256,7 +257,8 @@ export default {
 					.in(this)
 					// #endif
 					.select(".cl-tabs")
-					.fields({ size: true }, (d) => {
+					.boundingClientRect((d) => {
+						this.offsetLeft = d.left;
 						this.width = d.width;
 						this.getRect();
 					})
@@ -351,7 +353,7 @@ export default {
 						}
 
 						this.scrollLeft = scrollLeft;
-						this.lineLeft = item.left + item.width / 2 - 8;
+						this.lineLeft = item.left + item.width / 2 - 8 - this.offsetLeft;
 					}
 				});
 			}

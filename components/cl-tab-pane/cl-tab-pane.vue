@@ -1,17 +1,18 @@
 <template>
 	<view class="cl-tab-pane" v-show="visible" v-if="loaded">
 		<template v-if="parent.scrollView">
-			<scroll-view
-				class="cl-tab-pane__scroller"
-				scroll-y
+			<cl-scroller
+				ref="scroller"
 				:refresher-enabled="refresherEnabled"
-				:lower-threshold="100"
-				:refresher-triggered="triggered"
-				@refresherrefresh="handlePullDownRefresh"
-				@scrolltolower="handleReachBottom"
+				@up="handleReachBottom"
+				@down="handlePullDownRefresh"
 			>
+				<template #loading="{ status, text, move }">
+					<slot name="loading" :status="status" :text="text" :move="move"></slot>
+				</template>
+
 				<slot></slot>
-			</scroll-view>
+			</cl-scroller>
 		</template>
 
 		<template v-else>
@@ -33,7 +34,7 @@ import Parent from "../../mixins/parent";
  * @property {Boolean} prefixIcon 前缀图标
  * @property {Number} suffixIcon 后缀图标
  * @property {Boolean} lazy 是否延迟加载
- * @property {Boolean} refresherEnabled 开启自定义下拉刷新
+ * @property {Boolean} refresherEnabled 启用下拉刷新
  * @example 见教程
  */
 
@@ -53,8 +54,11 @@ export default {
 		suffixIcon: String,
 		// 是否延迟加载
 		lazy: Boolean,
-		// 开启自定义下拉刷新
-		refresherEnabled: Boolean,
+		// 启用下拉刷新
+		refresherEnabled: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	mixins: [Parent],
@@ -88,13 +92,9 @@ export default {
 	methods: {
 		handlePullDownRefresh() {
 			if (this.refresherEnabled) {
-				this.triggered = "restore";
-
 				this.$emit("pull-refresh", {
 					done: () => {
-						setTimeout(() => {
-							this.triggered = false;
-						}, 10);
+						this.$refs["scroller"].end();
 					},
 				});
 			}
