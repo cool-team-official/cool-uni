@@ -209,14 +209,21 @@ export default {
 				})
 				.exec();
 
-			// 获取距离顶部的高度
+			// 获取当前距离顶部的高度
 			uni.createSelectorQuery()
 				.in(this)
-				.selectAll(".cl-li__header")
-				.fields({ rect: true })
-				.exec((d) => {
-					this.tops = d[0].map((e) => e.top);
-				});
+				.select(".cl-li")
+				.boundingClientRect((res) => {
+					// 获取每项距离顶部的高度
+					uni.createSelectorQuery()
+						.in(this)
+						.selectAll(".cl-li__header")
+						.fields({ rect: true })
+						.exec((d) => {
+							this.tops = d[0].map((e) => e.top - res.top);
+						});
+				})
+				.exec();
 		},
 	},
 };
