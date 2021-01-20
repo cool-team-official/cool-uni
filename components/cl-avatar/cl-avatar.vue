@@ -10,9 +10,17 @@
 			@error="handleError"
 			@load="handleLoad"
 		>
-			<view class="cl-image__placeholder" slot="placeholder">
-				<text class="cl-icon-my" :style="{ fontSize }"></text>
-			</view>
+			<template #placeholder>
+				<view class="cl-image__placeholder">
+					<text class="cl-icon-my" :style="{ fontSize }"></text>
+				</view>
+			</template>
+
+			<template #error v-if="isError">
+				<view class="cl-image__error">
+					<slot name="error"></slot>
+				</view>
+			</template>
 		</cl-image>
 	</view>
 </template>
@@ -25,7 +33,7 @@
  * @property {String} src 图片链接
  * @property {Number} size 头像大小，默认80
  * @property {String} shape 头像的形状，默认circle
- * @property {String} mode 裁剪,缩放模式
+ * @property {String} mode 裁剪，缩放模式
  * @example <cl-avatar src="http://" />
  */
 
@@ -33,20 +41,30 @@ export default {
 	name: "cl-avatar",
 
 	props: {
+		// 图片链接
 		src: String,
 		lazyLoad: Boolean,
+		// 头像大小
 		size: {
 			type: Number,
 			default: 80,
 		},
+		// 头像的形状 circle | square
 		shape: {
 			type: String,
 			default: "circle",
 		},
+		// 裁剪，缩放模式
 		mode: {
 			type: String,
 			default: "scaleToFill",
 		},
+	},
+
+	data() {
+		return {
+			isError: false,
+		};
 	},
 
 	computed: {
@@ -69,10 +87,12 @@ export default {
 
 	methods: {
 		handleLoad(e) {
+			this.isError = false;
 			this.$emit("error", e);
 		},
 
 		handleError(e) {
+			this.isError = true;
 			this.$emit("load", e);
 		},
 	},

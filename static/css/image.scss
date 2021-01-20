@@ -12,7 +12,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #f7f7f7;
 		height: 100%;
 		width: 100%;
 	}
@@ -25,10 +24,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #f7f7f7;
 		height: 100%;
 		width: 100%;
 		font-size: 24rpx;
+		text-align: center;
 	}
 
 	&.is-round {
