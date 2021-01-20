@@ -15,6 +15,21 @@
 	&--square {
 		border-radius: 10rpx;
 	}
+
+	&__target {
+		height: 100%;
+		width: 100%;
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+	&__placeholder {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+	}
 }
 
 .cl-avatar-group {

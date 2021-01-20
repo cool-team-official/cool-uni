@@ -2,26 +2,27 @@
 	<view :class="['cl-avatar', isShape]" :style="{ height, width }">
 		<slot v-if="$slots.default || $slots.$default"> </slot>
 
-		<cl-image
-			v-else
-			:src="src"
-			:size="size"
-			:mode="mode"
-			@error="handleError"
-			@load="handleLoad"
-		>
-			<template #placeholder>
-				<view class="cl-image__placeholder">
+		<template v-else>
+			<slot name="placeholder" v-if="!src">
+				<view class="cl-avatar__placeholder">
 					<text class="cl-icon-my" :style="{ fontSize }"></text>
 				</view>
-			</template>
+			</slot>
 
-			<template #error v-if="isError">
-				<view class="cl-image__error">
-					<slot name="error"></slot>
-				</view>
-			</template>
-		</cl-image>
+			<slot name="error" v-else-if="isError">
+				<view class="cl-avatar__error"> 加载失败 </view>
+			</slot>
+
+			<image
+				v-else
+				class="cl-avatar__target"
+				:src="src"
+				:mode="mode"
+				:lazy-load="lazyLoad"
+				@error="handleError"
+				@load="handleLoad"
+			></image>
+		</template>
 	</view>
 </template>
 
