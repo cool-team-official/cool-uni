@@ -153,13 +153,13 @@ export default {
 
 		onScroll(e) {
 			let top = e.detail.scrollTop;
-			let num = this.tops.filter((e) => top >= e - 60).length;
+			let num = this.tops.filter((e) => top >= e - 60).length - 1;
 
 			if (num < 0) {
 				num = 0;
 			}
 
-			this.curr = this.list[num - 1];
+			this.curr = this.list[num];
 		},
 
 		// 选择行
