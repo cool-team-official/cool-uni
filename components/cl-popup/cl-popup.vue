@@ -127,6 +127,7 @@ export default {
 
 		open() {
 			if (!this.show) {
+				// 显示内容
 				this.show = true;
 
 				this.$emit("update:visible", true);
@@ -135,8 +136,13 @@ export default {
 				clearTimeout(this.timer);
 
 				this.timer = setTimeout(() => {
+					// 开始动画
 					this.status = true;
-					this.$emit("opened");
+
+					// 等待动画结束
+					this.timer = setTimeout(() => {
+						this.$emit("opened");
+					}, 350);
 				}, 50);
 			}
 		},
@@ -144,12 +150,14 @@ export default {
 		close() {
 			if (this.status) {
 				const done = () => {
+					// 关闭动画
 					this.status = false;
 					this.$emit("close");
 
 					clearTimeout(this.timer);
 
 					this.timer = setTimeout(() => {
+						// 隐藏内容
 						this.show = false;
 						this.$emit("update:visible", false);
 						this.$emit("closed");

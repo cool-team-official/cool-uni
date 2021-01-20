@@ -199,31 +199,33 @@ export default {
 		},
 
 		doLayout() {
-			// 获取索引栏大小
-			uni.createSelectorQuery()
-				.in(this)
-				.select(`.cl-li__bar-list`)
-				.boundingClientRect((res) => {
-					this.bar.top = res.top;
-					this.bar.itemH = parseInt(res.height / this.list.length);
-				})
-				.exec();
+			this.$nextTick(() => {
+				// 获取索引栏大小
+				uni.createSelectorQuery()
+					.in(this)
+					.select(`.cl-li__bar-list`)
+					.boundingClientRect((res) => {
+						this.bar.top = res.top;
+						this.bar.itemH = parseInt(res.height / this.list.length);
+					})
+					.exec();
 
-			// 获取当前距离顶部的高度
-			uni.createSelectorQuery()
-				.in(this)
-				.select(".cl-li")
-				.boundingClientRect((res) => {
-					// 获取每项距离顶部的高度
-					uni.createSelectorQuery()
-						.in(this)
-						.selectAll(".cl-li__header")
-						.fields({ rect: true })
-						.exec((d) => {
-							this.tops = d[0].map((e) => e.top - res.top);
-						});
-				})
-				.exec();
+				// 获取当前距离顶部的高度
+				uni.createSelectorQuery()
+					.in(this)
+					.select(".cl-li")
+					.boundingClientRect((res) => {
+						// 获取每项距离顶部的高度
+						uni.createSelectorQuery()
+							.in(this)
+							.selectAll(".cl-li__header")
+							.fields({ rect: true })
+							.exec((d) => {
+								this.tops = d[0].map((e) => e.top - res.top);
+							});
+					})
+					.exec();
+			});
 		},
 	},
 };
