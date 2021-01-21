@@ -135,6 +135,10 @@ export default {
 			handler: "setData",
 		},
 
+		list: {
+			handler: "doLayout",
+		},
+
 		curr: {
 			handler(val) {
 				this.$emit("change", val);
