@@ -22,6 +22,10 @@
 			:scroll-into-view="`index-${label}`"
 			@scroll="onScroll"
 		>
+			<!-- 追加内容到头部 -->
+			<slot name="prepend"></slot>
+
+			<!-- 分组数据 -->
 			<template v-for="(item, index) in flist">
 				<view class="cl-li__group" :key="index" :id="`index-${item.label}`">
 					<!-- 关键字 -->
@@ -34,28 +38,31 @@
 					<!-- 数据列表 -->
 					<view class="cl-li__container">
 						<template v-for="(item2, index2) in item.children">
-							<view class="cl-li__item" :key="index2" @tap="selectRow(item2)">
-								<!-- 内容插槽 -->
-								<slot :item="item2" :parent="item">
+							<!-- 内容插槽 -->
+							<slot :item="item2" :parent="item">
+								<view class="cl-li__item" :key="index2" @tap="selectRow(item2)">
 									<cl-avatar :src="item2.avatarUrl"></cl-avatar>
 									<cl-text :margin="[0, 0, 0, 20]" :value="item2.name"></cl-text>
-								</slot>
-							</view>
+								</view>
+							</slot>
 						</template>
 					</view>
 				</view>
 			</template>
+
+			<!-- 追加内容到尾部 -->
+			<slot name="append"></slot>
 		</scroll-view>
 
 		<!-- 索引栏 -->
-		<view class="cl-li__bar" @touchmove.stop="barMove" @touchend="barEnd">
-			<view class="cl-li__bar-list" @touchmove.stop="barMove" @touchend="barEnd">
+		<view class="cl-li__bar">
+			<view class="cl-li__bar-list" @touchmove.stop.prevent="barMove" @touchend="barEnd">
 				<template v-for="(item, index) in flist">
 					<view
 						:class="['cl-li__bar-block', curr.label == item.label ? 'is-active' : '']"
 						:key="index"
 						:id="index"
-						@touchstart="toRow(item)"
+						@touchstart.stop.prevent="toRow(item)"
 					>
 						<text>{{ item.label }}</text>
 					</view>
@@ -78,6 +85,7 @@ import { last } from "../../utils";
  * @property {Number} index 序号
  * @property {Array} list 列表数据
  * @property {Boolean} filterable 是否带有过滤栏，默认true
+ * @property {String} nodeKey 节点关键字，默认id
  * @event {Function} change 发生改变时触发
  * @event {Function} search 搜索时触发，function(keyword)
  * @event {Function} select 选择行时触发，function(item)
@@ -99,6 +107,11 @@ export default {
 		filterable: {
 			type: Boolean,
 			default: true,
+		},
+		// 节点关键字
+		nodeKey: {
+			type: String,
+			default: "id",
 		},
 	},
 
@@ -165,6 +178,19 @@ export default {
 		// 选择行
 		selectRow(item) {
 			this.$emit("select", item);
+		},
+
+		// 更新行数据，避免小程序等平台slot作用域异常问题
+		updateRow(id, key, data) {
+			this.list.map((e) => {
+				if (e.children) {
+					e.children.map((c) => {
+						if (c[this.nodeKey] == id) {
+							this.$set(c, key, data);
+						}
+					});
+				}
+			});
 		},
 
 		// 根据序号设置选择数据

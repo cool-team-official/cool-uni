@@ -152,7 +152,9 @@
 			transition: left 0.3s;
 		}
 	}
+}
 
+cl-list {
 	&:last-child {
 		margin-bottom: 0;
 	}
