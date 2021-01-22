@@ -37,7 +37,7 @@
 					</view>
 					<!-- 数据列表 -->
 					<view class="cl-li__container">
-						<template v-for="(item2, index2) in item.children">
+						<view v-for="(item2, index2) in item.children">
 							<!-- 内容插槽 -->
 							<slot :item="item2" :parent="item">
 								<view class="cl-li__item" :key="index2" @tap="selectRow(item2)">
@@ -45,7 +45,7 @@
 									<cl-text :margin="[0, 0, 0, 20]" :value="item2.name"></cl-text>
 								</view>
 							</slot>
-						</template>
+						</view>
 					</view>
 				</view>
 			</template>
@@ -249,7 +249,9 @@ export default {
 						uni.createSelectorQuery()
 							.in(this)
 							.selectAll(".cl-li__header")
-							.fields({ rect: true })
+							.fields({
+								rect: true,
+							})
 							.exec((d) => {
 								this.tops = d[0].map((e) => e.top - res.top);
 							});
