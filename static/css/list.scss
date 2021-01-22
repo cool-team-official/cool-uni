@@ -140,12 +140,14 @@
 		}
 
 		&__menu-left {
+			height: 100%;
 			transform: translateX(-100%);
 			position: absolute;
 			transition: left 0.3s;
 		}
 
 		&__menu-right {
+			height: 100%;
 			transform: translateX(100%);
 			position: absolute;
 			right: 0;

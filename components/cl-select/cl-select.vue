@@ -47,6 +47,7 @@ import Form from "../../mixins/form";
  * @property {Boolean} start 有效日期的开始
  * @property {Boolean} end 有效日期的结束
  * @event {Function} change 绑定值改变时触发
+ * @event {Function} confirm 绑定值改变时触发，返回完整数据
  * @event {Function} cancel 取消时触发
  * @event {Function} column-change 列发生改变时触发
  * @example <cl-select :options="[{label: '内容1', value: 1},{label: '内容2', value: 2}]" />
@@ -210,21 +211,28 @@ export default {
 				return false;
 			}
 
-			const value = (() => {
-				switch (this.mode) {
-					case "selector":
-						return this.options[detail.value]
-							? this.options[detail.value][this.valueKey]
-							: null;
-					case "multiSelector":
-						return detail.value
-							.map((v) => (v < 0 ? 0 : v))
-							.map((v, i) => this.options[i][v][this.valueKey]);
-					default:
-						return detail.value;
-				}
-			})();
+			// 返回的完整数据
+			let data = null;
 
+			// 返回的唯一数据
+			let value = null;
+
+			switch (this.mode) {
+				case "selector":
+					data = this.options[detail.value];
+					value = data ? data[this.valueKey] : null;
+					break;
+				case "multiSelector":
+					data = detail.value
+						.map((v) => (v < 0 ? 0 : v))
+						.map((v, i) => this.options[i][v]);
+					value = data.map((e) => e[this.valueKey]);
+					break;
+				default:
+					value = detail.value;
+			}
+
+			this.$emit("confirm", data);
 			this.$emit("change", value);
 			this.$emit("input", value);
 		},

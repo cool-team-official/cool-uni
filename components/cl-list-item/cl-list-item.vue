@@ -40,8 +40,6 @@
 <script>
 import Parent from "../../mixins/parent";
 
-const { platform } = uni.getSystemInfoSync();
-
 /**
  * list-item 列表项
  * @description 列表项,自定义内容,支持滑动
@@ -96,6 +94,7 @@ export default {
 				start: 0,
 				end: 0,
 				x: 0,
+				maxX: 0,
 				direction: "left",
 				lock: true,
 			},
@@ -166,23 +165,45 @@ export default {
 			}
 		},
 		onTouchMove(e) {
-			const { direction, start, end, lock } = this.touch;
+			const { start, end, lock, maxX } = this.touch;
 
 			if (!lock) {
+				// 滑动距离
 				let offsetX = e.touches[0].pageX - start;
 
+				// 移动方向
 				this.touch.direction = offsetX > 0 ? "right" : "left";
-				this.touch.x = end + offsetX;
 
-				offsetX = null;
+				// 偏移距离
+				let x = end + offsetX;
+
+				if (this.swipe == "left") {
+					if (x > maxX) {
+						x = maxX;
+					}
+
+					if (x < 0) {
+						x = 0;
+					}
+				}
+
+				if (this.swipe == "right") {
+					if (x < maxX) {
+						x = maxX;
+					}
+
+					if (x > 0) {
+						x = 0;
+					}
+				}
+
+				this.touch.x = x;
 			}
 		},
-		onTouchEnd(e) {
-			const { direction, x, end, lock } = this.touch;
+		onTouchEnd() {
+			const { direction, x, end, lock, maxX } = this.touch;
 
 			if (!lock) {
-				const maxX = this.menu.width * (this.swipe === "right" ? -1 : 1);
-
 				if (Math.abs(x - end) > 50) {
 					if (direction === this.swipe) {
 						this.touch.x = 0;
@@ -208,6 +229,7 @@ export default {
 					.boundingClientRect((data) => {
 						if (data) {
 							this.menu.width = data.width;
+							this.touch.maxX = this.menu.width * (this.swipe === "right" ? -1 : 1);
 						}
 					})
 					.exec();
