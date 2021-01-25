@@ -37,10 +37,10 @@
 					</view>
 					<!-- 数据列表 -->
 					<view class="cl-li__container">
-						<view v-for="(item2, index2) in item.children">
+						<view v-for="(item2, index2) in item.children" :key="index2">
 							<!-- 内容插槽 -->
 							<slot :item="item2" :parent="item">
-								<view class="cl-li__item" :key="index2" @tap="selectRow(item2)">
+								<view class="cl-li__item" @tap="selectRow(item2)">
 									<cl-avatar :src="item2.avatarUrl"></cl-avatar>
 									<cl-text :margin="[0, 0, 0, 20]" :value="item2.name"></cl-text>
 								</view>
