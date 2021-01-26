@@ -33,8 +33,10 @@
 			</view>
 		</view>
 
-		<view class="cl-timeline-item__content">
-			<slot name="content">{{ content }}</slot>
+		<view class="cl-timeline-item__content" select>
+			<slot name="content">
+				<text selectable user-select>{{ content }}</text>
+			</slot>
 		</view>
 	</view>
 </template>
