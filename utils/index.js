@@ -37,6 +37,11 @@ export function isNumber(value) {
 	return typeof value === "number" && !isNaN(value);
 }
 
+// 是否小数
+export function isDecimal(value) {
+	return String(value).length - String(value).indexOf(".") + 1;
+}
+
 // 是否Promise类型
 export function isPromise(obj) {
 	obj !== null &&
@@ -72,7 +77,7 @@ export function compareValue(a, b) {
 // 深拷贝
 export function cloneDeep(v) {
 	if (isObject(v)) {
-		let d = {}
+		let d = {};
 
 		for (let k in v) {
 			if (v.hasOwnProperty && v.hasOwnProperty(k)) {
@@ -84,11 +89,11 @@ export function cloneDeep(v) {
 			}
 		}
 
-		return d
+		return d;
 	} else if (isArray(v)) {
 		return v.map(cloneDeep);
 	} else {
-		return v
+		return v;
 	}
 }
 
@@ -113,17 +118,17 @@ export function getCurrentPage() {
 		query: options,
 		// #endif
 		// #ifdef H5
-		query: $route.params
+		query: $route.params,
 		// #endif
 	};
 }
 
 /**
  * 解析rpx
- * @param {*} val 
+ * @param {*} val
  */
 export function parseRpx(val) {
-	return isArray(val) ? val.map(parseRpx).join(" ") : (isNumber(val) ? val + "rpx" : val);
+	return isArray(val) ? val.map(parseRpx).join(" ") : isNumber(val) ? val + "rpx" : val;
 }
 
 /**
@@ -162,7 +167,7 @@ export function getCurrentColor({ color, max, value }) {
 				if (isString(item)) {
 					return {
 						color: item,
-						value: (index + 1) * (max / color.length)
+						value: (index + 1) * (max / color.length),
 					};
 				}
 				return item;

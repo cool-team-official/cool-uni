@@ -190,6 +190,10 @@ export default {
 		current(val) {
 			this.onOffset(val);
 		},
+
+		labels() {
+			this.refresh();
+		},
 	},
 
 	computed: {

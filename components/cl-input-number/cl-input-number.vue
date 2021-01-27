@@ -27,13 +27,14 @@
  * @property {Numbder} step 步进，默认1
  * @property {Numbder} max 最大值，默认100
  * @property {Numbder} min 最小值，默认0
- * @property {Boolean} input 是否可编辑，默认false
- * @property {Numbder,String} width 输入框宽度，默认100
+ * @property {Boolean} input 是否能编辑，默认false
+ * @property {Numbder} width 输入框宽度，默认100
+ * @property {Numbder} precision 数值精度
  * @event {Function} change 绑定值改变时触发
  * @example <cl-input-number v-model="val" />
  */
 
-import { parseRpx, isString } from "../../utils";
+import { parseRpx, isString, isDecimal } from "../../utils";
 
 export default {
 	name: "cl-input-number",
@@ -61,9 +62,10 @@ export default {
 			default: false,
 		},
 		width: {
-			type: [Number, String],
+			type: Number,
 			default: 100,
 		},
+		precision: Number,
 	},
 
 	data() {
@@ -122,10 +124,17 @@ export default {
 		},
 
 		update() {
+			// 是否字符
 			if (isString(this.value2)) {
 				this.value2 = Number(this.value2);
 			}
 
+			// 是否小数
+			if (isDecimal(this.value2)) {
+				this.value2 = Number(this.value2.toFixed(this.precision || 0));
+			}
+
+			// 是否超额
 			if (this.min > this.max) {
 				this.value2 = this.max;
 			}
