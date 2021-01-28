@@ -66,7 +66,6 @@ export default {
 	data() {
 		return {
 			loaded: this.lazy ? false : true,
-			triggered: false,
 			Keys: ["current", "scrollView"],
 			ComponentName: "ClTabs",
 		};

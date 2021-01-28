@@ -1,3 +1,6 @@
+// 是否开发模式
+export const isDev = process.env.NODE_ENV == "development"
+
 // 是否Array类型
 export function isArray(value) {
 	if (typeof Array.isArray === "function") {
@@ -69,6 +72,34 @@ export function last(data) {
 	}
 }
 
+// 首字母大写
+export function firstUpperCase(value) {
+	return value.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
+		return $1.toUpperCase() + $2.toLowerCase();
+	});
+}
+
+// 防抖
+export function debounce(fn, wait, immediate) {
+	let timer;
+	return function () {
+		if (timer) clearTimeout(timer);
+		if (immediate) {
+			var callNow = !timer;
+			timer = setTimeout(() => {
+				timer = null;
+			}, wait);
+			if (callNow) {
+				fn.apply(this, arguments);
+			}
+		} else {
+			timer = setTimeout(() => {
+				fn.apply(this, arguments);
+			}, wait);
+		}
+	};
+}
+
 // 比较值
 export function compareValue(a, b) {
 	return String(a) === String(b);
@@ -118,7 +149,7 @@ export function getCurrentPage() {
 		query: options,
 		// #endif
 		// #ifdef H5
-		query: $route.params,
+		query: $route.params
 		// #endif
 	};
 }
@@ -167,7 +198,7 @@ export function getCurrentColor({ color, max, value }) {
 				if (isString(item)) {
 					return {
 						color: item,
-						value: (index + 1) * (max / color.length),
+						value: (index + 1) * (max / color.length)
 					};
 				}
 				return item;

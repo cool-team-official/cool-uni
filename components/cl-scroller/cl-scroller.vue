@@ -178,7 +178,6 @@ export default {
 
 	methods: {
 		onTouchStart(e) {
-			console.log(this.refresherEnabled);
 			if (this.status == "end" && this.refresherEnabled) {
 				this.touch.start = e.changedTouches[0].clientY;
 				this.status = "pulling";

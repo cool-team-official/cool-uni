@@ -1,34 +1,24 @@
-const __stoage_timer = {};
-
 export default {
 	// 后缀标识
 	suffix: "_deadtime",
 
 	/**
-	 * 判断是否过期
+	 * 获取
+	 * @param {*} key 关键字
 	 */
-	isExpired() {
-		const { keys } = uni.getStorageInfoSync();
-		const nowTime = Date.parse(new Date());
-
-		// clear timer
-		Object.keys(__stoage_timer).forEach(clearTimeout);
-
-		// set timer
-		keys.filter(e => e.includes(this.suffix)).map(k => {
-			const value = uni.getStorageSync(k);
-
-			__stoage_timer[k] = setTimeout(
-				() => {
-					uni.removeStorageSync(k.split("_")[0]);
-				},
-				value - nowTime > 86400000 ? 86400000 : value - nowTime
-			);
-		});
+	get(key) {
+		return uni.getStorageSync(key)
 	},
 
 	/**
-	 * 设置缓存
+	 * 获取全部
+	 */
+	info() {
+		return uni.getStorageInfoSync()
+	},
+
+	/**
+	 * 设置
 	 * @param {*} key 关键字
 	 * @param {*} value 值
 	 * @param {*} expires 过期时间
@@ -39,5 +29,28 @@ export default {
 		if (expires) {
 			uni.setStorageSync(`${key}${this.suffix}`, Date.parse(new Date()) + expires * 1000);
 		}
+	},
+
+	/**
+	 * 是否过期
+	 * @param {*} key 关键字
+	 */
+	isExpired(key) {
+		return uni.getStorageSync(`${key}${this.suffix}`) - Date.parse(new Date()) <= 0;
+	},
+
+	/**
+	 * 移除
+	 * @param {*} key 关键字
+	 */
+	remove(key) {
+		return uni.removeStorageSync(key)
+	},
+
+	/**
+	 * 清理
+	 */
+	clear() {
+		uni.clearStorageSync()
 	}
 };

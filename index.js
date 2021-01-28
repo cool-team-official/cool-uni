@@ -15,13 +15,13 @@ const install = (Vue, options = {}) => {
 		...deepMerge(data, options),
 		Storage,
 		author: "cool",
-		version: "1.8.1",
+		version: "1.8.2",
 	};
 
 	Vue.prototype.$cl = uni.$cl = $cl;
 };
 
-export { Emitter };
+export { Emitter, Storage };
 
 export default {
 	install,
