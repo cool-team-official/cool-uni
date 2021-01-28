@@ -1,6 +1,19 @@
 <template>
 	<view class="cl-scroller__wrap">
 		<view
+			class="cl-scroller__loading"
+			:style="{
+				transform,
+				transition,
+			}"
+		>
+			<slot name="loading" :text="text" :status="status" :move="touch.move">
+				<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
+				<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
+			</slot>
+		</view>
+
+		<view
 			class="cl-scroller"
 			:style="{
 				transform,
@@ -10,18 +23,6 @@
 			@touchstart="onTouchStart"
 			@touchend="onTouchEnd"
 		>
-			<view
-				class="cl-scroller__loading"
-				:style="{
-					top: `-${height}px`,
-				}"
-			>
-				<slot name="loading" :text="text" :status="status" :move="touch.move">
-					<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
-					<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
-				</slot>
-			</view>
-
 			<scroll-view
 				class="cl-scroller__view"
 				scroll-y
@@ -131,7 +132,6 @@ export default {
 				start: 0,
 				move: 0,
 			},
-			height: 0,
 			scrollTop2: 0,
 			backTopButtonFadeIn: false,
 			status: "end", // pulling, loading, end
@@ -145,10 +145,6 @@ export default {
 				this.scrollTop2 = val || "";
 			},
 		},
-	},
-
-	mounted() {
-		this.init();
 	},
 
 	computed: {
@@ -208,23 +204,17 @@ export default {
 			this.$emit("scroll", e);
 		},
 
-		// 初始化
-		init() {
-			// 获取加载框的高度
+		// 下拉刷新
+		down() {
 			uni.createSelectorQuery()
 				.in(this)
 				.select(".cl-scroller__loading")
 				.fields({ size: true }, (d) => {
-					this.height = d.height;
+					this.status = "loading";
+					this.touch.move = d.height;
+					this.$emit("down");
 				})
 				.exec();
-		},
-
-		// 下拉刷新
-		down() {
-			this.status = "loading";
-			this.touch.move = this.height;
-			this.$emit("down");
 		},
 
 		// 上拉加载

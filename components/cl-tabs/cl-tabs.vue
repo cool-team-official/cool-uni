@@ -77,8 +77,6 @@
 </template>
 
 <script>
-import { isNumber } from "../../utils";
-
 /**
  * tabs 选项卡
  * @description 选项卡，支持滑动，自定义内容
@@ -350,7 +348,8 @@ export default {
 					let item = this.tabRect[this.getIndex()];
 
 					if (item) {
-						let scrollLeft = item.left - (this.width - item.width) / 2;
+						let scrollLeft =
+							item.left - (this.width - item.width) / 2 - this.offsetLeft;
 
 						if (scrollLeft < 0) {
 							scrollLeft = 0;
