@@ -2,6 +2,12 @@
 	width: 100%;
 	box-sizing: border-box;
 
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
 	&-column {
 		float: left;
 		break-inside: avoid;
