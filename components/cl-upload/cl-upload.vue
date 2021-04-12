@@ -14,7 +14,7 @@
 				width: size[1],
 			}"
 		>
-			<image class="cl-upload__target" v-show="url" :src="url" :mode="imageMode" />
+			<image class="cl-upload__target" v-show="url" :src="url | format" :mode="imageMode" />
 			<text class="cl-upload__remove cl-icon-delete-fill" @tap.stop="remove(index)"></text>
 		</view>
 
@@ -131,6 +131,12 @@ export default {
 			urls: [],
 			index: undefined,
 		};
+	},
+
+	filters: {
+		format(url) {
+			return url.replace(/\\/g, "");
+		},
 	},
 
 	watch: {
