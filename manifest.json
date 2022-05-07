@@ -163,7 +163,7 @@
             "mode" : "hash"
         },
         "devServer" : {
-            "https" : true
+            "https" : false
         }
     }
 }
