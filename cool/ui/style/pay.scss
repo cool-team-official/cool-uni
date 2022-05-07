@@ -1,0 +1,43 @@
+.cl-pay {
+	&__title {
+		font-size: 32rpx;
+		text-align: center;
+		padding-top: 30rpx;
+	}
+
+	&__container {
+		display: flex;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		height: 300rpx;
+
+		&:active {
+			opacity: 0.8;
+		}
+	}
+
+	&__icon {
+		height: 100rpx;
+		width: 100rpx;
+	}
+
+	&__label {
+		font-size: 26rpx;
+		margin-top: 20rpx;
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100rpx;
+		border-top: 4rpx solid #f7f7f7;
+		font-size: 28rpx;
+	}
+}

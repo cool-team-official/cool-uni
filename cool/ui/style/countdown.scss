@@ -1,0 +1,13 @@
+.cl-countdown {
+	display: inline-flex;
+	align-items: center;
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__tips {
+	}
+}

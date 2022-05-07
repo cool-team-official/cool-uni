@@ -1,4 +1,26 @@
-node_modules
-dist
-unpackage
 .DS_Store
+node_modules/
+unpackage/
+dist/
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.project
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+yarn.lock
+package-lock.json

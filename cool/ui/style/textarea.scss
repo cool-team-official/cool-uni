@@ -1,0 +1,46 @@
+.cl-textarea {
+	border-radius: 8rpx;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #fff;
+	position: relative;
+	line-height: 36rpx;
+
+	/* #ifdef MP */
+	padding: 0 10rpx;
+	/* #endif */
+
+	/* #ifndef MP */
+	padding: 10rpx 10rpx 10rpx 16rpx;
+	/* #endif */
+
+	textarea {
+		font-size: 24rpx;
+		width: 100%;
+		box-sizing: border-box;
+		font-size: 26rpx;
+	}
+
+	&.is-disabled {
+		background-color: #f5f7fa;
+	}
+
+	&__count {
+		position: absolute;
+		right: 10rpx;
+		bottom: 4rpx;
+		font-size: 24rpx;
+		letter-spacing: 1rpx;
+		color: #999;
+	}
+
+	&.is-count {
+		/* #ifndef MP-ALIPAY */
+		padding-bottom: 40rpx;
+		/* #endif */
+	}
+
+	&.is-border {
+		border: 1rpx solid #dcdfe6;
+	}
+}

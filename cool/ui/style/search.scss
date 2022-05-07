@@ -1,0 +1,40 @@
+.cl-search {
+	display: flex;
+	align-items: center;
+	padding: 15rpx 20rpx;
+	box-sizing: border-box;
+
+	&__input {
+		display: flex;
+		align-items: center;
+		flex: 1;
+		position: relative;
+		background-color: #fff;
+		border: 1rpx solid #dcdfe6;
+		border-radius: 100rpx;
+
+		.cl-input {
+			flex: 1;
+			border: 0;
+		}
+	}
+
+	&__btn {
+		margin-right: 4rpx;
+	}
+
+	&__prepend,
+	&__append {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__prepend {
+		margin-right: 20rpx;
+	}
+
+	&__append {
+		margin-left: 20rpx;
+	}
+}

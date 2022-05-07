@@ -1,0 +1,72 @@
+.cl-guide {
+	position: relative;
+	height: 100%;
+
+	&__mask {
+		background-color: rgba(0, 0, 0, 0.5);
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 9999;
+	}
+
+	&__display {
+		opacity: 1;
+	}
+
+	&__content {
+		display: inline-block;
+		background-color: #fff;
+		border-radius: 6rpx;
+		margin: 20rpx;
+		padding: 20rpx;
+		color: #000;
+		font-size: 28rpx;
+	}
+
+	&__op {
+		margin: 0 20rpx;
+
+		button {
+			display: inline-block;
+			font-size: 26rpx;
+			font-weight: 500;
+			margin-right: 20rpx;
+			height: 60rpx;
+			line-height: 60rpx;
+			padding: 0 20rpx;
+			border-radius: 6rpx;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&__image {
+		margin: 20rpx;
+	}
+
+	&__tools {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: absolute;
+		width: 100%;
+		transition: all 0.3s;
+
+		&.start {
+			align-items: flex-start;
+		}
+
+		&.center {
+			align-items: center;
+		}
+
+		&.end {
+			align-items: flex-end;
+		}
+	}
+}

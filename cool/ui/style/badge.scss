@@ -1,0 +1,60 @@
+.cl-badge {
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	z-index: 9;
+
+	&__content {
+		display: inline-flex;
+		height: 16rpx;
+		min-width: 16rpx;
+		align-items: center;
+		position: absolute;
+		top: -8rpx;
+		right: -8rpx;
+		background-color: $cl-color-error;
+		color: #fff;
+		font-size: 24rpx;
+		text-align: center;
+		white-space: nowrap;
+		border: 4rpx solid rgba(255, 255, 255, 1);
+		border-radius: 20rpx;
+		padding: 8rpx;
+		transform: scale(0.9);
+	}
+
+	&.is-dot {
+		.cl-badge__content {
+			height: 20rpx;
+			width: 20rpx;
+			padding: 0;
+			border-radius: 50%;
+		}
+	}
+
+	&--primary {
+		.cl-badge__content {
+			background-color: $cl-color-primary;
+		}
+	}
+	&--success {
+		.cl-badge__content {
+			background-color: $cl-color-success;
+		}
+	}
+	&--warning {
+		.cl-badge__content {
+			background-color: $cl-color-warning;
+		}
+	}
+	&--info {
+		.cl-badge__content {
+			background-color: $cl-color-info;
+		}
+	}
+	&--error {
+		.cl-badge__content {
+			background-color: $cl-color-error;
+		}
+	}
+}

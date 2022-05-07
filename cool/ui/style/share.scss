@@ -1,0 +1,55 @@
+.cl-share {
+	position: relative;
+
+	&__title {
+		font-size: 32rpx;
+		text-align: center;
+		padding-top: 30rpx;
+	}
+
+	&__container {
+		display: flex;
+
+		.item {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: transparent;
+			padding: 0;
+			margin: 0;
+			border: 0;
+			height: 200rpx;
+			line-height: normal;
+
+			&::after {
+				border: 0;
+			}
+
+			image {
+				height: 100rpx;
+				width: 100rpx;
+			}
+
+			text {
+				font-size: 26rpx;
+				margin-top: 20rpx;
+			}
+
+			&:active {
+				opacity: 0.8;
+			}
+		}
+	}
+}
+
+.cl-share-popup {
+	.cl-share {
+		border-radius: 0;
+
+		.item {
+			height: 300rpx;
+		}
+	}
+}

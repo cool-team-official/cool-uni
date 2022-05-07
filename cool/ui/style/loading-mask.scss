@@ -1,0 +1,46 @@
+.cl-loading-mask__wrap {
+	.cl-loading-mask {
+		position: absolute;
+		z-index: 500;
+		background-color: rgba(0, 0, 0, 0.2);
+		margin: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		opacity: 0;
+		transition: opacity 0.3s;
+		pointer-events: none;
+
+		&.is-show {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		&.is-fullscreen {
+			position: fixed;
+		}
+
+		&__content {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		&__text {
+			font-size: 26rpx;
+			margin-top: 16rpx;
+			letter-spacing: 1rpx;
+			color: $cl-color-primary;
+		}
+	}
+}

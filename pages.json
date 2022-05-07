@@ -1,0 +1,316 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/home",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/index/my",
+			"style": {}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages/user",
+			"pages": [
+				{
+					"path": "set",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				},
+				{
+					"path": "login",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "captcha",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "about",
+					"style": {
+						"navigationBarTitleText": "关于我们"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/demo",
+			"pages": [
+				{
+					"path": "basic/button",
+					"style": {
+						"navigationBarTitleText": "Button 按钮"
+					}
+				},
+				{
+					"path": "basic/text",
+					"style": {
+						"navigationBarTitleText": "Text 文本"
+					}
+				},
+				{
+					"path": "basic/image",
+					"style": {
+						"navigationBarTitleText": "Image 图片"
+					}
+				},
+				{
+					"path": "basic/icon",
+					"style": {
+						"navigationBarTitleText": "Icon 图标"
+					}
+				},
+				{
+					"path": "basic/tag",
+					"style": {
+						"navigationBarTitleText": "Tag 标签"
+					}
+				},
+				{
+					"path": "basic/toast",
+					"style": {
+						"navigationBarTitleText": "Toast 提示"
+					}
+				},
+				{
+					"path": "basic/loading",
+					"style": {
+						"navigationBarTitleText": "Loading 加载"
+					}
+				},
+				{
+					"path": "view/flex",
+					"style": {
+						"navigationBarTitleText": "Flex 弹性"
+					}
+				},
+				{
+					"path": "view/grid",
+					"style": {
+						"navigationBarTitleText": "Grid 宫格"
+					}
+				},
+				{
+					"path": "view/divider",
+					"style": {
+						"navigationBarTitleText": "Divider 分割符"
+					}
+				},
+				{
+					"path": "view/avatar",
+					"style": {
+						"navigationBarTitleText": "Avatar 头像"
+					}
+				},
+				{
+					"path": "view/badge",
+					"style": {
+						"navigationBarTitleText": "Badge 角标"
+					}
+				},
+				{
+					"path": "view/loadmore",
+					"style": {
+						"navigationBarTitleText": "Loadmore 加载更多"
+					}
+				},
+				{
+					"path": "view/noticebar",
+					"style": {
+						"navigationBarTitleText": "Noticebar 通知栏"
+					}
+				},
+				{
+					"path": "view/countdown",
+					"style": {
+						"navigationBarTitleText": "Countdown 倒计时"
+					}
+				},
+				{
+					"path": "view/popup",
+					"style": {
+						"navigationBarTitleText": "Popup 弹出框"
+					}
+				},
+				{
+					"path": "view/progress",
+					"style": {
+						"navigationBarTitleText": "Progress 进度条"
+					}
+				},
+				{
+					"path": "view/search",
+					"style": {
+						"navigationBarTitleText": "Search 搜索框"
+					}
+				},
+				{
+					"path": "view/slider",
+					"style": {
+						"navigationBarTitleText": "Slider 滑块"
+					}
+				},
+				{
+					"path": "view/tabs",
+					"style": {
+						"navigationBarTitleText": "Tabs 选项卡"
+					}
+				},
+				{
+					"path": "view/timeline",
+					"style": {
+						"navigationBarTitleText": "Timeline 时间线"
+					}
+				},
+				{
+					"path": "view/topbar",
+					"style": {
+						"navigationBarTitleText": "Topbar 顶部导航栏"
+					}
+				},
+				{
+					"path": "view/waterfall",
+					"style": {
+						"navigationBarTitleText": "Waterfall 瀑布流",
+						"enablePullDownRefresh": true
+					}
+				},
+				{
+					"path": "view/banner",
+					"style": {
+						"navigationBarTitleText": "Banner 轮博图"
+					}
+				},
+				{
+					"path": "view/card",
+					"style": {
+						"navigationBarTitleText": "Card 卡片"
+					}
+				},
+				{
+					"path": "view/list",
+					"style": {
+						"navigationBarTitleText": "List 列表"
+					}
+				},
+				{
+					"path": "form/input",
+					"style": {
+						"navigationBarTitleText": "Input 输入框"
+					}
+				},
+				{
+					"path": "form/input-number",
+					"style": {
+						"navigationBarTitleText": "InputNumber 计数器"
+					}
+				},
+				{
+					"path": "form/textarea",
+					"style": {
+						"navigationBarTitleText": "Textarea 文本域"
+					}
+				},
+				{
+					"path": "form/checkbox",
+					"style": {
+						"navigationBarTitleText": "Checkbox 多选框"
+					}
+				},
+				{
+					"path": "form/radio",
+					"style": {
+						"navigationBarTitleText": "Radio 单选框"
+					}
+				},
+				{
+					"path": "form/form",
+					"style": {
+						"navigationBarTitleText": "Form 表单"
+					}
+				},
+				{
+					"path": "form/select",
+					"style": {
+						"navigationBarTitleText": "Select 下拉框"
+					}
+				},
+				{
+					"path": "form/rate",
+					"style": {
+						"navigationBarTitleText": "Rate 评分"
+					}
+				},
+				{
+					"path": "form/switch",
+					"style": {
+						"navigationBarTitleText": "Switch 开关"
+					}
+				},
+				{
+					"path": "form/upload",
+					"style": {
+						"navigationBarTitleText": "Upload 文件上传"
+					}
+				},
+				{
+					"path": "extend/action-sheet",
+					"style": {
+						"navigationBarTitleText": "ActionSheet 操作菜单"
+					}
+				},
+				{
+					"path": "extend/captcha",
+					"style": {
+						"navigationBarTitleText": "Captcha 验证码"
+					}
+				},
+				{
+					"path": "extend/confirm",
+					"style": {
+						"navigationBarTitleText": "Confirm 确认框"
+					}
+				},
+				{
+					"path": "extend/dialog",
+					"style": {
+						"navigationBarTitleText": "Dialog 对话框"
+					}
+				},
+				{
+					"path": "extend/filter-bar",
+					"style": {
+						"navigationBarTitleText": "FilterBar 过滤栏"
+					}
+				},
+				{
+					"path": "extend/page",
+					"style": {
+						"navigationBarTitleText": "Page 页面"
+					}
+				}
+			]
+		}
+	],
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^cl-(.*)": "/@/cool/ui/components/cl-$1/cl-$1.vue"
+		}
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "cool-uni",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f7f7f7"
+	}
+}

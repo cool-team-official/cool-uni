@@ -1,25 +1,31 @@
 {
-	"name": "cl-uni",
-	"version": "1.8.5",
-	"description": "cool-uni: button、form ...",
+	"name": "cool-uni",
+	"version": "1.0.0",
 	"main": "index.js",
-	"scripts": {},
-	"author": "icssoa",
-	"license": "ISC",
-	"keywords": [
-		"uni",
-		"cool",
-		"vue",
-		"ui",
-		"uniapp",
-		"tabbar",
-		"cropper",
-		"timeline",
-		"form",
-		"upload",
-		"guide",
-		"cropper"
-	],
-	"homepage": "https://github.com/cool-team-official/cool-uni",
-	"sideEffects": false
+	"license": "MIT",
+	"dependencies": {
+		"@dcloudio/uni-app": "^3.0.0-alpha-3000020210521001",
+		"@hyoga/uni-socket.io": "^3.0.4",
+		"dayjs": "^1.11.0",
+		"image-tools": "^1.4.0",
+		"md5": "^2.3.0",
+		"mitt": "^3.0.0",
+		"mockjs": "^1.1.0",
+		"pinia": "^2.0.13",
+		"vue": "^3.2.33"
+	},
+	"devDependencies": {
+		"@dcloudio/types": "^2.5.15",
+		"@types/lodash": "^4.14.178",
+		"@types/md5": "^2.3.2",
+		"@types/mockjs": "^1.0.6",
+		"@types/node": "^17.0.4",
+		"@types/prettier": "^2.4.4",
+		"autoprefixer": "^10.4.0",
+		"lodash": "^4.17.21",
+		"prettier": "^2.5.1",
+		"ts-loader": "^9.2.6",
+		"typescript": "^4.5.2",
+		"vite": "^2.9.4"
+	}
 }

@@ -1,53 +1,43 @@
-@import "./icon.scss";
-@import "./button.scss";
-@import "./input.scss";
-@import "./input-number.scss";
-@import "./textarea.scss";
-@import "./switch.scss";
-@import "./checkbox.scss";
-@import "./radio.scss";
-@import "./form.scss";
-@import "./swiper.scss";
-@import "./tabs.scss";
-@import "./list.scss";
-@import "./col.scss";
-@import "./row.scss";
-@import "./avatar.scss";
-@import "./action-sheet.scss";
-@import "./search.scss";
-@import "./grid.scss";
-@import "./popup.scss";
-@import "./toast.scss";
-@import "./message.scss";
-@import "./loading.scss";
-@import "./loading-mask.scss";
-@import "./loadmore.scss";
-@import "./badge.scss";
-@import "./card.scss";
-@import "./confirm.scss";
-@import "./dialog.scss";
-@import "./divider.scss";
-@import "./image.scss";
-@import "./list-index.scss";
-@import "./noticebar.scss";
-@import "./progress.scss";
-@import "./rate.scss";
-@import "./select.scss";
-@import "./tag.scss";
-@import "./upload.scss";
-@import "./topbar.scss";
-@import "./text.scss";
-@import "./timeline.scss";
-@import "./filter-bar.scss";
-@import "./tabbar.scss";
-@import "./captcha.scss";
-@import "./column.scss";
-@import "./countdown.scss";
-@import "./sticky.scss";
-@import "./video.scss";
-@import "./waterfall.scss";
-@import "./sticky.scss";
-@import "./cropper.scss";
-@import "./guide.scss";
-@import "./calendar.scss";
-@import "./scroller.scss";
+page {
+	background-color: #f6f7fa;
+	height: 100%;
+
+	& > div {
+		height: 100%;
+	}
+}
+
+.uni-tabbar {
+	&__icon {
+		height: 50rpx !important;
+		width: 50rpx !important;
+	}
+}
+
+.uni-page-head {
+	.uni-page-head-btn {
+		height: 27px;
+		width: 27px;
+	}
+
+	.uni-page-head-bd {
+		.uni-page-head__title {
+			font-weight: 500;
+			letter-spacing: 1rpx;
+		}
+	}
+}
+
+.mp-html {
+	p {
+		line-height: normal !important;
+	}
+
+	img {
+		display: block;
+	}
+
+	image {
+		display: block;
+	}
+}

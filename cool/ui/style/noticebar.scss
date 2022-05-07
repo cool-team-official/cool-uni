@@ -1,0 +1,54 @@
+.cl-noticebar {
+	display: flex;
+	align-items: center;
+	padding: 10rpx;
+
+	&__icon,
+	&__close {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 10rpx;
+	}
+
+	&__close {
+		color: #999;
+	}
+
+	&__box {
+		flex: 1;
+		margin: 0 10rpx;
+		overflow: hidden;
+	}
+
+	&__scroller {
+		position: relative;
+
+		&.is-vertical {
+			transition: top 0.3s;
+
+			.cl-noticebar__text {
+				display: block;
+				height: 40rpx;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+	}
+
+	&__text {
+		font-size: 26rpx;
+	}
+
+	&.is-scrollable {
+		.cl-noticebar__scroller {
+			height: 40rpx;
+			line-height: 40rpx;
+		}
+
+		.cl-noticebar__text {
+			white-space: nowrap;
+		}
+	}
+}

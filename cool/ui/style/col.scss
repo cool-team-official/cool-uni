@@ -1,0 +1,48 @@
+@use "sass:math";
+
+.cl-col {
+	width: 100%;
+	box-sizing: border-box;
+
+	&::before {
+		content: "";
+		display: block;
+	}
+}
+
+[class*="cl-col-"] {
+	float: left;
+	box-sizing: border-box;
+}
+
+.cl-col-0 {
+	display: none;
+	width: 0%;
+}
+
+@for $i from 1 through 24 {
+	.cl-col-push-#{$i},
+	.cl-col-pull-#{$i} {
+		position: relative;
+	}
+}
+
+@for $i from 1 through 24 {
+	$w: math.div(100%, 24);
+
+	.cl-col-#{$i} {
+		width: $w * $i;
+	}
+
+	.cl-col-offset-#{$i} {
+		margin-left: $w * $i;
+	}
+
+	.cl-col-pull-#{$i} {
+		right: $w * $i;
+	}
+
+	.cl-col-push-#{$i} {
+		left: $w * $i;
+	}
+}

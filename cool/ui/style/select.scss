@@ -1,0 +1,60 @@
+.cl-select {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: #fff;
+	padding-left: 20rpx;
+	padding-right: 60rpx;
+	box-sizing: border-box;
+	position: relative;
+
+	picker {
+		width: 100%;
+		font-size: 26rpx;
+	}
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+	}
+
+	&__value {
+		flex: 1;
+	}
+
+	&__icon {
+		position: absolute;
+		right: 18rpx;
+	}
+
+	&__placeholder {
+		color: #999;
+	}
+
+	&.is-disabled {
+		color: #c0c4cc;
+
+		.cl-select__placeholder {
+			color: #c0c4cc;
+		}
+
+		&.is-border {
+			background-color: #f5f7fa;
+		}
+	}
+
+	&.is-border {
+		border: 1rpx solid #dcdfe6;
+		border-radius: 8rpx;
+	}
+
+	&.is-round {
+		border-radius: 70rpx;
+	}
+}
+
+.cl-select-region {
+	width: 100%;
+}
