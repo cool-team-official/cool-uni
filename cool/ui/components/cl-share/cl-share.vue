@@ -89,7 +89,7 @@ export default defineComponent({
 					emit("success");
 				},
 				fail: (err) => {
-					console.log(err);
+					console.error(err);
 					share();
 				},
 			});

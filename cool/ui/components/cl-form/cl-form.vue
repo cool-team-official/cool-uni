@@ -81,7 +81,6 @@ export default defineComponent({
 		watch(
 			() => props.modelValue,
 			(val: any) => {
-				console.log(val);
 				form.value = val;
 			},
 			{
@@ -200,7 +199,6 @@ export default defineComponent({
 		// 清空表单
 		function clear() {
 			form.value = {};
-			console.log(111);
 			emit("update:modelValue", form.value);
 			emit("clear");
 			clearValidate();
