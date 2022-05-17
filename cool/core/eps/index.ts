@@ -1,6 +1,7 @@
 import { isDev, test } from "../../config";
 import { service, BaseService } from "../service";
 import { deepFiles, deepMerge, storage, toCamel } from "../../utils";
+import { isArray } from "lodash";
 
 // 获取标签名
 function getNames(v: any) {
@@ -128,6 +129,10 @@ export function useEps() {
 
 		if (!d) {
 			return false;
+		}
+
+		if (isArray(d)) {
+			d = { d };
 		}
 
 		for (const i in d) {
