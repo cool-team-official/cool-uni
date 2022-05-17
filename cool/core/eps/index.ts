@@ -99,7 +99,7 @@ export function useEps() {
 
 	// 获取 eps
 	function getEps() {
-		if (isDev) {
+		if (isDev && test.eps) {
 			service
 				.request({
 					url: "/app/base/comm/eps",
@@ -184,20 +184,6 @@ export function useEps() {
 								}
 							});
 
-							// 创建权限
-							if (!d[k].permission) {
-								d[k].permission = {};
-
-								const ks = Array.from(new Set([...names, ...getNames(d[k])]));
-
-								ks.forEach((e) => {
-									d[k].permission[e] = `${d[k].namespace.replace(
-										"admin/",
-										""
-									)}/${e}`.replace(/\//g, ":");
-								});
-							}
-
 							list.push(e);
 						}
 					}
@@ -215,36 +201,28 @@ export function useEps() {
 		}
 	}
 
-	// 获取
-	if (isDev) {
-		// 缓存数据
-		set(storage.get("eps"));
-
-		// 接口数据
-		if (test.eps) {
-			getEps();
-		}
-	} else {
-		const eps: any[] = [];
-
-		JSON.parse(__EPS__).forEach((e: any) => {
-			const [prefix, api] = e;
-
-			eps.push({
-				prefix,
-				api: api.map((e: string[]) => {
-					const [method, path, name] = e;
-
-					return {
-						method,
-						path,
-						name,
-					};
-				}),
+	// 解析
+	try {
+		const eps =
+			storage.get("eps") ||
+			JSON.parse(__EPS__ || "[]").map(([prefix, api]: any[]) => {
+				return {
+					prefix,
+					api: api.map(([method, path, name]: string[]) => {
+						return {
+							method,
+							path,
+							name,
+						};
+					}),
+				};
 			});
-		});
 
-		// 文件数据
-		set({ eps });
+		set(eps);
+	} catch (err) {
+		console.error("[Eps] 解析失败！", err);
 	}
+
+	// 获取
+	getEps();
 }

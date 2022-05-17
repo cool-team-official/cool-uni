@@ -33,7 +33,6 @@ const app = {
 	// 页面配置
 	pages: {
 		login: "/pages/user/login",
-		chat: "/pages/chat/index",
 	},
 	// 微信配置
 	wx: {
