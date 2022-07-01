@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { has } from "lodash";
-import { baseUrl, isDev, test } from "../../config";
+import { isDev, config } from "../../config";
 import request from "./request";
 
 export function Service(
@@ -56,13 +56,13 @@ export class BaseService {
 		let ns = "";
 
 		// 是否 mock 模式
-		if (this.mock || test.mock) {
+		if (this.mock || config.test.mock) {
 			// 测试
 		} else {
 			if (isDev) {
-				ns = this.proxy || baseUrl;
+				ns = this.proxy || config.baseUrl;
 			} else {
-				ns = this.proxy ? this.url : baseUrl;
+				ns = this.proxy ? this.url : config.baseUrl;
 			}
 		}
 

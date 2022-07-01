@@ -1,6 +1,6 @@
 import io from "@hyoga/uni-socket.io";
 import { isString } from "lodash";
-import { host } from "../../config";
+import { config } from "../../config";
 import { useCool } from "../hook";
 import { useStore } from "../store";
 
@@ -35,7 +35,7 @@ const socket: Socket = {
 			return false;
 		}
 
-		this.client = io(`${host}/chat?token=${user.token}`, {
+		this.client = io(`${config.host}/chat?token=${user.token}`, {
 			query: {},
 			transports: ["websocket", "polling"],
 			timeout: 5000,

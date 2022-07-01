@@ -19,13 +19,18 @@
 				<cl-list-item label="隐私政策" @tap="toText('隐私政策')"> </cl-list-item>
 
 				<cl-list-item label="软件升级" :border="false" @tap="app.checkVersion">
-					<cl-text :value="`新版本 v${app.version.versionNo}`" color="red" :size="28" v-if="app.version">
+					<cl-text
+						:value="`新版本 v${app.version.versionNo}`"
+						color="red"
+						:size="28"
+						v-if="app.version"
+					>
 					</cl-text>
 					<cl-text value="已经是最新版本" color="#666" :size="28" v-else></cl-text>
 				</cl-list-item>
 			</cl-list>
 
-			<cl-button fill round plain :height="80" type="info" @tap="user.logout">退出登录</cl-button>
+			<cl-button fill round :height="80" type="error" @tap="user.logout">退出登录</cl-button>
 		</view>
 	</cl-page>
 </template>

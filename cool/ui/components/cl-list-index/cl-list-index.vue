@@ -260,8 +260,10 @@ export default defineComponent({
 				uni.createSelectorQuery()
 					.select(".cl-list-index__bar .list")
 					.boundingClientRect((res: any) => {
-						bar.top = res.top;
-						bar.itemH = res.height / list.value.length;
+						if (res) {
+							bar.top = res.top;
+							bar.itemH = res.height / list.value.length;
+						}
 					})
 					.exec();
 

@@ -89,7 +89,6 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { useCool, useStore, useWx } from "/@/cool";
-import { isIos } from "/@/cool/utils";
 
 const { ui, service, router } = useCool();
 
@@ -130,7 +129,7 @@ const platforms = ref<any[]>([
 const mode = ref<string>("wx");
 
 // 检测
-function check(callback: Function) {
+function check(callback: () => void) {
 	if (!agree.value) {
 		return ui.showToast("请先勾选同意后再进行登录");
 	}
@@ -139,14 +138,14 @@ function check(callback: Function) {
 }
 
 // 登录
-async function nextLogin(req: Promise<string>) {
+async function nextLogin(req: Promise<any>) {
 	check(() => {
-		req.then(async (token: string) => {
+		req.then((res) => {
 			// 设置token
-			user.setToken(token);
+			user.setToken(res);
 
 			// 设置用户信息
-			await user.get();
+			user.set(res.userInfo);
 
 			// 登录跳转
 			router.nextLogin();
@@ -184,27 +183,29 @@ function phoneLogin() {
 
 // 微信登录
 function wxLogin() {
-	// #ifdef APP
-	if (wx.hasApp()) {
-		nextLogin(wx.appLogin());
-	} else {
-		ui.showConfirm({
-			title: "温馨提示",
-			message: "您还未安装微信~",
-			showCancelButton: false,
-			confirmButtonText: "去下载",
-			callback(action) {
-				if (action == "confirm") {
-					wx.downloadApp();
-				}
-			},
-		});
-	}
-	// #endif
+	check(() => {
+		// #ifdef APP
+		if (wx.hasApp()) {
+			nextLogin(wx.appLogin());
+		} else {
+			ui.showConfirm({
+				title: "温馨提示",
+				message: "您还未安装微信~",
+				showCancelButton: false,
+				confirmButtonText: "去下载",
+				callback(action) {
+					if (action == "confirm") {
+						wx.downloadApp();
+					}
+				},
+			});
+		}
+		// #endif
 
-	// #ifdef MP-WEIXIN
-	wx.miniLogin();
-	// #endif
+		// #ifdef MP-WEIXIN
+		nextLogin(wx.miniLogin());
+		// #endif
+	});
 }
 
 // 切换模式

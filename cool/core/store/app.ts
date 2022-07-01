@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { service } from "../service";
 import { getVersion } from "../../utils";
-import { app } from "../../config";
+import { config } from "../../config";
 
 declare interface Version {
 	description: string;
@@ -19,7 +19,7 @@ declare interface Version {
 const useAppStore = defineStore("app", function () {
 	// 应用信息
 	const info = ref<any>({
-		...app,
+		...config.app,
 	});
 
 	// 版本信息

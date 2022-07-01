@@ -2,7 +2,7 @@ import { router, useStore } from "/@/cool";
 
 const ignoreToken = ["/pages/user/set", "/pages/user/feedback"];
 
-router.beforeEach((to: any, next: Function) => {
+router.beforeEach((to, next) => {
 	const { user } = useStore();
 
 	if (ignoreToken.includes(to.path)) {

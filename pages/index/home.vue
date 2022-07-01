@@ -24,9 +24,10 @@
 </template>
 
 <script lang="ts" setup>
+import { onShow } from "@dcloudio/uni-app";
 import { useCool } from "/@/cool";
 
-const { router } = useCool();
+const { router, service } = useCool();
 
 const list = [
 	{
@@ -222,6 +223,10 @@ const list = [
 function toLink(link: string) {
 	router.push(link);
 }
+
+onShow(() => {
+	service.user.info.update({});
+});
 </script>
 
 <style lang="scss" scoped>

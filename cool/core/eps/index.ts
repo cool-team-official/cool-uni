@@ -1,4 +1,4 @@
-import { isDev, test } from "../../config";
+import { config, isDev } from "../../config";
 import { service, BaseService } from "../service";
 import { deepFiles, deepMerge, storage, toCamel } from "../../utils";
 import { isArray } from "lodash";
@@ -100,7 +100,7 @@ export function useEps() {
 
 	// 获取 eps
 	function getEps() {
-		if (isDev && test.eps) {
+		if (isDev && config.test.eps) {
 			service
 				.request({
 					url: "/app/base/comm/eps",

@@ -312,5 +312,23 @@
 		"navigationBarTitleText": "cool-uni",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#f7f7f7"
+	},
+	"tabBar": {
+		"color": "#C7C7C7",
+		"selectedColor": "#409eff",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/home",
+				"iconPath": "static/icon/tabbar/home.png",
+				"selectedIconPath": "static/icon/tabbar/home2.png"
+			},
+			{
+				"pagePath": "pages/index/my",
+				"iconPath": "static/icon/tabbar/my.png",
+				"selectedIconPath": "static/icon/tabbar/my2.png"
+			}
+		]
 	}
 }

@@ -13,9 +13,25 @@ const useUserStore = defineStore("user", function () {
 	const token = ref<string>(data.token || "");
 
 	// 设置标识
-	function setToken(value: string) {
-		token.value = value;
-		storage.set("token", value);
+	function setToken({ accessToken, accessTokenExpires, refreshToken, refreshTokenExpires }: any) {
+		token.value = accessToken;
+
+		// 访问
+		storage.set("token", accessToken, accessTokenExpires - 5);
+		// 刷新
+		storage.set("refreshToken", refreshToken, refreshTokenExpires);
+	}
+
+	// 刷新标识
+	async function refreshToken() {
+		return service.user.login
+			.refreshToken({
+				refreshToken: storage.get("refreshToken"),
+			})
+			.then((res) => {
+				setToken(res);
+				return res.accessToken;
+			});
 	}
 
 	// 用户信息
@@ -30,13 +46,14 @@ const useUserStore = defineStore("user", function () {
 	// 更新用户信息
 	async function update(data: any) {
 		set(deepMerge(info.value, data));
-		await service.user.user.update(data);
+		await service.user.info.update(data);
 	}
 
 	// 清除用户
 	function clear() {
 		storage.remove("userInfo");
 		storage.remove("token");
+		storage.remove("refreshToken");
 		token.value = "";
 		info.value = undefined;
 	}
@@ -49,7 +66,7 @@ const useUserStore = defineStore("user", function () {
 
 	// 获取用户信息
 	async function get() {
-		return service.user.user
+		return service.user.info
 			.info()
 			.then((res) => {
 				if (res) {
@@ -65,6 +82,7 @@ const useUserStore = defineStore("user", function () {
 	return {
 		token,
 		setToken,
+		refreshToken,
 		info,
 		get,
 		set,

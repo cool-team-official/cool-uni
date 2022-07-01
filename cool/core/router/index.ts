@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { last } from "lodash";
 import { storage } from "../../utils";
-import { app } from "../../config";
+import { config } from "../../config";
 
 if (!__UNI_PAGES__) {
 	console.error("@dcloudio/uni-cli-shared 依赖未安装！");
@@ -36,13 +36,13 @@ const router = {
 	get pages() {
 		return {
 			home: "/" + (ctx.tabBar ? tabs[0].pagePath : ctx.pages[0].path),
-			...app.pages,
+			...config.app.pages,
 		};
 	},
 
 	// 当前页
 	get path() {
-		return router.info().path;
+		return router.info()?.path;
 	},
 
 	// 跳转
@@ -73,7 +73,7 @@ const router = {
 			complete,
 			query,
 			params,
-		} = options || {};
+		}: any = options || {};
 
 		if (query) {
 			let arr = [];
@@ -155,7 +155,7 @@ const router = {
 		const page = last(getCurrentPages());
 
 		if (page) {
-			const { route, $page, $vm } = page;
+			const { route, $page, $vm }: any = page;
 
 			const q: any = {};
 
@@ -184,8 +184,8 @@ const router = {
 	},
 
 	// 执行当前页面的某个方法
-	callMethod(name, data?) {
-		let { $vm } = this.info();
+	callMethod(name: string, data?: any) {
+		const { $vm }: any = this.info();
 
 		if ($vm[name]) {
 			return $vm[name](data);
@@ -199,7 +199,7 @@ const router = {
 
 	// 是否当前页
 	isCurrentPage(path: string) {
-		return this.info().path == path;
+		return this.info()?.path == path;
 	},
 
 	// 回到首页
@@ -229,7 +229,7 @@ const router = {
 
 	// 是否是Tab页
 	isTab(path: string) {
-		return !!tabs.find((e) => path.includes(e.pagePath));
+		return !!tabs.find((e: any) => path.includes(e.pagePath));
 	},
 
 	/**
@@ -283,12 +283,12 @@ const router = {
 	},
 
 	// 跳转前钩子
-	beforeEach(callback: Function) {
+	beforeEach(callback: (to: any, next: () => void) => void) {
 		this.fn.beforeEach = callback;
 	},
 
 	// 登录后回调
-	afterLogin(callback: Function) {
+	afterLogin(callback: (data: any) => void) {
 		this.fn.afterLogin = callback;
 	},
 };

@@ -1,13 +1,16 @@
 import { ref } from "vue";
-import { wx as conf } from "../../config";
+import { config } from "../../config";
 import { service } from "../service";
 import { useStore } from "../store";
+import { onReady } from "@dcloudio/uni-app";
 
 // #ifdef H5
-import h5 from "weixin-js-sdk";
+import wx from "weixin-js-sdk";
 // #endif
 
 export function useWx() {
+	const { platform } = uni.getSystemInfoSync();
+
 	// 用户缓存
 	const { user } = useStore();
 
@@ -15,25 +18,30 @@ export function useWx() {
 	const code = ref<string>("");
 
 	// 获取授权码
-	function getCode() {
-		// #ifdef MP-WEIXIN
-		uni.login({
-			provider: "weixin",
-			success: (res) => {
-				code.value = res.code;
-			},
+	async function getCode() {
+		return new Promise((resolve) => {
+			// #ifdef MP-WEIXIN
+			uni.login({
+				provider: "weixin",
+				success: (res) => {
+					code.value = res.code;
+					resolve(res.code);
+				},
+			});
+			// #endif
 		});
-		// #endif
 	}
 
 	// 是否微信浏览器
 	function isWxBrowser(): boolean {
+		// #ifdef H5
 		const ua: any = window.navigator.userAgent.toLowerCase();
 		if (ua.match(/MicroMessenger/i) == "micromessenger") {
 			return true;
 		} else {
 			return false;
 		}
+		// #endif
 	}
 
 	// 是否安装了微信
@@ -49,7 +57,8 @@ export function useWx() {
 
 	// 下载微信
 	function downloadApp(): void {
-		if (uni.getSystemInfoSync().platform == "android") {
+		// #ifdef APP
+		if (platform == "android") {
 			const Uri: any = plus.android.importClass("android.net.Uri");
 			const uri: any = Uri.parse("market://details?id=" + "com.tencent.mm");
 			const Intent: any = plus.android.importClass("android.content.Intent");
@@ -61,6 +70,7 @@ export function useWx() {
 				"itms-apps://" + "itunes.apple.com/cn/app/wechat/id414478124?mt=8"
 			);
 		}
+		// #endif
 	}
 
 	// 微信公众号配置
@@ -68,9 +78,9 @@ export function useWx() {
 
 	// 获取微信公众号配置
 	function getMpConfig() {
-		return service.user.login.wxMpConfig().then((res: any) => {
+		return service.user.login.wxMpConfig().then((res) => {
 			wx.config({
-				debug: weixin.mp.debug,
+				debug: config.app.wx.mp.debug,
 				jsApiList: ["chooseWXPay"],
 				...res,
 			});
@@ -94,7 +104,7 @@ export function useWx() {
 
 	// 微信公众号登录
 	function mpLogin(code: string) {
-		return service.user.login.wxMpLogin({ code }).then((res: any) => {
+		return service.user.login.wxMpLogin({ code }).then((res) => {
 			return res;
 		});
 	}
@@ -106,18 +116,18 @@ export function useWx() {
 				.wxMpPay({
 					orderId,
 				})
-				.then((conf: any) => {
+				.then((conf) => {
 					wx.chooseWXPay({
 						...conf,
-						success: (res: any) => {
+						success(res: any) {
 							resolve(res);
 						},
-						cancel: () => {
+						cancel() {
 							reject({
 								message: "取消支付",
 							});
 						},
-						fail: () => {
+						fail() {
 							reject({
 								message: "支付失败",
 							});
@@ -129,7 +139,7 @@ export function useWx() {
 	}
 
 	// 微信app登录
-	function appLogin(): Promise<string> {
+	function appLogin(): Promise<any> {
 		let all: any;
 		let Service: any;
 		return new Promise((resolve, reject) => {
@@ -148,9 +158,7 @@ export function useWx() {
 	}
 
 	// 微信小程序登录
-	function miniLogin() {
-		const { platform } = uni.getSystemInfoSync();
-
+	async function miniLogin() {
 		return new Promise((resolve, reject) => {
 			// 兼容 Mac
 			const k = platform === "mac" ? "getUserInfo" : "getUserProfile";
@@ -158,37 +166,37 @@ export function useWx() {
 			uni[k]({
 				lang: "zh_CN",
 				desc: "授权信息仅用于用户登录",
-				success: ({ iv, encryptedData, signature, rawData }: any) => {
+				success({ iv, encryptedData, signature, rawData }) {
 					// 请求
-					const next = (code?: string) => {
+					function next() {
 						service.user.login
 							.wxMiniLogin({
 								iv,
 								encryptedData,
 								signature,
 								rawData,
-								code,
+								code: code.value,
 							})
 							.then(resolve)
 							.catch(reject);
-					};
+
+						// 重新获取
+						getCode();
+					}
 
 					// 检查登录状态是否过期
 					uni.checkSession({
-						success: () => {
+						success() {
 							next();
 						},
-						fail: () => {
-							uni.login({
-								provider: "weixin",
-								success: (res: any) => {
-									next(res.code);
-								},
-							});
+						fail() {
+							getCode().then(next);
 						},
 					});
 				},
-				fail: () => {
+				fail() {
+					getCode();
+
 					reject({
 						message: "授权失败",
 					});
@@ -204,12 +212,12 @@ export function useWx() {
 				.wxMiniPay({
 					orderId,
 				})
-				.then((conf: any) => {
+				.then((res) => {
 					uni.requestPayment({
 						provider: "wxpay",
-						...conf,
+						...res,
 						success: resolve,
-						fail: () => {
+						fail() {
 							reject({
 								message: "已取消支付",
 							});
@@ -220,41 +228,9 @@ export function useWx() {
 		});
 	}
 
-	// 绑定手机号
-	function phoneBind({ iv, encryptedData, code }: any) {
-		return new Promise((resolve, reject) => {
-			const req = (code: string) => {
-				service.user.info
-					.bindMiniPhone({
-						iv,
-						encryptedData,
-						code,
-					})
-					.then((res: string) => {
-						// Store.commit("UPDATE_USERINFO", {
-						// 	phone: res,
-						// });
-
-						resolve(res);
-					})
-					.catch(reject);
-			};
-
-			uni.checkSession({
-				success: () => {
-					req(code);
-				},
-				fail: () => {
-					uni.login({
-						provider: "weixin",
-						success: (res: any) => {
-							req(res.code);
-						},
-					});
-				},
-			});
-		});
-	}
+	onReady(() => {
+		getCode();
+	});
 
 	return {
 		code,
@@ -269,7 +245,6 @@ export function useWx() {
 		mpPay,
 		miniLogin,
 		miniPay,
-		phoneBind,
 		appLogin,
 	};
 }
