@@ -41,7 +41,7 @@ export default defineComponent({
 		modelValue: Array,
 		api: {
 			type: String,
-			default: "https://cool-uni.oss-cn-shanghai.aliyuncs.com/comm/city.json",
+			default: "https://cool-uni.oss-cn-shanghai.aliyuncs.com/comm/city-pca.json",
 		},
 		options: Array,
 		disabled: {
@@ -54,11 +54,11 @@ export default defineComponent({
 		},
 		labelKey: {
 			type: String,
-			default: "label",
+			default: "name",
 		},
 		valueKey: {
 			type: String,
-			default: "value",
+			default: "code",
 		},
 		separator: {
 			type: String,

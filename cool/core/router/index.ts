@@ -10,7 +10,7 @@ if (!__UNI_PAGES__) {
 // pages.json 配置参数
 const ctx = JSON.parse(__UNI_PAGES__);
 
-// 底栏选项页
+// 底栏选项列表
 const tabs = ctx.tabBar ? ctx.tabBar.list : [];
 
 // 路由
@@ -20,6 +20,9 @@ const router = {
 		beforeEach: null,
 		afterLogin: null,
 	},
+
+	// 底栏选项列表
+	tabs,
 
 	// 地址栏参数
 	get query() {
