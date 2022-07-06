@@ -1,6 +1,10 @@
 <script>
+import { useStore } from "./cool";
+
 export default {
 	onLaunch: function () {
+		const { dict } = useStore();
+		dict.refresh();
 		console.log("App Launch");
 	},
 	onShow: function () {

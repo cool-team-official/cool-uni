@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onShow } from "@dcloudio/uni-app";
-import { useCool } from "/@/cool";
+import { onMounted } from "vue";
+import { useCool, useStore } from "/@/cool";
 
-const { router, service } = useCool();
+const { router } = useCool();
+const { dict } = useStore();
 
 const list = [
 	{
@@ -224,8 +225,9 @@ function toLink(link: string) {
 	router.push(link);
 }
 
-onShow(() => {
-	service.user.info.update({});
+onMounted(async () => {
+	const a = await dict.getSync("brand", 4);
+	console.log(a);
 });
 </script>
 

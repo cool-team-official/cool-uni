@@ -1,20 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { service } from "../service";
 import { getVersion } from "../../utils";
 import { config } from "../../config";
-
-declare interface Version {
-	description: string;
-	downloadUrl: string;
-	force: 0 | 1;
-	status: 0 | 1;
-	type: 1 | 2;
-	updateType: 1 | 2;
-	versionNo: string;
-	packageSize: string;
-	[key: string]: any;
-}
 
 const useAppStore = defineStore("app", function () {
 	// 应用信息
@@ -23,7 +10,7 @@ const useAppStore = defineStore("app", function () {
 	});
 
 	// 版本信息
-	const version = ref<Version | null>(null);
+	const version = ref(null);
 
 	// 检测版本
 	function checkVersion() {

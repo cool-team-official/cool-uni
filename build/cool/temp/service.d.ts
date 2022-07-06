@@ -230,6 +230,11 @@ declare interface DemoEs {
 	 */
 	test(data?: any): Promise<any>;
 	/**
+	 * 空间地理位置
+	 * @returns Promise<any>
+	 */
+	geo(data?: any): Promise<any>;
+	/**
 	 * list
 	 * @returns Promise<any>
 	 */
@@ -264,6 +269,7 @@ declare interface DemoEs {
 	 */
 	permission: {
 		test: string;
+		geo: string;
 		list: string;
 		page: string;
 		info: string;
@@ -765,6 +771,162 @@ declare interface DemoTag {
 	};
 }
 
+declare interface DictInfo {
+	/**
+	 * 获得字典数据
+	 * @returns Promise<any>
+	 */
+	data(data?: any): Promise<any>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * page
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		data: string;
+		list: string;
+		page: string;
+		info: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface OrderInfo {
+	/**
+	 * 提交订单
+	 * @returns Promise<any>
+	 */
+	submit(data?: any): Promise<any>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * page
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		submit: string;
+		list: string;
+		page: string;
+		info: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface OrderPay {
+	/**
+	 * wxNotify
+	 * @returns Promise<any>
+	 */
+	wxNotify(data?: any): Promise<any>;
+	/**
+	 * wx
+	 * @returns Promise<any>
+	 */
+	wx(data?: any): Promise<any>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * page
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		wxNotify: string;
+		wx: string;
+		list: string;
+		page: string;
+		info: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
 declare interface UserAddress {
 	/**
 	 * default
@@ -988,6 +1150,8 @@ declare type Service = {
 		swagger: DemoSwagger;
 		tag: DemoTag;
 	};
+	dict: { info: DictInfo };
+	order: { info: OrderInfo; pay: OrderPay };
 	user: { address: UserAddress; info: UserInfo; login: UserLogin };
 	test: Test;
 };
