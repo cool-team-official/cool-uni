@@ -83,9 +83,16 @@ export default defineComponent({
 		// 是否必填
 		const isRequired = ref<boolean>(false);
 
+		// 标题位置
+		const labelPosition2 = computed(() => {
+			return props.labelPosition || parent.value?.labelPosition;
+		});
+
 		// 标题宽度
 		const labelWidth2 = computed(() => {
-			return parseRpx(props.labelWidth || parent.value?.labelWidth);
+			return labelPosition2.value == "top"
+				? "auto"
+				: parseRpx(props.labelWidth || parent.value?.labelWidth);
 		});
 
 		// 是否显示消息
@@ -111,7 +118,7 @@ export default defineComponent({
 			}
 
 			// 标题位置
-			list.push(`is-${props.labelPosition || parent.value?.labelPosition}`);
+			list.push(`is-${labelPosition2.value}`);
 
 			return list.join(" ");
 		});

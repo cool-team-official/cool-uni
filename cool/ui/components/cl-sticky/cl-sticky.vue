@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
+import { isNumber } from "lodash";
 import { computed, defineComponent } from "vue";
+import { useCool } from "/@/cool";
 
 const { platform, statusBarHeight } = uni.getSystemInfoSync();
 
@@ -18,33 +20,35 @@ export default defineComponent({
 			default: 100,
 		},
 		top: {
-			type: Number,
+			type: [String, Number],
 			default: 0,
 		},
 		isFlex: Boolean,
-		isTopbar: Boolean,
 	},
 
 	setup(props) {
+		const { router } = useCool();
+
+		// 吸顶高度
 		const stickyTop = computed(() => {
-			let t = "0px";
+			// 状态栏高度
+			const t1 = `${statusBarHeight}px`;
 
-			if (props.isTopbar) {
-				t =
-					platform === "android"
-						? `${statusBarHeight}px`
-						: "env(safe-area-inset-top)" + " + 44px";
-			} else {
-				// #ifdef H5
-				t = "44px";
-				// #endif
+			// 标题栏高度
+			// #ifdef H5
+			const t2 = "44px";
+			// #endif
+			// #ifndef H5
+			const t2 = "0px";
+			// #endif
 
-				// #ifndef H5
-				t = "0px";
-				// #endif
-			}
+			// 自定义高度
+			const top = isNumber(props.top) ? props.top + "rpx" : props.top;
 
-			return `calc(${t} + ${props.top}rpx) `;
+			// 计算后距离顶部高度
+			const arr = [top, ...(router.info()?.isCustomNavbar ? [t1] : [t2])];
+
+			return `calc(${arr.join(" + ")})`;
 		});
 
 		return {

@@ -1,5 +1,12 @@
 <template>
-	<view class="cl-upload-list" :class="[classList]">
+	<view
+		class="cl-upload-list"
+		:class="[
+			{
+				'is-disabled': isDisabled,
+			},
+		]"
+	>
 		<!-- 上传列表 -->
 		<view
 			class="cl-upload"
@@ -133,6 +140,7 @@ export default defineComponent({
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);
 
+		// 监听值
 		watch(
 			() => props.modelValue,
 			(val: any) => {
@@ -161,17 +169,6 @@ export default defineComponent({
 		// 能否追加
 		const isAppend = computed(() => {
 			return list.value.length < (props.multiple ? props.limit : 1);
-		});
-
-		// 样式名
-		const classList = computed(() => {
-			let list = [];
-
-			if (isDisabled.value) {
-				list.push("is-disabled");
-			}
-
-			list.join(" ");
 		});
 
 		// 选择
@@ -301,24 +298,29 @@ export default defineComponent({
 			change();
 		}
 
+		// 检测是否上传完成
+		function check() {
+			return list.value.find((e) => e.progress != 100);
+		}
+
 		// 完成
 		function change() {
-			const l = list.value.filter((e) => e.progress == 100);
-			const v = props.multiple ? l.map((e) => e.url).join(",") : l[0]?.url;
+			if (!check()) {
+				const v = props.multiple
+					? list.value.map((e) => e.url).join(",")
+					: list.value[0]?.url;
 
-			// 多图模式下不返回
-			if (!props.multiple) {
 				emit("update:modelValue", v);
+				emit("change", v);
 			}
-
-			emit("change", v);
 		}
 
 		return {
+			isDisabled,
 			list,
 			index,
 			isAppend,
-			classList,
+			check,
 			choose,
 			update,
 			remove,

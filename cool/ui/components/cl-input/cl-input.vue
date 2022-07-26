@@ -4,16 +4,22 @@
 		:class="[
 			{
 				'is-round': round,
-				'is-disabled': disabled,
+				'is-disabled': isDisabled,
 				'is-border': border,
 				'is-focus': isFocus,
 			},
 		]"
 		:style="{
 			backgroundColor,
+			borderRadius: parseRpx(borderRadius),
+			height: parseRpx(height),
 		}"
+		@tap="onTap"
 	>
-		<!-- prepend -->
+		<!-- 只读 -->
+		<view class="cl-input__readonly" v-if="readonly"></view>
+
+		<!-- 前 -->
 		<view class="cl-input__prepend" v-if="$slots.prepend">
 			<slot name="prepend"></slot>
 		</view>
@@ -26,7 +32,7 @@
 					type="password"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -50,7 +56,7 @@
 					type="number"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -74,7 +80,7 @@
 					type="idcard"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -98,7 +104,7 @@
 					type="digit"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -122,7 +128,7 @@
 					type="text"
 					:password="password"
 					:placeholder="placeholder"
-					:disabled="disabled"
+					:disabled="isDisabled"
 					:focus="focus"
 					:placeholder-style="placeholderStyle"
 					:placeholder-class="placeholderClass"
@@ -140,13 +146,13 @@
 				/>
 			</template>
 
-			<!-- clear -->
+			<!-- 清空 -->
 			<view class="cl-input__clear" v-show="isFocus && clearable" @tap="clear">
 				<text class="cl-icon-close-border"></text>
 			</view>
 		</view>
 
-		<!-- append -->
+		<!-- 后 -->
 		<view class="cl-input__append" v-if="$slots.append">
 			<slot name="append"></slot>
 		</view>
@@ -163,8 +169,9 @@
  * @event {Function} clear 清空值时触发
  */
 
-import { defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { useForm } from "../../hook";
+import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-input",
@@ -189,8 +196,10 @@ export default defineComponent({
 		},
 		placeholderStyle: String,
 		placeholderClass: String,
+		readonly: Boolean,
 		disabled: Boolean,
 		round: Boolean,
+		borderRadius: [String, Number],
 		border: {
 			type: Boolean,
 			default: true,
@@ -221,6 +230,10 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
+		height: {
+			type: [String, Number],
+			default: 70,
+		},
 	},
 
 	emits: [
@@ -232,10 +245,12 @@ export default defineComponent({
 		"confirm",
 		"search",
 		"keyboardheightchange",
+		"click",
+		"tap",
 	],
 
 	setup(props, { emit }) {
-		const { disabled } = useForm();
+		const form = useForm();
 
 		// 绑定值
 		const value = ref<string>("");
@@ -252,6 +267,11 @@ export default defineComponent({
 
 		// 是否聚焦
 		const isFocus = ref<boolean>(props.focus);
+
+		// 是否禁用
+		const isDisabled = computed(() => {
+			return form.disabled.value || props.disabled;
+		});
 
 		// 输入
 		function onInput() {
@@ -303,10 +323,17 @@ export default defineComponent({
 			emit("keyboardheightchange", e);
 		}
 
+		// 点击
+		function onTap(e: any) {
+			emit("click", e);
+			emit("tap", e);
+		}
+
 		return {
 			value,
-			disabled,
+			isDisabled,
 			isFocus,
+			onTap,
 			onInput,
 			onFocus,
 			onBlur,
@@ -314,6 +341,7 @@ export default defineComponent({
 			search,
 			clear,
 			onKeyboardheightchange,
+			parseRpx,
 		};
 	},
 });

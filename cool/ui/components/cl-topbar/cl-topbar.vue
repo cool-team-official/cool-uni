@@ -1,48 +1,62 @@
 <template>
 	<view
-		class="cl-topbar"
-		:class="[classList]"
+		class="cl-topbar__wrap"
+		:class="{
+			'is-empty': empty,
+		}"
 		:style="{
-			'padding-top': top,
-			'background-color': backgroundColor,
-			color,
-			zIndex,
+			paddingTop: top,
 		}"
 	>
 		<view
-			class="cl-topbar__content"
+			class="cl-topbar"
+			:class="{
+				'is-border': border,
+			}"
 			:style="{
+				paddingTop: top,
+				backgroundColor,
 				color,
+				zIndex,
 			}"
 		>
-			<slot>
-				<view class="cl-topbar__text" @tap="tapText">
-					<text class="cl-topbar__title" v-if="title">{{ title }}</text>
-					<text class="cl-topbar__description" v-if="description">{{ description }}</text>
-				</view>
-			</slot>
-		</view>
-
-		<view
-			class="cl-topbar__prepend"
-			:style="{
-				top,
-			}"
-		>
-			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
-				<text class="cl-icon-arrow-left"></text>
+			<view
+				class="cl-topbar__content"
+				:style="{
+					color,
+				}"
+			>
+				<slot>
+					<view class="cl-topbar__text" @tap="tapText">
+						<text class="cl-topbar__title" v-if="title">{{ title }}</text>
+						<text class="cl-topbar__description" v-if="description">{{
+							description
+						}}</text>
+					</view>
+				</slot>
 			</view>
 
-			<slot name="prepend"></slot>
-		</view>
+			<view
+				class="cl-topbar__prepend"
+				:style="{
+					top,
+				}"
+			>
+				<view class="cl-topbar__icon" v-if="showBack" @tap="back">
+					<text class="cl-icon-arrow-left"></text>
+				</view>
 
-		<view
-			class="cl-topbar__append"
-			:style="{
-				top,
-			}"
-		>
-			<slot name="append"></slot>
+				<slot name="prepend"></slot>
+			</view>
+
+			<view
+				class="cl-topbar__append"
+				:style="{
+					top,
+				}"
+			>
+				<slot name="append"></slot>
+			</view>
 		</view>
 	</view>
 </template>
@@ -62,9 +76,6 @@ const { platform, statusBarHeight } = uni.getSystemInfoSync();
  * @property {String} backgroundColor 背景颜色，默认#fff
  * @property {String} color 字体颜色，默认#000
  * @property {String} backPath 返回路径
- * @property {Boolean} fixed 是否固定布局在顶部
- * @property {Boolean} isTop 是否添加顶部安全区域及状态栏
- * @property {Boolean} sticky 是否吸顶
  * @property {Number} zIndex 层级
  */
 
@@ -78,6 +89,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		empty: Boolean,
 		showBack: {
 			type: Boolean,
 			default: true,
@@ -91,21 +103,9 @@ export default defineComponent({
 			default: "#000",
 		},
 		backPath: String,
-		fixed: {
-			type: Boolean,
-			default: null,
-		},
-		isTop: {
-			type: Boolean,
-			default: true,
-		},
-		sticky: {
-			type: Boolean,
-			default: null,
-		},
 		zIndex: {
 			type: Number,
-			default: 9,
+			default: 99,
 		},
 	},
 
@@ -117,25 +117,6 @@ export default defineComponent({
 					? `${statusBarHeight}px`
 					: "env(safe-area-inset-top)"
 				: 0;
-		});
-
-		// 样式
-		const classList = computed(() => {
-			let list = [];
-
-			if (props.border) {
-				list.push("is-border");
-			}
-
-			if (props.fixed) {
-				list.push("is-fixed");
-			}
-
-			if (props.sticky) {
-				list.push("cl-sticky");
-			}
-
-			return list.join(" ");
 		});
 
 		// 返回
@@ -165,7 +146,6 @@ export default defineComponent({
 
 		return {
 			top,
-			classList,
 			back,
 			tapText,
 		};

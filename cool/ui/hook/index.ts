@@ -1,6 +1,7 @@
-import { computed, getCurrentInstance, nextTick } from "vue";
+import { computed, getCurrentInstance, nextTick, onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { router } from "/@/cool";
+import { onReady } from "@dcloudio/uni-app";
 
 // 获取父组件
 function getParent(name: string, k1: string[], k2?: string[]) {
@@ -65,16 +66,17 @@ export function useForm() {
 
 export function useUi(): Ui.Page {
 	// 子组件方法
-	let d: any = null;
+	let d: any;
 
 	const ui: any = {
 		get loaded() {
-			update();
 			return Boolean(d);
 		},
 	};
 
 	function update() {
+		d = null;
+
 		if (!d) {
 			const p = router.info();
 
@@ -84,12 +86,16 @@ export function useUi(): Ui.Page {
 		}
 	}
 
-	update();
+	onReady(() => {
+		update();
+	});
+
+	onMounted(() => {
+		update();
+	});
 
 	["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"].forEach((e) => {
 		ui[e] = (...args: any[]) => {
-			update();
-
 			if (d) {
 				d[e](...args);
 			}

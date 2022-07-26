@@ -4,5 +4,5 @@ declare interface ClPage {
 	hideLoading(): void;
 	showToast(options: ClToast.Options): void;
 	showConfirm(options: ClConfirm.Options): void;
-	showTips(message: string, callback?: Function): void;
+	showTips(message: string, callback?: () => void): void;
 }

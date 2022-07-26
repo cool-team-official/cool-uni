@@ -1,9 +1,23 @@
+$status-height: 44px;
+
 .cl-topbar {
 	display: flex;
 	align-items: center;
-	height: 44px;
+	height: $status-height;
 	width: 100%;
-	position: relative;
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	&__wrap {
+		height: $status-height;
+		width: 100%;
+
+		&.is-empty {
+			height: 0;
+			padding-top: 0;
+		}
+	}
 
 	&__content {
 		width: 100%;
@@ -38,7 +52,7 @@
 	&__append {
 		display: flex;
 		align-items: center;
-		height: 44px;
+		height: $status-height;
 		position: absolute;
 
 		/* #ifdef MP */
@@ -84,12 +98,5 @@
 		&__append {
 			top: 44rpx;
 		}
-	}
-
-	&.is-fixed {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 3000;
 	}
 }

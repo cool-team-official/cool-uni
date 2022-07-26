@@ -1,6 +1,5 @@
 .cl-input {
 	display: flex;
-	height: 70rpx;
 	width: 100%;
 	vertical-align: middle;
 	position: relative;
@@ -69,6 +68,15 @@
 		z-index: 99;
 	}
 
+	&__readonly {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 2;
+	}
+
 	&:not(.is-disabled) {
 		-webkit-box-shadow: 0 0 0 1000px transparent inset;
 	}
@@ -90,10 +98,6 @@
 		}
 	}
 
-	&.is-disabled {
-		background-color: #f5f7fa;
-	}
-
 	&.is-border {
 		border: 1rpx solid #dcdfe6;
 	}
@@ -102,7 +106,6 @@
 		background-color: #f5f7fa;
 
 		.cl-input__inner {
-			background-color: #f5f7fa !important;
 			color: #c0c4cc;
 		}
 	}

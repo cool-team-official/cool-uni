@@ -6,7 +6,7 @@
 				v-model="keyWord"
 				:border="false"
 				round
-				placeholder="搜索关键字"
+				:placeholder="placeholder"
 				background-color="#f7f7f7"
 				clearable
 			>
@@ -91,7 +91,7 @@
 		</view>
 
 		<!-- 索引栏 -->
-		<view class="cl-list-index__bar">
+		<view class="cl-list-index__bar" v-if="indexBar">
 			<view class="list" @touchmove.stop.prevent="barMove" @touchend="barEnd">
 				<view
 					class="block"
@@ -114,7 +114,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch } from "vue";
+import { computed, defineComponent, nextTick, PropType, reactive, ref, watch } from "vue";
 import py from "js-pinyin";
 import { groupBy, isEmpty } from "lodash";
 
@@ -123,7 +123,7 @@ export default defineComponent({
 
 	props: {
 		data: {
-			type: Array,
+			type: Array as PropType<ClListIndex.Group>,
 			required: true,
 			default: () => [],
 		},
@@ -132,6 +132,18 @@ export default defineComponent({
 		selection: {
 			type: Array,
 			default: () => [],
+		},
+		isGroup: {
+			type: Boolean,
+			default: true,
+		},
+		indexBar: {
+			type: Boolean,
+			default: true,
+		},
+		placeholder: {
+			type: String,
+			default: "搜索关键字",
 		},
 	},
 
@@ -312,6 +324,12 @@ export default defineComponent({
 				return false;
 			}
 
+			// 是否分组
+			if (!props.isGroup) {
+				list.value = props.data;
+				return false;
+			}
+
 			// 传入列表数据
 			const data = props.data.map((e: any) => {
 				return {
@@ -320,7 +338,7 @@ export default defineComponent({
 				};
 			});
 
-			// 分组数据
+			// 数据分组
 			const group = [];
 			const g = groupBy(data, "f");
 

@@ -10,8 +10,20 @@ if (!__UNI_PAGES__) {
 // pages.json 配置参数
 const ctx = JSON.parse(__UNI_PAGES__);
 
-// 底栏选项列表
+// 底栏选项页
 const tabs = ctx.tabBar ? ctx.tabBar.list : [];
+
+// 路由列表
+const routes = [...ctx.pages];
+
+ctx.subPackages.forEach((a) => {
+	a.pages.forEach((b) => {
+		routes.push({
+			...b,
+			path: a.root + "/" + b.path,
+		});
+	});
+});
 
 // 路由
 const router = {
@@ -21,8 +33,14 @@ const router = {
 		afterLogin: null,
 	},
 
-	// 底栏选项列表
+	// 底部导航
 	tabs,
+
+	// 全局样式配置
+	globalStyle: ctx.globalStyle,
+
+	// 路由列表
+	routes,
 
 	// 地址栏参数
 	get query() {
@@ -141,7 +159,7 @@ const router = {
 	},
 
 	// 后退
-	back(options?: any) {
+	back(options?: UniApp.NavigateBackOptions) {
 		const { delta = 1, animationDuration, animationType, duration = 0 } = options || {};
 
 		setTimeout(() => {
@@ -172,12 +190,17 @@ const router = {
 					});
 			} catch (e) {}
 
+			// 页面配置
+			const style = this.routes.find((e) => e.path == route)?.style;
+
 			let d = {
 				$vm,
 				path: `/${route}`,
 				fullPath: $page?.fullPath,
 				query: q || {},
 				isTab: this.isTab(route),
+				style,
+				isCustomNavbar: style?.navigationStyle == "custom",
 			};
 
 			return d;

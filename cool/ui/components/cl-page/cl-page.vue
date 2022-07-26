@@ -14,6 +14,11 @@
 		<!-- 确认框 -->
 		<cl-confirm :ref="setRefs('confirm')"></cl-confirm>
 
+		<!-- 状态栏 -->
+		<cl-sticky v-if="statusBar">
+			<cl-status-bar />
+		</cl-sticky>
+
 		<!-- 内容插槽 -->
 		<slot></slot>
 	</view>
@@ -32,11 +37,17 @@ export default defineComponent({
 			type: [Number, String],
 			default: 0,
 		},
+		statusBar: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
-	setup() {
-		const { proxy }: any = getCurrentInstance();
-		const { refs, setRefs } = useCool();
+	setup(props) {
+		const { refs, setRefs, router } = useCool();
+
+		// 是否显示导航栏
+		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
 
 		// 加载器
 		const loader = reactive<any>({
@@ -75,6 +86,9 @@ export default defineComponent({
 			} as ClConfirm.Options);
 		}
 
+		// 组件作用域
+		const { proxy }: any = getCurrentInstance();
+
 		// 追加方法
 		proxy.$root.$cl_page = {
 			showLoading,
@@ -89,6 +103,7 @@ export default defineComponent({
 			setRefs,
 			loader,
 			parseRpx,
+			statusBar,
 		};
 	},
 });
