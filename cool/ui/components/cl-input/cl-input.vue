@@ -325,8 +325,10 @@ export default defineComponent({
 
 		// 点击
 		function onTap(e: any) {
-			emit("click", e);
-			emit("tap", e);
+			if (!isDisabled.value) {
+				emit("click", e);
+				emit("tap", e);
+			}
 		}
 
 		return {

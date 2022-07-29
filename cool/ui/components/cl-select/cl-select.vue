@@ -3,7 +3,7 @@
 		class="cl-select"
 		:class="[
 			{
-				'is-disabled': disabled,
+				'is-disabled': isDisabled,
 				'is-round': round,
 				'is-border': border,
 			},

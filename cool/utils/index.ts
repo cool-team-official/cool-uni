@@ -35,7 +35,7 @@ export function deepMerge(a: any, b: any) {
 
 // 解析rpx
 export function parseRpx(val: any): string {
-	return isArray(val) ? val.map(parseRpx).join(" ") : parseFloat(val) + "rpx";
+	return isArray(val) ? val.map(parseRpx).join(" ") : isNumber(val) ? `${val}rpx` : val;
 }
 
 // 获取地址栏参数

@@ -1,62 +1,41 @@
 <template>
 	<view
-		class="cl-topbar__wrap"
+		class="cl-topbar"
 		:class="{
-			'is-empty': empty,
+			'is-border': border,
+			'is-fixed': fixed,
 		}"
 		:style="{
-			paddingTop: top,
+			backgroundColor,
+			color,
+			zIndex,
+			paddingTop,
 		}"
 	>
 		<view
-			class="cl-topbar"
-			:class="{
-				'is-border': border,
-			}"
+			class="cl-topbar__content"
 			:style="{
-				paddingTop: top,
-				backgroundColor,
 				color,
-				zIndex,
 			}"
 		>
-			<view
-				class="cl-topbar__content"
-				:style="{
-					color,
-				}"
-			>
-				<slot>
-					<view class="cl-topbar__text" @tap="tapText">
-						<text class="cl-topbar__title" v-if="title">{{ title }}</text>
-						<text class="cl-topbar__description" v-if="description">{{
-							description
-						}}</text>
-					</view>
-				</slot>
-			</view>
-
-			<view
-				class="cl-topbar__prepend"
-				:style="{
-					top,
-				}"
-			>
-				<view class="cl-topbar__icon" v-if="showBack" @tap="back">
-					<text class="cl-icon-arrow-left"></text>
+			<slot>
+				<view class="cl-topbar__text" @tap="tapText">
+					<text class="cl-topbar__title" v-if="title">{{ title }}</text>
+					<text class="cl-topbar__description" v-if="description">{{ description }}</text>
 				</view>
+			</slot>
+		</view>
 
-				<slot name="prepend"></slot>
+		<view class="cl-topbar__prepend">
+			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
+				<text class="cl-icon-arrow-left"></text>
 			</view>
 
-			<view
-				class="cl-topbar__append"
-				:style="{
-					top,
-				}"
-			>
-				<slot name="append"></slot>
-			</view>
+			<slot name="prepend"></slot>
+		</view>
+
+		<view class="cl-topbar__append">
+			<slot name="append"></slot>
 		</view>
 	</view>
 </template>
@@ -65,7 +44,7 @@
 import { computed, defineComponent } from "vue";
 import { router } from "/@/cool";
 
-const { platform, statusBarHeight } = uni.getSystemInfoSync();
+const { statusBarHeight } = uni.getSystemInfoSync();
 
 /**
  * @description 自定义顶部导航，弥补原生的不足
@@ -89,7 +68,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		empty: Boolean,
+		fixed: Boolean,
 		showBack: {
 			type: Boolean,
 			default: true,
@@ -110,13 +89,8 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		// 距离顶部距离
-		const top = computed(() => {
-			return props.isTop
-				? platform === "android"
-					? `${statusBarHeight}px`
-					: "env(safe-area-inset-top)"
-				: 0;
+		const paddingTop = computed(() => {
+			return props.fixed ? `${statusBarHeight}px` : 0;
 		});
 
 		// 返回
@@ -145,7 +119,7 @@ export default defineComponent({
 		}
 
 		return {
-			top,
+			paddingTop,
 			back,
 			tapText,
 		};

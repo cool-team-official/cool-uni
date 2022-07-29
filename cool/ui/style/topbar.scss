@@ -5,19 +5,6 @@ $status-height: 44px;
 	align-items: center;
 	height: $status-height;
 	width: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-
-	&__wrap {
-		height: $status-height;
-		width: 100%;
-
-		&.is-empty {
-			height: 0;
-			padding-top: 0;
-		}
-	}
 
 	&__content {
 		width: 100%;
@@ -85,6 +72,13 @@ $status-height: 44px;
 		.cl-icon-arrow-left {
 			font-size: 44rpx;
 		}
+	}
+
+	&.is-fixed {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
 	}
 
 	&.is-border {
