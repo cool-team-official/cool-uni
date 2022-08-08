@@ -33,7 +33,7 @@
 		></textarea>
 
 		<!-- #ifndef MP-ALIPAY -->
-		<text class="cl-textarea__count" v-if="count">{{ value?.length }}/{{ maxlength }}</text>
+		<text class="cl-textarea__count" v-if="count">{{ value?.length||0 }}/{{ maxlength }}</text>
 		<!-- #endif -->
 	</view>
 </template>
