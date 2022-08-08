@@ -1,8 +1,14 @@
 <template>
 	<view class="cl-form-item" :class="[classList]">
-		<view class="cl-form-item__label" :style="{ width: labelWidth2 }" v-if="label">{{
-			label
-		}}</view>
+		<view
+			class="cl-form-item__label"
+			:style="{ width: labelWidth2 }"
+			v-if="label || $slots.label"
+		>
+			<slot name="label">
+				{{ label }}
+			</slot>
+		</view>
 
 		<view class="cl-form-item__container">
 			<view class="cl-form-item__content" :class="[justify2]">

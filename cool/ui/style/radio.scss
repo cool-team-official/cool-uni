@@ -9,14 +9,16 @@
 		justify-content: center;
 		color: #fff;
 		box-sizing: border-box;
-		border: 1px solid #ddd;
+		border: 6rpx solid #ddd;
 		border-radius: 40rpx;
 		transition: all 0.3s;
 		position: relative;
 
 		text {
-			font-size: 24rpx;
+			display: inline-block;
 			position: absolute;
+			height: 20rpx;
+			width: 20rpx;
 		}
 	}
 
@@ -30,7 +32,12 @@
 		.cl-radio__input {
 			background-color: $cl-color-primary;
 			border-color: $cl-color-primary;
-			color: #fff;
+
+			text {
+				background-color: $cl-color-primary;
+				border: 4rpx solid #fff;
+				border-radius: 20rpx;
+			}
 		}
 	}
 

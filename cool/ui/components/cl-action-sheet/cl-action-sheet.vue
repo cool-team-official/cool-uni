@@ -4,9 +4,13 @@
 			v-model="visible"
 			direction="bottom"
 			:padding="0"
-			border-radius="20rpx 20rpx 0 0"
+			border-radius="32rpx 32rpx 0 0"
 			:close-on-click-modal="conf.closeOnClickModal"
 		>
+			<view class="cl-action-sheet__title" v-if="conf.title">
+				{{ conf.title }}
+			</view>
+
 			<!-- 列表 -->
 			<button
 				class="cl-action-sheet__item"
@@ -62,6 +66,7 @@ export default defineComponent({
 		function open(options: ClActionSheet.Options) {
 			conf.value = Object.assign(
 				{
+					title: "",
 					list: [],
 					callback: null,
 					closeOnClickModal: true,

@@ -1,7 +1,10 @@
 <template>
 	<view class="cl-progress">
 		<view class="cl-progress-bar" v-if="type === 'line'">
-			<view class="cl-progress-bar__outer" :style="{ height: parseRpx(strokeWidth) }">
+			<view
+				class="cl-progress-bar__outer"
+				:style="{ height: parseRpx(strokeWidth), backgroundColor: unColor }"
+			>
 				<view
 					class="cl-progress-bar__inner"
 					:style="{
@@ -62,6 +65,10 @@ export default defineComponent({
 		color: {
 			type: [String, Array],
 			default: "",
+		},
+		unColor: {
+			type: String,
+			default: "#ebeef5",
 		},
 		status: {
 			type: Boolean,

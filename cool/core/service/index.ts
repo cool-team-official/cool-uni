@@ -1,7 +1,7 @@
 import { BaseService } from "./base";
 
 // 服务
-export const service: Service = {
+export const service: Eps.Service = {
 	request: new BaseService().request,
 };
 

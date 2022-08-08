@@ -7,7 +7,7 @@
 				width: size,
 			}"
 		>
-			<text class="cl-icon-toast-success" v-if="checked"></text>
+			<text v-if="checked"></text>
 		</view>
 
 		<view class="cl-radio__label">

@@ -111,12 +111,421 @@ declare interface BaseComm {
 	};
 }
 
-declare interface DemoCache {
+declare interface BusinessAmount {
 	/**
-	 * geo
+	 * aliNotify
 	 * @returns Promise<any>
 	 */
-	geo(data?: any): Promise<any>;
+	aliNotify(data?: any): Promise<any>;
+	/**
+	 * recharge
+	 * @returns Promise<any>
+	 */
+	recharge(data?: any): Promise<any>;
+	/**
+	 * withdraw
+	 * @returns Promise<any>
+	 */
+	withdraw(data?: any): Promise<any>;
+	/**
+	 * toWallet
+	 * @returns Promise<any>
+	 */
+	toWallet(data?: any): Promise<any>;
+	/**
+	 * wxNotify
+	 * @returns Promise<any>
+	 */
+	wxNotify(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		aliNotify: string;
+		recharge: string;
+		withdraw: string;
+		toWallet: string;
+		wxNotify: string;
+		page: string;
+		list: string;
+		info: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface BusinessBanner {
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * page
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		list: string;
+		page: string;
+		info: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface BusinessRecharge {
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		info: string;
+		page: string;
+		list: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface BusinessTask {
+	/**
+	 * findByCode
+	 * @returns Promise<any>
+	 */
+	findByCode(data?: any): Promise<any>;
+	/**
+	 * myTask
+	 * @returns Promise<any>
+	 */
+	myTask(data?: any): Promise<any>;
+	/**
+	 * giveUp
+	 * @returns Promise<any>
+	 */
+	giveUp(data?: any): Promise<any>;
+	/**
+	 * submit
+	 * @returns Promise<any>
+	 */
+	submit(data?: any): Promise<any>;
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * click
+	 * @returns Promise<any>
+	 */
+	click(data?: any): Promise<any>;
+	/**
+	 * test
+	 * @returns Promise<any>
+	 */
+	test(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * get
+	 * @returns Promise<any>
+	 */
+	get(data?: any): Promise<any>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		findByCode: string;
+		myTask: string;
+		giveUp: string;
+		submit: string;
+		delete: string;
+		update: string;
+		click: string;
+		test: string;
+		info: string;
+		list: string;
+		page: string;
+		get: string;
+		add: string;
+	};
+}
+
+declare interface BusinessUser {
+	/**
+	 * loginByWechat
+	 * @returns Promise<any>
+	 */
+	loginByWechat(data?: any): Promise<any>;
+	/**
+	 * phoneBinding
+	 * @returns Promise<any>
+	 */
+	phoneBinding(data?: any): Promise<any>;
+	/**
+	 * 刷新token
+	 * @returns Promise<any>
+	 */
+	refreshToken(data?: any): Promise<any>;
+	/**
+	 * loginByCode
+	 * @returns Promise<any>
+	 */
+	loginByCode(data?: any): Promise<any>;
+	/**
+	 * 推广码号绑定
+	 * @returns Promise<any>
+	 */
+	codeBinding(data?: any): Promise<any>;
+	/**
+	 * 学生认证
+	 * @returns Promise<any>
+	 */
+	studentAuth(data?: any): Promise<any>;
+	/**
+	 * 粉丝列表
+	 * @returns Promise<any>
+	 */
+	fansList(data?: any): Promise<any>;
+	/**
+	 * 粉丝任务
+	 * @returns Promise<any>
+	 */
+	fansTask(data?: any): Promise<any>;
+	/**
+	 * getCode
+	 * @returns Promise<any>
+	 */
+	getCode(data?: any): Promise<any>;
+	/**
+	 * 账户
+	 * @returns Promise<any>
+	 */
+	account(data?: any): Promise<any>;
+	/**
+	 * 佣金列表
+	 * @returns Promise<any>
+	 */
+	yjList(data?: any): Promise<any>;
+	/**
+	 * 实名认证
+	 * @returns Promise<any>
+	 */
+	smAuth(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * test
+	 * @returns Promise<any>
+	 */
+	test(data?: any): Promise<any>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * page
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		loginByWechat: string;
+		phoneBinding: string;
+		refreshToken: string;
+		loginByCode: string;
+		codeBinding: string;
+		studentAuth: string;
+		fansList: string;
+		fansTask: string;
+		getCode: string;
+		account: string;
+		yjList: string;
+		smAuth: string;
+		update: string;
+		info: string;
+		test: string;
+		list: string;
+		page: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface BusinessWithdraw {
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		info: string;
+		page: string;
+		list: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface DemoCache {
 	/**
 	 * set
 	 * @returns Promise<any>
@@ -161,7 +570,6 @@ declare interface DemoCache {
 	 * 权限
 	 */
 	permission: {
-		geo: string;
 		set: string;
 		get: string;
 		list: string;
@@ -230,11 +638,6 @@ declare interface DemoEs {
 	 */
 	test(data?: any): Promise<any>;
 	/**
-	 * 空间地理位置
-	 * @returns Promise<any>
-	 */
-	geo(data?: any): Promise<any>;
-	/**
 	 * list
 	 * @returns Promise<any>
 	 */
@@ -269,7 +672,6 @@ declare interface DemoEs {
 	 */
 	permission: {
 		test: string;
-		geo: string;
 		list: string;
 		page: string;
 		info: string;
@@ -621,56 +1023,6 @@ declare interface DemoRpc {
 	};
 }
 
-declare interface DemoSms {
-	/**
-	 * test
-	 * @returns Promise<any>
-	 */
-	test(data?: any): Promise<any>;
-	/**
-	 * list
-	 * @returns Promise<any>
-	 */
-	list(data?: any): Promise<any>;
-	/**
-	 * page
-	 * @returns Promise<PageResponse>
-	 */
-	page(data?: any): Promise<PageResponse>;
-	/**
-	 * info
-	 * @returns Promise<any>
-	 */
-	info(data?: any): Promise<any>;
-	/**
-	 * update
-	 * @returns Promise<any>
-	 */
-	update(data?: any): Promise<any>;
-	/**
-	 * delete
-	 * @returns Promise<any>
-	 */
-	delete(data?: any): Promise<any>;
-	/**
-	 * add
-	 * @returns Promise<any>
-	 */
-	add(data?: any): Promise<any>;
-	/**
-	 * 权限
-	 */
-	permission: {
-		test: string;
-		list: string;
-		page: string;
-		info: string;
-		update: string;
-		delete: string;
-		add: string;
-	};
-}
-
 declare interface DemoSwagger {
 	/**
 	 * 创建
@@ -821,77 +1173,37 @@ declare interface DictInfo {
 	};
 }
 
-declare interface OrderInfo {
+declare interface SellerAmount {
 	/**
-	 * 提交订单
+	 * aliNotify
 	 * @returns Promise<any>
 	 */
-	submit(data?: any): Promise<any>;
+	aliNotify(data?: any): Promise<any>;
 	/**
-	 * list
+	 * recharge
 	 * @returns Promise<any>
 	 */
-	list(data?: any): Promise<any>;
+	recharge(data?: any): Promise<any>;
 	/**
-	 * page
-	 * @returns Promise<PageResponse>
-	 */
-	page(data?: any): Promise<PageResponse>;
-	/**
-	 * info
+	 * withdraw
 	 * @returns Promise<any>
 	 */
-	info(data?: any): Promise<any>;
-	/**
-	 * update
-	 * @returns Promise<any>
-	 */
-	update(data?: any): Promise<any>;
-	/**
-	 * delete
-	 * @returns Promise<any>
-	 */
-	delete(data?: any): Promise<any>;
-	/**
-	 * add
-	 * @returns Promise<any>
-	 */
-	add(data?: any): Promise<any>;
-	/**
-	 * 权限
-	 */
-	permission: {
-		submit: string;
-		list: string;
-		page: string;
-		info: string;
-		update: string;
-		delete: string;
-		add: string;
-	};
-}
-
-declare interface OrderPay {
+	withdraw(data?: any): Promise<any>;
 	/**
 	 * wxNotify
 	 * @returns Promise<any>
 	 */
 	wxNotify(data?: any): Promise<any>;
 	/**
-	 * wx
-	 * @returns Promise<any>
+	 * 分页查询
+	 * @returns Promise<PageResponse>
 	 */
-	wx(data?: any): Promise<any>;
+	page(data?: any): Promise<PageResponse>;
 	/**
 	 * list
 	 * @returns Promise<any>
 	 */
 	list(data?: any): Promise<any>;
-	/**
-	 * page
-	 * @returns Promise<PageResponse>
-	 */
-	page(data?: any): Promise<PageResponse>;
 	/**
 	 * info
 	 * @returns Promise<any>
@@ -916,10 +1228,12 @@ declare interface OrderPay {
 	 * 权限
 	 */
 	permission: {
+		aliNotify: string;
+		recharge: string;
+		withdraw: string;
 		wxNotify: string;
-		wx: string;
-		list: string;
 		page: string;
+		list: string;
 		info: string;
 		update: string;
 		delete: string;
@@ -927,12 +1241,81 @@ declare interface OrderPay {
 	};
 }
 
-declare interface UserAddress {
+declare interface SellerRecharge {
 	/**
-	 * default
+	 * 单个信息
 	 * @returns Promise<any>
 	 */
-	default(data?: any): Promise<any>;
+	info(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * list
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * update
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * delete
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * add
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		info: string;
+		page: string;
+		list: string;
+		update: string;
+		delete: string;
+		add: string;
+	};
+}
+
+declare interface SellerTask {
+	/**
+	 * findByCode
+	 * @returns Promise<any>
+	 */
+	findByCode(data?: any): Promise<any>;
+	/**
+	 * clickCount
+	 * @returns Promise<any>
+	 */
+	clickCount(data?: any): Promise<any>;
+	/**
+	 * taskUser
+	 * @returns Promise<any>
+	 */
+	taskUser(data?: any): Promise<any>;
+	/**
+	 * clickLog
+	 * @returns Promise<any>
+	 */
+	clickLog(data?: any): Promise<any>;
+	/**
+	 * setCode
+	 * @returns Promise<any>
+	 */
+	setCode(data?: any): Promise<any>;
+	/**
+	 * myTask
+	 * @returns Promise<any>
+	 */
+	myTask(data?: any): Promise<any>;
 	/**
 	 * 删除
 	 * @returns Promise<any>
@@ -943,6 +1326,11 @@ declare interface UserAddress {
 	 * @returns Promise<any>
 	 */
 	update(data?: any): Promise<any>;
+	/**
+	 * test
+	 * @returns Promise<any>
+	 */
+	test(data?: any): Promise<any>;
 	/**
 	 * 单个信息
 	 * @returns Promise<any>
@@ -967,9 +1355,15 @@ declare interface UserAddress {
 	 * 权限
 	 */
 	permission: {
-		default: string;
+		findByCode: string;
+		clickCount: string;
+		taskUser: string;
+		clickLog: string;
+		setCode: string;
+		myTask: string;
 		delete: string;
 		update: string;
+		test: string;
 		info: string;
 		list: string;
 		page: string;
@@ -977,22 +1371,67 @@ declare interface UserAddress {
 	};
 }
 
-declare interface UserInfo {
+declare interface SellerUser {
 	/**
-	 * 绑定手机
+	 * loginByWechat
 	 * @returns Promise<any>
 	 */
-	bindMiniPhone(data?: any): Promise<any>;
+	loginByWechat(data?: any): Promise<any>;
 	/**
-	 * 个人信息
+	 * phoneBinding
 	 * @returns Promise<any>
 	 */
-	person(data?: any): Promise<any>;
+	phoneBinding(data?: any): Promise<any>;
+	/**
+	 * 刷新token
+	 * @returns Promise<any>
+	 */
+	refreshToken(data?: any): Promise<any>;
+	/**
+	 * loginByCode
+	 * @returns Promise<any>
+	 */
+	loginByCode(data?: any): Promise<any>;
+	/**
+	 * 学生认证
+	 * @returns Promise<any>
+	 */
+	studentAuth(data?: any): Promise<any>;
+	/**
+	 * getCode
+	 * @returns Promise<any>
+	 */
+	getCode(data?: any): Promise<any>;
+	/**
+	 * 账户
+	 * @returns Promise<any>
+	 */
+	account(data?: any): Promise<any>;
+	/**
+	 * 实名认证
+	 * @returns Promise<any>
+	 */
+	smAuth(data?: any): Promise<any>;
+	/**
+	 * 企业认证
+	 * @returns Promise<any>
+	 */
+	qyAuth(data?: any): Promise<any>;
+	/**
+	 * 个人认证
+	 * @returns Promise<any>
+	 */
+	grAuth(data?: any): Promise<any>;
 	/**
 	 * 修改
 	 * @returns Promise<any>
 	 */
 	update(data?: any): Promise<any>;
+	/**
+	 * info
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
 	/**
 	 * list
 	 * @returns Promise<any>
@@ -1003,11 +1442,6 @@ declare interface UserInfo {
 	 * @returns Promise<PageResponse>
 	 */
 	page(data?: any): Promise<PageResponse>;
-	/**
-	 * info
-	 * @returns Promise<any>
-	 */
-	info(data?: any): Promise<any>;
 	/**
 	 * delete
 	 * @returns Promise<any>
@@ -1022,43 +1456,41 @@ declare interface UserInfo {
 	 * 权限
 	 */
 	permission: {
-		bindMiniPhone: string;
-		person: string;
+		loginByWechat: string;
+		phoneBinding: string;
+		refreshToken: string;
+		loginByCode: string;
+		studentAuth: string;
+		getCode: string;
+		account: string;
+		smAuth: string;
+		qyAuth: string;
+		grAuth: string;
 		update: string;
+		info: string;
 		list: string;
 		page: string;
-		info: string;
 		delete: string;
 		add: string;
 	};
 }
 
-declare interface UserLogin {
+declare interface SellerWithdraw {
 	/**
-	 * 刷新token
+	 * 单个信息
 	 * @returns Promise<any>
 	 */
-	refreshToken(data?: any): Promise<any>;
+	info(data?: any): Promise<any>;
 	/**
-	 * 小程序登录
-	 * @returns Promise<any>
+	 * 分页查询
+	 * @returns Promise<PageResponse>
 	 */
-	wxMiniLogin(data?: any): Promise<any>;
+	page(data?: any): Promise<PageResponse>;
 	/**
 	 * list
 	 * @returns Promise<any>
 	 */
 	list(data?: any): Promise<any>;
-	/**
-	 * page
-	 * @returns Promise<PageResponse>
-	 */
-	page(data?: any): Promise<PageResponse>;
-	/**
-	 * info
-	 * @returns Promise<any>
-	 */
-	info(data?: any): Promise<any>;
 	/**
 	 * update
 	 * @returns Promise<any>
@@ -1078,11 +1510,9 @@ declare interface UserLogin {
 	 * 权限
 	 */
 	permission: {
-		refreshToken: string;
-		wxMiniLogin: string;
-		list: string;
-		page: string;
 		info: string;
+		page: string;
+		list: string;
 		update: string;
 		delete: string;
 		add: string;
@@ -1136,6 +1566,14 @@ declare interface Test {
 declare type Service = {
 	request(data: RequestOptions): Promise<any>;
 	base: { comm: BaseComm };
+	business: {
+		amount: BusinessAmount;
+		banner: BusinessBanner;
+		recharge: BusinessRecharge;
+		task: BusinessTask;
+		user: BusinessUser;
+		withdraw: BusinessWithdraw;
+	};
 	demo: {
 		cache: DemoCache;
 		config: DemoConfig;
@@ -1146,12 +1584,16 @@ declare type Service = {
 		pay: DemoPay;
 		queue: DemoQueue;
 		rpc: DemoRpc;
-		sms: DemoSms;
 		swagger: DemoSwagger;
 		tag: DemoTag;
 	};
 	dict: { info: DictInfo };
-	order: { info: OrderInfo; pay: OrderPay };
-	user: { address: UserAddress; info: UserInfo; login: UserLogin };
+	seller: {
+		amount: SellerAmount;
+		recharge: SellerRecharge;
+		task: SellerTask;
+		user: SellerUser;
+		withdraw: SellerWithdraw;
+	};
 	test: Test;
 };

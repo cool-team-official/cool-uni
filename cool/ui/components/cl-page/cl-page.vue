@@ -46,6 +46,9 @@ export default defineComponent({
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
 
+		// 组件作用域
+		const { proxy }: any = getCurrentInstance();
+
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
 
@@ -68,26 +71,23 @@ export default defineComponent({
 
 		// 提示框
 		function showToast(options: ClToast.Options) {
-			refs.value.toast.open(options);
+			refs.value.toast?.open(options);
 		}
 
 		// 确认框
 		function showConfirm(options: ClConfirm.Options) {
-			refs.value.confirm.open(options);
+			refs.value.confirm?.open(options);
 		}
 
 		// 提示框
-		function showTips(message: string, callback?: Function) {
-			refs.value.confirm.open({
+		function showTips(message: string, callback?: () => void) {
+			refs.value.confirm?.open({
 				title: "温馨提示",
 				message,
 				showCancelButton: false,
 				callback,
 			} as ClConfirm.Options);
 		}
-
-		// 组件作用域
-		const { proxy }: any = getCurrentInstance();
 
 		// 追加方法
 		proxy.$root.$cl_page = {

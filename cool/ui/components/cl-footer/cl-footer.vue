@@ -9,6 +9,8 @@
 			class="cl-footer"
 			:style="{
 				backgroundColor,
+				padding: parseRpx(padding),
+				boxSizing: 'border-box',
 			}"
 		>
 			<slot></slot>
@@ -29,6 +31,7 @@ export default defineComponent({
 			type: String,
 			default: "#fff",
 		},
+		padding: [String, Number],
 	},
 
 	setup() {

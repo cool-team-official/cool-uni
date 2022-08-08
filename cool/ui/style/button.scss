@@ -112,6 +112,14 @@
 		opacity: 0.5;
 	}
 
+	&.is-bold {
+		font-weight: bold;
+
+		&::after {
+			border-width: 6rpx !important;
+		}
+	}
+
 	&.is-loading-mask {
 		position: relative;
 

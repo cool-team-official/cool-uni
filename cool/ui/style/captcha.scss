@@ -21,7 +21,6 @@
 		justify-content: center;
 		align-items: center;
 		flex: 1;
-		background-color: #ebecee;
 		border-radius: 10rpx;
 	}
 
@@ -35,6 +34,12 @@
 		width: 4rpx;
 		background-color: #000;
 		animation: flash 1s infinite ease;
+	}
+
+	&.is-border {
+		.cl-captcha__item {
+			border: 2rpx solid $cl-color-primary;
+		}
 	}
 
 	@keyframes flash {

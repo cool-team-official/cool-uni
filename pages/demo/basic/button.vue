@@ -1,5 +1,5 @@
 <template>
-	<cl-page padding="20">
+	<cl-page :padding="20">
 		<view class="page-demo-button">
 			<cl-card label="基础用法">
 				<cl-row :gutter="20">

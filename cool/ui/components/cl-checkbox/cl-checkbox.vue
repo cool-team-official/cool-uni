@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-checkbox" :class="[classList]" @tap="onChange">
+	<view class="cl-checkbox" :class="[classList]" @tap.stop="onChange">
 		<view
 			class="cl-checkbox__input"
 			:style="{

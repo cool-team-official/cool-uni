@@ -47,6 +47,14 @@
 		&__container {
 			height: 100%;
 		}
+
+		&__close {
+			position: absolute;
+			bottom: -110rpx;
+			left: calc(50% - 36rpx);
+			color: #fff;
+			font-size: 72rpx;
+		}
 	}
 
 	&--left {

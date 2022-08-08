@@ -64,7 +64,7 @@ export function usePager() {
 
 	// 下拉刷新
 	onPullDownRefresh(async () => {
-		await refresh({ page: 1 });
+		refresh({ page: 1 });
 		uni.stopPullDownRefresh();
 	});
 

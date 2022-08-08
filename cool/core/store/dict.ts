@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import { service } from "../service";
 
 declare interface Data {
@@ -15,13 +15,17 @@ const Dict = defineStore("dict", () => {
 
 	// 获取
 	function get(name: string, value?: any) {
-		return value ? data[name]?.find((e) => e.value === value)?.label : data[name];
+		return computed(() => {
+			return value ? data[name]?.find((e) => e.value == value) : data[name];
+		}).value;
 	}
 
-	// 同步获取
-	async function getSync(name: string, value?: any) {
-		await req;
-		return get(name, value);
+	// 获取名称
+	function getLabel(name: string, value: string): string {
+		const arr = value?.split(",") || [];
+
+		// @ts-ignore
+		return arr.map((e) => get(name, e)?.label).join(",");
 	}
 
 	// 刷新
@@ -51,7 +55,7 @@ const Dict = defineStore("dict", () => {
 	return {
 		data,
 		get,
-		getSync,
+		getLabel,
 		refresh,
 	};
 });

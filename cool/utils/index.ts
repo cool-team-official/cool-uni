@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { isArray } from "lodash";
+import { isArray, isNumber } from "lodash";
 import storage from "./storage";
 import Canvas from "./canvas";
 
@@ -13,7 +12,7 @@ export const isIos: boolean = platform == "ios";
 
 // 是否小数
 export function isDecimal(value: any): boolean {
-	return String(value).length - String(value).indexOf(".") + 1;
+	return String(value).length - String(value).indexOf(".") + 1 > 0;
 }
 
 // 首字母大写
@@ -170,7 +169,7 @@ export function getOAID() {
 				resolve(res.oaid);
 			},
 			fail() {
-				resolve();
+				resolve(0);
 			},
 		});
 	});

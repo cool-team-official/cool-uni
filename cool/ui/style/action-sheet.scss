@@ -4,8 +4,17 @@
 
 	.cl-popup__container {
 		background-color: #fff;
-		border-radius: 20rpx 20rpx 0 0;
+		border-radius: 32rpx 32rpx 0 0;
 		overflow: hidden;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		font-size: 24rpx;
+		padding: 0 46rpx;
+		height: 90rpx;
+		background-color: #f6faff;
 	}
 
 	&__item {
@@ -32,7 +41,7 @@
 		}
 
 		&--cancel {
-			border-top: 10rpx solid #f7f7f7;
+			border-top: 10rpx solid #f6faff;
 		}
 
 		&:after {

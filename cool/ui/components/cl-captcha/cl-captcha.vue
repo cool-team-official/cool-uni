@@ -1,5 +1,10 @@
 <template>
-	<view class="cl-captcha">
+	<view
+		class="cl-captcha"
+		:class="{
+			'is-border': border,
+		}"
+	>
 		<input
 			class="cl-captcha__input"
 			v-model="value"
@@ -17,6 +22,7 @@
 				:style="{
 					height: parseRpx(height),
 					margin: `0 ${parseRpx(gutter)}`,
+					backgroundColor,
 				}"
 				v-for="(_, index) in list"
 				:key="index"
@@ -59,6 +65,11 @@ export default defineComponent({
 		gutter: {
 			type: Number,
 			default: 20,
+		},
+		border: Boolean,
+		backgroundColor: {
+			type: String,
+			default: "#ebecee",
 		},
 	},
 

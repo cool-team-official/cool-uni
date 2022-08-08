@@ -89,7 +89,7 @@ export default function request(options: any) {
 				if (storage.isExpired("token")) {
 					// 判断 refreshToken 是否过期
 					if (storage.isExpired("refreshToken")) {
-						// 退出登陆
+						// 退出登录
 						return user.logout();
 					}
 

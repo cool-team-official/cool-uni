@@ -29,6 +29,10 @@
 			<view class="cl-popup__container" :style="{ padding: parseRpx(padding) }">
 				<slot></slot>
 			</view>
+
+			<view class="cl-popup__close" v-if="status && showCloseBtn" @tap="close">
+				<text class="cl-icon-close-border"></text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -88,6 +92,7 @@ export default defineComponent({
 			type: String,
 			default: "rgba(0, 0, 0, 0.4)",
 		},
+		showCloseBtn: Boolean,
 	},
 
 	emits: ["update:modelValue", "open", "opened", "close", "closed"],

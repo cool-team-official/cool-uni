@@ -295,7 +295,7 @@ const router = {
 		const data = storage.get("invalid-page");
 
 		if (data) {
-			data.mode = this.isTab(data.path) ? "switchTab" : "redirectTo";
+			data.mode = this.isTab(data.path) ? "switchTab" : "reLaunch";
 			this.push(data);
 			storage.remove("invalid-page");
 		} else {

@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { getCurrentInstance } from "vue";
 import { isEmpty, isString, cloneDeep, isObject } from "lodash";
-import { pathToBase64 } from "image-tools";
 
 // 渲染参数
 declare interface RenderOptions {
@@ -9,6 +7,7 @@ declare interface RenderOptions {
 	y: number;
 	height?: number;
 	width?: number;
+	[key: string]: any;
 }
 
 // 文本渲染参数
@@ -25,6 +24,7 @@ declare interface TextRenderOptions extends RenderOptions {
 
 // 图片渲染参数
 declare interface ImageRenderOptions extends RenderOptions {
+	mode: "aspectFill" | "aspectFit";
 	url: string;
 	radius?: number;
 }
@@ -217,8 +217,9 @@ class Canvas {
 				if (extName) {
 					extName = extName[1];
 				}
-				const fs = wx.getFileSystemManager();
+				const fs = uni.getFileSystemManager();
 				const fileName = Date.now() + "." + extName;
+				// @ts-ignore
 				const filePath = wx.env.USER_DATA_PATH + "/" + fileName;
 
 				return fs.writeFile({
@@ -431,7 +432,7 @@ class Canvas {
 			return fontSize / 2 + fontSize / 14 + letterSpace;
 		}
 
-		let ch = text.charCodeAt();
+		let ch = text.charCodeAt(0);
 
 		if ((ch >= 0x0001 && ch <= 0x007e) || (0xff60 <= ch && ch <= 0xff9f)) {
 			return fontSize / 2 + fontSize / 14 + letterSpace;
@@ -450,9 +451,9 @@ class Canvas {
 		// 区分是否有圆角采用不同模式渲染
 		if (options.radius) {
 			let { x, y } = options;
-			let w = options.width;
-			let h = options.height;
-			let r = options.radius;
+			let w = options.width || 0;
+			let h = options.height || 0;
+			let r = options.radius || 0;
 			// 画路径
 			this.drawRadiusRoute(x, y, w, h, r);
 			// 填充

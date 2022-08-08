@@ -8,6 +8,10 @@
 				'is-border': border,
 			},
 		]"
+		:style="{
+			backgroundColor,
+			borderRadius: parseRpx(borderRadius),
+		}"
 	>
 		<picker
 			:mode="mode"
@@ -127,6 +131,8 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		backgroundColor: String,
+		borderRadius: [String, Number],
 		setOptionsIsParseValue: Boolean,
 	},
 

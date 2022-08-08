@@ -1,5 +1,12 @@
 <template>
-	<view class="cl-textarea" :class="[classList]">
+	<view
+		class="cl-textarea"
+		:class="[classList]"
+		:style="{
+			backgroundColor,
+			borderRadius: parseRpx(borderRadius),
+		}"
+	>
 		<textarea
 			v-model="value"
 			:style="{ height: parseRpx(height) }"
@@ -26,7 +33,7 @@
 		></textarea>
 
 		<!-- #ifndef MP-ALIPAY -->
-		<text class="cl-textarea__count" v-if="count">{{ value.length }}/{{ maxlength }}</text>
+		<text class="cl-textarea__count" v-if="count">{{ value?.length }}/{{ maxlength }}</text>
 		<!-- #endif -->
 	</view>
 </template>
@@ -100,6 +107,8 @@ export default defineComponent({
 			type: Number,
 			default: 140,
 		},
+		backgroundColor: String,
+		borderRadius: [String, Number],
 	},
 
 	emits: [

@@ -233,6 +233,8 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .page-home {
+	padding-bottom: 200rpx;
+
 	.logo {
 		display: flex;
 		align-items: center;

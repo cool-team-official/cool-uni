@@ -13,6 +13,7 @@
 				'is-fill': fill,
 				'is-disabled': disabled,
 				'is-border': border,
+				'is-bold': bold,
 			},
 		]"
 		:style="{
@@ -120,6 +121,7 @@ export default defineComponent({
 			type: [Number, String],
 			default: 10,
 		},
+		bold: Boolean,
 		margin: [String, Number, Array],
 		shadow: Boolean,
 		icon: String,

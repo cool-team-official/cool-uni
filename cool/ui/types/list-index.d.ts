@@ -8,6 +8,7 @@ declare namespace ClListIndex {
 	type Group = {
 		label: string;
 		children: Item[];
+		[key: string]: any;
 	}[];
 
 	interface Dict {

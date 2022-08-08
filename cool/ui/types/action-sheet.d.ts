@@ -22,6 +22,7 @@ declare namespace ClActionSheet {
 	type Action = number | "cancel";
 
 	interface Options {
+		title?: string;
 		list: Item[];
 		showCancel?: boolean;
 		cancelText?: string;
