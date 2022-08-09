@@ -20,6 +20,12 @@ const Dict = defineStore("dict", () => {
 		}).value;
 	}
 
+	// 同步获取
+	async function getSync(name: string, value?: any) {
+		await req;
+		return get(name, value);
+	}
+
 	// 获取名称
 	function getLabel(name: string, value: string): string {
 		const arr = value?.split(",") || [];
@@ -55,6 +61,7 @@ const Dict = defineStore("dict", () => {
 	return {
 		data,
 		get,
+		getSync,
 		getLabel,
 		refresh,
 	};

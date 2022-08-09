@@ -23,7 +23,7 @@ const useUserStore = defineStore("user", function () {
 
 	// 刷新标识
 	async function refreshToken() {
-		return service.seller.user
+		return service.user.login
 			.refreshToken({
 				refreshToken: storage.get("refreshToken"),
 			})
@@ -34,10 +34,10 @@ const useUserStore = defineStore("user", function () {
 	}
 
 	// 用户信息
-	const info = ref<Eps.BuniessSellerEntity | undefined>(data.userInfo);
+	const info = ref<Eps.UserInfoEntity | undefined>(data.userInfo);
 
 	// 设置用户信息
-	function set(value: Eps.BuniessSellerEntity) {
+	function set(value: Eps.UserInfoEntity) {
 		info.value = value;
 		storage.set("userInfo", value);
 	}
@@ -45,7 +45,7 @@ const useUserStore = defineStore("user", function () {
 	// 更新用户信息
 	async function update(data: any) {
 		set(deepMerge(info.value, data));
-		await service.seller.user.update(info.value);
+		await service.user.info.update(info.value);
 	}
 
 	// 清除用户
@@ -65,7 +65,7 @@ const useUserStore = defineStore("user", function () {
 
 	// 获取用户信息
 	async function get() {
-		return service.seller.user
+		return service.user.info
 			.info()
 			.then((res) => {
 				if (res) {

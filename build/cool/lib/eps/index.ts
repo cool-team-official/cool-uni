@@ -3,70 +3,76 @@ import { isEmpty, last } from "lodash";
 import { createDir, firstUpperCase, readFile, toCamel } from "../../utils";
 import { createWriteStream } from "fs";
 import { join } from "path";
+import config from "./config";
 
 // 临时目录路径
 const tempPath = join(__dirname, "../../temp");
 
+// 获取类型
+function getType({ entityName, propertyName, type }: any) {
+	for (const map of config.entity.mapping) {
+		if (map.custom) {
+			const resType = map.custom({ entityName, propertyName, type });
+			if (resType) return resType;
+		}
+		if (map.test) {
+			if (map.test.includes(type)) {
+				return map.type;
+			}
+		}
+	}
+	return type;
+}
+
+// 创建 Entity
+function createEntity({ list }: any) {
+	const t0: any[] = [];
+
+	for (const item of list) {
+		if (!item.name) continue;
+		const t = [`interface ${item.name} {`];
+		for (const col of item.columns) {
+			// 描述
+			t.push("\n");
+			t.push("/**\n");
+			t.push(` * ${col.comment}\n`);
+			t.push(" */\n");
+			t.push(
+				`${col.propertyName}?: ${getType({
+					entityName: item.name,
+					propertyName: col.propertyName,
+					type: col.type,
+				})};`
+			);
+		}
+		t.push("\n");
+		t.push("/**\n");
+		t.push(` * 任意键值\n`);
+		t.push(" */\n");
+		t.push(`[key: string]: any;`);
+		t.push("}");
+		t0.push(t);
+	}
+
+	return t0.map((e) => e.join("")).join("\n\n");
+}
+
 // 创建描述文件
-export async function createEps({ list, service }: any) {
-	const t0 = [
-		[
-			`
-				declare interface Crud {
-					/**
-					 * 新增
-					 * @returns Promise<any>
-					 */
-					add(data: any): Promise<any>;
-					/**
-					 * 删除
-					 * @returns Promise<any>
-					 */
-					delete(data: { ids?: number[] | string[]; [key: string]: any }): Promise<any>;
-					/**
-					 * 修改
-					 * @returns Promise<any>
-					 */
-					update(data: { id?: number | string; [key: string]: any }): Promise<any>;
-					/**
-					 * 详情
-					 * @returns Promise<any>
-					 */
-					info(data: { id?: number | string; [key: string]: any }): Promise<any>;
-					/**
-					 * 全部
-					 * @returns Promise<any>
-					 */
-					list(data?: any): Promise<any>;
-					/**
-					 * 分页
-					 * @returns Promise<PageResponse>
-					 */
-					page(data?: { page?: number | string; size?: number | string; [key: string]: any }): Promise<PageResponse>;
-				}
-			`,
+function createService({ list, service }: any) {
+	const t0: any[] = [];
 
-			`
-				declare interface PageResponse {
-					list: any[];
-					pagination: { size: number; page: number; total: number };
-					[key: string]: any;
-				}
-			`,
-
-			`
-				declare interface RequestOptions {
-					params?: any;
-					data?: any;
-					url: string;
-					method?: "GET" | "get" | "POST" | "post" | string;
-					[key: string]: any;
-				}
-			`
-		]
+	const t1 = [
+		`type Service = {
+			request(options: {
+				url: string;
+				method?: 'POST' | 'GET' | string;
+				data?: any;
+				params?: any;
+				proxy?: boolean;
+				[key: string]: any;
+			}): Promise<any>;
+		`,
 	];
-
-	const t1 = [`declare type Service = {`, `request(data: RequestOptions): Promise<any>;`];
 
 	// 处理数据
 	function deep(d: any, k?: string) {
@@ -80,17 +86,12 @@ export async function createEps({ list, service }: any) {
 				const item = list.find((e: any) => (e.prefix || "").includes(d[i].namespace));
 
 				if (item) {
-					const t = [
-						`declare interface ${name} ${item.extendCrud ? " extends Crud" : ""} {`
-					];
+					const t = [`interface ${name} {`];
 
 					t1.push(`${i}: ${name};`);
 
 					// 插入方法
 					if (item.api) {
-						// 权限列表
-						const permission: string[] = [];
-
 						item.api.forEach((a: any) => {
 							// 方法名
 							const n = toCamel(a.name || last(a.path.split("/"))).replace(
@@ -130,10 +131,28 @@ export async function createEps({ list, service }: any) {
 								// 返回类型
 								let res = "";
 
+								// 实体名
+								const en = item.name || "any";
+
 								switch (a.path) {
 									case "/page":
-										res = "PageResponse";
+										res = `
+											{
+												pagination: { size: number; page: number; total: number };
+												list: ${en} [];
+												[key: string]: any;
+											}
+										`;
 										break;
+
+									case "/list":
+										res = `${en} []`;
+										break;
+
+									case "/info":
+										res = en;
+										break;
+
 									default:
 										res = "any";
 										break;
@@ -143,7 +162,6 @@ export async function createEps({ list, service }: any) {
 								t.push("\n");
 								t.push("/**\n");
 								t.push(` * ${a.summary || n}\n`);
-								t.push(` * @returns Promise<${res}>\n`);
 								t.push(" */\n");
 
 								t.push(
@@ -152,16 +170,7 @@ export async function createEps({ list, service }: any) {
 									)}): Promise<${res}>;`
 								);
 							}
-
-							permission.push(`${n}: string;`);
 						});
-
-						// 添加权限
-						t.push("\n");
-						t.push("/**\n");
-						t.push(" * 权限\n");
-						t.push(" */\n");
-						t.push(`permission: { ${permission.join("\n")} }`);
 					}
 
 					t.push("}");
@@ -175,14 +184,30 @@ export async function createEps({ list, service }: any) {
 		}
 	}
 
+	// 深度
 	deep(service);
+
+	// 结束
 	t1.push("}");
 
 	// 追加
 	t0.push(t1);
 
+	return t0.map((e) => e.join("")).join("\n\n");
+}
+
+// 创建描述文件
+export async function createEps({ list, service }: any) {
+	// 文件内容
+	const text = `
+		declare namespace Eps {
+			${createEntity({ list })}
+			${createService({ list, service })}
+		}
+	`;
+
 	// 文本内容
-	const content = prettier.format(t0.map((e) => e.join("")).join("\n\n"), {
+	const content = prettier.format(text, {
 		parser: "typescript",
 		useTabs: true,
 		tabWidth: 4,
@@ -190,20 +215,20 @@ export async function createEps({ list, service }: any) {
 		semi: true,
 		singleQuote: false,
 		printWidth: 100,
-		trailingComma: "none"
+		trailingComma: "none",
 	});
 
 	// 创建 temp 目录
 	createDir(tempPath);
 
-	// 创建 service 描述文件
-	createWriteStream(join(tempPath, "service.d.ts"), {
-		flags: "w"
+	// 创建 eps 描述文件
+	createWriteStream(join(tempPath, "eps.d.ts"), {
+		flags: "w",
 	}).write(content);
 
-	// 创建 eps 文件
+	// 创建 eps 数据文件
 	createWriteStream(join(tempPath, "eps.json"), {
-		flags: "w"
+		flags: "w",
 	}).write(
 		JSON.stringify(
 			list.map((e: any) => {

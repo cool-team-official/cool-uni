@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { service } from "../service";
 import { getVersion } from "../../utils";
 import { config } from "../../config";
 
