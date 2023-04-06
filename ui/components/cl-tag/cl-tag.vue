@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-tag" :class="classList" @tap="click" v-if="visible">
+	<view class="cl-tag" :class="tagClass" @tap="click" v-if="visible">
 		<slot></slot>
 		<text class="cl-tag__close cl-icon-close" v-if="closable" @tap.stop="close"></text>
 	</view>
@@ -10,7 +10,7 @@
  * @description 用于标记和选择
  * @property {String} type 类型 (primary | success | error | warning | info)
  * @property {Boolean} plain 图片裁剪、缩放的模式
- * @property {String} size 图片大小 (small | mini)，默认small
+ * @property {String} size 图片大小 (default | small)，默认default
  * @property {Boolean} closable 是否可关闭
  * @property {Boolean} round 是否圆角
  * @event {Function} click 点击时触发
@@ -29,8 +29,8 @@ export default defineComponent({
 		},
 		plain: Boolean,
 		size: {
-			type: String as PropType<"small" | "mini">,
-			default: "small",
+			type: String as PropType<"default" | "small">,
+			default: "default",
 		},
 		closable: Boolean,
 		round: Boolean,
@@ -38,10 +38,10 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 是否可见
-		const visible = ref<boolean>(true);
+		const visible = ref(true);
 
 		// 样式
-		const classList = computed(() => {
+		const tagClass = computed(() => {
 			let list = [];
 
 			if (props.type) {
@@ -82,7 +82,7 @@ export default defineComponent({
 
 		return {
 			visible,
-			classList,
+			tagClass,
 			click,
 			open,
 			close,

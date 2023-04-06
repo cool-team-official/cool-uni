@@ -58,7 +58,7 @@ export default defineComponent({
 		// 打开
 		function open(d: ClToast.Options) {
 			// 默认配置
-			const options: any = {
+			const options = {
 				id: id++,
 				visible: false,
 				closed: false,

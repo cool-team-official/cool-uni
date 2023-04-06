@@ -229,7 +229,9 @@ function toLink(link: string) {
 
 <style lang="scss" scoped>
 .page-home {
-	padding-bottom: 200rpx;
+	// #ifdef H5
+	padding-bottom: 150rpx;
+	// #endif
 
 	.logo {
 		display: flex;

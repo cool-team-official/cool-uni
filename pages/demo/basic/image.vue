@@ -68,7 +68,7 @@
 
 				<cl-image src="" :size="150" :margin="[0, 0, 0, 20]">
 					<template #placeholder>
-						<cl-text color="red" :size="30" value="自定义"></cl-text>
+						<cl-text color="red" value="自定义"></cl-text>
 					</template>
 				</cl-image>
 			</cl-row>
@@ -80,7 +80,7 @@
 
 				<cl-image src="https://xxxx.png" :size="150" :margin="[0, 0, 0, 20]">
 					<template #error>
-						<cl-text color="red" :size="30" value="自定义"></cl-text>
+						<cl-text color="red" value="自定义"></cl-text>
 					</template>
 				</cl-image>
 			</cl-row>

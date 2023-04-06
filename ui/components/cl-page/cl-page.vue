@@ -21,6 +21,9 @@
 
 		<!-- 内容插槽 -->
 		<slot></slot>
+
+		<!-- 底部安全区域 -->
+		<view class="safe-area-bottom"></view>
 	</view>
 </template>
 

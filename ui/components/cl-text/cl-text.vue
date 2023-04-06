@@ -1,17 +1,5 @@
 <template>
-	<view
-		class="cl-text"
-		:class="[classList]"
-		:style="{
-			color,
-			textAlign: align,
-			'-webkit-line-clamp': ellipsis,
-			margin: parseRpx(margin),
-			fontSize: parseRpx(size),
-			letterSpacing: parseRpx(letterSpacing),
-		}"
-		@tap="onTap"
-	>
+	<view class="cl-text" :class="textClass" :style="textStyle" @tap="onTap">
 		<!-- 价格 -->
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
 
@@ -19,11 +7,11 @@
 		<text class="cl-text__prefix-icon" :class="prefixIcon" v-if="prefixIcon"> </text>
 
 		<!-- 文本 -->
-		<text class="cl-text__value">{{ t.value }}</text>
+		<text class="cl-text__value">{{ text.value }}</text>
 
 		<!-- 小数 -->
 		<text class="cl-text__precision" v-if="type == 'price' && precision"
-			>.{{ t.precision }}</text
+			>.{{ text.precision }}</text
 		>
 
 		<!-- 后缀图标 -->
@@ -110,8 +98,7 @@ export default defineComponent({
 	emits: ["click", "tap"],
 
 	setup(props, { emit }) {
-		// 文本
-		const t = computed(() => {
+		const text = computed(() => {
 			if (props.type == "price") {
 				const [value, precision = "00"] = parseFloat(String(props.value) || "0")
 					.toFixed(2)
@@ -140,8 +127,7 @@ export default defineComponent({
 			}
 		});
 
-		// 样式
-		const classList = computed(() => {
+		const textClass = computed(() => {
 			let list = [];
 
 			if (props.bold) {
@@ -179,6 +165,17 @@ export default defineComponent({
 			return list.join(" ");
 		});
 
+		const textStyle = computed(() => {
+			return {
+				color: props.color,
+				textAlign: props.align,
+				"-webkit-line-clamp": props.ellipsis,
+				margin: parseRpx(props.margin),
+				fontSize: parseRpx(props.size),
+				letterSpacing: parseRpx(props.letterSpacing),
+			};
+		});
+
 		// 点击
 		function onTap(e: any) {
 			emit("click", e);
@@ -186,8 +183,9 @@ export default defineComponent({
 		}
 
 		return {
-			t,
-			classList,
+			text,
+			textClass,
+			textStyle,
 			parseRpx,
 			onTap,
 		};

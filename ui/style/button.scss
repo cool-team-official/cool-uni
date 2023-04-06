@@ -1,32 +1,59 @@
+$button-height: 64rpx;
+$button-padding: 0rpx 30rpx;
+$button-font-size: 26rpx;
+$button-border-radius: 100rpx;
+$button-border-width: 3rpx;
+
+// Mixins
+@mixin button-color($type, $color) {
+	&.cl-button--#{$type} {
+		background-color: $color;
+		border-color: $color;
+		.cl-button__text {
+			color: #fff;
+		}
+		&::after {
+			border-width: 0;
+		}
+		&.is-plain {
+			background-color: #fff;
+			.cl-button__text {
+				color: rgba($color, 0.8);
+			}
+			&.is-border {
+				&::after {
+					border-color: rgba($color, 0.8);
+				}
+			}
+		}
+		&.is-disabled {
+			background-color: $color;
+		}
+		&.button-hover {
+			&:not(.is-loading) {
+				background-color: rgba($color, 0.8);
+				&.is-plain {
+					.cl-button__text {
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Styles
 .cl-button {
-	display: inline-flex !important;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	line-height: 1;
-	vertical-align: middle;
 	box-sizing: border-box;
 	white-space: nowrap;
 	margin: 0;
-	padding: 0rpx 30rpx;
-	overflow: visible;
 	background-color: #fff;
-
-	&::after {
-		border-width: 0;
-	}
-
-	&.is-border {
-		&::after {
-			border-width: 1px;
-		}
-	}
-
-	/* #ifdef MP */
-	cl-loading {
-		display: inline-flex;
-		align-items: center;
-	}
-	/* #endif */
+	overflow: visible;
+	font-size: $button-font-size;
+	vertical-align: middle;
 
 	&__text {
 		display: inline;
@@ -42,55 +69,49 @@
 		}
 	}
 
+	&::after {
+		border-width: 0;
+	}
+
 	&.button-hover {
 		background-color: #f7f7f7;
 	}
 
-	[class^="cl-icon-"]:last-child {
-		margin-left: 10rpx;
+	&--large {
+		height: 80rpx;
+		padding: 0rpx 38rpx;
 	}
 
-	&[size="small"],
+	&--default {
+		height: $button-height;
+		padding: $button-padding;
+	}
+
 	&--small {
-		height: 60rpx;
-		padding: 0rpx 24rpx;
+		font-size: 24rpx;
+		height: 48rpx;
+		padding: 0rpx 22rpx;
 	}
 
-	&[size="mini"],
-	&--mini {
-		font-size: 24rpx;
-		padding: 0 14rpx;
-		height: 54rpx;
+	&.is-border {
+		&::after {
+			border-width: $button-border-width;
+		}
 	}
 
 	&.is-round {
-		border-radius: 100rpx !important;
-
+		border-radius: $button-border-radius !important;
 		&::after {
-			border-radius: 100rpx;
-		}
-	}
-
-	&--text {
-		background-color: transparent;
-
-		.cl-button__text {
-			color: $cl-color-primary;
-		}
-
-		&::after {
-			border-width: 0;
+			border-radius: $button-border-radius;
 		}
 	}
 
 	&.is-loading {
 		opacity: 0.7;
-
 		.cl-button__loading {
 			display: inline-flex;
 			align-items: center;
 		}
-
 		.cl-button__text {
 			margin-left: 15rpx;
 		}
@@ -103,7 +124,7 @@
 	&.is-plain {
 		&.is-border {
 			&::after {
-				border-width: 1px;
+				border-width: $button-border-width;
 			}
 		}
 	}
@@ -114,7 +135,6 @@
 
 	&.is-bold {
 		font-weight: bold;
-
 		&::after {
 			border-width: 6rpx !important;
 		}
@@ -122,20 +142,15 @@
 
 	&.is-loading-mask {
 		position: relative;
-
 		&::after {
 			content: "";
 			background-color: rgba(0, 0, 0, 0.5);
-
-			/* #ifdef MP-ALIPAY */
 			height: 100%;
 			width: 100%;
 			position: absolute;
 			left: 0;
 			top: 0;
-			/* #endif */
 		}
-
 		.cl-button__loading {
 			position: absolute;
 			left: auto;
@@ -143,70 +158,21 @@
 			z-index: 9;
 			display: inline-flex;
 			align-items: center;
-
 			&-text {
 				margin-left: 10rpx;
 			}
 		}
 	}
 
-	@mixin color($type, $color) {
-		&.cl-button--#{$type} {
-			background-color: $color;
-			border-color: $color;
-
-			.cl-button__text {
-				color: #fff;
-			}
-
-			&::after {
-				border-width: 0;
-			}
-
-			&.is-plain {
-				background-color: #fff;
-
-				.cl-button__text {
-					color: rgba($color, 0.8);
-				}
-
-				&.is-border {
-					&::after {
-						border-width: 1px;
-						border-color: rgba($color, 0.8);
-					}
-				}
-			}
-
-			&.is-disabled {
-				background-color: $color;
-			}
-
-			&.button-hover {
-				&:not(.is-loading) {
-					background-color: rgba($color, 0.8);
-
-					&.is-plain {
-						.cl-button__text {
-							color: #fff;
-						}
-					}
-				}
-			}
-		}
-
-		&.is-shadow {
-			box-shadow: 2rpx 4rpx 14rpx $color;
-		}
-	}
-
-	@include color(primary, $cl-color-primary);
-	@include color(success, $cl-color-success);
-	@include color(error, $cl-color-error);
-	@include color(warning, $cl-color-warning);
-	@include color(info, $cl-color-info);
+	// Colors
+	@include button-color(primary, $cl-color-primary);
+	@include button-color(success, $cl-color-success);
+	@include button-color(error, $cl-color-error);
+	@include button-color(warning, $cl-color-warning);
+	@include button-color(info, $cl-color-info);
 }
 
+// Adjacent selectors
 .cl-button + .cl-button,
 cl-button + cl-button {
 	margin-left: 20rpx;

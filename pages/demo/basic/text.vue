@@ -1,5 +1,5 @@
 <template>
-	<cl-page padding="20">
+	<cl-page :padding="20">
 		<view class="page-demo-text">
 			<cl-card label="基础用法">
 				<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>

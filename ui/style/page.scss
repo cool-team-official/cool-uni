@@ -3,6 +3,10 @@
 	width: 100%;
 	box-sizing: border-box;
 
+	.safe-area-bottom {
+		height: env(safe-area-inset-bottom);
+	}
+
 	&__loading {
 		position: relative;
 		z-index: 9999;

@@ -9,8 +9,8 @@
 		</cl-card>
 
 		<cl-card label="尺寸">
-			<cl-tag size="small">默认尺寸</cl-tag>
-			<cl-tag size="mini">小尺寸</cl-tag>
+			<cl-tag size="default">默认尺寸</cl-tag>
+			<cl-tag size="small">小尺寸</cl-tag>
 		</cl-card>
 
 		<cl-card label="标签颜色">
