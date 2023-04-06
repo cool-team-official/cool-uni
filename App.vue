@@ -18,5 +18,5 @@ export default {
 
 <style lang="scss">
 @import "/@/static/css/index.scss";
-@import "/@/cool/ui/index.scss";
+@import "/@/ui/index.scss";
 </style>

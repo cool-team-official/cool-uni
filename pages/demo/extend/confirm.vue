@@ -22,9 +22,9 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useCool } from "/@/cool";
+import { useUi } from "/@/ui";
 
-const { ui } = useCool();
+const ui = useUi();
 
 const Confirm = ref<ClConfirm.Ref>();
 const Confirm2 = ref<ClConfirm.Ref>();

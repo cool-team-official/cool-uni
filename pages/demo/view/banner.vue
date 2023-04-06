@@ -17,15 +17,15 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const urls = ref<any[]>([
+const urls = ref([
 	{
-		url: "../static/bg.png",
+		url: "/pages/demo/static/bg.png",
 	},
 	{
-		url: "../static/bg2.png",
+		url: "/pages/demo/static/bg2.png",
 	},
 	{
-		url: "../static/bg3.png",
+		url: "/pages/demo/static/bg3.png",
 	},
 ]);
 </script>

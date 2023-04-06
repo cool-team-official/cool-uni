@@ -98,7 +98,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const filter = ref<any>({
+const filter = ref({
 	d1: [],
 });
 </script>

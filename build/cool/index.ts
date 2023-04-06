@@ -17,7 +17,7 @@ export const cool = (): Plugin | null => {
 				}
 
 				// 自定义
-				if (req.url.includes("__cool")) {
+				if (req.url?.includes("__cool")) {
 					const body = await parseJson(req);
 					let next: any = null;
 

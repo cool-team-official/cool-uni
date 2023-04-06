@@ -21,7 +21,6 @@ function refresh() {
 	// if (!user.token) {
 	// 	return router.login();
 	// }
-
 	// user.get();
 }
 
@@ -41,9 +40,6 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .page-my {
-
-
-
 	.container {
 		padding: 20rpx;
 	}

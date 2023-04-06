@@ -42,20 +42,24 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const active = ref<number>(0);
+const active = ref(0);
 
-const list = ref<any[]>([
+const list = ref([
 	{
 		label: "数码",
+		value: 1,
 	},
 	{
 		label: "家电",
+		value: 2,
 	},
 	{
 		label: "母婴",
+		value: 3,
 	},
 	{
 		label: "潮牌",
+		value: 4,
 	},
 ]);
 </script>

@@ -3,14 +3,13 @@ import { ref } from "vue";
 import { deepMerge, storage } from "../../utils";
 import { router } from "../router";
 import { service } from "../service";
-import { User } from "/@/types";
 
 // 本地缓存
 const data = storage.info();
 
 const useUserStore = defineStore("user", function () {
 	// 标识
-	const token = ref<string>(data.token || "");
+	const token = ref(data.token || "");
 
 	// 设置标识
 	function setToken({ accessToken, accessTokenExpires, refreshToken, refreshTokenExpires }: any) {
@@ -35,10 +34,10 @@ const useUserStore = defineStore("user", function () {
 	}
 
 	// 用户信息
-	const info = ref<User.Info | undefined>(data.userInfo);
+	const info = ref<Eps.UserInfoEntity | undefined>(data.userInfo);
 
 	// 设置用户信息
-	function set(value: User.Info) {
+	function set(value: Eps.UserInfoEntity) {
 		info.value = value;
 		storage.set("userInfo", value);
 	}
@@ -46,7 +45,7 @@ const useUserStore = defineStore("user", function () {
 	// 更新用户信息
 	async function update(data: any) {
 		set(deepMerge(info.value, data));
-		await service.user.info.update(data);
+		await service.user.info.update(info.value);
 	}
 
 	// 清除用户
@@ -61,7 +60,7 @@ const useUserStore = defineStore("user", function () {
 	// 退出
 	function logout() {
 		clear();
-		router.login();
+		router.login({ reLaunch: true });
 	}
 
 	// 获取用户信息
@@ -91,4 +90,4 @@ const useUserStore = defineStore("user", function () {
 	};
 });
 
-export default useUserStore;
+export { useUserStore };

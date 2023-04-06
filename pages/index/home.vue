@@ -24,11 +24,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
-import { useCool, useStore } from "/@/cool";
+import { useCool } from "/@/cool";
 
 const { router } = useCool();
-const { dict } = useStore();
 
 const list = [
 	{
@@ -222,17 +220,17 @@ const list = [
 ];
 
 function toLink(link: string) {
-	router.push(link);
+	router.push({
+		path: link,
+		isGuard: false,
+	});
 }
-
-onMounted(async () => {
-	const a = await dict.getSync("brand", 4);
-	console.log(a);
-});
 </script>
 
 <style lang="scss" scoped>
 .page-home {
+	padding-bottom: 200rpx;
+
 	.logo {
 		display: flex;
 		align-items: center;

@@ -32,9 +32,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const v1 = ref<string>("1");
-const v2 = ref<string>("2");
-const v3 = ref<string>("1");
-const v4 = ref<string>("2");
-const v5 = ref<string>("2");
+const v1 = ref("1");
+const v2 = ref("2");
+const v3 = ref("1");
+const v4 = ref("2");
+const v5 = ref("2");
 </script>

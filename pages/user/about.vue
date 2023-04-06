@@ -5,15 +5,15 @@
 
 			<text class="name">{{ app.info.name }}</text>
 			<text class="desc">{{ app.info.desc }}</text>
-			<text class="version">v{{ app.info.version }}</text>
+			<text class="version">v{{ app.version.num }}</text>
 		</view>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "/@/cool";
+import { useApp } from "/@/cool";
 
-const { app } = useStore();
+const app = useApp();
 </script>
 
 <style lang="scss">

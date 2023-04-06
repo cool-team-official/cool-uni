@@ -16,17 +16,18 @@
 <script lang="ts" setup>
 import { onReady } from "@dcloudio/uni-app";
 import { nextTick, ref } from "vue";
-import { useCool, useStore } from "/@/cool";
+import { useApp } from "/@/cool";
 import { Canvas } from "/@/cool/utils";
 
 import Bg from "./static/images/share-bg.png";
 import Logo from "/@/static/logo.png";
+import { useUi } from "/@/ui";
 
-const { ui } = useCool();
-const { app } = useStore();
+const app = useApp();
+const ui = useUi();
 
 // 路径
-const url = ref<string>("");
+const url = ref("");
 
 function refresh() {
 	const cvs = new Canvas("cvs");

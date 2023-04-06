@@ -18,12 +18,12 @@
 				<cl-list-item label="用户协议" @tap="toText('用户协议')"> </cl-list-item>
 				<cl-list-item label="隐私政策" @tap="toText('隐私政策')"> </cl-list-item>
 
-				<cl-list-item label="软件升级" :border="false" @tap="app.checkVersion">
+				<cl-list-item label="软件升级" :border="false" @tap="app.version.get">
 					<cl-text
-						:value="`新版本 v${app.version.versionNo}`"
+						:value="`新版本 v${app.version.num.value}`"
 						color="red"
 						:size="28"
-						v-if="app.version"
+						v-if="app.version.isUpgrade.value"
 					>
 					</cl-text>
 					<cl-text value="已经是最新版本" color="#666" :size="28" v-else></cl-text>
@@ -35,60 +35,34 @@
 	</cl-page>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { onReady } from "@dcloudio/uni-app";
-import { defineComponent } from "vue";
-import { useCool, useStore } from "/@/cool";
+import { useApp, useCool, useStore } from "/@/cool";
 
-export default defineComponent({
-	setup() {
-		const { router, refs, setRefs } = useCool();
-		const { user, app } = useStore();
+const { router } = useCool();
+const { user } = useStore();
+const app = useApp();
 
-		function toPage(path: string) {
-			router.push(path);
-		}
+function toPage(path: string) {
+	router.push(path);
+}
 
-		function toText(value: string) {
-			router.push({
-				path: "/pages/comm/text",
-				query: {
-					key: "articalType",
-					value,
-				},
-			});
-		}
+function toText(value: string) {
+	router.push({
+		path: "/pages/comm/text",
+		query: {
+			key: "articalType",
+			value,
+		},
+	});
+}
 
-		onReady(() => {
-			app.checkVersion();
-		});
-
-		return {
-			refs,
-			setRefs,
-			user,
-			app,
-			toText,
-			toPage,
-		};
-	},
+onReady(() => {
+	app.version.check();
 });
 </script>
 
-<style>
-/* #ifndef H5 */
-page {
-	background-color: #f7f7f7;
-}
-
-/* #endif */
-</style>
-
 <style lang="scss" scoped>
-page {
-	background-color: #f7f7f7;
-}
-
 .page-set {
 	padding: 20rpx 24rpx;
 

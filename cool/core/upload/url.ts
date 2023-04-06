@@ -1,4 +1,4 @@
-import { isArray, has } from "lodash";
+import { isArray, has } from "lodash-es";
 
 function parse(rules: string[], { url, size }: any) {
 	if (!url) {

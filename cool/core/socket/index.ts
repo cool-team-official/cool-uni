@@ -1,21 +1,12 @@
 import io from "@hyoga/uni-socket.io";
-import { isString } from "lodash";
+import { isString } from "lodash-es";
 import { config } from "../../config";
 import { useCool } from "../hook";
 import { useStore } from "../store";
 
-declare interface Socket {
-	client: any;
-	token: string | unknown;
-	connect(): void;
-	close(): void;
-	on(name: string, cb: (msg: any) => void): void;
-	send(data: any): void;
-}
-
-const socket: Socket = {
+const socket = {
 	client: null,
-	token: null,
+	token: "",
 
 	// 连接
 	async connect() {

@@ -1,21 +1,12 @@
 import { ref } from "vue";
 import { config } from "../../config";
-import { service } from "../service";
-import { useStore } from "../store";
-import { onReady } from "@dcloudio/uni-app";
-
-// #ifdef H5
-import wx from "weixin-js-sdk";
-// #endif
+import { onShow } from "@dcloudio/uni-app";
 
 export function useWx() {
 	const { platform } = uni.getSystemInfoSync();
 
-	// 用户缓存
-	const { user } = useStore();
-
 	// 授权码
-	const code = ref<string>("");
+	const code = ref("");
 
 	// 获取授权码
 	async function getCode() {
@@ -76,20 +67,6 @@ export function useWx() {
 	// 微信公众号配置
 	const mpConfig = {};
 
-	// 获取微信公众号配置
-	function getMpConfig() {
-		return service.user.login.wxMpConfig().then((res) => {
-			wx.config({
-				debug: config.app.wx.mp.debug,
-				jsApiList: ["chooseWXPay"],
-				...res,
-			});
-
-			Object.assign(mpConfig, res);
-			return res;
-		});
-	}
-
 	// 微信公众号授权
 	function mpAuth() {
 		const redirect_uri = encodeURIComponent(`${location.origin}/#/pages/user/login`);
@@ -97,45 +74,9 @@ export function useWx() {
 		const scope = "snsapi_userinfo";
 		const state = "STATE";
 
-		const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${weixin.mp.appid}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`;
+		const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.app.wx.mp.appid}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`;
 
 		location.href = url;
-	}
-
-	// 微信公众号登录
-	function mpLogin(code: string) {
-		return service.user.login.wxMpLogin({ code }).then((res) => {
-			return res;
-		});
-	}
-
-	// 微信公众号支付
-	function mpPay(orderId: string) {
-		return new Promise((resolve, reject) => {
-			service.order.pay
-				.wxMpPay({
-					orderId,
-				})
-				.then((conf) => {
-					wx.chooseWXPay({
-						...conf,
-						success(res: any) {
-							resolve(res);
-						},
-						cancel() {
-							reject({
-								message: "取消支付",
-							});
-						},
-						fail() {
-							reject({
-								message: "支付失败",
-							});
-						},
-					});
-				})
-				.catch(reject);
-		});
 	}
 
 	// 微信app登录
@@ -150,9 +91,7 @@ export function useWx() {
 						Service = all[key];
 					}
 				});
-				Service.authorize((e: any) => {
-					service.user.user.loginByWechat({ code: e.code }).then(resolve).catch(reject);
-				}, reject);
+				Service.authorize(resolve, reject);
 			}, reject);
 		});
 	}
@@ -167,21 +106,14 @@ export function useWx() {
 				lang: "zh_CN",
 				desc: "授权信息仅用于用户登录",
 				success({ iv, encryptedData, signature, rawData }) {
-					// 请求
 					function next() {
-						service.user.login
-							.wxMiniLogin({
-								iv,
-								encryptedData,
-								signature,
-								rawData,
-								code: code.value,
-							})
-							.then(resolve)
-							.catch(reject);
-
-						// 重新获取
-						getCode();
+						resolve({
+							iv,
+							encryptedData,
+							signature,
+							rawData,
+							code: code.value,
+						});
 					}
 
 					// 检查登录状态是否过期
@@ -205,30 +137,25 @@ export function useWx() {
 		});
 	}
 
-	// 微信小程序支付
-	function miniPay(orderId: string) {
-		return new Promise((resolve, reject) => {
-			service.order.pay
-				.wxMiniPay({
-					orderId,
-				})
-				.then((res) => {
-					uni.requestPayment({
-						provider: "wxpay",
-						...res,
-						success: resolve,
-						fail() {
-							reject({
-								message: "已取消支付",
-							});
-						},
+	// 微信支付
+	function pay(orderInfo: string) {
+		return new Promise((reolsve, reject) => {
+			uni.requestPayment({
+				provider: "wxpay",
+				orderInfo,
+				success(res) {
+					reolsve(res);
+				},
+				fail() {
+					reject({
+						message: "已取消支付",
 					});
-				})
-				.catch(reject);
+				},
+			});
 		});
 	}
 
-	onReady(() => {
+	onShow(() => {
 		getCode();
 	});
 
@@ -239,12 +166,9 @@ export function useWx() {
 		hasApp,
 		downloadApp,
 		mpConfig,
-		getMpConfig,
+		pay,
 		mpAuth,
-		mpLogin,
-		mpPay,
 		miniLogin,
-		miniPay,
 		appLogin,
 	};
 }

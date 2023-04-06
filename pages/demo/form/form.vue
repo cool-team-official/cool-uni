@@ -58,14 +58,15 @@ import { reactive, ref } from "vue";
 
 const Form = ref<ClForm.Ref>();
 
-const form = ref<any>({
+const form = ref({
 	name: "",
 	area: 2,
+	date: "",
 	type: [0, 1],
 	source: 0,
 });
 
-const rules = reactive<any>({
+const rules = reactive({
 	name: {
 		required: true,
 		message: "活动名称不能为空",
@@ -76,7 +77,7 @@ const rules = reactive<any>({
 	},
 });
 
-const options = reactive<any>({
+const options = reactive({
 	area: [
 		{
 			label: "A区",
@@ -117,9 +118,9 @@ const options = reactive<any>({
 	],
 });
 
-const tips = ref<string>("toast");
+const tips = ref("toast");
 
-const loading = ref<boolean>(false);
+const loading = ref(false);
 
 function setTips(name: string) {
 	tips.value = name;

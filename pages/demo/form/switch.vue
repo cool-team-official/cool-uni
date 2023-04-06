@@ -17,5 +17,5 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const v3 = ref<boolean>(true);
+const v3 = ref(true);
 </script>

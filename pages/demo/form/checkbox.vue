@@ -32,9 +32,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const v1 = ref<string>("1");
-const v2 = ref<string>("");
-const v3 = ref<boolean>(true);
-const v4 = ref<boolean>(false);
-const arr = ref<string[]>(["2"]);
+const v1 = ref("1");
+const v2 = ref("");
+const v3 = ref(true);
+const v4 = ref(false);
+const arr = ref(["2"]);
 </script>

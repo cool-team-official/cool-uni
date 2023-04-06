@@ -1,25 +1,22 @@
 {
 	"name": "cool-uni",
-	"version": "1.2.0",
-	"main": "index.js",
+	"version": "6.0",
 	"license": "MIT",
 	"dependencies": {
-		"@dcloudio/uni-app": "^3.0.0-alpha-3000020210521001",
+		"@dcloudio/uni-app": "^3.0.0-alpha-3070120230210001",
 		"@hyoga/uni-socket.io": "^3.0.4",
-		"dayjs": "^1.11.0",
-		"image-tools": "^1.4.0",
+		"dayjs": "^1.11.7",
+		"lodash-es": "^4.17.21",
 		"md5": "^2.3.0",
 		"mitt": "^3.0.0",
-		"mockjs": "^1.1.0",
-		"pinia": "^2.0.13",
-		"vue": "^3.2.33",
-		"weixin-js-sdk": "^1.6.0"
+		"pinia": "^2.0.30",
+		"vue": "^3.2.47"
 	},
 	"devDependencies": {
 		"@dcloudio/types": "^2.5.15",
 		"@types/lodash": "^4.14.178",
+		"@types/lodash-es": "^4.17.6",
 		"@types/md5": "^2.3.2",
-		"@types/mockjs": "^1.0.6",
 		"@types/node": "^17.0.4",
 		"@types/prettier": "^2.4.4",
 		"autoprefixer": "^10.4.0",

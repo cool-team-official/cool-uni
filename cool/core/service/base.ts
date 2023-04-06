@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { has } from "lodash";
+import { has } from "lodash-es";
 import { isDev, config } from "../../config";
 import request from "./request";
 
@@ -41,16 +41,7 @@ export class BaseService {
 		}
 	}
 
-	request(
-		options = {} as {
-			params?: any;
-			data?: any;
-			url: string;
-			method?: "GET" | "get" | "POST" | "post" | string;
-			proxy?: boolean;
-			[key: string]: any;
-		}
-	) {
+	request(options: any = {}) {
 		if (!options.params) options.params = {};
 
 		let ns = "";

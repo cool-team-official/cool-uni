@@ -1,19 +1,18 @@
-// @ts-nocheck
-import { isArray } from "lodash";
+import { isArray, isNumber, orderBy } from "lodash-es";
 import storage from "./storage";
 import Canvas from "./canvas";
 
-const { platform, model } = uni.getSystemInfoSync();
+const { platform } = uni.getSystemInfoSync();
 
 // 是否安卓
-export const isAndroid: boolean = platform == "android";
+export const isAndroid = platform == "android";
 
 // 是否苹果
-export const isIos: boolean = platform == "ios";
+export const isIos = platform == "ios";
 
 // 是否小数
 export function isDecimal(value: any): boolean {
-	return String(value).length - String(value).indexOf(".") + 1;
+	return String(value).length - String(value).indexOf(".") + 1 > 0;
 }
 
 // 首字母大写
@@ -35,7 +34,7 @@ export function deepMerge(a: any, b: any) {
 
 // 解析rpx
 export function parseRpx(val: any): string {
-	return isArray(val) ? val.map(parseRpx).join(" ") : parseFloat(val) + "rpx";
+	return isArray(val) ? val.map(parseRpx).join(" ") : isNumber(val) ? `${val}rpx` : val;
 }
 
 // 获取地址栏参数
@@ -44,6 +43,37 @@ export function getUrlParam(name: string): string | null {
 	const r = window.location.search.substr(1).match(reg);
 	if (r != null) return decodeURIComponent(r[2]);
 	return null;
+}
+
+// 列表转树形
+export function deepTree(list: any[]): any[] {
+	const newList: any[] = [];
+	const map: any = {};
+
+	list.forEach((e) => (map[e.id] = e));
+
+	list.forEach((e) => {
+		const parent = map[e.parentId];
+
+		if (parent) {
+			(parent.children || (parent.children = [])).push(e);
+		} else {
+			newList.push(e);
+		}
+	});
+
+	const fn = (list: Array<any>) => {
+		list.map((e) => {
+			if (isArray(e.children)) {
+				e.children = orderBy(e.children, "orderNum");
+				fn(e.children);
+			}
+		});
+	};
+
+	fn(newList);
+
+	return orderBy(newList, "orderNum");
 }
 
 // 文件路径转对象
@@ -170,7 +200,7 @@ export function getOAID() {
 				resolve(res.oaid);
 			},
 			fail() {
-				resolve();
+				resolve(0);
 			},
 		});
 	});
@@ -207,36 +237,6 @@ export function getMac() {
 		}
 		return str;
 	}
-}
-
-// 设备信息
-const device: any = {
-	deviceId: getDeviceId(),
-	platform,
-	model,
-	isAndroid,
-	isIos,
-};
-
-export function useDevice(): Promise<any> {
-	return new Promise((resolve) => {
-		// #ifdef APP
-		plus.device.getInfo({
-			success: async (res) => {
-				device.imei = res.imei;
-				device.idfa = res.idfa;
-				device.androidId = getAndroidId();
-				device.mac = getMac();
-				device.oaid = await getOAID();
-				resolve(device);
-			},
-		});
-		// #endif
-
-		// #ifndef APP
-		resolve(device);
-		// #endif
-	});
 }
 
 export { platform, storage, Canvas };

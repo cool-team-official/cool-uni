@@ -1,7 +1,21 @@
-// @ts-nocheck
-import { last } from "lodash";
+import { last } from "lodash-es";
 import { storage } from "../../utils";
 import { config } from "../../config";
+
+type PushOptions =
+	| string
+	| {
+			path: string;
+			mode?: "navigateTo" | "redirectTo" | "reLaunch" | "switchTab" | "preloadPage";
+			query?: {
+				[key: string]: any;
+			};
+			params?: {
+				[key: string]: any;
+			};
+			isGuard?: boolean;
+			[key: string]: any;
+	  };
 
 if (!__UNI_PAGES__) {
 	console.error("@dcloudio/uni-cli-shared 依赖未安装！");
@@ -10,19 +24,36 @@ if (!__UNI_PAGES__) {
 // pages.json 配置参数
 const ctx = JSON.parse(__UNI_PAGES__);
 
-// 底栏选项列表
+// 底栏选项页
 const tabs = ctx.tabBar ? ctx.tabBar.list : [];
+
+// 路由列表
+const routes = [...ctx.pages];
+
+if (ctx.subPackages) {
+	ctx.subPackages.forEach((a: any) => {
+		a.pages.forEach((b: any) => {
+			routes.push({
+				...b,
+				path: a.root + "/" + b.path,
+			});
+		});
+	});
+}
+
+// 钩子函数
+const fn: { [key: string]: (...args: any[]) => any } = {};
 
 // 路由
 const router = {
-	// 钩子函数
-	fn: {
-		beforeEach: null,
-		afterLogin: null,
-	},
-
-	// 底栏选项列表
+	// 底部导航
 	tabs,
+
+	// 全局样式配置
+	globalStyle: ctx.globalStyle,
+
+	// 路由列表
+	routes,
 
 	// 地址栏参数
 	get query() {
@@ -49,16 +80,7 @@ const router = {
 	},
 
 	// 跳转
-	push(
-		options:
-			| string
-			| {
-					path: string;
-					mode?: "navigateTo" | "redirectTo" | "reLaunch" | "switchTab" | "preloadPage";
-					query?: object;
-					[key: string]: any;
-			  }
-	) {
+	push(options: PushOptions) {
 		if (typeof options == "string") {
 			options = {
 				path: options,
@@ -76,7 +98,8 @@ const router = {
 			complete,
 			query,
 			params,
-		}: any = options || {};
+			isGuard = true,
+		} = options || {};
 
 		if (query) {
 			let arr = [];
@@ -131,8 +154,8 @@ const router = {
 			}
 		};
 
-		if (this.fn.beforeEach) {
-			this.fn.beforeEach({ path: options.path, query }, next, (options: any) => {
+		if (fn.beforeEach && isGuard) {
+			fn.beforeEach({ path: options.path, query }, next, (options: PushOptions) => {
 				this.push(options);
 			});
 		} else {
@@ -141,16 +164,14 @@ const router = {
 	},
 
 	// 后退
-	back(options?: any) {
-		const { delta = 1, animationDuration, animationType, duration = 0 } = options || {};
+	back(options?: UniApp.NavigateBackOptions) {
+		const { delta = 1, animationDuration, animationType } = options || {};
 
-		setTimeout(() => {
-			uni.navigateBack({
-				delta,
-				animationDuration,
-				animationType,
-			});
-		}, duration);
+		uni.navigateBack({
+			delta,
+			animationDuration,
+			animationType,
+		});
 	},
 
 	// 当前路由信息
@@ -172,12 +193,17 @@ const router = {
 					});
 			} catch (e) {}
 
+			// 页面配置
+			const style = this.routes.find((e) => e.path == route)?.style;
+
 			let d = {
 				$vm,
 				path: `/${route}`,
 				fullPath: $page?.fullPath,
 				query: q || {},
 				isTab: this.isTab(route),
+				style,
+				isCustomNavbar: style?.navigationStyle == "custom",
 			};
 
 			return d;
@@ -258,13 +284,14 @@ const router = {
 								$vm: null,
 						  }
 				);
+
+				this.push({
+					path: this.pages.login,
+					mode: reLaunch ? "reLaunch" : "navigateTo",
+					isGuard: false,
+				});
 			}
 		}
-
-		this.push({
-			path: this.pages.login,
-			mode: reLaunch ? "reLaunch" : "navigateTo",
-		});
 	},
 
 	// 返回登录失效页
@@ -272,7 +299,7 @@ const router = {
 		const data = storage.get("invalid-page");
 
 		if (data) {
-			data.mode = this.isTab(data.path) ? "switchTab" : "redirectTo";
+			data.mode = this.isTab(data.path) ? "switchTab" : "reLaunch";
 			this.push(data);
 			storage.remove("invalid-page");
 		} else {
@@ -280,19 +307,19 @@ const router = {
 		}
 
 		// 登录回调
-		if (this.fn.afterLogin) {
-			this.fn.afterLogin(data);
+		if (fn.afterLogin) {
+			fn.afterLogin(data);
 		}
 	},
 
 	// 跳转前钩子
 	beforeEach(callback: (to: any, next: () => void) => void) {
-		this.fn.beforeEach = callback;
+		fn.beforeEach = callback;
 	},
 
 	// 登录后回调
 	afterLogin(callback: (data: any) => void) {
-		this.fn.afterLogin = callback;
+		fn.afterLogin = callback;
 	},
 };
 

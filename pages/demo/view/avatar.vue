@@ -49,9 +49,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const urls = ref<string[]>([
-	"../static/avatar.png",
-	"../static/avatar2.png",
-	"../static/avatar3.png",
+const urls = ref([
+	"/pages/demo/static/avatar.png",
+	"/pages/demo/static/avatar2.png",
+	"/pages/demo/static/avatar3.png",
 ]);
 </script>

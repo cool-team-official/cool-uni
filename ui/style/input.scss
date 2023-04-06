@@ -1,0 +1,126 @@
+.cl-input {
+	display: flex;
+	width: 100%;
+	vertical-align: middle;
+	position: relative;
+	border-radius: 8rpx;
+	box-sizing: border-box;
+	transition: border-color 0.2s;
+	padding: 0 20rpx;
+
+	&--focus {
+		border-color: rgba($cl-color-primary, 0.7);
+	}
+
+	&__wrap {
+		display: flex;
+		align-items: center;
+		flex: 1;
+		height: 100%;
+		position: relative;
+	}
+
+	&__inner {
+		height: 100%;
+		flex: 1;
+		font-size: 26rpx;
+		border: 0;
+		padding: 0;
+		outline: none;
+		background-color: transparent;
+	}
+
+	&__prepend,
+	&__append {
+		display: flex;
+		align-items: center;
+		font-size: 26rpx;
+	}
+
+	&__prepend {
+		margin-right: 20rpx;
+	}
+
+	&__append {
+		margin-left: 20rpx;
+	}
+
+	&__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 34rpx;
+		color: #999;
+		cursor: pointer;
+	}
+
+	&__clear {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		color: #c1c1c1;
+		margin-left: 20rpx;
+		height: 100%;
+		width: 40rpx;
+		font-size: 34rpx;
+		position: relative;
+		z-index: 99;
+	}
+
+	&__readonly {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 2;
+	}
+
+	&:not(.is-disabled) {
+		-webkit-box-shadow: 0 0 0 1000px transparent inset;
+	}
+
+	&--prefix,
+	&--suffix {
+		flex-shrink: 0;
+	}
+
+	&--prefix {
+		.cl-input__icon {
+			margin-right: 20rpx;
+		}
+	}
+
+	&--suffix {
+		.cl-input__icon {
+			margin-left: 20rpx;
+		}
+	}
+
+	&.is-border {
+		border: 1rpx solid #dcdfe6;
+	}
+
+	&.is-disabled {
+		background-color: #f5f7fa;
+
+		.cl-input__inner {
+			color: #c0c4cc;
+		}
+	}
+
+	&.is-round {
+		border-radius: 100rpx;
+
+		.cl-input__inner {
+			border-radius: 100rpx;
+		}
+	}
+}
+
+.cl-form-item--error {
+	input {
+		border-color: $cl-color-error;
+	}
+}

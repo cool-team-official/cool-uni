@@ -1,11 +1,9 @@
-import App from "./app";
-import User from "./user";
-import Dict from "./dict";
+import { useUserStore } from "./user";
+import { useDictStore } from "./dict";
 
 export function useStore() {
 	return {
-		app: App(),
-		user: User(),
-		dict: Dict(),
+		user: useUserStore(),
+		dict: useDictStore(),
 	};
 }

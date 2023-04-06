@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useCool } from "/@/cool";
+import { useUi } from "/@/ui";
 
-const { ui } = useCool();
+const ui = useUi();
 
 function openToast() {
 	ui.showToast("cool-cli");

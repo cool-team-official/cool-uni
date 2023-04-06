@@ -3,22 +3,38 @@
 		<cl-card label="裁剪模式">
 			<cl-row :gutter="20">
 				<cl-col :span="6">
-					<cl-image src="../static/bg.png" :size="140" mode="scaleToFill"></cl-image>
+					<cl-image
+						src="/pages/demo/static/bg.png"
+						:size="140"
+						mode="scaleToFill"
+					></cl-image>
 					<cl-text value="scaleToFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="../static/bg.png" :size="140" mode="aspectFit"></cl-image>
+					<cl-image
+						src="/pages/demo/static/bg.png"
+						:size="140"
+						mode="aspectFit"
+					></cl-image>
 					<cl-text value="aspectFit"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="../static/bg.png" :size="140" mode="aspectFill"></cl-image>
+					<cl-image
+						src="/pages/demo/static/bg.png"
+						:size="140"
+						mode="aspectFill"
+					></cl-image>
 					<cl-text value="aspectFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="../static/bg.png" :size="140" mode="widthFix"></cl-image>
+					<cl-image
+						src="/pages/demo/static/bg.png"
+						:size="140"
+						mode="widthFix"
+					></cl-image>
 					<cl-text value="widthFix"></cl-text>
 				</cl-col>
 			</cl-row>
@@ -26,9 +42,9 @@
 
 		<cl-card label="不同样式">
 			<cl-row type="flex">
-				<cl-image src="../static/avatar.png" :size="140" round></cl-image>
+				<cl-image src="/pages/demo/static/avatar.png" :size="140" round></cl-image>
 				<cl-image
-					src="../static/avatar.png"
+					src="/pages/demo/static/avatar.png"
 					:size="[140, 280]"
 					mode="aspectFill"
 					:margin="[0, 0, 0, 20]"
@@ -38,7 +54,11 @@
 
 		<cl-card label="点击预览">
 			<cl-row type="flex">
-				<cl-image src="../static/bg.png" :size="140" :preview-list="previewList"></cl-image>
+				<cl-image
+					src="/pages/demo/static/bg.png"
+					:size="140"
+					:preview-list="previewList"
+				></cl-image>
 			</cl-row>
 		</cl-card>
 
@@ -70,8 +90,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Bg from "../static/bg.png";
-import Avatar from "../static/avatar.png";
+import Bg from "/pages/demo/static/bg.png";
+import Avatar from "/pages/demo/static/avatar.png";
 
-const previewList = ref<string[]>([Bg, Avatar]);
+const previewList = ref([Bg, Avatar]);
 </script>

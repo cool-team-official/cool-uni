@@ -88,24 +88,23 @@
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { useCool, useStore, useWx } from "/@/cool";
+import { useApp, useCool, useStore, useWx } from "/@/cool";
+import { useUi } from "/@/ui";
 
-const { ui, service, router } = useCool();
-
-// 应用缓存
-const { app, user } = useStore();
-
-// 微信
+const { service, router } = useCool();
+const { user } = useStore();
+const ui = useUi();
+const app = useApp();
 const wx = useWx();
 
 // 是否同意
-const agree = ref<boolean>(true);
+const agree = ref(true);
 
 // 加载状态
-const loading = ref<boolean>(false);
+const loading = ref(false);
 
 // 手机号
-const phone = ref<string>("13255022028");
+const phone = ref("13255022028");
 
 // 手机号是否正确
 const phoneValid = computed(() => /^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(phone.value));
@@ -115,18 +114,18 @@ const platforms = ref<any[]>([
 	{
 		label: "通过手机登录",
 		value: "phone",
-		icon: "./static/icon/phone.png",
+		icon: "/pages/user/static/icon/phone.png",
 	},
 	{
 		label: "通过微信登录",
 		value: "wx",
-		icon: "./static/icon/wx.png",
+		icon: "/pages/user/static/icon/wx.png",
 		hidden: !wx.hasApp(),
 	},
 ]);
 
 // 登录方式
-const mode = ref<string>("wx");
+const mode = ref("wx");
 
 // 检测
 function check(callback: () => void) {

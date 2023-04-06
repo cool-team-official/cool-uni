@@ -16,11 +16,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useCool } from "/@/cool";
+import { useUi } from "/@/ui";
 
-const { ui } = useCool();
+const ui = useUi();
 
-const val = ref<string>("");
+const val = ref("");
 
 function onDone() {
 	ui.showToast(val.value);

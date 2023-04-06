@@ -27,7 +27,7 @@
 				@tap="
 					open({
 						image: {
-							url: '../static/avatar.png',
+							url: '/pages/demo/static/avatar.png',
 							style: {
 								height: '120rpx',
 								width: '120rpx',

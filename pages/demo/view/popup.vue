@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const visible = ref<boolean>(false);
-const visible2 = ref<boolean>(false);
-const visible3 = ref<boolean>(false);
+const visible = ref(false);
+const visible2 = ref(false);
+const visible3 = ref(false);
 </script>

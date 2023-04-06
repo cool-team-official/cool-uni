@@ -17,11 +17,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const v1 = ref<number>();
-const v2 = ref<string>();
-const v3 = ref<string>();
+const v1 = ref();
+const v2 = ref();
+const v3 = ref();
 
-const list = ref<any[]>([
+const list = ref([
 	{
 		label: "海南东山羊",
 		value: 1,

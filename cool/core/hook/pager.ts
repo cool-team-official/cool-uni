@@ -1,23 +1,22 @@
 import { computed, getCurrentInstance, reactive } from "vue";
-import { useCool } from "./index";
 import { onPullDownRefresh, onReachBottom } from "@dcloudio/uni-app";
 
-interface ResData {
-	list: any[];
+interface Res {
+	list: { [key: string]: any }[];
 	pagination: {
 		total: number;
 		page: number;
 		size: number;
+		[key: string]: any;
 	};
 	[key: string]: any;
 }
 
 export function usePager() {
 	const { proxy }: any = getCurrentInstance();
-	const { ui } = useCool();
 
 	// 分页信息
-	const pager = reactive<any>({
+	const pager = reactive({
 		params: {},
 		pagination: {
 			page: 1,
@@ -32,17 +31,8 @@ export function usePager() {
 	// 事件
 	const events: any = {};
 
-	// 是否加载中
-	const Loading = computed(() => pager.loading);
-
-	// 是否加载完成
-	const Finished = computed(() => pager.finished);
-
-	// 是否加载更多
-	const Loadmore = computed(() => pager.list.length);
-
 	// 列表
-	const List = computed(() => pager.list);
+	const list = computed(() => pager.list);
 
 	// 刷新
 	async function refresh(params?: any) {
@@ -57,14 +47,14 @@ export function usePager() {
 
 	// 上拉加载
 	onReachBottom(() => {
-		if (!Finished.value) {
+		if (!pager.finished) {
 			refresh({ page: pager.pagination.page + 1 });
 		}
 	});
 
 	// 下拉刷新
 	onPullDownRefresh(async () => {
-		await refresh({ page: 1 });
+		refresh({ page: 1 });
 		uni.stopPullDownRefresh();
 	});
 
@@ -88,37 +78,33 @@ export function usePager() {
 		// 合并请求参数
 		Object.assign(pager.params, params);
 
-		let data = {
+		const data = {
 			...pager.pagination,
 			...pager.params,
+			total: undefined,
 		};
-
-		delete data.total;
 
 		// 是否显示加载动画
 		if (data.page == 1 && loading) {
-			if (ui.showLoading) {
-				ui.showLoading("加载中...");
-			}
+			uni.showLoading({
+				title: "加载中",
+			});
 		}
 
 		pager.loading = true;
 
 		// 完成
 		function done() {
-			if (ui.hideLoading) {
-				ui.hideLoading();
-			}
-
+			uni.hideLoading();
 			pager.loading = false;
 		}
 
 		return {
 			data,
 			done,
-			next: (req: Promise<ResData>) => {
+			next: (req: Promise<Res>) => {
 				return new Promise((resolve, reject) => {
-					req.then((res: ResData) => {
+					req.then((res: Res) => {
 						// 设置列表数据
 						if (data.page == 1) {
 							pager.list = res.list;
@@ -141,9 +127,10 @@ export function usePager() {
 					}).catch((err) => {
 						done();
 
-						if (ui.showToast) {
-							ui.showToast(err.message);
-						}
+						uni.showToast({
+							title: err.message,
+							icon: "error",
+						});
 
 						reject(err);
 					});
@@ -154,10 +141,7 @@ export function usePager() {
 
 	return {
 		pager,
-		Loading,
-		Finished,
-		Loadmore,
-		List,
+		list,
 		onData,
 		onRefresh,
 		onPullDownRefresh,

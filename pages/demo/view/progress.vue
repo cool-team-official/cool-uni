@@ -28,5 +28,5 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const val = ref<number>(80);
+const val = ref(80);
 </script>

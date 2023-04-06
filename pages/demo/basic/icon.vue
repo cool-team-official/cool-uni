@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const list = ref<string[]>([
+const list = ref([
 	"share",
 	"link",
 	"back",

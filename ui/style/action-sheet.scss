@@ -1,0 +1,56 @@
+.cl-action-sheet {
+	position: relative;
+	z-index: 300;
+
+	.cl-popup__container {
+		background-color: #fff;
+		border-radius: 32rpx 32rpx 0 0;
+		overflow: hidden;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		font-size: 24rpx;
+		padding: 0 46rpx;
+		height: 90rpx;
+		background-color: #f6faff;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100rpx;
+		line-height: normal;
+		font-size: 28rpx;
+		border-bottom: 1rpx solid #f7f7f7;
+		background-color: #fff;
+		border-radius: 0;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+
+		&.is-disabled {
+			color: $cl-color-disabled;
+		}
+
+		&:not(.is-disabled):active {
+			background-color: #f9f9f9;
+		}
+
+		&--cancel {
+			border-top: 10rpx solid #f6faff;
+		}
+
+		&:after {
+			border: 0;
+		}
+	}
+
+	&__icon {
+		font-size: 40rpx;
+		margin-right: 10rpx;
+	}
+}

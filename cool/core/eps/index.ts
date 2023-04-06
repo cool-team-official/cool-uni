@@ -1,7 +1,7 @@
 import { config, isDev } from "../../config";
 import { service, BaseService } from "../service";
 import { deepFiles, deepMerge, storage, toCamel } from "../../utils";
-import { isArray } from "lodash";
+import { isArray } from "lodash-es";
 
 // 获取标签名
 function getNames(v: any) {

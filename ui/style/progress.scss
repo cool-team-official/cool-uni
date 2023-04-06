@@ -1,0 +1,74 @@
+.cl-progress {
+	display: flex;
+	align-items: center;
+	min-height: 34rpx;
+
+	&-bar {
+		box-sizing: border-box;
+		flex: 1;
+		margin-right: 10rpx;
+
+		&__outer {
+			border-radius: 50rpx;
+			overflow: hidden;
+			position: relative;
+		}
+
+		&__inner {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			background-color: $cl-color-primary;
+			text-align: right;
+			border-radius: 50rpx;
+			line-height: 1;
+			white-space: nowrap;
+			transition: width 0.6s ease;
+		}
+	}
+
+	&__text {
+		display: inline-block;
+		height: 34rpx;
+		width: 100rpx;
+		line-height: 34rpx;
+		color: #606266;
+		font-size: 24rpx;
+		text-align: left;
+	}
+
+	&__icon {
+		font-size: 30rpx;
+	}
+
+	&.is-success {
+		.cl-progress-bar__inner {
+			background-color: $cl-color-success;
+		}
+
+		.cl-progress__text {
+			color: $cl-color-success;
+		}
+	}
+
+	&.is-warning {
+		.cl-progress-bar__inner {
+			background-color: $cl-color-warning;
+		}
+
+		.cl-progress__text {
+			color: $cl-color-warning;
+		}
+	}
+
+	&.is-error {
+		.cl-progress-bar__inner {
+			background-color: $cl-color-error;
+		}
+
+		.cl-progress__text {
+			color: $cl-color-error;
+		}
+	}
+}

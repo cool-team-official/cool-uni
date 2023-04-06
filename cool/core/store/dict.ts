@@ -1,12 +1,14 @@
+import { cloneDeep } from "lodash-es";
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
+import { deepTree } from "../../utils";
 import { service } from "../service";
 
 declare interface Data {
-	[key: string]: Array<{ label: string; value: any }>;
+	[key: string]: Array<{ label: string; value: any; [key: string]: any }>;
 }
 
-const Dict = defineStore("dict", () => {
+const useDictStore = defineStore("dict", () => {
 	// 对象数据
 	const data = reactive<Data>({});
 
@@ -15,13 +17,15 @@ const Dict = defineStore("dict", () => {
 
 	// 获取
 	function get(name: string, value?: any) {
-		return value ? data[name]?.find((e) => e.value === value)?.label : data[name];
+		const arr = deepTree(cloneDeep(data[name] || []));
+		return computed(() => {
+			return value ? arr?.find((e) => e.value == value) : arr;
+		}).value;
 	}
 
-	// 同步获取
-	async function getSync(name: string, value?: any) {
-		await req;
-		return get(name, value);
+	// 获取名称
+	function getLabel(name: string, value: any): string {
+		return (value?.split(",") || []).map((e: any) => get(name, e)?.label).join(",");
 	}
 
 	// 刷新
@@ -38,22 +42,21 @@ const Dict = defineStore("dict", () => {
 					return {
 						label: e.name,
 						value: e.id,
+						...e,
 					};
 				});
 			}
 
 			Object.assign(data, d);
-
-			console.log("字典数据", data);
 		});
 	}
 
 	return {
 		data,
 		get,
-		getSync,
+		getLabel,
 		refresh,
 	};
 });
 
-export default Dict;
+export { useDictStore };
