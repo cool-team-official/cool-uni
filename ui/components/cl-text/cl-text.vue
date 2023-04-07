@@ -1,5 +1,28 @@
 <template>
-	<view class="cl-text" :class="textClass" :style="textStyle" @tap="onTap">
+	<view
+		class="cl-text"
+		:class="[
+			`is-${type}`,
+			`is-color-${color}`,
+			{
+				'is-bold': bold,
+				'is-block': block,
+				'is-line-through': lineThrough,
+				'is-underline': underline,
+				'is-ellipsis': ellipsis > 0,
+				'is-copy': copy,
+			},
+		]"
+		:style="{
+			color,
+			textAlign: align,
+			'-webkit-line-clamp': ellipsis,
+			margin: parseRpx(margin),
+			fontSize: parseRpx(size),
+			letterSpacing: parseRpx(letterSpacing),
+		}"
+		@tap="onTap"
+	>
 		<!-- 价格 -->
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
 
@@ -69,10 +92,7 @@ export default defineComponent({
 			type: String,
 			default: "#444",
 		},
-		size: {
-			type: [String, Number],
-			default: 24,
-		},
+		size: [String, Number],
 		align: {
 			type: String as PropType<
 				"start" | "end" | "left" | "right" | "center" | "justify" | "match-parent"
@@ -127,55 +147,6 @@ export default defineComponent({
 			}
 		});
 
-		const textClass = computed(() => {
-			let list = [];
-
-			if (props.bold) {
-				list.push("is-bold");
-			}
-
-			if (props.block) {
-				list.push("is-block");
-			}
-
-			if (props.lineThrough) {
-				list.push("is-line-through");
-			}
-
-			if (props.underline) {
-				list.push("is-underline");
-			}
-
-			if (props.ellipsis > 0) {
-				list.push("is-ellipsis");
-			}
-
-			if (props.type) {
-				list.push(`is-${props.type}`);
-			}
-
-			if (props.color) {
-				list.push(`is-color-${props.color}`);
-			}
-
-			if (props.copy) {
-				list.push("is-copy");
-			}
-
-			return list.join(" ");
-		});
-
-		const textStyle = computed(() => {
-			return {
-				color: props.color,
-				textAlign: props.align,
-				"-webkit-line-clamp": props.ellipsis,
-				margin: parseRpx(props.margin),
-				fontSize: parseRpx(props.size),
-				letterSpacing: parseRpx(props.letterSpacing),
-			};
-		});
-
 		// 点击
 		function onTap(e: any) {
 			emit("click", e);
@@ -184,8 +155,6 @@ export default defineComponent({
 
 		return {
 			text,
-			textClass,
-			textStyle,
 			parseRpx,
 			onTap,
 		};

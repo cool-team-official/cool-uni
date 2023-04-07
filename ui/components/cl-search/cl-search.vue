@@ -117,7 +117,7 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 绑定值
-		const value = ref<string>("");
+		const value = ref("");
 
 		watch(
 			() => props.modelValue,
@@ -130,7 +130,7 @@ export default defineComponent({
 		);
 
 		// 是否聚焦
-		const isFocus = ref<boolean>(false);
+		const isFocus = ref(false);
 
 		watch(
 			() => props.focus,

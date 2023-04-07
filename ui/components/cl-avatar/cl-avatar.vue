@@ -75,7 +75,7 @@ export default defineComponent({
 	emits: ["error", "load"],
 
 	setup(props, { emit }) {
-		const isError = ref<boolean>(false);
+		const isError = ref(false);
 		const backgroundColor = computed(() => (props.src ? "" : "#c0c4cc"));
 
 		function handleLoad(e: any) {

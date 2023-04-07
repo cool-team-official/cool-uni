@@ -1,6 +1,7 @@
 .cl-select {
 	display: flex;
 	align-items: center;
+	height: $cl-select-height;
 	width: 100%;
 	background-color: #fff;
 	padding-left: 20rpx;
@@ -10,7 +11,7 @@
 
 	picker {
 		width: 100%;
-		font-size: 26rpx;
+		font-size: $cl-select-font-size;
 	}
 
 	&__inner {
@@ -34,20 +35,17 @@
 	}
 
 	&.is-disabled {
-		color: #c0c4cc;
+		background-color: $cl-select-disabled-background-color;
+		color: $cl-select-disabled-color;
 
 		.cl-select__placeholder {
-			color: #c0c4cc;
-		}
-
-		&.is-border {
-			background-color: #f5f7fa;
+			color: $cl-select-disabled-color;
 		}
 	}
 
 	&.is-border {
-		border: 1rpx solid #dcdfe6;
-		border-radius: 8rpx;
+		border: $cl-select-border-width solid $cl-select-border-color;
+		border-radius: $cl-select-border-radius;
 	}
 
 	&.is-round {

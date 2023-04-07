@@ -69,7 +69,7 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		watch(
 			() => props.modelValue,

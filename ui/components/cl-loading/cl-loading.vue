@@ -24,8 +24,8 @@
 			:style="{
 				color,
 				borderColor,
-				borderWidth,
-				'border-bottom': `${spin.width} solid currentColor`,
+				borderWidth: spin.width,
+				'border-bottom-color': 'currentColor',
 			}"
 			v-else
 		>

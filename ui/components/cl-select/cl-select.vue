@@ -81,10 +81,7 @@ export default defineComponent({
 
 	props: {
 		modelValue: null,
-		height: {
-			type: Number,
-			default: 70,
-		},
+		height: Number,
 		mode: {
 			type: String as PropType<"selector" | "multiSelector" | "region" | "time" | "date">,
 			default: "selector",
@@ -145,7 +142,7 @@ export default defineComponent({
 		const index = ref<any>();
 
 		// 文本
-		const text = ref<string>("");
+		const text = ref("");
 
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);

@@ -84,10 +84,10 @@ export default defineComponent({
 		const value = ref<any>();
 
 		// 消息提示
-		const message = ref<string>("");
+		const message = ref("");
 
 		// 是否必填
-		const isRequired = ref<boolean>(false);
+		const isRequired = ref(false);
 
 		// 标题位置
 		const labelPosition2 = computed(() => {

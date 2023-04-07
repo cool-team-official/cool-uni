@@ -99,7 +99,7 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 序号
-		const current = ref<number>(0);
+		const current = ref(0);
 
 		watch(
 			() => props.modelValue,
@@ -112,18 +112,18 @@ export default defineComponent({
 		);
 
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		// 步骤列表
 		const steps = ref<any[]>([]);
 
 		// 显示样式
-		const display = reactive<any>({
+		const display = reactive({
 			style: {},
 		});
 
 		// 工具按钮
-		const tools = reactive<any>({
+		const tools = reactive({
 			style: {},
 		});
 

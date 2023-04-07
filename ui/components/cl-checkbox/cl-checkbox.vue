@@ -76,7 +76,7 @@ export default defineComponent({
 		]);
 
 		// 是否选中
-		const checked = ref<boolean>(false);
+		const checked = ref(false);
 
 		// 是否禁用
 		const isDisabled = computed(() => {

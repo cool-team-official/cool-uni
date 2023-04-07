@@ -59,10 +59,10 @@ export default defineComponent({
 		let timer: any = null;
 
 		// 是否展开
-		const isExpand = ref<boolean>(false);
+		const isExpand = ref(false);
 
 		// 层级
-		const zIndex = ref<number>(1);
+		const zIndex = ref(1);
 
 		// 设置是否展开。收起延迟300，避免动画未结束导致层级低了问题
 		function setExpand(f: boolean) {

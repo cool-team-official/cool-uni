@@ -1,10 +1,9 @@
-$status-height: 44px;
-
 .cl-topbar {
 	display: flex;
 	align-items: center;
-	height: $status-height;
+	height: $cl-status-height;
 	width: 100%;
+	position: relative;
 
 	&__content {
 		width: 100%;
@@ -39,7 +38,7 @@ $status-height: 44px;
 	&__append {
 		display: flex;
 		align-items: center;
-		height: $status-height;
+		height: $cl-status-height;
 		position: absolute;
 
 		/* #ifdef MP */

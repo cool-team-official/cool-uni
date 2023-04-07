@@ -84,7 +84,7 @@ export default defineComponent({
 		const { disabled } = useForm();
 
 		// 绑定值
-		const value = ref<number>(0);
+		const value = ref(0);
 
 		watch(
 			() => props.modelValue,

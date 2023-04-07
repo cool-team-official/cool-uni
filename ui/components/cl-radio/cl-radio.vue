@@ -69,7 +69,7 @@ export default defineComponent({
 		]);
 
 		// 是否选中
-		const checked = ref<boolean>(false);
+		const checked = ref(false);
 
 		// 监听绑定值变化
 		watch(

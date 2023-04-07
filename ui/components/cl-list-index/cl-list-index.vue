@@ -165,19 +165,19 @@ export default defineComponent({
 		});
 
 		// 关键字
-		const keyWord = ref<string>("");
+		const keyWord = ref("");
 
 		// 标签
-		const label = ref<string>("");
+		const label = ref("");
 
 		// 提示框
-		const alert = ref<boolean>(false);
+		const alert = ref(false);
 
 		// 当前选择
 		const curr = ref<any>({});
 
 		// 条
-		const bar = reactive<any>({
+		const bar = reactive({
 			top: 0,
 			itemH: 0,
 		});
@@ -186,7 +186,7 @@ export default defineComponent({
 		const tops = ref<any[]>([]);
 
 		// 过滤列表
-		const flist = computed<any>(() => {
+		const flist = computed<any[]>(() => {
 			function match(e: any) {
 				return e
 					? (e[dict.name] || "").toLowerCase().includes(keyWord.value.toLowerCase())

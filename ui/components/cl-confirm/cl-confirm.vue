@@ -17,7 +17,6 @@
 						<cl-button
 							plain
 							fill
-							:height="70"
 							:border="false"
 							:border-radius="0"
 							@tap="close('cancel')"
@@ -30,8 +29,7 @@
 						<cl-button
 							plain
 							fill
-							:height="70"
-							type="text"
+							type="primary"
 							:border="false"
 							:loading="loading"
 							:border-radius="0"
@@ -58,13 +56,13 @@ export default defineComponent({
 
 	setup() {
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		// 是否已关闭
-		const closed = ref<boolean>(false);
+		const closed = ref(false);
 
 		// 是否加载中
-		const loading = ref<boolean>(false);
+		const loading = ref(false);
 
 		// 配置
 		const conf = reactive<ClConfirm.Options>({

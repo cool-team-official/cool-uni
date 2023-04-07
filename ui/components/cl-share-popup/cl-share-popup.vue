@@ -28,7 +28,7 @@ export default defineComponent({
 
 	setup() {
 		// 是否显示
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		// 配置
 		const conf = reactive<any>({});

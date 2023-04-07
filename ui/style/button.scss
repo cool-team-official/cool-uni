@@ -1,9 +1,3 @@
-$button-height: 64rpx;
-$button-padding: 0rpx 30rpx;
-$button-font-size: 26rpx;
-$button-border-radius: 100rpx;
-$button-border-width: 3rpx;
-
 // Mixins
 @mixin button-color($type, $color) {
 	&.cl-button--#{$type} {
@@ -52,7 +46,7 @@ $button-border-width: 3rpx;
 	margin: 0;
 	background-color: #fff;
 	overflow: visible;
-	font-size: $button-font-size;
+	font-size: $cl-button-font-size;
 	vertical-align: middle;
 
 	&__text {
@@ -83,8 +77,8 @@ $button-border-width: 3rpx;
 	}
 
 	&--default {
-		height: $button-height;
-		padding: $button-padding;
+		height: $cl-button-height;
+		padding: $cl-button-padding;
 	}
 
 	&--small {
@@ -95,14 +89,15 @@ $button-border-width: 3rpx;
 
 	&.is-border {
 		&::after {
-			border-width: $button-border-width;
+			border-width: $cl-button-border-width;
 		}
 	}
 
 	&.is-round {
-		border-radius: $button-border-radius !important;
+		border-radius: $cl-button-round-border-radius !important;
+
 		&::after {
-			border-radius: $button-border-radius;
+			border-radius: $cl-button-round-border-radius;
 		}
 	}
 
@@ -124,7 +119,7 @@ $button-border-width: 3rpx;
 	&.is-plain {
 		&.is-border {
 			&::after {
-				border-width: $button-border-width;
+				border-width: $cl-button-border-width;
 			}
 		}
 	}

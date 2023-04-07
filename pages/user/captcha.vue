@@ -47,21 +47,23 @@
 import { onReady } from "@dcloudio/uni-app";
 import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
+import { useUi } from "/@/ui";
 
-const { service, ui, router } = useCool();
+const { service, router } = useCool();
 const { user } = useStore();
+const ui = useUi();
 
 // 倒计时
-const countdown = ref<number>(60);
+const countdown = ref(60);
 
 // 验证码长度
 const len = 4;
 
 // 保存状态
-const saving = ref<boolean>(false);
+const saving = ref(false);
 
 // 表单
-const form = reactive<any>({
+const form = reactive({
 	code: "",
 	phone: router.query.phone || "",
 });

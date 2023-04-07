@@ -116,13 +116,13 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 按下
-		const touch = reactive<any>({
+		const touch = reactive({
 			start: 0,
 			move: 0,
 		});
 
 		// 滚动距离
-		const scrollTop2 = ref<number>(0);
+		const scrollTop2 = ref(0);
 
 		watch(
 			() => props.scrollTop,
@@ -135,10 +135,10 @@ export default defineComponent({
 		);
 
 		// 回到顶部
-		const backTopButtonFadeIn = ref<boolean>(false);
+		const backTopButtonFadeIn = ref(false);
 
 		// 状态
-		const status = ref<string>("end");
+		const status = ref("end");
 
 		// 过渡效果
 		const transform = computed(() => {
@@ -205,7 +205,7 @@ export default defineComponent({
 				.select(".cl-scroller__loading")
 				.fields({ size: true }, (d) => {
 					status.value = "loading";
-					touch.move = d.height;
+					touch.move = d.height || 0;
 					emit("down");
 				})
 				.exec();

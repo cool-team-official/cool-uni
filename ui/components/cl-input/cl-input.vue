@@ -4,8 +4,8 @@
 		:class="[
 			{
 				'is-round': round,
-				'is-disabled': isDisabled,
 				'is-border': border,
+				'is-disabled': isDisabled,
 				'is-focus': isFocus,
 			},
 		]"
@@ -25,126 +25,27 @@
 		</view>
 
 		<view class="cl-input__wrap">
-			<template v-if="type == 'password'">
-				<input
-					class="cl-input__inner"
-					v-model="value"
-					type="password"
-					:password="password"
-					:placeholder="placeholder"
-					:disabled="isDisabled"
-					:focus="focus"
-					:placeholder-style="placeholderStyle"
-					:placeholder-class="placeholderClass"
-					:maxlength="maxlength"
-					:cursor-spacing="cursorSpacing"
-					:confirm-hold="confirmHold"
-					:adjust-position="adjustPosition"
-					:holdKeyboard="holdKeyboard"
-					@input="onInput"
-					@focus="onFocus"
-					@blur="onBlur"
-					@confirm="onConfirm"
-					@keyboardheightchange="onKeyboardheightchange"
-				/>
-			</template>
-
-			<template v-else-if="type == 'number'">
-				<input
-					class="cl-input__inner"
-					v-model="value"
-					type="number"
-					:password="password"
-					:placeholder="placeholder"
-					:disabled="isDisabled"
-					:focus="focus"
-					:placeholder-style="placeholderStyle"
-					:placeholder-class="placeholderClass"
-					:maxlength="maxlength"
-					:cursor-spacing="cursorSpacing"
-					:confirm-hold="confirmHold"
-					:adjust-position="adjustPosition"
-					:holdKeyboard="holdKeyboard"
-					@input="onInput"
-					@focus="onFocus"
-					@blur="onBlur"
-					@confirm="onConfirm"
-					@keyboardheightchange="onKeyboardheightchange"
-				/>
-			</template>
-
-			<template v-else-if="type == 'idcard'">
-				<input
-					class="cl-input__inner"
-					v-model="value"
-					type="idcard"
-					:password="password"
-					:placeholder="placeholder"
-					:disabled="isDisabled"
-					:focus="focus"
-					:placeholder-style="placeholderStyle"
-					:placeholder-class="placeholderClass"
-					:maxlength="maxlength"
-					:cursor-spacing="cursorSpacing"
-					:confirm-hold="confirmHold"
-					:adjust-position="adjustPosition"
-					:holdKeyboard="holdKeyboard"
-					@input="onInput"
-					@focus="onFocus"
-					@blur="onBlur"
-					@confirm="onConfirm"
-					@keyboardheightchange="onKeyboardheightchange"
-				/>
-			</template>
-
-			<template v-else-if="type == 'digit'">
-				<input
-					class="cl-input__inner"
-					v-model="value"
-					type="digit"
-					:password="password"
-					:placeholder="placeholder"
-					:disabled="isDisabled"
-					:focus="focus"
-					:placeholder-style="placeholderStyle"
-					:placeholder-class="placeholderClass"
-					:maxlength="maxlength"
-					:cursor-spacing="cursorSpacing"
-					:confirm-hold="confirmHold"
-					:adjust-position="adjustPosition"
-					:holdKeyboard="holdKeyboard"
-					@input="onInput"
-					@focus="onFocus"
-					@blur="onBlur"
-					@confirm="onConfirm"
-					@keyboardheightchange="onKeyboardheightchange"
-				/>
-			</template>
-
-			<template v-else>
-				<input
-					class="cl-input__inner"
-					v-model="value"
-					type="text"
-					:password="password"
-					:placeholder="placeholder"
-					:disabled="isDisabled"
-					:focus="focus"
-					:placeholder-style="placeholderStyle"
-					:placeholder-class="placeholderClass"
-					:maxlength="maxlength"
-					:cursor-spacing="cursorSpacing"
-					:confirm-type="confirmType"
-					:confirm-hold="confirmHold"
-					:adjust-position="adjustPosition"
-					:holdKeyboard="holdKeyboard"
-					@input="onInput"
-					@focus="onFocus"
-					@blur="onBlur"
-					@confirm="onConfirm"
-					@keyboardheightchange="onKeyboardheightchange"
-				/>
-			</template>
+			<input
+				class="cl-input__inner"
+				v-model="value"
+				:type="type"
+				:password="password"
+				:placeholder="placeholder"
+				:disabled="isDisabled"
+				:focus="focus"
+				:placeholder-style="placeholderStyle"
+				:placeholder-class="placeholderClass"
+				:maxlength="maxlength"
+				:cursor-spacing="cursorSpacing"
+				:confirm-hold="confirmHold"
+				:adjust-position="adjustPosition"
+				:holdKeyboard="holdKeyboard"
+				@input="onInput"
+				@focus="onFocus"
+				@blur="onBlur"
+				@confirm="onConfirm"
+				@keyboardheightchange="onKeyboardheightchange"
+			/>
 
 			<!-- 清空 -->
 			<view class="cl-input__clear" v-show="isFocus && clearable" @tap="clear">
@@ -169,7 +70,7 @@
  * @event {Function} clear 清空值时触发
  */
 
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch, PropType } from "vue";
 import { useForm } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
@@ -182,7 +83,9 @@ export default defineComponent({
 			default: "",
 		},
 		type: {
-			type: String,
+			type: String as PropType<
+				"text" | "number" | "idcard" | "digit" | "tel" | "safe-password" | "nickname"
+			>,
 			default: "text",
 		},
 		password: Boolean,
@@ -198,16 +101,14 @@ export default defineComponent({
 		placeholderClass: String,
 		readonly: Boolean,
 		disabled: Boolean,
+		height: [String, Number],
 		round: Boolean,
 		borderRadius: [String, Number],
 		border: {
 			type: Boolean,
 			default: true,
 		},
-		backgroundColor: {
-			type: String,
-			default: "#fff",
-		},
+		backgroundColor: String,
 		focus: Boolean,
 		maxlength: {
 			type: [Number, String],
@@ -230,10 +131,6 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
-		height: {
-			type: [String, Number],
-			default: 70,
-		},
 	},
 
 	emits: [
@@ -253,7 +150,7 @@ export default defineComponent({
 		const form = useForm();
 
 		// 绑定值
-		const value = ref<string>("");
+		const value = ref("");
 
 		watch(
 			() => props.modelValue,
@@ -266,7 +163,7 @@ export default defineComponent({
 		);
 
 		// 是否聚焦
-		const isFocus = ref<boolean>(props.focus);
+		const isFocus = ref(props.focus);
 
 		// 是否禁用
 		const isDisabled = computed(() => {

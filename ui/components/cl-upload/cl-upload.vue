@@ -135,7 +135,7 @@ export default defineComponent({
 		const list = ref<any[]>([]);
 
 		// 下标
-		const index = ref<number>();
+		const index = ref();
 
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);

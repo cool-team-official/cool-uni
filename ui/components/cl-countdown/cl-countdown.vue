@@ -70,13 +70,13 @@ export default defineComponent({
 		let timer: any = null;
 
 		// 秒
-		const seconds = ref<number>(0);
+		const seconds = ref(0);
 
 		// 状态
 		let status = false;
 
 		// 是否显示
-		const visible = ref<boolean>(true);
+		const visible = ref(true);
 
 		// 列表
 		const list = ref<any>([]);

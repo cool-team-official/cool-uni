@@ -6,10 +6,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 10rpx;
-		border-width: 1rpx;
+		border-radius: $cl-upload-border-radius;
+		border-width: $cl-upload-border-width;
 		border-style: dashed;
-		border-color: #d9d9d9;
+		border-color: $cl-upload-border-color;
 		box-sizing: border-box;
 		position: relative;
 		margin-right: 20rpx;
@@ -23,7 +23,7 @@
 		&__target {
 			height: 100%;
 			width: 100%;
-			border-radius: 10rpx;
+			border-radius: $cl-upload-border-radius;
 		}
 
 		&__remove {
@@ -59,7 +59,7 @@
 
 	&.is-disabled {
 		.cl-upload {
-			background-color: #f5f7fa;
+			background-color: $cl-upload-disabled-background-color;
 
 			&__add {
 				transform: rotate(45deg);

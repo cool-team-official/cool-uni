@@ -1,12 +1,14 @@
 .cl-input {
 	display: flex;
+	height: $cl-input-height;
 	width: 100%;
 	vertical-align: middle;
 	position: relative;
-	border-radius: 8rpx;
+	border-radius: $cl-input-border-radius;
 	box-sizing: border-box;
 	transition: border-color 0.2s;
 	padding: 0 20rpx;
+	background-color: #fff;
 
 	&--focus {
 		border-color: rgba($cl-color-primary, 0.7);
@@ -23,7 +25,7 @@
 	&__inner {
 		height: 100%;
 		flex: 1;
-		font-size: 26rpx;
+		font-size: $cl-input-font-size;
 		border: 0;
 		padding: 0;
 		outline: none;
@@ -34,7 +36,7 @@
 	&__append {
 		display: flex;
 		align-items: center;
-		font-size: 26rpx;
+		font-size: $cl-input-font-size;
 	}
 
 	&__prepend {
@@ -99,14 +101,14 @@
 	}
 
 	&.is-border {
-		border: 1rpx solid #dcdfe6;
+		border: $cl-input-border-width solid $cl-input-border-color;
 	}
 
 	&.is-disabled {
-		background-color: #f5f7fa;
+		background-color: $cl-input-disabled-background-color;
 
 		.cl-input__inner {
-			color: #c0c4cc;
+			color: $cl-input-disabled-color;
 		}
 	}
 

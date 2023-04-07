@@ -136,7 +136,7 @@ export default defineComponent({
 		});
 
 		// 触摸
-		const touch = reactive<any>({
+		const touch = reactive({
 			start: 0,
 			end: 0,
 			x: 0,
@@ -146,7 +146,7 @@ export default defineComponent({
 		});
 
 		// 滑动菜单
-		const menu = reactive<any>({
+		const menu = reactive({
 			width: 0,
 		});
 
@@ -227,7 +227,7 @@ export default defineComponent({
 					.select(`.cl-list-item__menu-${props.swipe}`)
 					.boundingClientRect((data) => {
 						if (data) {
-							menu.width = data.width;
+							menu.width = data.width || 0;
 							touch.maxX = menu.width * (props.swipe === "right" ? -1 : 1);
 						}
 					})

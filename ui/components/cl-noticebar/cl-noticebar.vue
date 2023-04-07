@@ -104,10 +104,10 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 是否可见
-		const visible = ref<boolean>(true);
+		const visible = ref(true);
 
 		// 滚动配置
-		const scroll = reactive<any>({
+		const scroll = reactive({
 			left: 0,
 			top: 0,
 			translateX: 0,

@@ -8,7 +8,11 @@
 			<cl-input-number :step="5" />
 		</cl-card>
 
-		<cl-card label="禁用（4-10）">
+		<cl-card label="禁用">
+			<cl-input-number disabled />
+		</cl-card>
+
+		<cl-card label="范围（4-10）">
 			<cl-input-number :max="10" :min="4" />
 		</cl-card>
 

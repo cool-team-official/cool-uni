@@ -11,6 +11,10 @@
 		<cl-card label="时间">
 			<cl-select v-model="v3" mode="time"></cl-select>
 		</cl-card>
+
+		<cl-card label="禁用">
+			<cl-select v-model="v4" :options="list" disabled></cl-select>
+		</cl-card>
 	</cl-page>
 </template>
 
@@ -20,6 +24,7 @@ import { ref } from "vue";
 const v1 = ref();
 const v2 = ref();
 const v3 = ref();
+const v4 = ref(2);
 
 const list = ref([
 	{

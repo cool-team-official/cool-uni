@@ -156,7 +156,7 @@ export default defineComponent({
 	emits: ["update:modelValue", "change", "tap", "click", "transition", "animationfinish"],
 
 	setup(props, { emit }) {
-		const current = ref<number>(0);
+		const current = ref(0);
 
 		watch(
 			() => props.modelValue,

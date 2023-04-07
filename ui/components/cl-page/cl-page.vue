@@ -56,7 +56,7 @@ export default defineComponent({
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
 
 		// 加载器
-		const loader = reactive<any>({
+		const loader = reactive({
 			loading: false,
 			text: "加载中",
 		});

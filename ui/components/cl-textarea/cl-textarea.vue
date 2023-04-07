@@ -1,7 +1,13 @@
 <template>
 	<view
 		class="cl-textarea"
-		:class="[classList]"
+		:class="[
+			{
+				'is-disabled': isDisabled,
+				'is-count': count,
+				'is-border': border,
+			},
+		]"
 		:style="{
 			backgroundColor,
 			borderRadius: parseRpx(borderRadius),
@@ -128,7 +134,7 @@ export default defineComponent({
 		const { disabled } = useForm();
 
 		// 绑定值
-		const value = ref<string>("");
+		const value = ref("");
 
 		watch(
 			() => props.modelValue,
@@ -142,25 +148,6 @@ export default defineComponent({
 
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);
-
-		// 样式
-		const classList = computed(() => {
-			let list = [];
-
-			if (isDisabled.value) {
-				list.push("is-disabled");
-			}
-
-			if (props.count) {
-				list.push("is-count");
-			}
-
-			if (props.border) {
-				list.push("is-border");
-			}
-
-			return list.join(" ");
-		});
 
 		function onFocus(e: any) {
 			emit("focus", e);
@@ -188,7 +175,6 @@ export default defineComponent({
 
 		return {
 			value,
-			classList,
 			isDisabled,
 			parseRpx,
 			onFocus,

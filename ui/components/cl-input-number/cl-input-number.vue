@@ -7,10 +7,15 @@
 
 		<!-- 值 -->
 		<view class="cl-input-number__value" :style="{ width: width2 }">
-			<input
+			<cl-input
 				type="number"
 				v-model="value"
 				:disabled="isDisabled"
+				:border="false"
+				:clearable="false"
+				:height="40"
+				background-color="#f5f7fa"
+				placeholder=""
 				@blur="onBlur"
 				v-if="input"
 			/>
@@ -79,7 +84,7 @@ export default defineComponent({
 		const { disabled } = useForm();
 
 		// 绑定值
-		const value = ref<number>(0);
+		const value = ref(0);
 
 		watch(() => props.modelValue, check, {
 			immediate: true,

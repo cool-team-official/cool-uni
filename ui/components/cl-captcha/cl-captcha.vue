@@ -76,10 +76,10 @@ export default defineComponent({
 	emits: ["update:modelValue", "done"],
 
 	setup(props, { emit }) {
-		const value = ref<string>(props.modelValue || "");
+		const value = ref(props.modelValue || "");
 
 		// 是否聚焦
-		const focus = ref<boolean>(false);
+		const focus = ref(false);
 
 		// 头条小程序下，无法 v-for 数字
 		const list = computed(() => new Array(props.len).fill(1));

@@ -190,16 +190,16 @@ export default defineComponent({
 		const current = ref<number | string>(props.modelValue || 0);
 
 		// 下划线左位移
-		const lineLeft = ref<number>(0);
+		const lineLeft = ref(0);
 
 		// 左滚动距离
-		const scrollLeft = ref<number>(0);
+		const scrollLeft = ref(0);
 
 		// 左位移
-		const offsetLeft = ref<number>(0);
+		const offsetLeft = ref(0);
 
 		// 宽度
-		const width = ref<number>(375);
+		const width = ref(375);
 
 		// 列表
 		const tabs = computed(() => {
@@ -231,10 +231,10 @@ export default defineComponent({
 		}
 
 		// 下拉
-		const dropdown = reactive<any>({
+		const dropdown = reactive({
 			visible: false,
 			height: "200rpx",
-			timer: null,
+			timer: null as any,
 		});
 
 		// 打开下拉框

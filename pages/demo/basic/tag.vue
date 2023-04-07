@@ -21,6 +21,10 @@
 			<cl-tag type="info">信息</cl-tag>
 		</cl-card>
 
+		<cl-card label="自定义颜色">
+			<cl-tag color="#626aef">标签</cl-tag>
+		</cl-card>
+
 		<cl-card label="其他">
 			<cl-tag plain>镂空</cl-tag>
 			<cl-tag closable>可移除标签</cl-tag>

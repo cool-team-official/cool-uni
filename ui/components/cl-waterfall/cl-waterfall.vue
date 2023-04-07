@@ -53,7 +53,7 @@ export default defineComponent({
 	setup(props) {
 		const { proxy }: any = getCurrentInstance();
 
-		const visible = ref<boolean>(true);
+		const visible = ref(true);
 
 		// 列表
 		const list = ref<any[]>([]);

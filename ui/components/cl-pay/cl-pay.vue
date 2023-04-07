@@ -28,7 +28,7 @@ export default defineComponent({
 
 	setup(_, { emit }) {
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		// 回掉
 		let cb: any = null;

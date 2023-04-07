@@ -99,10 +99,10 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref(false);
 
 		// 动画状态
-		const status = ref<boolean>(false);
+		const status = ref(false);
 
 		// 计时器
 		let timer: any = null;

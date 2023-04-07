@@ -59,6 +59,15 @@
 					</cl-col>
 				</cl-row>
 			</cl-card>
+
+			<cl-card label="自定义">
+				<cl-text
+					:size="30"
+					color="green"
+					:margin="[20, 20, 20, 20]"
+					value="自定义颜色(green)、大小(30)、间距(20)"
+				></cl-text>
+			</cl-card>
 		</view>
 	</cl-page>
 </template>

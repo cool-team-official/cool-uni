@@ -1,7 +1,26 @@
 <template>
 	<button
-		:class="buttonClass"
-		:style="buttonStyle"
+		:class="[
+			'cl-button',
+			`cl-button--${type}`,
+			`cl-button--${size}`,
+			{ 'is-round': round },
+			{ 'is-loading': loading },
+			{ 'is-loading-mask': loadingMask },
+			{ 'is-plain': plain },
+			{ 'is-fill': fill },
+			{ 'is-disabled': disabled },
+			{ 'is-border': border },
+			{ 'is-bold': bold },
+		]"
+		:style="{
+			color,
+			backgroundColor,
+			height: parseRpx(height),
+			width: parseRpx(width),
+			fontSize: parseRpx(fontSize),
+			margin: parseRpx(margin),
+		}"
 		:size="size"
 		:type="type"
 		:disabled="disabled"
@@ -109,32 +128,6 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		const buttonClass = computed(() => {
-			const list = [
-				"cl-button",
-				`cl-button--${props.type}`,
-				`cl-button--${props.size}`,
-				{ "is-round": props.round },
-				{ "is-loading": props.loading },
-				{ "is-loading-mask": props.loadingMask },
-				{ "is-plain": props.plain },
-				{ "is-fill": props.fill },
-				{ "is-disabled": props.disabled },
-				{ "is-border": props.border },
-				{ "is-bold": props.bold },
-			];
-			return list;
-		});
-
-		const buttonStyle = computed(() => ({
-			color: props.color,
-			backgroundColor: props.backgroundColor,
-			height: parseRpx(props.height),
-			width: parseRpx(props.width),
-			fontSize: parseRpx(props.fontSize),
-			margin: parseRpx(props.margin),
-		}));
-
 		function handleClick(e: MouseEvent) {
 			if (!props.disabled && !props.loading) {
 				emit("click", e);
@@ -149,13 +142,11 @@ export default defineComponent({
 		}
 
 		return {
-			buttonClass,
-			buttonStyle,
-			parseRpx,
 			isImg: computed(() => props.icon?.includes("/")),
 			loadingColor: computed(() => (props.type ? "#fff" : "")),
 			handleClick,
 			handleTap,
+			parseRpx,
 		};
 	},
 });

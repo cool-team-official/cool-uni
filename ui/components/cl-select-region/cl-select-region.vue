@@ -12,7 +12,7 @@
 			set-options-is-parse-value
 			@column-change="onColumnChange"
 			@change="onChange"
-		></cl-select>
+		/>
 	</view>
 </template>
 
@@ -70,7 +70,7 @@ export default defineComponent({
 		const list = ref<any[]>([[], [], []]);
 
 		// 绑定值
-		const value = ref<any>([]);
+		const value = ref<any[]>([]);
 
 		// 监听值改变
 		function onChange(arr: any[]) {

@@ -4,15 +4,24 @@
 			<cl-input />
 		</cl-card>
 
-		<cl-card label="可清空">
-			<cl-input clearable />
+		<cl-card label="数字键盘">
+			<cl-input type="number" />
 		</cl-card>
 
 		<cl-card label="禁用">
-			<cl-input disabled />
+			<view style="margin-bottom: 20rpx">
+				<cl-button size="small" type="success" @tap="disabled = false">启用</cl-button>
+				<cl-button size="small" type="error" @tap="disabled = true">禁用</cl-button>
+			</view>
+
+			<cl-input :disabled="disabled" />
 		</cl-card>
 
-		<cl-card label="插槽：prepend">
+		<cl-card label="无边框">
+			<cl-input :border="false" />
+		</cl-card>
+
+		<cl-card label="前置元素">
 			<cl-input>
 				<template #prepend>
 					<text>https://</text>
@@ -20,14 +29,22 @@
 			</cl-input>
 		</cl-card>
 
-		<cl-card label="插槽：append">
+		<cl-card label="后置元素">
 			<cl-input>
 				<template #append>
-					<text>.com</text>
+					<text>元</text>
 				</template>
 			</cl-input>
+		</cl-card>
+
+		<cl-card label="自定义">
+			<cl-input :height="80" background-color="#eee" :border="false" />
 		</cl-card>
 	</cl-page>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts" setup>
+import { ref } from "vue";
+
+const disabled = ref(true);
+</script>
