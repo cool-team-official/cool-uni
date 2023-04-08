@@ -1,7 +1,14 @@
 <template>
 	<view
 		class="cl-row"
-		:class="[classList]"
+		:class="[
+			`cl-row--${type}`,
+			`is-justify-${justify}`,
+			`is-align-${align}`,
+			{
+				'is-wrap': wrap,
+			},
+		]"
 		:style="{
 			height: parseRpx(height),
 			width: parseRpx(width),
@@ -58,28 +65,6 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		const classList = computed(() => {
-			let list = [];
-
-			if (props.type) {
-				list.push(`cl-row--${props.type}`);
-			}
-
-			if (props.justify) {
-				list.push(`is-justify-${props.justify}`);
-			}
-
-			if (props.align) {
-				list.push(`is-align-${props.align}`);
-			}
-
-			if (props.wrap) {
-				list.push("is-wrap");
-			}
-
-			return list.join(" ");
-		});
-
 		const margin2 = computed(() => {
 			return props.margin ? parseRpx(props.margin) : `0 -${props.gutter / 2}rpx`;
 		});
@@ -90,7 +75,6 @@ export default defineComponent({
 		}
 
 		return {
-			classList,
 			margin2,
 			parseRpx,
 			onTap,

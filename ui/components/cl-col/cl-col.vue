@@ -52,7 +52,7 @@ export default defineComponent({
 		// 样式
 		const classList = computed(() => {
 			let list: string[] = [];
-			["span", "offset", "pull", "push"].forEach((k: any) => {
+			["span", "offset", "pull", "push"].forEach((k) => {
 				let value = props[k];
 				if (value || value === 0) {
 					list.push(k !== "span" ? `cl-col-${k}-${value}` : `cl-col-${value}`);

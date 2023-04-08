@@ -12,16 +12,6 @@
 			<cl-tabs v-model="active" :list="list" fill></cl-tabs>
 		</cl-card>
 
-		<cl-card label="自定义颜色">
-			<cl-tabs
-				v-model="active"
-				:list="list"
-				color="red"
-				un-color="blue"
-				background-color="#f7f7f7"
-			></cl-tabs>
-		</cl-card>
-
 		<cl-card label="下拉框">
 			<cl-tabs v-model="active" :list="list" show-dropdown>
 				<template #dropdown>
@@ -36,13 +26,24 @@
 				</template>
 			</cl-tabs>
 		</cl-card>
+
+		<cl-card label="自定义颜色">
+			<cl-tabs
+				v-model="active"
+				:list="list"
+				:border="false"
+				color="red"
+				un-color="blue"
+				background-color="#f7f7f7"
+			></cl-tabs>
+		</cl-card>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const active = ref(0);
+const active = ref(1);
 
 const list = ref([
 	{

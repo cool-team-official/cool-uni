@@ -1,7 +1,7 @@
 <template>
 	<view
 		class="cl-list-item"
-		:class="[classList]"
+		:class="itemClass"
 		:style="customStyle"
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
@@ -20,7 +20,7 @@
 
 				<text class="cl-list-item__label" v-if="label && label != 'true'">{{ label }}</text>
 
-				<view class="cl-list-item__content" :class="[classList2]">
+				<view class="cl-list-item__content" :class="contentClass">
 					<slot></slot>
 				</view>
 
@@ -92,7 +92,7 @@ export default defineComponent({
 		},
 	},
 
-	setup(props, { emit, slots }) {
+	setup(props, { slots }) {
 		const { proxy }: any = getCurrentInstance();
 		const { getParent } = useEl();
 
@@ -100,39 +100,30 @@ export default defineComponent({
 		const parent = getParent("cl-list", ["justify", "border", "disabled"]);
 
 		// 样式
-		const classList = computed(() => {
-			let list: string[] = [];
-
-			if (isBoolean(props.border) ? props.border : parent.value?.border) {
-				list.push("is-border");
-			}
-
-			if (isBoolean(props.disabled) ? props.disabled : parent.value?.disabled) {
-				list.push("is-disabled");
-			}
-
-			if (slots.append) {
-				list.push("is-append");
-			}
-
-			return list.join(" ");
+		const itemClass = computed(() => {
+			return [
+				{
+					"is-append": slots.append,
+					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
+					"is-disabled": isBoolean(props.disabled)
+						? props.disabled
+						: parent.value?.disabled,
+				},
+			];
 		});
 
-		// 样式2
-		const classList2 = computed(() => {
+		// 内容样式
+		const contentClass = computed(() => {
 			let list: string[] = [];
 
 			if (props.type) {
 				list.push(`is-color-${props.type}`);
 			}
 
-			const justify = props.justify || parent.value?.justify || "end";
-
-			if (justify) {
-				list.push(`is-justify-${justify}`);
-			}
-
-			return list.join(" ");
+			return [
+				`is-color-${props.type}`,
+				`is-justify-${props.justify || parent.value?.justify || "end"}`,
+			];
 		});
 
 		// 触摸
@@ -257,8 +248,8 @@ export default defineComponent({
 		});
 
 		return {
-			classList,
-			classList2,
+			itemClass,
+			contentClass,
 			touch,
 			menu,
 			restore,

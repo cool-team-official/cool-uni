@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-filter-item" :class="[classList]" @tap="tapItem">
+	<view class="cl-filter-item" :class="classList" @tap="tapItem">
 		<!-- 文本内容 -->
 		<text class="cl-filter-item__label">{{ dropdown.name || label }}</text>
 
@@ -161,29 +161,14 @@ export default defineComponent({
 
 		// 样式
 		const classList = computed(() => {
-			let list = [];
-
-			if (value.value) {
-				switch (props.type) {
-					case "switch":
-						list.push("is-switch");
-						break;
-				}
-			}
-
-			if (dropdown.isExpand) {
-				list.push("is-expand");
-			}
-
-			if (!parent.value) {
-				list.push("is-only");
-			}
-
-			if (props.disabled) {
-				list.push("is-disabled");
-			}
-
-			return list.join(" ");
+			return [
+				{
+					"is-switch": value.value && props.type == "switch",
+					"is-expand": dropdown.isExpand,
+					"is-only": !parent.value,
+					"is-disabled": props.disabled,
+				},
+			];
 		});
 
 		// 每项宽度

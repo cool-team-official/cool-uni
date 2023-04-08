@@ -1,5 +1,5 @@
 <template>
-	<view class="cl-checkbox" :class="[classList]" @tap.stop="onChange">
+	<view class="cl-checkbox" :class="classList" @tap.stop="onChange">
 		<view
 			class="cl-checkbox__input"
 			:style="{
@@ -93,29 +93,15 @@ export default defineComponent({
 
 		// 样式
 		const classList = computed(() => {
-			let list = [];
-
-			if (isBoolean(props.border) ? props.border : parent.value?.border) {
-				list.push("is-border");
-			}
-
-			if (isBoolean(props.round) ? props.round : parent.value?.round) {
-				list.push("is-round");
-			}
-
-			if (parent.value?.fill) {
-				list.push("is-fill");
-			}
-
-			if (isDisabled.value) {
-				list.push("is-disabled");
-			}
-
-			if (checked.value) {
-				list.push("is-checked");
-			}
-
-			return list.join(" ");
+			return [
+				{
+					"is-checked": checked.value,
+					"is-disabled": isDisabled.value,
+					"is-fill": parent.value?.fill,
+					"is-round": isBoolean(props.round) ? props.round : parent.value?.round,
+					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
+				},
+			];
 		});
 
 		// 绑定值改变

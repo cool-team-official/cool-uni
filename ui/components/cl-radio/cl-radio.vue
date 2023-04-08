@@ -97,25 +97,14 @@ export default defineComponent({
 
 		// 样式
 		const classList = computed(() => {
-			let list = [];
-
-			if (isBoolean(props.border) ? props.border : parent.value?.border) {
-				list.push("is-border");
-			}
-
-			if (isDisabled.value) {
-				list.push("is-disabled");
-			}
-
-			if (checked.value) {
-				list.push("is-checked");
-			}
-
-			if (parent.value?.fill) {
-				list.push("is-fill");
-			}
-
-			return list.join(" ");
+			return [
+				{
+					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
+					"is-disabled": isDisabled.value,
+					"is-checked": checked.value,
+					"is-fill": parent.value?.fill,
+				},
+			];
 		});
 
 		// 值改变

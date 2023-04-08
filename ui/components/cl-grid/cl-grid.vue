@@ -1,5 +1,13 @@
 <template>
-	<view class="cl-grid" :class="[classList]">
+	<view
+		class="cl-grid"
+		:class="[
+			`cl-grid__column-${column}`,
+			{
+				'is-border': border,
+			},
+		]"
+	>
 		<slot></slot>
 	</view>
 </template>
@@ -22,26 +30,6 @@ export default defineComponent({
 			default: 3,
 		},
 		border: Boolean,
-	},
-
-	setup(props) {
-		const classList = () => {
-			let list = [];
-
-			if (props.border) {
-				list.push("cl-grid--border");
-			}
-
-			if (props.column) {
-				list.push(`cl-grid__column--${props.column}`);
-			}
-
-			return list.join(" ");
-		};
-
-		return {
-			classList,
-		};
 	},
 });
 </script>

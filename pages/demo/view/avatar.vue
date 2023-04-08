@@ -3,11 +3,11 @@
 		<cl-card label="基础用法">
 			<cl-row>
 				<cl-col :span="4">
-					<cl-avatar src="../static/avatar.png"></cl-avatar>
+					<cl-avatar src="/pages/demo/static/avatar.png"></cl-avatar>
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-avatar src="../static/avatar.png" shape="square"></cl-avatar>
+					<cl-avatar src="/pages/demo/static/avatar.png" shape="square"></cl-avatar>
 				</cl-col>
 			</cl-row>
 		</cl-card>
@@ -27,15 +27,15 @@
 		<cl-card label="不同大小">
 			<cl-row>
 				<cl-col :span="6">
-					<cl-avatar :size="100" src="../static/avatar.png"></cl-avatar>
+					<cl-avatar :size="100" src="/pages/demo/static/avatar.png"></cl-avatar>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-avatar :size="120" src="../static/avatar.png"></cl-avatar>
+					<cl-avatar :size="120" src="/pages/demo/static/avatar.png"></cl-avatar>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-avatar :size="140" src="../static/avatar.png"></cl-avatar>
+					<cl-avatar :size="140" src="/pages/demo/static/avatar.png"></cl-avatar>
 				</cl-col>
 			</cl-row>
 		</cl-card>

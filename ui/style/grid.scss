@@ -17,7 +17,7 @@
 		position: relative;
 	}
 
-	&--border {
+	.is-border {
 		border: 2rpx solid $cl-color-default;
 		border-bottom: 0;
 		border-right: 0;

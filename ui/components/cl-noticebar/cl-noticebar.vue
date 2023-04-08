@@ -1,7 +1,11 @@
 <template>
 	<view
 		class="cl-noticebar"
-		:class="[classList]"
+		:class="[
+			{
+				'is-scrollable': scrollable,
+			},
+		]"
 		:style="{
 			color,
 			backgroundColor,
@@ -117,17 +121,6 @@ export default defineComponent({
 		// 计时器
 		let timer: any = null;
 
-		// 样式
-		const classList = computed(() => {
-			let list = [];
-
-			if (props.scrollable) {
-				list.push("is-scrollable");
-			}
-
-			return list.join(" ");
-		});
-
 		// 文案列表
 		const list = computed(() => {
 			return isArray(props.text) ? props.text : [props.text];
@@ -222,7 +215,6 @@ export default defineComponent({
 		return {
 			visible,
 			scroll,
-			classList,
 			list,
 			transition,
 			refresh,

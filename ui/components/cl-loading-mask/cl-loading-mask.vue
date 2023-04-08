@@ -2,7 +2,12 @@
 	<view class="cl-loading-mask__wrap">
 		<view
 			class="cl-loading-mask"
-			:class="[classList]"
+			:class="[
+				{
+					'is-fullscreen': fullscreen,
+					'is-show': loading,
+				},
+			]"
 			:style="{
 				background,
 				color,
@@ -29,7 +34,7 @@
  * @property {String} background 背景颜色，默认rgba(255,255,255,0.7)
  */
 
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
 	name: "cl-loading-mask",
@@ -44,26 +49,6 @@ export default defineComponent({
 			type: String,
 			default: "rgba(255, 255, 255, 0.7)",
 		},
-	},
-
-	setup(props) {
-		const classList = computed(() => {
-			let list = [];
-
-			if (props.fullscreen) {
-				list.push("is-fullscreen");
-			}
-
-			if (props.loading) {
-				list.push("is-show");
-			}
-
-			return list.join(" ");
-		});
-
-		return {
-			classList,
-		};
 	},
 });
 </script>

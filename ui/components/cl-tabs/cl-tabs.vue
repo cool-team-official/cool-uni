@@ -1,12 +1,27 @@
 <template>
-	<view class="cl-tabs" :class="[classList]">
+	<view
+		class="cl-tabs"
+		:class="[
+			{
+				'is-content': $slots.default,
+				'is-fill': fill,
+				'is-border': border,
+				'is-dropdown': showDropdown,
+			},
+		]"
+		:style="{
+			backgroundColor: backgroundColor,
+		}"
+	>
 		<view class="cl-tabs__header">
 			<scroll-view
 				class="cl-tabs__bar"
 				scroll-with-animation
 				scroll-x
 				:scroll-left="scrollLeft"
-				:style="[style]"
+				:style="{
+					height: parseRpx(height),
+				}"
 			>
 				<view
 					class="cl-tabs__bar-box"
@@ -58,7 +73,7 @@
 			</scroll-view>
 
 			<!-- 下拉图标 -->
-			<view class="cl-tabs__dropdown" :style="style" @tap="openDropdown" v-if="showDropdown">
+			<view class="cl-tabs__dropdown" @tap="openDropdown" v-if="showDropdown">
 				<cl-icon :name="`${dropdown.visible ? 'arrow-top' : 'arrow-bottom'}`"></cl-icon>
 			</view>
 
@@ -152,39 +167,8 @@ export default defineComponent({
 
 	emits: ["update:modelValue", "change"],
 
-	setup(props, { emit, slots }) {
+	setup(props, { emit }) {
 		const { proxy }: any = getCurrentInstance();
-
-		// 样式
-		const style = computed(() => {
-			return {
-				height: parseRpx(props.height),
-				backgroundColor: props.backgroundColor,
-			};
-		});
-
-		// 样式名
-		const classList = computed(() => {
-			let list = [];
-
-			if (slots.default) {
-				list.push("is-content");
-			}
-
-			if (props.fill) {
-				list.push("is-fill");
-			}
-
-			if (props.border) {
-				list.push("is-border");
-			}
-
-			if (props.showDropdown) {
-				list.push("is-dropdown");
-			}
-
-			return list.join(" ");
-		});
 
 		// 当前选中
 		const current = ref<number | string>(props.modelValue || 0);
@@ -350,8 +334,6 @@ export default defineComponent({
 		});
 
 		return {
-			style,
-			classList,
 			current,
 			scrollLeft,
 			lineLeft,
@@ -362,6 +344,7 @@ export default defineComponent({
 			next,
 			openDropdown,
 			closeDropdown,
+			parseRpx,
 		};
 	},
 });

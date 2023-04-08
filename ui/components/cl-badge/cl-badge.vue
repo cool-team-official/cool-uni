@@ -49,20 +49,6 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		const classList = computed(() => {
-			let list = [];
-
-			if (props.type) {
-				list.push(`cl-badge__content--${props.type}`);
-			}
-
-			if (props.isDot) {
-				list.push("is-dot");
-			}
-
-			return list.join(" ");
-		});
-
 		const content = computed(() => {
 			if (props.isDot) return "";
 
@@ -78,7 +64,6 @@ export default defineComponent({
 
 		return {
 			content,
-			classList,
 		};
 	},
 });

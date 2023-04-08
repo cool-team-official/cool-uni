@@ -1,5 +1,14 @@
 <template>
-	<view class="cl-form-item" :class="[classList]">
+	<view
+		class="cl-form-item"
+		:class="[
+			`is-${labelPosition2}`,
+			{
+				'is-error': !!message,
+				'is-required': isRequired,
+			},
+		]"
+	>
 		<view
 			class="cl-form-item__label"
 			:style="{ width: labelWidth2 }"
@@ -111,24 +120,6 @@ export default defineComponent({
 			return `is-justify--${props.justify || parent.value?.justify}`;
 		});
 
-		// 样式
-		const classList = computed(() => {
-			let list: string[] = [];
-
-			if (isRequired.value) {
-				list.push("is-required");
-			}
-
-			if (message.value) {
-				list.push("is-error");
-			}
-
-			// 标题位置
-			list.push(`is-${labelPosition2.value}`);
-
-			return list.join(" ");
-		});
-
 		// 校验器
 		let validator: any = null;
 
@@ -234,8 +225,9 @@ export default defineComponent({
 
 		return {
 			message,
-			classList,
+			isRequired,
 			labelWidth2,
+			labelPosition2,
 			showMessage,
 			justify2,
 			parseRpx,
