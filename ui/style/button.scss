@@ -6,18 +6,13 @@
 		.cl-button__text {
 			color: #fff;
 		}
-		&::after {
-			border-width: 0;
-		}
 		&.is-plain {
 			background-color: #fff;
 			.cl-button__text {
 				color: rgba($color, 0.8);
 			}
 			&.is-border {
-				&::after {
-					border-color: rgba($color, 0.8);
-				}
+				border-color: rgba($color, 0.8);
 			}
 		}
 		&.is-disabled {
@@ -46,8 +41,9 @@
 	margin: 0;
 	background-color: #fff;
 	overflow: visible;
-	font-size: $cl-button-font-size;
 	vertical-align: middle;
+	font-size: $cl-button-font-size;
+	border-radius: $cl-button-border-radius;
 
 	&__text {
 		display: inline;
@@ -64,6 +60,7 @@
 	}
 
 	&::after {
+		display: none;
 		border-width: 0;
 	}
 
@@ -88,17 +85,11 @@
 	}
 
 	&.is-border {
-		&::after {
-			border-width: $cl-button-border-width;
-		}
+		border: $cl-button-border-width solid $cl-button-border-color;
 	}
 
 	&.is-round {
 		border-radius: $cl-button-round-border-radius !important;
-
-		&::after {
-			border-radius: $cl-button-round-border-radius;
-		}
 	}
 
 	&.is-loading {
@@ -118,9 +109,7 @@
 
 	&.is-plain {
 		&.is-border {
-			&::after {
-				border-width: $cl-button-border-width;
-			}
+			border-width: $cl-button-border-width;
 		}
 	}
 
@@ -130,9 +119,6 @@
 
 	&.is-bold {
 		font-weight: bold;
-		&::after {
-			border-width: 6rpx !important;
-		}
 	}
 
 	&.is-loading-mask {

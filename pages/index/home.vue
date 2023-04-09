@@ -20,11 +20,14 @@
 				</view>
 			</view>
 		</view>
+
+		<tabbar />
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
 import { useCool } from "/@/cool";
+import Tabbar from "./components/tabbar.vue";
 
 const { router } = useCool();
 

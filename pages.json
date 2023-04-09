@@ -4,7 +4,7 @@
 			"path": "pages/index/home",
 			"style": {
 				"navigationStyle": "custom",
-				"enablePullDownRefresh": true
+				"navigationBarBackgroundColor": "#f7f7f7"
 			}
 		},
 		{
@@ -25,7 +25,8 @@
 				{
 					"path": "login",
 					"style": {
-						"navigationStyle": "custom"
+						"navigationStyle": "custom",
+						"navigationBarBackgroundColor": "#f7f7f7"
 					}
 				},
 				{

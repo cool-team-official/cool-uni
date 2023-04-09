@@ -10,7 +10,7 @@ $cl-color-disabled: #c0c4cc;
 // 通用
 $cl-status-height: 44px;
 $cl-border-color: #dcdfe6;
-$cl-border-width: 3rpx;
+$cl-border-width: 1px;
 $cl-font-size: 26rpx;
 $cl-height: 64rpx;
 $cl-border-radius: 8rpx;
@@ -23,6 +23,8 @@ $cl-button-padding: 0rpx 30rpx;
 $cl-button-font-size: $cl-font-size;
 $cl-button-round-border-radius: 100rpx;
 $cl-button-border-width: $cl-border-width;
+$cl-button-border-color: $cl-border-color;
+$cl-button-border-radius: $cl-border-radius;
 
 // 输入框
 $cl-input-height: $cl-height;

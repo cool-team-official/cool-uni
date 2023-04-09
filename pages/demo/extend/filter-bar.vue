@@ -86,7 +86,8 @@
 				<cl-filter-item label="输入框" prop="input" type="dropdown">
 					<template #dropdown>
 						<view class="cs" @tap.stop>
-							<cl-input></cl-input>
+							<cl-input />
+							<cl-button :margin="[0, 0, 0, 20]">搜索</cl-button>
 						</view>
 					</template>
 				</cl-filter-item>
@@ -102,3 +103,10 @@ const filter = ref({
 	d1: [],
 });
 </script>
+
+<style lang="scss" scoped>
+.cs {
+	display: flex;
+	padding: 20rpx;
+}
+</style>

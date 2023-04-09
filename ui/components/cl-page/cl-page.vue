@@ -15,9 +15,11 @@
 		<cl-confirm :ref="setRefs('confirm')"></cl-confirm>
 
 		<!-- 状态栏 -->
+		<!-- #ifndef MP-ALIPAY -->
 		<cl-sticky v-if="statusBar">
 			<cl-status-bar />
 		</cl-sticky>
+		<!-- #endif -->
 
 		<!-- 内容插槽 -->
 		<slot></slot>

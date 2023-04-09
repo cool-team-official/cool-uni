@@ -12,7 +12,8 @@
 	border-radius: 6rpx;
 	padding: 0 20rpx;
 	color: #fff;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	font-size: 24rpx;
 
 	&__close {
@@ -21,12 +22,10 @@
 
 	&--default {
 		height: 48rpx;
-		line-height: 48rpx;
 	}
 
 	&--small {
 		height: 40rpx;
-		line-height: 40rpx;
 	}
 
 	&.is-round {

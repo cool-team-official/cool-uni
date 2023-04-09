@@ -8,9 +8,9 @@
 
 		<cl-card label="不同位置">
 			<cl-button @tap="open()">默认</cl-button>
-			<cl-button @tap="open({ position: 'top' })">顶部位置</cl-button>
-			<cl-button @tap="open({ position: 'middle' })">中间位置</cl-button>
-			<cl-button @tap="open({ position: 'bottom' })">底部位置</cl-button>
+			<cl-button @tap="open({ position: 'top' })">顶部</cl-button>
+			<cl-button @tap="open({ position: 'middle' })">中间</cl-button>
+			<cl-button @tap="open({ position: 'bottom' })">底部</cl-button>
 		</cl-card>
 
 		<cl-card label="不同类型">

@@ -7,12 +7,15 @@
 				</cl-list>
 			</view>
 		</view>
+
+		<tabbar />
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
 import { useCool, useStore } from "/@/cool";
+import Tabbar from "./components/tabbar.vue";
 
 const { router } = useCool();
 const { user } = useStore();

@@ -1,12 +1,6 @@
 <template>
 	<cl-page>
 		<view class="page-login">
-			<cl-topbar
-				:border="false"
-				background-color="transparent"
-				:show-back="false"
-			></cl-topbar>
-
 			<!-- Logo -->
 			<view class="logo">
 				<image src="/static/logo.png" alt="" />
@@ -36,6 +30,7 @@
 								fill
 								:disabled="!phoneValid"
 								:height="90"
+								:font-size="30"
 								:loading="loading"
 								@click="phoneLogin"
 								>获取验证码</cl-button
@@ -45,28 +40,34 @@
 
 					<!-- 微信登录 -->
 					<template v-else-if="mode == 'wx'">
-						<cl-button type="primary" fill round :height="90" @click="wxLogin">
-							通过微信登录
+						<cl-button
+							type="primary"
+							fill
+							:height="90"
+							:font-size="30"
+							@click="wxLogin"
+						>
+							微信一键登录
 						</cl-button>
 					</template>
 
 					<!-- 协议 -->
 					<view class="agree">
-						<cl-checkbox :size="34" v-model="agree" round> </cl-checkbox>
-
-						<view class="text">
-							已阅读并同意
-							<text @tap.stop="toText('用户协议')">《用户协议》</text>
-							及
-							<text @tap="toText('隐私政策')">《隐私政策》</text>
-						</view>
+						<cl-checkbox :size="34" v-model="agree" round>
+							<view class="text">
+								已阅读并同意
+								<text @tap.stop="toText('用户协议')">《用户协议》</text>
+								及
+								<text @tap.stop="toText('隐私政策')">《隐私政策》</text>
+							</view>
+						</cl-checkbox>
 					</view>
 				</view>
 			</div>
 
 			<!-- 其他登录方式 -->
 			<view class="other">
-				<cl-divider width="400rpx">
+				<cl-divider width="400rpx" background-color="#f7f7f7">
 					<cl-text color="#ccc" value="其他登录方式"></cl-text>
 				</cl-divider>
 
@@ -104,7 +105,7 @@ const agree = ref(true);
 const loading = ref(false);
 
 // 手机号
-const phone = ref("13255022028");
+const phone = ref("13255022000");
 
 // 手机号是否正确
 const phoneValid = computed(() => /^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(phone.value));
@@ -125,7 +126,7 @@ const platforms = ref<any[]>([
 ]);
 
 // 登录方式
-const mode = ref("wx");
+const mode = ref("phone");
 
 // 检测
 function check(callback: () => void) {
@@ -225,29 +226,24 @@ function toText(name: string) {
 
 <style lang="scss" scoped>
 .page-login {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	background-color: #fff;
-
 	.logo {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin-top: 140rpx;
+		padding-top: calc(20% + 44px);
 
 		image {
 			display: block;
 			height: 120rpx;
 			width: 120rpx;
-			border-radius: 20rpx;
+			border-radius: 60rpx;
 			margin-bottom: 22rpx;
 			box-shadow: 0 0 200rpx 10rpx $cl-color-primary;
 		}
 
 		text {
-			font-size: 28rpx;
+			font-size: 40rpx;
 			font-weight: bold;
 			letter-spacing: 1rpx;
 		}
@@ -258,7 +254,7 @@ function toText(name: string) {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		flex: 1;
+		margin-top: 80rpx;
 
 		.mode {
 			width: 100%;
@@ -316,6 +312,9 @@ function toText(name: string) {
 	}
 
 	.other {
+		position: absolute;
+		bottom: env(safe-area-inset-bottom);
+		left: 0;
 		width: 100%;
 
 		.platform {

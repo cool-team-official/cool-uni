@@ -9,6 +9,9 @@ export function createApp() {
 	// 启动
 	bootstrap(app);
 
+	// 隐藏 Tabs
+	uni.hideTabBar();
+
 	return {
 		app,
 	};

@@ -56,15 +56,25 @@
 				<cl-button icon="cl-icon-good-fill">点赞</cl-button>
 			</cl-card>
 
-			<cl-card label="自定义颜色">
-				<cl-button color="#ffffff" background-color="#626aef">Default</cl-button>
-				<cl-button color="#626aef" plain>Plain</cl-button>
+			<cl-card label="圆角">
+				<cl-button type="primary" round>默认</cl-button>
+				<cl-button round>默认</cl-button>
 			</cl-card>
 
-			<cl-card label="其他">
-				<cl-button round>圆角</cl-button>
-				<cl-button loading>加载中</cl-button>
-				<cl-button :border="false">Plain</cl-button>
+			<cl-card label="加载中">
+				<cl-button type="primary" loading>默认</cl-button>
+				<cl-button loading>默认</cl-button>
+			</cl-card>
+
+			<cl-card label="没有边框">
+				<cl-button :border="false">默认</cl-button>
+			</cl-card>
+
+			<cl-card label="自定义颜色">
+				<cl-button :border="false" color="#ffffff" background-color="#626aef"
+					>默认</cl-button
+				>
+				<cl-button color="#626aef" plain>朴素</cl-button>
 			</cl-card>
 		</view>
 	</cl-page>
