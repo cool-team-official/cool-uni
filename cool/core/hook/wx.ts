@@ -82,7 +82,7 @@ export function useWx() {
 
 	// 微信公众号登录
 	async function mpLogin() {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			const code = getUrlParam("code");
 			const mpCode = storage.get("mpCode");
 
@@ -90,7 +90,7 @@ export function useWx() {
 				storage.set("mpCode", code);
 				resolve(code);
 			} else {
-				reject();
+				resolve(null);
 			}
 		});
 	}
@@ -147,7 +147,7 @@ export function useWx() {
 					getCode();
 
 					reject({
-						message: "授权失败",
+						message: "登录授权失败",
 					});
 				},
 			});

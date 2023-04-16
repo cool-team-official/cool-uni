@@ -10,12 +10,16 @@
 				}"
 				@tap="toLink(item.pagePath)"
 			>
-				<view class="custom" @tap="toChat" v-if="item.isCustom">
-					<image class="icon" src="/static/icon/tabbar/chat.png" mode="aspectFit" />
+				<view class="custom" v-if="item.pagePath == 'custom'">
+					<view class="icon">
+						<image src="/static/icon/tabbar/chat.png" mode="aspectFit" />
+					</view>
 				</view>
 
 				<template v-else>
-					<image class="icon" :src="item.icon" mode="aspectFit" />
+					<view class="icon">
+						<image :src="item.icon" mode="aspectFit" />
+					</view>
 					<text class="label">{{ item.text }}</text>
 					<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
 				</template>
@@ -34,8 +38,7 @@ const list = computed(() => {
 	const arr = [...router.tabs];
 
 	arr.splice(1, 0, {
-		pagePath: "",
-		isCustom: true,
+		pagePath: "custom",
 	});
 
 	return arr.map((e) => {
@@ -45,21 +48,22 @@ const list = computed(() => {
 			icon: "/" + (active ? e.selectedIconPath : e.iconPath),
 			active,
 			number: 0,
-			isCustom: e.isCustom,
 			...e,
 		};
 	});
 });
 
 function toLink(pagePath: string) {
-	router.push("/" + pagePath);
+	if (pagePath == "custom") {
+		// #ifdef H5
+		location.href = "https://cool-js.com/ai/chat-vip/index.html#/";
+		// #endif
+	} else {
+		router.push("/" + pagePath);
+	}
 }
 
-function toChat() {
-	// #ifdef H5
-	location.href = "https://cool-js.com/ai/chat-vip/index.html#/";
-	// #endif
-}
+uni.hideTabBar();
 </script>
 
 <style lang="scss" scoped>
@@ -90,6 +94,11 @@ function toChat() {
 			.icon {
 				height: 46rpx;
 				width: 46rpx;
+
+				image {
+					height: 100%;
+					width: 100%;
+				}
 			}
 
 			.label {
@@ -137,7 +146,6 @@ function toChat() {
 						#d14bd8,
 						#e9388a
 					);
-
 					border-radius: 100%;
 					padding: 16rpx;
 				}

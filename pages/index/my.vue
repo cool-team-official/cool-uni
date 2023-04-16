@@ -21,7 +21,7 @@
 
 			<view class="container">
 				<cl-list :radius="16">
-					<cl-list-item label="我的订单" />
+					<cl-list-item label="我的订单" @tap="toDev" />
 					<cl-list-item label="我的二维码" :arrow-icon="false">
 						<cl-icon name="qrcode" />
 					</cl-list-item>
@@ -44,21 +44,35 @@
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
 import { useCool, useStore } from "/@/cool";
 import Tabbar from "./components/tabbar.vue";
+import { useUi } from "/@/ui";
 
 const { router } = useCool();
 const { user } = useStore();
+const ui = useUi();
+
+async function refresh() {
+	if (user.token) {
+		await user.get();
+	} else {
+		user.logout();
+	}
+}
+
+function toDev() {
+	ui.showToast("开发中");
+}
 
 function toSet() {
 	router.push("/pages/user/set");
 }
 
 onPullDownRefresh(async () => {
-	await user.get();
+	await refresh();
 	uni.stopPullDownRefresh();
 });
 
 onShow(() => {
-	user.get();
+	refresh();
 });
 </script>
 

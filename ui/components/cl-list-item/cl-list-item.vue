@@ -6,6 +6,7 @@
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
+		@tap="onTap"
 	>
 		<view
 			class="cl-list-item__swiper"
@@ -92,12 +93,17 @@ export default defineComponent({
 		},
 	},
 
-	setup(props, { slots }) {
+	setup(props, { slots, emit }) {
 		const { proxy }: any = getCurrentInstance();
 		const { getParent } = useEl();
 
 		// cl-list
 		const parent = getParent("cl-list", ["justify", "border", "disabled"]);
+
+		// 是否禁用
+		const isDisabled = computed(() => {
+			return isBoolean(props.disabled) ? props.disabled : parent.value?.disabled;
+		});
 
 		// 样式
 		const itemClass = computed(() => {
@@ -105,9 +111,7 @@ export default defineComponent({
 				{
 					"is-append": slots.append,
 					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
-					"is-disabled": isBoolean(props.disabled)
-						? props.disabled
-						: parent.value?.disabled,
+					"is-disabled": isDisabled.value,
 				},
 			];
 		});
@@ -240,6 +244,11 @@ export default defineComponent({
 			}
 		}
 
+		// 点击事件
+		function onTap(e: any) {
+			emit("tap", e);
+		}
+
 		// 重新设置滑动菜单
 		watch(() => props.swipe, setMenu);
 
@@ -256,6 +265,7 @@ export default defineComponent({
 			onTouchStart,
 			onTouchMove,
 			onTouchEnd,
+			onTap,
 		};
 	},
 });

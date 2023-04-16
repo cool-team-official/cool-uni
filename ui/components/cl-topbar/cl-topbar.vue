@@ -19,7 +19,7 @@
 			}"
 		>
 			<slot>
-				<view class="cl-topbar__text" @tap="tapText">
+				<view class="cl-topbar__text" @tap="tapTitle">
 					<text class="cl-topbar__title" v-if="title">{{ title }}</text>
 					<text class="cl-topbar__description" v-if="description">{{ description }}</text>
 				</view>
@@ -112,16 +112,15 @@ export default defineComponent({
 			}
 		}
 
-		// 点击
-		function tapText(e: any) {
-			emit("click", e);
-			emit("tap", e);
+		// 点击标题
+		function tapTitle(e: any) {
+			emit("title", e);
 		}
 
 		return {
 			paddingTop,
 			back,
-			tapText,
+			tapTitle,
 		};
 	},
 });

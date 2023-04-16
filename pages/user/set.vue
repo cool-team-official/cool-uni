@@ -51,7 +51,7 @@
 			</cl-list>
 
 			<cl-list :radius="16">
-				<cl-list-item label="切换账号" />
+				<cl-list-item label="切换账号" @tap="router.push('/pages/user/login')" />
 				<cl-list-item label="退出登录" :arrow-icon="false" @tap="user.logout()">
 					<cl-icon :size="36" name="exit" />
 				</cl-list-item>

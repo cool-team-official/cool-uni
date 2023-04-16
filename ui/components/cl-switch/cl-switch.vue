@@ -38,7 +38,10 @@ export default defineComponent({
 			type: [Boolean, String, Number],
 			default: false,
 		},
-		color: String,
+		color: {
+			type: String,
+			default: "#6b69f8",
+		},
 	},
 
 	setup(props, { emit }) {

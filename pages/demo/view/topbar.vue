@@ -8,10 +8,10 @@
 			<cl-topbar title="标题" description="描述"></cl-topbar>
 		</cl-card>
 
-		<cl-card label="带描述">
+		<cl-card label="自定义">
 			<cl-topbar title="标题">
 				<template #append>
-					<view class="cl-topbar__icon">
+					<view class="cl-topbar__icon" @tap="toToast">
 						<text class="cl-icon-warning-border"></text>
 					</view>
 				</template>
@@ -27,3 +27,13 @@
 		</cl-card>
 	</cl-page>
 </template>
+
+<script setup lang="ts">
+import { useUi } from "/@/ui";
+
+const ui = useUi();
+
+function toToast() {
+	ui.showTips("Cool-uni");
+}
+</script>

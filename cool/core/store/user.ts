@@ -50,7 +50,7 @@ const useUserStore = defineStore("user", function () {
 	// 更新用户信息
 	async function update(data: Eps.UserInfoEntity & { [key: string]: any }) {
 		set(deepMerge(info.value, data));
-		await service.user.info.updatePerson(info.value);
+		return service.user.info.updatePerson(info.value);
 	}
 
 	// 清除用户

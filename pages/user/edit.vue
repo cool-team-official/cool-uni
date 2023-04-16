@@ -1,14 +1,6 @@
 <template>
 	<cl-page>
 		<view class="page-user-edit">
-			<cl-topbar title="编辑">
-				<template #append>
-					<!-- #ifndef MP -->
-					<button class="save-btn" @tap="save">保存</button>
-					<!-- #endif -->
-				</template>
-			</cl-topbar>
-
 			<view class="form">
 				<cl-form label-position="top">
 					<cl-form-item label="昵称">
@@ -17,17 +9,17 @@
 				</cl-form>
 			</view>
 
-			<!-- #ifdef MP -->
-			<view class="next">
-				<cl-button :width="220" round type="primary">保存</cl-button>
+			<view class="save-btn">
+				<cl-button :width="220" round type="primary" :loading="loading" @tap="save">
+					保存
+				</cl-button>
 			</view>
-			<!-- #endif -->
 		</view>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
 import { useUi } from "/@/ui";
 
@@ -36,11 +28,15 @@ const { user } = useStore();
 const ui = useUi();
 
 const form = reactive(user.info || {});
+const loading = ref(false);
 
-function save() {
-	user.update(form);
-	ui.showToast("更新用户信息成功");
-	router.back();
+async function save() {
+	loading.value = true;
+	await user.update(form).catch((err) => {
+		ui.showToast(err.message);
+	});
+	loading.value = false;
+	ui.showTips("用户信息保存成功", router.back);
 }
 </script>
 
@@ -50,26 +46,10 @@ function save() {
 		padding: 20rpx 24rpx;
 	}
 
-	.next {
+	.save-btn {
 		padding: 20rpx 24rpx;
 		display: flex;
 		justify-content: center;
-	}
-
-	.save-btn {
-		display: flex;
-		align-items: center;
-		height: 100%;
-		padding: 0 30rpx;
-		margin: 0;
-		line-height: normal;
-		font-size: 28rpx;
-		color: $cl-color-primary;
-		background-color: transparent;
-
-		&::after {
-			border: 0;
-		}
 	}
 }
 </style>

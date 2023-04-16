@@ -22,7 +22,6 @@
 			margin: parseRpx(margin),
 		}"
 		:size="size"
-		:type="type"
 		:disabled="disabled"
 		:form-type="formType"
 		:open-type="openType"
@@ -42,6 +41,7 @@
 		@error="error"
 		@opensetting="openSetting"
 		@launchapp="launchApp"
+		@click="click"
 	>
 		<!-- 加载框 -->
 		<view class="cl-button__loading" v-if="loading">
@@ -151,12 +151,23 @@ export default defineComponent({
 			emit("launchapp", e);
 		}
 
+		function click(e: any) {
+			if (!props.disabled && !props.loading) {
+				emit("click", e);
+
+				// #ifndef MP-WEIXIN
+				emit("tap", e);
+				// #endif
+			}
+		}
+
 		return {
 			getPhoneNumber,
 			getUserInfo,
 			error,
 			openSetting,
 			launchApp,
+			click,
 			isImg: computed(() => props.icon?.includes("/")),
 			loadingColor: computed(() => (props.type ? "#fff" : "")),
 			parseRpx,

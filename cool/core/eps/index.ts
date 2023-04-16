@@ -1,7 +1,7 @@
 import { config, isDev } from "../../config";
 import { service, BaseService } from "../service";
 import { deepFiles, deepMerge, storage, toCamel } from "../../utils";
-import { isArray } from "lodash-es";
+import { isArray, isEmpty } from "lodash-es";
 
 // 获取标签名
 function getNames(v: any) {
@@ -105,15 +105,24 @@ export function useEps() {
 				.request({
 					url: "/app/base/comm/eps",
 				})
-				.then(async (res) => {
-					const isLoaded: boolean = storage.get("eps");
-					storage.set("eps", res);
+				.then((res) => {
+					if (!storage.get("eps")) {
+						// 首次设置
+						storage.set("eps", res || {});
 
-					if (!isLoaded) {
+						// #ifdef H5
 						location.reload();
+						// #endif
+
+						// #ifndef H5
+						console.error("[Eps] 初始化成功，请重新编译");
+						// #endif
 					} else {
-						set(res, true);
-						console.log("[Eps] 初始化成功。");
+						if (!isEmpty(res)) {
+							storage.set("eps", res);
+							set(res, true);
+							console.log("[Eps] 解析成功");
+						}
 					}
 				})
 				.catch((err) => {
@@ -127,7 +136,7 @@ export function useEps() {
 		// 接口列表
 		const list: any[] = [];
 
-		if (!d) {
+		if (isEmpty(d)) {
 			return false;
 		}
 

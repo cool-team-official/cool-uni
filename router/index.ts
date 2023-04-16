@@ -1,12 +1,12 @@
 import { router, useStore } from "/@/cool";
 
-const ignoreToken = ["/pages/user/captcha"];
+const ignoreToken = ["/pages/user/login", "/pages/user/captcha", "/pages/index/home"];
 
 router.beforeEach((to, next) => {
 	const { user } = useStore();
 
 	if (ignoreToken.includes(to.path)) {
-		return next();
+		next();
 	} else {
 		if (user.token) {
 			next();

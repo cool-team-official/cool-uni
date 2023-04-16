@@ -28,13 +28,13 @@
 				{
 					"path": "edit",
 					"style": {
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "编辑"
 					}
 				},
 				{
 					"path": "login",
 					"style": {
-						"navigationStyle": "custom",
+						"navigationBarTitleText": "",
 						"navigationBarBackgroundColor": "#f7f7f7"
 					}
 				},

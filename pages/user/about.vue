@@ -44,7 +44,7 @@ page {
 		height: 140rpx;
 		width: 140rpx;
 		margin: 10rpx auto;
-		border-radius: 16rpx;
+		border-radius: 100%;
 	}
 
 	.version {

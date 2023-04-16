@@ -106,7 +106,7 @@ import { useApp, useCool, useStore, useWx } from "/@/cool";
 import { useUi } from "/@/ui";
 import SmsBtn from "/@/components/sms-btn.vue";
 
-const { service, router, refs, setRefs } = useCool();
+const { service, router, refs, setRefs, storage } = useCool();
 const { user } = useStore();
 const app = useApp();
 const ui = useUi();
@@ -132,15 +132,17 @@ const platforms = ref([
 		value: "phone",
 		icon: "/pages/user/static/icon/phone.png",
 	},
+	// #ifdef H5 || APP || MP-WEIXIN
 	{
 		label: "通过微信登录",
 		value: "wx",
 		icon: "/pages/user/static/icon/wx.png",
 		hidden: !wx.hasApp(),
 	},
+	// #endif
 ]);
 
-const phone = ref("");
+const phone = ref(storage.get("phone") || "");
 
 // 登录请求
 async function nextLogin(key: "mini" | "mp", data: any) {
@@ -151,9 +153,6 @@ async function nextLogin(key: "mini" | "mp", data: any) {
 
 			// 设置用户信息
 			user.set(res.userInfo);
-
-			// 关闭加载
-			loading.value = false;
 
 			// 登录跳转
 			router.nextLogin();
@@ -170,6 +169,8 @@ function phoneLogin(sms?: boolean) {
 			refs.smsBtn.open();
 		});
 	} else {
+		storage.set("phone", phone.value);
+
 		router.push({
 			path: "/pages/user/captcha",
 			mode: "redirectTo",
@@ -182,7 +183,7 @@ function phoneLogin(sms?: boolean) {
 
 // 微信登录
 function wxLogin() {
-	check(() => {
+	check(async () => {
 		// #ifdef APP
 		if (wx.hasApp()) {
 			wx.appLogin().then((code) => {
@@ -206,9 +207,16 @@ function wxLogin() {
 		// #ifdef MP-WEIXIN
 		loading.value = true;
 
-		wx.miniLogin().then((res) => {
-			nextLogin("mini", res);
-		});
+		await wx
+			.miniLogin()
+			.then(async (res) => {
+				await nextLogin("mini", res);
+			})
+			.catch((err) => {
+				ui.showToast(err.message);
+			});
+
+		loading.value = false;
 		// #endif
 
 		// #ifdef H5
@@ -221,9 +229,11 @@ function wxLogin() {
 function mpLogin() {
 	// #ifdef H5
 	wx.mpLogin().then(async (code) => {
-		ui.showLoading();
-		await nextLogin("mp", { code });
-		ui.hideLoading();
+		if (code) {
+			ui.showLoading();
+			await nextLogin("mp", { code });
+			ui.hideLoading();
+		}
 	});
 	// #endif
 }
@@ -264,15 +274,15 @@ onReady(() => {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding-top: calc(20% + 44px);
+		padding-top: 20%;
 
 		image {
 			display: block;
-			height: 120rpx;
-			width: 120rpx;
-			border-radius: 60rpx;
+			height: 140rpx;
+			width: 140rpx;
+			border-radius: 100%;
 			margin-bottom: 22rpx;
-			box-shadow: 0 0 200rpx 10rpx $cl-color-primary;
+			border: 8rpx solid #eee;
 		}
 
 		text {
@@ -378,9 +388,5 @@ onReady(() => {
 			}
 		}
 	}
-}
-
-.v {
-	background-color: #000;
 }
 </style>
