@@ -1,4 +1,51 @@
 declare namespace Eps {
+	interface AiVipEntity {
+		/**
+		 * ID
+		 */
+		id?: number;
+		/**
+		 * 用户ID
+		 */
+		userId?: number;
+		/**
+		 * 标题
+		 */
+		title?: string;
+		/**
+		 * 限制次数
+		 */
+		limitCount?: number;
+		/**
+		 * 月数
+		 */
+		month?: number;
+		/**
+		 * 价格
+		 */
+		price?: number;
+		/**
+		 * 状态 0-禁用 1-启用
+		 */
+		status?: number;
+		/**
+		 * 排序
+		 */
+		sortNum?: number;
+		/**
+		 * 创建时间
+		 */
+		createTime?: Date;
+		/**
+		 * 更新时间
+		 */
+		updateTime?: Date;
+		/**
+		 * 任意键值
+		 */
+		[key: string]: any;
+	}
+
 	interface DemoGoodsEntity {
 		/**
 		 * ID
@@ -84,6 +131,135 @@ declare namespace Eps {
 		 */
 		[key: string]: any;
 	}
+
+	interface UserInfoEntity {
+		/**
+		 * ID
+		 */
+		id?: number;
+		/**
+		 * 登录唯一ID
+		 */
+		unionid?: string;
+		/**
+		 * 头像
+		 */
+		avatarUrl?: string;
+		/**
+		 * 昵称
+		 */
+		nickName?: string;
+		/**
+		 * 手机号
+		 */
+		phone?: string;
+		/**
+		 * 性别 0-未知 1-男 2-女
+		 */
+		gender?: number;
+		/**
+		 * 状态 0-禁用 1-正常
+		 */
+		status?: number;
+		/**
+		 * 登录方式 0-小程序 1-公众号 2-H5
+		 */
+		loginType?: number;
+		/**
+		 * 创建时间
+		 */
+		createTime?: Date;
+		/**
+		 * 更新时间
+		 */
+		updateTime?: Date;
+		/**
+		 * 任意键值
+		 */
+		[key: string]: any;
+	}
+	interface AiPay {
+		/**
+		 * wxNotify
+		 */
+		wxNotify(data?: any): Promise<any>;
+		/**
+		 * 微信小程序支付
+		 */
+		wxMini(data?: any): Promise<any>;
+		/**
+		 * 微信公众号支付
+		 */
+		wxMp(data?: any): Promise<any>;
+		/**
+		 * 微信H5支付
+		 */
+		wxH5(data?: any): Promise<any>;
+		/**
+		 * wx
+		 */
+		wx(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
+	interface AiVip {
+		/**
+		 * 列表查询
+		 */
+		list(data?: any): Promise<AiVipEntity[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: AiVipEntity[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<AiVipEntity>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
 	interface BaseComm {
 		/**
 		 * 文件上传模式
@@ -171,6 +347,41 @@ declare namespace Eps {
 		 * get
 		 */
 		get(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
+	interface DemoChat {
+		/**
+		 * 聊天
+		 */
+		chat(data?: any): Promise<any>;
 		/**
 		 * list
 		 */
@@ -568,6 +779,96 @@ declare namespace Eps {
 		delete(data?: any): Promise<any>;
 	}
 
+	interface UserInfo {
+		/**
+		 * 获取用户信息
+		 */
+		updatePerson(data?: any): Promise<any>;
+		/**
+		 * 获取用户信息
+		 */
+		person(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<UserInfoEntity[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: UserInfoEntity[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<UserInfoEntity>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
+	interface UserLogin {
+		/**
+		 * 刷新token
+		 */
+		refreshToken(data?: any): Promise<any>;
+		/**
+		 * 图片验证码
+		 */
+		captcha(data?: any): Promise<any>;
+		/**
+		 * 验证码
+		 */
+		smsCode(data?: any): Promise<any>;
+		/**
+		 * 手机号登录
+		 */
+		phone(data?: any): Promise<any>;
+		/**
+		 * 小程序登录
+		 */
+		mini(data?: any): Promise<any>;
+		/**
+		 * 公众号登录
+		 */
+		mp(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
 	interface Test {
 		/**
 		 * list
@@ -608,10 +909,12 @@ declare namespace Eps {
 			proxy?: boolean;
 			[key: string]: any;
 		}): Promise<any>;
+		ai: { pay: AiPay; vip: AiVip };
 		base: { comm: BaseComm };
 		cloud: { func: CloudFunc };
 		demo: {
 			cache: DemoCache;
+			chat: DemoChat;
 			event: DemoEvent;
 			goods: DemoGoods;
 			pay: DemoPay;
@@ -622,6 +925,7 @@ declare namespace Eps {
 		dict: { info: DictInfo };
 		mqtt: { iot: MqttIot };
 		wps: Wps;
+		user: { info: UserInfo; login: UserLogin };
 		test: Test;
 	};
 }

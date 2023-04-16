@@ -1,10 +1,11 @@
-import { computed, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 import { onShow } from "@dcloudio/uni-app";
 import { getVersion } from "../../utils";
 import { config } from "../../config";
+import { defineStore } from "pinia";
 
 // 缓存
-function useCache() {
+const useCache = defineStore("cache", () => {
 	// 缓存大小
 	const size = ref("0KB");
 
@@ -26,9 +27,11 @@ function useCache() {
 
 	// 清空缓存
 	function clear() {
+		// #ifdef APP
 		plus.cache.clear(function () {
 			get();
 		});
+		// #endif
 	}
 
 	onShow(() => {
@@ -40,10 +43,10 @@ function useCache() {
 		get,
 		clear,
 	};
-}
+});
 
 // 消息通知
-function useNotice() {
+const useNotice = defineStore("notice", () => {
 	// 是否开启
 	const enabled = ref(false);
 
@@ -84,15 +87,18 @@ function useNotice() {
 		get,
 		open,
 	};
-}
+});
 
 // 版本信息
-function useVersion() {
+const useVersion = defineStore("version", () => {
 	// 版本号
 	const num = ref("");
 
 	// 是否能升级
 	const isUpgrade = ref(false);
+
+	// 检测状态
+	const loading = ref(false);
 
 	// 获取版本号
 	function get() {
@@ -103,14 +109,18 @@ function useVersion() {
 
 	// 检测更新
 	function check() {
+		loading.value = true;
+
 		// 这边调用接口获取版本号
 		setTimeout(() => {
 			const v = "1.0.1";
+			isUpgrade.value = v > num.value;
 
 			if (v > num.value) {
-				isUpgrade.value = true;
 				num.value = v;
 			}
+
+			loading.value = false;
 		}, 1500);
 	}
 
@@ -119,10 +129,11 @@ function useVersion() {
 	return {
 		num,
 		isUpgrade,
+		loading,
 		get,
 		check,
 	};
-}
+});
 
 export function useApp() {
 	const info = reactive(config.app);

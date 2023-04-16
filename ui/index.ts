@@ -27,6 +27,8 @@ export function useUi(): Ui.Page {
 		update();
 	});
 
+	update();
+
 	["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"].forEach((e) => {
 		ui[e] = (...args: any[]) => {
 			if (d) {

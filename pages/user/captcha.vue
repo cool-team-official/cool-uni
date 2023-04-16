@@ -8,35 +8,28 @@
 				<text class="tips">已发送至 +86 {{ form.phone }}</text>
 
 				<view class="code">
-					<cl-captcha
-						v-model="form.code"
-						:length="len"
-						:gutter="26"
-						@done="next"
-					></cl-captcha>
+					<cl-captcha v-model="form.smsCode" :length="len" :gutter="26" @done="next" />
 				</view>
 
 				<cl-button
 					type="primary"
-					:disabled="form.code.length !== len"
+					:disabled="form.smsCode.length !== len"
 					:loading="saving"
 					fill
-					:height="92"
+					:height="90"
+					:font-size="30"
 					@tap="next"
-					>确定</cl-button
 				>
+					确定
+				</cl-button>
 
 				<view class="send">
-					<cl-text
-						color="#333"
-						:size="26"
-						:value="`重新获取（${countdown}s）`"
-						v-if="countdown > 0"
-					></cl-text>
-
-					<cl-button size="mini" type="text" @tap="reSend" v-else>
-						重新获取验证码
-					</cl-button>
+					<sms-btn
+						size="small"
+						:border="false"
+						:phone="form.phone"
+						:ref="setRefs('smsBtn')"
+					/>
 				</view>
 			</view>
 		</view>
@@ -48,13 +41,11 @@ import { onReady } from "@dcloudio/uni-app";
 import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
 import { useUi } from "/@/ui";
+import SmsBtn from "/@/components/sms-btn.vue";
 
-const { service, router } = useCool();
+const { service, router, refs, setRefs } = useCool();
 const { user } = useStore();
 const ui = useUi();
-
-// 倒计时
-const countdown = ref(60);
 
 // 验证码长度
 const len = 4;
@@ -64,44 +55,16 @@ const saving = ref(false);
 
 // 表单
 const form = reactive({
-	code: "",
+	smsCode: "",
 	phone: router.query.phone || "",
 });
-
-// 开始倒计时
-function startCountdown() {
-	countdown.value = 60;
-
-	const timer = setInterval(() => {
-		countdown.value--;
-
-		if (countdown.value < 1) {
-			clearInterval(timer);
-		}
-	}, 1000);
-}
-
-// 重新发送短信
-function reSend() {
-	service.user.user
-		.getCode({
-			phone: form.phone,
-		})
-		.then(() => {
-			startCountdown();
-			ui.showToast("短信已发送，请查收");
-		})
-		.catch((err) => {
-			ui.showToast(err.message);
-		});
-}
 
 // 下一步
 function next() {
 	saving.value = true;
 
-	service.user.user
-		.loginByCode(form)
+	service.user.login
+		.phone(form)
 		.then(async (res) => {
 			// 设置token
 			user.setToken(res);
@@ -115,12 +78,12 @@ function next() {
 		.catch((err) => {
 			ui.showTips(err.message || "登录失效，请重试~");
 			saving.value = false;
-			form.code = "";
+			form.smsCode = "";
 		});
 }
 
 onReady(() => {
-	startCountdown();
+	refs.smsBtn.startCountdown();
 });
 </script>
 

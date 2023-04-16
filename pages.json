@@ -9,7 +9,10 @@
 		},
 		{
 			"path": "pages/index/my",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"subPackages": [
@@ -20,6 +23,12 @@
 					"path": "set",
 					"style": {
 						"navigationBarTitleText": "设置"
+					}
+				},
+				{
+					"path": "edit",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -315,10 +324,6 @@
 		"backgroundColor": "#f7f7f7"
 	},
 	"tabBar": {
-		"color": "#C7C7C7",
-		"selectedColor": "#409eff",
-		"borderStyle": "white",
-		"backgroundColor": "#ffffff",
 		"list": [
 			{
 				"pagePath": "pages/index/home",

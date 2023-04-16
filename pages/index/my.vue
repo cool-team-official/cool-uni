@@ -1,9 +1,37 @@
 <template>
 	<cl-page>
 		<view class="page-my">
+			<view class="header">
+				<view class="info">
+					<!-- 信息 -->
+					<view class="base">
+						<text class="name" @tap="toSet">{{ user.info?.nickName || "昵称" }}</text>
+						<text class="level">Lv1</text>
+					</view>
+
+					<!-- 头像 -->
+					<view class="avatar" @tap="toSet">
+						<cl-avatar :size="110" :url="user.info?.avatarUrl" />
+					</view>
+				</view>
+
+				<!-- 简介 -->
+				<view class="desc"> 简介：我也写了一个cool-admin的开源项目 </view>
+			</view>
+
 			<view class="container">
-				<cl-list :radius="8">
-					<cl-list-item label="设置" @tap="toPage('/pages/user/set')"> </cl-list-item>
+				<cl-list :radius="16">
+					<cl-list-item label="我的订单" />
+					<cl-list-item label="我的二维码" :arrow-icon="false">
+						<cl-icon name="qrcode" />
+					</cl-list-item>
+					<cl-list-item label="我的钱包" :arrow-icon="false">
+						<cl-text type="price" :value="59.05" />
+					</cl-list-item>
+				</cl-list>
+
+				<cl-list :radius="16">
+					<cl-list-item :border="false" label="设置" @tap="toSet" />
 				</cl-list>
 			</view>
 		</view>
@@ -20,31 +48,64 @@ import Tabbar from "./components/tabbar.vue";
 const { router } = useCool();
 const { user } = useStore();
 
-function refresh() {
-	// if (!user.token) {
-	// 	return router.login();
-	// }
-	// user.get();
-}
-
-function toPage(path: string) {
-	router.push(path);
+function toSet() {
+	router.push("/pages/user/set");
 }
 
 onPullDownRefresh(async () => {
-	refresh();
+	await user.get();
 	uni.stopPullDownRefresh();
 });
 
 onShow(() => {
-	refresh();
+	user.get();
 });
 </script>
 
 <style lang="scss" scoped>
 .page-my {
+	.header {
+		padding: 30rpx 30rpx 40rpx 30rpx;
+		background-color: #fff;
+
+		.info {
+			display: flex;
+			position: relative;
+
+			.name {
+				display: block;
+				font-size: 50rpx;
+				font-weight: bold;
+			}
+
+			.level {
+				display: inline-block;
+				font-size: 24rpx;
+				border: 2rpx solid currentColor;
+				border-radius: 8rpx;
+				padding: 0 6rpx;
+				margin: 10rpx 0 0 0;
+				color: $cl-color-primary;
+			}
+
+			.avatar {
+				border: 6rpx solid #f7f7f7;
+				border-radius: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		}
+
+		.desc {
+			color: #999;
+			font-size: 24rpx;
+			margin-top: 20rpx;
+		}
+	}
+
 	.container {
-		padding: 20rpx;
+		padding: 20rpx 24rpx;
 	}
 }
 </style>

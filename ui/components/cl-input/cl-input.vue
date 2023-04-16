@@ -13,6 +13,7 @@
 			backgroundColor,
 			borderRadius: parseRpx(borderRadius),
 			height: parseRpx(height),
+			fontSize: parseRpx(fontSize),
 		}"
 		@tap="onTap"
 	>
@@ -107,6 +108,10 @@ export default defineComponent({
 		border: {
 			type: Boolean,
 			default: true,
+		},
+		fontSize: {
+			type: [Number, String],
+			default: 26,
 		},
 		backgroundColor: String,
 		focus: Boolean,

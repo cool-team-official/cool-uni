@@ -12,13 +12,18 @@ const useUserStore = defineStore("user", function () {
 	const token = ref(data.token || "");
 
 	// 设置标识
-	function setToken({ accessToken, accessTokenExpires, refreshToken, refreshTokenExpires }: any) {
-		token.value = accessToken;
+	function setToken(data: {
+		token: string;
+		expire: number;
+		refreshToken: string;
+		refreshExpire: number;
+	}) {
+		token.value = data.token;
 
 		// 访问
-		storage.set("token", accessToken, accessTokenExpires - 5);
+		storage.set("token", data.token, data.expire - 5);
 		// 刷新
-		storage.set("refreshToken", refreshToken, refreshTokenExpires);
+		storage.set("refreshToken", data.refreshToken, data.refreshExpire - 5);
 	}
 
 	// 刷新标识
@@ -29,7 +34,7 @@ const useUserStore = defineStore("user", function () {
 			})
 			.then((res) => {
 				setToken(res);
-				return res.accessToken;
+				return res.token;
 			});
 	}
 
@@ -43,9 +48,9 @@ const useUserStore = defineStore("user", function () {
 	}
 
 	// 更新用户信息
-	async function update(data: any) {
+	async function update(data: Eps.UserInfoEntity & { [key: string]: any }) {
 		set(deepMerge(info.value, data));
-		await service.user.info.update(info.value);
+		await service.user.info.updatePerson(info.value);
 	}
 
 	// 清除用户
@@ -66,7 +71,7 @@ const useUserStore = defineStore("user", function () {
 	// 获取用户信息
 	async function get() {
 		return service.user.info
-			.info()
+			.person()
 			.then((res) => {
 				if (res) {
 					set(res);

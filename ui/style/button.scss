@@ -107,12 +107,6 @@
 		width: 100%;
 	}
 
-	&.is-plain {
-		&.is-border {
-			border-width: $cl-button-border-width;
-		}
-	}
-
 	&.is-disabled {
 		opacity: 0.5;
 	}

@@ -1,7 +1,9 @@
 <template>
 	<cl-page>
 		<view class="page-home">
-			<view class="logo"> COOL-UNI </view>
+			<view class="logo">
+				<text>Cool-uni</text>
+			</view>
 
 			<view class="group" v-for="(item, index) in list" :key="index">
 				<text class="title">{{ item.label }}</text>
@@ -241,9 +243,27 @@ function toLink(link: string) {
 		align-items: center;
 		justify-content: center;
 		padding: 100rpx 0 50rpx 0;
-		color: #000;
-		font-weight: 500;
-		font-size: 60rpx;
+		height: 60rpx;
+
+		text {
+			font-size: 80rpx;
+			font-weight: bold;
+			animation: showUp 2.5s forwards;
+			background: linear-gradient(to right, #6b69f8, #a35df2, #d14bd8);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+
+	@keyframes showUp {
+		from {
+			letter-spacing: -40rpx;
+			filter: blur(20rpx);
+		}
+
+		to {
+			letter-spacing: 6rpx;
+		}
 	}
 
 	.group {

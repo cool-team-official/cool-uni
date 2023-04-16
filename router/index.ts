@@ -1,6 +1,6 @@
 import { router, useStore } from "/@/cool";
 
-const ignoreToken = ["/pages/user/set", "/pages/user/feedback"];
+const ignoreToken = ["/pages/user/captcha"];
 
 router.beforeEach((to, next) => {
 	const { user } = useStore();

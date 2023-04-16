@@ -14,27 +14,38 @@
 					<template v-if="mode == 'phone'">
 						<text class="label">手机号登录</text>
 
-						<view class="input">
+						<view class="phone">
 							<text>+86</text>
-							<input
+							<cl-input
 								v-model="phone"
 								type="number"
 								placeholder="请输入手机号码"
-								maxlength="11"
+								:border="false"
+								:maxlength="11"
+								:font-size="30"
+								background-color="transparent"
 							/>
 						</view>
 
 						<view class="next-btn">
-							<cl-button
-								type="primary"
-								fill
-								:disabled="!phoneValid"
-								:height="90"
-								:font-size="30"
-								:loading="loading"
-								@click="phoneLogin"
-								>获取验证码</cl-button
+							<sms-btn
+								:ref="setRefs('smsBtn')"
+								:phone="phone"
+								@success="phoneLogin(false)"
 							>
+								<template #default="{ disabled }">
+									<cl-button
+										fill
+										type="primary"
+										:height="90"
+										:font-size="30"
+										:disabled="disabled"
+										@tap="phoneLogin"
+									>
+										获取验证码
+									</cl-button>
+								</template>
+							</sms-btn>
 						</view>
 					</template>
 
@@ -45,7 +56,8 @@
 							fill
 							:height="90"
 							:font-size="30"
-							@click="wxLogin"
+							:loading="loading"
+							@tap="wxLogin"
 						>
 							微信一键登录
 						</cl-button>
@@ -88,14 +100,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { ref } from "vue";
+import { onReady } from "@dcloudio/uni-app";
 import { useApp, useCool, useStore, useWx } from "/@/cool";
 import { useUi } from "/@/ui";
+import SmsBtn from "/@/components/sms-btn.vue";
 
-const { service, router } = useCool();
+const { service, router, refs, setRefs } = useCool();
 const { user } = useStore();
-const ui = useUi();
 const app = useApp();
+const ui = useUi();
 const wx = useWx();
 
 // 是否同意
@@ -104,14 +118,15 @@ const agree = ref(true);
 // 加载状态
 const loading = ref(false);
 
-// 手机号
-const phone = ref("13255022000");
+// 登录方式
+const mode = ref("phone");
 
-// 手机号是否正确
-const phoneValid = computed(() => /^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(phone.value));
+// #ifdef MP-WEIXIN
+mode.value = "wx";
+// #endif
 
 // 登录平台
-const platforms = ref<any[]>([
+const platforms = ref([
 	{
 		label: "通过手机登录",
 		value: "phone",
@@ -125,60 +140,44 @@ const platforms = ref<any[]>([
 	},
 ]);
 
-// 登录方式
-const mode = ref("phone");
+const phone = ref("");
 
-// 检测
-function check(callback: () => void) {
-	if (!agree.value) {
-		return ui.showToast("请先勾选同意后再进行登录");
-	}
-
-	callback();
-}
-
-// 登录
-async function nextLogin(req: Promise<any>) {
-	check(() => {
-		req.then((res) => {
+// 登录请求
+async function nextLogin(key: "mini" | "mp", data: any) {
+	return service.user.login[key](data)
+		.then((res) => {
 			// 设置token
 			user.setToken(res);
 
 			// 设置用户信息
 			user.set(res.userInfo);
 
+			// 关闭加载
+			loading.value = false;
+
 			// 登录跳转
 			router.nextLogin();
-		}).catch((err) => {
+		})
+		.catch((err) => {
 			ui.showTips(err.message);
 		});
-	});
 }
 
 // 手机号登录
-function phoneLogin() {
-	check(async function () {
-		loading.value = true;
-
-		await service.user.user
-			.getCode({
+function phoneLogin(sms?: boolean) {
+	if (sms) {
+		check(() => {
+			refs.smsBtn.open();
+		});
+	} else {
+		router.push({
+			path: "/pages/user/captcha",
+			mode: "redirectTo",
+			query: {
 				phone: phone.value,
-			})
-			.then(() => {
-				router.push({
-					path: "/pages/user/captcha",
-					mode: "redirectTo",
-					query: {
-						phone: phone.value,
-					},
-				});
-			})
-			.catch((err) => {
-				ui.showTips(err.message);
-			});
-
-		loading.value = false;
-	});
+			},
+		});
+	}
 }
 
 // 微信登录
@@ -186,7 +185,9 @@ function wxLogin() {
 	check(() => {
 		// #ifdef APP
 		if (wx.hasApp()) {
-			nextLogin(wx.appLogin());
+			wx.appLogin().then((code) => {
+				//
+			});
 		} else {
 			ui.showConfirm({
 				title: "温馨提示",
@@ -203,14 +204,42 @@ function wxLogin() {
 		// #endif
 
 		// #ifdef MP-WEIXIN
-		nextLogin(wx.miniLogin());
+		loading.value = true;
+
+		wx.miniLogin().then((res) => {
+			nextLogin("mini", res);
+		});
+		// #endif
+
+		// #ifdef H5
+		wx.mpAuth();
 		// #endif
 	});
+}
+
+// 公众号登录
+function mpLogin() {
+	// #ifdef H5
+	wx.mpLogin().then(async (code) => {
+		ui.showLoading();
+		await nextLogin("mp", { code });
+		ui.hideLoading();
+	});
+	// #endif
 }
 
 // 切换模式
 function changeMode(value: string) {
 	mode.value = value;
+}
+
+// 检测
+function check(callback: () => void) {
+	if (!agree.value) {
+		return ui.showToast("请先勾选同意后再进行登录");
+	}
+
+	callback();
 }
 
 // 文案
@@ -222,6 +251,10 @@ function toText(name: string) {
 		},
 	});
 }
+
+onReady(() => {
+	mpLogin();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -269,19 +302,19 @@ function toText(name: string) {
 			}
 
 			&.is-phone {
-				.input {
+				.phone {
 					display: flex;
 					align-items: center;
 					background-color: #eeeeee;
 					border-radius: 10rpx;
 					height: 90rpx;
 					margin-bottom: 26rpx;
+					font-size: 30rpx;
 
 					text {
 						display: inline-block;
 						padding: 0 24rpx 0 50rpx;
-						border-right: 1rpx solid #d6d6d6;
-						font-size: 28rpx;
+						border-right: 2rpx solid $cl-border-color;
 						font-weight: bold;
 						color: #404040;
 					}
@@ -290,7 +323,6 @@ function toText(name: string) {
 						height: 100%;
 						flex: 1;
 						padding: 0 30rpx;
-						font-size: 28rpx;
 					}
 				}
 			}
@@ -346,5 +378,9 @@ function toText(name: string) {
 			}
 		}
 	}
+}
+
+.v {
+	background-color: #000;
 }
 </style>

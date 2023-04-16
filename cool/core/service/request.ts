@@ -96,11 +96,16 @@ export default function request(options: any) {
 					// 是否在刷新中
 					if (!isRefreshing) {
 						isRefreshing = true;
-						user.refreshToken().then((token) => {
-							requests.forEach((cb) => cb(token));
-							requests = [];
-							isRefreshing = false;
-						});
+						user.refreshToken()
+							.then((token) => {
+								requests.forEach((cb) => cb(token));
+								requests = [];
+								isRefreshing = false;
+							})
+							.catch((err) => {
+								isRefreshing = false;
+								reject(err);
+							});
 					}
 
 					return new Promise((resolve) => {

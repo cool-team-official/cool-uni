@@ -1,6 +1,6 @@
 # COOL-UNI
 
-让你不用想太多就能开发完功能，2.0 携带 vue3、vite、ts、pinia 等众多新特性细节曝光！！[文档地址](https://cool-js.com/uni/introduce.html)
+让你不用想太多就能开发完功能，6.0 携带 vue3、vite、ts、pinia 等众多新特性细节曝光！！[文档地址](https://cool-js.com/uni/introduce.html)
 
 ## 更快
 
@@ -14,8 +14,9 @@
 
 ```html
 <script lang="ts" setup>
-	import { useCool } from "/@/cool";
-	const { service, router, ui, mitt, storage, upload } = useCool();
+	import { useCool, useUi } from "/@/cool";
+	const { service, router, mitt, storage, upload } = useCool();
+	const ui = useUi();
 
 	// 请求
 	service.test.page().then((res) => {

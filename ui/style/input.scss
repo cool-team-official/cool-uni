@@ -9,6 +9,7 @@
 	transition: border-color 0.2s;
 	padding: 0 20rpx;
 	background-color: #fff;
+	font-size: $cl-input-font-size;
 
 	&--focus {
 		border-color: rgba($cl-color-primary, 0.7);
@@ -25,18 +26,17 @@
 	&__inner {
 		height: 100%;
 		flex: 1;
-		font-size: $cl-input-font-size;
 		border: 0;
 		padding: 0;
 		outline: none;
 		background-color: transparent;
+		font-size: inherit;
 	}
 
 	&__prepend,
 	&__append {
 		display: flex;
 		align-items: center;
-		font-size: $cl-input-font-size;
 	}
 
 	&__prepend {

@@ -8,11 +8,17 @@
 				:class="{
 					'is-active': item.active,
 				}"
-				@click="toLink(item)"
+				@tap="toLink(item.pagePath)"
 			>
-				<image class="icon" :src="item.icon" mode="aspectFit" />
-				<text class="label">{{ item.text }}</text>
-				<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
+				<view class="custom" @tap="toChat" v-if="item.isCustom">
+					<image class="icon" src="/static/icon/tabbar/chat.png" mode="aspectFit" />
+				</view>
+
+				<template v-else>
+					<image class="icon" :src="item.icon" mode="aspectFit" />
+					<text class="label">{{ item.text }}</text>
+					<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
+				</template>
 			</view>
 		</view>
 	</view>
@@ -27,20 +33,32 @@ const { router } = useCool();
 const list = computed(() => {
 	const arr = [...router.tabs];
 
-	return arr.map((e, i) => {
+	arr.splice(1, 0, {
+		pagePath: "",
+		isCustom: true,
+	});
+
+	return arr.map((e) => {
 		const active = router.path?.includes(e.pagePath);
 
 		return {
 			icon: "/" + (active ? e.selectedIconPath : e.iconPath),
 			active,
-			number: i == 1 ? (Math.random() * 9).toFixed(0) : 0,
+			number: 0,
+			isCustom: e.isCustom,
 			...e,
 		};
 	});
 });
 
-function toLink(item: any) {
-	router.push("/" + item.pagePath);
+function toLink(pagePath: string) {
+	router.push("/" + pagePath);
+}
+
+function toChat() {
+	// #ifdef H5
+	location.href = "https://cool-js.com/ai/chat-vip/index.html#/";
+	// #endif
 }
 </script>
 
@@ -70,13 +88,13 @@ function toLink(item: any) {
 			position: relative;
 
 			.icon {
-				height: 58rpx;
-				width: 58rpx;
+				height: 46rpx;
+				width: 46rpx;
 			}
 
 			.label {
 				font-size: 24rpx;
-				color: #999;
+				color: #bfbfbf;
 			}
 
 			.badge {
@@ -104,16 +122,25 @@ function toLink(item: any) {
 				}
 			}
 
-			&:not(:last-child)::after {
-				display: block;
-				content: "";
-				height: 36rpx;
-				width: 4rpx;
-				border-radius: 4rpx;
-				background-color: #eee;
-				position: absolute;
-				right: -2rpx;
-				top: calc(50% - 18rpx);
+			.custom {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+
+				.icon {
+					background: linear-gradient(
+						to bottom right,
+						#408fff,
+						#6b69f8,
+						#a35df2,
+						#d14bd8,
+						#e9388a
+					);
+
+					border-radius: 100%;
+					padding: 16rpx;
+				}
 			}
 		}
 	}

@@ -17,6 +17,14 @@ type PushOptions =
 			[key: string]: any;
 	  };
 
+type Tabs = {
+	text?: string;
+	pagePath: string;
+	iconPath?: string;
+	selectedIconPath?: string;
+	[key: string]: any;
+}[];
+
 if (!__UNI_PAGES__) {
 	console.error("@dcloudio/uni-cli-shared 依赖未安装！");
 }
@@ -24,15 +32,12 @@ if (!__UNI_PAGES__) {
 // pages.json 配置参数
 const ctx = JSON.parse(__UNI_PAGES__);
 
-// 底栏选项页
-const tabs = ctx.tabBar ? ctx.tabBar.list : [];
-
 // 路由列表
 const routes = [...ctx.pages];
 
 if (ctx.subPackages) {
-	ctx.subPackages.forEach((a: any) => {
-		a.pages.forEach((b: any) => {
+	ctx.subPackages.forEach((a: { pages: any[]; root: string }) => {
+		a.pages.forEach((b) => {
 			routes.push({
 				...b,
 				path: a.root + "/" + b.path,
@@ -47,7 +52,13 @@ const fn: { [key: string]: (...args: any[]) => any } = {};
 // 路由
 const router = {
 	// 底部导航
-	tabs,
+	get tabs(): Tabs {
+		if (ctx.tabBar) {
+			return ctx.tabBar.list || [];
+		} else {
+			return [];
+		}
+	},
 
 	// 全局样式配置
 	globalStyle: ctx.globalStyle,
@@ -69,7 +80,7 @@ const router = {
 	// 页面地址
 	get pages() {
 		return {
-			home: "/" + (ctx.tabBar ? tabs[0].pagePath : ctx.pages[0].path),
+			home: "/" + (ctx.tabBar ? this.tabs[0].pagePath : ctx.pages[0].path),
 			...config.app.pages,
 		};
 	},
@@ -244,7 +255,7 @@ const router = {
 	 * @param {*} name
 	 */
 	switchTab(name: string) {
-		let item = tabs.find((e: any) => e.pagePath.includes(name));
+		let item = this.tabs.find((e) => e.pagePath.includes(name));
 
 		if (item) {
 			this.push({
@@ -258,7 +269,7 @@ const router = {
 
 	// 是否是Tab页
 	isTab(path: string) {
-		return !!tabs.find((e: any) => path.includes(e.pagePath));
+		return !!this.tabs.find((e) => path.includes(e.pagePath));
 	},
 
 	/**

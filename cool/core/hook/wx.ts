@@ -1,6 +1,7 @@
 import { ref } from "vue";
-import { config } from "../../config";
 import { onShow } from "@dcloudio/uni-app";
+import { config } from "../../config";
+import { getUrlParam, storage } from "../../utils";
 
 export function useWx() {
 	const { platform } = uni.getSystemInfoSync();
@@ -79,8 +80,23 @@ export function useWx() {
 		location.href = url;
 	}
 
+	// 微信公众号登录
+	async function mpLogin() {
+		return new Promise((resolve, reject) => {
+			const code = getUrlParam("code");
+			const mpCode = storage.get("mpCode");
+
+			if (code != mpCode) {
+				storage.set("mpCode", code);
+				resolve(code);
+			} else {
+				reject();
+			}
+		});
+	}
+
 	// 微信app登录
-	function appLogin(): Promise<any> {
+	function appLogin(): Promise<string> {
 		let all: any;
 		let Service: any;
 		return new Promise((resolve, reject) => {
@@ -97,7 +113,7 @@ export function useWx() {
 	}
 
 	// 微信小程序登录
-	async function miniLogin() {
+	async function miniLogin(): Promise<{ code: string; [key: string]: any }> {
 		return new Promise((resolve, reject) => {
 			// 兼容 Mac
 			const k = platform === "mac" ? "getUserInfo" : "getUserProfile";
@@ -126,7 +142,8 @@ export function useWx() {
 						},
 					});
 				},
-				fail() {
+				fail(err) {
+					console.error(err);
 					getCode();
 
 					reject({
@@ -168,6 +185,7 @@ export function useWx() {
 		mpConfig,
 		pay,
 		mpAuth,
+		mpLogin,
 		miniLogin,
 		appLogin,
 	};

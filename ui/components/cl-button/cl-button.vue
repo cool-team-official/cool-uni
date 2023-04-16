@@ -37,8 +37,11 @@
 		:send-message-path="sendMessagePath"
 		:send-message-img="sendMessageImg"
 		:show-message-card="showMessageCard"
-		@click="handleClick"
-		@tap.stop="handleTap"
+		@getphonenumber="getPhoneNumber"
+		@getuserinfo="getUserInfo"
+		@error="error"
+		@opensetting="openSetting"
+		@launchapp="launchApp"
 	>
 		<!-- 加载框 -->
 		<view class="cl-button__loading" v-if="loading">
@@ -128,24 +131,34 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		function handleClick(e: MouseEvent) {
-			if (!props.disabled && !props.loading) {
-				emit("click", e);
-				emit("tap", e);
-			}
+		function getPhoneNumber(e: any) {
+			emit("getphonenumber", e);
 		}
 
-		function handleTap(e: MouseEvent) {
-			if (!props.disabled && !props.loading) {
-				emit("tap", e);
-			}
+		function getUserInfo(e: any) {
+			emit("getuserinfo", e);
+		}
+
+		function error(e: any) {
+			emit("error", e);
+		}
+
+		function openSetting(e: any) {
+			emit("opensetting", e);
+		}
+
+		function launchApp(e: any) {
+			emit("launchapp", e);
 		}
 
 		return {
+			getPhoneNumber,
+			getUserInfo,
+			error,
+			openSetting,
+			launchApp,
 			isImg: computed(() => props.icon?.includes("/")),
 			loadingColor: computed(() => (props.type ? "#fff" : "")),
-			handleClick,
-			handleTap,
 			parseRpx,
 		};
 	},

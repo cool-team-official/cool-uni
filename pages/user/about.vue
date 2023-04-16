@@ -4,8 +4,8 @@
 			<image class="logo" src="@/static/logo.png" />
 
 			<text class="name">{{ app.info.name }}</text>
-			<text class="desc">{{ app.info.desc }}</text>
 			<text class="version">v{{ app.version.num }}</text>
+			<view class="desc">{{ app.info.desc }}</view>
 		</view>
 	</cl-page>
 </template>
@@ -26,36 +26,33 @@ page {
 
 	.name {
 		display: block;
-		color: $cl-color-primary;
-		font-size: 36rpx;
-		font-weight: bold;
-		margin-bottom: 20rpx;
+		font-size: 32rpx;
+		margin-top: 20rpx;
 		text-align: center;
 		letter-spacing: 1rpx;
 	}
 
 	.desc {
+		margin-top: 30rpx;
 		font-size: 26rpx;
 		color: #666;
+		text-align: center;
 	}
 
 	.logo {
 		display: block;
-		height: 188rpx;
-		width: 188rpx;
+		height: 140rpx;
+		width: 140rpx;
 		margin: 10rpx auto;
-		border-radius: 8rpx;
+		border-radius: 16rpx;
 	}
 
 	.version {
 		display: block;
-		position: fixed;
-		left: 0;
-		bottom: 50rpx;
-		width: 100%;
 		text-align: center;
-		font-size: 28rpx;
-		font-weight: 700;
+		font-size: 26rpx;
+		margin-top: 10rpx;
+		color: #666;
 	}
 }
 </style>

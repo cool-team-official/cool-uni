@@ -28,7 +28,7 @@
 				:key="index"
 			>
 				<text class="cl-captcha__value">{{ value[index] }}</text>
-				<view class="cl-captcha__cursor" v-if="value.length == index && focus"></view>
+				<view class="cl-captcha__cursor" v-if="value.length == index && isFocus"></view>
 			</view>
 		</view>
 	</view>
@@ -79,7 +79,7 @@ export default defineComponent({
 		const value = ref(props.modelValue || "");
 
 		// 是否聚焦
-		const focus = ref(false);
+		const isFocus = ref(props.focus);
 
 		// 头条小程序下，无法 v-for 数字
 		const list = computed(() => new Array(props.len).fill(1));
@@ -92,11 +92,11 @@ export default defineComponent({
 		);
 
 		function onFocus() {
-			focus.value = true;
+			isFocus.value = true;
 		}
 
 		function onBlur() {
-			focus.value = false;
+			isFocus.value = false;
 		}
 
 		function onInput(e: any) {
@@ -111,7 +111,7 @@ export default defineComponent({
 
 		return {
 			value,
-			focus,
+			isFocus,
 			list,
 			parseRpx,
 			onFocus,

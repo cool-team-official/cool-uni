@@ -18,11 +18,11 @@ export const config = {
 		wx: {
 			// 小程序
 			mini: {
-				appid: "wx82e7b00f6e7aeda5",
+				appid: "",
 			},
 			// 公众号
 			mp: {
-				appid: "",
+				appid: "wx14cb082fd5f06648",
 				debug: false,
 			},
 			// App
