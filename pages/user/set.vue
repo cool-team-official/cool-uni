@@ -8,12 +8,17 @@
 					<view class="avatar">
 						<!-- #ifdef MP-WEIXIN -->
 						<button open-type="chooseAvatar" @chooseavatar="uploadAvatar">
-							<cl-avatar round :size="88" :src="user.info.avatar" />
+							<cl-avatar round :size="88" :src="user.info.avatarUrl" />
 						</button>
 						<!-- #endif -->
 
 						<!-- #ifndef MP-WEIXIN -->
-						<cl-avatar round :size="88" :src="user.info.avatar" @tap="uploadAvatar()" />
+						<cl-avatar
+							round
+							:size="88"
+							:src="user.info.avatarUrl"
+							@tap="uploadAvatar()"
+						/>
 						<!-- #endif -->
 					</view>
 				</cl-list-item>

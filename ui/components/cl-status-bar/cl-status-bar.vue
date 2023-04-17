@@ -1,6 +1,11 @@
 <template>
 	<view
 		class="cl-status-bar__wrap"
+		:class="[
+			{
+				'is-sticky': sticky,
+			},
+		]"
 		:style="{
 			height,
 		}"
@@ -30,6 +35,10 @@ export default defineComponent({
 
 	props: {
 		backgroundColor: String,
+		sticky: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	setup(props) {

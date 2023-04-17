@@ -11,7 +11,7 @@
 
 					<!-- 头像 -->
 					<view class="avatar" @tap="toSet">
-						<cl-avatar :size="110" :url="user.info?.avatarUrl" />
+						<cl-avatar :size="110" :src="user.info?.avatarUrl" />
 					</view>
 				</view>
 
@@ -108,6 +108,8 @@ onShow(() => {
 				position: absolute;
 				top: 0;
 				right: 0;
+				height: 110rpx;
+				width: 110rpx;
 			}
 		}
 

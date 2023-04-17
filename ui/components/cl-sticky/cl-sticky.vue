@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { isNumber } from "lodash-es";
 import { computed, defineComponent } from "vue";
 import { useCool } from "/@/cool";
+import { parseRpx } from "/@/cool/utils";
 
-const { platform, statusBarHeight } = uni.getSystemInfoSync();
+const { statusBarHeight } = uni.getSystemInfoSync();
 
 export default defineComponent({
 	name: "cl-sticky",
@@ -23,6 +23,10 @@ export default defineComponent({
 			type: [String, Number],
 			default: 0,
 		},
+		statusBar: {
+			type: Boolean,
+			default: true,
+		},
 		isFlex: Boolean,
 	},
 
@@ -32,7 +36,7 @@ export default defineComponent({
 		// 吸顶高度
 		const stickyTop = computed(() => {
 			// 状态栏高度
-			const t1 = `${statusBarHeight}px`;
+			const t1 = `${props.statusBar ? statusBarHeight : 0}px`;
 
 			// 标题栏高度
 			// #ifdef H5
@@ -43,7 +47,7 @@ export default defineComponent({
 			// #endif
 
 			// 自定义高度
-			const top = isNumber(props.top) ? props.top + "rpx" : props.top;
+			const top = parseRpx(props.top);
 
 			// 计算后距离顶部高度
 			const arr = [top, ...(router.info()?.isCustomNavbar ? [t1] : [t2])];

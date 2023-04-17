@@ -16,9 +16,7 @@
 
 		<!-- 状态栏 -->
 		<!-- #ifndef MP-ALIPAY -->
-		<cl-sticky v-if="statusBar">
-			<cl-status-bar />
-		</cl-sticky>
+		<cl-status-bar v-if="statusBar" />
 		<!-- #endif -->
 
 		<!-- 内容插槽 -->

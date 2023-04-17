@@ -3,8 +3,7 @@
 		{
 			"path": "pages/index/home",
 			"style": {
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#f7f7f7"
+				"navigationStyle": "custom"
 			}
 		},
 		{

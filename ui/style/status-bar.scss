@@ -5,3 +5,10 @@
 	height: inherit;
 	width: 100%;
 }
+
+.cl-status-bar__wrap {
+	&.is-sticky {
+		position: sticky;
+		top: 0;
+	}
+}
