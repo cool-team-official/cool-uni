@@ -20,6 +20,7 @@
 			width: parseRpx(width),
 			fontSize: parseRpx(fontSize),
 			margin: parseRpx(margin),
+			borderRadius: parseRpx(borderRadius),
 		}"
 		:size="size"
 		:disabled="disabled"
@@ -94,6 +95,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		borderRadius: Number,
 		bold: Boolean,
 		margin: [String, Number, Array],
 		icon: String,

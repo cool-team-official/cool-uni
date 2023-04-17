@@ -1,7 +1,11 @@
 import { ref } from "vue";
-import { onShow } from "@dcloudio/uni-app";
+import { onReady, onShow } from "@dcloudio/uni-app";
 import { config } from "../../config";
 import { getUrlParam, storage } from "../../utils";
+
+// #ifdef H5
+import wx from "weixin-js-sdk";
+// #endif
 
 export function useWx() {
 	const { platform } = uni.getSystemInfoSync();
@@ -25,7 +29,7 @@ export function useWx() {
 	}
 
 	// 是否微信浏览器
-	function isWxBrowser(): boolean {
+	function isWxBrowser() {
 		// #ifdef H5
 		const ua: any = window.navigator.userAgent.toLowerCase();
 		if (ua.match(/MicroMessenger/i) == "micromessenger") {
@@ -34,10 +38,14 @@ export function useWx() {
 			return false;
 		}
 		// #endif
+
+		// #ifndef H5
+		return false;
+		// #endif
 	}
 
 	// 是否安装了微信
-	function hasApp(): boolean {
+	function hasApp() {
 		// #ifdef APP
 		return plus.runtime.isApplicationExist({ pname: "com.tencent.mm", action: "weixin://" });
 		// #endif
@@ -48,7 +56,7 @@ export function useWx() {
 	}
 
 	// 下载微信
-	function downloadApp(): void {
+	function downloadApp() {
 		// #ifdef APP
 		if (platform == "android") {
 			const Uri: any = plus.android.importClass("android.net.Uri");
@@ -67,6 +75,18 @@ export function useWx() {
 
 	// 微信公众号配置
 	const mpConfig = {};
+
+	// 获取微信公众号配置
+	function getMpConfig() {
+		// #ifdef H5
+		if (isWxBrowser()) {
+			wx.config({
+				debug: config.app.wx.mp.debug,
+				jsApiList: ["chooseWXPay"],
+			});
+		}
+		// #endif
+	}
 
 	// 微信公众号授权
 	function mpAuth() {
@@ -174,6 +194,10 @@ export function useWx() {
 
 	onShow(() => {
 		getCode();
+	});
+
+	onReady(() => {
+		getMpConfig();
 	});
 
 	return {

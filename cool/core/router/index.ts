@@ -269,57 +269,36 @@ const router = {
 
 	// 是否是Tab页
 	isTab(path: string) {
-		return !!this.tabs.find((e) => path.includes(e.pagePath));
+		return !!this.tabs.find((e) => path == `/${e.pagePath}`);
 	},
 
-	/**
-	 * 登录流程 redirectTo
-	 * 1. 记录失效页
-	 * 2. 关闭当前失效页，跳转到登录页
-	 * 3. 登录成功后关闭登录页，打开失效页
-	 */
+	// 去登陆
 	login(options?: { reLaunch: boolean }) {
 		const { reLaunch = false } = options || {};
-		const data = this.info();
 
-		if (data) {
-			if (data.path != this.pages.login) {
-				storage.set(
-					"invalid-page",
-					reLaunch
-						? {
-								path: this.pages.home,
-						  }
-						: {
-								...data,
-								$vm: null,
-						  }
-				);
-
-				this.push({
-					path: this.pages.login,
-					mode: reLaunch ? "reLaunch" : "navigateTo",
-					isGuard: false,
-				});
-			}
-		}
+		this.push({
+			path: this.pages.login,
+			mode: reLaunch ? "reLaunch" : "navigateTo",
+			isGuard: false,
+		});
 	},
 
 	// 返回登录失效页
 	nextLogin() {
-		const data = storage.get("invalid-page");
+		const pages = getCurrentPages();
+		const index = pages.findIndex((e) => this.pages.login.includes(e.route || ""));
 
-		if (data) {
-			data.mode = this.isTab(data.path) ? "switchTab" : "reLaunch";
-			this.push(data);
-			storage.remove("invalid-page");
-		} else {
+		if (index <= 0) {
 			this.home();
+		} else {
+			router.back({
+				delta: pages.length - index,
+			});
 		}
 
 		// 登录回调
 		if (fn.afterLogin) {
-			fn.afterLogin(data);
+			fn.afterLogin();
 		}
 	},
 
@@ -329,7 +308,7 @@ const router = {
 	},
 
 	// 登录后回调
-	afterLogin(callback: (data: any) => void) {
+	afterLogin(callback: () => void) {
 		fn.afterLogin = callback;
 	},
 };

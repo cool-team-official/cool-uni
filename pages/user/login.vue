@@ -33,7 +33,7 @@
 								:phone="phone"
 								@success="phoneLogin(false)"
 							>
-								<template #default="{ disabled }">
+								<template #default="{ disabled, btnText }">
 									<cl-button
 										fill
 										type="primary"
@@ -42,7 +42,7 @@
 										:disabled="disabled"
 										@tap="phoneLogin"
 									>
-										获取验证码
+										{{ btnText }}
 									</cl-button>
 								</template>
 							</sms-btn>
@@ -173,7 +173,6 @@ function phoneLogin(sms?: boolean) {
 
 		router.push({
 			path: "/pages/user/captcha",
-			mode: "redirectTo",
 			query: {
 				phone: phone.value,
 			},

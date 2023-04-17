@@ -13,3 +13,24 @@
 		}
 	}
 }
+
+.uni-tabbar {
+	&__icon {
+		height: 50rpx !important;
+		width: 50rpx !important;
+	}
+}
+
+.mp-html {
+	p {
+		line-height: normal !important;
+	}
+
+	img {
+		display: block;
+	}
+
+	image {
+		display: block;
+	}
+}

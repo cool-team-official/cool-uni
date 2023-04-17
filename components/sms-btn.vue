@@ -1,6 +1,6 @@
 <template>
 	<view class="sms-btn">
-		<slot :disabled="isDisabled" :countdown="countdown">
+		<slot :disabled="isDisabled" :countdown="countdown" :btnText="btnText">
 			<cl-button
 				:type="type"
 				:height="height"
@@ -12,7 +12,7 @@
 				:plain="plain"
 				@tap="open"
 			>
-				{{ isDisabled ? `${countdown}s后重新获取` : "获取验证码" }}
+				{{ btnText }}
 			</cl-button>
 		</slot>
 
@@ -89,6 +89,11 @@ const countdown = ref(0);
 // 是否禁用
 const isDisabled = computed(() => countdown.value > 0 || !props.phone);
 
+// 按钮文案
+const btnText = computed(() =>
+	countdown.value > 0 ? `${countdown.value}s后重新获取` : "获取验证码"
+);
+
 // 表单
 const form = reactive({
 	code: "",
@@ -97,7 +102,7 @@ const form = reactive({
 
 // 开始倒计时
 function startCountdown() {
-	countdown.value = 60;
+	countdown.value = 5;
 
 	function fn() {
 		countdown.value--;

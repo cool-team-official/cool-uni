@@ -17,6 +17,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "/@/static/css/index.scss";
 @import "/@/ui/index.scss";
+
+page {
+	background-color: #f6f7fa;
+}
 </style>

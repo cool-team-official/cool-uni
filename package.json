@@ -10,7 +10,8 @@
 		"md5": "^2.3.0",
 		"mitt": "^3.0.0",
 		"pinia": "^2.0.30",
-		"vue": "^3.2.47"
+		"vue": "^3.2.47",
+		"weixin-js-sdk": "^1.6.0"
 	},
 	"devDependencies": {
 		"@dcloudio/types": "^2.5.15",
