@@ -22,6 +22,7 @@
 					<view class="row">
 						<cl-input
 							v-model="form.code"
+							type="number"
 							placeholder="验证码"
 							maxlength="4"
 							:clearable="false"
