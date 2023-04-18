@@ -1,11 +1,7 @@
 <template>
 	<view
 		class="cl-image"
-		:style="{
-			height: size[0],
-			width: size[1],
-			margin: parseRpx(margin),
-		}"
+		:style="imgStyle"
 		:class="[
 			{
 				'is-round': round,
@@ -24,6 +20,10 @@
 			<slot name="error"> 加载失败 </slot>
 		</view>
 
+		<view class="cl-image__loading" v-if="isLoading">
+			<cl-loading />
+		</view>
+
 		<image
 			class="cl-image__target"
 			:src="src"
@@ -33,7 +33,7 @@
 			:show-menu-by-longpress="showMenuByLongpress"
 			@error="handleError"
 			@load="handleLoad"
-		></image>
+		/>
 	</view>
 </template>
 
@@ -50,7 +50,7 @@
  * @event {Function} error 加载失败时触发
  */
 
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, PropType, watch } from "vue";
 import { isNumber, isArray, isString } from "lodash-es";
 import { parseRpx } from "/@/cool/utils";
 
@@ -65,7 +65,7 @@ export default defineComponent({
 		},
 		round: Boolean,
 		margin: [Number, String, Array],
-		previewList: Array,
+		previewList: Array as PropType<string[]>,
 		lazyLoad: Boolean,
 		fadeShow: {
 			type: Boolean,
@@ -73,12 +73,23 @@ export default defineComponent({
 		},
 		webp: Boolean,
 		showMenuByLongpress: Boolean,
+		customStyle: Object,
 	},
-
-	emits: ["error", "load"],
 
 	setup(props, { emit }) {
 		const isError = ref(false);
+		const isLoading = ref(false);
+
+		// 样式
+		const imgStyle = computed(() => {
+			const [height, width] = size.value;
+			return {
+				height,
+				width,
+				margin: parseRpx(props.margin),
+				...props.customStyle,
+			};
+		});
 
 		// 尺寸
 		const size = computed(() => {
@@ -96,12 +107,14 @@ export default defineComponent({
 		// 加载失败
 		function handleError(e: any) {
 			isError.value = true;
+			isLoading.value = false;
 			emit("error", e);
 		}
 
 		// 加载成功
 		function handleLoad(e: any) {
 			isError.value = false;
+			isLoading.value = false;
 			emit("load", e);
 		}
 
@@ -113,11 +126,25 @@ export default defineComponent({
 					current: props.src,
 				});
 			}
+
+			emit("tap");
 		}
+
+		watch(
+			() => props.src,
+			(val) => {
+				isLoading.value = !!val;
+			},
+			{
+				immediate: true,
+			}
+		);
 
 		return {
 			isError,
+			isLoading,
 			size,
+			imgStyle,
 			handleError,
 			handleLoad,
 			onPreview,

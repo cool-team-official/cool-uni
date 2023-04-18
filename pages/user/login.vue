@@ -147,12 +147,12 @@ const phone = ref(storage.get("phone") || "");
 // 登录请求
 async function nextLogin(key: "mini" | "mp", data: any) {
 	return service.user.login[key](data)
-		.then((res) => {
+		.then(async (res) => {
 			// 设置token
 			user.setToken(res);
 
-			// 设置用户信息
-			user.set(res.userInfo);
+			// 获取用户信息
+			await user.get();
 
 			// 登录跳转
 			router.nextLogin();

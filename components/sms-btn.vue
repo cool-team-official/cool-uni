@@ -21,8 +21,8 @@
 				<view class="sms-popup">
 					<view class="row">
 						<cl-input
-							v-model="form.code"
 							type="number"
+							v-model="form.code"
 							placeholder="验证码"
 							maxlength="4"
 							:clearable="false"
@@ -103,7 +103,7 @@ const form = reactive({
 
 // 开始倒计时
 function startCountdown() {
-	countdown.value = 5;
+	countdown.value = 60;
 
 	function fn() {
 		countdown.value--;
@@ -156,6 +156,16 @@ async function getCaptcha() {
 		.then((res) => {
 			form.captchaId = res.captchaId;
 			captcha.img = res.data;
+
+			// #ifdef MP
+			setTimeout(() => {
+				captcha.focus = true;
+			}, 500);
+			// #endif
+
+			// #ifdef H5
+			captcha.focus = true;
+			// #endif
 		})
 		.catch((err) => {
 			ui.showToast(err.message);
@@ -166,25 +176,10 @@ async function getCaptcha() {
 
 // 打开
 function open() {
-	captcha.focus = false;
-
 	if (props.phone) {
 		if (/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(props.phone)) {
 			captcha.visible = true;
-
-			nextTick(() => {
-				getCaptcha();
-
-				// #ifdef MP
-				setTimeout(() => {
-					captcha.focus = true;
-				}, 500);
-				// #endif
-
-				// #ifdef H5
-				captcha.focus = true;
-				// #endif
-			});
+			getCaptcha();
 		} else {
 			ui.showToast("请输入正确的手机号格式");
 		}
@@ -201,12 +196,14 @@ function close() {
 function clear() {
 	form.code = "";
 	form.captchaId = "";
+	captcha.focus = false;
 }
 
 defineExpose({
-	startCountdown,
 	open,
 	send,
+	getCaptcha,
+	startCountdown,
 });
 </script>
 

@@ -2,7 +2,7 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 28rpx;
+	font-size: $cl-font-size;
 	color: #fff;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -25,9 +25,9 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 22rpx;
 		text-align: center;
 		background-color: #eee;
+		color: #666;
 	}
 
 	&__target,

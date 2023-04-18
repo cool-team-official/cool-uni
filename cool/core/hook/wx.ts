@@ -175,13 +175,20 @@ export function useWx() {
 	}
 
 	// 微信支付
-	function pay(orderInfo: string) {
-		return new Promise((reolsve, reject) => {
+	function pay(orderInfo: any) {
+		return new Promise((resolve, reject) => {
+			// #ifdef H5
+			wx.chooseWXPay({
+				...orderInfo,
+			});
+			// #endif
+
+			// #ifndef H5
 			uni.requestPayment({
 				provider: "wxpay",
-				orderInfo,
+				...orderInfo,
 				success(res) {
-					reolsve(res);
+					resolve(res);
 				},
 				fail() {
 					reject({
@@ -189,6 +196,7 @@ export function useWx() {
 					});
 				},
 			});
+			// #endif
 		});
 	}
 
