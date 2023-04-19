@@ -78,7 +78,7 @@
 			</div>
 
 			<!-- 其他登录方式 -->
-			<view class="other">
+			<view class="other" v-if="platforms.length > 0">
 				<cl-divider width="400rpx" background-color="#f7f7f7">
 					<cl-text color="#ccc" value="其他登录方式"></cl-text>
 				</cl-divider>
@@ -100,7 +100,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { onReady } from "@dcloudio/uni-app";
 import { useApp, useCool, useStore, useWx } from "/@/cool";
 import { useUi } from "/@/ui";
@@ -118,31 +118,51 @@ const agree = ref(true);
 // 加载状态
 const loading = ref(false);
 
-// 登录方式
-const mode = ref("phone");
+// 手机号
+const phone = ref(storage.get("phone") || "");
 
-// #ifdef MP-WEIXIN
-mode.value = "wx";
-// #endif
+// 登录方式
+const mode = ref();
 
 // 登录平台
-const platforms = ref([
-	{
-		label: "通过手机登录",
-		value: "phone",
-		icon: "/pages/user/static/icon/phone.png",
-	},
-	// #ifdef H5 || APP || MP-WEIXIN
-	{
-		label: "通过微信登录",
-		value: "wx",
-		icon: "/pages/user/static/icon/wx.png",
-		hidden: !wx.hasApp(),
-	},
-	// #endif
-]);
+const platforms = getPlatforms();
 
-const phone = ref(storage.get("phone") || "");
+// 获取登录平台
+function getPlatforms() {
+	let arr = [
+		{
+			label: "通过手机登录",
+			value: "phone",
+			icon: "/pages/user/static/icon/phone.png",
+			hidden: false,
+		},
+		{
+			label: "通过微信登录",
+			value: "wx",
+			icon: "/pages/user/static/icon/wx.png",
+			hidden: true,
+		},
+	];
+
+	// #ifdef H5
+	if (wx.isWxBrowser()) {
+		// 显示微信登录
+		arr[1].hidden = false;
+	}
+	// #endif
+
+	// #ifdef MP-WEIXIN
+	arr[1].hidden = false;
+	// #endif
+
+	// 过滤
+	arr = arr.filter((e) => !e.hidden);
+
+	// 默认第一个登录方式
+	mode.value = arr[0].value;
+
+	return computed(() => arr.filter((e) => e.value != mode.value));
+}
 
 // 登录请求
 async function nextLogin(key: "mini" | "mp", data: any) {

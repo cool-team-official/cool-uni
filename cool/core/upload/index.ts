@@ -3,7 +3,7 @@ import { config } from "../../config";
 import { service } from "../service";
 import { basename } from "../../utils";
 import { useStore } from "../store";
-import { videoPoster, resizeImage } from "./url";
+import { videoPoster, resizeImage } from "./comm";
 
 declare interface UploadCallback {
 	onProgressUpdate?(options: UniApp.OnProgressUpdateResult): void;

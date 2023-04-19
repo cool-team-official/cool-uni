@@ -155,9 +155,11 @@ export default defineComponent({
 
 		function click(e: any) {
 			if (!props.disabled && !props.loading) {
+				// #ifdef MP-WEIXIN
 				emit("click", e);
+				// #endif
 
-				// #ifndef MP-WEIXIN
+				// #ifdef MP-ALIPAY
 				emit("tap", e);
 				// #endif
 			}
