@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { deepMerge, storage } from "../../utils";
+import { deepMerge, storage } from "../utils";
 import { router } from "../router";
 import { service } from "../service";
 

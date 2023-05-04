@@ -1,5 +1,5 @@
 import { createSSRApp } from "vue";
-import { bootstrap } from "/@/cool";
+import { bootstrap } from "/@/cool/bootstrap";
 import App from "./App.vue";
 import "./router";
 
@@ -9,7 +9,7 @@ export function createApp() {
 	// 启动
 	bootstrap(app);
 
-	// 隐藏 Tabs
+	// 隐藏底部导航栏
 	uni.hideTabBar();
 
 	return {

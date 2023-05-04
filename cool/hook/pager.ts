@@ -1,5 +1,5 @@
 import { computed, getCurrentInstance, reactive } from "vue";
-import { onPullDownRefresh, onReachBottom } from "@dcloudio/uni-app";
+import { onPullDownRefresh, onReachBottom, onUnload } from "@dcloudio/uni-app";
 
 interface Res {
 	list: { [key: string]: any }[];
@@ -23,7 +23,7 @@ export function usePager() {
 			size: 20,
 			total: 0,
 		},
-		list: [],
+		list: [] as any[],
 		loading: false,
 		finished: false,
 	});
@@ -56,6 +56,11 @@ export function usePager() {
 	onPullDownRefresh(async () => {
 		await refresh({ page: 1 });
 		uni.stopPullDownRefresh();
+	});
+
+	// 离开页面
+	onUnload(() => {
+		uni.hideLoading();
 	});
 
 	// 数据
@@ -129,7 +134,7 @@ export function usePager() {
 
 						uni.showToast({
 							title: err.message,
-							icon: "error",
+							icon: "none",
 						});
 
 						reject(err);

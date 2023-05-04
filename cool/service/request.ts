@@ -1,7 +1,7 @@
 import { useStore } from "../store";
 import { router } from "../router";
-import { isDev, config } from "../../config";
-import { storage } from "../../utils";
+import { isDev, config } from "../config";
+import { storage } from "../utils";
 
 // 请求队列
 let requests: any[] = [];

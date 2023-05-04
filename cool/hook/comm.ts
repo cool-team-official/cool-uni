@@ -2,7 +2,7 @@ import { reactive } from "vue";
 import { router } from "../router";
 import { service } from "../service";
 import { upload } from "../upload";
-import { storage } from "../../utils";
+import { storage } from "../utils";
 import { useMitt } from "./mitt";
 
 export function useRefs() {

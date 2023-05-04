@@ -1,6 +1,6 @@
 import { last } from "lodash-es";
-import { storage } from "../../utils";
-import { config } from "../../config";
+import { storage } from "../utils";
+import { config } from "../config";
 
 type PushOptions =
 	| string
@@ -284,7 +284,7 @@ const router = {
 	},
 
 	// 返回登录失效页
-	nextLogin() {
+	nextLogin(loginType: string) {
 		const pages = getCurrentPages();
 		const index = pages.findIndex((e) => this.pages.login.includes(e.route || ""));
 
@@ -295,6 +295,9 @@ const router = {
 				delta: pages.length - index,
 			});
 		}
+
+		// 登录方式
+		storage.set("loginType", loginType);
 
 		// 登录回调
 		if (fn.afterLogin) {

@@ -1,16 +1,13 @@
-// @ts-nocheck
 import { has } from "lodash-es";
-import { isDev, config } from "../../config";
+import { isDev, config } from "../config";
 import request from "./request";
 
 export function Service(
-	value:
-		| string
-		| {
-				namespace?: string;
-				url?: string;
-				mock?: boolean;
-		  }
+	value: {
+		namespace?: string;
+		url?: string;
+		mock?: boolean;
+	} & string
 ) {
 	return function (target: any) {
 		// 命名
@@ -74,7 +71,7 @@ export class BaseService {
 		return request(options);
 	}
 
-	list(data) {
+	list(data: any) {
 		return this.request({
 			url: "/list",
 			method: "POST",
@@ -82,7 +79,7 @@ export class BaseService {
 		});
 	}
 
-	page(data) {
+	page(data: any) {
 		return this.request({
 			url: "/page",
 			method: "POST",
@@ -90,14 +87,14 @@ export class BaseService {
 		});
 	}
 
-	info(params) {
+	info(params: any) {
 		return this.request({
 			url: "/info",
 			params,
 		});
 	}
 
-	update(data) {
+	update(data: any) {
 		return this.request({
 			url: "/update",
 			method: "POST",
@@ -105,7 +102,7 @@ export class BaseService {
 		});
 	}
 
-	delete(data) {
+	delete(data: any) {
 		return this.request({
 			url: "/delete",
 			method: "POST",
@@ -113,7 +110,7 @@ export class BaseService {
 		});
 	}
 
-	add(data) {
+	add(data: any) {
 		return this.request({
 			url: "/add",
 			method: "POST",

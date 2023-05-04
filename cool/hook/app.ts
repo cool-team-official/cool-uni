@@ -1,7 +1,7 @@
 import { reactive, ref } from "vue";
 import { onShow } from "@dcloudio/uni-app";
-import { getVersion } from "../../utils";
-import { config } from "../../config";
+import { getVersion } from "../utils";
+import { config } from "../config";
 import { defineStore } from "pinia";
 
 // 缓存

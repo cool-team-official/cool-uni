@@ -1,7 +1,8 @@
 import { ref } from "vue";
 import { onReady, onShow } from "@dcloudio/uni-app";
-import { config } from "../../config";
-import { getUrlParam, storage } from "../../utils";
+import { config } from "../config";
+import { getUrlParam, storage } from "../utils";
+import { service } from "../service";
 
 // #ifdef H5
 import wx from "weixin-js-sdk";
@@ -80,9 +81,14 @@ export function useWx() {
 	function getMpConfig() {
 		// #ifdef H5
 		if (isWxBrowser()) {
-			wx.config({
-				debug: config.app.wx.mp.debug,
-				jsApiList: ["chooseWXPay"],
+			service.user.comm.wxMpConfig().then((res) => {
+				wx.config({
+					debug: config.app.wx.mp.debug,
+					jsApiList: ["chooseWXPay"],
+					...res,
+				});
+
+				Object.assign(mpConfig, res);
 			});
 		}
 		// #endif
@@ -90,7 +96,9 @@ export function useWx() {
 
 	// 微信公众号授权
 	function mpAuth() {
-		const redirect_uri = encodeURIComponent(`${location.origin}/#/pages/user/login`);
+		const redirect_uri = encodeURIComponent(
+			`${location.origin}${location.pathname}#/pages/user/login`
+		);
 		const response_type = "code";
 		const scope = "snsapi_userinfo";
 		const state = "STATE";
@@ -105,6 +113,10 @@ export function useWx() {
 		return new Promise((resolve) => {
 			const code = getUrlParam("code");
 			const mpCode = storage.get("mpCode");
+
+			let url = window.location.href;
+			url = url.replace(/(\?[^#]*)#/, "#");
+			window.history.replaceState({}, "", url);
 
 			if (code != mpCode) {
 				storage.set("mpCode", code);
