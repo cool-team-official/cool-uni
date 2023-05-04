@@ -12,7 +12,7 @@
 		:style="{
 			backgroundColor: color,
 		}"
-		@tap="click"
+		@click="tap"
 		v-if="visible"
 	>
 		<slot></slot>
@@ -34,6 +34,7 @@
  */
 
 import { defineComponent, PropType, ref } from "vue";
+import { useTap } from "../../hook";
 
 export default defineComponent({
 	name: "cl-tag",
@@ -53,15 +54,11 @@ export default defineComponent({
 		round: Boolean,
 	},
 
-	setup(props, { emit }) {
+	setup(_, { emit }) {
+		const { tap } = useTap(emit);
+
 		// 是否可见
 		const visible = ref(true);
-
-		// 点击
-		function click() {
-			emit("click");
-			emit("tap");
-		}
 
 		// 打开
 		function open() {
@@ -76,7 +73,7 @@ export default defineComponent({
 
 		return {
 			visible,
-			click,
+			tap,
 			open,
 			close,
 		};

@@ -31,8 +31,8 @@
 
 import { computed, defineComponent, ref, watch } from "vue";
 import { isArray, isBoolean } from "lodash-es";
-import { parseRpx } from "/@/cool/utils";
-import { useEl, useForm } from "../../hook";
+import { getParent, parseRpx } from "/@/cool/utils";
+import { useForm } from "../../hook";
 
 export default defineComponent({
 	name: "cl-checkbox",
@@ -61,7 +61,6 @@ export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(props, { emit }) {
-		const { getParent } = useEl();
 		const { disabled } = useForm();
 
 		// cl-checkbox-group

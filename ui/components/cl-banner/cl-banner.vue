@@ -153,7 +153,7 @@ export default defineComponent({
 		},
 	},
 
-	emits: ["update:modelValue", "change", "tap", "click", "transition", "animationfinish"],
+	emits: ["update:modelValue", "change", "select", "transition", "animationfinish"],
 
 	setup(props, { emit }) {
 		const current = ref(0);
@@ -263,8 +263,7 @@ export default defineComponent({
 
 		// 点击，返回序号
 		function onTap() {
-			emit("click", current.value);
-			emit("tap", current.value);
+			emit("select", current.value);
 		}
 
 		return {

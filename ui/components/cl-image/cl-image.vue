@@ -52,6 +52,7 @@
 
 import { computed, defineComponent, ref, PropType, watch } from "vue";
 import { isNumber, isArray, isString } from "lodash-es";
+import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -77,7 +78,12 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
+		const { tap } = useTap(emit);
+
+		// 是否加载失败
 		const isError = ref(false);
+
+		// 是否加载中
 		const isLoading = ref(false);
 
 		// 样式
@@ -127,7 +133,7 @@ export default defineComponent({
 				});
 			}
 
-			emit("tap");
+			tap();
 		}
 
 		watch(

@@ -1,54 +1,20 @@
-import { computed, getCurrentInstance, nextTick } from "vue";
-import { isEmpty } from "lodash-es";
+import { computed } from "vue";
+import { getParent } from "/@/cool/utils";
 
-// 获取父组件
-function getParent(name: string, k1: string[], k2?: string[]) {
-	const { proxy }: any = getCurrentInstance();
+// 点击
+export function useTap(emit: (event: any, ...args: any[]) => void) {
+	function tap(e?: any) {
+		// #ifdef MP-WEIXIN
+		emit("click", e);
+		// #endif
 
-	const next = () => {
-		let parent = proxy.$parent;
+		// #ifdef MP-ALIPAY
+		emit("tap", e);
+		// #endif
+	}
 
-		while (parent) {
-			if (parent.$options.name !== name) {
-				parent = parent.$parent;
-			} else {
-				if (!isEmpty(k2)) {
-					nextTick(() => {
-						const child: any = {};
-
-						(k2 || []).map((key: string) => {
-							if (proxy[key]) {
-								child[key] = proxy[key];
-							}
-						});
-
-						if (!parent.__children) {
-							parent.__children = [];
-						}
-
-						if (!isEmpty(child)) {
-							parent.__children.push(child);
-						}
-					});
-				}
-
-				return (k1 || []).reduce((res: any, key: string) => {
-					res[key] = parent[key];
-					return res;
-				}, {});
-			}
-		}
-
-		return parent;
-	};
-
-	return computed(() => next());
-}
-
-// 元素
-export function useEl() {
 	return {
-		getParent,
+		tap,
 	};
 }
 

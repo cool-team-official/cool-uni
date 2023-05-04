@@ -1,4 +1,4 @@
-export default {
+export const storage = {
 	// 后缀标识
 	suffix: "_deadtime",
 

@@ -67,6 +67,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
+import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -133,6 +134,15 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
+		const { tap } = useTap(emit);
+
+		// 是否图片
+		const isImg = computed(() => props.icon?.includes("/"));
+
+		// loading 颜色
+		const loadingColor = computed(() => props.icon?.includes("/"));
+
+		// 事件
 		function getPhoneNumber(e: any) {
 			emit("getphonenumber", e);
 		}
@@ -155,13 +165,7 @@ export default defineComponent({
 
 		function click(e: any) {
 			if (!props.disabled && !props.loading) {
-				// #ifdef MP-WEIXIN
-				emit("click", e);
-				// #endif
-
-				// #ifdef MP-ALIPAY
-				emit("tap", e);
-				// #endif
+				tap(e);
 			}
 		}
 
@@ -172,9 +176,9 @@ export default defineComponent({
 			openSetting,
 			launchApp,
 			click,
-			isImg: computed(() => props.icon?.includes("/")),
-			loadingColor: computed(() => (props.type ? "#fff" : "")),
 			parseRpx,
+			isImg,
+			loadingColor,
 		};
 	},
 });

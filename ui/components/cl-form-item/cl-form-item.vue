@@ -36,9 +36,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, PropType, ref, watch } from "vue";
-import { useEl } from "../../hook";
 import { isArray, isBoolean } from "lodash-es";
-import { parseRpx } from "/@/cool/utils";
+import { getParent, parseRpx } from "/@/cool/utils";
 import AsyncValidator from "../../utils/async-validator";
 
 /**
@@ -71,8 +70,6 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		const { getParent } = useEl();
-
 		// cl-form
 		const parent = getParent(
 			"cl-form",

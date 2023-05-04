@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useEl } from "../../hook";
+import { getParent } from "/@/cool/utils";
 /**
  * @description 时间线
  * @property {String} timestamp 时间
@@ -75,8 +75,6 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		const { getParent } = useEl();
-
 		// cl-timeline
 		const parent = getParent("cl-timeline", ["timestampWidth"]);
 

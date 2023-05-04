@@ -9,7 +9,7 @@
 		</cl-card>
 
 		<cl-card label="衔接">
-			<cl-banner :list="urls" type="chain"></cl-banner>
+			<cl-banner :list="urls" type="chain" @select="onSelect"></cl-banner>
 		</cl-card>
 	</cl-page>
 </template>
@@ -28,4 +28,8 @@ const urls = ref([
 		url: "/pages/demo/static/bg3.png",
 	},
 ]);
+
+function onSelect(i: number) {
+	console.log(i);
+}
 </script>

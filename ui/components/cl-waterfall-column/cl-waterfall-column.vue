@@ -12,14 +12,13 @@
 
 <script lang="ts">
 import { getCurrentInstance, computed, defineComponent, nextTick } from "vue";
-import { useEl } from "../../hook";
+import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-waterfall-column",
 
 	setup() {
 		const { proxy }: any = getCurrentInstance();
-		const { getParent } = useEl();
 
 		// cl-waterfall
 		const parent = getParent("cl-waterfall", ["column", "gutter"]);

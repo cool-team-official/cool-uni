@@ -10,14 +10,12 @@
  */
 
 import { computed, defineComponent } from "vue";
-import { useEl } from "../../hook";
+import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-grid-item",
 
 	setup() {
-		const { getParent } = useEl();
-
 		// cl-grid
 		const parent = getParent("cl-grid", ["column"]);
 

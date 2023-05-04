@@ -2,6 +2,7 @@
 	<view
 		:class="['cl-avatar', `cl-avatar--${shape}`]"
 		:style="{ height: parseRpx(size), width: parseRpx(size), backgroundColor }"
+		@click="tap"
 	>
 		<slot v-if="$slots.default || $slots.$default"> </slot>
 
@@ -47,6 +48,7 @@
 
 import { computed, defineComponent, PropType, ref } from "vue";
 import { parseRpx } from "/@/cool/utils";
+import { useTap } from "../../hook";
 
 export default defineComponent({
 	name: "cl-avatar",
@@ -75,7 +77,12 @@ export default defineComponent({
 	emits: ["error", "load"],
 
 	setup(props, { emit }) {
+		const { tap } = useTap(emit);
+
+		// 是否加载失败
 		const isError = ref(false);
+
+		// 背景色
 		const backgroundColor = computed(() => (props.src ? "" : "#c0c4cc"));
 
 		function handleLoad(e: any) {
@@ -92,6 +99,7 @@ export default defineComponent({
 			isError,
 			backgroundColor,
 			parseRpx,
+			tap,
 			handleLoad,
 			handleError,
 		};
