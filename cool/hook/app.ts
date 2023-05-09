@@ -79,7 +79,7 @@ const useNotice = defineStore("notice", () => {
 	}
 
 	onShow(() => {
-		get();
+		// get();
 	});
 
 	return {
