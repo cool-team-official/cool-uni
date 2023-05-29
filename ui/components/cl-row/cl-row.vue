@@ -13,12 +13,12 @@
 			height: parseRpx(height),
 			width: parseRpx(width),
 			padding: parseRpx(padding),
-			margin: margin2,
 			borderRadius: parseRpx(borderRadius),
+			margin,
 			border,
 			backgroundColor,
 		}"
-		@tap="onTap"
+		@click="tap"
 	>
 		<slot></slot>
 	</view>
@@ -33,6 +33,7 @@
  */
 
 import { computed, defineComponent } from "vue";
+import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -65,19 +66,16 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		const margin2 = computed(() => {
+		const { tap } = useTap(emit);
+
+		const margin = computed(() => {
 			return props.margin ? parseRpx(props.margin) : `0 -${props.gutter / 2}rpx`;
 		});
 
-		function onTap(e: any) {
-			emit("click", e);
-			emit("tap", e);
-		}
-
 		return {
-			margin2,
 			parseRpx,
-			onTap,
+			margin,
+			tap,
 		};
 	},
 });

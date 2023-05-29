@@ -28,9 +28,9 @@
  */
 
 import { computed, defineComponent, ref, watch } from "vue";
-import { useEl, useForm } from "../../hook";
+import { useForm } from "../../hook";
 import { isBoolean } from "lodash-es";
-import { parseRpx } from "/@/cool/utils";
+import { getParent, parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-radio",
@@ -55,7 +55,6 @@ export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(props, { emit }) {
-		const { getParent } = useEl();
 		const { disabled } = useForm();
 
 		// cl-radio-group

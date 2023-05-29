@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import { config } from "../../config";
+import { config } from "../config";
 import { service } from "../service";
-import { basename } from "../../utils";
+import { basename } from "../utils";
 import { useStore } from "../store";
 import { videoPoster, resizeImage } from "./comm";
 
@@ -42,7 +42,7 @@ export async function upload(file: any, cb?: UploadCallback): Promise<string> {
 			}
 
 			// 文件名
-			fd.key = fileName;
+			fd.key = fileName.replace(/\s/, "_");
 
 			// 上传
 			const task = uni.uploadFile({
@@ -62,7 +62,7 @@ export async function upload(file: any, cb?: UploadCallback): Promise<string> {
 							reject(message);
 						}
 					} else {
-						resolve(`${preview || host}/${fileName}`);
+						resolve(`${preview || host}/${fd.key}`);
 					}
 				},
 				fail(err) {

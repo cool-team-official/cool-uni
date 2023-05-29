@@ -1,6 +1,6 @@
-import { config, isDev } from "../../config";
+import { config, isDev } from "../config";
 import { service, BaseService } from "../service";
-import { deepFiles, deepMerge, storage, toCamel } from "../../utils";
+import { deepFiles, deepMerge, storage, toCamel } from "../utils";
 import { isArray, isEmpty } from "lodash-es";
 
 // 获取标签名

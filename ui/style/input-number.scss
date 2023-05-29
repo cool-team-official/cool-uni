@@ -1,18 +1,21 @@
 .cl-input-number {
 	display: inline-flex;
 	align-items: center;
+	height: $cl-input-number-size;
 
 	&__plus,
 	&__minus {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		height: 40rpx;
-		width: 40rpx;
+		height: $cl-input-number-size;
+		width: $cl-input-number-size;
+		border-radius: $cl-input-number-size;
 		margin: 0;
 		padding: 0;
-		border-radius: 6rpx;
-		font-size: 28rpx;
+		font-size: 30rpx;
+		font-weight: bold;
+		background-color: #f1f7ff;
 
 		&::after {
 			border: 0;
@@ -28,17 +31,50 @@
 		color: #fff;
 	}
 
-	&__minus {
-		background-color: #eee;
+	&__value {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 28rpx;
+		text-align: center;
+		color: $cl-color-primary;
+		position: relative;
+		margin: 0 20rpx;
+
+		input {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-size: inherit;
+			background-color: #fff;
+		}
+
+		.unit {
+			font-size: 20rpx;
+			position: relative;
+			z-index: 9;
+
+			&:nth-child(1) {
+				opacity: 0;
+			}
+		}
+
+		.num {
+			margin: 0 20rpx;
+		}
 	}
 
-	&__value {
-		font-size: 26rpx;
-		margin: 0 20rpx;
-		text-align: center;
-
-		text {
-			font-size: 24rpx;
+	&.is-disabled {
+		.cl-input-number__plus,
+		.cl-input-number__minus {
+			background-color: $cl-disabled-background-color;
+			color: $cl-disabled-color;
+		}
+		.cl-input-number__value {
+			color: $cl-disabled-color;
 		}
 	}
 }

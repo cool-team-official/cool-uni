@@ -31,7 +31,9 @@
 import { useCool } from "/@/cool";
 import Tabbar from "./components/tabbar.vue";
 
-const { router } = useCool();
+const { router, service } = useCool();
+
+console.log(service);
 
 const list = [
 	{

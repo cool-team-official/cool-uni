@@ -23,7 +23,7 @@ export function usePager() {
 			size: 20,
 			total: 0,
 		},
-		list: [],
+		list: [] as any[],
 		loading: false,
 		finished: false,
 	});

@@ -91,7 +91,7 @@
  */
 
 import { computed, defineComponent, PropType, reactive } from "vue";
-import { useEl } from "../../hook";
+import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-filter-item",
@@ -125,8 +125,6 @@ export default defineComponent({
 	emits: ["change"],
 
 	setup(props, { emit }) {
-		const { getParent } = useEl();
-
 		// cl-filter-bar
 		const parent = getParent(
 			"cl-filter-bar",

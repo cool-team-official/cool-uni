@@ -21,7 +21,7 @@
 			fontSize: parseRpx(size),
 			letterSpacing: parseRpx(letterSpacing),
 		}"
-		@tap="onTap"
+		@click="tap"
 	>
 		<!-- 价格 -->
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
+import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
 /**
@@ -118,6 +119,8 @@ export default defineComponent({
 	emits: ["click", "tap"],
 
 	setup(props, { emit }) {
+		const { tap } = useTap(emit);
+
 		const text = computed(() => {
 			if (props.type == "price") {
 				const [value, precision = "00"] = parseFloat(String(props.value) || "0")
@@ -147,16 +150,10 @@ export default defineComponent({
 			}
 		});
 
-		// 点击
-		function onTap(e: any) {
-			emit("click", e);
-			emit("tap", e);
-		}
-
 		return {
 			text,
+			tap,
 			parseRpx,
-			onTap,
 		};
 	},
 });

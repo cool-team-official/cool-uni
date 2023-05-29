@@ -5,7 +5,7 @@ function parse(rules: string[], { url, size }: any) {
 		return "";
 	}
 
-	if (!url.includes("oss-cn")) {
+	if (!url.includes("cool-type-oss")) {
 		return url;
 	}
 
@@ -41,10 +41,12 @@ function parse(rules: string[], { url, size }: any) {
 
 type Size = number | number[] | { h?: number; w?: number; m?: string };
 
-export function videoPoster(url: string, size: Size) {
+function videoPoster(url: string, size: Size) {
 	return parse(["x-oss-process=video/snapshot,t_1000,f_jpg,m_fast"], { url, size });
 }
 
-export function resizeImage(url: string, size: Size) {
+function resizeImage(url: string, size: Size) {
 	return parse(["x-oss-process=image/resize"], { url, size });
 }
+
+export { videoPoster, resizeImage };

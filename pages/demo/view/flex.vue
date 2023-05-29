@@ -2,7 +2,7 @@
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
 			<cl-row :gutter="20">
-				<cl-col :span="4">
+				<cl-col :span="4" @tap="onTap">
 					<view class="item">4</view>
 				</cl-col>
 
@@ -45,6 +45,12 @@
 		</cl-card>
 	</cl-page>
 </template>
+
+<script setup lang="ts">
+function onTap() {
+	console.log(111);
+}
+</script>
 
 <style lang="scss" scoped>
 .item {

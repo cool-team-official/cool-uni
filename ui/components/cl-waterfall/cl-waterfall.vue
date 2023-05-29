@@ -152,7 +152,7 @@ export default defineComponent({
 				let timer: any = null;
 
 				function fn() {
-					const children = proxy.$children;
+					const children: any[] = proxy.$children;
 
 					if (isEmpty(children)) {
 						timer = setTimeout(() => {
@@ -160,7 +160,7 @@ export default defineComponent({
 						}, 50);
 					} else {
 						clearTimeout(timer);
-						let arr = children.map((e: any) => e.getRect());
+						let arr = children.filter((e) => e.getRect).map((e) => e.getRect());
 						resolve(arr);
 					}
 				}

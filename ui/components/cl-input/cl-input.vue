@@ -15,7 +15,7 @@
 			height: parseRpx(height),
 			fontSize: parseRpx(fontSize),
 		}"
-		@tap="onTap"
+		@click="click"
 	>
 		<!-- 只读 -->
 		<view class="cl-input__readonly" v-if="readonly"></view>
@@ -72,7 +72,7 @@
  */
 
 import { computed, defineComponent, ref, watch, PropType } from "vue";
-import { useForm } from "../../hook";
+import { useForm, useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -152,6 +152,8 @@ export default defineComponent({
 	],
 
 	setup(props, { emit }) {
+		const { tap } = useTap(emit);
+
 		const form = useForm();
 
 		// 绑定值
@@ -226,10 +228,9 @@ export default defineComponent({
 		}
 
 		// 点击
-		function onTap(e: any) {
+		function click(e: any) {
 			if (!isDisabled.value) {
-				emit("click", e);
-				emit("tap", e);
+				tap(e);
 			}
 		}
 
@@ -237,7 +238,7 @@ export default defineComponent({
 			value,
 			isDisabled,
 			isFocus,
-			onTap,
+			click,
 			onInput,
 			onFocus,
 			onBlur,

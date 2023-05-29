@@ -1,7 +1,7 @@
 import { cloneDeep } from "lodash-es";
 import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
-import { deepTree } from "../../utils";
+import { deepTree } from "../utils";
 import { service } from "../service";
 
 declare interface Data {

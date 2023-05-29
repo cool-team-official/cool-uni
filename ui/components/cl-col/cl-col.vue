@@ -6,7 +6,7 @@
 			'padding-left': padding,
 			'padding-right': padding,
 		}"
-		@tap="onTap"
+		@click="tap"
 	>
 		<slot></slot>
 	</view>
@@ -23,7 +23,8 @@
  */
 
 import { computed, defineComponent } from "vue";
-import { useEl } from "../../hook";
+import { useTap } from "../../hook";
+import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-col",
@@ -38,10 +39,8 @@ export default defineComponent({
 		push: Number,
 	},
 
-	emits: ["click", "tap"],
-
 	setup(props, { emit }) {
-		const { getParent } = useEl();
+		const { tap } = useTap(emit);
 
 		// cl-row
 		const parent = getParent("cl-row", ["gutter"]);
@@ -61,16 +60,11 @@ export default defineComponent({
 			return list.join(" ");
 		});
 
-		function onTap(e: any) {
-			emit("click", e);
-			emit("tap", e);
-		}
-
 		return {
 			classList,
 			parent,
 			padding,
-			onTap,
+			tap,
 		};
 	},
 });

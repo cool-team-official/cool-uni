@@ -600,4 +600,4 @@ class Canvas {
 	}
 }
 
-export default Canvas;
+export { Canvas };

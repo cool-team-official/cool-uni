@@ -159,7 +159,7 @@ function getPlatforms() {
 	arr = arr.filter((e) => !e.hidden);
 
 	// 默认第一个登录方式
-	mode.value = arr[0].value;
+	mode.value = arr[0]?.value;
 
 	return computed(() => arr.filter((e) => e.value != mode.value));
 }

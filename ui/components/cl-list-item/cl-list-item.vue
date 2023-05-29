@@ -6,7 +6,7 @@
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
-		@tap="onTap"
+		@click="tap"
 	>
 		<view
 			class="cl-list-item__swiper"
@@ -65,7 +65,8 @@ import {
 	watch,
 } from "vue";
 import { isBoolean } from "lodash-es";
-import { useEl } from "../../hook";
+import { useTap } from "../../hook";
+import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-list-item",
@@ -95,7 +96,7 @@ export default defineComponent({
 
 	setup(props, { slots, emit }) {
 		const { proxy }: any = getCurrentInstance();
-		const { getParent } = useEl();
+		const { tap } = useTap(emit);
 
 		// cl-list
 		const parent = getParent("cl-list", ["justify", "border", "disabled"]);
@@ -244,11 +245,6 @@ export default defineComponent({
 			}
 		}
 
-		// 点击事件
-		function onTap(e: any) {
-			emit("tap", e);
-		}
-
 		// 重新设置滑动菜单
 		watch(() => props.swipe, setMenu);
 
@@ -265,7 +261,7 @@ export default defineComponent({
 			onTouchStart,
 			onTouchMove,
 			onTouchEnd,
-			onTap,
+			tap,
 		};
 	},
 });

@@ -63,7 +63,7 @@
 					<!-- 选中样式 -->
 					<view
 						class="cl-tabs__line"
-						v-if="lineLeft > 0"
+						v-if="lineLeft > 0 && showLine"
 						:style="{
 							'background-color': color,
 							left: lineLeft + 'px',
@@ -130,7 +130,7 @@ export default defineComponent({
 			default: 80,
 		},
 		list: {
-			type: Array,
+			type: Array as PropType<{ label: string; value: any; [key: string]: any }[]>,
 			default: [],
 		},
 		loop: {
@@ -163,6 +163,10 @@ export default defineComponent({
 			default: "#fff",
 		},
 		showDropdown: Boolean,
+		showLine: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	emits: ["update:modelValue", "change"],
@@ -171,7 +175,7 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 当前选中
-		const current = ref<number | string>(props.modelValue || 0);
+		const current = ref<number | string>();
 
 		// 下划线左位移
 		const lineLeft = ref(0);
@@ -186,15 +190,7 @@ export default defineComponent({
 		const width = ref(375);
 
 		// 列表
-		const tabs = computed(() => {
-			return props.list.map((e: any, i: number) => {
-				e.value = e.value === undefined ? i : e.value;
-				return e;
-			});
-		});
-
-		// 监听列表改变
-		watch(() => props.list, refresh);
+		const tabs = computed(() => props.list);
 
 		// 刷新
 		function refresh() {
@@ -321,13 +317,20 @@ export default defineComponent({
 			}
 		}
 
+		// 监听绑定值
 		watch(
 			() => props.modelValue,
 			(val: any) => {
 				current.value = val;
 				onOffset();
+			},
+			{
+				immediate: true,
 			}
 		);
+
+		// 监听列表改变
+		watch(() => props.list, refresh);
 
 		onMounted(() => {
 			refresh();

@@ -4,7 +4,7 @@
 			<cl-card label="基础用法">
 				<cl-row :gutter="20">
 					<cl-col :span="8">
-						<cl-button fill>默认</cl-button>
+						<cl-button fill @tap="onTap">默认</cl-button>
 					</cl-col>
 					<cl-col :span="8">
 						<cl-button type="primary" fill>主要</cl-button>
@@ -80,7 +80,15 @@
 	</cl-page>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useUi } from "/@/ui";
+
+const ui = useUi();
+
+function onTap() {
+	ui.showToast("点我干嘛");
+}
+</script>
 
 <style lang="scss">
 .page-demo-button {
