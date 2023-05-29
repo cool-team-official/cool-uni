@@ -9,7 +9,7 @@
 		justify-content: center;
 		color: #fff;
 		box-sizing: border-box;
-		border: 6rpx solid #ddd;
+		border: 6rpx solid $cl-border-color;
 		border-radius: 40rpx;
 		transition: all 0.3s;
 		position: relative;
@@ -43,13 +43,13 @@
 
 	&.is-disabled {
 		.cl-radio__input {
-			background-color: #f5f7fa;
-			border-color: #e4e7ed;
-			color: #c0c4cc;
+			background-color: $cl-disabled-background-color;
+			border-color: transparent;
+			color: $cl-disabled-color;
 		}
 
 		.cl-radio__label {
-			color: #c0c4cc;
+			color: $cl-disabled-color;
 		}
 	}
 
@@ -57,7 +57,7 @@
 		border-radius: 10rpx;
 		padding: 10rpx 30rpx;
 		margin-bottom: 20rpx;
-		border: 1rpx solid #ddd;
+		border: $cl-border-width solid $cl-border-color;
 		box-sizing: border-box;
 		line-height: normal;
 

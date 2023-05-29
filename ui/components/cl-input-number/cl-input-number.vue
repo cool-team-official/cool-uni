@@ -1,25 +1,23 @@
 <template>
-	<view class="cl-input-number">
+	<view class="cl-input-number" :class="{ 'is-disabled': isDisabled }">
 		<!-- 减 -->
 		<view class="cl-input-number__minus" @tap="onMinus">
 			<text class="cl-icon-minus"></text>
 		</view>
 
 		<!-- 值 -->
-		<view class="cl-input-number__value" :style="{ width: width2 }">
-			<cl-input
+		<view class="cl-input-number__value" @tap="onFocus">
+			<text class="unit" v-if="unit">{{ unit }}</text>
+			<text class="num">{{ value }}</text>
+			<text class="unit" v-if="unit">{{ unit }}</text>
+
+			<input
 				type="number"
 				v-model="value"
 				:disabled="isDisabled"
-				:border="false"
-				:clearable="false"
-				:height="40"
-				background-color="#f5f7fa"
-				placeholder=""
+				:focus="isFocus"
 				@blur="onBlur"
-				v-if="input"
 			/>
-			<text v-else>{{ value }}</text>
 		</view>
 
 		<!-- 加 -->
@@ -36,8 +34,6 @@
  * @property {Numbder} step 步进，默认1
  * @property {Numbder} max 最大值，默认100
  * @property {Numbder} min 最小值，默认0
- * @property {Boolean} input 是否能编辑，默认false
- * @property {Numbder} width 输入框宽度，默认100
  * @property {Numbder} precision 数值精度
  * @property {Boolean} disabled 是否禁用
  * @event {Function} change 绑定值改变时触发
@@ -46,7 +42,7 @@
 
 import { computed, defineComponent, ref, watch } from "vue";
 import { useForm } from "../../hook";
-import { parseRpx, isDecimal } from "/@/cool/utils";
+import { isDecimal, parseRpx } from "/@/cool/utils";
 import { isString } from "lodash-es";
 
 export default defineComponent({
@@ -66,16 +62,9 @@ export default defineComponent({
 			type: Number,
 			default: 0,
 		},
-		input: {
-			type: Boolean,
-			default: false,
-		},
-		width: {
-			type: Number,
-			default: 100,
-		},
 		precision: Number,
 		disabled: Boolean,
+		unit: String,
 	},
 
 	emits: ["update:modelValue", "change"],
@@ -96,9 +85,6 @@ export default defineComponent({
 
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);
-
-		// 宽度
-		const width2 = computed(() => (props.input ? parseRpx(props.width) : "auto"));
 
 		// 验证值
 		function check(val?: any) {
@@ -167,18 +153,29 @@ export default defineComponent({
 			}
 		}
 
+		// 是否显示输入框
+		const isFocus = ref(false);
+
+		// 聚焦
+		function onFocus() {
+			isFocus.value = true;
+		}
+
 		// 失焦
 		function onBlur() {
+			isFocus.value = false;
 			update();
 		}
 
 		return {
 			value,
-			width2,
 			isDisabled,
 			onPlus,
 			onMinus,
 			onBlur,
+			onFocus,
+			isFocus,
+			parseRpx,
 		};
 	},
 });
