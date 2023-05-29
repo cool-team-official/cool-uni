@@ -25,6 +25,14 @@
 		<!-- 底部安全区域 -->
 		<view class="safe-area-bottom"></view>
 	</view>
+
+	<!-- 背景色 -->
+	<view
+		class="cl-page__bg"
+		:style="{
+			backgroundColor,
+		}"
+	></view>
 </template>
 
 <script lang="ts">
@@ -43,6 +51,10 @@ export default defineComponent({
 		statusBar: {
 			type: Boolean,
 			default: true,
+		},
+		backgroundColor: {
+			type: String,
+			default: "#f7f7f7",
 		},
 	},
 

@@ -2,6 +2,8 @@
 	height: 100%;
 	width: 100%;
 	box-sizing: border-box;
+	position: relative;
+	z-index: 2;
 
 	.safe-area-bottom {
 		height: env(safe-area-inset-bottom);
@@ -10,5 +12,13 @@
 	&__loading {
 		position: relative;
 		z-index: 9999;
+	}
+
+	&__bg {
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
 	}
 }

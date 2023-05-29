@@ -20,6 +20,7 @@
 			margin: parseRpx(margin),
 			fontSize: parseRpx(size),
 			letterSpacing: parseRpx(letterSpacing),
+			width: parseRpx(width),
 		}"
 		@click="tap"
 	>
@@ -114,6 +115,7 @@ export default defineComponent({
 		prefixIcon: String,
 		suffixIcon: String,
 		copy: Boolean,
+		width: [String, Number],
 	},
 
 	emits: ["click", "tap"],
