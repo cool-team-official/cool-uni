@@ -4,8 +4,11 @@
 	font-size: $cl-font-size;
 
 	&__target {
+		display: block;
 		height: 100%;
 		width: 100%;
+		max-height: 100%;
+		max-width: 100%;
 	}
 
 	&__loading,

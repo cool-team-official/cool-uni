@@ -7,7 +7,6 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useCool } from "/@/cool";
-import { parseRpx } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
 
@@ -20,7 +19,7 @@ export default defineComponent({
 			default: 100,
 		},
 		top: {
-			type: [String, Number],
+			type: Number,
 			default: 0,
 		},
 		statusBar: {
@@ -47,7 +46,7 @@ export default defineComponent({
 			// #endif
 
 			// 自定义高度
-			const top = parseRpx(props.top);
+			const top = uni.upx2px(props.top) + "px";
 
 			// 计算后距离顶部高度
 			const arr = [top, ...(router.info()?.isCustomNavbar ? [t1] : [t2])];

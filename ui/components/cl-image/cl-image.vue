@@ -65,6 +65,7 @@ export default defineComponent({
 		},
 		round: Boolean,
 		margin: [Number, String, Array],
+		previewCurrent: String,
 		previewList: Array as PropType<string[]>,
 		lazyLoad: Boolean,
 		fadeShow: {
@@ -123,7 +124,7 @@ export default defineComponent({
 			if (props.previewList) {
 				uni.previewImage({
 					urls: props.previewList || [],
-					current: props.src,
+					current: props.previewCurrent || props.src,
 				});
 			}
 
