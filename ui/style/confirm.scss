@@ -1,6 +1,6 @@
 .cl-confirm {
 	position: relative;
-	z-index: 400;
+	z-index: $cl-zIndex;
 
 	::v-deep .cl-popup {
 		overflow: hidden;

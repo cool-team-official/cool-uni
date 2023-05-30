@@ -86,7 +86,7 @@ export default defineComponent({
 		},
 		zIndex: {
 			type: [Number, String],
-			default: 200,
+			default: 600,
 		},
 		modalBackground: {
 			type: String,

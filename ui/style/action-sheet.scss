@@ -1,6 +1,6 @@
 .cl-action-sheet {
 	position: relative;
-	z-index: 300;
+	z-index: $cl-zIndex;
 
 	.cl-popup__container {
 		background-color: #fff;

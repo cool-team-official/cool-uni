@@ -9,7 +9,7 @@
 		opacity: 0;
 		pointer-events: none;
 		transition: all 0.3s ease-in-out;
-		z-index: 200;
+		z-index: $cl-zIndex;
 	}
 
 	&.is-expand {
