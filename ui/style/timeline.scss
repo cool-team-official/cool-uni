@@ -34,7 +34,14 @@
 				display: block;
 				height: calc(100% - 32rpx);
 				width: 2px;
-				background-color: #f2f2f2;
+				background-image: linear-gradient(
+					to bottom,
+					currentColor 0%,
+					currentColor 80%,
+					transparent 50%
+				);
+				background-size: 2px 18rpx;
+				background-repeat: y-repeat;
 				transform: scaleX(1);
 				position: absolute;
 				top: 32rpx;
