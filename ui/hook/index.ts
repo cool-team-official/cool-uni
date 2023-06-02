@@ -8,7 +8,7 @@ export function useTap(emit: (event: any, ...args: any[]) => void) {
 		emit("click", e);
 		// #endif
 
-		// #ifdef MP-ALIPAY
+		// #ifdef MP-ALIPAY || H5
 		emit("tap", e);
 		// #endif
 	}
