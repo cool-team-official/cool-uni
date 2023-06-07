@@ -152,7 +152,7 @@ async function getCaptcha() {
 	captcha.loading = true;
 
 	await service.user.login
-		.captcha({ type: "png", color: "#000000" })
+		.captcha({ type: "png", color: "#000000", phone: props.phone })
 		.then((res) => {
 			form.captchaId = res.captchaId;
 			captcha.img = res.data;

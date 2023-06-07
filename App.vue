@@ -18,8 +18,5 @@ export default {
 
 <style lang="scss">
 @import "/@/ui/index.scss";
-
-page {
-	background-color: #f6f7fa;
-}
+@import "/@/static/index.scss";
 </style>
