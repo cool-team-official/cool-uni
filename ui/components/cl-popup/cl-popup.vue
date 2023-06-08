@@ -5,6 +5,9 @@
 			'cl-popup__wrapper',
 			`cl-popup__wrapper--${direction}`,
 			`is-${status ? 'open' : 'close'}`,
+			{
+				'is-modal': modal,
+			},
 		]"
 		:style="{
 			zIndex,
@@ -54,6 +57,8 @@
 import { computed, defineComponent, PropType, ref, watch } from "vue";
 import { parseRpx } from "/@/cool/utils";
 
+let id = 1;
+
 export default defineComponent({
 	name: "cl-popup",
 
@@ -74,7 +79,7 @@ export default defineComponent({
 		borderRadius: [String, Number],
 		padding: {
 			type: [String, Number],
-			default: 20,
+			default: 32,
 		},
 		closeOnClickModal: {
 			type: Boolean,
@@ -85,7 +90,7 @@ export default defineComponent({
 			default: true,
 		},
 		zIndex: {
-			type: [Number, String],
+			type: Number,
 			default: 600,
 		},
 		modalBackground: {
@@ -103,6 +108,8 @@ export default defineComponent({
 
 		// 动画状态
 		const status = ref(false);
+
+		const zIndex = ref(0);
 
 		// 计时器
 		let timer: any = null;
@@ -134,6 +141,9 @@ export default defineComponent({
 
 		// 打开
 		function open() {
+			// 层级
+			zIndex.value = props.zIndex + id++;
+
 			if (!visible.value) {
 				// 显示内容
 				visible.value = true;
@@ -205,6 +215,7 @@ export default defineComponent({
 			status,
 			height,
 			width,
+			zIndex,
 			parseRpx,
 			open,
 			close,

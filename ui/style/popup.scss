@@ -10,11 +10,14 @@
 
 	&.is-open {
 		opacity: 1;
-		pointer-events: auto;
 
 		.cl-popup {
 			transition: all 0.4s;
 			transform: translate(0, 0);
+		}
+
+		&.is-modal {
+			pointer-events: auto;
 		}
 	}
 
@@ -53,7 +56,7 @@
 			bottom: -110rpx;
 			left: calc(50% - 36rpx);
 			color: #fff;
-			font-size: 72rpx;
+			font-size: 60rpx;
 		}
 	}
 

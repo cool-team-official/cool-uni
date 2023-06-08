@@ -12,7 +12,7 @@
 			>
 				<view class="custom" v-if="item.pagePath == 'custom'">
 					<view class="icon">
-						<image src="/static/icon/tabbar/chat.png" mode="aspectFit" />
+						<image src="/static/chat.png" mode="aspectFit" />
 					</view>
 				</view>
 
@@ -56,7 +56,7 @@ const list = computed(() => {
 function toLink(pagePath: string) {
 	if (pagePath == "custom") {
 		// #ifdef H5
-		location.href = "https://cool-js.com/ai/chat-vip/index.html#/";
+		location.href = "https://cool-js.com/";
 		// #endif
 	} else {
 		router.push("/" + pagePath);

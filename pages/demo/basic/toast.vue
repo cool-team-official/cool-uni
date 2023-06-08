@@ -9,7 +9,7 @@
 		<cl-card label="不同位置">
 			<cl-button @tap="open()">默认</cl-button>
 			<cl-button @tap="open({ position: 'top' })">顶部</cl-button>
-			<cl-button @tap="open({ position: 'middle' })">中间</cl-button>
+			<cl-button @tap="open({ position: 'center' })">中间</cl-button>
 			<cl-button @tap="open({ position: 'bottom' })">底部</cl-button>
 		</cl-card>
 
@@ -22,15 +22,19 @@
 		</cl-card>
 
 		<cl-card label="其他">
-			<cl-button @tap="open({ icon: 'cl-icon-good-fill' })">带图标</cl-button>
+			<cl-button @tap="open({ icon: 'cl-icon-good-fill', message: '带图标' })"
+				>带图标</cl-button
+			>
 			<cl-button
 				@tap="
 					open({
+						message: '带图片',
 						image: {
-							url: '/pages/demo/static/avatar.png',
+							url: '/static/logo.png',
 							style: {
-								height: '120rpx',
-								width: '120rpx',
+								height: '200rpx',
+								width: '200rpx',
+								borderRadius: '16rpx',
 							},
 						},
 					})

@@ -1,123 +1,127 @@
 declare namespace Eps {
-	interface AiVipEntity {
+	interface DemoGoodsEntity {
 		/**
 		 * ID
 		 */
 		id?: number;
 		/**
-		 * 用户ID
-		 */
-		userId?: number;
-		/**
 		 * 标题
 		 */
 		title?: string;
-		/**
-		 * 限制次数
-		 */
-		limitCount?: number;
-		/**
-		 * 月数
-		 */
-		month?: number;
 		/**
 		 * 价格
 		 */
 		price?: number;
 		/**
-		 * 状态 0-禁用 1-启用
+		 * 描述
+		 */
+		description?: string;
+		/**
+		 * 主图
+		 */
+		mainImage?: string;
+		/**
+		 * 示例图
+		 */
+		exampleImages?: json;
+		/**
+		 * 库存
+		 */
+		stock?: number;
+		/**
+		 * 创建时间
+		 */
+		createTime?: Date;
+		/**
+		 * 更新时间
+		 */
+		updateTime?: Date;
+		/**
+		 * 任意键值
+		 */
+		[key: string]: any;
+	}
+
+	interface DemoGoodsEntity {
+		/**
+		 * ID
+		 */
+		id?: number;
+		/**
+		 * 标题
+		 */
+		title?: string;
+		/**
+		 * 价格
+		 */
+		price?: number;
+		/**
+		 * 描述
+		 */
+		description?: string;
+		/**
+		 * 主图
+		 */
+		mainImage?: string;
+		/**
+		 * 示例图
+		 */
+		exampleImages?: json;
+		/**
+		 * 库存
+		 */
+		stock?: number;
+		/**
+		 * 创建时间
+		 */
+		createTime?: Date;
+		/**
+		 * 更新时间
+		 */
+		updateTime?: Date;
+		/**
+		 * 任意键值
+		 */
+		[key: string]: any;
+	}
+
+	interface FeelInfoEntity {
+		/**
+		 * ID
+		 */
+		id?: number;
+		/**
+		 * 用户id
+		 */
+		userId?: string;
+		/**
+		 * 目标
+		 */
+		target?: json;
+		/**
+		 * 关键词
+		 */
+		keyword?: json;
+		/**
+		 * 践行
+		 */
+		practice?: json;
+		/**
+		 * 觉知生活
+		 */
+		lift?: json;
+		/**
+		 * 想法
+		 */
+		idea?: json;
+		/**
+		 * 咖啡冥想
+		 */
+		coffee?: json;
+		/**
+		 * 状态:0-灰旗 1-红边款 2-红旗
 		 */
 		status?: number;
-		/**
-		 * 排序
-		 */
-		sortNum?: number;
-		/**
-		 * 创建时间
-		 */
-		createTime?: Date;
-		/**
-		 * 更新时间
-		 */
-		updateTime?: Date;
-		/**
-		 * 任意键值
-		 */
-		[key: string]: any;
-	}
-
-	interface DemoGoodsEntity {
-		/**
-		 * ID
-		 */
-		id?: number;
-		/**
-		 * 标题
-		 */
-		title?: string;
-		/**
-		 * 价格
-		 */
-		price?: number;
-		/**
-		 * 描述
-		 */
-		description?: string;
-		/**
-		 * 主图
-		 */
-		mainImage?: string;
-		/**
-		 * 示例图
-		 */
-		exampleImages?: json;
-		/**
-		 * 库存
-		 */
-		stock?: number;
-		/**
-		 * 创建时间
-		 */
-		createTime?: Date;
-		/**
-		 * 更新时间
-		 */
-		updateTime?: Date;
-		/**
-		 * 任意键值
-		 */
-		[key: string]: any;
-	}
-
-	interface DemoGoodsEntity {
-		/**
-		 * ID
-		 */
-		id?: number;
-		/**
-		 * 标题
-		 */
-		title?: string;
-		/**
-		 * 价格
-		 */
-		price?: number;
-		/**
-		 * 描述
-		 */
-		description?: string;
-		/**
-		 * 主图
-		 */
-		mainImage?: string;
-		/**
-		 * 示例图
-		 */
-		exampleImages?: json;
-		/**
-		 * 库存
-		 */
-		stock?: number;
 		/**
 		 * 创建时间
 		 */
@@ -178,88 +182,6 @@ declare namespace Eps {
 		 */
 		[key: string]: any;
 	}
-	interface AiPay {
-		/**
-		 * wxNotify
-		 */
-		wxNotify(data?: any): Promise<any>;
-		/**
-		 * 微信小程序支付
-		 */
-		wxMini(data?: any): Promise<any>;
-		/**
-		 * 微信公众号支付
-		 */
-		wxMp(data?: any): Promise<any>;
-		/**
-		 * 微信H5支付
-		 */
-		wxH5(data?: any): Promise<any>;
-		/**
-		 * wx
-		 */
-		wx(data?: any): Promise<any>;
-		/**
-		 * list
-		 */
-		list(data?: any): Promise<any[]>;
-		/**
-		 * page
-		 */
-		page(data?: any): Promise<{
-			pagination: { size: number; page: number; total: number };
-			list: any[];
-			[key: string]: any;
-		}>;
-		/**
-		 * info
-		 */
-		info(data?: any): Promise<any>;
-		/**
-		 * update
-		 */
-		update(data?: any): Promise<any>;
-		/**
-		 * delete
-		 */
-		delete(data?: any): Promise<any>;
-		/**
-		 * add
-		 */
-		add(data?: any): Promise<any>;
-	}
-
-	interface AiVip {
-		/**
-		 * 列表查询
-		 */
-		list(data?: any): Promise<AiVipEntity[]>;
-		/**
-		 * page
-		 */
-		page(data?: any): Promise<{
-			pagination: { size: number; page: number; total: number };
-			list: AiVipEntity[];
-			[key: string]: any;
-		}>;
-		/**
-		 * info
-		 */
-		info(data?: any): Promise<AiVipEntity>;
-		/**
-		 * update
-		 */
-		update(data?: any): Promise<any>;
-		/**
-		 * delete
-		 */
-		delete(data?: any): Promise<any>;
-		/**
-		 * add
-		 */
-		add(data?: any): Promise<any>;
-	}
-
 	interface BaseComm {
 		/**
 		 * 文件上传模式
@@ -347,41 +269,6 @@ declare namespace Eps {
 		 * get
 		 */
 		get(data?: any): Promise<any>;
-		/**
-		 * list
-		 */
-		list(data?: any): Promise<any[]>;
-		/**
-		 * page
-		 */
-		page(data?: any): Promise<{
-			pagination: { size: number; page: number; total: number };
-			list: any[];
-			[key: string]: any;
-		}>;
-		/**
-		 * info
-		 */
-		info(data?: any): Promise<any>;
-		/**
-		 * update
-		 */
-		update(data?: any): Promise<any>;
-		/**
-		 * delete
-		 */
-		delete(data?: any): Promise<any>;
-		/**
-		 * add
-		 */
-		add(data?: any): Promise<any>;
-	}
-
-	interface DemoChat {
-		/**
-		 * 聊天
-		 */
-		chat(data?: any): Promise<any>;
 		/**
 		 * list
 		 */
@@ -779,9 +666,75 @@ declare namespace Eps {
 		delete(data?: any): Promise<any>;
 	}
 
+	interface UserComm {
+		/**
+		 * 获取微信公众号配置
+		 */
+		wxMpConfig(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+	}
+
+	interface UserHome {
+		/**
+		 * 删除
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 修改
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * 单个信息
+		 */
+		info(data?: any): Promise<FeelInfoEntity>;
+		/**
+		 * 列表查询
+		 */
+		list(data?: any): Promise<FeelInfoEntity[]>;
+		/**
+		 * 分页查询
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: FeelInfoEntity[];
+			[key: string]: any;
+		}>;
+		/**
+		 * 新增
+		 */
+		add(data?: any): Promise<any>;
+	}
+
 	interface UserInfo {
 		/**
-		 * 获取用户信息
+		 * 更新用户信息
 		 */
 		updatePerson(data?: any): Promise<any>;
 		/**
@@ -909,12 +862,10 @@ declare namespace Eps {
 			proxy?: boolean;
 			[key: string]: any;
 		}): Promise<any>;
-		ai: { pay: AiPay; vip: AiVip };
 		base: { comm: BaseComm };
 		cloud: { func: CloudFunc };
 		demo: {
 			cache: DemoCache;
-			chat: DemoChat;
 			event: DemoEvent;
 			goods: DemoGoods;
 			pay: DemoPay;
@@ -925,7 +876,7 @@ declare namespace Eps {
 		dict: { info: DictInfo };
 		mqtt: { iot: MqttIot };
 		wps: Wps;
-		user: { info: UserInfo; login: UserLogin };
+		user: { comm: UserComm; home: UserHome; info: UserInfo; login: UserLogin };
 		test: Test;
 	};
 }

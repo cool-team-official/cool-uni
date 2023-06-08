@@ -81,33 +81,39 @@ export default defineComponent({
 
 		// 打开
 		function open(options: ClConfirm.Options) {
-			visible.value = true;
-			closed.value = false;
+			if (visible.value) {
+				timer = setTimeout(() => {
+					open(options);
+				}, 350);
+			} else {
+				visible.value = true;
+				closed.value = false;
 
-			// 设置选项
-			nextTick(() => {
-				Object.assign(
-					conf,
-					{
-						width: "500rpx",
-						showCancelButton: true,
-						showConfirmButton: true,
-						confirmButtonText: "确认",
-						cancelButtonText: "取消",
-						closeOnClickModal: true,
-					},
-					options
-				);
+				// 设置选项
+				nextTick(() => {
+					Object.assign(
+						conf,
+						{
+							width: "500rpx",
+							showCancelButton: true,
+							showConfirmButton: true,
+							confirmButtonText: "确认",
+							cancelButtonText: "取消",
+							closeOnClickModal: true,
+						},
+						options
+					);
 
-				clearTimeout(timer);
+					clearTimeout(timer);
 
-				// 是否定时关闭
-				if (conf.duration) {
-					timer = setTimeout(() => {
-						close("close");
-					}, conf.duration);
-				}
-			});
+					// 是否定时关闭
+					if (conf.duration) {
+						timer = setTimeout(() => {
+							close("close");
+						}, conf.duration);
+					}
+				});
+			}
 		}
 
 		// 关闭

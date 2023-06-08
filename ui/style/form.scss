@@ -1,6 +1,6 @@
 .cl-form {
 	.cl-form-item {
-		min-height: 70rpx;
+		min-height: $cl-height;
 		padding: 20rpx 0;
 		position: relative;
 
@@ -32,10 +32,11 @@
 			text-align: right;
 			vertical-align: middle;
 			float: left;
-			line-height: 70rpx;
+			line-height: $cl-height;
 		}
 
 		&__content {
+			display: flex;
 			flex: 1;
 			font-size: 26rpx;
 			line-height: 70rpx;

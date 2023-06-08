@@ -373,7 +373,7 @@ onReady(() => {
 	}
 
 	.other {
-		position: absolute;
+		position: fixed;
 		bottom: env(safe-area-inset-bottom);
 		left: 0;
 		width: 100%;

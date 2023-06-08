@@ -13,7 +13,7 @@ declare namespace ClToast {
 				message: string;
 				duration?: number;
 				type?: "default" | "primary" | "success" | "error" | "warning" | "info";
-				position?: "bottom" | "top" | "middle";
+				position?: "bottom" | "top" | "center";
 				onClose?(): void;
 		  };
 

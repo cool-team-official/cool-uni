@@ -1,30 +1,37 @@
 <template>
 	<view class="cl-toast__wrap">
 		<template v-for="item in list" :key="item.id">
-			<view
-				class="cl-toast"
-				v-if="!item.closed"
-				:class="[
-					`cl-toast--${item.type}`,
-					`is-${item.position}`,
-					item.visible ? 'is-show' : '',
-					item.icon ? 'is-icon' : '',
-				]"
+			<cl-popup
+				v-model="item.visible"
+				:padding="0"
+				:modal="false"
+				:direction="item.position"
+				background-color="transparent"
 			>
-				<view class="cl-toast__icon" v-if="item.image || item.icon">
-					<image
-						:src="item.image.url"
-						:mode="item.image.mode"
-						:style="item.image.style"
-						v-if="item.image"
-					/>
-					<text :class="item.icon" v-else></text>
-				</view>
+				<view
+					class="cl-toast"
+					:class="[
+						`cl-toast--${item.type}`,
+						{
+							'is-icon': item.icon || item.image,
+						},
+					]"
+				>
+					<view class="cl-toast__icon" v-if="item.image || item.icon">
+						<image
+							:src="item.image.url"
+							:mode="item.image.mode || 'aspectFill'"
+							:style="item.image.style"
+							v-if="item.image"
+						/>
+						<text :class="item.icon" v-else></text>
+					</view>
 
-				<slot>
-					<text class="cl-toast__content">{{ item.message }}</text>
-				</slot>
-			</view>
+					<slot>
+						<text class="cl-toast__content">{{ item.message }}</text>
+					</slot>
+				</view>
+			</cl-popup>
 		</template>
 	</view>
 </template>
@@ -67,7 +74,7 @@ export default defineComponent({
 				message: "",
 				duration: 2000,
 				type: "default",
-				position: "bottom",
+				position: "center",
 			};
 
 			// 合并参数
@@ -86,7 +93,7 @@ export default defineComponent({
 
 			// 有图标默认居中显示
 			if (options.image || options.icon) {
-				options.position = "middle";
+				options.position = "center";
 			}
 
 			setTimeout(() => {

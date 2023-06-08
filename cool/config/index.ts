@@ -22,7 +22,7 @@ export const config = {
 			},
 			// 公众号
 			mp: {
-				appid: "wx14cb082fd5f06648",
+				appid: "wxd532456e1e1ef9b9",
 				debug: false,
 			},
 			// App
