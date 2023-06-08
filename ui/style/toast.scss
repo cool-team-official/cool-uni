@@ -3,10 +3,9 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	min-width: auto;
-	max-width: 80%;
 	border-radius: $cl-border-radius;
 	padding: 8rpx 16rpx;
+	max-width: 80%;
 
 	&__icon {
 		text {
@@ -69,9 +68,7 @@
 
 .cl-toast__wrap {
 	.cl-popup {
-		&__container {
-			text-align: center;
-		}
+		width: 100% !important;
 
 		&__wrapper {
 			&--top {
@@ -83,6 +80,11 @@
 				bottom: 100rpx;
 				bottom: calc(env(safe-area-inset-bottom) + 100rpx);
 			}
+		}
+
+		&__container {
+			text-align: center;
+			width: 100%;
 		}
 	}
 }

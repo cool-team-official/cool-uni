@@ -247,6 +247,7 @@ const router = {
 		this.push({
 			path: this.pages.home,
 			mode: this.isTab(this.pages.home) ? "switchTab" : "navigateTo",
+			isGuard: false,
 		});
 	},
 
@@ -284,7 +285,7 @@ const router = {
 	},
 
 	// 返回登录失效页
-	nextLogin(loginType: string) {
+	nextLogin(loginType?: string) {
 		const pages = getCurrentPages();
 		const index = pages.findIndex((e) => this.pages.login.includes(e.route || ""));
 
@@ -297,7 +298,9 @@ const router = {
 		}
 
 		// 登录方式
-		storage.set("loginType", loginType);
+		if (loginType) {
+			storage.set("loginType", loginType);
+		}
 
 		// 登录回调
 		if (fn.afterLogin) {

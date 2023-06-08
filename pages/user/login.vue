@@ -1,5 +1,7 @@
 <template>
 	<cl-page>
+		<cl-topbar :border="false" background-color="transparent" />
+
 		<view class="page-login">
 			<!-- Logo -->
 			<view class="logo">

@@ -33,8 +33,7 @@
 				{
 					"path": "login",
 					"style": {
-						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor": "#f7f7f7"
+						"navigationStyle": "custom"
 					}
 				},
 				{
