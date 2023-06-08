@@ -1,0 +1,38 @@
+.cl-tree {
+	&-item {
+		&__content {
+			display: flex;
+			align-items: center;
+			height: 50rpx;
+		}
+
+		&__expand {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			height: 50rpx;
+			width: 50rpx;
+		}
+
+		&__label {
+			font-size: $cl-font-size;
+		}
+
+		&__children {
+			transition: all 0.3s;
+			display: grid;
+			grid-template-rows: 0fr;
+			overflow: hidden;
+
+			&-wrap {
+				min-height: 0;
+			}
+		}
+
+		&.is-expand {
+			> .cl-tree-item__children {
+				grid-template-rows: 1fr;
+			}
+		}
+	}
+}

@@ -222,6 +222,10 @@ const list = [
 				label: "Page 页面",
 				link: "/pages/demo/extend/page",
 			},
+			{
+				label: "Tree 树形",
+				link: "/pages/demo/extend/tree",
+			},
 		],
 	},
 ];

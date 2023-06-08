@@ -305,6 +305,12 @@
 					"style": {
 						"navigationBarTitleText": "Page 页面"
 					}
+				},
+				{
+					"path": "extend/tree",
+					"style": {
+						"navigationBarTitleText": "Tree 树形"
+					}
 				}
 			]
 		}
