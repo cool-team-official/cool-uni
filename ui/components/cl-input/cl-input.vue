@@ -147,8 +147,6 @@ export default defineComponent({
 		"confirm",
 		"search",
 		"keyboardheightchange",
-		"click",
-		"tap",
 	],
 
 	setup(props, { emit }) {

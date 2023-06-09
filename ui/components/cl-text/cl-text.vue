@@ -118,8 +118,6 @@ export default defineComponent({
 		width: [String, Number],
 	},
 
-	emits: ["click", "tap"],
-
 	setup(props, { emit }) {
 		const { tap } = useTap(emit);
 

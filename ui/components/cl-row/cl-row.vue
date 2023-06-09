@@ -39,8 +39,6 @@ import { parseRpx } from "/@/cool/utils";
 export default defineComponent({
 	name: "cl-row",
 
-	emits: ["click", "tap"],
-
 	props: {
 		type: String,
 		wrap: Boolean,

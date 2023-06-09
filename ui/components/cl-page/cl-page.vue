@@ -29,6 +29,9 @@
 	<!-- 背景色 -->
 	<view
 		class="cl-page__bg"
+		:class="{
+			'is-primary': backgroundColor == 'primary',
+		}"
 		:style="{
 			backgroundColor,
 		}"
@@ -105,13 +108,19 @@ export default defineComponent({
 		}
 
 		// 追加方法
-		proxy.$root.$cl_page = {
-			showLoading,
-			hideLoading,
-			showToast,
-			showConfirm,
-			showTips,
-		};
+		if (!proxy.$root.$cl_page) {
+			proxy.$root.$cl_page = {};
+		}
+
+		if (router.path) {
+			proxy.$root.$cl_page[router.path] = {
+				showLoading,
+				hideLoading,
+				showToast,
+				showConfirm,
+				showTips,
+			};
+		}
 
 		return {
 			refs,

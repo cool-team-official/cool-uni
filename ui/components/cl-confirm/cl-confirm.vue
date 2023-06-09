@@ -81,11 +81,7 @@ export default defineComponent({
 
 		// 打开
 		function open(options: ClConfirm.Options) {
-			if (visible.value) {
-				timer = setTimeout(() => {
-					open(options);
-				}, 350);
-			} else {
+			function next() {
 				visible.value = true;
 				closed.value = false;
 
@@ -113,6 +109,14 @@ export default defineComponent({
 						}, conf.duration);
 					}
 				});
+			}
+
+			if (closed.value) {
+				timer = setTimeout(() => {
+					next();
+				}, 350);
+			} else {
+				next();
 			}
 		}
 
