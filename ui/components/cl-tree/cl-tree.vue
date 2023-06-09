@@ -1,6 +1,6 @@
 <template>
 	<view class="cl-tree">
-		<cl-tree-item :data="item" v-for="(item, index) in data" :key="index" />
+		<cl-tree-item :data="item" v-for="(item, index) in data" :key="index"> </cl-tree-item>
 	</view>
 </template>
 
@@ -10,7 +10,16 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
 	name: "cl-tree",
 
-	setup(props) {
+	props: {
+		itemHeight: {
+			type: Number,
+			default: 50,
+		},
+	},
+
+	emits: ["change"],
+
+	setup(props, { emit }) {
 		const data = ref([
 			{
 				label: "A",
@@ -86,8 +95,17 @@ export default defineComponent({
 			},
 		]);
 
+		const value = ref();
+
+		function setValue(val: any) {
+			value.value = val;
+			console.log(val);
+			emit("change", val);
+		}
+
 		return {
 			data,
+			setValue,
 		};
 	},
 });

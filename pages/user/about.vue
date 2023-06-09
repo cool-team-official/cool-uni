@@ -1,7 +1,7 @@
 <template>
 	<cl-page>
 		<view class="page-about">
-			<image class="logo" src="@/static/logo.png" />
+			<image class="logo" src="/static/logo.png" />
 
 			<text class="name">{{ app.info.name }}</text>
 			<text class="version">v{{ app.version.num }}</text>

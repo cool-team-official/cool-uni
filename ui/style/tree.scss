@@ -12,6 +12,12 @@
 			justify-content: center;
 			height: 50rpx;
 			width: 50rpx;
+
+			.icon-caret {
+				display: inline-block;
+				transform: rotate(-90deg);
+				transition: transform 0.3s;
+			}
 		}
 
 		&__label {
@@ -19,19 +25,13 @@
 		}
 
 		&__children {
-			transition: all 0.3s;
-			display: grid;
-			grid-template-rows: 0fr;
 			overflow: hidden;
-
-			&-wrap {
-				min-height: 0;
-			}
+			transition: all 0.3s;
 		}
 
 		&.is-expand {
-			> .cl-tree-item__children {
-				grid-template-rows: 1fr;
+			& > .cl-tree-item__content .icon-caret {
+				transform: rotate(0deg);
 			}
 		}
 	}
