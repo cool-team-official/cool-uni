@@ -11,6 +11,7 @@
 		]"
 		:style="{
 			backgroundColor: color,
+			margin: parseRpx(margin),
 		}"
 		@click="tap"
 		v-if="visible"
@@ -35,6 +36,7 @@
 
 import { defineComponent, PropType, ref } from "vue";
 import { useTap } from "../../hook";
+import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-tag",
@@ -52,6 +54,7 @@ export default defineComponent({
 		color: String,
 		closable: Boolean,
 		round: Boolean,
+		margin: [String, Number, Array],
 	},
 
 	setup(_, { emit }) {
@@ -76,6 +79,7 @@ export default defineComponent({
 			tap,
 			open,
 			close,
+			parseRpx,
 		};
 	},
 });

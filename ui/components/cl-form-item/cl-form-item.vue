@@ -2,7 +2,7 @@
 	<view
 		class="cl-form-item"
 		:class="[
-			`is-${labelPosition2}`,
+			`is-${labelPosition}`,
 			{
 				'is-error': !!message,
 				'is-required': isRequired,
@@ -11,7 +11,7 @@
 	>
 		<view
 			class="cl-form-item__label"
-			:style="{ width: labelWidth2 }"
+			:style="{ width: labelWidth }"
 			v-if="label || $slots.label"
 		>
 			<slot name="label">
@@ -20,7 +20,7 @@
 		</view>
 
 		<view class="cl-form-item__container">
-			<view class="cl-form-item__content" :class="[justify2]">
+			<view class="cl-form-item__content" :class="[justify]">
 				<slot></slot>
 			</view>
 			<view class="cl-form-item__suffix">
@@ -79,6 +79,7 @@ export default defineComponent({
 				"tips",
 				"labelWidth",
 				"labelPosition",
+				"justify",
 				"addField",
 				"removeField",
 				"validateOnRuleChange",
@@ -96,25 +97,25 @@ export default defineComponent({
 		const isRequired = ref(false);
 
 		// 标题位置
-		const labelPosition2 = computed(() => {
+		const labelPosition = computed(() => {
 			return props.labelPosition || parent.value?.labelPosition;
 		});
 
 		// 标题宽度
-		const labelWidth2 = computed(() => {
-			return labelPosition2.value == "top"
+		const labelWidth = computed(() => {
+			return labelPosition.value == "top"
 				? "auto"
 				: parseRpx(props.labelWidth || parent.value?.labelWidth);
+		});
+
+		// 内容布局
+		const justify = computed(() => {
+			return `is-justify--${props.justify || parent.value?.justify}`;
 		});
 
 		// 是否显示消息
 		const showMessage = computed(() => {
 			return parent.value?.tips == "inner" && message.value;
-		});
-
-		// 内容布局
-		const justify2 = computed(() => {
-			return `is-justify--${props.justify || parent.value?.justify}`;
 		});
 
 		// 校验器
@@ -223,10 +224,10 @@ export default defineComponent({
 		return {
 			message,
 			isRequired,
-			labelWidth2,
-			labelPosition2,
+			labelWidth,
+			labelPosition,
+			justify,
 			showMessage,
-			justify2,
 			parseRpx,
 			validate,
 			clearValidate,

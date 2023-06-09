@@ -29,6 +29,7 @@ import AsyncValidator from "../../utils/async-validator";
  * @property {Boolean} tips 消息提示方式
  * @property {String, Number} labelWidth 表单域标签的宽度，默认150rpx
  * @property {String} labelPosition 表单域标签的位置，默认right
+ * @property {String} justify 水平布局，默认start
  * @property {Boolean} validateOnRuleChange 是否在 rules 属性改变后立即触发一次验证，默认true
  */
 
@@ -47,7 +48,7 @@ export default defineComponent({
 		disabled: Boolean,
 		tips: {
 			type: String as PropType<"toast" | "inner" | "none">,
-			default: "inner",
+			default: "toast",
 		},
 		labelWidth: {
 			type: [String, Number],
@@ -61,6 +62,7 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
+		justify: String as PropType<"start" | "center" | "end">,
 	},
 
 	emits: ["update:modelValue", "change", "reset", "clear"],
