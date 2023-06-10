@@ -21,6 +21,10 @@
 		}
 	}
 
+	&.is-justify-start {
+		justify-content: flex-start;
+	}
+
 	&.is-justify-center {
 		justify-content: center;
 	}
@@ -37,7 +41,11 @@
 		justify-content: space-around;
 	}
 
-	&.is-align-middle {
+	&.is-align-top {
+		align-items: flex-start;
+	}
+
+	&.is-align-center {
 		align-items: center;
 	}
 

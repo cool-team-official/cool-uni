@@ -32,7 +32,7 @@
  * @example <cl-col :span="12"></cl-col>
  */
 
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
@@ -49,12 +49,12 @@ export default defineComponent({
 			default: 0,
 		},
 		justify: {
-			type: String,
+			type: String as PropType<"start" | "center" | "end">,
 			default: "start",
 		},
 		align: {
-			type: String,
-			default: "top",
+			type: String as PropType<"top" | "center" | "bottom">,
+			default: "center",
 		},
 		height: [String, Number],
 		width: [String, Number],
