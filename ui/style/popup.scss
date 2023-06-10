@@ -47,6 +47,26 @@
 		transition: all 0.3s;
 		box-sizing: border-box;
 
+		&__header {
+			display: flex;
+			align-items: center;
+			height: 100rpx;
+			padding: 0 20rpx;
+			border-bottom: $cl-border-width solid #f7f7f7;
+
+			.text {
+				font-size: 28rpx;
+				flex: 1;
+				text-align: center;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+				padding: 0 20rpx;
+			}
+		}
+
 		&__container {
 			height: 100%;
 		}

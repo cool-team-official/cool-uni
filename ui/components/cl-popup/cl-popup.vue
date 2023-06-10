@@ -27,8 +27,31 @@
 		<!-- 内容 -->
 		<view
 			class="cl-popup"
+			:class="[`cl-popup--${type}`]"
 			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
 		>
+			<view class="cl-popup__header">
+				<cl-button
+					:border="false"
+					size="small"
+					type="info"
+					@tap="close"
+					v-if="type == 'select'"
+					>取消</cl-button
+				>
+
+				<text class="text">{{ title }}</text>
+
+				<cl-button
+					:border="false"
+					size="small"
+					type="primary"
+					@tap="confirm"
+					v-if="type == 'select'"
+					>确定</cl-button
+				>
+			</view>
+
 			<view class="cl-popup__container" :style="{ padding: parseRpx(padding) }">
 				<slot></slot>
 			</view>
@@ -44,7 +67,7 @@
 /**
  * @description 弹出框
  * @property {Boolean} modelValue 是否可见
- * @property {Function} beforeClose 关闭前钩子函数
+ * @property {String} title 标题
  * @property {String} direction 弹出方向，默认center
  * @property {Boolean} closeOnClickModal 点击遮罩层是否关闭，默认true
  * @property {String, Number} size 弹出框大小，默认auto
@@ -52,6 +75,7 @@
  * @property {String, Number} borderRadius 内容圆角
  * @property {String, Number} padding 内容内间据，默认20
  * @property {Boolean} modal 是否显示遮罩层
+ * @property {String} type 类型
  */
 
 import { computed, defineComponent, PropType, ref, watch } from "vue";
@@ -64,6 +88,7 @@ export default defineComponent({
 
 	props: {
 		modelValue: Boolean,
+		title: String,
 		direction: {
 			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
 			default: "center",
@@ -98,9 +123,13 @@ export default defineComponent({
 			default: "rgba(0, 0, 0, 0.4)",
 		},
 		showCloseBtn: Boolean,
+		type: {
+			type: String as PropType<"default" | "select">,
+			default: "default",
+		},
 	},
 
-	emits: ["update:modelValue", "open", "opened", "close", "closed"],
+	emits: ["update:modelValue", "open", "opened", "close", "closed", "confirm"],
 
 	setup(props, { emit }) {
 		// 是否可见
@@ -196,6 +225,11 @@ export default defineComponent({
 			close();
 		}
 
+		// 确认
+		function confirm() {
+			emit("confirm");
+		}
+
 		watch(
 			() => props.modelValue,
 			(val: boolean) => {
@@ -220,6 +254,7 @@ export default defineComponent({
 			open,
 			close,
 			modalClose,
+			confirm,
 		};
 	},
 });

@@ -1,6 +1,11 @@
 <template>
-	<view class="cl-card">
-		<view class="cl-card__header">
+	<view
+		class="cl-card"
+		:style="{
+			backgroundColor,
+		}"
+	>
+		<view class="cl-card__header" v-if="label">
 			<cl-text :size="fontSize" bold :value="label"></cl-text>
 
 			<view class="cl-card__loading" v-if="loading">
@@ -52,6 +57,10 @@ export default defineComponent({
 		},
 		more: Boolean,
 		moreText: String,
+		backgroundColor: {
+			type: String,
+			default: "#ffffff",
+		},
 	},
 
 	setup(_, { emit }) {

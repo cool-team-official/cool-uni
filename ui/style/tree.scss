@@ -3,15 +3,22 @@
 		&__content {
 			display: flex;
 			align-items: center;
-			height: 50rpx;
+			height: 100%;
+			position: relative;
+			border-radius: $cl-border-radius;
+			padding: 0 10rpx;
+			box-sizing: border-box;
+
+			&:active {
+				background-color: $cl-color-active;
+			}
 		}
 
 		&__expand {
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			height: 50rpx;
-			width: 50rpx;
+			height: 100%;
 
 			.icon-caret {
 				display: inline-block;
@@ -22,6 +29,13 @@
 
 		&__label {
 			font-size: $cl-font-size;
+			flex: 1;
+			position: relative;
+			padding: 0 50rpx 0 4rpx;
+		}
+
+		&__check {
+			display: none;
 		}
 
 		&__children {
@@ -34,5 +48,21 @@
 				transform: rotate(0deg);
 			}
 		}
+
+		&.is-checked {
+			& > .cl-tree-item__content {
+				color: $cl-color-primary;
+
+				.cl-tree-item__check {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+.cl-tree-select {
+	&__wrap {
+		padding: 10rpx;
 	}
 }
