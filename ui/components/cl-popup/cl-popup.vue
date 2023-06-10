@@ -30,7 +30,7 @@
 			:class="[`cl-popup--${type}`]"
 			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
 		>
-			<view class="cl-popup__header">
+			<view class="cl-popup__header" v-if="title">
 				<cl-button
 					:border="false"
 					size="small"
