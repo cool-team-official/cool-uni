@@ -5,6 +5,7 @@
 		type="select"
 		title="选择节点"
 		:padding="0"
+		:confirm-disabled="!isChecked"
 		@confirm="save"
 	>
 		<scroll-view
@@ -16,6 +17,7 @@
 		>
 			<view class="cl-tree-select__wrap">
 				<cl-tree
+					v-if="visible"
 					v-model="value"
 					:data="data"
 					:row-height="rowHeight"
@@ -23,6 +25,7 @@
 					:default-expand-all="defaultExpandAll"
 					:auto-expand="keys"
 					:accordion="accordion"
+					:multiple="multiple"
 					:keys="keys"
 				/>
 			</view>
@@ -31,15 +34,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { TreeProps, useTree } from "../cl-tree/helper";
 import { parseRpx } from "/@/cool/utils";
+import { cloneDeep, isEmpty } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-tree-select",
 
 	props: {
-		modelValue: [String, Number],
 		maxHeight: {
 			type: [String, Number],
 			default: 800,
@@ -50,7 +53,7 @@ export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(props, { emit }) {
-		const { label } = useTree(props);
+		const { label } = useTree({ props });
 
 		// 绑定值
 		const value = ref();
@@ -58,9 +61,16 @@ export default defineComponent({
 		// 是否显示
 		const visible = ref(false);
 
+		// 是否选择了
+		const isChecked = computed(() => {
+			return !(props.multiple
+				? isEmpty(value.value)
+				: value.value === undefined || value.value === null || value.value === "");
+		});
+
 		// 打开
 		function open() {
-			value.value = props.modelValue;
+			value.value = cloneDeep(props.modelValue);
 			visible.value = true;
 		}
 
@@ -84,6 +94,7 @@ export default defineComponent({
 			close,
 			save,
 			parseRpx,
+			isChecked,
 		};
 	},
 });

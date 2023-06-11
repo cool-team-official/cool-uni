@@ -5,21 +5,15 @@
 			'is-expand': data.isExpand,
 			'is-checked': isChecked,
 		}"
-		:style="{
-			paddingLeft,
-		}"
+		:style="itemStyle"
 	>
-		<view
-			class="cl-tree-item__content"
-			:style="{ height, marginLeft: isLeaf ? '32rpx' : '0' }"
-			@tap="toTap"
-		>
+		<view class="cl-tree-item__content" :style="childStyle" @tap="toTap">
 			<view class="cl-tree-item__expand" @tap.stop="toExpand()" v-if="!isLeaf">
 				<text class="icon-caret cl-icon-caret-bottom"></text>
 			</view>
 
 			<view class="cl-tree-item__label">
-				<slot>
+				<slot name="item" :data="data" :level="level">
 					{{ label }}
 				</slot>
 			</view>
@@ -41,6 +35,9 @@
 				:key="index"
 				:level="level + 1"
 			>
+				<!-- <template #item="{ data, level }">
+					<slot name="item" :data="data" :level="level"> </slot>
+				</template> -->
 			</cl-tree-item>
 		</view>
 	</view>
@@ -74,13 +71,15 @@ export default defineComponent({
 	setup(props) {
 		// cl-tree
 		const parent = getParent("cl-tree", [
-			"modelValue",
-			"updateModelValue",
+			"value",
+			"updateValue",
 			"data",
 			"keys",
+			"getKey",
 			"rowHeight",
 			"checkStrictly",
 			"accordion",
+			"noChildren",
 		]);
 
 		// 是否展开
@@ -89,21 +88,26 @@ export default defineComponent({
 		// 最大高度
 		const maxHeight = ref();
 
-		// 左间距
-		const paddingLeft = computed(() => (props.level ? 26 : 0) + "rpx");
+		// 样式
+		const itemStyle = computed(() => {
+			return {
+				paddingLeft: (props.level ? 26 : 0) + "rpx",
+			};
+		});
+
+		// 子集样式
+		const childStyle = computed(() => {
+			return {
+				marginLeft: parent.value?.noChildren ? 0 : isLeaf.value ? "32rpx" : "0",
+				height: parseRpx(parent.value?.rowHeight),
+			};
+		});
 
 		// 是否叶子节点
 		const isLeaf = computed(() => isEmpty(getKey("children")));
 
 		// 是否选中
-		const isChecked = computed(
-			() =>
-				parent.value?.modelValue === getKey("value") &&
-				parent.value?.modelValue !== undefined
-		);
-
-		// 高度
-		const height = computed(() => parseRpx(parent.value?.rowHeight));
+		const isChecked = computed(() => parent.value?.value.includes(getKey("value")));
 
 		// 文本
 		const label = computed(() => getKey("label"));
@@ -186,7 +190,7 @@ export default defineComponent({
 
 		// 选择
 		function toCheck() {
-			parent.value?.updateModelValue(getKey("value"));
+			parent.value?.updateValue(getKey("value"));
 		}
 
 		// 获取key
@@ -194,7 +198,7 @@ export default defineComponent({
 			if (!value) {
 				value = props.data;
 			}
-			return value[parent.value?.keys[key]];
+			return parent.value.getKey(key, value);
 		}
 
 		// 点击
@@ -210,6 +214,7 @@ export default defineComponent({
 			() => props.data.isExpand,
 			(val) => {
 				if (!val) {
+					console.log(1111);
 					toExpand(false);
 				}
 			}
@@ -217,9 +222,9 @@ export default defineComponent({
 
 		return {
 			isExpand,
-			height,
 			maxHeight,
-			paddingLeft,
+			itemStyle,
+			childStyle,
 			isLeaf,
 			isChecked,
 			label,

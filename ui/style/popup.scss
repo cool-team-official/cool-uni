@@ -9,15 +9,12 @@
 	pointer-events: none;
 
 	&.is-open {
+		pointer-events: auto;
 		opacity: 1;
 
 		.cl-popup {
 			transition: all 0.4s;
 			transform: translate(0, 0);
-		}
-
-		&.is-modal {
-			pointer-events: auto;
 		}
 	}
 

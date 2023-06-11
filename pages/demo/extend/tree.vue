@@ -1,20 +1,34 @@
 <template>
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-tag>Label：{{ refs.tree?.label }}</cl-tag>
-			<cl-tag type="error">Value：{{ value }}</cl-tag>
+			<cl-row :margin="[0, 0, 10, 0]">
+				<cl-tag>{{ refs.tree?.label }}</cl-tag>
+			</cl-row>
+
+			<cl-tag type="error">{{ value }}</cl-tag>
 
 			<view class="bor">
-				<cl-tree :ref="setRefs('tree')" v-model="value" :data="data" />
+				<cl-tree :ref="setRefs('tree')" v-model="value" :data="data"> </cl-tree>
+			</view>
+		</cl-card>
+
+		<cl-card label="多选">
+			<cl-row :margin="[0, 0, 10, 0]">
+				<cl-tag>{{ refs.treeMultiple?.label }}</cl-tag>
+			</cl-row>
+			<cl-tag type="error">{{ value2 }}</cl-tag>
+
+			<view class="bor">
+				<cl-tree multiple :ref="setRefs('treeMultiple')" v-model="value2" :data="data" />
 			</view>
 		</cl-card>
 
 		<cl-card label="弹出框选择">
-			<cl-list-item :arrow-icon="false" label="节点选择" @tap="refs.treeSelect?.open">{{
-				refs.treeSelect?.label
-			}}</cl-list-item>
+			<cl-list-item :arrow-icon="false" label="节点选择" @tap="refs.treeSelect?.open">
+				<cl-text :value="refs.treeSelect?.label" :ellipsis="1"></cl-text>
+			</cl-list-item>
 
-			<cl-tree-select :ref="setRefs('treeSelect')" v-model="value2" :data="data" />
+			<cl-tree-select :ref="setRefs('treeSelect')" v-model="value3" :data="data" />
 		</cl-card>
 	</cl-page>
 </template>
@@ -25,8 +39,9 @@ import { useCool } from "/@/cool";
 
 const { refs, setRefs } = useCool();
 
-const value = ref(6);
-const value2 = ref(12);
+const value = ref(3);
+const value2 = ref([12, 3]);
+const value3 = ref(7);
 
 const data = ref([
 	{
@@ -56,6 +71,28 @@ const data = ref([
 					{
 						label: "Level three 2-1-1",
 						value: 6,
+						children: [
+							{
+								label: "Level four 2-1-1-1",
+								value: 14,
+								children: [
+									{
+										label: "Level five 2-1-1-1-1",
+										value: 16,
+									},
+								],
+							},
+							{
+								label: "Level four 2-1-1-2",
+								value: 15,
+								children: [
+									{
+										label: "Level five 2-1-1-2-1",
+										value: 17,
+									},
+								],
+							},
+						],
 					},
 				],
 			},

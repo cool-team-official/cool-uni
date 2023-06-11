@@ -6,7 +6,7 @@
 			<cl-button @tap="open">打开</cl-button>
 		</cl-card>
 
-		<cl-card label="添加样式">
+		<cl-card label="添加图标">
 			<cl-button @tap="open2">打开</cl-button>
 		</cl-card>
 
@@ -43,8 +43,7 @@ function open2() {
 		list: [
 			{
 				label: "删除好友",
-				color: "red",
-				size: "40rpx",
+				icon: "cl-icon-close",
 			},
 		],
 	});
@@ -75,16 +74,21 @@ function open4() {
 			},
 		],
 		beforeClose(index, done) {
-			ui.showConfirm({
-				title: "提示",
-				message: "是否删除该联系人",
-				callback(action) {
-					if (action == "confirm") {
-						ui.showToast("删除成功");
+			if (index == 0) {
+				ui.showConfirm({
+					title: "提示",
+					message: "是否删除该联系人",
+					callback(action) {
+						if (action == "confirm") {
+							ui.showToast("删除成功");
+						}
+
 						done();
-					}
-				},
-			});
+					},
+				});
+			} else {
+				done();
+			}
 		},
 	});
 }

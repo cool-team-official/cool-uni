@@ -21,11 +21,11 @@
 	}
 
 	&--default {
-		height: 48rpx;
+		min-height: 48rpx;
 	}
 
 	&--small {
-		height: 40rpx;
+		min-height: 40rpx;
 	}
 
 	&.is-round {

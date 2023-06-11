@@ -3,6 +3,7 @@ declare namespace ClActionSheet {
 		label: string;
 		color?: string;
 		size?: string;
+		icon?: string;
 		disabled?: boolean;
 		openType?:
 			| "feedback"

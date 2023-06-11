@@ -71,6 +71,8 @@
 		width: 100% !important;
 
 		&__wrapper {
+			pointer-events: none;
+
 			&--top {
 				top: 100rpx;
 				top: calc(env(safe-area-inset-top) + 100rpx);

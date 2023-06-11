@@ -46,6 +46,7 @@
 					:border="false"
 					size="small"
 					type="primary"
+					:disabled="confirmDisabled"
 					@tap="confirm"
 					v-if="type == 'select'"
 					>确定</cl-button
@@ -127,6 +128,7 @@ export default defineComponent({
 			type: String as PropType<"default" | "select">,
 			default: "default",
 		},
+		confirmDisabled: Boolean,
 	},
 
 	emits: ["update:modelValue", "open", "opened", "close", "closed", "confirm"],
