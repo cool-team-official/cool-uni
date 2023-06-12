@@ -50,11 +50,6 @@
 		background-color: $cl-color-info;
 	}
 
-	&.is-show {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
 	&.is-icon {
 		min-height: 140rpx;
 		min-width: 140rpx;
