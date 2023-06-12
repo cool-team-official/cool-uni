@@ -60,10 +60,8 @@ export class BaseService {
 		}
 
 		// 处理地址
-		if (options.url.indexOf("http") < 0) {
-			if (options.proxy === undefined || options.proxy) {
-				options.url = ns + options.url;
-			}
+		if (options.proxy === undefined || options.proxy) {
+			options.url = ns + options.url;
 		}
 
 		// 处理参数
