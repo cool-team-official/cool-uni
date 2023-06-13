@@ -1,5 +1,6 @@
-import { computed, getCurrentInstance, reactive } from "vue";
+import { computed, getCurrentInstance, onUnmounted, reactive } from "vue";
 import { onPullDownRefresh, onReachBottom, onUnload } from "@dcloudio/uni-app";
+import { useUi } from "/@/ui";
 
 interface Res {
 	list: { [key: string]: any }[];
@@ -14,6 +15,7 @@ interface Res {
 
 export function usePager() {
 	const { proxy }: any = getCurrentInstance();
+	const ui = useUi();
 
 	// 分页信息
 	const pager = reactive({
@@ -45,24 +47,6 @@ export function usePager() {
 		}
 	}
 
-	// 上拉加载
-	onReachBottom(() => {
-		if (!pager.finished) {
-			refresh({ page: pager.pagination.page + 1 });
-		}
-	});
-
-	// 下拉刷新
-	onPullDownRefresh(async () => {
-		await refresh({ page: 1 });
-		uni.stopPullDownRefresh();
-	});
-
-	// 离开页面
-	onUnload(() => {
-		uni.hideLoading();
-	});
-
 	// 数据
 	function onData(cb: (list: any[]) => void) {
 		events.onData = cb;
@@ -91,16 +75,14 @@ export function usePager() {
 
 		// 是否显示加载动画
 		if (data.page == 1 && loading) {
-			uni.showLoading({
-				title: "加载中",
-			});
+			ui.showLoading();
 		}
 
 		pager.loading = true;
 
 		// 完成
 		function done() {
-			uni.hideLoading();
+			ui.hideLoading();
 			pager.loading = false;
 		}
 
@@ -131,18 +113,45 @@ export function usePager() {
 						resolve(res);
 					}).catch((err) => {
 						done();
-
-						uni.showToast({
-							title: err.message,
-							icon: "none",
-						});
-
+						ui.showToast(err.message);
 						reject(err);
 					});
 				});
 			},
 		};
 	}
+
+	// 关闭
+	function close() {
+		isReg = false;
+		ui.hideLoading();
+	}
+
+	// 是否注册，避免在组件中重复注入事件问题
+	let isReg = true;
+
+	// 上拉加载
+	onReachBottom(() => {
+		if (isReg) {
+			if (!pager.finished) {
+				refresh({ page: pager.pagination.page + 1 });
+			}
+		}
+	});
+
+	// 下拉刷新
+	onPullDownRefresh(async () => {
+		if (isReg) {
+			await refresh({ page: 1 });
+			uni.stopPullDownRefresh();
+		}
+	});
+
+	// 组件销毁
+	onUnmounted(close);
+
+	// 离开页面
+	onUnload(close);
 
 	return {
 		pager,
