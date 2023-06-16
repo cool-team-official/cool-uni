@@ -33,8 +33,6 @@ import Tabbar from "./components/tabbar.vue";
 
 const { router, service } = useCool();
 
-console.log(service);
-
 const list = [
 	{
 		label: "基础组件",

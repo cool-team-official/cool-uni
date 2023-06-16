@@ -32,7 +32,7 @@ const Confirm3 = ref<ClConfirm.Ref>();
 
 function open() {
 	Confirm.value?.open({
-		title: "温馨提示",
+		title: "提示",
 		message: "你有一个待取信件",
 		callback(action) {
 			switch (action) {
@@ -54,13 +54,13 @@ function open() {
 
 function open2() {
 	Confirm2.value?.open({
-		title: "温馨提示",
+		title: "提示",
 	});
 }
 
 function open3() {
 	Confirm3.value?.open({
-		title: "温馨提示",
+		title: "提示",
 		message: "你有一个待取信件",
 		beforeClose(action, { done, showLoading, hideLoading }) {
 			if (action == "confirm") {

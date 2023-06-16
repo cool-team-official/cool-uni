@@ -214,7 +214,6 @@ export default defineComponent({
 			() => props.data.isExpand,
 			(val) => {
 				if (!val) {
-					console.log(1111);
 					toExpand(false);
 				}
 			}

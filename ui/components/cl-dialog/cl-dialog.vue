@@ -17,7 +17,7 @@
 
 				<!-- 内容 -->
 				<view class="cl-dialog__container">
-					<view class="cl-dialog__message">
+					<view class="cl-dialog__message" :style="{ textAlign }">
 						<slot></slot>
 					</view>
 				</view>
@@ -46,7 +46,7 @@
  * @property {Boolean} showCloseBtn 显示关闭按钮
  */
 
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, PropType } from "vue";
 
 export default defineComponent({
 	name: "cl-dialog",
@@ -57,6 +57,10 @@ export default defineComponent({
 			required: true,
 		},
 		title: String,
+		textAlign: {
+			type: String as PropType<"left" | "center" | "right">,
+			default: "left",
+		},
 		width: {
 			type: String,
 			default: "80%",

@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 function onTap() {
-	console.log(111);
+	console.log("tap");
 }
 </script>
 

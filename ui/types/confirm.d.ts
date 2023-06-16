@@ -5,6 +5,7 @@ declare namespace ClConfirm {
 		title?: string;
 		message?: string;
 		width?: string;
+		type?: "success" | "warning" | "error";
 		showCancelButton?: boolean;
 		cancelButtonText?: string;
 		showConfirmButton?: boolean;

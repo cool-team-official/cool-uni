@@ -20,7 +20,9 @@
 		<!-- #endif -->
 
 		<!-- 内容插槽 -->
-		<slot></slot>
+		<view class="cl-page__container" :style="{ height }">
+			<slot></slot>
+		</view>
 
 		<!-- 底部安全区域 -->
 		<view class="safe-area-bottom"></view>
@@ -29,24 +31,24 @@
 	<!-- 背景色 -->
 	<view
 		class="cl-page__bg"
-		:class="{
-			'is-primary': backgroundColor == 'primary',
-		}"
 		:style="{
-			backgroundColor,
+			background: backgroundColor,
 		}"
 	></view>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, reactive } from "vue";
-import { useCool } from "/@/cool";
+import { computed, defineComponent, getCurrentInstance, reactive } from "vue";
+import { router, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
+
+const { statusBarHeight } = uni.getSystemInfoSync();
 
 export default defineComponent({
 	name: "cl-page",
 
 	props: {
+		fullscreen: Boolean,
 		padding: {
 			type: [Number, String],
 			default: 0,
@@ -57,7 +59,7 @@ export default defineComponent({
 		},
 		backgroundColor: {
 			type: String,
-			default: "#f7f7f7",
+			default: router.globalStyle.backgroundColor || "#fff",
 		},
 	},
 
@@ -69,6 +71,11 @@ export default defineComponent({
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
+
+		// 内容高度
+		const height = computed(() => {
+			return props.fullscreen ? `calc(100% - ${statusBarHeight}px)` : "auto";
+		});
 
 		// 加载器
 		const loader = reactive({
@@ -100,7 +107,7 @@ export default defineComponent({
 		// 提示框
 		function showTips(message: string, callback?: () => void) {
 			refs.confirm?.open({
-				title: "温馨提示",
+				title: "提示",
 				message,
 				showCancelButton: false,
 				callback,
@@ -123,6 +130,7 @@ export default defineComponent({
 		}
 
 		return {
+			height,
 			refs,
 			setRefs,
 			loader,

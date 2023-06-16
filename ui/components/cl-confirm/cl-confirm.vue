@@ -2,11 +2,18 @@
 	<view class="cl-confirm">
 		<cl-dialog
 			v-model="visible"
-			:title="conf.title"
 			:close-on-click-modal="conf.closeOnClickModal"
 			:width="conf.width"
+			text-align="center"
 			@close="onClose"
 		>
+			<view class="cl-confirm__header" v-if="conf.title">
+				<text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
+				<text class="cl-icon-toast-warning" v-else-if="conf.type == 'warning'"></text>
+				<text class="cl-icon-toast-success" v-else-if="conf.type == 'success'"></text>
+				<text class="cl-confirm__title">{{ conf.title }}</text>
+			</view>
+
 			<slot>
 				<view class="cl-confirm__message">{{ conf.message }}</view>
 			</slot>
@@ -14,27 +21,13 @@
 			<template #footer>
 				<view class="cl-confirm__footer">
 					<view class="cl-confirm__footer-item" v-if="conf.showCancelButton">
-						<cl-button
-							plain
-							fill
-							:border="false"
-							:border-radius="0"
-							@tap="close('cancel')"
-						>
+						<cl-button fill @tap="close('cancel')">
 							{{ conf.cancelButtonText }}</cl-button
 						>
 					</view>
 
 					<view class="cl-confirm__footer-item" v-if="conf.showConfirmButton">
-						<cl-button
-							plain
-							fill
-							type="primary"
-							:border="false"
-							:loading="loading"
-							:border-radius="0"
-							@tap="close('confirm')"
-						>
+						<cl-button fill type="primary" :loading="loading" @tap="close('confirm')">
 							{{ conf.confirmButtonText }}
 						</cl-button>
 					</view>
@@ -65,16 +58,7 @@ export default defineComponent({
 		const loading = ref(false);
 
 		// 配置
-		const conf = reactive<ClConfirm.Options>({
-			title: "",
-			message: "",
-			width: "500rpx",
-			showCancelButton: true,
-			cancelButtonText: "取消",
-			showConfirmButton: true,
-			confirmButtonText: "确认",
-			closeOnClickModal: true,
-		});
+		const conf = reactive<ClConfirm.Options>({});
 
 		// 计时器
 		let timer: any = null;
