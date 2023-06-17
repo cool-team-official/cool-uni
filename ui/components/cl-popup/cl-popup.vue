@@ -53,7 +53,7 @@
 				>
 			</view>
 
-			<view class="cl-popup__container" :style="{ padding: parseRpx(padding) }">
+			<view class="cl-popup__container" :style="{ padding: parseRpx(padding), paddingTop }">
 				<slot></slot>
 			</view>
 
@@ -81,6 +81,9 @@
 
 import { computed, defineComponent, PropType, ref, watch } from "vue";
 import { parseRpx } from "/@/cool/utils";
+import { router } from "/@/cool";
+
+const { statusBarHeight } = uni.getSystemInfoSync();
 
 let id = 1;
 
@@ -170,6 +173,25 @@ export default defineComponent({
 			}
 		});
 
+		// 顶部距离
+		const paddingTop = computed(() => {
+			if (["left", "right", "top"].includes(props.direction)) {
+				let h = statusBarHeight || 0;
+
+				// #ifdef H5
+				if (!router.info()?.isCustomNavbar) {
+					h += 44;
+				}
+				// #endif
+
+				const [t] = parseRpx(props.padding).split(" ");
+
+				return `calc(${h}px + ${parseInt(t)}rpx)`;
+			} else {
+				return 1;
+			}
+		});
+
 		// 打开
 		function open() {
 			// 层级
@@ -251,6 +273,7 @@ export default defineComponent({
 			status,
 			height,
 			width,
+			paddingTop,
 			zIndex,
 			parseRpx,
 			open,

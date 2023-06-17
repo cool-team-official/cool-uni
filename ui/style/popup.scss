@@ -120,20 +120,6 @@
 		}
 	}
 
-	&--top,
-	&--left,
-	&--right {
-		.cl-popup {
-			/* #ifdef H5 */
-			padding-top: 44px;
-			/* #endif */
-
-			/* #ifndef H5 */
-			padding-top: env(safe-area-inset-top);
-			/* #endif */
-		}
-	}
-
 	&--left,
 	&--right,
 	&--bottom {

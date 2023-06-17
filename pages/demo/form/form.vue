@@ -55,6 +55,9 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
+import { useUi } from "/@/ui";
+
+const ui = useUi();
 
 const Form = ref<ClForm.Ref>();
 
@@ -133,6 +136,7 @@ function submit() {
 			loading.value = true;
 
 			setTimeout(() => {
+				ui.showToast("提交成功");
 				loading.value = false;
 			}, 1500);
 		}
