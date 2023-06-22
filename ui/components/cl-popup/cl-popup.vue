@@ -184,9 +184,13 @@ export default defineComponent({
 				}
 				// #endif
 
-				const [t] = parseRpx(props.padding).split(" ");
+				let [t] = parseRpx(props.padding).split(" ");
 
-				return `calc(${h}px + ${parseInt(t)}rpx)`;
+				if (t == "0rpx") {
+					t = "0px";
+				}
+
+				return `calc(${h}px + ${t})`;
 			} else {
 				return 1;
 			}

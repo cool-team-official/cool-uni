@@ -1,7 +1,7 @@
 .cl-topbar {
 	display: flex;
 	align-items: center;
-	height: $cl-status-height;
+	height: $cl-topbar-height;
 	width: 100%;
 	position: relative;
 
@@ -38,7 +38,7 @@
 	&__append {
 		display: flex;
 		align-items: center;
-		height: $cl-status-height;
+		height: $cl-topbar-height;
 		position: absolute;
 
 		/* #ifdef MP */
@@ -82,14 +82,5 @@
 
 	&.is-border {
 		border-bottom: 1rpx solid #f7f7f7;
-	}
-
-	&.is-android {
-		padding-top: 44rpx;
-
-		&__prepend,
-		&__append {
-			top: 44rpx;
-		}
 	}
 }

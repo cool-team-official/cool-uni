@@ -190,7 +190,7 @@ const router = {
 		const page = last(getCurrentPages());
 
 		if (page) {
-			const { route, $page, $vm }: any = page;
+			const { route, $page, $vm, $getAppWebview }: any = page;
 
 			const q: any = {};
 
@@ -209,6 +209,7 @@ const router = {
 
 			let d = {
 				$vm,
+				$getAppWebview,
 				path: `/${route}`,
 				fullPath: $page?.fullPath,
 				query: q || {},
@@ -247,7 +248,6 @@ const router = {
 		this.push({
 			path: this.pages.home,
 			mode: this.isTab(this.pages.home) ? "switchTab" : "navigateTo",
-			isGuard: false,
 		});
 	},
 
@@ -298,9 +298,7 @@ const router = {
 		}
 
 		// 登录方式
-		if (loginType) {
-			storage.set("loginType", loginType);
-		}
+		storage.set("loginType", loginType);
 
 		// 登录回调
 		if (fn.afterLogin) {
