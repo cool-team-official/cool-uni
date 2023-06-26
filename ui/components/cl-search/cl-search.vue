@@ -4,30 +4,32 @@
 			<slot name="prepend"></slot>
 		</view>
 		<view class="cl-search__input">
-			<cl-input
-				v-model="value"
-				:prefix-icon="searchIcon"
-				:type="type"
-				:placeholder="placeholder"
-				:disabled="disabled"
-				:clearable="clearable"
-				:focus="isFocus"
-				:placeholder-style="placeholderStyle"
-				:placeholder-class="placeholderClass"
-				:maxlength="maxlength"
-				:cursor-spacing="cursorSpacing"
-				:confirm-type="confirmType"
-				:confirm-hold="confirmHold"
-				:adjust-position="adjustPosition"
-				:holdKeyboard="holdKeyboard"
-				round
-				@input="onInput"
-				@focus="onFocus"
-				@blur="onBlur"
-				@confirm="onConfirm"
-				@clear="onClear"
-				@keyboardheightchange="onKeyboardheightchange"
-			></cl-input>
+			<view class="cl-search__inner">
+				<cl-input
+					v-model="value"
+					:prefix-icon="searchIcon"
+					:type="type"
+					:placeholder="placeholder"
+					:disabled="disabled"
+					:clearable="clearable"
+					:focus="isFocus"
+					:placeholder-style="placeholderStyle"
+					:placeholder-class="placeholderClass"
+					:maxlength="maxlength"
+					:cursor-spacing="cursorSpacing"
+					:confirm-type="confirmType"
+					:confirm-hold="confirmHold"
+					:adjust-position="adjustPosition"
+					:holdKeyboard="holdKeyboard"
+					round
+					@input="onInput"
+					@focus="onFocus"
+					@blur="onBlur"
+					@confirm="onConfirm"
+					@clear="onClear"
+					@keyboardheightchange="onKeyboardheightchange"
+				></cl-input>
+			</view>
 
 			<view class="cl-search__btn">
 				<cl-button

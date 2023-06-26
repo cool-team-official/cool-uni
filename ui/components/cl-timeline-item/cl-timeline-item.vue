@@ -10,7 +10,7 @@
 		<view
 			class="cl-timeline-item__timestamp"
 			:style="{
-				width: `${parent.timestampWidth}rpx`,
+				width: `${parent?.timestampWidth}rpx`,
 			}"
 		>
 			<slot name="timestamp">

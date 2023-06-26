@@ -1,9 +1,11 @@
 import { isArray, isEmpty, isNumber } from "lodash-es";
-import { computed, getCurrentInstance, nextTick } from "vue";
+import { computed, getCurrentInstance, nextTick, ref } from "vue";
 
 // 获取父组件
 export function getParent(name: string, k1: string[], k2?: string[]) {
 	const { proxy }: any = getCurrentInstance();
+
+	const d = ref();
 
 	const next = () => {
 		let parent = proxy.$parent;
@@ -39,7 +41,17 @@ export function getParent(name: string, k1: string[], k2?: string[]) {
 			}
 		}
 
-		return parent;
+		function deep() {
+			if (!d.value) {
+				setTimeout(() => {
+					d.value = next();
+				}, 50);
+			}
+		}
+
+		deep();
+
+		return parent || d.value;
 	};
 
 	return computed(() => next());

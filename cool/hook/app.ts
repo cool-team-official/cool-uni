@@ -5,7 +5,7 @@ import { config } from "../config";
 import { defineStore } from "pinia";
 
 // 缓存
-const useCache = defineStore("cache", () => {
+export const useCache = defineStore("cache", () => {
 	// 缓存大小
 	const size = ref("0KB");
 
@@ -46,7 +46,7 @@ const useCache = defineStore("cache", () => {
 });
 
 // 消息通知
-const useNotice = defineStore("notice", () => {
+export const useNotice = defineStore("notice", () => {
 	// 是否开启
 	const enabled = ref(false);
 
@@ -90,7 +90,7 @@ const useNotice = defineStore("notice", () => {
 });
 
 // 版本信息
-const useVersion = defineStore("version", () => {
+export const useVersion = defineStore("version", () => {
 	// 版本号
 	const num = ref("");
 
@@ -135,11 +135,26 @@ const useVersion = defineStore("version", () => {
 	};
 });
 
+// 全局数据
+export const useGlobal = defineStore("global", () => {
+	const data = reactive<{ [key: string]: any }>({});
+
+	function set(key: string, value: any) {
+		data[key] = value;
+	}
+
+	return {
+		data,
+		set,
+	};
+});
+
 export function useApp() {
 	const info = reactive(config.app);
 
 	return {
 		info,
+		global: useGlobal(),
 		cache: useCache(),
 		notice: useNotice(),
 		version: useVersion(),

@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, reactive } from "vue";
-import { router, useCool } from "/@/cool";
+import { router, useCool, useGlobal } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
@@ -65,6 +65,7 @@ export default defineComponent({
 
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
+		const global = useGlobal();
 
 		// 组件作用域
 		const { proxy }: any = getCurrentInstance();
@@ -115,18 +116,14 @@ export default defineComponent({
 		}
 
 		// 追加方法
-		if (!proxy.$root.$cl_page) {
-			proxy.$root.$cl_page = {};
-		}
-
 		if (router.path) {
-			proxy.$root.$cl_page[router.path] = {
+			global.set(`cl-page__${router.path}`, {
 				showLoading,
 				hideLoading,
 				showToast,
 				showConfirm,
 				showTips,
-			};
+			});
 		}
 
 		return {

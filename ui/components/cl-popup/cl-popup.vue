@@ -176,7 +176,11 @@ export default defineComponent({
 		// 顶部距离
 		const paddingTop = computed(() => {
 			if (["left", "right", "top"].includes(props.direction)) {
-				let h = statusBarHeight || 0;
+				let h = 0;
+
+				// #ifdef H5 || APP || MP-WEIXIN
+				h += statusBarHeight || 0;
+				// #endif
 
 				// #ifdef H5
 				if (!router.info()?.isCustomNavbar) {

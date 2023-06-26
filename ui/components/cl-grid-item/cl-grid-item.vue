@@ -21,7 +21,7 @@ export default defineComponent({
 
 		// 宽度
 		const width = computed(() => {
-			return 100 / (parent.value.column || 0) + "%";
+			return 100 / (parent.value?.column || 0) + "%";
 		});
 
 		return {

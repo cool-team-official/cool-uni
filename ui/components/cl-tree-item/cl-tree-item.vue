@@ -198,7 +198,7 @@ export default defineComponent({
 			if (!value) {
 				value = props.data;
 			}
-			return parent.value.getKey(key, value);
+			return parent.value?.getKey?.(key, value);
 		}
 
 		// 点击

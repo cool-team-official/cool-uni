@@ -163,18 +163,20 @@ export default defineComponent({
 		// 监听值变化
 		watch(
 			() => {
-				let d: any = parent.value?.form;
+				if (parent.value) {
+					let d: any = parent.value?.form;
 
-				if (props.prop?.includes(".")) {
-					props.prop.split(".").forEach((e) => {
-						if (d[e] !== undefined) {
-							d = d[e];
-						}
-					});
+					if (props.prop?.includes(".")) {
+						props.prop.split(".").forEach((e) => {
+							if (d[e] !== undefined) {
+								d = d[e];
+							}
+						});
 
-					return d;
-				} else {
-					return d[props.prop];
+						return d;
+					} else {
+						return d[props.prop];
+					}
 				}
 			},
 			(val: any) => {

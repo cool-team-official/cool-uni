@@ -46,7 +46,7 @@ export default defineComponent({
 		const parent = getParent("cl-row", ["gutter"]);
 
 		// 间距
-		const padding = computed(() => parent.value.gutter / 2 + "rpx");
+		const padding = computed(() => (parent.value ? parent.value.gutter / 2 + "rpx" : 0));
 
 		// 样式
 		const classList = computed(() => {

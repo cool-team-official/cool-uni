@@ -1,7 +1,9 @@
 import { onReady } from "@dcloudio/uni-app";
-import { router } from "../cool";
+import { router, useGlobal } from "/@/cool";
 
 export function useUi(): Ui.Page {
+	const global = useGlobal();
+
 	let d: any;
 
 	const ui: any = {
@@ -17,7 +19,7 @@ export function useUi(): Ui.Page {
 			const p = router.info();
 
 			if (p) {
-				d = p.$vm?.$root?.$cl_page?.[p.path];
+				d = global.data[`cl-page__${p.path}`];
 			}
 		}
 	}
