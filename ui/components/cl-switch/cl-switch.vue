@@ -44,6 +44,8 @@ export default defineComponent({
 		},
 	},
 
+	emits: ["update:modelValue", "change"],
+
 	setup(props, { emit }) {
 		const { disabled } = useForm();
 

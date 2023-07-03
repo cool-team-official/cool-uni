@@ -6,6 +6,7 @@ export function getParent(name: string, k1: string[], k2?: string[]) {
 	const { proxy }: any = getCurrentInstance();
 
 	const d = ref();
+	let n = 10;
 
 	const next = () => {
 		let parent = proxy.$parent;
@@ -14,7 +15,7 @@ export function getParent(name: string, k1: string[], k2?: string[]) {
 			if (parent.$options.name !== name) {
 				parent = parent.$parent;
 			} else {
-				if (!isEmpty(k2)) {
+				if (isArray(k2)) {
 					nextTick(() => {
 						const child: any = {};
 
@@ -36,20 +37,17 @@ export function getParent(name: string, k1: string[], k2?: string[]) {
 
 				return (k1 || []).reduce((res: any, key: string) => {
 					res[key] = parent[key];
+
 					return res;
 				}, {});
 			}
 		}
 
-		function deep() {
-			if (!d.value) {
-				setTimeout(() => {
-					d.value = next();
-				}, 50);
-			}
-		}
-
-		deep();
+		// if (!d.value && n-- > 0) {
+		// 	setTimeout(() => {
+		// 		d.value = next();
+		// 	}, 50);
+		// }
 
 		return parent || d.value;
 	};

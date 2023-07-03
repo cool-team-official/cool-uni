@@ -128,8 +128,8 @@ export default defineComponent({
 		});
 
 		// 监听规则
-		function onRules(rules: any[]) {
-			const rule = props.rules || rules[props.prop];
+		function onRules(rules: any) {
+			const rule = props.rules || rules?.[props.prop];
 
 			if (rule) {
 				isRequired.value = false;
@@ -157,6 +157,31 @@ export default defineComponent({
 				) {
 					validate();
 				}
+			}
+		}
+
+		// 检验
+		function validate() {
+			if (isRequired.value) {
+				validator.validate({ [props.prop]: value.value }, (errors: any) => {
+					message.value = errors ? errors[0].message : "";
+				});
+			} else {
+				clearValidate();
+			}
+		}
+
+		// 清空验证
+		function clearValidate() {
+			message.value = "";
+		}
+
+		// 错误提示
+		function onError(errors: any[]) {
+			const item = errors.find((e) => e.field == props.prop);
+
+			if (item) {
+				message.value = item.message;
 			}
 		}
 
@@ -188,39 +213,20 @@ export default defineComponent({
 			}
 		);
 
-		// 检验
-		function validate() {
-			if (isRequired.value) {
-				validator.validate({ [props.prop]: value.value }, (errors: any) => {
-					message.value = errors ? errors[0].message : "";
-				});
-			} else {
-				clearValidate();
-			}
-		}
-
-		// 清空验证
-		function clearValidate() {
-			message.value = "";
-		}
-
-		// 错误提示
-		function onError(errors: any[]) {
-			const item = errors.find((e) => e.field == props.prop);
-
-			if (item) {
-				message.value = item.message;
-			}
-		}
-
-		onMounted(() => {
-			// 添加字段
-			parent.value?.addField(props.prop, props.rules);
-		});
+		// 监听cl-form加载完
+		watch(
+			parent,
+			(val) => {
+				if (val) {
+					parent.value?.addField(props.prop, props.rules);
+				}
+			},
+			{ immediate: true }
+		);
 
 		onUnmounted(() => {
 			// 移除字段
-			parent.value.removeField(props.prop);
+			parent.value?.removeField(props.prop);
 		});
 
 		return {

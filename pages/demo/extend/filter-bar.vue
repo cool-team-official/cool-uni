@@ -1,7 +1,7 @@
 <template>
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-filter-bar v-model="filter">
+			<cl-filter-bar v-model="filter" :num="4">
 				<cl-filter-item label="排序" prop="order" type="order"></cl-filter-item>
 				<cl-filter-item label="开关" prop="switch" type="switch"></cl-filter-item>
 			</cl-filter-bar>

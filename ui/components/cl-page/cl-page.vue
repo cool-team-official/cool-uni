@@ -32,14 +32,14 @@
 	<view
 		class="cl-page__bg"
 		:style="{
-			background: backgroundColor,
+			background,
 		}"
 	></view>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, reactive } from "vue";
-import { router, useCool, useGlobal } from "/@/cool";
+import { useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
@@ -57,15 +57,11 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		backgroundColor: {
-			type: String,
-			default: router.globalStyle.backgroundColor || "#fff",
-		},
+		backgroundColor: String,
 	},
 
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
-		const global = useGlobal();
 
 		// 组件作用域
 		const { proxy }: any = getCurrentInstance();
@@ -76,6 +72,15 @@ export default defineComponent({
 		// 内容高度
 		const height = computed(() => {
 			return props.fullscreen ? `calc(100% - ${statusBarHeight}px)` : "auto";
+		});
+
+		const background = computed(() => {
+			return (
+				props.backgroundColor ||
+				router.info()?.style?.backgroundColor ||
+				router.globalStyle.backgroundColor ||
+				"#fff"
+			);
 		});
 
 		// 加载器
@@ -116,18 +121,23 @@ export default defineComponent({
 		}
 
 		// 追加方法
+		if (!proxy.$root.$cl_page) {
+			proxy.$root.$cl_page = {};
+		}
+
 		if (router.path) {
-			global.set(`cl-page__${router.path}`, {
+			proxy.$root.$cl_page[router.path] = {
 				showLoading,
 				hideLoading,
 				showToast,
 				showConfirm,
 				showTips,
-			});
+			};
 		}
 
 		return {
 			height,
+			background,
 			refs,
 			setRefs,
 			loader,

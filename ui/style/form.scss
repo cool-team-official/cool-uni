@@ -36,41 +36,22 @@
 		}
 
 		&__content {
-			display: flex;
+			// #ifndef MP-TOUTIAO
+			// #endif
 			flex: 1;
 			font-size: 26rpx;
 			line-height: 70rpx;
 
-			&.is-justify--center {
-				justify-content: center;
-
-				/* #ifdef MP-TOUTIAO */
+			&.is-justify--left {
 				text-align: left;
-				/* #endif */
+			}
 
-				picker {
-					text-align: center;
-				}
+			&.is-justify--center {
+				text-align: center;
 			}
 
 			&.is-justify--end {
-				justify-content: flex-end;
-
-				/* #ifdef MP-TOUTIAO */
 				text-align: right;
-				/* #endif */
-
-				picker {
-					text-align: right;
-				}
-			}
-
-			&.is-justify--space-between {
-				justify-content: space-between;
-			}
-
-			&.is-justify--space-around {
-				justify-content: space-around;
 			}
 
 			picker {

@@ -128,9 +128,11 @@ export default defineComponent({
 		// cl-filter-bar
 		const parent = getParent(
 			"cl-filter-bar",
-			["form", "setExpand", "update", "close", "collapse"],
+			["form", "setExpand", "update", "close", "collapse", "num"],
 			["collapse"]
 		);
+
+		console.log(parent)
 
 		// 下拉框
 		const dropdown = reactive<any>({

@@ -22,7 +22,11 @@
 			<image class="cl-upload__target" v-show="item.url" :src="item.url" :mode="imageMode" />
 
 			<!-- 移除 -->
-			<text class="cl-upload__remove cl-icon-toast-error" @tap.stop="remove(index)"></text>
+			<text
+				class="cl-upload__remove cl-icon-toast-error"
+				@tap.stop="remove(index)"
+				v-if="!isDisabled"
+			></text>
 
 			<!-- 进度 -->
 			<view class="cl-upload__progress" v-if="item.progress < 100">
@@ -40,7 +44,9 @@
 			}"
 			@tap="choose()"
 		>
-			<text class="cl-upload__add cl-icon-plus"></text>
+			<slot>
+				<text class="cl-upload__add cl-icon-plus"></text>
+			</slot>
 		</view>
 	</view>
 </template>
@@ -168,7 +174,13 @@ export default defineComponent({
 
 		// 能否追加
 		const isAppend = computed(() => {
-			return list.value.length < (props.multiple ? props.limit : 1);
+			const n = list.value.length;
+
+			if (isDisabled.value) {
+				return n == 0;
+			} else {
+				return n < (props.multiple ? props.limit : 1);
+			}
 		});
 
 		// 选择
@@ -306,9 +318,7 @@ export default defineComponent({
 		// 完成
 		function change() {
 			if (!check()) {
-				const v = props.multiple
-					? list.value.map((e) => e.url).join(",")
-					: list.value[0]?.url;
+				const v = props.multiple ? list.value.map((e) => e.url) : list.value[0]?.url;
 
 				emit("update:modelValue", v);
 				emit("change", v);

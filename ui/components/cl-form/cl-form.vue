@@ -127,6 +127,7 @@ export default defineComponent({
 		// 校验表单
 		function validate(callback: Function) {
 			if (!props.disabled) {
+				console.log(fields.value);
 				validateField(fields.value, (valid: boolean, errors: any[], fields: any) => {
 					if (callback) {
 						callback(valid, errors);
@@ -187,6 +188,8 @@ export default defineComponent({
 						callback(!errors, errors);
 					}
 				});
+			} else {
+				callback(true, []);
 			}
 		}
 

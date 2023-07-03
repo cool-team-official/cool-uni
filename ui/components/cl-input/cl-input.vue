@@ -138,17 +138,6 @@ export default defineComponent({
 		},
 	},
 
-	emits: [
-		"update:modelValue",
-		"change",
-		"clear",
-		"focus",
-		"blur",
-		"confirm",
-		"search",
-		"keyboardheightchange",
-	],
-
 	setup(props, { emit }) {
 		const { tap } = useTap(emit);
 

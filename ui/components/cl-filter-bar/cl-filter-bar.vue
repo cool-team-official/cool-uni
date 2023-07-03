@@ -36,6 +36,8 @@ export default defineComponent({
 				return {};
 			},
 		},
+		// 兼容参数
+		num: Number,
 	},
 
 	setup(props, { emit }) {

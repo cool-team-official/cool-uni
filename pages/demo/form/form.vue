@@ -132,7 +132,6 @@ function setTips(name: string) {
 function submit() {
 	Form.value?.validate((valid, errors) => {
 		if (valid) {
-			console.log(form.value);
 			loading.value = true;
 
 			setTimeout(() => {
