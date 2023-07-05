@@ -6,6 +6,7 @@
 			:width="conf.width"
 			text-align="center"
 			@close="onClose"
+			@closed="onClosed"
 		>
 			<view class="cl-confirm__header" v-if="conf.title">
 				<text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
@@ -42,7 +43,7 @@
  * @description 确认框
  */
 
-import { defineComponent, nextTick, reactive, ref } from "vue";
+import { defineComponent, nextTick, ref } from "vue";
 
 export default defineComponent({
 	name: "cl-confirm",
@@ -58,7 +59,7 @@ export default defineComponent({
 		const loading = ref(false);
 
 		// 配置
-		const conf = reactive<ClConfirm.Options>({});
+		const conf = ref<ClConfirm.Options>({});
 
 		// 计时器
 		let timer: any;
@@ -74,24 +75,21 @@ export default defineComponent({
 
 				// 设置选项
 				nextTick(() => {
-					Object.assign(
-						conf,
-						{
-							width: "500rpx",
-							showCancelButton: true,
-							showConfirmButton: true,
-							confirmButtonText: "确认",
-							cancelButtonText: "取消",
-							closeOnClickModal: true,
-						},
-						options
-					);
+					conf.value = {
+						width: "500rpx",
+						showCancelButton: true,
+						showConfirmButton: true,
+						confirmButtonText: "确认",
+						cancelButtonText: "取消",
+						closeOnClickModal: true,
+						...options,
+					};
 
 					// 是否定时关闭
-					if (conf.duration) {
+					if (conf.value.duration) {
 						timer = setTimeout(() => {
 							close("close");
-						}, conf.duration);
+						}, conf.value.duration);
 					}
 				});
 			}
@@ -109,13 +107,12 @@ export default defineComponent({
 		function close(action: ClConfirm.Action = "close") {
 			// 完成
 			function done() {
-				if (conf.callback) {
-					conf.callback(action);
+				if (conf.value.callback) {
+					conf.value.callback(action);
 				}
 
 				nextTick(() => {
 					visible.value = false;
-					closed.value = true;
 					hideLoading();
 				});
 			}
@@ -130,8 +127,8 @@ export default defineComponent({
 				loading.value = false;
 			}
 
-			if (conf.beforeClose) {
-				conf.beforeClose(action, { done, showLoading, hideLoading });
+			if (conf.value.beforeClose) {
+				conf.value.beforeClose(action, { done, showLoading, hideLoading });
 			} else {
 				done();
 			}
@@ -144,6 +141,11 @@ export default defineComponent({
 			}
 		}
 
+		// 监听关闭后
+		function onClosed() {
+			closed.value = true;
+		}
+
 		return {
 			visible,
 			loading,
@@ -151,6 +153,7 @@ export default defineComponent({
 			open,
 			close,
 			onClose,
+			onClosed,
 		};
 	},
 });

@@ -7,6 +7,7 @@
 				'is-fill': fill,
 				'is-border': border,
 				'is-dropdown': showDropdown,
+				'is-custom': custom,
 			},
 		]"
 		:style="{
@@ -130,7 +131,7 @@ export default defineComponent({
 			default: 80,
 		},
 		list: {
-			type: Array as PropType<{ label: string; value: any; [key: string]: any }[]>,
+			type: Array as PropType<any[]>,
 			default: [],
 		},
 		loop: {
@@ -167,6 +168,8 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		custom: Boolean,
+		disabled: Boolean,
 	},
 
 	emits: ["update:modelValue", "change"],
@@ -175,7 +178,7 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 当前选中
-		const current = ref<number | string>();
+		const current = ref<any>(props.modelValue);
 
 		// 下划线左位移
 		const lineLeft = ref(0);
@@ -190,7 +193,18 @@ export default defineComponent({
 		const width = ref(375);
 
 		// 列表
-		const tabs = computed(() => props.list);
+		const tabs = computed(() => {
+			// 处理没有设置值的情况
+			const noVal = props.list.filter((e) => e.value === undefined).length > 1;
+
+			return props.list.map((e, i) => {
+				e.value = noVal ? i : e.value;
+				return e;
+			});
+		});
+
+		// 监听列表改变
+		watch(() => props.list, refresh);
 
 		// 刷新
 		function refresh() {
@@ -249,6 +263,10 @@ export default defineComponent({
 
 		// 改变
 		async function change(index: number) {
+			if (props.disabled) {
+				return false;
+			}
+
 			const { value } = tabs.value[index];
 
 			emit("update:modelValue", value);
@@ -317,20 +335,13 @@ export default defineComponent({
 			}
 		}
 
-		// 监听绑定值
 		watch(
 			() => props.modelValue,
 			(val: any) => {
 				current.value = val;
 				onOffset();
-			},
-			{
-				immediate: true,
 			}
 		);
-
-		// 监听列表改变
-		watch(() => props.list, refresh);
 
 		onMounted(() => {
 			refresh();

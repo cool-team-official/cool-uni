@@ -8,6 +8,7 @@
 			:border-radius="16"
 			:padding="0"
 			@close="onClose"
+			@closed="onClosed"
 		>
 			<view class="cl-dialog">
 				<!-- 顶部 -->
@@ -98,11 +99,16 @@ export default defineComponent({
 			emit("close");
 		}
 
+		function onClosed() {
+			emit("closed");
+		}
+
 		return {
 			visible,
 			open,
 			close,
 			onClose,
+			onClosed,
 		};
 	},
 });
