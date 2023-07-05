@@ -136,7 +136,7 @@ export default defineComponent({
 
 		// 监听关闭
 		function onClose(action: ClConfirm.Action) {
-			if (!closed.value) {
+			if (!closed.value && visible.value) {
 				close(action);
 			}
 		}
