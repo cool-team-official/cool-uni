@@ -52,7 +52,7 @@ export default defineComponent({
 		const visible = ref(false);
 
 		// 是否已关闭
-		const closed = ref(false);
+		const closed = ref(true);
 
 		// 是否加载中
 		const loading = ref(false);
@@ -61,10 +61,13 @@ export default defineComponent({
 		const conf = reactive<ClConfirm.Options>({});
 
 		// 计时器
-		let timer: any = null;
+		let timer: any;
 
 		// 打开
 		function open(options: ClConfirm.Options) {
+			visible.value = false;
+			clearTimeout(timer);
+
 			function next() {
 				visible.value = true;
 				closed.value = false;
@@ -84,8 +87,6 @@ export default defineComponent({
 						options
 					);
 
-					clearTimeout(timer);
-
 					// 是否定时关闭
 					if (conf.duration) {
 						timer = setTimeout(() => {
@@ -95,8 +96,8 @@ export default defineComponent({
 				});
 			}
 
-			if (closed.value) {
-				timer = setTimeout(() => {
+			if (!closed.value) {
+				setTimeout(() => {
 					next();
 				}, 350);
 			} else {
