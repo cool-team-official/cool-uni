@@ -7,9 +7,7 @@ export function useUi(): Ui.Page {
 	let d: any;
 
 	const ui: any = {
-		get loaded() {
-			return Boolean(d);
-		},
+		loaded: false,
 	};
 
 	function update() {
@@ -25,10 +23,9 @@ export function useUi(): Ui.Page {
 	}
 
 	onReady(() => {
+		ui.loaded = true;
 		update();
 	});
-
-	update();
 
 	["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"].forEach((e) => {
 		ui[e] = (...args: any[]) => {
