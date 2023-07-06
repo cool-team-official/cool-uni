@@ -24,3 +24,9 @@ yarn-error.log*
 
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
+
+
+
+types/auto-imports.d.ts
+types/components.d.ts
