@@ -1,21 +1,20 @@
 {
+	"extends": "@vue/tsconfig/tsconfig.json",
 	"compilerOptions": {
-		"target": "esnext",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"strict": true,
-		"jsx": "preserve",
+		"ignoreDeprecations": "5.0",
+		"verbatimModuleSyntax": true,
+		"experimentalDecorators": true,
 		"sourceMap": true,
 		"resolveJsonModule": true,
-		"experimentalDecorators": true,
 		"esModuleInterop": true,
-		"lib": ["esnext", "dom"],
 		"allowJs": true,
 		"paths": {
 			"/@/*": ["./*"],
 			"/$/*": ["./pages/*"]
-		}
+		},
+		"lib": ["esnext", "dom"],
+		"types": ["@dcloudio/types"]
 	},
-	"include": ["**/*.ts", "**/*.vue", "main.js"],
+	"include": ["**/*.ts", "**/*.vue", "main.js", "types/*.d.ts"],
 	"exclude": ["node_modules", "dist"]
 }
