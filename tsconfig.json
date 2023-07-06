@@ -13,7 +13,8 @@
 			"/$/*": ["./pages/*"]
 		},
 		"lib": ["esnext", "dom"],
-		"types": ["@dcloudio/types"]
+		"types": ["@dcloudio/types"],
+		"outDir": "esbuild"
 	},
 	"include": ["**/*.ts", "**/*.vue", "main.js", "types/*.d.ts"],
 	"exclude": ["node_modules", "dist"]
