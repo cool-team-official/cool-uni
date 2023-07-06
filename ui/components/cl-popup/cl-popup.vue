@@ -1,67 +1,62 @@
 <template>
-	<view
-		v-if="visible"
-		:class="[
-			'cl-popup__wrapper',
-			`cl-popup__wrapper--${direction}`,
-			`is-${status ? 'open' : 'close'}`,
-			{
-				'is-modal': modal,
-			},
-		]"
-		:style="{
-			zIndex,
-		}"
-		@touchmove.stop.prevent
-	>
-		<!-- 遮罩层 -->
-		<view
-			class="cl-popup__modal"
-			:style="{
-				background: modalBackground,
-			}"
-			@tap="modalClose"
-			v-if="modal"
-		></view>
+    <view
+        v-if="visible"
+        :class="[
+            'cl-popup__wrapper',
+            `cl-popup__wrapper--${direction}`,
+            `is-${status ? 'open' : 'close'}`,
+            {
+                'is-modal': modal
+            }
+        ]"
+        :style="{
+            zIndex
+        }"
+        @touchmove.stop.prevent
+    >
+        <!-- 遮罩层 -->
+        <view
+            class="cl-popup__modal"
+            :style="{
+                background: modalBackground
+            }"
+            @tap="modalClose"
+            v-if="modal"
+        ></view>
 
-		<!-- 内容 -->
-		<view
-			class="cl-popup"
-			:class="[`cl-popup--${type}`]"
-			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
-		>
-			<view class="cl-popup__header" v-if="title">
-				<cl-button
-					:border="false"
-					size="small"
-					type="info"
-					@tap="close"
-					v-if="type == 'select'"
-					>取消</cl-button
-				>
+        <!-- 内容 -->
+        <view
+            class="cl-popup"
+            :class="[`cl-popup--${type}`]"
+            :style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
+        >
+            <view class="cl-popup__header" v-if="title">
+                <cl-button :border="false" size="small" type="info" @tap="close" v-if="type == 'select'"
+                    >取消</cl-button
+                >
 
-				<text class="text">{{ title }}</text>
+                <text class="text">{{ title }}</text>
 
-				<cl-button
-					:border="false"
-					size="small"
-					type="primary"
-					:disabled="confirmDisabled"
-					@tap="confirm"
-					v-if="type == 'select'"
-					>确定</cl-button
-				>
-			</view>
+                <cl-button
+                    :border="false"
+                    size="small"
+                    type="primary"
+                    :disabled="confirmDisabled"
+                    @tap="confirm"
+                    v-if="type == 'select'"
+                    >确定</cl-button
+                >
+            </view>
 
-			<view class="cl-popup__container" :style="{ padding: parseRpx(padding), paddingTop }">
-				<slot></slot>
-			</view>
+            <view class="cl-popup__container" :style="{ padding: parseRpx(padding), paddingTop }">
+                <slot></slot>
+            </view>
 
-			<view class="cl-popup__close" v-if="status && showCloseBtn" @tap="close">
-				<text class="cl-icon-close-border"></text>
-			</view>
-		</view>
-	</view>
+            <view class="cl-popup__close" v-if="status && showCloseBtn" @tap="close">
+                <text class="cl-icon-close-border"></text>
+            </view>
+        </view>
+    </view>
 </template>
 
 <script lang="ts">
@@ -79,216 +74,217 @@
  * @property {String} type 类型
  */
 
-import { computed, defineComponent, PropType, ref, watch } from "vue";
-import { parseRpx } from "/@/cool/utils";
-import { router } from "/@/cool";
+import { computed, defineComponent, ref, watch } from "vue"
+import type { PropType } from "vue"
+import { parseRpx } from "/@/cool/utils"
+import { router } from "/@/cool"
 
-const { statusBarHeight } = uni.getSystemInfoSync();
+const { statusBarHeight } = uni.getSystemInfoSync()
 
-let id = 1;
+let id = 1
 
 export default defineComponent({
-	name: "cl-popup",
+    name: "cl-popup",
 
-	props: {
-		modelValue: Boolean,
-		title: String,
-		direction: {
-			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
-			default: "center",
-		},
-		size: {
-			type: [String, Number],
-			default: "auto",
-		},
-		backgroundColor: {
-			type: String,
-			default: "#fff",
-		},
-		borderRadius: [String, Number],
-		padding: {
-			type: [String, Number],
-			default: 32,
-		},
-		closeOnClickModal: {
-			type: Boolean,
-			default: true,
-		},
-		modal: {
-			type: Boolean,
-			default: true,
-		},
-		zIndex: {
-			type: Number,
-			default: 600,
-		},
-		modalBackground: {
-			type: String,
-			default: "rgba(0, 0, 0, 0.4)",
-		},
-		showCloseBtn: Boolean,
-		type: {
-			type: String as PropType<"default" | "select">,
-			default: "default",
-		},
-		confirmDisabled: Boolean,
-	},
+    props: {
+        modelValue: Boolean,
+        title: String,
+        direction: {
+            type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
+            default: "center"
+        },
+        size: {
+            type: [String, Number],
+            default: "auto"
+        },
+        backgroundColor: {
+            type: String,
+            default: "#fff"
+        },
+        borderRadius: [String, Number],
+        padding: {
+            type: [String, Number],
+            default: 32
+        },
+        closeOnClickModal: {
+            type: Boolean,
+            default: true
+        },
+        modal: {
+            type: Boolean,
+            default: true
+        },
+        zIndex: {
+            type: Number,
+            default: 600
+        },
+        modalBackground: {
+            type: String,
+            default: "rgba(0, 0, 0, 0.4)"
+        },
+        showCloseBtn: Boolean,
+        type: {
+            type: String as PropType<"default" | "select">,
+            default: "default"
+        },
+        confirmDisabled: Boolean
+    },
 
-	emits: ["update:modelValue", "open", "opened", "close", "closed", "confirm"],
+    emits: ["update:modelValue", "open", "opened", "close", "closed", "confirm"],
 
-	setup(props, { emit }) {
-		// 是否可见
-		const visible = ref(false);
+    setup(props, { emit }) {
+        // 是否可见
+        const visible = ref(false)
 
-		// 动画状态
-		const status = ref(false);
+        // 动画状态
+        const status = ref(false)
 
-		const zIndex = ref(0);
+        const zIndex = ref(0)
 
-		// 计时器
-		let timer: any = null;
+        // 计时器
+        let timer: any = null
 
-		// 高
-		const height = computed(() => {
-			switch (props.direction) {
-				case "top":
-				case "bottom":
-					return props.size;
-				case "left":
-				case "right":
-					return "100%";
-			}
-		});
+        // 高
+        const height = computed(() => {
+            switch (props.direction) {
+                case "top":
+                case "bottom":
+                    return props.size
+                case "left":
+                case "right":
+                    return "100%"
+            }
+        })
 
-		// 宽
-		const width = computed(() => {
-			switch (props.direction) {
-				case "top":
-				case "bottom":
-					return "100%";
-				case "left":
-				case "right":
-				case "center":
-					return props.size;
-			}
-		});
+        // 宽
+        const width = computed(() => {
+            switch (props.direction) {
+                case "top":
+                case "bottom":
+                    return "100%"
+                case "left":
+                case "right":
+                case "center":
+                    return props.size
+            }
+        })
 
-		// 顶部距离
-		const paddingTop = computed(() => {
-			if (["left", "right", "top"].includes(props.direction)) {
-				let h = 0;
+        // 顶部距离
+        const paddingTop = computed(() => {
+            if (["left", "right", "top"].includes(props.direction)) {
+                let h = 0
 
-				// #ifdef H5 || APP || MP-WEIXIN
-				h += statusBarHeight || 0;
-				// #endif
+                // #ifdef H5 || APP || MP-WEIXIN
+                h += statusBarHeight || 0
+                // #endif
 
-				// #ifdef H5
-				if (!router.info()?.isCustomNavbar) {
-					h += 44;
-				}
-				// #endif
+                // #ifdef H5
+                if (!router.info()?.isCustomNavbar) {
+                    h += 44
+                }
+                // #endif
 
-				let [t] = parseRpx(props.padding).split(" ");
+                let [t] = parseRpx(props.padding).split(" ")
 
-				if (t == "0rpx") {
-					t = "0px";
-				}
+                if (t == "0rpx") {
+                    t = "0px"
+                }
 
-				return `calc(${h}px + ${t})`;
-			} else {
-				return 1;
-			}
-		});
+                return `calc(${h}px + ${t})`
+            } else {
+                return 1
+            }
+        })
 
-		// 打开
-		function open() {
-			// 层级
-			zIndex.value = props.zIndex + id++;
+        // 打开
+        function open() {
+            // 层级
+            zIndex.value = props.zIndex + id++
 
-			if (!visible.value) {
-				// 显示内容
-				visible.value = true;
+            if (!visible.value) {
+                // 显示内容
+                visible.value = true
 
-				emit("update:modelValue", true);
-				emit("open");
+                emit("update:modelValue", true)
+                emit("open")
 
-				clearTimeout(timer);
+                clearTimeout(timer)
 
-				timer = setTimeout(() => {
-					// 开始动画
-					status.value = true;
+                timer = setTimeout(() => {
+                    // 开始动画
+                    status.value = true
 
-					// 等待动画结束
-					timer = setTimeout(() => {
-						emit("opened");
-					}, 350);
-				}, 50);
-			}
-		}
+                    // 等待动画结束
+                    timer = setTimeout(() => {
+                        emit("opened")
+                    }, 350)
+                }, 50)
+            }
+        }
 
-		// 关闭
-		function close() {
-			if (status.value) {
-				const done = () => {
-					// 关闭动画
-					status.value = false;
-					emit("close");
+        // 关闭
+        function close() {
+            if (status.value) {
+                const done = () => {
+                    // 关闭动画
+                    status.value = false
+                    emit("close")
 
-					clearTimeout(timer);
+                    clearTimeout(timer)
 
-					timer = setTimeout(() => {
-						// 隐藏内容
-						visible.value = false;
-						emit("update:modelValue", false);
-						emit("closed");
-					}, 300);
-				};
+                    timer = setTimeout(() => {
+                        // 隐藏内容
+                        visible.value = false
+                        emit("update:modelValue", false)
+                        emit("closed")
+                    }, 300)
+                }
 
-				done();
-			}
-		}
+                done()
+            }
+        }
 
-		// 遮罩层关闭
-		function modalClose() {
-			if (!props.closeOnClickModal) {
-				return false;
-			}
+        // 遮罩层关闭
+        function modalClose() {
+            if (!props.closeOnClickModal) {
+                return false
+            }
 
-			close();
-		}
+            close()
+        }
 
-		// 确认
-		function confirm() {
-			emit("confirm");
-		}
+        // 确认
+        function confirm() {
+            emit("confirm")
+        }
 
-		watch(
-			() => props.modelValue,
-			(val: boolean) => {
-				if (val) {
-					open();
-				} else {
-					close();
-				}
-			},
-			{
-				immediate: true,
-			}
-		);
+        watch(
+            () => props.modelValue,
+            (val: boolean) => {
+                if (val) {
+                    open()
+                } else {
+                    close()
+                }
+            },
+            {
+                immediate: true
+            }
+        )
 
-		return {
-			visible,
-			status,
-			height,
-			width,
-			paddingTop,
-			zIndex,
-			parseRpx,
-			open,
-			close,
-			modalClose,
-			confirm,
-		};
-	},
-});
+        return {
+            visible,
+            status,
+            height,
+            width,
+            paddingTop,
+            zIndex,
+            parseRpx,
+            open,
+            close,
+            modalClose,
+            confirm
+        }
+    }
+})
 </script>

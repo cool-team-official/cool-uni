@@ -114,13 +114,12 @@ import {
 	getCurrentInstance,
 	nextTick,
 	onMounted,
-	PropType,
 	reactive,
 	ref,
 	watch,
 } from "vue";
 import { parseRpx } from "/@/cool/utils";
-
+import type { PropType } from "vue";
 export default defineComponent({
 	name: "cl-tabs",
 
@@ -246,6 +245,7 @@ export default defineComponent({
 						// #endif
 						.select(".cl-tabs__dropdown-box")
 						.boundingClientRect((res) => {
+							//@ts-ignore
 							dropdown.height = res.height + "px";
 						})
 						.exec();
