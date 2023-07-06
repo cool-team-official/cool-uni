@@ -1,26 +1,26 @@
 <template>
-	<view class="cl-loading-mask__wrap">
-		<view
-			class="cl-loading-mask"
-			:class="[
-				{
-					'is-fullscreen': fullscreen,
-					'is-show': loading,
-				},
-			]"
-			:style="{
-				background,
-				color,
-			}"
-		>
-			<view class="cl-loading-mask__content" v-show="loading">
-				<cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
-				<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
-			</view>
-		</view>
+    <view class="cl-loading-mask__wrap">
+        <view
+            class="cl-loading-mask"
+            :class="[
+                {
+                    'is-fullscreen': fullscreen,
+                    'is-show': loading
+                }
+            ]"
+            :style="{
+                background,
+                color
+            }"
+        >
+            <view class="cl-loading-mask__content" v-show="loading">
+                <cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
+                <text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
+            </view>
+        </view>
 
-		<slot></slot>
-	</view>
+        <slot></slot>
+    </view>
 </template>
 
 <script lang="ts">
@@ -34,21 +34,21 @@
  * @property {String} background 背景颜色，默认rgba(255,255,255,0.7)
  */
 
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
 
 export default defineComponent({
-	name: "cl-loading-mask",
+    name: "cl-loading-mask",
 
-	props: {
-		text: String,
-		loading: Boolean,
-		loadingTheme: String,
-		fullscreen: Boolean,
-		color: String,
-		background: {
-			type: String,
-			default: "rgba(255, 255, 255, 0.7)",
-		},
-	},
-});
+    props: {
+        text: String,
+        loading: Boolean,
+        loadingTheme: String,
+        fullscreen: Boolean,
+        color: String,
+        background: {
+            type: String,
+            default: "rgba(255, 255, 255, 0.7)"
+        }
+    }
+})
 </script>

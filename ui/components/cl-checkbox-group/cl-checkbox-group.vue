@@ -1,12 +1,12 @@
 <template>
-	<view
-		class="cl-checkbox-group"
-		:class="{
-			'is-fill': fill,
-		}"
-	>
-		<slot></slot>
-	</view>
+    <view
+        class="cl-checkbox-group"
+        :class="{
+            'is-fill': fill
+        }"
+    >
+        <slot></slot>
+    </view>
 </template>
 
 <script lang="ts">
@@ -21,59 +21,59 @@
  * @event {Function} change 绑定值改变时触发
  */
 
-import { defineComponent } from "vue";
-import { cloneDeep } from "lodash-es";
+import { defineComponent } from "vue"
+import { cloneDeep } from "lodash-es"
 
 export default defineComponent({
-	name: "cl-checkbox-group",
+    name: "cl-checkbox-group",
 
-	props: {
-		modelValue: {
-			type: Array,
-			default: () => [],
-		},
-		border: {
-			type: Boolean,
-			default: null,
-		},
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
-		round: {
-			type: Boolean,
-			default: null,
-		},
-		fill: {
-			type: Boolean,
-			default: null,
-		},
-		size: {
-			type: [String, Number],
-			default: null,
-		},
-	},
+    props: {
+        modelValue: {
+            type: Array,
+            default: () => []
+        },
+        border: {
+            type: Boolean,
+            default: null
+        },
+        disabled: {
+            type: Boolean,
+            default: null
+        },
+        round: {
+            type: Boolean,
+            default: null
+        },
+        fill: {
+            type: Boolean,
+            default: null
+        },
+        size: {
+            type: [String, Number],
+            default: null
+        }
+    },
 
-	emits: ["update:modelValue", "change"],
+    emits: ["update:modelValue", "change"],
 
-	setup(props, { emit }) {
-		function onChange(label: string) {
-			const index = props.modelValue.findIndex((e) => e == label);
-			let list = cloneDeep(props.modelValue);
+    setup(props, { emit }) {
+        function onChange(label: string) {
+            const index = props.modelValue.findIndex((e) => e == label)
+            let list = cloneDeep(props.modelValue)
 
-			if (index >= 0) {
-				list.splice(index, 1);
-			} else {
-				list.push(label);
-			}
+            if (index >= 0) {
+                list.splice(index, 1)
+            } else {
+                list.push(label)
+            }
 
-			emit("update:modelValue", list);
-			emit("change", list);
-		}
+            emit("update:modelValue", list)
+            emit("change", list)
+        }
 
-		return {
-			onChange,
-		};
-	},
-});
+        return {
+            onChange
+        }
+    }
+})
 </script>
