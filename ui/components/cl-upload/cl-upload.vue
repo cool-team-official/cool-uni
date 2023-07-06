@@ -53,6 +53,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
+import type { PropType } from "vue";
 import { parseRpx, uuid } from "/@/cool/utils";
 import { isArray } from "lodash-es";
 import { upload } from "/@/cool";
@@ -86,11 +87,11 @@ export default defineComponent({
 	props: {
 		modelValue: [String, Array],
 		sizeType: {
-			type: Array,
+			type: [String, Array] as PropType<string[] | string>,
 			default: () => ["original", "compressed"],
 		},
 		sourceType: {
-			type: Array,
+			type: Array as PropType<string[]>,
 			default: () => ["album", "camera"],
 		},
 		size: {
@@ -201,9 +202,7 @@ export default defineComponent({
 			}
 
 			uni.chooseImage({
-				// @ts-ignore
 				sizeType: props.sizeType,
-				// @ts-ignore
 				sourceType: props.sourceType,
 				count,
 				success: (res: any) => {
