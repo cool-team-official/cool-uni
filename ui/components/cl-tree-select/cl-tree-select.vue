@@ -23,7 +23,7 @@
 					:row-height="rowHeight"
 					:check-strictly="checkStrictly"
 					:default-expand-all="defaultExpandAll"
-					:auto-expand="keys"
+					:auto-expand="autoExpand"
 					:accordion="accordion"
 					:multiple="multiple"
 					:keys="keys"
