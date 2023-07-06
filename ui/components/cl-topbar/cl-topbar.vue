@@ -1,50 +1,50 @@
 <template>
-	<view
-		class="cl-topbar"
-		:class="{
-			'is-border': border,
-			'is-fixed': fixed,
-		}"
-		:style="{
-			backgroundColor,
-			color,
-			zIndex,
-			paddingTop,
-		}"
-	>
-		<view
-			class="cl-topbar__content"
-			:style="{
-				color,
-			}"
-		>
-			<slot>
-				<view class="cl-topbar__text" @tap="tapTitle">
-					<text class="cl-topbar__title" v-if="title">{{ title }}</text>
-					<text class="cl-topbar__description" v-if="description">{{ description }}</text>
-				</view>
-			</slot>
-		</view>
+    <view
+        class="cl-topbar"
+        :class="{
+            'is-border': border,
+            'is-fixed': fixed
+        }"
+        :style="{
+            backgroundColor,
+            color,
+            zIndex,
+            paddingTop
+        }"
+    >
+        <view
+            class="cl-topbar__content"
+            :style="{
+                color
+            }"
+        >
+            <slot>
+                <view class="cl-topbar__text" @tap="tapTitle">
+                    <text class="cl-topbar__title" v-if="title">{{ title }}</text>
+                    <text class="cl-topbar__description" v-if="description">{{ description }}</text>
+                </view>
+            </slot>
+        </view>
 
-		<view class="cl-topbar__prepend">
-			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
-				<text class="cl-icon-arrow-left"></text>
-			</view>
+        <view class="cl-topbar__prepend">
+            <view class="cl-topbar__icon" v-if="showBack" @tap="back">
+                <text class="cl-icon-arrow-left"></text>
+            </view>
 
-			<slot name="prepend"></slot>
-		</view>
+            <slot name="prepend"></slot>
+        </view>
 
-		<view class="cl-topbar__append">
-			<slot name="append"></slot>
-		</view>
-	</view>
+        <view class="cl-topbar__append">
+            <slot name="append"></slot>
+        </view>
+    </view>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { router } from "/@/cool";
+import { computed, defineComponent } from "vue"
+import { router } from "/@/cool"
 
-const { statusBarHeight } = uni.getSystemInfoSync();
+const { statusBarHeight } = uni.getSystemInfoSync()
 
 /**
  * @description 自定义顶部导航，弥补原生的不足
@@ -59,69 +59,69 @@ const { statusBarHeight } = uni.getSystemInfoSync();
  */
 
 export default defineComponent({
-	name: "cl-topbar",
+    name: "cl-topbar",
 
-	props: {
-		title: String,
-		description: String,
-		border: {
-			type: Boolean,
-			default: true,
-		},
-		fixed: Boolean,
-		showBack: {
-			type: Boolean,
-			default: true,
-		},
-		backgroundColor: {
-			type: String,
-			default: "#fff",
-		},
-		color: {
-			type: String,
-			default: "#000",
-		},
-		backPath: String,
-		zIndex: {
-			type: Number,
-			default: 99,
-		},
-	},
+    props: {
+        title: String,
+        description: String,
+        border: {
+            type: Boolean,
+            default: true
+        },
+        fixed: Boolean,
+        showBack: {
+            type: Boolean,
+            default: true
+        },
+        backgroundColor: {
+            type: String,
+            default: "#fff"
+        },
+        color: {
+            type: String,
+            default: "#000"
+        },
+        backPath: String,
+        zIndex: {
+            type: Number,
+            default: 99
+        }
+    },
 
-	setup(props, { emit }) {
-		const paddingTop = computed(() => {
-			return props.fixed ? `${statusBarHeight}px` : 0;
-		});
+    setup(props, { emit }) {
+        const paddingTop = computed(() => {
+            return props.fixed ? `${statusBarHeight}px` : 0
+        })
 
-		// 返回
-		function back() {
-			const pages = getCurrentPages();
+        // 返回
+        function back() {
+            const pages = getCurrentPages()
 
-			if (pages.length == 1) {
-				//  H5页面刷新或者分享页时，页面栈长度只有1。此时逐个验证返回的页面路径
-				if (props.backPath) {
-					router.push({
-						path: props.backPath,
-						mode: "reLaunch",
-					});
-				} else {
-					router.home();
-				}
-			} else {
-				router.back();
-			}
-		}
+            if (pages.length == 1) {
+                //  H5页面刷新或者分享页时，页面栈长度只有1。此时逐个验证返回的页面路径
+                if (props.backPath) {
+                    router.push({
+                        path: props.backPath,
+                        mode: "reLaunch"
+                    })
+                } else {
+                    router.home()
+                }
+            } else {
+                router.back()
+            }
+        }
 
-		// 点击标题
-		function tapTitle(e: any) {
-			emit("title", e);
-		}
+        // 点击标题
+        function tapTitle(e: any) {
+            emit("title", e)
+        }
 
-		return {
-			paddingTop,
-			back,
-			tapTitle,
-		};
-	},
-});
+        return {
+            paddingTop,
+            back,
+            tapTitle
+        }
+    }
+})
 </script>

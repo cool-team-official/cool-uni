@@ -1,19 +1,19 @@
 <template>
-	<view class="cl-slider">
-		<slider
-			:value="value"
-			:min="min"
-			:max="max"
-			:step="step"
-			:active-color="activeColor"
-			:background-color="backgroundColor"
-			:block-size="blockSize"
-			:show-value="showValue"
-			:disabled="disabled"
-			@change="onChange"
-			@changing="onChanging"
-		></slider>
-	</view>
+    <view class="cl-slider">
+        <slider
+            :value="value"
+            :min="min"
+            :max="max"
+            :step="step"
+            :active-color="activeColor"
+            :background-color="backgroundColor"
+            :block-size="blockSize"
+            :show-value="showValue"
+            :disabled="disabled"
+            @change="onChange"
+            @changing="onChanging"
+        ></slider>
+    </view>
 </template>
 
 <script lang="ts">
@@ -32,79 +32,79 @@
  * @event {Function} changing 拖动过程中触发
  */
 
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue"
 
 export default defineComponent({
-	name: "cl-slider",
+    name: "cl-slider",
 
-	props: {
-		modelValue: {
-			type: Number,
-		},
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
-		min: {
-			type: Number,
-			default: 0,
-		},
-		max: {
-			type: Number,
-			default: 100,
-		},
-		step: {
-			type: Number,
-			default: 1,
-		},
-		activeColor: {
-			type: String,
-			default: "#409eff",
-		},
-		backgroundColor: {
-			type: String,
-			default: "#e9e9e9",
-		},
-		blockSize: {
-			type: Number,
-			default: 15,
-		},
-		showValue: {
-			type: Boolean,
-			default: false,
-		},
-	},
+    props: {
+        modelValue: {
+            type: Number
+        },
+        disabled: {
+            type: Boolean,
+            default: null
+        },
+        min: {
+            type: Number,
+            default: 0
+        },
+        max: {
+            type: Number,
+            default: 100
+        },
+        step: {
+            type: Number,
+            default: 1
+        },
+        activeColor: {
+            type: String,
+            default: "#409eff"
+        },
+        backgroundColor: {
+            type: String,
+            default: "#e9e9e9"
+        },
+        blockSize: {
+            type: Number,
+            default: 15
+        },
+        showValue: {
+            type: Boolean,
+            default: false
+        }
+    },
 
-	emits: ["update:modelValue", "change", "changing"],
+    emits: ["update:modelValue", "change", "changing"],
 
-	setup(props, { emit }) {
-		const value = ref(0);
+    setup(props, { emit }) {
+        const value = ref(0)
 
-		watch(
-			() => props.modelValue,
-			(val: number) => {
-				value.value = val;
-			},
-			{
-				immediate: true,
-			}
-		);
+        watch(
+            () => props.modelValue,
+            (val) => {
+                value.value = val as number
+            },
+            {
+                immediate: true
+            }
+        )
 
-		function onChange(e: any) {
-			emit("update:modelValue", e.detail.value);
-			emit("change", e);
-		}
+        function onChange(e: any) {
+            emit("update:modelValue", e.detail.value)
+            emit("change", e)
+        }
 
-		function onChanging(e: any) {
-			emit("update:modelValue", e.detail.value);
-			emit("changing", e);
-		}
+        function onChanging(e: any) {
+            emit("update:modelValue", e.detail.value)
+            emit("changing", e)
+        }
 
-		return {
-			value,
-			onChange,
-			onChanging,
-		};
-	},
-});
+        return {
+            value,
+            onChange,
+            onChanging
+        }
+    }
+})
 </script>

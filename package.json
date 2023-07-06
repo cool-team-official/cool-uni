@@ -13,6 +13,10 @@
 		"vue": "^3.2.47",
 		"weixin-js-sdk": "^1.6.0"
 	},
+	"packageManager": "pnpm@7.11.0",
+	"engines": {
+		"node": ">= 16"
+	},
 	"devDependencies": {
 		"@dcloudio/types": "^2.5.15",
 		"@types/lodash": "^4.14.178",
@@ -20,6 +24,7 @@
 		"@types/md5": "^2.3.2",
 		"@types/node": "^17.0.4",
 		"@types/prettier": "^2.4.4",
+		"@vue/tsconfig": "^0.4.0",
 		"autoprefixer": "^10.4.0",
 		"lodash": "^4.17.21",
 		"prettier": "^2.5.1",

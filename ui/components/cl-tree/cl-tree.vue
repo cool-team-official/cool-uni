@@ -1,30 +1,30 @@
 <template>
-	<view class="cl-tree">
-		<cl-tree-item v-for="(item, index) in data" :key="index" :data="item" :siblings="data">
-			<!-- <template #item="{ data, level }">
+    <view class="cl-tree">
+        <cl-tree-item v-for="(item, index) in data" :key="index" :data="item" :siblings="data">
+            <!-- <template #item="{ data, level }">
 				<slot name="item" :data="data" :level="level"></slot>
 			</template> -->
-		</cl-tree-item>
-	</view>
+        </cl-tree-item>
+    </view>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import { TreeProps, useTree } from "./helper";
+import { defineComponent, ref, watch } from "vue"
+import { TreeProps, useTree } from "./helper"
 
 export default defineComponent({
-	name: "cl-tree",
+    name: "cl-tree",
 
-	props: {
-		...TreeProps,
-	},
+    props: {
+        ...TreeProps
+    },
 
-	emits: ["update:modelValue", "change"],
+    emits: ["update:modelValue", "change"],
 
-	setup(props, { emit }) {
-		return {
-			...useTree({ props, emit }),
-		};
-	},
-});
+    setup(props, { emit }) {
+        return {
+            ...useTree({ props, emit })
+        }
+    }
+})
 </script>

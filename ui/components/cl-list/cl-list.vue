@@ -1,12 +1,12 @@
 <template>
-	<view
-		class="cl-list"
-		:style="{
-			'border-radius': parseRpx(radius),
-		}"
-	>
-		<slot></slot>
-	</view>
+    <view
+        class="cl-list"
+        :style="{
+            'border-radius': parseRpx(radius)
+        }"
+    >
+        <slot></slot>
+    </view>
 </template>
 
 <script lang="ts">
@@ -18,26 +18,27 @@
  * @property {Number} radius 圆角大小
  */
 
-import { defineComponent, PropType } from "vue";
-import { parseRpx } from "/@/cool/utils";
+import { defineComponent } from "vue"
+import type { PropType } from "vue"
+import { parseRpx } from "/@/cool/utils"
 
 export default defineComponent({
-	name: "cl-list",
+    name: "cl-list",
 
-	props: {
-		justify: String as PropType<"start" | "end" | "center">,
-		disabled: Boolean,
-		border: {
-			type: Boolean,
-			default: true,
-		},
-		radius: Number,
-	},
+    props: {
+        justify: String as PropType<"start" | "end" | "center">,
+        disabled: Boolean,
+        border: {
+            type: Boolean,
+            default: true
+        },
+        radius: Number
+    },
 
-	setup() {
-		return {
-			parseRpx,
-		};
-	},
-});
+    setup() {
+        return {
+            parseRpx
+        }
+    }
+})
 </script>

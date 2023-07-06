@@ -1,5 +1,6 @@
 import path from "path";
-import { UserConfig } from "vite";
+import type { UserConfig } from "vite";
+//@ts-ignore
 import uni from "@dcloudio/vite-plugin-uni"; // ！此依赖不能安装
 import { cool } from "./build/cool";
 import { proxy } from "./cool/config/proxy";

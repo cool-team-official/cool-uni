@@ -1,28 +1,19 @@
 <template>
-	<view class="cl-loadmore__wrap">
-		<cl-divider
-			:background-color="backgroundColor"
-			:color="color"
-			:width="divider ? '400rpx' : '0rpx'"
-		>
-			<view class="cl-loadmore">
-				<cl-loading
-					:color="iconColor"
-					:theme="loadingTheme"
-					:size="20"
-					v-if="!finish && loading"
-				></cl-loading>
-				<text
-					class="cl-loadmore__text"
-					:style="{
-						color,
-					}"
-					v-if="message"
-					>{{ message }}</text
-				>
-			</view>
-		</cl-divider>
-	</view>
+    <view class="cl-loadmore__wrap">
+        <cl-divider :background-color="backgroundColor" :color="color" :width="divider ? '400rpx' : '0rpx'">
+            <view class="cl-loadmore">
+                <cl-loading :color="iconColor" :theme="loadingTheme" :size="20" v-if="!finish && loading"></cl-loading>
+                <text
+                    class="cl-loadmore__text"
+                    :style="{
+                        color
+                    }"
+                    v-if="message"
+                    >{{ message }}</text
+                >
+            </view>
+        </cl-divider>
+    </view>
 </template>
 
 <script lang="ts">
@@ -40,50 +31,50 @@
  * @property {String} finishText 加载完成显示内容，默认“没有更多了”
  */
 
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent } from "vue"
 
 export default defineComponent({
-	name: "cl-loadmore",
+    name: "cl-loadmore",
 
-	props: {
-		loading: Boolean,
-		finish: Boolean,
-		divider: {
-			type: Boolean,
-			default: true,
-		},
-		color: {
-			type: String,
-			default: "#666",
-		},
-		iconColor: String,
-		backgroundColor: {
-			type: String,
-			default: "#f7f7f7",
-		},
-		text: {
-			type: String,
-			default: "上拉加载更多",
-		},
-		loadingText: {
-			type: String,
-			default: "加载中",
-		},
-		loadingTheme: String,
-		finishText: {
-			type: String,
-			default: "没有更多了",
-		},
-	},
+    props: {
+        loading: Boolean,
+        finish: Boolean,
+        divider: {
+            type: Boolean,
+            default: true
+        },
+        color: {
+            type: String,
+            default: "#666"
+        },
+        iconColor: String,
+        backgroundColor: {
+            type: String,
+            default: "#f7f7f7"
+        },
+        text: {
+            type: String,
+            default: "上拉加载更多"
+        },
+        loadingText: {
+            type: String,
+            default: "加载中"
+        },
+        loadingTheme: String as PropType<"default" | "spin">,
+        finishText: {
+            type: String,
+            default: "没有更多了"
+        }
+    },
 
-	setup(props) {
-		const message = computed(() => {
-			return props.finish ? props.finishText : props.loading ? props.loadingText : props.text;
-		});
+    setup(props) {
+        const message = computed(() => {
+            return props.finish ? props.finishText : props.loading ? props.loadingText : props.text
+        })
 
-		return {
-			message,
-		};
-	},
-});
+        return {
+            message
+        }
+    }
+})
 </script>

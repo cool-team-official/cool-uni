@@ -57,7 +57,7 @@
  */
 
 import { defineComponent, ref, watch } from "vue";
-
+import type { PropType } from "vue";
 export default defineComponent({
 	name: "cl-search",
 
@@ -67,7 +67,9 @@ export default defineComponent({
 			default: "",
 		},
 		type: {
-			type: String,
+			type: String as PropType<
+				"text" | "number" | "idcard" | "digit" | "tel" | "safe-password" | "nickname"
+			>,
 			default: "text",
 		},
 		password: Boolean,

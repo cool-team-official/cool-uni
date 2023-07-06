@@ -1,16 +1,10 @@
 <template>
-	<switch
-		class="cl-switch"
-		:checked="checked"
-		:disabled="isDisabled"
-		:color="color"
-		@change="onChange"
-	></switch>
+    <switch class="cl-switch" :checked="checked" :disabled="isDisabled" :color="color" @change="onChange"></switch>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useForm } from "../../hook";
+import { computed, defineComponent } from "vue"
+import { useForm } from "../../hook"
 
 /**
  * @description 开关
@@ -24,50 +18,50 @@ import { useForm } from "../../hook";
  */
 
 export default defineComponent({
-	props: {
-		modelValue: [Boolean, String, Number],
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
-		activeValue: {
-			type: [Boolean, String, Number],
-			default: true,
-		},
-		inactiveValue: {
-			type: [Boolean, String, Number],
-			default: false,
-		},
-		color: {
-			type: String,
-			default: "#6b69f8",
-		},
-	},
+    props: {
+        modelValue: [Boolean, String, Number],
+        disabled: {
+            type: Boolean,
+            default: null
+        },
+        activeValue: {
+            type: [Boolean, String, Number],
+            default: true
+        },
+        inactiveValue: {
+            type: [Boolean, String, Number],
+            default: false
+        },
+        color: {
+            type: String,
+            default: "#6b69f8"
+        }
+    },
 
-	emits: ["update:modelValue", "change"],
+    emits: ["update:modelValue", "change"],
 
-	setup(props, { emit }) {
-		const { disabled } = useForm();
+    setup(props, { emit }) {
+        const { disabled } = useForm()
 
-		// 是否选中
-		const checked = computed(() => props.modelValue === props.activeValue);
+        // 是否选中
+        const checked = computed(() => props.modelValue === props.activeValue)
 
-		// 是否禁用
-		const isDisabled = computed(() => disabled.value || props.disabled);
+        // 是否禁用
+        const isDisabled = computed(() => disabled.value || props.disabled)
 
-		// 监听变化
-		function onChange(e: any) {
-			const v = e.detail.value ? props.activeValue : props.inactiveValue;
+        // 监听变化
+        function onChange(e: any) {
+            const v = e.detail.value ? props.activeValue : props.inactiveValue
 
-			emit("update:modelValue", v);
-			emit("change", v);
-		}
+            emit("update:modelValue", v)
+            emit("change", v)
+        }
 
-		return {
-			checked,
-			isDisabled,
-			onChange,
-		};
-	},
-});
+        return {
+            checked,
+            isDisabled,
+            onChange
+        }
+    }
+})
 </script>
