@@ -1,42 +1,42 @@
-import { onReady } from "@dcloudio/uni-app"
-import { router, useGlobal } from "/@/cool"
+import { onReady } from "@dcloudio/uni-app";
+import { router, useGlobal } from "/@/cool";
 
 export function useUi(): Ui.Page {
-    const global = useGlobal()
+	const global = useGlobal();
 
-    let d: any
+	let d: any;
 
-    const ui: any = {
-        loaded: false
-    }
+	const ui: any = {
+		loaded: false,
+	};
 
-    function update() {
-        d = null
+	function update() {
+		d = null;
 
-        if (!d) {
-            const p = router.info()
+		if (!d) {
+			const p = router.info();
 
-            if (p) {
-                d = global.data[`cl-page__${p.path}`]
-            }
-        }
-    }
+			if (p) {
+				d = global.data[`cl-page__${p.path}`];
+			}
+		}
+	}
 
-    onReady(() => {
-        ui.loaded = true
-        update()
-    })
+	onReady(() => {
+		ui.loaded = true;
+		update();
+	});
 
-    update()
+	update();
 
-    const Comps = ["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"]
-    Comps.forEach((e) => {
-        ui[e] = (...args: any[]) => {
-            if (d) {
-                d[e]?.(...args)
-            }
-        }
-    })
+	const Comps = ["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"];
+	Comps.forEach((e) => {
+		ui[e] = (...args: any[]) => {
+			if (d) {
+				d[e]?.(...args);
+			}
+		};
+	});
 
-    return ui
+	return ui;
 }
