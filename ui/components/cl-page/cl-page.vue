@@ -38,8 +38,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, reactive } from "vue";
-import { useCool } from "/@/cool";
+import { computed, defineComponent, reactive } from "vue";
+import { useCool, useGlobal } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
@@ -62,9 +62,7 @@ export default defineComponent({
 
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
-
-		// 组件作用域
-		const { proxy }: any = getCurrentInstance();
+		const global = useGlobal();
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
@@ -74,6 +72,7 @@ export default defineComponent({
 			return props.fullscreen ? `calc(100% - ${statusBarHeight}px)` : "auto";
 		});
 
+		// 背景色
 		const background = computed(() => {
 			return (
 				props.backgroundColor ||
@@ -121,18 +120,14 @@ export default defineComponent({
 		}
 
 		// 追加方法
-		if (!proxy.$root.$cl_page) {
-			proxy.$root.$cl_page = {};
-		}
-
 		if (router.path) {
-			proxy.$root.$cl_page[router.path] = {
+			global.set(`cl-page__${router.path}`, {
 				showLoading,
 				hideLoading,
 				showToast,
 				showConfirm,
 				showTips,
-			};
+			});
 		}
 
 		return {
