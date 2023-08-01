@@ -7,7 +7,7 @@
 				'is-fill': fill,
 				'is-border': border,
 				'is-dropdown': showDropdown,
-				'is-custom': custom,
+				'is-checkable': checkable,
 			},
 		]"
 		:style="{
@@ -114,12 +114,13 @@ import {
 	getCurrentInstance,
 	nextTick,
 	onMounted,
+	PropType,
 	reactive,
 	ref,
 	watch,
 } from "vue";
 import { parseRpx } from "/@/cool/utils";
-import type { PropType } from "vue";
+
 export default defineComponent({
 	name: "cl-tabs",
 
@@ -130,7 +131,7 @@ export default defineComponent({
 			default: 80,
 		},
 		list: {
-			type: Array as PropType<any[]>,
+			type: Array as PropType<{ label: string; value: any; [key: string]: any }[]>,
 			default: [],
 		},
 		loop: {
@@ -167,7 +168,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		custom: Boolean,
+		checkable: Boolean,
 		disabled: Boolean,
 	},
 
@@ -177,7 +178,7 @@ export default defineComponent({
 		const { proxy }: any = getCurrentInstance();
 
 		// 当前选中
-		const current = ref<any>(props.modelValue);
+		const current = ref<number | string>();
 
 		// 下划线左位移
 		const lineLeft = ref(0);
@@ -192,18 +193,7 @@ export default defineComponent({
 		const width = ref(375);
 
 		// 列表
-		const tabs = computed(() => {
-			// 处理没有设置值的情况
-			const noVal = props.list.filter((e) => e.value === undefined).length > 1;
-
-			return props.list.map((e, i) => {
-				e.value = noVal ? i : e.value;
-				return e;
-			});
-		});
-
-		// 监听列表改变
-		watch(() => props.list, refresh);
+		const tabs = computed(() => props.list);
 
 		// 刷新
 		function refresh() {
@@ -245,7 +235,6 @@ export default defineComponent({
 						// #endif
 						.select(".cl-tabs__dropdown-box")
 						.boundingClientRect((res) => {
-							//@ts-ignore
 							dropdown.height = res.height + "px";
 						})
 						.exec();
@@ -267,7 +256,13 @@ export default defineComponent({
 				return false;
 			}
 
-			const { value } = tabs.value[index];
+			let { value } = tabs.value[index];
+
+			if (props.checkable) {
+				if (value == current.value) {
+					value = undefined;
+				}
+			}
 
 			emit("update:modelValue", value);
 			emit("change", value);
@@ -335,13 +330,20 @@ export default defineComponent({
 			}
 		}
 
+		// 监听绑定值
 		watch(
 			() => props.modelValue,
 			(val: any) => {
 				current.value = val;
 				onOffset();
+			},
+			{
+				immediate: true,
 			}
 		);
+
+		// 监听列表改变
+		watch(() => props.list, refresh);
 
 		onMounted(() => {
 			refresh();

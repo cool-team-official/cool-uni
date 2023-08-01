@@ -104,4 +104,25 @@
 			width: calc(100% - 100rpx);
 		}
 	}
+
+	&.is-checkable {
+		.cl-tabs__label {
+			background-color: rgba($cl-color-primary, 0.05);
+			color: $cl-color-primary;
+			padding: 8rpx 20rpx;
+			border-radius: 8rpx;
+		}
+
+		.cl-tabs__bar-item {
+			padding: 0 !important;
+			margin-right: 20rpx;
+
+			&.is-active {
+				.cl-tabs__label {
+					background-color: $cl-color-primary;
+					color: #fff;
+				}
+			}
+		}
+	}
 }
