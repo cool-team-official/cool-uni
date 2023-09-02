@@ -34,7 +34,7 @@
 					</view>
 
 					<cl-button
-						type="success"
+						type="primary"
 						fill
 						:disabled="!form.code"
 						:loading="captcha.sending"
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, PropType, reactive, ref } from "vue";
+import { computed, type PropType, reactive, ref } from "vue";
 import { useCool } from "../cool";
 import { useUi } from "../ui";
 

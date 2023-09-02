@@ -1,6 +1,7 @@
 import { last } from "lodash-es";
 import { storage } from "../utils";
-import { config } from "../config";
+import { config } from "../../config";
+import { ctx } from "virtual:ctx";
 
 type PushOptions =
 	| string
@@ -24,13 +25,6 @@ type Tabs = {
 	selectedIconPath?: string;
 	[key: string]: any;
 }[];
-
-if (!__UNI_PAGES__) {
-	console.error("@dcloudio/uni-cli-shared 依赖未安装！");
-}
-
-// pages.json 配置参数
-const ctx = JSON.parse(__UNI_PAGES__);
 
 // 路由列表
 const routes = [...ctx.pages];

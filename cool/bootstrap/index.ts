@@ -1,7 +1,7 @@
 import { createPinia } from "pinia";
 import { App } from "vue";
 import mitt from "mitt";
-import { useEps } from "./eps";
+import { createEps } from "./eps";
 
 export function bootstrap(app: App) {
 	// 通信
@@ -10,6 +10,5 @@ export function bootstrap(app: App) {
 	// 缓存
 	app.use(createPinia());
 
-	// eps
-	useEps();
+	createEps();
 }

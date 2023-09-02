@@ -1,14 +1,15 @@
 import { Plugin } from "vite";
-import { parseJson, readFile } from "./utils";
-import { createEps, getEps } from "./lib/eps";
-import { join } from "path";
+import { createEps } from "./eps";
+import { parseJson } from "./utils";
+import { createCtx } from "./ctx";
 
-export const cool = (): Plugin | null => {
-	// 读取页面路径
-	const pages = readFile(join(__dirname, "../../pages.json"));
+export function cool(): Plugin {
+	// 虚拟模块
+	const virtualModuleIds = ["virtual:eps", "virtual:ctx"];
 
 	return {
 		name: "vite-cool",
+		enforce: "pre",
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				function done(data: any) {
@@ -16,43 +17,43 @@ export const cool = (): Plugin | null => {
 					res.end(JSON.stringify(data));
 				}
 
-				// 自定义
 				if (req.url?.includes("__cool")) {
 					const body = await parseJson(req);
-					let next: any = null;
 
 					switch (req.url) {
 						// 创建描述文件
 						case "/__cool_eps":
-							next = createEps(body);
+							await createEps(body);
 							break;
+
+						default:
+							return done({
+								code: 1001,
+								message: "未知请求",
+							});
 					}
 
-					if (next) {
-						next.then((data: any) => {
-							done({
-								code: 1000,
-								data,
-							});
-						}).catch((message: string) => {
-							done({
-								code: 1001,
-								message,
-							});
-						});
-					}
+					done({
+						code: 1000,
+					});
 				} else {
 					next();
 				}
 			});
 		},
-		config() {
-			return {
-				define: {
-					__UNI_PAGES__: JSON.stringify(pages),
-					__EPS__: getEps(),
-				},
-			};
+		resolveId(id) {
+			if (virtualModuleIds.includes(id)) {
+				return "\0" + id;
+			}
+		},
+		async load(id) {
+			if (id === "\0virtual:eps") {
+				return createEps();
+			}
+
+			if (id === "\0virtual:ctx") {
+				return createCtx();
+			}
 		},
 	};
-};
+}

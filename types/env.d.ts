@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 /// <reference types="@dcloudio/types/uni-app" />
-/// <reference types="./build/cool/temp/eps" />
+/// <reference types="./build/cool/eps/temp/eps" />
 /// <reference types="./ui/types" />
 
 declare module "*.vue" {
@@ -11,4 +11,3 @@ declare module "*.vue" {
 }
 
 declare const __UNI_PAGES__: string;
-declare const __EPS__: string;

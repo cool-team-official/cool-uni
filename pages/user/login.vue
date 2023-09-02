@@ -1,5 +1,5 @@
 <template>
-	<cl-page>
+	<cl-page background-color="#fff">
 		<cl-topbar :border="false" background-color="transparent" />
 
 		<view class="page-login">
@@ -66,22 +66,13 @@
 					</template>
 
 					<!-- 协议 -->
-					<view class="agree">
-						<cl-checkbox :size="34" v-model="agree" round>
-							<view class="text">
-								已阅读并同意
-								<text @tap.stop="toText('用户协议')">《用户协议》</text>
-								及
-								<text @tap.stop="toText('隐私政策')">《隐私政策》</text>
-							</view>
-						</cl-checkbox>
-					</view>
+					<agree-btn :ref="setRefs('agreeBtn')" />
 				</view>
 			</div>
 
 			<!-- 其他登录方式 -->
 			<view class="other" v-if="platforms.length > 0">
-				<cl-divider width="400rpx" background-color="#f7f7f7">
+				<cl-divider width="400rpx">
 					<cl-text color="#ccc" value="其他登录方式"></cl-text>
 				</cl-divider>
 
@@ -107,15 +98,13 @@ import { onReady } from "@dcloudio/uni-app";
 import { useApp, useCool, useStore, useWx } from "/@/cool";
 import { useUi } from "/@/ui";
 import SmsBtn from "/@/components/sms-btn.vue";
+import AgreeBtn from "/@/components/agree-btn.vue";
 
 const { service, router, refs, setRefs, storage } = useCool();
 const { user } = useStore();
 const app = useApp();
 const ui = useUi();
 const wx = useWx();
-
-// 是否同意
-const agree = ref(true);
 
 // 加载状态
 const loading = ref(false);
@@ -265,22 +254,10 @@ function changeMode(value: string) {
 }
 
 // 检测
-function check(callback: () => void) {
-	if (!agree.value) {
-		return ui.showToast("请先勾选同意后再进行登录");
+function check(cb: () => void) {
+	if (refs.agreeBtn.check()) {
+		cb();
 	}
-
-	callback();
-}
-
-// 文案
-function toText(name: string) {
-	router.push({
-		path: "/pages/comm/text",
-		query: {
-			name,
-		},
-	});
 }
 
 onReady(() => {
@@ -355,20 +332,6 @@ onReady(() => {
 						flex: 1;
 						padding: 0 30rpx;
 					}
-				}
-			}
-
-			.agree {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: #999999;
-				font-size: 24rpx;
-				margin-top: 38rpx;
-				width: 100%;
-
-				text {
-					color: #000;
 				}
 			}
 		}

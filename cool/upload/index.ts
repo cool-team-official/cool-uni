@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { config } from "../config";
+import { config } from "../../config";
 import { service } from "../service";
 import { basename } from "../utils";
 import { useStore } from "../store";

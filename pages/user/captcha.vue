@@ -1,5 +1,5 @@
 <template>
-	<cl-page>
+	<cl-page background-color="#fff">
 		<view class="page-captcha">
 			<cl-topbar :border="false"> </cl-topbar>
 

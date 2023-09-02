@@ -1,4 +1,5 @@
 import fs from "fs";
+import { join } from "path";
 
 // 首字母大写
 export function firstUpperCase(value: string): string {
@@ -29,7 +30,7 @@ export function readFile(name: string) {
 }
 
 // 解析body
-export function parseJson(req: any) {
+export function parseJson(req: any): Promise<any> {
 	return new Promise((resolve) => {
 		let d = "";
 		req.on("data", function (chunk: Buffer) {
@@ -43,4 +44,31 @@ export function parseJson(req: any) {
 			}
 		});
 	});
+}
+
+// 深度创建目录
+export function mkdirs(path: string) {
+	const arr = path.split("/");
+	let p = "";
+
+	arr.forEach((e) => {
+		const t = join(p, e);
+
+		try {
+			fs.statSync(t);
+		} catch (err) {
+			try {
+				fs.mkdirSync(t);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+		p = t;
+	});
+
+	return p;
+}
+
+export function error(message: string) {
+	console.log("\x1B[31m%s\x1B[0m", message);
 }

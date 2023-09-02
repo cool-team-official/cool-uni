@@ -30,8 +30,10 @@
 <script lang="ts" setup>
 import { useCool } from "/@/cool";
 import Tabbar from "./components/tabbar.vue";
+import { useUi } from "/@/ui";
 
 const { router, service } = useCool();
+const ui = useUi();
 
 const list = [
 	{

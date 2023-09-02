@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { onReady, onShow } from "@dcloudio/uni-app";
-import { config } from "../config";
+import { config } from "../../config";
 import { getUrlParam, storage } from "../utils";
 import { service } from "../service";
 

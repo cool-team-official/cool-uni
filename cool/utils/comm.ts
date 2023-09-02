@@ -61,37 +61,29 @@ export function deepTree(list: any[]): any[] {
 	return orderBy(newList, "orderNum");
 }
 
-// 文件路径转对象
-export function deepFiles(list: any[]) {
-	const modules: any = {};
+// 路径转对象
+export function path2Obj(list: any[]) {
+	const data: any = {};
 
-	list.forEach((e) => {
-		const arr = e.path.split("/");
+	list.forEach(({ path, value }) => {
+		const arr: string[] = path.split("/");
 		const parents = arr.slice(0, arr.length - 1);
-		const name = basename(e.path).replace(".ts", "");
+		const name = basename(path).replace(".ts", "");
 
-		let curr: any = modules;
-		let prev: any = null;
-		let key: any = null;
+		let curr = data;
 
-		parents.forEach((k: string) => {
+		parents.forEach((k) => {
 			if (!curr[k]) {
 				curr[k] = {};
 			}
 
-			prev = curr;
 			curr = curr[k];
-			key = k;
 		});
 
-		if (name == "index") {
-			prev[key] = e.value;
-		} else {
-			curr[name] = e.value;
-		}
+		curr[name] = value;
 	});
 
-	return modules;
+	return data;
 }
 
 // 文件名

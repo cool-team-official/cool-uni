@@ -1,13 +1,16 @@
+// @ts-nocheck
 import { has } from "lodash-es";
-import { isDev, config } from "../config";
+import { isDev, config } from "../../config";
 import request from "./request";
 
 export function Service(
-	value: {
-		namespace?: string;
-		url?: string;
-		mock?: boolean;
-	} & string
+	value:
+		| {
+				namespace?: string;
+				url?: string;
+				mock?: boolean;
+		  }
+		| string
 ) {
 	return function (target: any) {
 		// 命名

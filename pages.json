@@ -19,6 +19,12 @@
 			"root": "pages/user",
 			"pages": [
 				{
+					"path": "doc",
+					"style": {
+						"navigationBarTitleText": ""
+					}
+				},
+				{
 					"path": "set",
 					"style": {
 						"navigationBarTitleText": "设置"
