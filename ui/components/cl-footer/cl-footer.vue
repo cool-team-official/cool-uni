@@ -1,32 +1,42 @@
 <template>
-	<view
-		class="cl-footer__wrap"
-		:style="{
-			height: parseRpx(height),
-		}"
-	>
+	<view class="cl-footer__wrap">
+		<view class="cl-footer__placeholder" :style="{ height }"></view>
+
 		<view
 			class="cl-footer"
 			:style="{
 				backgroundColor,
-				padding: parseRpx(padding),
-				boxSizing: 'border-box',
+				visibility: height != '0px' ? 'visible' : 'hidden',
 			}"
 		>
-			<slot></slot>
+			<view
+				class="cl-footer__inner"
+				:style="{
+					padding: parseRpx(padding),
+				}"
+			>
+				<slot> </slot>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {
+	computed,
+	defineComponent,
+	getCurrentInstance,
+	nextTick,
+	onMounted,
+	ref,
+	watch,
+} from "vue";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-footer",
 
 	props: {
-		height: [String, Number],
 		backgroundColor: {
 			type: String,
 			default: "#fff",
@@ -35,10 +45,64 @@ export default defineComponent({
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
+		vt: null,
+		vh: Number,
 	},
 
-	setup() {
+	setup(props) {
+		const instance = getCurrentInstance();
+
+		const height = ref();
+
+		watch(
+			() => props.vt,
+			() => {
+				update();
+			},
+			{
+				deep: true,
+			}
+		);
+
+		const vh = computed(() => {
+			let v = 0;
+
+			if (props.vh) {
+				v = props.vh;
+			} else {
+				const [top, right, bottom, left] = parseRpx(props.padding).split(" ");
+
+				if (top && bottom) {
+					v = parseInt(top) + parseInt(bottom);
+				} else if (top) {
+					v = parseInt(top) * 2;
+				}
+			}
+
+			return uni.upx2px(v);
+		});
+
+		async function update() {
+			await nextTick();
+
+			uni.createSelectorQuery()
+				.in(instance?.proxy)
+				.select(".cl-footer")
+				.boundingClientRect((rect) => {
+					if (rect) {
+						height.value = (rect.height || 0) > vh.value ? `${rect.height}px` : "0px";
+					}
+				})
+				.exec();
+		}
+
+		onMounted(() => {
+			update();
+		});
+
 		return {
+			height,
+			update,
 			parseRpx,
 		};
 	},

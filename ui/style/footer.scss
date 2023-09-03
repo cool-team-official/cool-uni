@@ -1,13 +1,16 @@
 .cl-footer {
-	&__wrap {
-		padding-bottom: env(safe-area-inset-bottom);
-	}
-
-	padding-bottom: inherit;
-	height: inherit;
+	padding-bottom: env(safe-area-inset-bottom);
 	width: 100%;
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	z-index: 99;
+
+	&__inner {
+		display: flex;
+
+		:deep(cl-button) {
+			width: 100%;
+		}
+	}
 }

@@ -31,11 +31,11 @@
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-avatar :size="120" src="/pages/demo/static/avatar.png"></cl-avatar>
+					<cl-avatar :size="120" src="/pages/demo/static/avatar2.png"></cl-avatar>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-avatar :size="140" src="/pages/demo/static/avatar.png"></cl-avatar>
+					<cl-avatar :size="140" src="/pages/demo/static/avatar3.png"></cl-avatar>
 				</cl-col>
 			</cl-row>
 		</cl-card>
@@ -53,5 +53,6 @@ const urls = ref([
 	"/pages/demo/static/avatar.png",
 	"/pages/demo/static/avatar2.png",
 	"/pages/demo/static/avatar3.png",
+	"/pages/demo/static/avatar4.png",
 ]);
 </script>

@@ -23,7 +23,12 @@
 			</view>
 		</view>
 
-		<tabbar />
+		<!-- <tabbar /> -->
+
+		<cl-footer>
+			<cl-button size="large" fill round type="primary"> 保存 </cl-button>
+			<cl-button size="large" fill round> 设置 </cl-button>
+		</cl-footer>
 	</cl-page>
 </template>
 
