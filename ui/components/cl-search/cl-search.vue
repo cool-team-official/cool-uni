@@ -1,13 +1,24 @@
 <template>
-	<view class="cl-search">
+	<view
+		class="cl-search"
+		:style="{
+			padding: parseRpx(padding),
+		}"
+	>
 		<view class="cl-search__prepend" v-if="$slots.prepend">
 			<slot name="prepend"></slot>
 		</view>
-		<view class="cl-search__input">
+
+		<view
+			class="cl-search__input"
+			:style="{
+				height: parseRpx(height),
+			}"
+		>
 			<view class="cl-search__inner">
 				<cl-input
 					v-model="value"
-					:prefix-icon="searchIcon"
+					:height="height"
 					:type="type"
 					:placeholder="placeholder"
 					:disabled="disabled"
@@ -28,17 +39,21 @@
 					@confirm="onConfirm"
 					@clear="onClear"
 					@keyboardheightchange="onKeyboardheightchange"
-				></cl-input>
+				>
+					<template #prepend>
+						<text class="cl-icon-search"></text>
+					</template>
+				</cl-input>
 			</view>
 
 			<view class="cl-search__btn">
 				<cl-button
 					type="primary"
 					round
-					v-if="showSearchButton"
-					:height="60"
 					:disabled="!value"
+					:border="false"
 					@tap="search"
+					v-if="showSearchButton"
 				>
 					{{ searchButtonText }}
 				</cl-button>
@@ -58,6 +73,8 @@
 
 import { defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
+import { parseRpx } from "/@/cool/utils";
+
 export default defineComponent({
 	name: "cl-search",
 
@@ -72,6 +89,11 @@ export default defineComponent({
 			>,
 			default: "text",
 		},
+		padding: {
+			type: [String, Number],
+			default: "15rpx 20rpx",
+		},
+		height: Number,
 		password: Boolean,
 		placeholder: String,
 		placeholderStyle: String,
@@ -185,6 +207,7 @@ export default defineComponent({
 			onClear,
 			onKeyboardheightchange,
 			search,
+			parseRpx,
 		};
 	},
 });
