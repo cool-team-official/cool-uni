@@ -334,6 +334,8 @@
 		"backgroundColor": "#f7f7f7"
 	},
 	"tabBar": {
+		"backgroundColor": "#ffffff",
+		"borderStyle": "white",
 		"list": [
 			{
 				"pagePath": "pages/index/home",

@@ -1,7 +1,6 @@
 .cl-search {
 	display: flex;
 	align-items: center;
-	padding: 15rpx 20rpx;
 	box-sizing: border-box;
 
 	&__input {
@@ -21,11 +20,20 @@
 	}
 
 	&__inner {
+		height: 100%;
 		flex: 1;
+
+		.cl-icon-search {
+			font-size: 30rpx;
+		}
 	}
 
 	&__btn {
-		margin-right: 4rpx;
+		.cl-button {
+			height: 56rpx;
+			margin: 0 4rpx 0 0;
+			padding: 0 34rpx;
+		}
 	}
 
 	&__prepend,
