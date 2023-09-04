@@ -1,24 +1,24 @@
 <template>
-    <view
-        class="cl-badge"
-        :class="[
-            `cl-badge--${type}`,
-            {
-                'is-dot': isDot
-            }
-        ]"
-        v-if="$slots.default"
-    >
-        <slot></slot>
-        <text
-            class="cl-badge__content"
-            :style="{
-                backgroundColor: color
-            }"
-            v-if="!hidden && ((content && content != 0) || isDot)"
-            >{{ content }}</text
-        >
-    </view>
+	<view
+		class="cl-badge"
+		:class="[
+			`cl-badge--${type}`,
+			{
+				'is-dot': isDot,
+			},
+		]"
+		v-if="$slots.default"
+	>
+		<slot></slot>
+		<text
+			class="cl-badge__content"
+			:style="{
+				backgroundColor: color,
+			}"
+			v-if="!hidden && ((content && content != 0) || isDot)"
+			>{{ content }}</text
+		>
+	</view>
 </template>
 
 <script lang="ts">
@@ -33,39 +33,42 @@
  * @example <cl-badge :value="10">Hello !</cl-badge>
  */
 
-import { computed, defineComponent } from "vue"
-import type { PropType } from "vue"
-import { isNumber } from "lodash-es"
+import { computed, defineComponent } from "vue";
+import type { PropType } from "vue";
+import { isNumber } from "lodash-es";
 
 export default defineComponent({
-    name: "cl-badge",
+	name: "cl-badge",
 
-    props: {
-        value: [String, Number],
-        max: Number,
-        isDot: Boolean,
-        hidden: Boolean,
-        type: String as PropType<"primary" | "success" | "warning" | "error">,
-        color: String
-    },
+	props: {
+		value: [String, Number],
+		max: Number,
+		isDot: Boolean,
+		hidden: Boolean,
+		type: {
+			type: String as PropType<"primary" | "success" | "warning" | "error">,
+			default: "error",
+		},
+		color: String,
+	},
 
-    setup(props) {
-        const content = computed(() => {
-            if (props.isDot) return ""
+	setup(props) {
+		const content = computed(() => {
+			if (props.isDot) return "";
 
-            const value: any = props.value
-            const max: any = props.max
+			const value: any = props.value;
+			const max: any = props.max;
 
-            if (isNumber(value) && isNumber(max) && max > 0) {
-                return max < value ? `${max}+` : value
-            }
+			if (isNumber(value) && isNumber(max) && max > 0) {
+				return max < value ? `${max}+` : value;
+			}
 
-            return value
-        })
+			return value;
+		});
 
-        return {
-            content
-        }
-    }
-})
+		return {
+			content,
+		};
+	},
+});
 </script>

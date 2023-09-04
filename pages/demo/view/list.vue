@@ -42,9 +42,9 @@
 
 		<cl-card label="自定义">
 			<cl-list-item justify="start">
-				<cl-row type="flex" align="middle">
+				<cl-row type="flex" align="center">
 					<cl-avatar></cl-avatar>
-					<cl-text value="神仙都没用" :margin="[0, 0, 0, 10]"></cl-text>
+					<cl-text value="神仙都没用" :margin="[0, 0, 0, 20]"></cl-text>
 				</cl-row>
 
 				<template #append>

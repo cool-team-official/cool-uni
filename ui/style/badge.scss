@@ -12,7 +12,6 @@
 		position: absolute;
 		top: -8rpx;
 		right: -8rpx;
-		background-color: $cl-color-error;
 		color: #fff;
 		font-size: 24rpx;
 		text-align: center;
@@ -21,6 +20,7 @@
 		border-radius: 20rpx;
 		padding: 8rpx;
 		transform: scale(0.9);
+		line-height: 0;
 	}
 
 	&.is-dot {
