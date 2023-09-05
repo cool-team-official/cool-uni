@@ -13,4 +13,8 @@
 			width: 100%;
 		}
 	}
+
+	&.is-border {
+		border-top: $cl-border-width solid $cl-border-color;
+	}
 }

@@ -6,8 +6,10 @@ $cl-color-warning: #e6a23c;
 $cl-color-error: #f56c6c;
 $cl-color-info: #909399;
 $cl-color-disabled: #c0c4cc;
+$cl-color-disabled-bg: #f5f7fa;
 $cl-color-active: #f7f7f7;
 $cl-color-bg: #f6f7fa;
+$cl-color-placeholder: #a8abb2;
 
 // 通用
 $cl-topbar-height: 44px;
@@ -16,54 +18,13 @@ $cl-border-width: 1px;
 $cl-font-size: 26rpx;
 $cl-height: 64rpx;
 $cl-border-radius: 8rpx;
-$cl-disabled-background-color: #f5f7fa;
-$cl-disabled-color: #c0c4cc;
 $cl-zIndex: 500;
 
 // 按钮
-$cl-button-height: $cl-height;
 $cl-button-padding: 0rpx 30rpx;
-$cl-button-font-size: $cl-font-size;
-$cl-button-round-border-radius: 100rpx;
-$cl-button-border-width: $cl-border-width;
-$cl-button-border-color: $cl-border-color;
-$cl-button-border-radius: $cl-border-radius;
-
-// 输入框
-$cl-input-height: $cl-height;
-$cl-input-border-radius: $cl-border-radius;
-$cl-input-border-width: $cl-border-width;
-$cl-input-border-color: $cl-border-color;
-$cl-input-font-size: $cl-font-size;
-$cl-input-disabled-background-color: $cl-disabled-background-color;
-$cl-input-disabled-color: $cl-disabled-color;
 
 // 计数器
 $cl-input-number-size: 50rpx;
 
-// 文本
-$cl-text-font-size: $cl-font-size;
-
-// 文本域
-$cl-textarea-border-radius: $cl-border-radius;
-$cl-textarea-border-width: $cl-border-width;
-$cl-textarea-border-color: $cl-border-color;
-$cl-textarea-font-size: $cl-font-size;
-$cl-textarea-disabled-background-color: $cl-disabled-background-color;
-$cl-textarea-disabled-color: $cl-disabled-color;
-
-// 下拉框
-$cl-select-height: $cl-height;
-$cl-select-border-radius: $cl-border-radius;
-$cl-select-border-width: $cl-border-width;
-$cl-select-border-color: $cl-border-color;
-$cl-select-font-size: $cl-font-size;
-$cl-select-disabled-background-color: $cl-disabled-background-color;
-$cl-select-disabled-color: $cl-disabled-color;
-
-// 文件上传
-$cl-upload-border-radius: $cl-border-radius;
-$cl-upload-border-width: $cl-border-width;
-$cl-upload-border-color: $cl-border-color;
-$cl-upload-disabled-background-color: $cl-disabled-background-color;
-$cl-upload-disabled-color: $cl-disabled-color;
+// 上传
+$cl-upload-radius: 12rpx;

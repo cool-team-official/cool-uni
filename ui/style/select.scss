@@ -1,55 +1,42 @@
 .cl-select {
 	display: flex;
 	align-items: center;
-	height: $cl-select-height;
+	height: $cl-height;
 	width: 100%;
 	background-color: #fff;
-	padding-left: 20rpx;
-	padding-right: 60rpx;
+	padding: 0 20rpx;
 	box-sizing: border-box;
 	position: relative;
-
-	picker {
-		width: 100%;
-		font-size: $cl-select-font-size;
-	}
 
 	&__inner {
 		display: flex;
 		align-items: center;
 		height: 100%;
 		width: 100%;
-	}
-
-	&__value {
-		flex: 1;
-	}
-
-	&__icon {
-		position: absolute;
-		right: 18rpx;
+		font-size: $cl-font-size;
+		margin-right: 20rpx;
 	}
 
 	&__placeholder {
-		color: #999;
+		color: $cl-color-placeholder;
 	}
 
 	&.is-disabled {
-		background-color: $cl-select-disabled-background-color;
-		color: $cl-select-disabled-color;
+		background-color: $cl-color-disabled-bg;
+		color: $cl-color-disabled;
 
 		.cl-select__placeholder {
-			color: $cl-select-disabled-color;
+			color: $cl-color-disabled;
 		}
 	}
 
 	&.is-border {
-		border: $cl-select-border-width solid $cl-select-border-color;
-		border-radius: $cl-select-border-radius;
+		border: $cl-border-width solid $cl-border-color;
+		border-radius: $cl-border-radius;
 	}
 
 	&.is-round {
-		border-radius: 70rpx;
+		border-radius: $cl-height;
 	}
 }
 

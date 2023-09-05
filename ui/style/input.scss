@@ -1,15 +1,15 @@
 .cl-input {
 	display: flex;
-	height: $cl-input-height;
+	height: $cl-height;
 	width: 100%;
 	vertical-align: middle;
 	position: relative;
-	border-radius: $cl-input-border-radius;
+	border-radius: $cl-border-radius;
 	box-sizing: border-box;
 	transition: border-color 0.2s;
 	padding: 0 20rpx;
 	background-color: #fff;
-	font-size: $cl-input-font-size;
+	font-size: $cl-font-size;
 
 	&--focus {
 		border-color: rgba($cl-color-primary, 0.7);
@@ -101,14 +101,14 @@
 	}
 
 	&.is-border {
-		border: $cl-input-border-width solid $cl-input-border-color;
+		border: $cl-border-width solid $cl-border-color;
 	}
 
 	&.is-disabled {
-		background-color: $cl-input-disabled-background-color;
+		background-color: $cl-color-disabled-bg;
 
 		.cl-input__inner {
-			color: $cl-input-disabled-color;
+			color: $cl-color-disabled;
 		}
 	}
 

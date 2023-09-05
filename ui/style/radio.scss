@@ -43,13 +43,13 @@
 
 	&.is-disabled {
 		.cl-radio__input {
-			background-color: $cl-disabled-background-color;
+			background-color: $cl-color-disabled-bg;
 			border-color: transparent;
-			color: $cl-disabled-color;
+			color: $cl-color-disabled;
 		}
 
 		.cl-radio__label {
-			color: $cl-disabled-color;
+			color: $cl-color-disabled;
 		}
 	}
 

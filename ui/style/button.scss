@@ -42,8 +42,8 @@
 	background-color: #fff;
 	overflow: visible;
 	vertical-align: middle;
-	font-size: $cl-button-font-size;
-	border-radius: $cl-button-border-radius;
+	font-size: $cl-font-size;
+	border-radius: $cl-border-radius;
 
 	&__text {
 		display: inline;
@@ -74,7 +74,7 @@
 	}
 
 	&--default {
-		height: $cl-button-height;
+		height: $cl-height;
 		padding: $cl-button-padding;
 	}
 
@@ -85,11 +85,11 @@
 	}
 
 	&.is-border {
-		border: $cl-button-border-width solid $cl-button-border-color;
+		border: $cl-border-width solid $cl-border-color;
 	}
 
 	&.is-round {
-		border-radius: $cl-button-round-border-radius !important;
+		border-radius: $cl-height !important;
 	}
 
 	&.is-loading {

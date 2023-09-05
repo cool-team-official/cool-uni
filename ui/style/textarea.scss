@@ -4,7 +4,7 @@
 	background-color: #fff;
 	position: relative;
 	line-height: 36rpx;
-	border-radius: $cl-textarea-border-radius;
+	border-radius: $cl-border-radius;
 
 	/* #ifdef MP-WEIXIN */
 	padding: 0 10rpx;
@@ -21,12 +21,12 @@
 	textarea {
 		width: 100%;
 		box-sizing: border-box;
-		font-size: $cl-textarea-font-size;
+		font-size: $cl-font-size;
 	}
 
 	&.is-disabled {
-		background-color: $cl-textarea-disabled-background-color;
-		color: $cl-textarea-disabled-color;
+		background-color: $cl-color-disabled-bg;
+		color: $cl-color-disabled;
 	}
 
 	&__count {
@@ -45,6 +45,6 @@
 	}
 
 	&.is-border {
-		border: $cl-textarea-border-width solid $cl-textarea-border-color;
+		border: $cl-border-width solid $cl-border-color;
 	}
 }

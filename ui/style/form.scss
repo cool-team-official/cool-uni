@@ -5,10 +5,10 @@
 		position: relative;
 
 		&.is-required {
-			.cl-form-item__label::before {
+			.cl-form-item__label::after {
 				content: "*";
 				color: $cl-color-error;
-				margin-right: 10rpx;
+				margin-left: 10rpx;
 			}
 		}
 

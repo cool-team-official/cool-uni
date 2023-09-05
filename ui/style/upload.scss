@@ -6,10 +6,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: $cl-upload-border-radius;
-		border-width: $cl-upload-border-width;
+		border-radius: $cl-upload-radius;
+		border-width: $cl-border-width;
 		border-style: dashed;
-		border-color: $cl-upload-border-color;
+		border-color: $cl-border-color;
 		box-sizing: border-box;
 		position: relative;
 		margin-right: 20rpx;
@@ -23,7 +23,7 @@
 		&__target {
 			height: 100%;
 			width: 100%;
-			border-radius: $cl-upload-border-radius;
+			border-radius: $cl-upload-radius;
 		}
 
 		&__remove {
@@ -44,6 +44,23 @@
 			width: calc(100% - 10rpx);
 			z-index: 2;
 		}
+
+		&__demo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: $cl-color-placeholder;
+
+			.cl-icon-camera-fill {
+				font-size: 70rpx;
+				margin-bottom: 10rpx;
+			}
+
+			text {
+				line-height: normal;
+			}
+		}
 	}
 
 	&:not(.is-disabled) {
@@ -59,7 +76,7 @@
 
 	&.is-disabled {
 		.cl-upload {
-			background-color: $cl-upload-disabled-background-color;
+			background-color: $cl-color-disabled-bg;
 
 			&__add {
 				transform: rotate(45deg);

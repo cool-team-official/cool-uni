@@ -4,6 +4,9 @@
 
 		<view
 			class="cl-footer"
+			:class="{
+				'is-border': border,
+			}"
 			:style="{
 				backgroundColor,
 				visibility: height != '0px' ? 'visible' : 'hidden',
@@ -45,6 +48,7 @@ export default defineComponent({
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
+		border: Boolean,
 		vt: null,
 		vh: Number,
 	},

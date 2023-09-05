@@ -45,7 +45,10 @@
 			@tap="choose()"
 		>
 			<slot>
-				<text class="cl-upload__add cl-icon-plus"></text>
+				<view class="cl-upload__demo">
+					<text class="cl-icon-camera-fill"></text>
+					<text>{{ text }}</text>
+				</view>
 			</slot>
 		</view>
 	</view>
@@ -86,6 +89,10 @@ export default defineComponent({
 
 	props: {
 		modelValue: [String, Array],
+		text: {
+			type: String,
+			default: "上传/拍摄",
+		},
 		sizeType: {
 			type: [String, Array] as PropType<string[] | string>,
 			default: () => ["original", "compressed"],

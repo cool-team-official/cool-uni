@@ -1,25 +1,24 @@
 <template>
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-button @tap="setTips('inner')" v-if="tips == 'toast'"
-				>切换为行内提示，输入时自动触发</cl-button
-			>
-			<cl-button @tap="setTips('toast')" v-else>切换为Toast提示，提交时弹出</cl-button>
-
-			<cl-form ref="Form" v-model="form" :rules="rules" :tips="tips" :disabled="loading">
+			<cl-form ref="Form" v-model="form" :rules="rules" :disabled="loading">
 				<cl-form-item label="活动名称" prop="name">
 					<cl-input v-model="form.name"></cl-input>
-				</cl-form-item>
-
-				<cl-form-item label="活动区域" prop="area">
-					<cl-select v-model="form.area" :options="options.area"></cl-select>
 				</cl-form-item>
 
 				<cl-form-item label="活动时间" prop="date">
 					<cl-select v-model="form.date" mode="date"></cl-select>
 				</cl-form-item>
 
-				<cl-form-item label="活动类型" prop="type">
+				<cl-form-item label="活动区域" prop="area">
+					<cl-select v-model="form.area" :options="options.area"></cl-select>
+				</cl-form-item>
+
+				<cl-form-item label="活动人数" prop="num" justify="end">
+					<cl-input-number v-model="form.num" :min="1" :max="100"></cl-input-number>
+				</cl-form-item>
+
+				<cl-form-item label="活动类型" prop="type" label-position="top">
 					<cl-checkbox-group v-model="form.type">
 						<cl-checkbox
 							v-for="(item, index) in options.type"
@@ -31,7 +30,7 @@
 					</cl-checkbox-group>
 				</cl-form-item>
 
-				<cl-form-item label="资源" prop="source">
+				<cl-form-item label="资源" prop="source" label-position="top">
 					<cl-radio-group v-model="form.source">
 						<cl-radio
 							v-for="(item, index) in options.source"
@@ -42,14 +41,23 @@
 						</cl-radio>
 					</cl-radio-group>
 				</cl-form-item>
-			</cl-form>
 
-			<cl-row type="flex" justify="end">
-				<cl-button @tap="reset">重置</cl-button>
-				<cl-button @tap="clear">清空</cl-button>
-				<cl-button @tap="submit" type="success" :loading="loading">提交</cl-button>
-			</cl-row>
+				<cl-form-item label="活动封面" prop="cover" label-position="top">
+					<cl-upload />
+				</cl-form-item>
+
+				<cl-form-item label="备注" prop="remark" label-position="top">
+					<cl-textarea v-model="form.remark" />
+				</cl-form-item>
+			</cl-form>
 		</cl-card>
+
+		<cl-footer border>
+			<cl-button size="large" round fill @tap="clear">清空</cl-button>
+			<cl-button size="large" round fill @tap="submit" type="success" :loading="loading"
+				>提交</cl-button
+			>
+		</cl-footer>
 	</cl-page>
 </template>
 
@@ -59,14 +67,15 @@ import { useUi } from "/@/ui";
 
 const ui = useUi();
 
-const Form = ref<ClForm.Ref>();
-
 const form = ref({
 	name: "",
 	area: 2,
 	date: "",
 	type: [0, 1],
 	source: 0,
+	num: 5,
+	remark: "",
+	cover: "",
 });
 
 const rules = reactive({
@@ -77,6 +86,14 @@ const rules = reactive({
 	area: {
 		required: true,
 		message: "活动区域不能为空",
+	},
+	date: {
+		required: true,
+		message: "活动时间不能为空",
+	},
+	cover: {
+		required: true,
+		message: "活动封面不能为空",
 	},
 });
 
@@ -121,13 +138,9 @@ const options = reactive({
 	],
 });
 
-const tips = ref("toast");
+const Form = ref<ClForm.Ref>();
 
 const loading = ref(false);
-
-function setTips(name: string) {
-	tips.value = name;
-}
 
 function submit() {
 	Form.value?.validate((valid, errors) => {

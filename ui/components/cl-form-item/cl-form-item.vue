@@ -1,41 +1,46 @@
 <template>
-    <view
-        class="cl-form-item"
-        :class="[
-            `is-${labelPosition}`,
-            {
-                'is-error': !!message,
-                'is-required': isRequired
-            }
-        ]"
-    >
-        <view class="cl-form-item__label" :style="{ width: labelWidth }" v-if="label || $slots.label">
-            <slot name="label">
-                {{ label }}
-            </slot>
-        </view>
+	<view
+		class="cl-form-item"
+		:class="[
+			`is-${labelPosition}`,
+			`field-${prop}`,
+			{
+				'is-error': !!message,
+				'is-required': isRequired,
+			},
+		]"
+	>
+		<view
+			class="cl-form-item__label"
+			:style="{ width: labelWidth }"
+			v-if="label || $slots.label"
+		>
+			<slot name="label">
+				{{ label }}
+			</slot>
+		</view>
 
-        <view class="cl-form-item__container">
-            <view class="cl-form-item__content" :class="[justify]">
-                <slot></slot>
-            </view>
-            <view class="cl-form-item__suffix">
-                <slot name="suffix"></slot>
-            </view>
-        </view>
+		<view class="cl-form-item__container">
+			<view class="cl-form-item__content" :class="[justify]">
+				<slot></slot>
+			</view>
+			<view class="cl-form-item__suffix">
+				<slot name="suffix"></slot>
+			</view>
+		</view>
 
-        <slot name="error" :message="message" :error="!!message">
-            <text class="cl-form-item__message" v-if="showMessage">{{ message }}</text>
-        </slot>
-    </view>
+		<slot name="error" :message="message" :error="!!message">
+			<text class="cl-form-item__message" v-if="showMessage">{{ message }}</text>
+		</slot>
+	</view>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref, watch } from "vue"
-import type { PropType } from "vue"
-import { isArray, isBoolean } from "lodash-es"
-import { getParent, parseRpx } from "/@/cool/utils"
-import AsyncValidator from "../../utils/async-validator"
+import { computed, defineComponent, onUnmounted, ref, watch } from "vue";
+import type { PropType } from "vue";
+import { isArray, isBoolean } from "lodash-es";
+import { getParent, parseRpx } from "/@/cool/utils";
+import AsyncValidator from "../../utils/async-validator";
 
 /**
  * @description 表单项，基于 async-validator 的验证
@@ -48,196 +53,198 @@ import AsyncValidator from "../../utils/async-validator"
  */
 
 export default defineComponent({
-    name: "cl-form-item",
+	name: "cl-form-item",
 
-    props: {
-        prop: String,
-        label: String,
-        labelWidth: [String, Number],
-        labelPosition: String as PropType<"left" | "right" | "top">,
-        justify: String as PropType<"start" | "center" | "end">,
-        rules: {
-            type: Object,
-            default: null
-        },
-        validateOnRuleChange: {
-            type: Boolean,
-            default: null
-        }
-    },
+	props: {
+		prop: String,
+		label: String,
+		labelWidth: [String, Number],
+		labelPosition: String as PropType<"left" | "right" | "top">,
+		justify: String as PropType<"start" | "center" | "end">,
+		rules: {
+			type: Object,
+			default: null,
+		},
+		validateOnRuleChange: {
+			type: Boolean,
+			default: null,
+		},
+	},
 
-    setup(props) {
-        // cl-form
-        const parent = getParent(
-            "cl-form",
-            [
-                "form",
-                "rules",
-                "tips",
-                "labelWidth",
-                "labelPosition",
-                "justify",
-                "addField",
-                "removeField",
-                "validateOnRuleChange"
-            ],
-            ["clearValidate", "onError"]
-        )
+	setup(props) {
+		// cl-form
+		const parent = getParent(
+			"cl-form",
+			[
+				"form",
+				"rules",
+				"tips",
+				"labelWidth",
+				"labelPosition",
+				"justify",
+				"addField",
+				"removeField",
+				"validateOnRuleChange",
+			],
+			["clearValidate", "onError"]
+		);
 
-        // 绑定值
-        const value = ref<any>()
+		// 绑定值
+		const value = ref<any>();
 
-        // 消息提示
-        const message = ref("")
+		// 消息提示
+		const message = ref("");
 
-        // 是否必填
-        const isRequired = ref(false)
+		// 是否必填
+		const isRequired = ref(false);
 
-        // 标题位置
-        const labelPosition = computed(() => {
-            return props.labelPosition || parent.value?.labelPosition
-        })
+		// 标题位置
+		const labelPosition = computed(() => {
+			return props.labelPosition || parent.value?.labelPosition;
+		});
 
-        // 标题宽度
-        const labelWidth = computed(() => {
-            return labelPosition.value == "top" ? "auto" : parseRpx(props.labelWidth || parent.value?.labelWidth)
-        })
+		// 标题宽度
+		const labelWidth = computed(() => {
+			return labelPosition.value == "top"
+				? "auto"
+				: parseRpx(props.labelWidth || parent.value?.labelWidth);
+		});
 
-        // 内容布局
-        const justify = computed(() => {
-            return `is-justify--${props.justify || parent.value?.justify}`
-        })
+		// 内容布局
+		const justify = computed(() => {
+			return `is-justify--${props.justify || parent.value?.justify}`;
+		});
 
-        // 是否显示消息
-        const showMessage = computed(() => {
-            return parent.value?.tips == "inner" && message.value
-        })
+		// 是否显示消息
+		const showMessage = computed(() => {
+			return parent.value?.tips == "inner" && message.value;
+		});
 
-        // 校验器
-        let validator: any = null
+		// 校验器
+		let validator: any = null;
 
-        // 监听规则校验
-        watch(() => parent.value?.rules, onRules, {
-            immediate: true,
-            deep: true
-        })
+		// 监听规则校验
+		watch(() => parent.value?.rules, onRules, {
+			immediate: true,
+			deep: true,
+		});
 
-        // 监听规则
-        function onRules(rules: any) {
-            if (!props.prop) return
-            const rule = props.rules || rules?.[props.prop]
+		// 监听规则
+		function onRules(rules: any) {
+			if (!props.prop) return;
+			const rule = props.rules || rules?.[props.prop];
 
-            if (rule) {
-                isRequired.value = false
+			if (rule) {
+				isRequired.value = false;
 
-                if (isArray(rule)) {
-                    rule.forEach((e: any) => {
-                        if (e.required) {
-                            isRequired.value = e.required
-                        }
-                    })
-                } else {
-                    isRequired.value = rule.required
-                }
+				if (isArray(rule)) {
+					rule.forEach((e: any) => {
+						if (e.required) {
+							isRequired.value = e.required;
+						}
+					});
+				} else {
+					isRequired.value = rule.required;
+				}
 
-                // 检验器
-                //@ts-ignore
-                validator = new AsyncValidator({
-                    [props.prop]: rule
-                })
+				// 检验器
+				//@ts-ignore
+				validator = new AsyncValidator({
+					[props.prop]: rule,
+				});
 
-                // 是否在 rules 属性改变后立即触发一次验证
-                if (
-                    isBoolean(props.validateOnRuleChange)
-                        ? props.validateOnRuleChange
-                        : parent.value?.validateOnRuleChange
-                ) {
-                    validate()
-                }
-            }
-        }
+				// 是否在 rules 属性改变后立即触发一次验证
+				if (
+					isBoolean(props.validateOnRuleChange)
+						? props.validateOnRuleChange
+						: parent.value?.validateOnRuleChange
+				) {
+					validate();
+				}
+			}
+		}
 
-        // 检验
-        function validate() {
-            if (isRequired.value) {
-                validator.validate({ [props.prop as any]: value.value }, (errors: any) => {
-                    message.value = errors ? errors[0].message : ""
-                })
-            } else {
-                clearValidate()
-            }
-        }
+		// 检验
+		function validate() {
+			if (isRequired.value) {
+				validator.validate({ [props.prop as any]: value.value }, (errors: any) => {
+					message.value = errors ? errors[0].message : "";
+				});
+			} else {
+				clearValidate();
+			}
+		}
 
-        // 清空验证
-        function clearValidate() {
-            message.value = ""
-        }
+		// 清空验证
+		function clearValidate() {
+			message.value = "";
+		}
 
-        // 错误提示
-        function onError(errors: any[]) {
-            const item = errors.find((e) => e.field == props.prop)
+		// 错误提示
+		function onError(errors: any[]) {
+			const item = errors.find((e) => e.field == props.prop);
 
-            if (item) {
-                message.value = item.message
-            }
-        }
+			if (item) {
+				message.value = item.message;
+			}
+		}
 
-        // 监听值变化
-        watch(
-            () => {
-                if (parent.value) {
-                    let d: any = parent.value?.form
+		// 监听值变化
+		watch(
+			() => {
+				if (parent.value) {
+					let d: any = parent.value?.form;
 
-                    if (props.prop?.includes(".")) {
-                        props.prop.split(".").forEach((e) => {
-                            if (d[e] !== undefined) {
-                                d = d[e]
-                            }
-                        })
+					if (props.prop?.includes(".")) {
+						props.prop.split(".").forEach((e) => {
+							if (d[e] !== undefined) {
+								d = d[e];
+							}
+						});
 
-                        return d
-                    } else {
-                        return d[props.prop as any]
-                    }
-                }
-            },
-            (val: any) => {
-                value.value = val
-                validate()
-            },
-            {
-                deep: true
-            }
-        )
+						return d;
+					} else {
+						return d[props.prop as any];
+					}
+				}
+			},
+			(val: any) => {
+				value.value = val;
+				validate();
+			},
+			{
+				deep: true,
+			}
+		);
 
-        // 监听cl-form加载完
-        watch(
-            parent,
-            (val) => {
-                if (val) {
-                    parent.value?.addField(props.prop, props.rules)
-                }
-            },
-            { immediate: true }
-        )
+		// 监听cl-form加载完
+		watch(
+			parent,
+			(val) => {
+				if (val) {
+					parent.value?.addField(props.prop, props.rules);
+				}
+			},
+			{ immediate: true }
+		);
 
-        onUnmounted(() => {
-            // 移除字段
-            parent.value?.removeField(props.prop)
-        })
+		onUnmounted(() => {
+			// 移除字段
+			parent.value?.removeField(props.prop);
+		});
 
-        return {
-            message,
-            isRequired,
-            labelWidth,
-            labelPosition,
-            justify,
-            showMessage,
-            parseRpx,
-            validate,
-            clearValidate,
-            onError
-        }
-    }
-})
+		return {
+			message,
+			isRequired,
+			labelWidth,
+			labelPosition,
+			justify,
+			showMessage,
+			parseRpx,
+			validate,
+			clearValidate,
+			onError,
+		};
+	},
+});
 </script>

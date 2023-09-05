@@ -70,11 +70,11 @@
 	&.is-disabled {
 		.cl-input-number__plus,
 		.cl-input-number__minus {
-			background-color: $cl-disabled-background-color;
-			color: $cl-disabled-color;
+			background-color: $cl-color-disabled-bg;
+			color: $cl-color-disabled;
 		}
 		.cl-input-number__value {
-			color: $cl-disabled-color;
+			color: $cl-color-disabled;
 		}
 	}
 }
