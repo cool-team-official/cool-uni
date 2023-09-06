@@ -1,43 +1,45 @@
 <template>
-	<view
-		class="cl-select"
-		:class="[
-			{
-				'is-disabled': isDisabled,
-				'is-round': round,
-				'is-border': border,
-			},
-		]"
-		:style="{
-			height: parseRpx(height),
-			backgroundColor,
-			borderRadius: parseRpx(borderRadius),
-		}"
+	<picker
+		class="cl-select__wrap"
+		:mode="mode"
+		:value="index"
+		:range="options"
+		:range-key="rangeKey"
+		:disabled="isDisabled"
+		:end="end"
+		:start="start"
+		:fields="fields"
+		@change="onChange"
+		@columnchange="onColumnChange"
+		@cancel="onCancel"
 	>
-		<picker
-			class="cl-select__inner"
-			:mode="mode"
-			:value="index"
-			:range="options"
-			:range-key="rangeKey"
-			:disabled="isDisabled"
-			:end="end"
-			:start="start"
-			:fields="fields"
-			@change="onChange"
-			@columnchange="onColumnChange"
-			@cancel="onCancel"
+		<view
+			class="cl-select"
+			:class="[
+				{
+					'is-disabled': isDisabled,
+					'is-round': round,
+					'is-border': border,
+				},
+			]"
+			:style="{
+				height: parseRpx(height),
+				backgroundColor,
+				borderRadius: parseRpx(borderRadius),
+			}"
 		>
-			<slot :scope="{ index, text }">
-				{{ text }}
-				<text class="cl-select__placeholder" v-if="!text">
-					{{ placeholder }}
-				</text>
-			</slot>
-		</picker>
+			<view class="cl-select__value">
+				<slot :scope="{ index, text }">
+					{{ text }}
+					<text class="cl-select__placeholder" v-if="!text">
+						{{ placeholder }}
+					</text>
+				</slot>
+			</view>
 
-		<text class="cl-select__icon cl-icon-arrow-bottom"></text>
-	</view>
+			<text class="cl-select__icon" :class="[arrowIcon]" v-if="arrowIcon"></text>
+		</view>
+	</picker>
 </template>
 
 <script lang="ts">
@@ -125,6 +127,10 @@ export default defineComponent({
 		backgroundColor: String,
 		borderRadius: [String, Number],
 		setOptionsIsParseValue: Boolean,
+		arrowIcon: {
+			type: String,
+			default: "cl-icon-arrow-bottom",
+		},
 	},
 
 	emits: ["update:modelValue", "confirm", "change", "column-change", "cancel"],

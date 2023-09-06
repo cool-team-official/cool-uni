@@ -15,6 +15,16 @@
 		<cl-card label="禁用">
 			<cl-select v-model="v4" :options="list" disabled></cl-select>
 		</cl-card>
+
+		<cl-card label="自定义">
+			<cl-select v-model="v4" :options="list" :height="90" arrow-icon="cl-icon-arrow-right">
+				<template #default="{ scope }">
+					<view class="custom">
+						选择了<cl-tag :margin="[0, 0, 0, 20]">{{ scope.text }}</cl-tag>
+					</view>
+				</template>
+			</cl-select>
+		</cl-card>
 	</cl-page>
 </template>
 

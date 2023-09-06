@@ -7,14 +7,15 @@
 	padding: 0 20rpx;
 	box-sizing: border-box;
 	position: relative;
+	font-size: $cl-font-size;
 
-	&__inner {
-		display: flex;
-		align-items: center;
+	&__wrap {
 		height: 100%;
 		width: 100%;
-		font-size: $cl-font-size;
-		margin-right: 20rpx;
+	}
+
+	&__value {
+		flex: 1;
 		line-height: 0;
 	}
 
