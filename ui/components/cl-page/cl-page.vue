@@ -137,18 +137,10 @@ export default defineComponent({
 			// 减去自定义导航栏高度
 			top -= info?.isCustomNavbar ? statusBarHeight : 0;
 
-			// 加上间距
+			// 减去间距
 			if (props.padding) {
-				const [t, r, b, l] = parseRpx(props.padding).split(" ");
-				let v = 0;
-
-				if (top && b) {
-					v = parseInt(t) + parseInt(b);
-				} else if (top) {
-					v = parseInt(t) * 2;
-				}
-
-				top += uni.upx2px(v);
+				const [t] = parseRpx(props.padding).split(" ");
+				top -= uni.upx2px(parseInt(t));
 			}
 
 			uni.createSelectorQuery()

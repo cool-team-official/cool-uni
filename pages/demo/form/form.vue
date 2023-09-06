@@ -47,6 +47,10 @@
 						<cl-upload v-model="form.cover" />
 					</cl-form-item>
 
+					<cl-form-item label="活动海报" prop="pics" label-position="top">
+						<cl-upload v-model="form.pics" multiple />
+					</cl-form-item>
+
 					<cl-form-item label="活动描述" prop="remark" label-position="top">
 						<cl-textarea v-model="form.remark" />
 					</cl-form-item>
@@ -81,6 +85,7 @@ const form = ref({
 	num: 5,
 	remark: "",
 	cover: "",
+	pics: [],
 });
 
 const rules = reactive({
