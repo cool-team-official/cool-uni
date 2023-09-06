@@ -66,7 +66,9 @@
 					</template>
 
 					<!-- 协议 -->
-					<agree-btn :ref="setRefs('agreeBtn')" />
+					<view class="agree">
+						<agree-btn :ref="setRefs('agreeBtn')" />
+					</view>
 				</view>
 			</div>
 
@@ -276,17 +278,17 @@ onReady(() => {
 
 		image {
 			display: block;
-			height: 140rpx;
-			width: 140rpx;
+			height: 150rpx;
+			width: 150rpx;
 			border-radius: 100%;
-			margin-bottom: 22rpx;
-			border: 8rpx solid #eee;
+			margin-bottom: 30rpx;
 		}
 
 		text {
-			font-size: 40rpx;
+			font-size: 36rpx;
 			font-weight: bold;
 			letter-spacing: 1rpx;
+			color: #333;
 		}
 	}
 
@@ -306,7 +308,7 @@ onReady(() => {
 				display: block;
 				font-size: 36rpx;
 				font-weight: 500;
-				margin-bottom: 48rpx;
+				margin-bottom: 30rpx;
 			}
 
 			&.is-phone {
@@ -316,13 +318,13 @@ onReady(() => {
 					background-color: #eeeeee;
 					border-radius: 10rpx;
 					height: 90rpx;
-					margin-bottom: 26rpx;
+					margin-bottom: 30rpx;
 					font-size: 30rpx;
 
 					text {
 						display: inline-block;
-						padding: 0 24rpx 0 50rpx;
-						border-right: 2rpx solid $cl-border-color;
+						padding: 0 40rpx;
+						border-right: $cl-border-width solid $cl-border-color;
 						font-weight: bold;
 						color: #404040;
 					}
@@ -334,6 +336,11 @@ onReady(() => {
 					}
 				}
 			}
+		}
+
+		.agree {
+			text-align: center;
+			margin: 50rpx -60rpx 0 0;
 		}
 	}
 

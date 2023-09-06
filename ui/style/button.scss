@@ -43,7 +43,8 @@
 	overflow: visible;
 	vertical-align: middle;
 	font-size: $cl-font-size;
-	border-radius: $cl-border-radius;
+	border-radius: $cl-button-radius;
+	letter-spacing: 1rpx;
 
 	&__text {
 		display: inline;

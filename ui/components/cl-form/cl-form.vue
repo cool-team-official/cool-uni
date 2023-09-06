@@ -141,8 +141,8 @@ export default defineComponent({
 						const { field, message } = errors[0];
 
 						if (props.scrollToError) {
-							uni.pageScrollTo({
-								selector: `.field-${field}`,
+							proxy.__children.forEach((e: any) => {
+								e.scrollTo(field);
 							});
 						}
 

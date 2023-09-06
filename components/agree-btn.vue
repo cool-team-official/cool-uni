@@ -1,14 +1,12 @@
 <template>
-	<view class="agree-btn">
-		<cl-checkbox :size="34" v-model="agree" round>
-			<view class="text">
-				已阅读并同意
-				<text @tap.stop="toDoc('用户协议', 'userAgreement')">《用户协议》</text>
-				及
-				<text @tap.stop="toDoc('隐私政策', 'privacyPolicy')">《隐私政策》</text>
-			</view>
-		</cl-checkbox>
-	</view>
+	<cl-checkbox :size="34" v-model="agree" round>
+		<view class="agree-btn">
+			已阅读并同意
+			<text @tap.stop="toDoc('用户协议', 'userAgreement')">用户协议</text>
+			和
+			<text @tap.stop="toDoc('隐私政策', 'privacyPolicy')">隐私政策</text>
+		</view>
+	</cl-checkbox>
 </template>
 
 <script setup lang="ts">
@@ -50,12 +48,11 @@ defineExpose({
 	align-items: center;
 	justify-content: center;
 	color: #999999;
-	font-size: 24rpx;
-	margin-top: 38rpx;
-	width: 100%;
+	letter-spacing: 1rpx;
 
 	text {
-		color: #000;
+		color: $cl-color-primary;
+		padding: 0 10rpx;
 	}
 }
 </style>

@@ -38,11 +38,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, getCurrentInstance } from "vue";
 import { useCool, useGlobal } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
-
-const { statusBarHeight } = uni.getSystemInfoSync();
 
 export default defineComponent({
 	name: "cl-page",
@@ -64,6 +62,9 @@ export default defineComponent({
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
 		const global = useGlobal();
+		const info = router.info();
+		const { statusBarHeight = 0 } = uni.getSystemInfoSync();
+		const { proxy }: any = getCurrentInstance();
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
@@ -130,6 +131,45 @@ export default defineComponent({
 				showTips,
 			});
 		}
+
+		// 滚动事件
+		proxy.$root.scrollTo = (top: number) => {
+			// 减去自定义导航栏高度
+			top -= info?.isCustomNavbar ? statusBarHeight : 0;
+
+			// 加上间距
+			if (props.padding) {
+				const [t, r, b, l] = parseRpx(props.padding).split(" ");
+				let v = 0;
+
+				if (top && b) {
+					v = parseInt(t) + parseInt(b);
+				} else if (top) {
+					v = parseInt(t) * 2;
+				}
+
+				top += uni.upx2px(v);
+			}
+
+			uni.createSelectorQuery()
+				.in(proxy)
+				.select(`.cl-page`)
+				.boundingClientRect((a) => {
+					uni.createSelectorQuery()
+						.in(proxy)
+						.select(`.safe-area-bottom`)
+						.boundingClientRect((b) => {
+							const scrollTop = top + (a?.height || 0) - (b?.bottom || 0);
+
+							uni.pageScrollTo({
+								scrollTop,
+								duration: 100,
+							});
+						})
+						.exec();
+				})
+				.exec();
+		};
 
 		return {
 			height,

@@ -3,12 +3,13 @@
 		class="cl-form-item"
 		:class="[
 			`is-${labelPosition}`,
-			`field-${prop}`,
 			{
 				'is-error': !!message,
 				'is-required': isRequired,
 			},
 		]"
+		:id="`cl-form-item--${prop}`"
+		ref="cl-form-item"
 	>
 		<view
 			class="cl-form-item__label"
@@ -36,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onUnmounted, ref, watch } from "vue";
+import { computed, defineComponent, onUnmounted, ref, watch, getCurrentInstance } from "vue";
 import type { PropType } from "vue";
 import { isArray, isBoolean } from "lodash-es";
 import { getParent, parseRpx } from "/@/cool/utils";
@@ -72,6 +73,8 @@ export default defineComponent({
 	},
 
 	setup(props) {
+		const { proxy }: any = getCurrentInstance();
+
 		// cl-form
 		const parent = getParent(
 			"cl-form",
@@ -86,7 +89,7 @@ export default defineComponent({
 				"removeField",
 				"validateOnRuleChange",
 			],
-			["clearValidate", "onError"]
+			["clearValidate", "onError", "scrollTo"]
 		);
 
 		// 绑定值
@@ -180,6 +183,19 @@ export default defineComponent({
 			message.value = "";
 		}
 
+		// 滚动到此
+		function scrollTo(prop: string) {
+			if (prop == props.prop) {
+				uni.createSelectorQuery()
+					.in(proxy)
+					.select(`#cl-form-item--${prop}`)
+					.boundingClientRect((res) => {
+						proxy.$root.scrollTo(res.top);
+					})
+					.exec();
+			}
+		}
+
 		// 错误提示
 		function onError(errors: any[]) {
 			const item = errors.find((e) => e.field == props.prop);
@@ -243,6 +259,7 @@ export default defineComponent({
 			parseRpx,
 			validate,
 			clearValidate,
+			scrollTo,
 			onError,
 		};
 	},
