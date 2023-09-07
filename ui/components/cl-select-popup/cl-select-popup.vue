@@ -36,13 +36,14 @@
 
 			<!-- 滚动区域 -->
 			<scroll-view
+				:ref="setRefs('scroller')"
 				scroll-y
 				:scroll-into-view="scroller.view"
 				class="cl-select-popup__container"
 				:style="{
 					height: parseRpx(height),
+					maxHeight: parseRpx(maxHeight),
 				}"
-				:ref="setRefs('scroller')"
 			>
 				<slot>
 					<view class="cl-select-popup__list">
@@ -76,7 +77,13 @@
 
 			<view class="cl-select-popup__footer">
 				<slot name="confirm">
-					<cl-button round fill type="primary" size="large" @tap="confirm"
+					<cl-button
+						round
+						fill
+						type="primary"
+						size="large"
+						:disabled="required ? selection.length == 0 : false"
+						@tap="confirm"
 						>确定</cl-button
 					>
 				</slot>
@@ -87,10 +94,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, type PropType, watch, computed, nextTick, reactive } from "vue";
-import { parseRpx } from "/@/cool/utils";
-import { isArray, isEmpty } from "lodash-es";
-import { useForm } from "../../hook";
+import { isArray, isEmpty, last } from "lodash-es";
 import { useRefs } from "/@/cool";
+import { parseRpx } from "/@/cool/utils";
+import { useForm } from "../../hook";
 
 interface Item {
 	label: string;
@@ -108,7 +115,8 @@ export default defineComponent({
 			type: String,
 			default: "请选择",
 		},
-		height: {
+		height: [String, Number],
+		maxHeight: {
 			type: [String, Number],
 			default: 600,
 		},
@@ -129,9 +137,10 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		required: Boolean,
 	},
 
-	emits: ["update:modelValue", "change"],
+	emits: ["update:modelValue", "change", "confirm", "close"],
 
 	setup(props, { emit }) {
 		const { refs, setRefs } = useRefs();
@@ -169,7 +178,7 @@ export default defineComponent({
 					() => {
 						if (!isEmpty(checked.value) && !isEmpty(props.options)) {
 							nextTick(() => {
-								scroller.view = `item-${checked.value[0]}`;
+								scroller.view = `item-${last(checked.value)}`;
 								scroller.stop?.();
 							});
 						}
@@ -202,20 +211,25 @@ export default defineComponent({
 		// 关闭事件
 		function onClose() {
 			scroller.clear();
+			emit("close");
 		}
 
 		// 选中
 		function check(value: any) {
-			if (props.multiple) {
-				const i = selection.value.indexOf(value);
+			const i = selection.value.indexOf(value);
 
+			if (props.multiple) {
 				if (i >= 0) {
 					selection.value.splice(i, 1);
 				} else {
 					selection.value.push(value);
 				}
 			} else {
-				selection.value = [value];
+				if (i >= 0) {
+					selection.value = [];
+				} else {
+					selection.value = [value];
+				}
 			}
 		}
 
@@ -225,6 +239,7 @@ export default defineComponent({
 
 			emit("update:modelValue", v);
 			emit("change", v);
+			emit("confirm", v);
 			close();
 		}
 
@@ -240,7 +255,9 @@ export default defineComponent({
 				if (isArray(value)) {
 					checked.value = [...value] || [];
 				} else {
-					if (value !== undefined) {
+					if (value === undefined) {
+						checked.value = [];
+					} else {
 						checked.value = [value];
 					}
 				}

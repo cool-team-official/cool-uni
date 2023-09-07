@@ -25,7 +25,8 @@
 		</cl-card>
 
 		<cl-card label="自定义弹出框">
-			<cl-select-popup v-model="v5" title="选择歌曲" :options="list"> </cl-select-popup>
+			<cl-select-popup v-model="v5" multiple title="选择歌曲" :options="list">
+			</cl-select-popup>
 		</cl-card>
 	</cl-page>
 </template>
@@ -37,7 +38,7 @@ const v1 = ref();
 const v2 = ref();
 const v3 = ref();
 const v4 = ref(2);
-const v5 = ref(2);
+const v5 = ref();
 
 const list = ref([
 	{
@@ -71,6 +72,18 @@ const list = ref([
 	{
 		label: "小河淌水",
 		value: 8,
+	},
+	{
+		label: "午夜派对",
+		value: 9,
+	},
+	{
+		label: "POW!!!!!!!!!!!!!引爆",
+		value: 10,
+	},
+	{
+		label: "流浪`地球",
+		value: 11,
 	},
 ]);
 </script>

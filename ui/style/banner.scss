@@ -34,7 +34,7 @@
 	&--card {
 		.cl-banner-item {
 			width: 100%;
-			background-color: #f7f7f7;
+			background-color: #f6f7fa;
 			transform: scale(0.95, 0.9);
 			transition: all 0.2s ease-in 0s;
 
@@ -48,7 +48,7 @@
 	&--chain {
 		.cl-banner-item {
 			width: calc(100% - 20rpx);
-			background-color: #f7f7f7;
+			background-color: #f6f7fa;
 			margin: 0 10rpx;
 		}
 	}

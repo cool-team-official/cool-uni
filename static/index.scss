@@ -1,0 +1,38 @@
+page {
+	font-family: Arial, "Microsoft Yahei", "微软雅黑";
+}
+
+// 主题
+.cl-page {
+	&.theme-default {
+		// 渐变色
+		.cl-tag.cl-tag--primary:not(.is-plain),
+		.cl-button--primary:not(.is-plain) {
+			background: linear-gradient(120deg, rgba($cl-color-primary, 0.7), $cl-color-primary);
+			border: 0;
+		}
+	}
+
+	&.theme-grey {
+		$color: #f6f7fa;
+
+		@mixin set() {
+			background-color: $color;
+			border-color: $color;
+		}
+
+		.cl-button--default,
+		.cl-input,
+		.cl-select,
+		.cl-upload,
+		.cl-textarea,
+		.cl-checkbox.is-border,
+		.cl-search__input {
+			@include set();
+		}
+
+		.cl-upload {
+			border: 0;
+		}
+	}
+}

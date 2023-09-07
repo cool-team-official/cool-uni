@@ -64,7 +64,7 @@
 .space {
 	font-size: 28rpx;
 	width: 100%;
-	background-color: #f7f7f7;
+	background-color: #f6f7fa;
 	position: relative;
 }
 </style>

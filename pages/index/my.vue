@@ -103,7 +103,7 @@ onShow(() => {
 			}
 
 			.avatar {
-				border: 6rpx solid #f7f7f7;
+				border: 6rpx solid f6f7fa;
 				border-radius: 100%;
 				position: absolute;
 				top: 0;

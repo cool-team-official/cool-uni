@@ -25,10 +25,15 @@
 
 		<cl-card label="弹出框选择">
 			<cl-list-item :arrow-icon="false" label="节点选择" @tap="refs.treeSelect?.open">
-				<cl-text :value="refs.treeSelect?.label" :ellipsis="1"></cl-text>
+				<cl-text :value="refs.treeSelect?.label || '请选择'" :ellipsis="1"></cl-text>
 			</cl-list-item>
 
-			<cl-tree-select :ref="setRefs('treeSelect')" v-model="value3" :data="data" />
+			<cl-tree-select
+				:ref="setRefs('treeSelect')"
+				v-model="value3"
+				:data="data"
+				:show-picker="false"
+			/>
 		</cl-card>
 	</cl-page>
 </template>
@@ -41,7 +46,7 @@ const { refs, setRefs } = useCool();
 
 const value = ref(3);
 const value2 = ref([12, 3]);
-const value3 = ref(7);
+const value3 = ref();
 
 const data = ref([
 	{
@@ -137,7 +142,7 @@ const data = ref([
 
 <style lang="scss" scoped>
 .bor {
-	border: 1rpx solid #eee;
+	border: $cl-border-width solid #eee;
 	border-radius: 16rpx;
 	margin-top: 20rpx;
 	padding: 10rpx;

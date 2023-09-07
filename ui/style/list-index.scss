@@ -3,7 +3,7 @@
 	height: 100%;
 
 	&__search {
-		border-bottom: 1rpx solid #eee;
+		border-bottom: $cl-border-width solid #eee;
 		background-color: #fff;
 		box-sizing: border-box;
 		padding: 20rpx 30rpx;
@@ -24,7 +24,7 @@
 				position: sticky;
 				top: 0;
 				z-index: 9;
-				background-color: #f7f7f7;
+				background-color: #f6f7fa;
 
 				&.is-active {
 					text {

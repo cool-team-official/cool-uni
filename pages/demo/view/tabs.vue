@@ -41,7 +41,7 @@
 				:list="list"
 				:border="false"
 				color="red"
-				background-color="#f7f7f7"
+				background-color="f6f7fa"
 				:show-line="false"
 			></cl-tabs>
 		</cl-card>

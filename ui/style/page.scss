@@ -20,25 +20,4 @@
 		width: 100%;
 		background-color: $cl-color-bg;
 	}
-
-	&.theme-grey {
-		@mixin set() {
-			background-color: $cl-theme-grey-color;
-			border-color: $cl-theme-grey-color;
-		}
-
-		.cl-button--default,
-		.cl-input,
-		.cl-select,
-		.cl-upload,
-		.cl-textarea,
-		.cl-checkbox.is-border,
-		.cl-search__input {
-			@include set();
-		}
-
-		.cl-upload {
-			border: 0;
-		}
-	}
 }

@@ -1,8 +1,8 @@
 <template>
-	<cl-page>
+	<cl-page status-bar-background="transparent">
 		<view class="page-home">
 			<view class="logo">
-				<text>Cool-uni</text>
+				<text>{{ app.info.name }}</text>
 			</view>
 
 			<view class="group" v-for="(item, index) in list" :key="index">
@@ -28,12 +28,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useCool } from "/@/cool";
+import { useApp, useCool } from "/@/cool";
 import Tabbar from "./components/tabbar.vue";
 import { useUi } from "/@/ui";
 
 const { router, service } = useCool();
 const ui = useUi();
+const app = useApp();
 
 const list = [
 	{
@@ -244,7 +245,7 @@ function toLink(link: string) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 100rpx 0 50rpx 0;
+		padding: 150rpx 0 100rpx 0;
 		height: 60rpx;
 
 		text {

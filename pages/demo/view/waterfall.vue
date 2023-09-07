@@ -86,7 +86,7 @@ defineExpose({
 <style lang="scss" scoped>
 .goods-item {
 	margin-bottom: 20rpx;
-	border: 1rpx solid #eee;
+	border: $cl-border-width solid #eee;
 	border-radius: 8rpx;
 	overflow: hidden;
 	background-color: #fff;

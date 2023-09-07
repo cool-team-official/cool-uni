@@ -331,7 +331,7 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "cool-uni",
 		"navigationBarBackgroundColor": "#ffffff",
-		"backgroundColor": "#f7f7f7"
+		"backgroundColor": "#f6f7fa"
 	},
 	"tabBar": {
 		"backgroundColor": "#ffffff",

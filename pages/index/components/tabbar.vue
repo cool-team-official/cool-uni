@@ -81,7 +81,7 @@ uni.hideTabBar();
 		left: 0;
 		bottom: 0;
 		z-index: 399;
-		border-top: 1rpx solid #eee;
+		border-top: $cl-border-width solid #eee;
 
 		.item {
 			display: flex;

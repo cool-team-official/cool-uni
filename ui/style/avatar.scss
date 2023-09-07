@@ -42,7 +42,7 @@
 	display: inline-flex;
 
 	.cl-avatar {
-		border: 1rpx solid rgba(255, 255, 255, 0.2);
+		border: $cl-border-width solid rgba(255, 255, 255, 0.2);
 		position: relative;
 	}
 

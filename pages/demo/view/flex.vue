@@ -54,7 +54,7 @@ function onTap() {
 
 <style lang="scss" scoped>
 .item {
-	background-color: #f7f7f7;
+	background-color: #f6f7fa;
 	text-align: center;
 	font-size: 28rpx;
 	height: 60rpx;

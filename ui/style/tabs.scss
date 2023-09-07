@@ -95,7 +95,7 @@
 
 	&.is-border {
 		.cl-tabs__header {
-			border-bottom: 1rpx solid #eee;
+			border-bottom: $cl-border-width solid #eee;
 		}
 	}
 

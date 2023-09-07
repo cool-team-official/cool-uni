@@ -135,7 +135,7 @@
 
 	&--border {
 		.cl-form-item {
-			border-bottom: 1rpx solid #eee;
+			border-bottom: $cl-border-width solid #eee;
 		}
 	}
 }
