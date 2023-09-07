@@ -2,7 +2,8 @@
 	<cl-page status-bar-background="transparent">
 		<view class="page-home">
 			<view class="logo">
-				<text>{{ app.info.name }}</text>
+				<text class="name">{{ app.info.name }}</text>
+				<text class="version">v7.0.0</text>
 			</view>
 
 			<view class="group" v-for="(item, index) in list" :key="index">
@@ -243,22 +244,30 @@ function toLink(link: string) {
 .page-home {
 	.logo {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		padding: 150rpx 0 100rpx 0;
 		height: 60rpx;
+		font-weight: bold;
 
-		text {
+		.name {
 			font-size: 80rpx;
-			font-weight: bold;
-			animation: showUp 2.5s forwards;
+			animation: showName 2.5s forwards;
 			background: linear-gradient(to right, #6b69f8, #a35df2, #d14bd8);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 		}
+
+		.version {
+			margin-top: 10rpx;
+			font-size: 28rpx;
+			color: #666;
+			animation: showV 2.5s forwards;
+		}
 	}
 
-	@keyframes showUp {
+	@keyframes showName {
 		from {
 			letter-spacing: -40rpx;
 			filter: blur(20rpx);
@@ -266,6 +275,17 @@ function toLink(link: string) {
 
 		to {
 			letter-spacing: 6rpx;
+		}
+	}
+
+	@keyframes showV {
+		from {
+			letter-spacing: -10rpx;
+			filter: blur(20rpx);
+		}
+
+		to {
+			letter-spacing: 1rpx;
 		}
 	}
 
