@@ -9,6 +9,7 @@
 		</cl-card>
 
 		<cl-card label="尺寸">
+			<cl-tag size="large">大尺寸</cl-tag>
 			<cl-tag size="default">默认尺寸</cl-tag>
 			<cl-tag size="small">小尺寸</cl-tag>
 		</cl-card>

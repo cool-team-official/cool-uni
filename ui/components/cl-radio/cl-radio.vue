@@ -1,5 +1,12 @@
 <template>
-	<view class="cl-radio" :class="[classList]" @tap="change">
+	<view
+		class="cl-radio"
+		:class="[classList]"
+		:style="{
+			height: parseRpx(height),
+		}"
+		@tap.stop="change"
+	>
 		<view
 			class="cl-radio__input"
 			:style="{
@@ -40,12 +47,17 @@ export default defineComponent({
 		label: [String, Number],
 		disabled: {
 			type: Boolean,
-			default: null,
+			default: undefined,
 		},
 		border: {
 			type: Boolean,
-			default: null,
+			default: undefined,
 		},
+		fill: {
+			type: Boolean,
+			default: undefined,
+		},
+		height: [String, Number],
 		size: [String, Number],
 	},
 
@@ -95,10 +107,10 @@ export default defineComponent({
 		const classList = computed(() => {
 			return [
 				{
-					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
+					"is-border": props.border ?? parent.value?.border,
+					"is-fill": props.fill ?? parent.value?.fill,
 					"is-disabled": isDisabled.value,
 					"is-checked": checked.value,
-					"is-fill": parent.value?.fill,
 				},
 			];
 		});

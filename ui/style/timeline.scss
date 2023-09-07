@@ -28,19 +28,20 @@
 			justify-content: center;
 			position: relative;
 			width: 52rpx;
+			color: #ccc;
 
 			&::after {
 				content: "";
 				display: block;
 				height: calc(100% - 32rpx);
-				width: 2px;
+				width: 4rpx;
 				background-image: linear-gradient(
 					to bottom,
 					currentColor 0%,
 					currentColor 80%,
 					transparent 50%
 				);
-				background-size: 2px 18rpx;
+				background-size: 4rpx 18rpx;
 				background-repeat: y-repeat;
 				transform: scaleX(1);
 				position: absolute;

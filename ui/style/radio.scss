@@ -4,6 +4,7 @@
 	margin-right: 60rpx;
 	white-space: nowrap;
 	font-size: 28rpx;
+	height: $cl-height;
 
 	&__input {
 		display: inline-flex;
@@ -65,15 +66,14 @@
 
 	&.is-border {
 		border-radius: 10rpx;
-		padding: 14rpx 20rpx;
-		margin-bottom: 20rpx;
+		padding: 0 20rpx;
+		margin: 0 20rpx 20rpx 0;
 		border: $cl-border-width solid $cl-border-color;
 		box-sizing: border-box;
 		line-height: normal;
 
 		.cl-radio__label {
 			margin-left: 16rpx;
-			text-align: right;
 		}
 
 		&.is-checked {
@@ -85,6 +85,10 @@
 	&.is-fill {
 		justify-content: center;
 		width: 100%;
+
+		.cl-radio__label {
+			text-align: right;
+		}
 	}
 }
 

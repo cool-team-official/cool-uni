@@ -16,7 +16,11 @@
 
 	&__value {
 		flex: 1;
-		line-height: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: 1;
+		margin-right: 20rpx;
 	}
 
 	&__placeholder {

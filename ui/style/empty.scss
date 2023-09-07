@@ -1,0 +1,31 @@
+.cl-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+
+	&__icon {
+		height: 160rpx;
+		margin-bottom: 20rpx;
+	}
+
+	&__text {
+		font-size: 28rpx;
+		color: #999;
+		letter-spacing: 1rpx;
+	}
+
+	&__container {
+		pointer-events: all;
+		margin-top: 60rpx;
+	}
+
+	&.is-fixed {
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+	}
+}

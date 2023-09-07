@@ -77,7 +77,7 @@ export default defineComponent({
 
 	props: {
 		modelValue: null,
-		height: Number,
+		height: [String, Number],
 		mode: {
 			type: String as PropType<"selector" | "multiSelector" | "region" | "time" | "date">,
 			default: "selector",

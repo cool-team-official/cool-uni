@@ -3,6 +3,7 @@
 	align-items: center;
 	margin-right: 60rpx;
 	font-size: 28rpx;
+	height: $cl-height;
 
 	&__input {
 		display: inline-flex;
@@ -53,27 +54,30 @@
 		}
 	}
 
-	&.is-fill {
-		justify-content: center;
-		width: 100%;
-	}
-
 	&.is-border {
-		border-radius: 10rpx;
-		padding: 14rpx 20rpx;
-		margin-bottom: 20rpx;
+		border-radius: $cl-border-radius;
+		padding: 0 20rpx;
+		margin: 0 20rpx 20rpx 0;
 		border: $cl-border-width solid $cl-border-color;
 		box-sizing: border-box;
 		line-height: normal;
 
 		.cl-checkbox__label {
 			margin-left: 16rpx;
-			text-align: right;
 		}
 
 		&.is-checked {
-			border: 1rpx solid $cl-color-primary;
 			color: $cl-color-primary;
+			border-color: $cl-color-primary;
+		}
+	}
+
+	&.is-fill {
+		justify-content: center;
+		width: 100%;
+
+		.cl-checkbox__label {
+			text-align: right;
 		}
 	}
 

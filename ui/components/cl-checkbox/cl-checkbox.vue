@@ -1,5 +1,12 @@
 <template>
-	<view class="cl-checkbox" :class="classList" @tap.stop="onChange">
+	<view
+		class="cl-checkbox"
+		:class="[classList]"
+		:style="{
+			height: parseRpx(height),
+		}"
+		@tap.stop="change"
+	>
 		<view
 			class="cl-checkbox__input"
 			:style="{
@@ -52,6 +59,7 @@ export default defineComponent({
 			type: Boolean,
 			default: null,
 		},
+		height: [String, Number],
 		size: [String, Number],
 	},
 
@@ -101,7 +109,7 @@ export default defineComponent({
 		});
 
 		// 绑定值改变
-		function onChange() {
+		function change() {
 			if (isDisabled.value) {
 				return false;
 			}
@@ -136,7 +144,8 @@ export default defineComponent({
 			size,
 			checked,
 			classList,
-			onChange,
+			change,
+			parseRpx,
 		};
 	},
 });

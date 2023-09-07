@@ -10,30 +10,36 @@
 
 .cl-tag {
 	border-radius: 6rpx;
-	padding: 0 20rpx;
 	color: #fff;
 	display: inline-flex;
 	align-items: center;
 	font-size: 24rpx;
+	line-height: 1;
 
 	&__close {
 		margin-left: 10rpx;
+		position: relative;
+		top: 1rpx;
 	}
 
 	&--default {
-		min-height: 48rpx;
+		padding: 12rpx 20rpx;
 	}
 
 	&--small {
-		min-height: 40rpx;
+		padding: 8rpx 14rpx;
+	}
+
+	&--large {
+		padding: 16rpx 24rpx;
 	}
 
 	&.is-round {
-		border-radius: 48rpx;
+		border-radius: 50rpx;
 	}
 
 	&.is-plain {
-		border-width: 1rpx;
+		border-width: $cl-border-width;
 		border-style: solid;
 	}
 

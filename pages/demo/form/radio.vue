@@ -4,6 +4,8 @@
 			<cl-radio v-model="v1" label="1">炸鸡</cl-radio>
 			<cl-radio v-model="v1" label="2">汉堡</cl-radio>
 			<cl-radio v-model="v1" label="3">薯条</cl-radio>
+			<cl-radio v-model="v1" label="4">可乐</cl-radio>
+			<cl-radio v-model="v1" label="5">冰淇淋</cl-radio>
 		</cl-card>
 
 		<cl-card label="禁用">

@@ -19,11 +19,13 @@
 		<cl-card label="自定义">
 			<cl-select v-model="v4" :options="list" :height="90" arrow-icon="cl-icon-arrow-right">
 				<template #default="{ text, index }">
-					<view class="custom">
-						选择了<cl-tag :margin="[0, 0, 0, 20]">{{ text }}</cl-tag>
-					</view>
+					选择了<cl-tag :margin="[0, 0, 0, 20]">{{ text }}</cl-tag>
 				</template>
 			</cl-select>
+		</cl-card>
+
+		<cl-card label="自定义弹出框">
+			<cl-select-popup v-model="v5" title="选择歌曲" :options="list"> </cl-select-popup>
 		</cl-card>
 	</cl-page>
 </template>
@@ -35,15 +37,40 @@ const v1 = ref();
 const v2 = ref();
 const v3 = ref();
 const v4 = ref(2);
+const v5 = ref(2);
 
 const list = ref([
 	{
-		label: "海南东山羊",
+		label: "冠军相",
 		value: 1,
 	},
 	{
-		label: "乌鱼子",
+		label: "鬼脸",
 		value: 2,
+	},
+	{
+		label: "说唱歌手",
+		value: 3,
+	},
+	{
+		label: "一般的一天",
+		value: 4,
+	},
+	{
+		label: "会魔法的老人",
+		value: 5,
+	},
+	{
+		label: "C级浪漫",
+		value: 6,
+	},
+	{
+		label: "我想",
+		value: 7,
+	},
+	{
+		label: "小河淌水",
+		value: 8,
 	},
 ]);
 </script>
