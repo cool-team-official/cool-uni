@@ -10,6 +10,8 @@
 				</cl-waterfall-column>
 			</template>
 		</cl-waterfall>
+
+		<cl-loadmore :loading="loading" :divider="false"></cl-loadmore>
 	</cl-page>
 </template>
 
@@ -22,6 +24,8 @@ const { onRefresh, onData } = usePager();
 
 const Waterfall = ref<ClWaterfall.Ref>();
 
+const loading = ref(false);
+
 function refresh(params?: any) {
 	const { data, next } = onRefresh(params);
 
@@ -33,9 +37,13 @@ function refresh(params?: any) {
 		}
 	});
 
+	loading.value = true;
+
 	return next(
 		new Promise((resolve) => {
 			setTimeout(() => {
+				loading.value = false;
+
 				resolve({
 					list: [
 						{
