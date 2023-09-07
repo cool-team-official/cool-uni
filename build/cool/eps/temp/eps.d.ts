@@ -131,6 +131,13 @@ declare namespace Eps {
 		 */
 		[key: string]: any;
 	}
+
+	interface Test {
+		/**
+		 * 任意键值
+		 */
+		[key: string]: any;
+	}
 	interface BaseComm {
 		/**
 		 * 文件上传模式
@@ -452,6 +459,37 @@ declare namespace Eps {
 		request: Service["request"];
 	}
 
+	interface AdminTest {
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<any>;
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
 	type json = any;
 
 	type Service = {
@@ -484,5 +522,6 @@ declare namespace Eps {
 		mqtt: { iot: MqttIot };
 		wps: Wps;
 		user: { comm: UserComm; info: UserInfo; login: UserLogin };
+		admin: { test: AdminTest };
 	};
 }
