@@ -47,7 +47,7 @@
 			<slot>
 				<view class="cl-upload__demo">
 					<text class="cl-icon-camera-fill"></text>
-					<text>{{ text }}</text>
+					<text class="text">{{ text }}</text>
 				</view>
 			</slot>
 		</view>
