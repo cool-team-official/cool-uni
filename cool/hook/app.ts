@@ -1,6 +1,6 @@
 import { reactive, ref } from "vue";
 import { onShow } from "@dcloudio/uni-app";
-import { getVersion } from "../utils";
+import { getVersion, storage } from "../utils";
 import { config } from "../../config";
 import { defineStore } from "pinia";
 
@@ -149,11 +149,27 @@ export const useGlobal = defineStore("global", () => {
 	};
 });
 
+// 主题
+export const useTheme = defineStore("theme", () => {
+	const name = ref(storage.get("theme") || "default");
+
+	function set(value: string) {
+		name.value = value;
+		storage.set("theme", value);
+	}
+
+	return {
+		name,
+		set,
+	};
+});
+
 export function useApp() {
 	const info = reactive(config.app);
 
 	return {
 		info,
+		theme: useTheme(),
 		global: useGlobal(),
 		cache: useCache(),
 		notice: useNotice(),

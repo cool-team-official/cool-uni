@@ -75,15 +75,7 @@
 		</cl-card>
 
 		<cl-card label="插槽：加载错误">
-			<cl-row type="flex">
-				<cl-image src="https://xxxx.png" :size="150"></cl-image>
-
-				<cl-image src="https://xxxx.png" :size="150" :margin="[0, 0, 0, 20]">
-					<template #error>
-						<cl-text color="red" value="自定义"></cl-text>
-					</template>
-				</cl-image>
-			</cl-row>
+			<cl-image src="https://xxxx.png" :size="150"></cl-image>
 		</cl-card>
 	</cl-page>
 </template>

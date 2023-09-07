@@ -149,7 +149,7 @@ export default defineComponent({
 		},
 		gutter: {
 			type: Number,
-			default: 20,
+			default: 30,
 		},
 		color: {
 			type: String,

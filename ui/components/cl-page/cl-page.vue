@@ -1,6 +1,7 @@
 <template>
 	<view
 		class="cl-page"
+		:class="[`theme-${app.theme.name}`]"
 		:style="{
 			padding: parseRpx(padding),
 		}"
@@ -38,8 +39,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, getCurrentInstance } from "vue";
-import { useCool, useGlobal } from "/@/cool";
+import { computed, defineComponent, reactive, getCurrentInstance, type PropType } from "vue";
+import { useApp, useCool, useGlobal } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -61,6 +62,7 @@ export default defineComponent({
 
 	setup(props) {
 		const { refs, setRefs, router } = useCool();
+		const app = useApp();
 		const global = useGlobal();
 		const info = router.info();
 		const { statusBarHeight = 0 } = uni.getSystemInfoSync();
@@ -80,7 +82,7 @@ export default defineComponent({
 				props.backgroundColor ||
 				router.info()?.style?.backgroundColor ||
 				router.globalStyle.backgroundColor ||
-				"#fff"
+				"#ffffff"
 			);
 		});
 
@@ -164,6 +166,7 @@ export default defineComponent({
 		};
 
 		return {
+			app,
 			height,
 			background,
 			refs,

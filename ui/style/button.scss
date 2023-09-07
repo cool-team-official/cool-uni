@@ -45,6 +45,8 @@
 	font-size: $cl-font-size;
 	border-radius: $cl-button-radius;
 	letter-spacing: 1rpx;
+	height: $cl-height;
+	padding: $cl-button-padding;
 
 	&__text {
 		display: inline;
@@ -72,11 +74,6 @@
 		height: 80rpx;
 		padding: 0rpx 38rpx;
 		font-size: 30rpx;
-	}
-
-	&--default {
-		height: $cl-height;
-		padding: $cl-button-padding;
 	}
 
 	&--small {

@@ -10,7 +10,7 @@ const ignoreToken = [
 router.beforeEach((to, next) => {
 	const { user } = useStore();
 
-	if (ignoreToken.includes(to.path)) {
+	if (ignoreToken.includes(to.path) || to.path.startsWith("/pages/demo")) {
 		next();
 	} else {
 		if (user.token) {
