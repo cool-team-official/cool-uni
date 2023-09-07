@@ -29,7 +29,7 @@
 			}"
 		>
 			<view class="cl-select__value">
-				<slot :scope="{ index, text }">
+				<slot :index="index" :text="text">
 					{{ text }}
 					<text class="cl-select__placeholder" v-if="!text">
 						{{ placeholder }}

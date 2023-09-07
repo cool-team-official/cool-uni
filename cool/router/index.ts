@@ -239,10 +239,7 @@ const router = {
 
 	// 回到首页
 	home() {
-		this.push({
-			path: this.pages.home,
-			mode: this.isTab(this.pages.home) ? "switchTab" : "navigateTo",
-		});
+		this.push(this.pages.home);
 	},
 
 	/**

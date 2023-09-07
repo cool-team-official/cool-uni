@@ -18,9 +18,9 @@
 
 		<cl-card label="自定义">
 			<cl-select v-model="v4" :options="list" :height="90" arrow-icon="cl-icon-arrow-right">
-				<template #default="{ scope }">
+				<template #default="{ text, index }">
 					<view class="custom">
-						选择了<cl-tag :margin="[0, 0, 0, 20]">{{ scope.text }}</cl-tag>
+						选择了<cl-tag :margin="[0, 0, 0, 20]">{{ text }}</cl-tag>
 					</view>
 				</template>
 			</cl-select>
