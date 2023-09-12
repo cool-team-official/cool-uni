@@ -33,7 +33,7 @@
 					:adjust-position="adjustPosition"
 					:holdKeyboard="holdKeyboard"
 					round
-					@input="onInput"
+					@change="onChange"
 					@focus="onFocus"
 					@blur="onBlur"
 					@confirm="onConfirm"
@@ -160,7 +160,7 @@ export default defineComponent({
 
 		watch(
 			() => props.focus,
-			(val: boolean) => {
+			(val) => {
 				isFocus.value = val;
 			},
 			{
@@ -168,7 +168,7 @@ export default defineComponent({
 			}
 		);
 
-		function onInput(e: any) {
+		function onChange(e: any) {
 			emit("update:modelValue", e);
 		}
 
@@ -200,7 +200,7 @@ export default defineComponent({
 		return {
 			value,
 			isFocus,
-			onInput,
+			onChange,
 			onFocus,
 			onBlur,
 			onConfirm,
