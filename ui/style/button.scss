@@ -55,15 +55,19 @@
 	vertical-align: middle;
 	font-size: $cl-font-size;
 	border-radius: $cl-button-radius;
-	letter-spacing: 1rpx;
 	height: $cl-height;
 	padding: $cl-button-padding;
 
 	&__text {
 		line-height: 1;
+		letter-spacing: 1rpx;
 	}
 
 	&__icon {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		line-height: 1;
 		margin-right: 10rpx;
 
 		image {
