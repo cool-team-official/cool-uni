@@ -1,7 +1,7 @@
 import { join } from "path";
 
-// 临时目录
-export const TempFilePath = join(__dirname, "temp");
+// 打包路径
+export const DistPath = join(__dirname, "../dist");
 
 // 实体描述
 export const Entity = {
@@ -13,27 +13,27 @@ export const Entity = {
 				if (propertyName === "status" && type == "tinyint") return "boolean";
 				// 如果没有，返回null或者不返回，则继续遍历其他匹配规则
 				return null;
-			}
+			},
 		},
 		{
 			type: "string",
-			test: ["varchar", "text", "simple-json"]
+			test: ["varchar", "text", "simple-json"],
 		},
 		{
 			type: "string[]",
-			test: ["simple-array"]
+			test: ["simple-array"],
 		},
 		{
 			type: "Date",
-			test: ["datetime", "date"]
+			test: ["datetime", "date"],
 		},
 		{
 			type: "number",
-			test: ["tinyint", "int", "decimal"]
+			test: ["tinyint", "int", "decimal"],
 		},
 		{
 			type: "BigInt",
-			test: ["bigint"]
-		}
-	]
+			test: ["bigint"],
+		},
+	],
 };

@@ -1,6 +1,6 @@
 import { createDir, error, firstUpperCase, readFile, toCamel } from "../utils";
 import { join } from "path";
-import { Entity, TempFilePath } from "./config";
+import { Entity, DistPath } from "./config";
 import axios from "axios";
 import { isArray, isEmpty, last } from "lodash";
 import { createWriteStream } from "fs";
@@ -50,9 +50,9 @@ async function getData(temps: any[]) {
 
 	// 本地文件
 	try {
-		list = JSON.parse(readFile(join(TempFilePath, "eps.json")) || "[]");
+		list = JSON.parse(readFile(join(DistPath, "eps.json")) || "[]");
 	} catch (err) {
-		error(`[eps] ${join(TempFilePath, "eps.json")} 文件异常, ${err.message}`);
+		error(`[eps] ${join(DistPath, "eps.json")} 文件异常, ${err.message}`);
 	}
 
 	// 远程数据
@@ -83,7 +83,7 @@ async function getData(temps: any[]) {
 
 // 创建数据文件
 function createJson(eps: Entity[]) {
-	createWriteStream(join(TempFilePath, "eps.json"), {
+	createWriteStream(join(DistPath, "eps.json"), {
 		flags: "w",
 	}).write(
 		JSON.stringify(
@@ -326,7 +326,7 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 	});
 
 	// 创建 eps 描述文件
-	createWriteStream(join(TempFilePath, "eps.d.ts"), {
+	createWriteStream(join(DistPath, "eps.d.ts"), {
 		flags: "w",
 	}).write(content);
 }
@@ -400,7 +400,7 @@ export async function createEps(query?: { list: any[] }) {
 	const { service, list } = createService(data);
 
 	// 创建临时目录
-	createDir(TempFilePath);
+	createDir(DistPath);
 
 	// 创建数据文件
 	createJson(data);

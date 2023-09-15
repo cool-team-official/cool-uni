@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 /// <reference types="@dcloudio/types/uni-app" />
-/// <reference types="./build/cool/eps/temp/eps" />
+/// <reference types="./build/cool/dist/eps" />
 /// <reference types="./ui/types" />
 
 declare module "*.vue" {

@@ -3,9 +3,18 @@
 	&.cl-button--#{$type} {
 		background-color: $color;
 		border-color: $color;
-		.cl-button__text {
+
+		.cl-button__text,
+		.cl-button__icon,
+		.cl-loading__inner,
+		.cl-loading__spin-item {
 			color: #fff;
 		}
+
+		.cl-loading__spin-item {
+			background-color: #fff;
+		}
+
 		&.is-plain {
 			background-color: #fff;
 			.cl-button__text {
@@ -15,9 +24,11 @@
 				border-color: rgba($color, 0.8);
 			}
 		}
+
 		&.is-disabled {
 			background-color: $color;
 		}
+
 		&.button-hover {
 			&:not(.is-loading) {
 				background-color: rgba($color, 0.8);
@@ -49,7 +60,7 @@
 	padding: $cl-button-padding;
 
 	&__text {
-		display: inline;
+		line-height: 1;
 	}
 
 	&__icon {
@@ -91,13 +102,10 @@
 	}
 
 	&.is-loading {
-		opacity: 0.7;
-		.cl-button__loading {
-			display: inline-flex;
-			align-items: center;
-		}
-		.cl-button__text {
-			margin-left: 15rpx;
+		opacity: 0.5;
+
+		.cl-loading {
+			margin-right: 16rpx;
 		}
 	}
 
@@ -111,30 +119,6 @@
 
 	&.is-bold {
 		font-weight: bold;
-	}
-
-	&.is-loading-mask {
-		position: relative;
-		&::after {
-			content: "";
-			background-color: rgba(0, 0, 0, 0.5);
-			height: 100%;
-			width: 100%;
-			position: absolute;
-			left: 0;
-			top: 0;
-		}
-		.cl-button__loading {
-			position: absolute;
-			left: auto;
-			top: auto;
-			z-index: 9;
-			display: inline-flex;
-			align-items: center;
-			&-text {
-				margin-left: 10rpx;
-			}
-		}
 	}
 
 	// Colors

@@ -4,14 +4,16 @@
 			'cl-button',
 			type && `cl-button--${type}`,
 			size && `cl-button--${size}`,
-			{ 'is-round': round },
-			{ 'is-loading': loading },
-			{ 'is-loading-mask': loadingMask },
-			{ 'is-plain': plain },
-			{ 'is-fill': fill },
-			{ 'is-disabled': disabled },
-			{ 'is-border': border },
-			{ 'is-bold': bold },
+			{
+				'is-round': round,
+				'is-loading': loading,
+				'is-plain': plain,
+				'is-fill': fill,
+				'is-disabled': disabled,
+				'is-border': border,
+				'is-bold': bold,
+				'is-custom': custom,
+			},
 		]"
 		:style="{
 			color,
@@ -45,16 +47,7 @@
 		@click="click"
 	>
 		<!-- 加载框 -->
-		<view class="cl-button__loading" v-if="loading">
-			<cl-loading
-				:size="16"
-				:color="loadingColor || type ? '#fff' : ''"
-				:theme="loadingTheme"
-			></cl-loading>
-			<text class="cl-button__loading-text" v-if="loadingText && loadingMask">
-				{{ loadingText }}
-			</text>
-		</view>
+		<cl-loading :size="16" :color="loadingColor" :theme="loadingTheme" v-if="loading" />
 
 		<!-- 图标 -->
 		<view class="cl-button__icon" v-if="icon">
@@ -93,8 +86,6 @@ export default defineComponent({
 			type: String as PropType<"default" | "spin">,
 			default: "default",
 		},
-		loadingMask: Boolean,
-		loadingText: String,
 		round: Boolean,
 		border: {
 			type: Boolean,
@@ -111,6 +102,7 @@ export default defineComponent({
 		color: String,
 		backgroundColor: String,
 		fontSize: Number,
+		custom: Boolean,
 		formType: String,
 		openType: String,
 		hoverClass: {
