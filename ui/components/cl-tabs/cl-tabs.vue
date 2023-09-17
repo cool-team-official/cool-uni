@@ -114,7 +114,7 @@ import {
 	getCurrentInstance,
 	nextTick,
 	onMounted,
-	PropType,
+	type PropType,
 	reactive,
 	ref,
 	watch,

@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from "vue";
+import { type PropType, defineComponent } from "vue";
 
 export default defineComponent({
 	name: "cl-empty",
