@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, getCurrentInstance, type PropType } from "vue";
+import { computed, defineComponent, reactive, getCurrentInstance } from "vue";
 import { useApp, useCool, useGlobal } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 
@@ -145,24 +145,46 @@ export default defineComponent({
 				top -= uni.upx2px(parseInt(t));
 			}
 
-			uni.createSelectorQuery()
-				.in(proxy)
-				.select(`.cl-page`)
-				.boundingClientRect((a) => {
-					uni.createSelectorQuery()
+			const getPageBoundingClientRect = (): Promise<UniApp.NodeInfo | UniApp.NodeInfo[]> => {
+				return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>(resolve => {
+					uni
+						.createSelectorQuery()
 						.in(proxy)
-						.select(`.safe-area-bottom`)
-						.boundingClientRect((b) => {
-							const scrollTop = top + (a?.height || 0) - (b?.bottom || 0);
-
-							uni.pageScrollTo({
-								scrollTop,
-								duration: 100,
-							});
+						.select(".cl-page")
+						.boundingClientRect((a: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
+							resolve(a);
 						})
 						.exec();
+				});
+			};
+
+			const getSafeAreaBottomBoundingClientRect = (): Promise<UniApp.NodeInfo | UniApp.NodeInfo[]> => {
+				return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>(resolve => {
+					uni
+						.createSelectorQuery()
+						.in(proxy)
+						.select(".safe-area-bottom")
+						.boundingClientRect((b: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
+							resolve(b);
+						})
+						.exec();
+				});
+			};
+
+			Promise.all([getPageBoundingClientRect(), getSafeAreaBottomBoundingClientRect()])
+				.then(([a, b]) => {
+					const aArray = Array.isArray(a) ? a : [a];
+					const bArray = Array.isArray(b) ? b : [b];
+					const scrollTop = top + (aArray[0]?.height || 0) - (bArray[0]?.bottom || 0);
+
+					uni.pageScrollTo({
+						scrollTop,
+						duration: 100,
+					});
 				})
-				.exec();
+				.catch(error => {
+					console.error("滚动失败", error);
+				});
 		};
 
 		return {
