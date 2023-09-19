@@ -90,7 +90,7 @@
  * @event {Function} change 绑定值发生改变时触发
  */
 
-import { computed, defineComponent, PropType, reactive, watch } from "vue";
+import { computed, defineComponent, type PropType, reactive, watch } from "vue";
 import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
