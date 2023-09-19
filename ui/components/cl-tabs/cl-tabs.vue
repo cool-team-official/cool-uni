@@ -324,7 +324,8 @@ export default defineComponent({
 						}
 
 						scrollLeft.value = x;
-						lineLeft.value = item.left + item.width / 2 - 8 - offsetLeft.value;
+						lineLeft.value =
+							item.left + item.width / 2 - uni.upx2px(16) - offsetLeft.value;
 					}
 				});
 			}
