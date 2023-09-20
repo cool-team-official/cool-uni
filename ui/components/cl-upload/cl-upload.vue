@@ -163,7 +163,7 @@ export default defineComponent({
 					const arr: string[] = isArray(val) ? val : val.split(",");
 
 					list.value = arr
-						.map((e: string) => {
+						.map((e) => {
 							const d = _list.find((a) => a.url == e);
 
 							return {
@@ -212,7 +212,7 @@ export default defineComponent({
 				sizeType: props.sizeType,
 				sourceType: props.sourceType,
 				count,
-				success: (res: any) => {
+				success(res: any) {
 					// 文件信息
 					res.tempFiles.forEach(async (file: any) => {
 						// 预览
@@ -241,7 +241,7 @@ export default defineComponent({
 								name: props.name,
 								header: props.headers,
 								formData: props.data,
-								success: (res: any) => {
+								success(res: any) {
 									const { data } = JSON.parse(res.data);
 									done(data);
 								},
@@ -255,7 +255,7 @@ export default defineComponent({
 							if (props.autoUpload) {
 								// 自动上传
 								upload(file, {
-									onProgressUpdate: ({ progress }: any) => {
+									onProgressUpdate({ progress }: any) {
 										update(uid, { progress });
 									},
 								})

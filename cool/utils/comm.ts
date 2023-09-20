@@ -126,3 +126,29 @@ export function uuid(): string {
 
 	return s.join("");
 }
+
+// 路径拼接
+export function pathJoin(...parts: string[]): string {
+	if (parts.length === 0) {
+		return "";
+	}
+
+	const firstPart = parts[0];
+	let isAbsolute = false;
+
+	// 检查第一个部分是否以 "http" 开头，以确定路径类型（绝对还是相对）
+	if (firstPart.startsWith("http")) {
+		isAbsolute = true;
+	}
+
+	// 标准化路径，去除任何开头或结尾的斜杠
+	const normalizedParts = parts.map((part) => part.replace(/(^\/+|\/+$)/g, ""));
+
+	if (isAbsolute) {
+		// 如果是绝对路径，使用斜杠连接部分
+		return normalizedParts.join("/");
+	} else {
+		// 如果是相对路径，使用平台特定的分隔符连接部分
+		return normalizedParts.join("/");
+	}
+}
