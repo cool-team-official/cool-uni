@@ -1,0 +1,54 @@
+{
+	"page": {
+		"prefix": "page",
+		"scope": "vue",
+		"body": [
+			"<template>",
+			"    <cl-page>",
+			"        <view class=\"page\">",
+			"            $1",
+			"        </view>",
+			"    </cl-page>",
+			"</template>",
+			"",
+			"<script lang=\"ts\" setup>",
+			"import { useCool } from \"/@/cool\";",
+			"",
+			"const { service, router } = useCool();",
+			"</script>",
+			"",
+			"<style lang=\"scss\" scoped>",
+			".page {",
+			"    ",
+			"}",
+			"</style>",
+			""
+		],
+		"description": "page snippets"
+	},
+	"component": {
+		"prefix": "component",
+		"scope": "vue",
+		"body": [
+			"<template>",
+			"    <view class=\"$1\">",
+			"        ",
+			"    </view>",
+			"</template>",
+			"",
+			"<script lang=\"ts\" setup>",
+			"import { useCool } from \"/@/cool\";",
+			"",
+			"const { service, router } = useCool();",
+			"</script>",
+			"",
+			"<style lang=\"scss\" scoped>",
+			".component {",
+			"    ",
+			"}",
+			"</style>",
+			""
+		],
+		"description": "component snippets"
+	}
+}
