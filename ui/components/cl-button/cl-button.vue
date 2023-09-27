@@ -51,7 +51,7 @@
 
 		<!-- 图标 -->
 		<view class="cl-button__icon" v-if="icon">
-			<image :src="icon" v-if="isImg" />
+			<image :src="icon" mode="aspectFit" v-if="isImg" />
 			<text :class="[icon]" v-else></text>
 		</view>
 
