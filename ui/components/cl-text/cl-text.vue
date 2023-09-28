@@ -109,7 +109,7 @@ export default defineComponent({
 		},
 		lineThrough: Boolean,
 		lineHeight: {
-			type: [String],
+			type: [String, Number],
 			default: 1,
 		},
 		underline: Boolean,
