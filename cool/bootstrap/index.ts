@@ -1,5 +1,5 @@
 import { createPinia } from "pinia";
-import { App } from "vue";
+import type { App } from "vue";
 import mitt from "mitt";
 import { createEps } from "./eps";
 
@@ -10,5 +10,6 @@ export function bootstrap(app: App) {
 	// 缓存
 	app.use(createPinia());
 
+	// 创建 eps
 	createEps();
 }

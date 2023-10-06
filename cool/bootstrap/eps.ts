@@ -12,6 +12,7 @@ function getService() {
 
 	for (const i in files) {
 		try {
+			// @ts-ignore
 			const Value = files[i].default;
 			arr.push(new Value());
 		} catch (e) {
