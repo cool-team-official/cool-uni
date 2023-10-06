@@ -1,39 +1,41 @@
 <template>
 	<cl-page>
 		<view class="page-set">
-			<cl-text value="账号" :margin="[0, 0, 20, 20]" />
+			<template v-if="user.info">
+				<cl-text value="账号" :margin="[0, 0, 20, 20]" block />
 
-			<cl-list :radius="16" v-if="user.info">
-				<cl-list-item label="头像" :arrow-icon="false">
-					<view class="avatar">
-						<!-- #ifdef MP-WEIXIN -->
-						<button open-type="chooseAvatar" @chooseavatar="uploadAvatar">
-							<cl-avatar round :size="88" :src="user.info.avatarUrl" />
-						</button>
-						<!-- #endif -->
+				<cl-list :radius="16">
+					<cl-list-item label="头像" :arrow-icon="false">
+						<view class="avatar">
+							<!-- #ifdef MP-WEIXIN -->
+							<button open-type="chooseAvatar" @chooseavatar="uploadAvatar">
+								<cl-avatar round :size="88" :src="user.info.avatarUrl" />
+							</button>
+							<!-- #endif -->
 
-						<!-- #ifndef MP-WEIXIN -->
-						<cl-avatar
-							round
-							:size="88"
-							:src="user.info.avatarUrl"
-							@tap="uploadAvatar()"
-						/>
-						<!-- #endif -->
-					</view>
-				</cl-list-item>
-				<cl-list-item label="昵称" @tap="router.push('/pages/user/edit')">
-					<cl-text :value="user.info.nickName" />
-				</cl-list-item>
-				<cl-list-item label="手机号" :arrow-icon="false">
-					<cl-text :value="user.info.phone" />
-				</cl-list-item>
-				<cl-list-item label="ID" :arrow-icon="false" :border="false">
-					<cl-text :value="user.info.id" />
-				</cl-list-item>
-			</cl-list>
+							<!-- #ifndef MP-WEIXIN -->
+							<cl-avatar
+								round
+								:size="88"
+								:src="user.info.avatarUrl"
+								@tap="uploadAvatar()"
+							/>
+							<!-- #endif -->
+						</view>
+					</cl-list-item>
+					<cl-list-item label="昵称" @tap="router.push('/pages/user/edit')">
+						<cl-text :value="user.info.nickName" />
+					</cl-list-item>
+					<cl-list-item label="手机号" :arrow-icon="false">
+						<cl-text :value="user.info.phone" />
+					</cl-list-item>
+					<cl-list-item label="ID" :arrow-icon="false" :border="false">
+						<cl-text :value="user.info.id" />
+					</cl-list-item>
+				</cl-list>
+			</template>
 
-			<cl-text value="关于" :margin="[30, 0, 20, 20]" />
+			<cl-text value="关于" :margin="[30, 0, 20, 20]" block />
 
 			<cl-list :radius="16">
 				<cl-list-item label="关于我们" @tap="router.push('/pages/user/about')">
