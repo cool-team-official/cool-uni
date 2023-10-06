@@ -19,7 +19,7 @@ export default defineComponent({
 			default: 100,
 		},
 		top: {
-			type: Number,
+			type: [Number, String],
 			default: "0px",
 		},
 		statusBar: {
