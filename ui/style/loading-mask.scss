@@ -1,8 +1,9 @@
 .cl-loading-mask__wrap {
+	position: relative;
+
 	.cl-loading-mask {
 		position: absolute;
 		z-index: $cl-zIndex;
-		background-color: rgba(0, 0, 0, 0.2);
 		margin: 0;
 		top: 0;
 		right: 0;
