@@ -5,7 +5,7 @@
 			`is-${labelPosition}`,
 			{
 				'is-error': !!message,
-				'is-required': isRequired,
+				'is-required': isRequired || required,
 			},
 		]"
 		:id="`cl-form-item--${prop}`"
@@ -70,6 +70,7 @@ export default defineComponent({
 			type: Boolean,
 			default: null,
 		},
+		required: Boolean,
 	},
 
 	setup(props) {
