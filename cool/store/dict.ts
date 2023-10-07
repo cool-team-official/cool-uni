@@ -40,9 +40,9 @@ const useDictStore = defineStore("dict", () => {
 			for (const i in res) {
 				d[i] = res[i].map((e: any) => {
 					return {
+						...e,
 						label: e.name,
 						value: e.value || e.id,
-						...e,
 					};
 				});
 			}
