@@ -14,6 +14,9 @@
 		>
 			<view
 				class="cl-footer__inner"
+				:class="{
+					'is-flex': flex,
+				}"
 				:style="{
 					padding: parseRpx(padding),
 				}"
@@ -49,6 +52,10 @@ export default defineComponent({
 			default: "24rpx 36rpx",
 		},
 		border: Boolean,
+		flex: {
+			type: Boolean,
+			default: true,
+		},
 		vt: null,
 		vh: Number,
 	},

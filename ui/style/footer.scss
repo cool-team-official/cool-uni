@@ -7,10 +7,12 @@
 	z-index: 99;
 
 	&__inner {
-		display: flex;
-
 		:deep(cl-button) {
 			width: 100%;
+		}
+
+		&.is-flex {
+			display: flex;
 		}
 	}
 
