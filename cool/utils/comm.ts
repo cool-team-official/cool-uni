@@ -152,3 +152,12 @@ export function pathJoin(...parts: string[]): string {
 		return normalizedParts.join("/");
 	}
 }
+
+// 延迟
+export function sleep(duration: number) {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(true);
+		}, duration);
+	});
+}

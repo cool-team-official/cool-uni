@@ -37,7 +37,7 @@ import {
 	ref,
 	watch,
 } from "vue";
-import { parseRpx } from "/@/cool/utils";
+import { parseRpx, sleep } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-footer",
@@ -55,6 +55,10 @@ export default defineComponent({
 		flex: {
 			type: Boolean,
 			default: true,
+		},
+		delay: {
+			type: Number,
+			default: 0,
 		},
 		vt: null,
 		vh: Number,
@@ -94,6 +98,7 @@ export default defineComponent({
 		});
 
 		async function update() {
+			await sleep(props.delay);
 			await nextTick();
 
 			uni.createSelectorQuery()
