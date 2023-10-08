@@ -103,6 +103,14 @@
 			}
 		}
 
+		&__prefix {
+			margin-right: 20rpx;
+		}
+
+		&__suffix {
+			margin-left: 20rpx;
+		}
+
 		&.is-top {
 			padding: 0 0 20rpx 0;
 

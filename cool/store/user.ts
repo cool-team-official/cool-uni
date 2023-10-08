@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { deepMerge, storage } from "../utils";
 import { router } from "../router";
 import { service } from "../service";
+import type { Token } from "../types";
 
 // 本地缓存
 const data = storage.info();
@@ -12,12 +13,7 @@ const useUserStore = defineStore("user", function () {
 	const token = ref(data.token || "");
 
 	// 设置标识
-	function setToken(data: {
-		token: string;
-		expire: number;
-		refreshToken: string;
-		refreshExpire: number;
-	}) {
+	function setToken(data: Token) {
 		token.value = data.token;
 
 		// 访问

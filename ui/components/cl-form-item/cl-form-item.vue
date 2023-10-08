@@ -22,7 +22,7 @@
 		</view>
 
 		<view class="cl-form-item__container">
-			<view class="cl-form-item__prefix">
+			<view class="cl-form-item__prefix" v-if="$slots.prefix">
 				<slot name="prefix"></slot>
 			</view>
 
@@ -30,7 +30,7 @@
 				<slot></slot>
 			</view>
 
-			<view class="cl-form-item__suffix">
+			<view class="cl-form-item__suffix" v-if="$slots.suffix">
 				<slot name="suffix"></slot>
 			</view>
 		</view>

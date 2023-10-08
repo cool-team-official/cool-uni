@@ -3,29 +3,31 @@ import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import { deepTree } from "../utils";
 import { service } from "../service";
-
-declare interface Data {
-	[key: string]: Array<{ label: string; value: any; [key: string]: any }>;
-}
+import type { DictItem } from "../types";
 
 const useDictStore = defineStore("dict", () => {
 	// 对象数据
-	const data = reactive<Data>({});
+	const data = reactive<{ [key: string]: DictItem[] }>({});
 
 	// 请求
 	let req: Promise<any>;
 
 	// 获取
-	function get(name: string, value?: any) {
-		const arr = deepTree(cloneDeep(data[name] || []));
-		return computed(() => {
-			return value ? arr?.find((e) => e.value == value) : arr;
-		}).value;
+	function get(name: string) {
+		const arr: DictItem[] = deepTree(cloneDeep(data[name] || []));
+		return computed(() => arr).value;
 	}
 
 	// 获取名称
 	function getLabel(name: string, value: any): string {
-		return (value?.split(",") || []).map((e: any) => get(name, e)?.label).join(",");
+		const arr: any[] = value?.split(",") || [];
+
+		return arr
+			.map((e) => {
+				return get(name).find((a) => a.value == e)?.label;
+			})
+			.filter(Boolean)
+			.join(",");
 	}
 
 	// 刷新
