@@ -12,12 +12,6 @@
 			}
 		}
 
-		&--suffix {
-			.cl-form-item__content {
-				margin-right: 20rpx;
-			}
-		}
-
 		&__container {
 			display: flex;
 
@@ -36,8 +30,6 @@
 		}
 
 		&__content {
-			// #ifndef MP-TOUTIAO
-			// #endif
 			flex: 1;
 			font-size: 26rpx;
 			line-height: 70rpx;
@@ -100,6 +92,7 @@
 			margin-top: 6rpx;
 		}
 
+		&__prefix,
 		&__suffix {
 			display: flex;
 			align-items: center;
@@ -111,8 +104,10 @@
 		}
 
 		&.is-top {
+			padding: 0 0 20rpx 0;
+
 			.cl-form-item__label {
-				padding: 0 0 20rpx 0;
+				padding: 0 0 10rpx 0;
 				float: none;
 				text-align: left;
 			}

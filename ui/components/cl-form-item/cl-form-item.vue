@@ -22,9 +22,14 @@
 		</view>
 
 		<view class="cl-form-item__container">
+			<view class="cl-form-item__prefix">
+				<slot name="prefix"></slot>
+			</view>
+
 			<view class="cl-form-item__content" :class="[justify]">
 				<slot></slot>
 			</view>
+
 			<view class="cl-form-item__suffix">
 				<slot name="suffix"></slot>
 			</view>
