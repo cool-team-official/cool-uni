@@ -2,14 +2,15 @@
 	<view class="sms-btn">
 		<slot :disabled="isDisabled" :countdown="countdown" :btnText="btnText">
 			<cl-button
+				fill
 				:type="type"
 				:height="height"
 				:font-size="fontSize"
-				fill
 				:disabled="isDisabled"
 				:size="size"
 				:border="border"
 				:plain="plain"
+				:disabled="isDisabled"
 				@tap="open"
 			>
 				{{ btnText }}
