@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
 import { useApp, useCool } from "/@/cool";
-import Tabbar from "./components/tabbar.vue";
 import { useUi } from "/@/ui";
+import Tabbar from "./components/tabbar.vue";
 
 const { router, service } = useCool();
 const ui = useUi();
@@ -228,6 +228,10 @@ const list = [
 				label: "Tree 树形",
 				link: "/pages/demo/extend/tree",
 			},
+			{
+				label: "Service 服务",
+				link: "/pages/demo/extend/service",
+			},
 		],
 	},
 ];
@@ -236,6 +240,17 @@ function toLink(link: string) {
 	router.push({
 		path: link,
 		isGuard: false,
+	});
+}
+
+function get() {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve({
+				list: [1, 2, 3],
+				count: 10,
+			});
+		}, 1000);
 	});
 }
 </script>
@@ -264,6 +279,15 @@ function toLink(link: string) {
 			font-size: 28rpx;
 			color: #666;
 			animation: showV 2.5s forwards;
+		}
+	}
+
+	.dd {
+		display: flex;
+		padding: 50rpx;
+
+		.a {
+			flex: 1;
 		}
 	}
 
