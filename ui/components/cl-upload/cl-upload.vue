@@ -163,7 +163,7 @@ export default defineComponent({
 					const arr: string[] = isArray(val) ? val : val.split(",");
 
 					list.value = arr
-						.map((e) => {
+						.map((e: string) => {
 							const d = _list.find((a) => a.url == e);
 
 							return {
@@ -222,7 +222,7 @@ export default defineComponent({
 						function done(url: string) {
 							if (url) {
 								update(uid, { url, progress: 100 });
-								emit("success", url);
+								emit("success", url, file);
 							} else {
 								fail();
 							}
@@ -241,7 +241,7 @@ export default defineComponent({
 								name: props.name,
 								header: props.headers,
 								formData: props.data,
-								success(res: any) {
+								success: (res: any) => {
 									const { data } = JSON.parse(res.data);
 									done(data);
 								},
@@ -255,7 +255,7 @@ export default defineComponent({
 							if (props.autoUpload) {
 								// 自动上传
 								upload(file, {
-									onProgressUpdate({ progress }: any) {
+									onProgressUpdate: ({ progress }: any) => {
 										update(uid, { progress });
 									},
 								})

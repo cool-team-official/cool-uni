@@ -31,34 +31,26 @@ export function getUrlParam(name: string): string | null {
 }
 
 // 列表转树形
-export function deepTree(list: any[]): any[] {
+export function deepTree(list: any[], sort?: "desc" | "asc"): any[] {
 	const newList: any[] = [];
 	const map: any = {};
 
-	list.forEach((e) => (map[e.id] = e));
+	orderBy(list, "orderNum", sort)
+		.map((e) => {
+			map[e.id] = e;
+			return e;
+		})
+		.forEach((e) => {
+			const parent = map[e.parentId];
 
-	list.forEach((e) => {
-		const parent = map[e.parentId];
-
-		if (parent) {
-			(parent.children || (parent.children = [])).push(e);
-		} else {
-			newList.push(e);
-		}
-	});
-
-	const fn = (list: Array<any>) => {
-		list.map((e) => {
-			if (isArray(e.children)) {
-				e.children = orderBy(e.children, "orderNum");
-				fn(e.children);
+			if (parent) {
+				(parent.children || (parent.children = [])).push(e);
+			} else {
+				newList.push(e);
 			}
 		});
-	};
 
-	fn(newList);
-
-	return orderBy(newList, "orderNum");
+	return newList;
 }
 
 // 路径转对象
