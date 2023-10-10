@@ -50,7 +50,6 @@
 				<cl-button
 					type="primary"
 					round
-					:disabled="!value"
 					:border="false"
 					@tap="search"
 					v-if="showSearchButton"
