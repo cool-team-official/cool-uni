@@ -38,8 +38,12 @@ export default function request(options: any) {
 					...options.header,
 				},
 
-				success(res: any) {
-					const { code, data, message } = res.data;
+				success(res) {
+					const { code, data, message } = res.data as {
+						code: number;
+						message: string;
+						data: any;
+					};
 
 					// 无权限
 					if (res.statusCode === 401) {

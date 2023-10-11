@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { deepMerge, storage } from "../utils";
 import { router } from "../router";
 import { service } from "../service";
-import type { Token } from "../types";
+import type { User } from "../types";
 
 // 本地缓存
 const data = storage.info();
@@ -13,7 +13,7 @@ const useUserStore = defineStore("user", function () {
 	const token = ref(data.token || "");
 
 	// 设置标识
-	function setToken(data: Token) {
+	function setToken(data: User.Token) {
 		token.value = data.token;
 
 		// 访问
@@ -35,16 +35,16 @@ const useUserStore = defineStore("user", function () {
 	}
 
 	// 用户信息
-	const info = ref<Eps.UserInfoEntity | undefined>(data.userInfo);
+	const info = ref<User.Info | undefined>(data.userInfo);
 
 	// 设置用户信息
-	function set(value: Eps.UserInfoEntity) {
+	function set(value: User.Info) {
 		info.value = value;
 		storage.set("userInfo", value);
 	}
 
 	// 更新用户信息
-	async function update(data: Eps.UserInfoEntity & { [key: string]: any }) {
+	async function update(data: User.Info & { [key: string]: any }) {
 		set(deepMerge(info.value, data));
 		return service.user.info.updatePerson(info.value);
 	}

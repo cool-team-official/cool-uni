@@ -1,21 +1,16 @@
-import { cloneDeep } from "lodash-es";
 import { defineStore } from "pinia";
-import { computed, reactive } from "vue";
+import { computed, reactive, toRaw } from "vue";
 import { deepTree } from "../utils";
 import { service } from "../service";
-import type { DictItem } from "../types";
+import { isDev } from "/@/config";
+import type { Dict } from "../types";
 
 const useDictStore = defineStore("dict", () => {
 	// 对象数据
-	const data = reactive<{ [key: string]: DictItem[] }>({});
+	const data = reactive<Dict.Data>({});
 
-	// 请求
-	let req: Promise<any>;
-
-	// 获取
 	function get(name: string) {
-		const arr: DictItem[] = deepTree(cloneDeep(data[name] || []));
-		return computed(() => arr).value;
+		return computed(() => data[name]).value;
 	}
 
 	// 获取名称
@@ -32,25 +27,32 @@ const useDictStore = defineStore("dict", () => {
 
 	// 刷新
 	async function refresh(types?: string[]) {
-		req = service.dict.info.data({
-			types,
-		});
+		return service.dict.info
+			.data({
+				types,
+			})
+			.then((res: Dict.Data) => {
+				const d: any = {};
 
-		await req.then((res) => {
-			const d: any = {};
+				for (const [i, arr] of Object.entries(res)) {
+					arr.forEach((e) => {
+						e.label = e.name;
+						e.value = e.value || e.id;
+					});
 
-			for (const i in res) {
-				d[i] = res[i].map((e: any) => {
-					return {
-						...e,
-						label: e.name,
-						value: e.value || e.id,
-					};
-				});
-			}
+					d[i] = deepTree(arr, "desc");
+				}
 
-			Object.assign(data, d);
-		});
+				Object.assign(data, d);
+
+				if (isDev) {
+					console.group("字典数据");
+					console.log(toRaw(data));
+					console.groupEnd();
+				}
+
+				return data;
+			});
 	}
 
 	return {

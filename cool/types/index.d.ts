@@ -1,13 +1,24 @@
-export declare interface DictItem {
-	label: string;
-	value: any;
-	children?: Item[];
-	[key: string]: any;
+export namespace User {
+	interface Token {
+		token: string;
+		expire: number;
+		refreshToken: string;
+		refreshExpire: number;
+	}
+
+	interface Info extends Eps.UserInfoEntity {}
 }
 
-export declare interface Token {
-	token: string;
-	expire: number;
-	refreshToken: string;
-	refreshExpire: number;
+export namespace Dict {
+	interface Item {
+		id: string;
+		label: string;
+		value: any;
+		children?: Item[];
+		[key: string]: any;
+	}
+
+	interface Data {
+		[key: string]: Item[];
+	}
 }
