@@ -170,13 +170,7 @@ const router = {
 
 	// 后退
 	back(options?: UniApp.NavigateBackOptions) {
-		const { delta = 1, animationDuration, animationType } = options || {};
-
-		uni.navigateBack({
-			delta,
-			animationDuration,
-			animationType,
-		});
+		uni.navigateBack(options || {});
 	},
 
 	// 当前路由信息

@@ -71,3 +71,8 @@ export async function getRect(selector: string): Promise<any> {
 export function parseRpx(val: any): string {
 	return isArray(val) ? val.map(parseRpx).join(" ") : isNumber(val) ? `${val}rpx` : val;
 }
+
+// px 转 rpx
+export function px2Rpx(px: number) {
+	return px / (uni.upx2px(100) / 100);
+}

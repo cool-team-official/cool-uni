@@ -10,12 +10,12 @@ const useDictStore = defineStore("dict", () => {
 	const data = reactive<Dict.Data>({});
 
 	function get(name: string) {
-		return computed(() => data[name]).value;
+		return computed(() => data[name]).value || [];
 	}
 
 	// 获取名称
 	function getLabel(name: string, value: any): string {
-		const arr: any[] = value?.split(",") || [];
+		const arr: any[] = String(value)?.split(",") || [];
 
 		return arr
 			.map((e) => {
