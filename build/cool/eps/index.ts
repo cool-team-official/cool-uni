@@ -6,50 +6,24 @@ import { isArray, isEmpty, last, merge } from "lodash";
 import { createWriteStream } from "fs";
 import prettier from "prettier";
 import { proxy } from "../../../config/proxy";
+import type { Eps } from "../types";
 
-// 实体类型
-type Entity = {
-	api: {
-		dts: {
-			parameters?: {
-				description: string;
-				name: string;
-				required: boolean;
-				schema: {
-					type: string;
-				};
-			}[];
-		};
-		name: string;
-		method: string;
-		path: string;
-		prefix: string;
-		summary: string;
-		tag: string;
-	}[];
-	columns: {
-		comment: string;
-		length: string;
-		nullable: boolean;
-		propertyName: string;
-		type: string;
-	}[];
-	module: string;
-	name: string;
-	prefix: string;
-};
+// 获取方法名
+function getNames(v: any) {
+	return Object.keys(v).filter((e) => !["namespace", "permission"].includes(e));
+}
+
+// 数据
+let service = {};
+let list: Eps.Entity[] = [];
 
 // 获取数据
-async function getData(temps: any[]) {
-	let list: Entity[] = [];
-
+async function getData(temps?: Eps.Entity[]) {
 	// 本地文件
 	try {
-		list = JSON.parse(readFile(join(DistPath, "eps.json")));
-	} catch (err) {
-		if (err instanceof Error) {
-			error(`[eps] ${join(DistPath, "eps.json")} 文件异常, ${err.message}`);
-		}
+		list = JSON.parse(readFile(join(DistPath, "eps.json")) || "[]");
+	} catch (err: any) {
+		error(`[eps] ${join(DistPath, "eps.json")} 文件异常, ${err.message}`);
 	}
 
 	// 远程地址
@@ -65,17 +39,17 @@ async function getData(temps: any[]) {
 
 			if (code === 1000) {
 				if (!isEmpty(data) && data) {
-					list = (Object.values(data) as Entity[]).flat();
+					list = Object.values(data).flat() as Eps.Entity[];
 				}
 			} else {
 				error(`[eps] ${message}`);
 			}
 		})
 		.catch(() => {
-			error(`[eps] 获取失败, ${url} 无法访问，请启动服务！`);
+			error(`[eps] ${url} 服务未启动！！！`);
 		});
 
-	// 判断是否重复项
+	// 合并本地 service 数据
 	if (isArray(temps)) {
 		temps.forEach((e) => {
 			const d = list.find((a) => e.prefix === a.prefix);
@@ -87,37 +61,33 @@ async function getData(temps: any[]) {
 			}
 		});
 	}
-
-	return list;
 }
 
-// 创建数据文件
-function createJson(eps: Entity[]) {
+// 创建 json 文件
+function createJson() {
+	const d = list.map((e) => {
+		return {
+			prefix: e.prefix,
+			name: e.name || "",
+			api: e.api.map((e) => {
+				return {
+					name: e.name,
+					method: e.method,
+					path: e.path,
+				};
+			}),
+		};
+	});
+
 	createWriteStream(join(DistPath, "eps.json"), {
 		flags: "w",
-	}).write(
-		JSON.stringify(
-			eps.map((e) => {
-				return {
-					prefix: e.prefix,
-					name: e.name || "",
-					api: e.api.map((e) => {
-						return {
-							name: e.name,
-							method: e.method,
-							path: e.path,
-						};
-					}),
-				};
-			})
-		)
-	);
+	}).write(JSON.stringify(d));
 }
 
 // 创建描述文件
-async function createDescribe({ list, service }: { list: Entity[]; service: any }) {
+async function createDescribe({ list, service }: { list: Eps.Entity[]; service: any }) {
 	// 获取类型
-	function getType({ propertyName, type }: { propertyName: string; type: string }) {
+	function getType({ propertyName, type }: any) {
 		for (const map of Entity.mapping) {
 			if (map.custom) {
 				const resType = map.custom({ propertyName, type });
@@ -172,7 +142,7 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 
 			type Service = {
 				request(options?: {
-					url: \`/\${string}\`;
+					url: string;
 					method?: "POST" | "GET" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS";
 					data?: any;
 					params?: any;
@@ -204,6 +174,9 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 
 						// 插入方法
 						if (item.api) {
+							// 权限列表
+							const permission: string[] = [];
+
 							item.api.forEach((a) => {
 								// 方法名
 								const n = toCamel(a.name || last(a.path.split("/")) || "").replace(
@@ -282,7 +255,31 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 										)}): Promise<${res}>;`
 									);
 								}
+
+								permission.push(n);
 							});
+
+							// 权限标识
+							t.push("\n");
+							t.push("/**\n");
+							t.push(" * 权限标识\n");
+							t.push(" */\n");
+							t.push(
+								`permission: { ${permission
+									.map((e) => `${e}: string;`)
+									.join("\n")} };`
+							);
+
+							// 权限状态
+							t.push("\n");
+							t.push("/**\n");
+							t.push(" * 权限状态\n");
+							t.push(" */\n");
+							t.push(
+								`_permission: { ${permission
+									.map((e) => `${e}: boolean;`)
+									.join("\n")} };`
+							);
 
 							// 请求
 							t.push("\n");
@@ -324,7 +321,7 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 	`;
 
 	// 文本内容
-	const content = await prettier.format(text, {
+	const content = prettier.format(text, {
 		parser: "typescript",
 		useTabs: true,
 		tabWidth: 4,
@@ -341,84 +338,82 @@ async function createDescribe({ list, service }: { list: Entity[]; service: any 
 	}).write(content);
 }
 
-// 创建服务
-function createService(data: Entity[]) {
-	const list: Entity[] = [];
-	const service = {};
-	const d: any = { data };
+// 创建 service
+function createService() {
+	list.forEach((e) => {
+		// 分隔路径
+		const arr = e.prefix
+			.replace(/\//, "")
+			.replace("admin", "")
+			.split("/")
+			.filter(Boolean)
+			.map(toCamel);
 
-	for (const i in d) {
-		if (isArray(d[i])) {
-			d[i].forEach((e: Entity) => {
-				// 分隔路径
-				const arr = e.prefix
-					.replace(/\//, "")
-					.replace("app", "")
-					.split("/")
-					.filter(Boolean)
-					.map(toCamel);
+		// 遍历
+		function deep(d: any, i: number) {
+			const k = arr[i];
 
-				// 遍历
-				function deep(d: any, i: number) {
-					const k = arr[i];
-
-					if (k) {
-						// 是否最后一个
-						if (arr[i + 1]) {
-							if (!d[k]) {
-								d[k] = {};
-							}
-
-							deep(d[k], i + 1);
-						} else {
-							// 本地不存在则创建实例
-							if (!d[k]) {
-								d[k] = {
-									namespace: e.prefix.substring(1, e.prefix.length),
-								};
-							}
-
-							// 创建方法
-							e.api.forEach((a) => {
-								// 方法名
-								const n = a.path.replace("/", "");
-
-								if (n && !/[-:]/g.test(n)) {
-									d[k][n] = a;
-								}
-							});
-
-							list.push(e);
-						}
+			if (k) {
+				// 是否最后一个
+				if (arr[i + 1]) {
+					if (!d[k]) {
+						d[k] = {};
 					}
+
+					deep(d[k], i + 1);
+				} else {
+					// 不存在则创建
+					if (!d[k]) {
+						d[k] = {
+							namespace: e.prefix.substring(1, e.prefix.length),
+							permission: {},
+						};
+					}
+
+					// 创建方法
+					e.api.forEach((a) => {
+						// 方法名
+						const n = a.path.replace("/", "");
+
+						if (n && !/[-:]/g.test(n)) {
+							d[k][n] = a;
+						}
+					});
+
+					// 创建权限
+					getNames(d[k]).forEach((e) => {
+						d[k].permission[e] = `${d[k].namespace.replace("admin/", "")}/${e}`.replace(
+							/\//g,
+							":"
+						);
+					});
 				}
-
-				deep(service, 0);
-			});
+			}
 		}
-	}
 
-	return { service, list };
+		deep(service, 0);
+	});
 }
 
 // 创建 eps
 export async function createEps(query?: { list: any[] }) {
 	// 获取数据
-	const data = await getData(query?.list || []);
+	await getData(query?.list || []);
 
-	// 生成数据
-	const { service, list } = createService(data);
+	// 创建 service
+	createService();
 
 	// 创建临时目录
 	createDir(DistPath);
 
-	// 创建数据文件
-	createJson(data);
+	// 创建 json 文件
+	createJson();
 
 	// 创建描述文件
 	createDescribe({ service, list });
 
-	return `
-	export const eps = ${JSON.stringify({ service, list })}
-	`;
+	return {
+		service,
+		list,
+	};
 }
