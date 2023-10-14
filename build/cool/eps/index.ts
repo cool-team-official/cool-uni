@@ -344,7 +344,7 @@ function createService() {
 		// 分隔路径
 		const arr = e.prefix
 			.replace(/\//, "")
-			.replace("admin", "")
+			.replace("app", "")
 			.split("/")
 			.filter(Boolean)
 			.map(toCamel);
