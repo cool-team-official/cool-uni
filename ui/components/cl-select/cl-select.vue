@@ -177,9 +177,9 @@ export default defineComponent({
 			text.value = (() => {
 				switch (props.mode) {
 					case "selector":
-						//@ts-ignore
 						return props.options[index.value]
-							? props.options[index.value][props.labelKey]
+							? //@ts-ignore
+							  props.options[index.value][props.labelKey]
 							: "";
 					case "multiSelector":
 						return index.value
@@ -229,9 +229,9 @@ export default defineComponent({
 					value = detail.value;
 			}
 
+			emit("update:modelValue", value);
 			emit("confirm", data);
 			emit("change", value);
-			emit("update:modelValue", value);
 		}
 
 		// 监听列
