@@ -10,4 +10,5 @@ declare module "*.vue" {
 	export default component;
 }
 
-declare const __UNI_PAGES__: string;
+declare module "virtual:ctx";
+declare module "virtual:eps";

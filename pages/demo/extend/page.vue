@@ -32,7 +32,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import { useUi } from "/@/ui";
 import { useApp, useCool } from "/@/cool";
 

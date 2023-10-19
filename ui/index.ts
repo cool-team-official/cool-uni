@@ -1,39 +1,26 @@
-import { onReady } from "@dcloudio/uni-app";
-import { router, useGlobal } from "/@/cool";
+import { router } from "/@/cool";
 
 export function useUi(): Ui.Page {
-	const global = useGlobal();
-
-	let d: any;
-
 	const ui: any = {
-		loaded: false,
+		get loaded() {
+			return router.currentPage()?.["cl-page"]?.loaded;
+		},
 	};
 
-	function update() {
-		d = null;
+	const keys = ["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"];
 
-		if (!d) {
-			const p = router.info();
+	keys.forEach((k) => {
+		ui[k] = (...args: any[]) => {
+			const d = router.currentPage()?.["cl-page"];
 
-			if (p) {
-				d = global.data[`cl-page__${p.path}`];
-			}
-		}
-	}
-
-	onReady(() => {
-		ui.loaded = true;
-		update();
-	});
-
-	update();
-
-	const Comps = ["showLoading", "hideLoading", "showToast", "showTips", "showConfirm"];
-	Comps.forEach((e) => {
-		ui[e] = (...args: any[]) => {
 			if (d) {
-				d[e]?.(...args);
+				d[k]?.(...args);
+			} else {
+				if (ui.loaded) {
+					console.error(`[error] ui.${k}(), because <cl-page /> not added.`);
+				} else {
+					console.error(`[error] ui.${k}(), cannot be used in onLoad.`);
+				}
 			}
 		};
 	});

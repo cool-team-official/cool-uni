@@ -1,7 +1,7 @@
 import { last } from "lodash-es";
+import { ctx } from "virtual:ctx";
 import { storage } from "../utils";
 import { config } from "../../config";
-import { ctx } from "virtual:ctx";
 
 type PushOptions =
 	| string
@@ -63,7 +63,10 @@ const router = {
 	// 地址栏参数
 	get query() {
 		const info = this.info();
-		return info ? info.query : {};
+
+		return {
+			...info?.query,
+		};
 	},
 
 	// 临时参数
@@ -80,8 +83,52 @@ const router = {
 	},
 
 	// 当前页
+	currentPage(): { [key: string]: any } {
+		return last(getCurrentPages())!;
+	},
+
+	// 当前页
 	get path() {
 		return router.info()?.path;
+	},
+
+	// 当前路由信息
+	info() {
+		const page = last(getCurrentPages());
+
+		if (page) {
+			const { route, $page, $vm, $getAppWebview }: any = page;
+
+			const q: any = {};
+
+			try {
+				$page?.fullPath
+					.split("?")[1]
+					.split("&")
+					.forEach((e: string) => {
+						const [k, v] = e.split("=");
+						q[k] = decodeURIComponent(v);
+					});
+			} catch (e) {}
+
+			// 页面配置
+			const style = this.routes.find((e) => e.path == route)?.style;
+
+			let d = {
+				$vm,
+				$getAppWebview,
+				path: `/${route}`,
+				fullPath: $page?.fullPath,
+				query: q || {},
+				isTab: this.isTab(route),
+				style,
+				isCustomNavbar: style?.navigationStyle == "custom",
+			};
+
+			return d;
+		} else {
+			return null;
+		}
 	},
 
 	// 跳转
@@ -171,45 +218,6 @@ const router = {
 	// 后退
 	back(options?: UniApp.NavigateBackOptions) {
 		uni.navigateBack(options || {});
-	},
-
-	// 当前路由信息
-	info() {
-		const page = last(getCurrentPages());
-
-		if (page) {
-			const { route, $page, $vm, $getAppWebview }: any = page;
-
-			const q: any = {};
-
-			try {
-				$page?.fullPath
-					.split("?")[1]
-					.split("&")
-					.forEach((e: string) => {
-						const [k, v] = e.split("=");
-						q[k] = decodeURIComponent(v);
-					});
-			} catch (e) {}
-
-			// 页面配置
-			const style = this.routes.find((e) => e.path == route)?.style;
-
-			let d = {
-				$vm,
-				$getAppWebview,
-				path: `/${route}`,
-				fullPath: $page?.fullPath,
-				query: q || {},
-				isTab: this.isTab(route),
-				style,
-				isCustomNavbar: style?.navigationStyle == "custom",
-			};
-
-			return d;
-		} else {
-			return null;
-		}
 	},
 
 	// 执行当前页面的某个方法
