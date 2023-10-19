@@ -6,7 +6,6 @@
 				:type="type"
 				:height="height"
 				:font-size="fontSize"
-				:disabled="isDisabled"
 				:size="size"
 				:border="border"
 				:plain="plain"
