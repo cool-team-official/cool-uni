@@ -5,10 +5,10 @@
 			`is-${labelPosition}`,
 			{
 				'is-error': !!message,
-				'is-required': isRequired || required,
+				'is-required': isRequired,
 			},
 		]"
-		:id="`cl-form-item--${prop}`"
+		:id="`cl-form-item--${id}`"
 		ref="cl-form-item"
 	>
 		<view
@@ -22,15 +22,10 @@
 		</view>
 
 		<view class="cl-form-item__container">
-			<view class="cl-form-item__prefix" v-if="$slots.prefix">
-				<slot name="prefix"></slot>
-			</view>
-
 			<view class="cl-form-item__content" :class="[justify]">
 				<slot></slot>
 			</view>
-
-			<view class="cl-form-item__suffix" v-if="$slots.suffix">
+			<view class="cl-form-item__suffix">
 				<slot name="suffix"></slot>
 			</view>
 		</view>
@@ -98,6 +93,9 @@ export default defineComponent({
 			["clearValidate", "onError", "scrollTo"]
 		);
 
+		// 避免多层级带 . 符号无法识别问题
+		const id = props.prop?.replace(/\./g, "-");
+
 		// 绑定值
 		const value = ref<any>();
 
@@ -105,7 +103,7 @@ export default defineComponent({
 		const message = ref("");
 
 		// 是否必填
-		const isRequired = ref(false);
+		const isRequired = ref(props.required || false);
 
 		// 标题位置
 		const labelPosition = computed(() => {
@@ -144,16 +142,18 @@ export default defineComponent({
 			const rule = props.rules || rules?.[props.prop];
 
 			if (rule) {
-				isRequired.value = false;
+				if (!isRequired.value) {
+					isRequired.value = false;
 
-				if (isArray(rule)) {
-					rule.forEach((e: any) => {
-						if (e.required) {
-							isRequired.value = e.required;
-						}
-					});
-				} else {
-					isRequired.value = rule.required;
+					if (isArray(rule)) {
+						rule.forEach((e: any) => {
+							if (e.required) {
+								isRequired.value = e.required;
+							}
+						});
+					} else {
+						isRequired.value = rule.required;
+					}
 				}
 
 				// 检验器
@@ -194,9 +194,11 @@ export default defineComponent({
 			if (prop == props.prop) {
 				uni.createSelectorQuery()
 					.in(proxy)
-					.select(`#cl-form-item--${prop}`)
+					.select(`#cl-form-item--${id}`)
 					.boundingClientRect((res) => {
-						proxy.$root.scrollTo(res.top);
+						if (res) {
+							proxy.$root.scrollTo(res.top);
+						}
 					})
 					.exec();
 			}
@@ -256,6 +258,7 @@ export default defineComponent({
 		});
 
 		return {
+			id,
 			message,
 			isRequired,
 			labelWidth,

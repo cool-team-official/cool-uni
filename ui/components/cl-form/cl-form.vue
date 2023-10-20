@@ -174,6 +174,7 @@ export default defineComponent({
 						r[e] = rules.value[e];
 					}
 				});
+
 				//@ts-ignore
 				const validator = new AsyncValidator(r);
 				const values: any = isArray(value) ? value : [value];

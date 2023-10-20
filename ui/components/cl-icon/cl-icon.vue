@@ -37,7 +37,7 @@ export default defineComponent({
 			default: 30,
 		},
 		color: String,
-		margin: [String, Number],
+		margin: [String, Number, Array],
 	},
 	setup() {
 		return {
