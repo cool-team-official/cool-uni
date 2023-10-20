@@ -25,7 +25,7 @@
 			borderRadius: parseRpx(borderRadius),
 		}"
 		:size="size"
-		:disabled="disabled"
+		:disabled="disabled || loading"
 		:form-type="formType"
 		:open-type="openType"
 		:hover-class="hoverClass"
@@ -161,9 +161,7 @@ export default defineComponent({
 		}
 
 		function click(e: any) {
-			if (!props.disabled && !props.loading) {
-				tap(e);
-			}
+			tap(e);
 		}
 
 		return {
