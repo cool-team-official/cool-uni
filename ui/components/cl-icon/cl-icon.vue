@@ -1,17 +1,18 @@
 <template>
-    <text
-        :class="[
-            'cl-icon',
-            className || `cl-icon-${name}`,
-            {
-                'is-primary': color == 'primary'
-            }
-        ]"
-        :style="{
-            fontSize: parseRpx(size),
-            color
-        }"
-    ></text>
+	<text
+		:class="[
+			'cl-icon',
+			className || `cl-icon-${name}`,
+			{
+				'is-primary': color == 'primary',
+			},
+		]"
+		:style="{
+			fontSize: parseRpx(size),
+			margin: parseRpx(margin),
+			color,
+		}"
+	></text>
 </template>
 
 <script lang="ts">
@@ -23,24 +24,25 @@
  * @property {String} color 图标颜色
  */
 
-import { defineComponent } from "vue"
-import { parseRpx } from "/@/cool/utils"
+import { defineComponent } from "vue";
+import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
-    name: "cl-icon",
-    props: {
-        name: String,
-        className: String,
-        size: {
-            type: [String, Number],
-            default: 30
-        },
-        color: String
-    },
-    setup() {
-        return {
-            parseRpx
-        }
-    }
-})
+	name: "cl-icon",
+	props: {
+		name: String,
+		className: String,
+		size: {
+			type: [String, Number],
+			default: 30,
+		},
+		color: String,
+		margin: [String, Number],
+	},
+	setup() {
+		return {
+			parseRpx,
+		};
+	},
+});
 </script>

@@ -68,9 +68,11 @@
 								<text class="is-check cl-icon-check"></text>
 							</slot>
 						</view>
+					</view>
 
-						<!-- 空态 -->
-						<cl-empty v-show="options.length == 0" />
+					<!-- 空态 -->
+					<view class="cl-select-popup__empty" v-show="options.length == 0">
+						<cl-empty :fixed="false" />
 					</view>
 				</slot>
 			</scroll-view>

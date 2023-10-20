@@ -6,7 +6,6 @@
 		}"
 		:style="{
 			height,
-			marginTop: parseRpx(top),
 		}"
 	>
 		<image
@@ -17,7 +16,7 @@
 		/>
 		<text class="cl-empty__text">{{ text }}</text>
 
-		<view class="cl-empty__container">
+		<view class="cl-empty__container" v-if="$slots.default">
 			<slot></slot>
 		</view>
 	</view>
@@ -25,7 +24,6 @@
 
 <script lang="ts">
 import { type PropType, defineComponent } from "vue";
-import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-empty",
@@ -51,13 +49,6 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		top: Number,
-	},
-
-	setup() {
-		return {
-			parseRpx,
-		};
 	},
 });
 </script>

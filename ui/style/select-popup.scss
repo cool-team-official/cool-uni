@@ -17,7 +17,6 @@
 
 	&__list {
 		padding: 10rpx 30rpx;
-		min-height: 300rpx;
 	}
 
 	&__item {
@@ -43,6 +42,10 @@
 				display: inline-block;
 			}
 		}
+	}
+
+	&__empty {
+		padding: 30rpx 0 60rpx 0;
 	}
 
 	&__footer {
