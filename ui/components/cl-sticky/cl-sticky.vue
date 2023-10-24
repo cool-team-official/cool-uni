@@ -19,8 +19,8 @@ export default defineComponent({
 			default: 100,
 		},
 		top: {
-			type: [Number, String],
-			default: "0px",
+			type: Number,
+			default: 0,
 		},
 		statusBar: {
 			type: Boolean,
