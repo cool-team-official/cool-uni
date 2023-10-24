@@ -25,6 +25,7 @@
 			}
 		}
 
+		&[disabled],
 		&.is-disabled {
 			background-color: $color;
 		}

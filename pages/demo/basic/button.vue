@@ -62,8 +62,49 @@
 			</cl-card>
 
 			<cl-card label="加载中">
-				<cl-button type="primary" loading>默认</cl-button>
-				<cl-button loading>默认</cl-button>
+				<cl-row :gutter="20">
+					<cl-col :span="8">
+						<cl-button loading fill @tap="onTap">默认</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="primary" fill loading>主要</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="success" fill loading>成功</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="error" fill loading>失败</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="warning" fill loading>警告</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="info" fill loading>信息</cl-button>
+					</cl-col>
+				</cl-row>
+			</cl-card>
+
+			<cl-card label="禁用">
+				<cl-row :gutter="20">
+					<cl-col :span="8">
+						<cl-button disabled fill @tap="onTap">默认</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="primary" fill disabled>主要</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="success" fill disabled>成功</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="error" fill disabled>失败</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="warning" fill disabled>警告</cl-button>
+					</cl-col>
+					<cl-col :span="8">
+						<cl-button type="info" fill disabled>信息</cl-button>
+					</cl-col>
+				</cl-row>
 			</cl-card>
 
 			<cl-card label="没有边框">

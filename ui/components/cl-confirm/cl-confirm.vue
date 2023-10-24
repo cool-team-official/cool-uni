@@ -1,33 +1,41 @@
 <template>
-    <view class="cl-confirm">
-        <cl-dialog v-model="visible" :close-on-click-modal="conf.closeOnClickModal" :width="conf.width" text-align="center"
-            @close="onClose" @closed="onClosed">
-            <view class="cl-confirm__header" v-if="conf.title">
-                <text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
-                <text class="cl-icon-toast-warning" v-else-if="conf.type == 'warning'"></text>
-                <text class="cl-icon-toast-success" v-else-if="conf.type == 'success'"></text>
-                <text class="cl-confirm__title">{{ conf.title }}</text>
-            </view>
+	<view class="cl-confirm">
+		<cl-dialog
+			v-model="visible"
+			:close-on-click-modal="conf.closeOnClickModal"
+			:width="conf.width"
+			:text-align="conf.message ? 'center' : 'left'"
+			@close="onClose"
+			@closed="onClosed"
+		>
+			<view class="cl-confirm__header" v-if="conf.title">
+				<text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
+				<text class="cl-icon-toast-warning" v-else-if="conf.type == 'warning'"></text>
+				<text class="cl-icon-toast-success" v-else-if="conf.type == 'success'"></text>
+				<text class="cl-confirm__title">{{ conf.title }}</text>
+			</view>
 
-            <slot>
-                <view class="cl-confirm__message">{{ conf.message }}</view>
-            </slot>
+			<slot>
+				<view class="cl-confirm__message">{{ conf.message }}</view>
+			</slot>
 
-            <template #footer>
-                <view class="cl-confirm__footer">
-                    <view class="cl-confirm__footer-item" v-if="conf.showCancelButton">
-                        <cl-button fill @tap="close('cancel')"> {{ conf.cancelButtonText }}</cl-button>
-                    </view>
+			<template #footer>
+				<view class="cl-confirm__footer">
+					<view class="cl-confirm__footer-item" v-if="conf.showCancelButton">
+						<cl-button fill @tap="close('cancel')">
+							{{ conf.cancelButtonText }}</cl-button
+						>
+					</view>
 
-                    <view class="cl-confirm__footer-item" v-if="conf.showConfirmButton">
-                        <cl-button fill type="primary" :loading="loading" @tap="close('confirm')">
-                            {{ conf.confirmButtonText }}
-                        </cl-button>
-                    </view>
-                </view>
-            </template>
-        </cl-dialog>
-    </view>
+					<view class="cl-confirm__footer-item" v-if="conf.showConfirmButton">
+						<cl-button fill type="primary" :loading="loading" @tap="close('confirm')">
+							{{ conf.confirmButtonText }}
+						</cl-button>
+					</view>
+				</view>
+			</template>
+		</cl-dialog>
+	</view>
 </template>
 
 <script lang="ts">
@@ -35,118 +43,126 @@
  * @description 确认框
  */
 
-import { defineComponent, nextTick, ref } from "vue"
+import { defineComponent, nextTick, ref } from "vue";
 
 export default defineComponent({
-    name: "cl-confirm",
+	name: "cl-confirm",
 
-    setup() {
-        // 是否可见
-        const visible = ref(false)
+	setup() {
+		// 是否可见
+		const visible = ref(false);
 
-        // 是否已关闭
-        const closed = ref(true)
+		// 是否已关闭
+		const closed = ref(true);
 
-        // 是否加载中
-        const loading = ref(false)
+		// 是否加载中
+		const loading = ref(false);
 
-        // 配置
-        const conf = ref<ClConfirm.Options>({})
+		// 配置
+		const conf = ref<ClConfirm.Options>({});
 
-        // 计时器
-        let timer: any
+		// 计时器
+		let timer: any;
 
-        // 打开
-        function open(options: ClConfirm.Options) {
-            visible.value = false
-            clearTimeout(timer)
+		// 锁
+		let lock = false;
 
-            function next() {
-                visible.value = true
-                closed.value = false
+		// 打开
+		function open(options: ClConfirm.Options) {
+			lock = false;
+			visible.value = false;
+			clearTimeout(timer);
 
-                // 设置选项
-                nextTick(() => {
-                    conf.value = {
-                        width: "500rpx",
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        confirmButtonText: "确认",
-                        cancelButtonText: "取消",
-                        closeOnClickModal: true,
-                        ...options
-                    }
+			function next() {
+				visible.value = true;
+				closed.value = false;
 
-                    // 是否定时关闭
-                    if (conf.value.duration) {
-                        timer = setTimeout(() => {
-                            close("close")
-                        }, conf.value.duration)
-                    }
-                })
-            }
+				// 设置选项
+				nextTick(() => {
+					conf.value = {
+						width: "500rpx",
+						showCancelButton: true,
+						showConfirmButton: true,
+						confirmButtonText: "确认",
+						cancelButtonText: "取消",
+						closeOnClickModal: true,
+						...options,
+					};
 
-            if (!closed.value) {
-                setTimeout(() => {
-                    next()
-                }, 350)
-            } else {
-                next()
-            }
-        }
+					// 是否定时关闭
+					if (conf.value.duration) {
+						timer = setTimeout(() => {
+							close("close");
+						}, conf.value.duration);
+					}
+				});
+			}
 
-        // 关闭
-        function close(action: ClConfirm.Action = "close") {
-            // 完成
-            function done() {
-                if (conf.value.callback) {
-                    conf.value.callback(action)
-                }
+			if (!closed.value) {
+				setTimeout(() => {
+					next();
+				}, 350);
+			} else {
+				next();
+			}
+		}
 
-                nextTick(() => {
-                    visible.value = false
-                    hideLoading()
-                })
-            }
+		// 关闭
+		function close(action: ClConfirm.Action = "close") {
+			lock = true;
 
-            // 加载中
-            function showLoading() {
-                loading.value = true
-            }
+			// 完成
+			function done() {
+				if (conf.value.callback) {
+					conf.value.callback(action);
+				}
 
-            // 关闭加载
-            function hideLoading() {
-                loading.value = false
-            }
+				nextTick(() => {
+					visible.value = false;
+					hideLoading();
+				});
+			}
 
-            if (conf.value.beforeClose) {
-                conf.value.beforeClose(action, { done, showLoading, hideLoading })
-            } else {
-                done()
-            }
-        }
+			// 加载中
+			function showLoading() {
+				loading.value = true;
+			}
 
-        // 监听关闭
-        function onClose(action: ClConfirm.Action) {
-            if (!closed.value && visible.value) {
-                close(action)
-            }
-        }
+			// 关闭加载
+			function hideLoading() {
+				loading.value = false;
+			}
 
-        // 监听关闭后
-        function onClosed() {
-            closed.value = true
-        }
+			if (conf.value.beforeClose) {
+				conf.value.beforeClose(action, { done, showLoading, hideLoading });
+			} else {
+				done();
+			}
+		}
 
-        return {
-            visible,
-            loading,
-            conf,
-            open,
-            close,
-            onClose,
-            onClosed
-        }
-    }
-})
+		// 监听关闭
+		function onClose() {
+			clearTimeout(timer);
+
+			if (!lock) {
+				close("close");
+			}
+		}
+
+		// 监听关闭后
+		function onClosed() {
+			closed.value = true;
+		}
+
+		return {
+			visible,
+			loading,
+			conf,
+			open,
+			close,
+			onClose,
+			onClosed,
+		};
+	},
+});
 </script>

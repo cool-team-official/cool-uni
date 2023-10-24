@@ -35,6 +35,8 @@ function open() {
 		title: "提示",
 		message: "你有一个待取信件",
 		callback(action) {
+			console.log(action);
+
 			switch (action) {
 				case "confirm":
 					ui.showToast("领取成功");
@@ -63,13 +65,15 @@ function open3() {
 		title: "提示",
 		message: "你有一个待取信件",
 		beforeClose(action, { done, showLoading, hideLoading }) {
+			console.log(action);
+
 			if (action == "confirm") {
 				showLoading();
 
 				setTimeout(() => {
 					done();
 					ui.showToast("领取成功");
-				}, 2000);
+				}, 200022);
 			} else {
 				done();
 			}
