@@ -106,7 +106,10 @@ export default defineComponent({
 				.select(".cl-footer")
 				.boundingClientRect((rect) => {
 					if (rect) {
-						height.value = (rect.height || 0) > vh.value ? `${rect.height}px` : "0px";
+						const a = Math.floor(rect.height || 0);
+						const b = Math.floor(vh.value);
+
+						height.value = a > b ? `${rect.height}px` : "0px";
 					}
 				})
 				.exec();
