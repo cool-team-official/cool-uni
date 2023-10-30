@@ -39,7 +39,7 @@ async function getData(temps?: Eps.Entity[]) {
 
 			if (code === 1000) {
 				if (!isEmpty(data) && data) {
-					list = Object.values(data).flat() as Eps.Entity[];
+					merge(list, Object.values(data).flat() as Eps.Entity[]);
 				}
 			} else {
 				error(`[eps] ${message}`);
@@ -49,7 +49,7 @@ async function getData(temps?: Eps.Entity[]) {
 			error(`[eps] ${url} 服务未启动！！！`);
 		});
 
-	// 合并本地 service 数据
+	// 合并其他数据
 	if (isArray(temps)) {
 		temps.forEach((e) => {
 			const d = list.find((a) => e.prefix === a.prefix);

@@ -43,7 +43,7 @@ export function usePager() {
 		} else if (proxy.$.exposed.refresh) {
 			await proxy.$.exposed.refresh(params);
 		} else {
-			console.log("refresh 方法未定义");
+			console.log("use defineExpose({ refresh })");
 		}
 	}
 
