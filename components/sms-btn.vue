@@ -2,13 +2,13 @@
 	<view class="sms-btn">
 		<slot :disabled="isDisabled" :countdown="countdown" :btnText="btnText">
 			<cl-button
-				fill
-				:type="type"
+				:border="false"
+				background-color="transparent"
+				color="#FE6B03"
 				:height="height"
 				:font-size="fontSize"
+				fill
 				:size="size"
-				:border="border"
-				:plain="plain"
 				:disabled="isDisabled"
 				@tap="open"
 			>
@@ -25,8 +25,9 @@
 							v-model="form.code"
 							placeholder="验证码"
 							maxlength="4"
+							:height="62"
 							:clearable="false"
-							:focus="captcha.focus"
+							focus
 							@confirm="send"
 						/>
 
@@ -80,7 +81,6 @@ const captcha = reactive({
 	visible: false,
 	loading: false,
 	sending: false,
-	focus: false,
 	img: "",
 });
 
@@ -156,16 +156,6 @@ async function getCaptcha() {
 		.then((res) => {
 			form.captchaId = res.captchaId;
 			captcha.img = res.data;
-
-			// #ifdef MP
-			setTimeout(() => {
-				captcha.focus = true;
-			}, 500);
-			// #endif
-
-			// #ifdef H5
-			captcha.focus = true;
-			// #endif
 		})
 		.catch((err) => {
 			ui.showToast(err.message);
@@ -196,7 +186,6 @@ function close() {
 function clear() {
 	form.code = "";
 	form.captchaId = "";
-	captcha.focus = false;
 }
 
 defineExpose({
