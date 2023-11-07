@@ -13,7 +13,11 @@
 	>
 		<view
 			class="cl-form-item__label"
-			:style="{ width: labelWidth }"
+			:style="{ 
+				height: labelHeight,
+				lineHeight: labelHeight,
+				width: labelWidth 
+			}"
 			v-if="label || $slots.label"
 		>
 			<slot name="label">
@@ -22,7 +26,9 @@
 		</view>
 
 		<view class="cl-form-item__container">
-			<view class="cl-form-item__content" :class="[justify]">
+			<view class="cl-form-item__content" :class="[justify]" :style="{
+				lineHeight: labelPosition == 'top' ? 'normal' : labelHeight
+			}">
 				<slot></slot>
 			</view>
 			<view class="cl-form-item__suffix">
@@ -59,6 +65,7 @@ export default defineComponent({
 	props: {
 		prop: String,
 		label: String,
+		labelHeight: [String, Number],
 		labelWidth: [String, Number],
 		labelPosition: String as PropType<"left" | "right" | "top">,
 		justify: String as PropType<"start" | "center" | "end">,
@@ -83,6 +90,7 @@ export default defineComponent({
 				"form",
 				"rules",
 				"tips",
+				"labelHeight",
 				"labelWidth",
 				"labelPosition",
 				"justify",
@@ -108,6 +116,11 @@ export default defineComponent({
 		// 标题位置
 		const labelPosition = computed(() => {
 			return props.labelPosition || parent.value?.labelPosition;
+		});
+
+		// 标题高度
+		const labelHeight = computed(() => {
+			return  parseRpx(props.labelHeight || parent.value?.labelHeight);
 		});
 
 		// 标题宽度
@@ -261,6 +274,7 @@ export default defineComponent({
 			id,
 			message,
 			isRequired,
+			labelHeight,
 			labelWidth,
 			labelPosition,
 			justify,

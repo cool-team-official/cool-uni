@@ -52,6 +52,10 @@ export default defineComponent({
 			type: String as PropType<"toast" | "inner" | "none">,
 			default: "toast",
 		},
+		labelHeight: {
+			type: [String, Number],
+			default: 64,
+		},
 		labelWidth: {
 			type: [String, Number],
 			default: 150,

@@ -22,6 +22,11 @@
 		margin-right: 20rpx;
 	}
 
+	&__icon {
+		color: $cl-color-placeholder;
+		font-size: 28rpx;
+	}
+
 	&__placeholder {
 		color: $cl-color-placeholder;
 	}

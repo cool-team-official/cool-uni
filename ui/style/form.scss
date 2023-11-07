@@ -1,6 +1,5 @@
 .cl-form {
 	.cl-form-item {
-		min-height: $cl-height;
 		padding: 20rpx 0;
 		position: relative;
 
@@ -26,13 +25,11 @@
 			text-align: right;
 			vertical-align: middle;
 			float: left;
-			line-height: $cl-height;
 		}
 
 		&__content {
 			flex: 1;
 			font-size: 26rpx;
-			line-height: 70rpx;
 
 			&.is-justify--left {
 				text-align: left;
@@ -115,7 +112,7 @@
 			padding: 0 0 20rpx 0;
 
 			.cl-form-item__label {
-				padding: 0 0 10rpx 0;
+				margin: 0 0 10rpx 0;
 				float: none;
 				text-align: left;
 			}

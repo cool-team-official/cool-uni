@@ -267,8 +267,14 @@ onReady(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+page {
+	height: 100%;
+}
+
 .page-login {
+	height: 100%;
+
 	.logo {
 		display: flex;
 		flex-direction: column;
@@ -298,6 +304,8 @@ onReady(() => {
 		align-items: center;
 		justify-content: center;
 		margin-top: 80rpx;
+		position: relative;
+		z-index: 99;
 
 		.mode {
 			width: 100%;
@@ -345,7 +353,7 @@ onReady(() => {
 	}
 
 	.other {
-		position: fixed;
+		position: absolute;
 		bottom: env(safe-area-inset-bottom);
 		left: 0;
 		width: 100%;

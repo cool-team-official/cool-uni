@@ -61,11 +61,10 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		color: #c1c1c1;
+		color: $cl-color-placeholder;
 		margin-left: 20rpx;
 		height: 100%;
-		width: 40rpx;
-		font-size: 34rpx;
+		font-size: 28rpx;
 		position: relative;
 		z-index: 9;
 	}

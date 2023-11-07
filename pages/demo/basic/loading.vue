@@ -41,19 +41,19 @@
 		</cl-card>
 
 		<cl-card label="加载区域">
-			<view class="space">
-				<cl-loading-mask loading> </cl-loading-mask>
+			<cl-loading-mask loading> 
+				<view class="space">
+					<cl-form>
+						<cl-form-item label="昵称">
+							<cl-input></cl-input>
+						</cl-form-item>
 
-				<cl-form>
-					<cl-form-item label="昵称">
-						<cl-input></cl-input>
-					</cl-form-item>
-
-					<cl-form-item label="性别">
-						<cl-select></cl-select>
-					</cl-form-item>
-				</cl-form>
-			</view>
+						<cl-form-item label="性别">
+							<cl-select></cl-select>
+						</cl-form-item>
+					</cl-form>
+				</view>
+			</cl-loading-mask>
 		</cl-card>
 	</cl-page>
 </template>
@@ -63,8 +63,10 @@
 <style lang="scss" scoped>
 .space {
 	font-size: 28rpx;
-	width: 100%;
 	background-color: #f6f7fa;
 	position: relative;
+	padding: 20rpx;
+	box-sizing: border-box;
+	border-radius: 16rpx;
 }
 </style>

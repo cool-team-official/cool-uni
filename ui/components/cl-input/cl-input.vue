@@ -14,6 +14,7 @@
 			borderRadius: parseRpx(borderRadius),
 			height: parseRpx(height),
 			fontSize: parseRpx(fontSize),
+			padding: parseRpx(padding),
 		}"
 		@click="click"
 	>
@@ -99,11 +100,15 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		placeholderStyle: [String, Object],
+		placeholderStyle: Object,
 		placeholderClass: String,
 		readonly: Boolean,
 		disabled: Boolean,
 		height: [String, Number],
+		padding: {
+			type: [String, Number],
+			default: "0 20rpx",
+		},
 		round: Boolean,
 		borderRadius: [String, Number],
 		border: {
@@ -163,6 +168,15 @@ export default defineComponent({
 		// 是否禁用
 		const isDisabled = computed(() => {
 			return form.disabled.value || props.disabled;
+		});
+
+		// 占位符
+		const placeholderStyle = computed(() => {
+			return {
+				lineHeight: 1,
+				color: "#a8abb2",
+				...props.placeholderStyle,
+			};
 		});
 
 		// 输入
@@ -235,6 +249,7 @@ export default defineComponent({
 			clear,
 			onKeyboardheightchange,
 			parseRpx,
+			placeholderStyle,
 		};
 	},
 });
