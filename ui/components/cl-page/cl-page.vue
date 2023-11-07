@@ -1,7 +1,12 @@
 <template>
 	<view
 		class="cl-page"
-		:class="[`theme-${app.theme.name}`]"
+		:class="[
+			`theme-${app.theme.name}`,
+			{
+				'is-fullscreen': fullscreen,
+			},
+		]"
 		:style="{
 			padding: parseRpx(padding),
 		}"
@@ -21,12 +26,10 @@
 		<!-- #endif -->
 
 		<!-- 内容插槽 -->
-		<view class="cl-page__container" :style="{ height }">
-			<slot></slot>
-		</view>
+		<slot></slot>
 
 		<!-- 底部安全区域 -->
-		<view class="safe-area-bottom"></view>
+		<view class="safe-area-bottom" v-if="!fullscreen"></view>
 	</view>
 
 	<!-- 背景色 -->
@@ -69,11 +72,6 @@ export default defineComponent({
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
-
-		// 内容高度
-		const height = computed(() => {
-			return props.fullscreen ? `calc(100% - ${statusBarHeight}px)` : "auto";
-		});
 
 		// 背景色
 		const background = computed(() => {
@@ -173,7 +171,6 @@ export default defineComponent({
 
 		return {
 			app,
-			height,
 			background,
 			refs,
 			setRefs,
