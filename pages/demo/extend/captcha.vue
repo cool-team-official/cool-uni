@@ -1,7 +1,7 @@
 <template>
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-captcha></cl-captcha>
+			<cl-captcha focus></cl-captcha>
 		</cl-card>
 
 		<cl-card label="其他数量">

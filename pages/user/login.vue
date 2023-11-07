@@ -267,14 +267,8 @@ onReady(() => {
 });
 </script>
 
-<style lang="scss" >
-page {
-	height: 100%;
-}
-
+<style lang="scss" scoped>
 .page-login {
-	height: 100%;
-
 	.logo {
 		display: flex;
 		flex-direction: column;
@@ -304,8 +298,6 @@ page {
 		align-items: center;
 		justify-content: center;
 		margin-top: 80rpx;
-		position: relative;
-		z-index: 99;
 
 		.mode {
 			width: 100%;
@@ -353,10 +345,7 @@ page {
 	}
 
 	.other {
-		position: absolute;
-		bottom: env(safe-area-inset-bottom);
-		left: 0;
-		width: 100%;
+		margin-top: 100rpx;
 
 		.platform {
 			display: flex;
@@ -373,6 +362,7 @@ page {
 				width: 130px;
 				margin-bottom: 28rpx;
 				border-radius: 6px;
+				background-color: #ffffff;
 
 				image {
 					height: 32rpx;

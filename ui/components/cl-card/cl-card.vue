@@ -15,7 +15,7 @@
             <template v-else>
                 <view class="cl-card__more" v-if="more" @tap="toMore">
                     <slot name="more">
-                        <cl-text :value="moreText" color="#777"></cl-text>
+                        <text class="text">{{ moreText }}</text>
                         <text class="cl-icon-arrow-right"></text>
                     </slot>
                 </view>

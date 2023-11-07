@@ -22,11 +22,14 @@
 		align-items: center;
 		position: absolute;
 		right: 20rpx;
-		line-height: 1;
+		color: #777;
+
+		.text {
+			font-size: 26rpx;
+		}
 
 		.cl-icon-arrow-right {
 			font-size: 30rpx;
-			color: #777;
 		}
 	}
 

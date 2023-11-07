@@ -25,7 +25,7 @@
 							v-model="form.code"
 							placeholder="验证码"
 							maxlength="4"
-							:height="62"
+							:height="64"
 							:clearable="false"
 							focus
 							@confirm="send"
@@ -205,7 +205,7 @@ defineExpose({
 		margin-bottom: 30rpx;
 
 		image {
-			height: 62rpx;
+			height: 64rpx;
 			width: 200rpx;
 			border-radius: 3rpx;
 			flex-shrink: 0;
