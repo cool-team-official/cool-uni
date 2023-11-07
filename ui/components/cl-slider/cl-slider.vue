@@ -8,6 +8,7 @@
             :active-color="activeColor"
             :background-color="backgroundColor"
             :block-size="blockSize"
+			:block-color="blockColor"
             :show-value="showValue"
             :disabled="disabled"
             @change="onChange"
@@ -27,6 +28,7 @@
  * @property {String} activeColor 滑块左侧已选择部分的线条颜色
  * @property {String} backgroundColor 滑块右侧背景条的颜色，默认#e9e9e9
  * @property {Number} blockSize 滑块的大小，默认20
+ * @property {Number} blockColor 滑块颜色，默认#ffffff
  * @property {Boolean} showValue 是否显示当前 value
  * @event {Function} change 绑定值改变时触发
  * @event {Function} changing 拖动过程中触发
@@ -69,6 +71,7 @@ export default defineComponent({
             type: Number,
             default: 15
         },
+		blockColor: String,
         showValue: {
             type: Boolean,
             default: false
