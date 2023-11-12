@@ -13,10 +13,10 @@
 	>
 		<view
 			class="cl-form-item__label"
-			:style="{ 
+			:style="{
 				height: labelHeight,
 				lineHeight: labelHeight,
-				width: labelWidth 
+				width: labelWidth,
 			}"
 			v-if="label || $slots.label"
 		>
@@ -26,12 +26,16 @@
 		</view>
 
 		<view class="cl-form-item__container">
-			<view class="cl-form-item__content" :class="[justify]" :style="{
-				lineHeight: labelPosition == 'top' ? 'normal' : labelHeight
-			}">
+			<view
+				class="cl-form-item__content"
+				:class="[justify]"
+				:style="{
+					lineHeight: labelPosition == 'top' ? 'normal' : labelHeight,
+				}"
+			>
 				<slot></slot>
 			</view>
-			<view class="cl-form-item__suffix">
+			<view class="cl-form-item__suffix" v-if="$slots.suffix">
 				<slot name="suffix"></slot>
 			</view>
 		</view>
@@ -98,7 +102,7 @@ export default defineComponent({
 				"removeField",
 				"validateOnRuleChange",
 			],
-			["clearValidate", "onError", "scrollTo"]
+			["clearValidate", "onError", "scrollTo"],
 		);
 
 		// 避免多层级带 . 符号无法识别问题
@@ -120,7 +124,7 @@ export default defineComponent({
 
 		// 标题高度
 		const labelHeight = computed(() => {
-			return  parseRpx(props.labelHeight || parent.value?.labelHeight);
+			return parseRpx(props.labelHeight || parent.value?.labelHeight);
 		});
 
 		// 标题宽度
@@ -251,7 +255,7 @@ export default defineComponent({
 			},
 			{
 				deep: true,
-			}
+			},
 		);
 
 		// 监听cl-form加载完
@@ -262,7 +266,7 @@ export default defineComponent({
 					parent.value?.addField(props.prop, props.rules);
 				}
 			},
-			{ immediate: true }
+			{ immediate: true },
 		);
 
 		onUnmounted(() => {
