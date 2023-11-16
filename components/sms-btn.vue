@@ -16,18 +16,25 @@
 			</cl-button>
 		</slot>
 
-		<cl-popup v-model="captcha.visible" :padding="30" border-radius="16rpx" show-close-btn>
+		<cl-popup v-model="captcha.visible" :padding="40" border-radius="24rpx">
 			<cl-loading-mask :loading="captcha.loading">
 				<view class="sms-popup">
+					<view class="head">
+						<cl-text bold :size="28" value="获取短信验证码"></cl-text>
+						<cl-icon :size="32" name="close" @tap="close"></cl-icon>
+					</view>
+
 					<view class="row">
 						<cl-input
 							type="number"
 							v-model="form.code"
 							placeholder="验证码"
-							maxlength="4"
-							:height="64"
+							:maxlength="4"
+							:height="70"
 							:clearable="false"
 							focus
+							:border="false"
+							background-color="#f7f7f7"
 							@confirm="send"
 						/>
 
@@ -39,6 +46,7 @@
 						fill
 						:disabled="!form.code"
 						:loading="captcha.sending"
+						:height="70"
 						@tap="send"
 					>
 						发送短信
@@ -65,10 +73,6 @@ const props = defineProps({
 		default: true,
 	},
 	plain: Boolean,
-	countdown: {
-		type: Boolean,
-		default: true,
-	},
 });
 
 const emit = defineEmits(["success"]);
@@ -129,9 +133,7 @@ async function send() {
 			})
 			.then(() => {
 				ui.showToast("短信已发送，请查收");
-				if (props.countdown) {
-					startCountdown();
-				}
+				startCountdown();
 				close();
 				emit("success");
 			})
@@ -200,14 +202,21 @@ defineExpose({
 .sms-popup {
 	width: 400rpx;
 
+	.head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 30rpx;
+	}
+
 	.row {
 		display: flex;
+		align-items: center;
 		margin-bottom: 30rpx;
 
 		image {
-			height: 64rpx;
+			height: 70rpx;
 			width: 200rpx;
-			border-radius: 3rpx;
 			flex-shrink: 0;
 		}
 	}
