@@ -40,14 +40,28 @@
 			</cl-row>
 		</cl-card>
 
-		<cl-card label="不同样式">
+		<cl-card label="圆角">
 			<cl-row type="flex">
-				<cl-image src="/pages/demo/static/avatar.png" :size="140" round></cl-image>
+				<cl-col :span="6">
+					<cl-image src="/pages/demo/static/avatar.png" :size="140" round></cl-image>
+				</cl-col>
+
+				<cl-col :span="6">
+					<cl-image
+						src="/pages/demo/static/avatar.png"
+						:size="140"
+						:radius="16"
+					></cl-image>
+				</cl-col>
+			</cl-row>
+		</cl-card>
+
+		<cl-card label="自定义大小">
+			<cl-row type="flex">
 				<cl-image
 					src="/pages/demo/static/avatar.png"
-					:size="[140, 280]"
+					:size="[150, 280]"
 					mode="aspectFill"
-					:margin="[0, 0, 0, 20]"
 				></cl-image>
 			</cl-row>
 		</cl-card>

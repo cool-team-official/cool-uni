@@ -8,7 +8,13 @@
 				<text class="tips">已发送至 +86 {{ form.phone }}</text>
 
 				<view class="code">
-					<cl-captcha v-model="form.smsCode" :length="len" :gutter="26" @done="next" />
+					<cl-captcha
+						focus
+						v-model="form.smsCode"
+						:length="len"
+						:gutter="26"
+						@done="next"
+					/>
 				</view>
 
 				<cl-button

@@ -1,9 +1,11 @@
 <template>
 	<cl-page :padding="20">
 		<cl-confirm ref="Confirm"> </cl-confirm>
+
 		<cl-confirm ref="Confirm2">
 			<cl-input></cl-input>
 		</cl-confirm>
+
 		<cl-confirm ref="Confirm3"> </cl-confirm>
 
 		<cl-card label="基础用法">

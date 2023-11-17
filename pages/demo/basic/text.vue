@@ -44,6 +44,7 @@
 			<cl-card label="超出省略">
 				<cl-text
 					:ellipsis="2"
+					:line-height="1.4"
 					value="锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃。沧海月明珠有泪，蓝田日暖玉生烟。此情可待成追忆，只是当时已惘然。"
 				></cl-text>
 			</cl-card>
@@ -65,7 +66,7 @@
 					:size="30"
 					color="green"
 					:margin="[20, 20, 20, 20]"
-					value="自定义颜色(green)、大小(30)、间距(20)"
+					value="颜色(green)、大小(30)、间距(20)"
 				></cl-text>
 			</cl-card>
 		</view>

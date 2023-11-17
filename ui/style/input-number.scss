@@ -12,14 +12,11 @@
 		height: $cl-input-number-size;
 		width: $cl-input-number-size;
 		border-radius: $cl-input-number-size;
-		margin: 0;
-		padding: 0;
-		font-size: 26rpx;
-		font-weight: bold;
 		background-color: #f1f7ff;
 
-		&::after {
-			border: 0;
+		text {
+			font-size: 28rpx;
+			font-weight: bold;
 		}
 
 		&:active {

@@ -76,7 +76,7 @@ function onUpdate() {
 
 	// 提示
 	if (isDev) {
-		console.log("[eps] update", service);
+		console.log("[eps] update");
 	}
 }
 
