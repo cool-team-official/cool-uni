@@ -14,6 +14,7 @@
 			class="cl-badge__content"
 			:style="{
 				backgroundColor: color,
+				margin: parseRpx(offset),
 			}"
 			v-if="!hidden && ((content && content != 0) || isDot)"
 			>{{ content }}</text
@@ -36,6 +37,7 @@
 import { computed, defineComponent } from "vue";
 import type { PropType } from "vue";
 import { isNumber } from "lodash-es";
+import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-badge",
@@ -50,6 +52,7 @@ export default defineComponent({
 			default: "error",
 		},
 		color: String,
+		offset: Number,
 	},
 
 	setup(props) {
@@ -68,6 +71,7 @@ export default defineComponent({
 
 		return {
 			content,
+			parseRpx,
 		};
 	},
 });

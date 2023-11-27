@@ -17,7 +17,8 @@
 
 		&.is-plain {
 			background-color: #fff;
-			.cl-button__text {
+			.cl-button__text,
+			.cl-button__icon {
 				color: rgba($color, 0.8);
 			}
 			&.is-border {
@@ -34,7 +35,8 @@
 			&:not(.is-loading) {
 				background-color: rgba($color, 0.8);
 				&.is-plain {
-					.cl-button__text {
+					.cl-button__text,
+					.cl-button__icon {
 						color: #fff;
 					}
 				}
