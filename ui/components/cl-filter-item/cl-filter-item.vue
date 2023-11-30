@@ -136,7 +136,7 @@ export default defineComponent({
 		const parent = getParent(
 			"cl-filter-bar",
 			["form", "setExpand", "update", "close", "collapse"],
-			["collapse"],
+			["collapse", "clear"],
 		);
 
 		// 下拉框
@@ -254,14 +254,7 @@ export default defineComponent({
 			} else {
 				if (item.checked) {
 					item.checked = false;
-
-					// 更新标题
-					if (props.label) {
-						dropdown.name = props.label;
-					}
-
-					// 更新数据
-					update(undefined);
+					clear();
 				} else {
 					dropdown.list.forEach((e) => {
 						e.checked = e.value == item.value;
@@ -271,10 +264,9 @@ export default defineComponent({
 					dropdown.name = item.label;
 					// 更新数据
 					update(item.value);
+					// 收起下拉框
+					collapse();
 				}
-
-				// 收起下拉框
-				collapse();
 			}
 		}
 
@@ -310,14 +302,23 @@ export default defineComponent({
 			collapse();
 		}
 
-		// 下拉框多选清空
+		// 清空
 		function clear() {
-			update([]);
+			if (props.multiple) {
+				update([], "clear");
+			} else {
+				update(undefined, "clear");
+			}
+
+			if (props.label) {
+				dropdown.name = props.label;
+			}
+
 			collapse();
 		}
 
 		// 更新数据
-		function update(value?: string | number | boolean | any[]) {
+		function update(value?: string | number | boolean | any[], action?: string) {
 			emit("change", value);
 
 			// 更新 cl-filter-bar
@@ -325,6 +326,7 @@ export default defineComponent({
 				parent.value.update({
 					prop: props.prop,
 					value,
+					action,
 				});
 			}
 		}
