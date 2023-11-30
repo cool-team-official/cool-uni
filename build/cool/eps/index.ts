@@ -117,7 +117,7 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 					`${col.propertyName}?: ${getType({
 						propertyName: col.propertyName,
 						type: col.type,
-					})};`
+					})};`,
 				);
 			}
 			t.push("\n");
@@ -181,7 +181,7 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 								// 方法名
 								const n = toCamel(a.name || last(a.path.split("/")) || "").replace(
 									/[:\/-]/g,
-									""
+									"",
 								);
 
 								if (n) {
@@ -251,12 +251,12 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 
 									t.push(
 										`${n}(data${q.length == 1 ? "?" : ""}: ${q.join(
-											""
-										)}): Promise<${res}>;`
+											"",
+										)}): Promise<${res}>;`,
 									);
-								}
 
-								permission.push(n);
+									permission.push(n);
+								}
 							});
 
 							// 权限标识
@@ -267,7 +267,7 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 							t.push(
 								`permission: { ${permission
 									.map((e) => `${e}: string;`)
-									.join("\n")} };`
+									.join("\n")} };`,
 							);
 
 							// 权限状态
@@ -278,7 +278,7 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 							t.push(
 								`_permission: { ${permission
 									.map((e) => `${e}: boolean;`)
-									.join("\n")} };`
+									.join("\n")} };`,
 							);
 
 							// 请求
@@ -382,9 +382,9 @@ function createService() {
 
 					// 创建权限
 					getNames(d[k]).forEach((e) => {
-						d[k].permission[e] = `${d[k].namespace.replace("admin/", "")}/${e}`.replace(
+						d[k].permission[e] = `${d[k].namespace.replace("app/", "")}/${e}`.replace(
 							/\//g,
-							":"
+							":",
 						);
 					});
 				}
