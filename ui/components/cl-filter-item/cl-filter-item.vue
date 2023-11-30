@@ -254,7 +254,9 @@ export default defineComponent({
 			} else {
 				if (item.checked) {
 					item.checked = false;
-					clear();
+
+					dropdown.name = props.label || "";
+					update(undefined);
 				} else {
 					dropdown.list.forEach((e) => {
 						e.checked = e.value == item.value;
@@ -264,9 +266,10 @@ export default defineComponent({
 					dropdown.name = item.label;
 					// 更新数据
 					update(item.value);
-					// 收起下拉框
-					collapse();
 				}
+
+				// 收起下拉框
+				collapse();
 			}
 		}
 
@@ -310,9 +313,7 @@ export default defineComponent({
 				update(undefined, "clear");
 			}
 
-			if (props.label) {
-				dropdown.name = props.label;
-			}
+			dropdown.name = props.label || "";
 
 			collapse();
 		}
