@@ -93,6 +93,13 @@
 import { computed, defineComponent, type PropType, reactive, watch } from "vue";
 import { getParent } from "/@/cool/utils";
 
+declare interface Item {
+	label: string;
+	value: any;
+	checked?: boolean;
+	[key: string]: any;
+}
+
 export default defineComponent({
 	name: "cl-filter-item",
 
@@ -117,7 +124,7 @@ export default defineComponent({
 			default: 4,
 		},
 		options: {
-			type: Array,
+			type: Array as PropType<Item[]>,
 			default: () => [],
 		},
 	},
@@ -129,13 +136,13 @@ export default defineComponent({
 		const parent = getParent(
 			"cl-filter-bar",
 			["form", "setExpand", "update", "close", "collapse"],
-			["collapse"]
+			["collapse"],
 		);
 
 		// 下拉框
-		const dropdown = reactive<any>({
+		const dropdown = reactive({
 			name: "",
-			list: [],
+			list: [] as Item[],
 			isExpand: false,
 		});
 
@@ -146,7 +153,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		// 绑定值
@@ -156,7 +163,7 @@ export default defineComponent({
 			switch (props.type) {
 				case "dropdown":
 					if (!props.multiple) {
-						const d = dropdown.list.find((e: any) => e.value == v);
+						const d = dropdown.list.find((e) => e.value == v);
 						if (d) {
 							dropdown.name = d.label;
 						}
@@ -203,7 +210,7 @@ export default defineComponent({
 					} else {
 						let arr = props.multiple ? value.value || [] : [value.value];
 
-						dropdown.list.map((e: any) => {
+						dropdown.list.map((e) => {
 							e.checked = arr.includes(e.value);
 
 							// 设置单选的选中标题
@@ -236,7 +243,7 @@ export default defineComponent({
 		}
 
 		// 选择项
-		function checkItem(item: any) {
+		function checkItem(item: Item) {
 			// 已禁用
 			if (item.disabled) {
 				return false;
@@ -245,14 +252,27 @@ export default defineComponent({
 			if (props.multiple) {
 				item.checked = !item.checked;
 			} else {
-				dropdown.list.forEach((e: any) => {
-					e.checked = e.value == item.value;
-				});
+				if (item.checked) {
+					item.checked = false;
 
-				// 更新标题
-				dropdown.name = item.label;
-				// 更新数据
-				update(item.value);
+					// 更新标题
+					if (props.label) {
+						dropdown.name = props.label;
+					}
+
+					// 更新数据
+					update(undefined);
+				} else {
+					dropdown.list.forEach((e) => {
+						e.checked = e.value == item.value;
+					});
+
+					// 更新标题
+					dropdown.name = item.label;
+					// 更新数据
+					update(item.value);
+				}
+
 				// 收起下拉框
 				collapse();
 			}
@@ -286,7 +306,7 @@ export default defineComponent({
 
 		// 下拉框多选确认
 		function confirm() {
-			update(dropdown.list.filter((e: any) => e.checked).map((e: any) => e.value));
+			update(dropdown.list.filter((e) => e.checked).map((e) => e.value));
 			collapse();
 		}
 
