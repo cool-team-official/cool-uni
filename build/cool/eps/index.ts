@@ -165,7 +165,7 @@ async function createDescribe({ list, service }: { list: Eps.Entity[]; service: 
 
 				if (d[i].namespace) {
 					// 查找配置
-					const item = list.find((e) => (e.prefix || "").includes(d[i].namespace));
+					const item = list.find((e) => (e.prefix || "") === `/${d[i].namespace}`);
 
 					if (item) {
 						const t = [`interface ${name} {`];
