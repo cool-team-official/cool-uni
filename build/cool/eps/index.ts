@@ -16,9 +16,20 @@ function getNames(v: any) {
 // 数据
 let service = {};
 let list: Eps.Entity[] = [];
+let localList: Eps.Entity[] = [];
 
 // 获取数据
 async function getData(temps?: Eps.Entity[]) {
+	// 记录本地数据
+	if (!isEmpty(temps)) {
+		localList = (temps || []).map((e) => {
+			return {
+				...e,
+				isLocal: true,
+			};
+		});
+	}
+
 	// 本地文件
 	try {
 		list = JSON.parse(readFile(join(DistPath, "eps.json")) || "[]");
@@ -49,9 +60,9 @@ async function getData(temps?: Eps.Entity[]) {
 			error(`[eps] ${url} 服务未启动！！！`);
 		});
 
-	// 合并其他数据
-	if (isArray(temps)) {
-		temps.forEach((e) => {
+	// 合并本地数据
+	if (isArray(localList)) {
+		localList.forEach((e) => {
 			const d = list.find((a) => e.prefix === a.prefix);
 
 			if (d) {
