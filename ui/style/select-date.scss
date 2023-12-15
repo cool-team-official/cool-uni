@@ -1,0 +1,12 @@
+.cl-select-date {
+	&__picker {
+		height: 500rpx;
+
+		&-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 28rpx;
+		}
+	}
+}

@@ -1,0 +1,53 @@
+.cl-select-inner {
+	display: flex;
+	align-items: center;
+	height: $cl-height;
+	width: 100%;
+	background-color: #fff;
+	box-sizing: border-box;
+	position: relative;
+	font-size: $cl-font-size;
+
+	&__wrap {
+		width: 100%;
+	}
+
+	&__value {
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: 1;
+	}
+
+	&__icon {
+		color: $cl-color-placeholder;
+		font-size: 28rpx;
+
+		&:last-child {
+			margin-left: 20rpx;
+		}
+	}
+
+	&__placeholder {
+		color: $cl-color-placeholder;
+	}
+
+	&.is-disabled {
+		background-color: $cl-color-disabled-bg;
+		color: $cl-color-disabled;
+
+		.cl-select__placeholder {
+			color: $cl-color-disabled;
+		}
+	}
+
+	&.is-border {
+		border: $cl-border-width solid $cl-border-color;
+		border-radius: $cl-border-radius;
+	}
+
+	&.is-round {
+		border-radius: $cl-height;
+	}
+}

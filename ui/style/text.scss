@@ -42,6 +42,10 @@
 		user-select: text;
 	}
 
+	&.is-flex1 {
+		flex: 1;
+	}
+
 	&.is-color-primary {
 		color: $cl-color-primary;
 	}
@@ -71,11 +75,11 @@
 	}
 
 	&__prefix-icon {
-		margin-right: 4rpx;
+		margin-right: 10rpx;
 	}
 
 	&__suffix-icon {
-		margin-left: 4rpx;
+		margin-left: 10rpx;
 	}
 
 	&__value {

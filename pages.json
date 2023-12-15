@@ -259,6 +259,18 @@
 					}
 				},
 				{
+					"path": "form/select-popup",
+					"style": {
+						"navigationBarTitleText": "SelectPopup 下拉框弹窗"
+					}
+				},
+				{
+					"path": "form/select-date",
+					"style": {
+						"navigationBarTitleText": "SelectDate 时间选择器"
+					}
+				},
+				{
 					"path": "form/rate",
 					"style": {
 						"navigationBarTitleText": "Rate 评分"

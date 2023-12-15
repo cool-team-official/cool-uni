@@ -1,33 +1,30 @@
 <template>
-	<view
-		class="cl-select"
-		:class="{
-			'is-border': border,
-			'is-disabled': isDisabled,
-		}"
-		@tap="open"
-		v-if="showPicker"
-	>
-		<text class="cl-select__value">
-			{{ text }}
-
-			<text class="cl-select__placeholder" v-if="!text">
-				{{ placeholder }}
-			</text>
-		</text>
-
-		<text class="cl-icon-arrow-bottom"></text>
+	<view class="cl-select-popup" @tap="open" v-if="showPicker">
+		<cl-select-inner
+			:height="height"
+			:placeholder="placeholder"
+			:disabled="disabled"
+			:border="border"
+			:round="round"
+			:backgroundColor="backgroundColor"
+			:borderRadius="borderRadius"
+			:arrowIcon="arrowIcon"
+			:padding="padding"
+			:text="text"
+		>
+			<slot :value="checked" :label="text"></slot>
+		</cl-select-inner>
 	</view>
 
 	<!-- 弹出框 -->
 	<cl-popup
 		:ref="setRefs('popup')"
-		direction="bottom"
 		:padding="0"
+		direction="bottom"
 		border-radius="16rpx 16rpx 0 0"
 		@close="onClose"
 	>
-		<view class="cl-select-popup">
+		<view class="cl-select-popup__wrap">
 			<!-- 标题 -->
 			<view class="cl-select-popup__header">
 				{{ title }}
@@ -41,8 +38,8 @@
 				:scroll-into-view="scroller.view"
 				class="cl-select-popup__container"
 				:style="{
-					height: parseRpx(height),
-					maxHeight: parseRpx(maxHeight),
+					height: parseRpx(scrollerHeight),
+					maxHeight: parseRpx(scrollerMaxHeight),
 				}"
 			>
 				<slot>
@@ -99,7 +96,7 @@ import { defineComponent, ref, type PropType, watch, computed, nextTick, reactiv
 import { isArray, isEmpty, last } from "lodash-es";
 import { useRefs } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
-import { useForm } from "../../hook";
+import { Props } from "../cl-select-inner/config";
 
 interface Item {
 	label: string;
@@ -113,12 +110,8 @@ export default defineComponent({
 	props: {
 		modelValue: [String, Number, Array],
 		title: String,
-		placeholder: {
-			type: String,
-			default: "请选择",
-		},
-		height: [String, Number],
-		maxHeight: {
+		scrollerHeight: [String, Number],
+		scrollerMaxHeight: {
 			type: [String, Number],
 			default: 600,
 		},
@@ -126,27 +119,19 @@ export default defineComponent({
 			type: Array as PropType<Item[]>,
 			default: () => [],
 		},
-		border: {
-			type: Boolean,
-			default: true,
-		},
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
 		multiple: Boolean,
 		showPicker: {
 			type: Boolean,
 			default: true,
 		},
 		required: Boolean,
+		...Props,
 	},
 
 	emits: ["update:modelValue", "change", "confirm", "close"],
 
 	setup(props, { emit }) {
 		const { refs, setRefs } = useRefs();
-		const { disabled } = useForm();
 
 		// 已选
 		const checked = ref<any[]>([]);
@@ -160,9 +145,6 @@ export default defineComponent({
 				.map((e) => props.options.find((a) => a.value == e)?.label)
 				.join("、");
 		});
-
-		// 是否禁用
-		const isDisabled = computed(() => disabled.value || props.disabled);
 
 		// 滚动条
 		const scroller = reactive({
@@ -188,7 +170,7 @@ export default defineComponent({
 					{
 						immediate: true,
 						deep: true,
-					}
+					},
 				);
 			},
 		});
@@ -269,7 +251,7 @@ export default defineComponent({
 			{
 				deep: true,
 				immediate: true,
-			}
+			},
 		);
 
 		return {
@@ -279,7 +261,6 @@ export default defineComponent({
 			selection,
 			text,
 			scroller,
-			isDisabled,
 			open,
 			close,
 			onClose,

@@ -76,6 +76,7 @@ import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { useForm, useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
+import { keys } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-input",
@@ -159,7 +160,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		// 是否聚焦
@@ -172,11 +173,15 @@ export default defineComponent({
 
 		// 占位符
 		const placeholderStyle = computed(() => {
-			return {
+			const d = {
 				lineHeight: 1,
 				color: "#a8abb2",
 				...props.placeholderStyle,
 			};
+
+			return keys(d)
+				.map((k) => `${k}:${d[k]};`)
+				.join("");
 		});
 
 		// 输入

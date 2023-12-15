@@ -1,27 +1,23 @@
 <template>
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-select v-model="v1" :options="list"></cl-select>
+			<cl-select-popup v-model="v1" title="选择歌曲" :options="list" />
 		</cl-card>
 
-		<cl-card label="日期">
-			<cl-select v-model="v2" mode="date" fields="month"></cl-select>
+		<cl-card label="多选">
+			<cl-select-popup v-model="v2" multiple title="选择歌曲" :options="list" />
 		</cl-card>
 
-		<cl-card label="时间">
-			<cl-select v-model="v3" mode="time"></cl-select>
+		<cl-card label="必填">
+			<cl-select-popup v-model="v3" required title="选择歌曲" :options="list" />
 		</cl-card>
 
-		<cl-card label="禁用">
-			<cl-select v-model="v4" :options="list" disabled></cl-select>
-		</cl-card>
-
-		<cl-card label="自定义">
-			<cl-select v-model="v5" :options="list" :height="90" padding="0 32rpx" round>
-				<template #default="{ label, value }">
-					你选择了<cl-tag round :margin="[0, 0, 0, 20]">{{ label }}</cl-tag>
+		<cl-card label="自定义项">
+			<cl-select-popup v-model="v4" required title="选择歌曲" :options="list">
+				<template #item="{ item }">
+					{{ item }}
 				</template>
-			</cl-select>
+			</cl-select-popup>
 		</cl-card>
 	</cl-page>
 </template>
@@ -30,10 +26,9 @@
 import { ref } from "vue";
 
 const v1 = ref();
-const v2 = ref();
+const v2 = ref([]);
 const v3 = ref();
-const v4 = ref(2);
-const v5 = ref(2);
+const v4 = ref();
 
 const list = ref([
 	{

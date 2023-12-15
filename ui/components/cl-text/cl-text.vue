@@ -11,6 +11,7 @@
 				'is-underline': underline,
 				'is-ellipsis': ellipsis > 0,
 				'is-copy': copy,
+				'is-flex1': flex1,
 			},
 		]"
 		:style="{
@@ -121,6 +122,7 @@ export default defineComponent({
 		prefixIcon: String,
 		suffixIcon: String,
 		copy: Boolean,
+		flex1: Boolean,
 		width: [String, Number],
 	},
 

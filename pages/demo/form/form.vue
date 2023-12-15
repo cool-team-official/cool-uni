@@ -8,7 +8,7 @@
 					</cl-form-item>
 
 					<cl-form-item label="活动时间" prop="date">
-						<cl-select v-model="form.date" mode="date"></cl-select>
+						<cl-select-date v-model="form.date"></cl-select-date>
 					</cl-form-item>
 
 					<cl-form-item label="活动类型" prop="type">

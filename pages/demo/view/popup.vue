@@ -4,7 +4,7 @@
 			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
 		</cl-popup>
 
-		<cl-popup v-model="visible_modal" :modal="false">
+		<cl-popup v-model="visible_modal" :modal="false" :padding="0">
 			<cl-button type="primary" @tap="visible_modal = false">点我关闭</cl-button>
 		</cl-popup>
 

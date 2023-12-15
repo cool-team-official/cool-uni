@@ -5,7 +5,7 @@
 		:value="index"
 		:range="options"
 		:range-key="rangeKey"
-		:disabled="isDisabled"
+		:disabled="disabled"
 		:end="end"
 		:start="start"
 		:fields="fields"
@@ -13,32 +13,20 @@
 		@columnchange="onColumnChange"
 		@cancel="onCancel"
 	>
-		<view
-			class="cl-select"
-			:class="[
-				{
-					'is-disabled': isDisabled,
-					'is-round': round,
-					'is-border': border,
-				},
-			]"
-			:style="{
-				height: parseRpx(height),
-				backgroundColor,
-				borderRadius: parseRpx(borderRadius),
-			}"
+		<cl-select-inner
+			:height="height"
+			:placeholder="placeholder"
+			:disabled="disabled"
+			:border="border"
+			:round="round"
+			:backgroundColor="backgroundColor"
+			:borderRadius="borderRadius"
+			:arrowIcon="arrowIcon"
+			:padding="padding"
+			:text="text"
 		>
-			<view class="cl-select__value">
-				<slot :index="index" :text="text">
-					{{ text }}
-					<text class="cl-select__placeholder" v-if="!text">
-						{{ placeholder }}
-					</text>
-				</slot>
-			</view>
-
-			<text class="cl-select__icon" :class="[arrowIcon]" v-if="arrowIcon"></text>
-		</view>
+			<slot :value="index" :label="text"></slot>
+		</cl-select-inner>
 	</picker>
 </template>
 
@@ -68,23 +56,18 @@
 
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
-import { useForm } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 import { isArray, isEmpty } from "lodash-es";
+import { Props } from "../cl-select-inner/config";
 
 export default defineComponent({
 	name: "cl-select",
 
 	props: {
 		modelValue: null,
-		height: [String, Number],
 		mode: {
 			type: String as PropType<"selector" | "multiSelector" | "region" | "time" | "date">,
 			default: "selector",
-		},
-		placeholder: {
-			type: String,
-			default: "请选择",
 		},
 		options: {
 			type: Array as PropType<{ label: string; value: any }[]>,
@@ -102,18 +85,6 @@ export default defineComponent({
 			type: String,
 			default: "/",
 		},
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
-		border: {
-			type: Boolean,
-			default: true,
-		},
-		round: {
-			type: Boolean,
-			default: null,
-		},
 		fields: {
 			type: String as PropType<"year" | "month" | "day">,
 			default: "day",
@@ -124,28 +95,18 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		backgroundColor: String,
-		borderRadius: [String, Number],
 		setOptionsIsParseValue: Boolean,
-		arrowIcon: {
-			type: String,
-			default: "cl-icon-arrow-bottom",
-		},
+		...Props,
 	},
 
 	emits: ["update:modelValue", "confirm", "change", "column-change", "cancel"],
 
 	setup(props, { emit }) {
-		const { disabled } = useForm();
-
 		// 选中下标
 		const index = ref<any>();
 
 		// 文本
 		const text = ref("");
-
-		// 是否禁用
-		const isDisabled = computed(() => disabled.value || props.disabled);
 
 		// key
 		const rangeKey = computed(() => (props.mode == "region" ? "" : props.labelKey));
@@ -158,14 +119,14 @@ export default defineComponent({
 					// 返回下标
 					case "selector":
 						return props.options.findIndex(
-							(e: any) => String(e[props.valueKey]) == String(val)
+							(e: any) => String(e[props.valueKey]) == String(val),
 						);
 					// 返回数组
 					case "multiSelector":
 						return (isArray(val) ? val : [val]).map((v, i) => {
 							//@ts-ignore
 							return props.options[i].findIndex(
-								(e: any) => String(e[props.valueKey]) == String(v)
+								(e: any) => String(e[props.valueKey]) == String(v),
 							);
 						});
 					default:
@@ -187,7 +148,7 @@ export default defineComponent({
 							.map(
 								(v: any, i: number) =>
 									//@ts-ignore
-									props.options[i][v][props.labelKey]
+									props.options[i][v][props.labelKey],
 							)
 							.join(props.separator);
 					case "region":
@@ -221,7 +182,7 @@ export default defineComponent({
 						.map(
 							(v: any, i: number) =>
 								//@ts-ignore
-								props.options[i][v]
+								props.options[i][v],
 						);
 					value = data.map((e: any) => e[props.valueKey]);
 					break;
@@ -237,7 +198,7 @@ export default defineComponent({
 		// 监听列
 		function onColumnChange({ detail }: any) {
 			index.value = index.value.map((v: any, i: number) =>
-				i < detail.column ? v : i === detail.column ? detail.value : 0
+				i < detail.column ? v : i === detail.column ? detail.value : 0,
 			);
 
 			emit("column-change", { ...detail, selects: index.value });
@@ -274,14 +235,13 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		return {
 			index,
 			text,
 			rangeKey,
-			isDisabled,
 			parse,
 			onChange,
 			onColumnChange,

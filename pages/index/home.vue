@@ -99,6 +99,14 @@ const list = [
 				link: "/pages/demo/form/select",
 			},
 			{
+				label: "SelectDate 时间选择器",
+				link: "/pages/demo/form/select-date",
+			},
+			{
+				label: "SelectPopup 下拉框弹窗",
+				link: "/pages/demo/form/select-popup",
+			},
+			{
 				label: "Rate 评分",
 				link: "/pages/demo/form/rate",
 			},
