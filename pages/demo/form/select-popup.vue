@@ -12,10 +12,16 @@
 			<cl-select-popup v-model="v3" required title="选择歌曲" :options="list" />
 		</cl-card>
 
-		<cl-card label="自定义项">
+		<cl-card label="自定义">
 			<cl-select-popup v-model="v4" required title="选择歌曲" :options="list">
 				<template #item="{ item }">
 					{{ item }}
+				</template>
+
+				<template #default="{ label, value }">
+					<cl-select-inner :height="90" padding="0 32rpx" round>
+						你选择了<cl-tag round :margin="[0, 0, 0, 20]">{{ label }}</cl-tag>
+					</cl-select-inner>
 				</template>
 			</cl-select-popup>
 		</cl-card>

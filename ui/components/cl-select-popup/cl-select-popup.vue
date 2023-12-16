@@ -1,19 +1,19 @@
 <template>
 	<view class="cl-select-popup" @tap="open" v-if="showPicker">
-		<cl-select-inner
-			:height="height"
-			:placeholder="placeholder"
-			:disabled="disabled"
-			:border="border"
-			:round="round"
-			:backgroundColor="backgroundColor"
-			:borderRadius="borderRadius"
-			:arrowIcon="arrowIcon"
-			:padding="padding"
-			:text="text"
-		>
-			<slot :value="checked" :label="text"></slot>
-		</cl-select-inner>
+		<slot :label="text" :value="checked">
+			<cl-select-inner
+				:height="height"
+				:placeholder="placeholder"
+				:disabled="disabled"
+				:border="border"
+				:round="round"
+				:backgroundColor="backgroundColor"
+				:borderRadius="borderRadius"
+				:arrowIcon="arrowIcon"
+				:padding="padding"
+				:text="text"
+			/>
+		</slot>
 	</view>
 
 	<!-- 弹出框 -->
@@ -42,7 +42,7 @@
 					maxHeight: parseRpx(scrollerMaxHeight),
 				}"
 			>
-				<slot>
+				<slot name="list">
 					<view class="cl-select-popup__list">
 						<view
 							class="cl-select-popup__item"

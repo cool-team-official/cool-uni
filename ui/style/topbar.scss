@@ -4,6 +4,7 @@
 	height: $cl-topbar-height;
 	width: 100%;
 	position: relative;
+	box-sizing: border-box;
 
 	&__content {
 		width: 100%;
@@ -15,9 +16,9 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		line-height: 1;
 
 		text {
+			width: 500rpx;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -25,15 +26,17 @@
 	}
 
 	&__title {
-		font-size: 32rpx;
-		width: 500rpx;
+		font-size: 14px;
+
+		&:last-child {
+			font-size: 16px;
+		}
 	}
 
 	&__description {
-		font-size: 22rpx;
+		font-size: 12px;
 		color: #999;
-		width: 400rpx;
-		margin-top: 6rpx;
+		line-height: 1;
 	}
 
 	&__prepend,
@@ -64,14 +67,10 @@
 		justify-content: center;
 		height: 100%;
 		width: 80rpx;
-		font-size: 40rpx;
+		font-size: 22px;
 
 		&:active {
 			opacity: 0.8;
-		}
-
-		.cl-icon-arrow-left {
-			font-size: 44rpx;
 		}
 	}
 
@@ -84,5 +83,11 @@
 
 	&.is-border {
 		border-bottom: $cl-border-width solid #f6f7fa;
+	}
+
+	&.is-ios {
+		.cl-topbar__title {
+			font-weight: bold;
+		}
 	}
 }

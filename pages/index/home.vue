@@ -346,7 +346,7 @@ function get() {
 				.label {
 					flex: 1;
 					font-size: 28rpx;
-					font-weight: 500;
+					font-weight: bold;
 				}
 			}
 		}

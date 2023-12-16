@@ -37,16 +37,18 @@
 		</cl-card>
 
 		<cl-card label="自定义">
-			<cl-select-date v-model="v5" round title="请选择预约时间">
+			<cl-select-date v-model="v5" title="请选择预约时间">
 				<template #default="{ value }">
-					<cl-text
-						prefix-icon="cl-icon-time"
-						:value="
-							value
-								? dayjs(value).format('YYYY年MM月DD日 HH时mm分ss秒')
-								: '请选择预约时间'
-						"
-					></cl-text>
+					<cl-select-inner :height="90" padding="0 32rpx" round>
+						<cl-text
+							prefix-icon="cl-icon-time"
+							:value="
+								value
+									? dayjs(value).format('YYYY年MM月DD日 HH时mm分ss秒')
+									: '请选择预约时间'
+							"
+						></cl-text>
+					</cl-select-inner>
 				</template>
 			</cl-select-date>
 		</cl-card>

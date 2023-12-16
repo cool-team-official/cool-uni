@@ -1,11 +1,13 @@
 <template>
+	<cl-topbar title="Topbar 顶部导航栏"></cl-topbar>
+
 	<cl-page :padding="20">
 		<cl-card label="基础用法">
-			<cl-topbar title="标题"></cl-topbar>
+			<cl-topbar title="Topbar 顶部导航栏"></cl-topbar>
 		</cl-card>
 
 		<cl-card label="带描述">
-			<cl-topbar title="标题" description="描述"></cl-topbar>
+			<cl-topbar title="Topbar 顶部导航栏" description="兼容多端"></cl-topbar>
 		</cl-card>
 
 		<cl-card label="自定义">

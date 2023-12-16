@@ -16,10 +16,16 @@
 			<cl-select v-model="v4" :options="list" disabled></cl-select>
 		</cl-card>
 
+		<cl-card label="省市区">
+			<cl-select-region v-model="v5"></cl-select-region>
+		</cl-card>
+
 		<cl-card label="自定义">
-			<cl-select v-model="v5" :options="list" :height="90" padding="0 32rpx" round>
+			<cl-select v-model="v6" :options="list">
 				<template #default="{ label, value }">
-					你选择了<cl-tag round :margin="[0, 0, 0, 20]">{{ label }}</cl-tag>
+					<cl-select-inner :height="90" padding="0 32rpx" round>
+						你选择了<cl-tag round :margin="[0, 0, 0, 20]">{{ label }}</cl-tag>
+					</cl-select-inner>
 				</template>
 			</cl-select>
 		</cl-card>
@@ -33,7 +39,8 @@ const v1 = ref();
 const v2 = ref();
 const v3 = ref();
 const v4 = ref(2);
-const v5 = ref(2);
+const v5 = ref([]);
+const v6 = ref(2);
 
 const list = ref([
 	{

@@ -166,11 +166,11 @@
 				padding: 0 40rpx;
 			}
 
-			// #ifdef MP
+			/* #ifdef MP */
 			& > view {
 				height: 100%;
 			}
-			// #endif
+			/* #endif */
 		}
 	}
 }

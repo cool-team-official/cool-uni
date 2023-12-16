@@ -1,36 +1,39 @@
 <template>
 	<view class="cl-select-date" @tap="open">
-		<cl-select-inner
-			:height="height"
-			:placeholder="placeholder"
-			:disabled="disabled"
-			:border="border"
-			:round="round"
-			:backgroundColor="backgroundColor"
-			:borderRadius="borderRadius"
-			arrowIcon="cl-icon-time"
-			:padding="padding"
-			:text="modelValue"
-		>
-			<slot :value="modelValue" :label="modelValue"></slot>
-		</cl-select-inner>
+		<slot :value="modelValue" :label="modelValue">
+			<cl-select-inner
+				:height="height"
+				:placeholder="placeholder"
+				:disabled="disabled"
+				:border="border"
+				:round="round"
+				:backgroundColor="backgroundColor"
+				:borderRadius="borderRadius"
+				arrowIcon="cl-icon-time"
+				:padding="padding"
+				:text="modelValue"
+			>
+			</cl-select-inner>
+		</slot>
 	</view>
 
 	<!-- 弹出框 -->
 	<cl-select-popup :ref="setRefs('popup')" :title="title" :show-picker="false">
-		<view class="cl-select-date__wrap">
-			<picker-view :value="value" @change="onChange" class="cl-select-date__picker">
-				<picker-view-column v-for="(c, ci) in columns" :key="ci">
-					<view
-						class="cl-select-date__picker-item"
-						v-for="(item, index) in c.list"
-						:key="index"
-					>
-						{{ item }}{{ c.unit }}
-					</view>
-				</picker-view-column>
-			</picker-view>
-		</view>
+		<template #list>
+			<view class="cl-select-date__wrap">
+				<picker-view :value="value" @change="onChange" class="cl-select-date__picker">
+					<picker-view-column v-for="(c, ci) in columns" :key="ci">
+						<view
+							class="cl-select-date__picker-item"
+							v-for="(item, index) in c.list"
+							:key="index"
+						>
+							{{ item }}{{ c.unit }}
+						</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+		</template>
 
 		<template #confirm>
 			<cl-button type="primary" size="large" round fill @tap="confirm">选择</cl-button>

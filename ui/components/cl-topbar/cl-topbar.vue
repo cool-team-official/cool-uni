@@ -4,6 +4,7 @@
 		:class="{
 			'is-border': border,
 			'is-fixed': fixed,
+			'is-ios': isIos,
 		}"
 		:style="{
 			backgroundColor,
@@ -28,7 +29,8 @@
 
 		<view class="cl-topbar__prepend">
 			<view class="cl-topbar__icon" v-if="showBack" @tap="back">
-				<text class="cl-icon-arrow-left"></text>
+				<text class="cl-icon-home" v-if="isFirst"></text>
+				<text class="cl-icon-arrow-left" v-else></text>
 			</view>
 
 			<slot name="prepend"></slot>
@@ -41,8 +43,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { router } from "/@/cool";
+import { isIos } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
 
@@ -89,15 +92,17 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
+		// 是否页面栈的第一个
+		const isFirst = ref(false);
+
+		// 顶部内边距
 		const paddingTop = computed(() => {
 			return props.fixed ? `${statusBarHeight}px` : 0;
 		});
 
 		// 返回
 		function back() {
-			const pages = getCurrentPages();
-
-			if (pages.length == 1) {
+			if (isFirst.value) {
 				//  H5页面刷新或者分享页时，页面栈长度只有1。此时逐个验证返回的页面路径
 				if (props.backPath) {
 					router.push({
@@ -117,10 +122,17 @@ export default defineComponent({
 			emit("title", e);
 		}
 
+		onMounted(() => {
+			const pages = getCurrentPages();
+			isFirst.value = pages.length == 1;
+		});
+
 		return {
+			isFirst,
 			paddingTop,
 			back,
 			tapTitle,
+			isIos,
 		};
 	},
 });

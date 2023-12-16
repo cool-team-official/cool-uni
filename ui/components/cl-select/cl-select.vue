@@ -13,20 +13,20 @@
 		@columnchange="onColumnChange"
 		@cancel="onCancel"
 	>
-		<cl-select-inner
-			:height="height"
-			:placeholder="placeholder"
-			:disabled="disabled"
-			:border="border"
-			:round="round"
-			:backgroundColor="backgroundColor"
-			:borderRadius="borderRadius"
-			:arrowIcon="arrowIcon"
-			:padding="padding"
-			:text="text"
-		>
-			<slot :value="index" :label="text"></slot>
-		</cl-select-inner>
+		<slot :label="text" :value="index">
+			<cl-select-inner
+				:height="height"
+				:placeholder="placeholder"
+				:disabled="disabled"
+				:border="border"
+				:round="round"
+				:backgroundColor="backgroundColor"
+				:borderRadius="borderRadius"
+				:arrowIcon="arrowIcon"
+				:padding="padding"
+				:text="text"
+			/>
+		</slot>
 	</picker>
 </template>
 
