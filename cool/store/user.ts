@@ -46,7 +46,7 @@ const useUserStore = defineStore("user", function () {
 	// 更新用户信息
 	async function update(data: User.Info & { [key: string]: any }) {
 		set(deepMerge(info.value, data));
-		return service.user.info.updatePerson(info.value);
+		return service.user.info.updatePerson(data);
 	}
 
 	// 清除用户
