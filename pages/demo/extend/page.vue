@@ -56,7 +56,10 @@ function openConfirm() {
 }
 
 function openLoading() {
-	ui.showLoading("2秒后关闭");
+	ui.showLoading({
+		text: "2秒后关闭",
+		border: false,
+	});
 
 	setTimeout(() => {
 		ui.hideLoading();

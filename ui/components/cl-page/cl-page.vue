@@ -11,14 +11,19 @@
 			padding: parseRpx(padding),
 		}"
 	>
-		<!-- 遮罩层 -->
-		<cl-loading-mask fullscreen :loading="loader.loading" :text="loader.text"></cl-loading-mask>
+		<!-- 加载框 -->
+		<cl-loading-mask
+			fullscreen
+			:loading="loader.loading"
+			:text="loader.text"
+			:border="loader.border"
+		/>
 
 		<!-- 提示 -->
-		<cl-toast :ref="setRefs('toast')"></cl-toast>
+		<cl-toast :ref="setRefs('toast')" />
 
 		<!-- 确认框 -->
-		<cl-confirm :ref="setRefs('confirm')"></cl-confirm>
+		<cl-confirm :ref="setRefs('confirm')" />
 
 		<!-- 状态栏 -->
 		<!-- #ifndef MP-ALIPAY -->
@@ -45,6 +50,7 @@
 import { computed, defineComponent, reactive, getCurrentInstance, onMounted } from "vue";
 import { useApp, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
+import { isString } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-page",
@@ -83,16 +89,22 @@ export default defineComponent({
 			);
 		});
 
-		// 加载器
+		// 加载框配置
 		const loader = reactive({
 			loading: false,
+			border: false,
 			text: "加载中",
 		});
 
 		// 显示加载框
-		function showLoading(text: string) {
+		function showLoading(options?: ClLoading.MaskOptions) {
 			loader.loading = true;
-			loader.text = text;
+
+			if (isString(options)) {
+				loader.text = options;
+			} else {
+				Object.assign(loader, options);
+			}
 		}
 
 		// 隐藏加载框

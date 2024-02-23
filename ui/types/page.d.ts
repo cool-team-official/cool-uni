@@ -1,6 +1,6 @@
 declare interface ClPage {
 	loaded: boolean;
-	showLoading(text?: string): void;
+	showLoading(options?: ClLoading.MaskOptions): void;
 	hideLoading(): void;
 	showToast(options: ClToast.Options): void;
 	showConfirm(options: ClConfirm.Options): void;
