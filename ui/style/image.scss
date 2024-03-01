@@ -13,11 +13,15 @@
 	}
 
 	&__loading,
-	&__placeholder,
-	&__error {
+	&__placeholder {
 		position: absolute;
 		left: 0;
 		top: 0;
+	}
+
+	&__loading,
+	&__placeholder,
+	&__error {
 		height: 100%;
 		width: 100%;
 		display: flex;
@@ -36,7 +40,17 @@
 
 	&__error {
 		text-align: center;
-		color: #666;
+		color: #909399;
+		background-color: #dcdfe6;
+		border-radius: inherit;
+
+		.icon {
+			font-size: 70rpx;
+		}
+
+		.text {
+			font-size: 24rpx;
+		}
 	}
 
 	&.is-round {

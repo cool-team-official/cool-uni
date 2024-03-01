@@ -8,7 +8,7 @@
 				'is-error': !src || isError,
 			},
 		]"
-		@tap.stop="onPreview"
+		@tap="onPreview"
 	>
 		<view class="cl-image__placeholder" v-if="!src">
 			<slot name="placeholder">
@@ -17,23 +17,27 @@
 		</view>
 
 		<view class="cl-image__error" v-else-if="isError">
-			<slot name="error"> 加载失败 </slot>
+			<slot name="error">
+				<text class="icon cl-icon-img-warning"></text>
+			</slot>
 		</view>
 
-		<view class="cl-image__loading" v-if="isLoading">
-			<cl-loading />
-		</view>
+		<template v-else>
+			<view class="cl-image__loading" v-if="isLoading">
+				<cl-loading />
+			</view>
 
-		<image
-			class="cl-image__target"
-			:src="src"
-			:mode="mode"
-			:lazy-load="lazyLoad"
-			:webp="webp"
-			:show-menu-by-longpress="showMenuByLongpress"
-			@error="handleError"
-			@load="handleLoad"
-		/>
+			<image
+				class="cl-image__target"
+				:src="src"
+				:mode="mode"
+				:lazy-load="lazyLoad"
+				:webp="webp"
+				:show-menu-by-longpress="showMenuByLongpress"
+				@error="handleError"
+				@load="handleLoad"
+			/>
+		</template>
 	</view>
 </template>
 
@@ -52,7 +56,7 @@
 
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
-import { isNumber, isArray, isString } from "lodash-es";
+import { isNumber, isArray, isString, isNaN } from "lodash-es";
 import { useTap } from "../../hook";
 import { parseRpx } from "/@/cool/utils";
 
@@ -92,9 +96,25 @@ export default defineComponent({
 		// 样式
 		const imgStyle = computed(() => {
 			const [height, width] = size.value;
+
+			let minWidth = "0";
+			let minHeight = "0";
+
+			// 不是有效高
+			if (isNaN(parseInt(height))) {
+				minHeight = width;
+			}
+
+			// 不是有效宽
+			if (isNaN(parseInt(width))) {
+				minWidth = height;
+			}
+
 			return {
 				height,
 				width,
+				minWidth,
+				minHeight,
 				margin: parseRpx(props.margin),
 				borderRadius: parseRpx(props.radius),
 				...props.customStyle,
@@ -129,13 +149,15 @@ export default defineComponent({
 		}
 
 		// 点击是否预览图片
-		function onPreview() {
+		function onPreview(e: any) {
 			if (props.previewList) {
 				uni.previewImage({
 					urls: props.previewList || [],
 					current: props.previewCurrent || props.src,
 				});
 			}
+
+			e.stopPropagation();
 
 			tap();
 		}
@@ -147,7 +169,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		return {

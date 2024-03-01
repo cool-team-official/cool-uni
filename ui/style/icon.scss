@@ -1,11 +1,11 @@
 @font-face {
 	font-family: "cl-iconfont"; /* Project id 1725188 */
 	src:
-		url("https://at.alicdn.com/t/c/font_1725188_vzxrvo32q0i.woff2?t=1702706665098")
+		url("https://at.alicdn.com/t/c/font_1725188_ejohsqo5kmj.woff2?t=1709196479703")
 			format("woff2"),
-		url("https://at.alicdn.com/t/c/font_1725188_vzxrvo32q0i.woff?t=1702706665098")
+		url("https://at.alicdn.com/t/c/font_1725188_ejohsqo5kmj.woff?t=1709196479703")
 			format("woff"),
-		url("https://at.alicdn.com/t/c/font_1725188_vzxrvo32q0i.ttf?t=1702706665098")
+		url("https://at.alicdn.com/t/c/font_1725188_ejohsqo5kmj.ttf?t=1709196479703")
 			format("truetype");
 }
 
@@ -19,6 +19,14 @@
 	&.is-primary {
 		color: $cl-color-primary;
 	}
+}
+
+.cl-icon-img-error:before {
+	content: "\e900";
+}
+
+.cl-icon-img-warning:before {
+	content: "\e901";
 }
 
 .cl-icon-amount-fill:before {

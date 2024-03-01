@@ -72,6 +72,16 @@ async function getData(temps?: Eps.Entity[]) {
 			}
 		});
 	}
+
+	list.forEach((e) => {
+		if (!e.namespace) {
+			e.namespace = "";
+		}
+
+		if (!e.api) {
+			e.api = [];
+		}
+	});
 }
 
 // 创建 json 文件
