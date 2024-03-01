@@ -6,16 +6,24 @@
 				{
 					'is-fullscreen': fullscreen,
 					'is-show': loading,
+					'is-border': border,
 				},
 			]"
 			:style="{
-				background: modal ? background : 'transparent',
+				background: modal && !border ? background : 'transparent',
 				color,
 			}"
 		>
 			<view class="cl-loading-mask__content" v-show="loading">
-				<cl-loading :color="color" :loading-theme="loadingTheme"></cl-loading>
-				<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
+				<view class="cl-loading-mask__border">
+					<cl-loading
+						:theme="loadingTheme"
+						:color="border ? '#ffffff' : color"
+						:size="border ? 30 : 25"
+						:border-width="border ? 6 : 4"
+					/>
+					<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
+				</view>
 			</view>
 		</view>
 
@@ -49,6 +57,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		border: Boolean,
 		background: {
 			type: String,
 			default: "rgba(255, 255, 255, 0.7)",

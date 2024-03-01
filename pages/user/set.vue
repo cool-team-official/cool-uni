@@ -65,18 +65,8 @@
 					"
 				/>
 
-				<cl-list-item label="软件升级" :arrow-icon="false" :border="false">
-					<cl-loading :size="20" v-if="app.version.loading" />
-
-					<template v-else>
-						<cl-text
-							:value="`新版本 v${app.version.num}`"
-							color="red"
-							v-if="app.version.isUpgrade"
-						/>
-						<cl-text value="已经是最新版本" v-else />
-					</template>
-				</cl-list-item>
+				<!-- 版本更新 -->
+				<version-list-item />
 			</cl-list>
 
 			<cl-list :radius="16">
@@ -91,12 +81,11 @@
 
 <script lang="ts" setup>
 import { onReady } from "@dcloudio/uni-app";
-import { useApp, useCool, useStore } from "/@/cool";
+import { useCool, useStore } from "/@/cool";
 import { useUi } from "/@/ui";
 
 const { router, upload } = useCool();
 const { user } = useStore();
-const app = useApp();
 const ui = useUi();
 
 // 上传头像
@@ -124,7 +113,6 @@ function uploadAvatar(e?: { detail: { avatarUrl: string } }) {
 }
 
 onReady(() => {
-	app.version.check();
 	user.get();
 });
 </script>

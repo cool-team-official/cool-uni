@@ -24,7 +24,7 @@ export default (): UserConfig => {
 		resolve: {
 			alias: {
 				"/@": resolve("./"),
-				"/$": resolve("./pages/"),
+				"/$": resolve("./uni_modules/"),
 			},
 		},
 	};

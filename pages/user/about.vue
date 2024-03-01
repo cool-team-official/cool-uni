@@ -4,14 +4,14 @@
 			<image class="logo" src="/static/logo.png" />
 
 			<text class="name">{{ app.info.name }}</text>
-			<text class="version">v{{ app.version.num }}</text>
+			<text class="version">v{{ config.version }}</text>
 			<view class="desc">{{ app.info.desc }}</view>
 		</view>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
-import { useApp } from "/@/cool";
+import { config, useApp } from "/@/cool";
 
 const app = useApp();
 </script>

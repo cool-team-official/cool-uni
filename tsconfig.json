@@ -10,7 +10,7 @@
 		"allowJs": true,
 		"paths": {
 			"/@/*": ["./*"],
-			"/$/*": ["./pages/*"]
+			"/$/*": ["./uni_modules/*"]
 		},
 		"lib": ["esnext", "dom"],
 		"types": ["@dcloudio/types"],

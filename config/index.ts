@@ -6,6 +6,9 @@ export const isDev = import.meta.env.MODE === "development";
 
 // 配置
 export const config = {
+	// 版本号
+	version: "0.0.0",
+
 	// 项目信息
 	app: {
 		name: "COOL-UNI",

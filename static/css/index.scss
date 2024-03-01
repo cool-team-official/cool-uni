@@ -13,6 +13,14 @@
 			background: linear-gradient(120deg, rgba($cl-color-primary, 0.7), $cl-color-primary);
 			border: 0;
 		}
+
+		.cl-button {
+			&.is-custom {
+				height: 80rpx;
+				font-size: 30rpx;
+				width: 100%;
+			}
+		}
 	}
 
 	&.theme-grey {
