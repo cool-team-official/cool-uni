@@ -9,6 +9,7 @@
 		]"
 		:style="{
 			padding: parseRpx(padding),
+			height: fullscreen ? `${height}px` : 'auto',
 		}"
 	>
 		<!-- 加载框 -->
@@ -47,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, getCurrentInstance, onMounted } from "vue";
+import { computed, defineComponent, reactive, getCurrentInstance, onMounted, ref } from "vue";
 import { useApp, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 import { isString } from "lodash-es";
@@ -56,16 +57,21 @@ export default defineComponent({
 	name: "cl-page",
 
 	props: {
+		// 是否全屏显示，高度100%
 		fullscreen: Boolean,
+		// 內间距
 		padding: {
 			type: [Number, String],
 			default: 0,
 		},
+		// 是否显示状态栏
 		statusBar: {
 			type: Boolean,
 			default: true,
 		},
+		// 状态栏背景色
 		statusBarBackground: String,
+		// 页面背景色
 		backgroundColor: String,
 	},
 
@@ -73,11 +79,14 @@ export default defineComponent({
 		const { refs, setRefs, router } = useCool();
 		const app = useApp();
 		const info = router.info();
-		const { statusBarHeight = 0 } = uni.getSystemInfoSync();
+		const { statusBarHeight = 0, windowHeight } = uni.getSystemInfoSync();
 		const { proxy }: any = getCurrentInstance();
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
+
+		// 屏幕高度
+		const height = computed(() => (statusBar ? windowHeight - 44 : windowHeight));
 
 		// 背景色
 		const background = computed(() => {
@@ -184,6 +193,7 @@ export default defineComponent({
 		return {
 			app,
 			background,
+			height,
 			refs,
 			setRefs,
 			loader,
