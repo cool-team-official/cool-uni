@@ -5,6 +5,7 @@
 			`cl-badge--${type}`,
 			{
 				'is-dot': isDot,
+				'is-plain': plain,
 			},
 		]"
 		v-if="$slots.default"
@@ -53,6 +54,7 @@ export default defineComponent({
 		},
 		color: String,
 		offset: Number,
+		plain: Boolean,
 	},
 
 	setup(props) {

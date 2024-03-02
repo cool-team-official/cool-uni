@@ -6,29 +6,38 @@
 
 	&__content {
 		display: inline-flex;
-		height: 16rpx;
-		min-width: 16rpx;
+		height: 24rpx;
+		min-width: 12rpx;
 		align-items: center;
-		position: absolute;
-		top: -8rpx;
-		right: -8rpx;
-		color: #fff;
-		font-size: 24rpx;
+		justify-content: center;
 		text-align: center;
 		white-space: nowrap;
-		border: 4rpx solid rgba(255, 255, 255, 1);
-		border-radius: 20rpx;
-		padding: 8rpx;
-		transform: scale(0.9);
-		line-height: 0;
+		font-size: 16rpx;
+		color: #fff;
+		position: absolute;
+		top: -12rpx;
+		right: -12rpx;
+		border: 2rpx solid rgba(255, 255, 255, 0.8);
+		border-radius: 32rpx;
+		padding: 0 6rpx;
 	}
 
 	&.is-dot {
 		.cl-badge__content {
-			height: 20rpx;
-			width: 20rpx;
+			height: 14rpx;
+			width: 14rpx;
 			padding: 0;
 			border-radius: 50%;
+			top: -7rpx;
+			right: -7rpx;
+		}
+	}
+
+	&.is-plain {
+		.cl-badge__content {
+			background-color: #fff;
+			color: $cl-color-primary;
+			border: 2rpx solid currentColor;
 		}
 	}
 

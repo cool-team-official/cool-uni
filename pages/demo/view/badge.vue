@@ -24,6 +24,12 @@
 			</cl-badge>
 		</cl-card>
 
+		<cl-card label="不同样式">
+			<cl-badge :value="132" plain>
+				<cl-button>不同样式</cl-button>
+			</cl-badge>
+		</cl-card>
+
 		<cl-card label="不同状态">
 			<cl-row>
 				<cl-col :span="6">
