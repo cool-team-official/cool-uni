@@ -9,7 +9,7 @@
 		]"
 		:style="{
 			padding: parseRpx(padding),
-			height: fullscreen ? `${height}px` : 'auto',
+			height: fullscreen ? `${windowHeight}px` : 'auto',
 		}"
 	>
 		<!-- 加载框 -->
@@ -84,9 +84,6 @@ export default defineComponent({
 
 		// 是否显示导航栏
 		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
-
-		// 屏幕高度
-		const height = computed(() => (statusBar ? windowHeight - 44 : windowHeight));
 
 		// 背景色
 		const background = computed(() => {
@@ -193,7 +190,7 @@ export default defineComponent({
 		return {
 			app,
 			background,
-			height,
+			windowHeight,
 			refs,
 			setRefs,
 			loader,
