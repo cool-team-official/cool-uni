@@ -46,7 +46,7 @@
 import { onReady } from "@dcloudio/uni-app";
 import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import SmsBtn from "/@/components/sms-btn.vue";
 
 const { service, router, refs, setRefs } = useCool();

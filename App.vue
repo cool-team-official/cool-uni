@@ -18,6 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "/@/ui/index.scss";
+@import "/$/cool-ui/index.scss";
 @import "/@/static/css/index.scss";
 </style>

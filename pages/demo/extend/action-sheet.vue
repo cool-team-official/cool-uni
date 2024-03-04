@@ -22,7 +22,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const ui = useUi();
 

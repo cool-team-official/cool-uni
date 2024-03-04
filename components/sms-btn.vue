@@ -60,7 +60,7 @@
 <script lang="ts" setup>
 import { computed, type PropType, reactive, ref } from "vue";
 import { useCool } from "../cool";
-import { useUi } from "../ui";
+import { useUi } from "/$/cool-ui";
 
 const props = defineProps({
 	phone: String,
@@ -96,7 +96,7 @@ const isDisabled = computed(() => countdown.value > 0 || !props.phone);
 
 // 按钮文案
 const btnText = computed(() =>
-	countdown.value > 0 ? `${countdown.value}s后重新获取` : "获取验证码"
+	countdown.value > 0 ? `${countdown.value}s后重新获取` : "获取验证码",
 );
 
 // 表单

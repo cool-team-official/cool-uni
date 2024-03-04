@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 /// <reference types="@dcloudio/types/uni-app" />
-/// <reference types="./build/cool/dist/eps" />
-/// <reference types="./ui/types" />
+/// <reference types="../build/cool/dist/eps" />
+/// <reference types="../uni_modules/cool-ui/types" />
 
 declare module "*.vue" {
 	import { DefineComponent } from "vue";

@@ -339,12 +339,6 @@
 			]
 		}
 	],
-	"easycom": {
-		"autoscan": true,
-		"custom": {
-			"^cl-(.*)": "/@/ui/components/cl-$1/cl-$1.vue"
-		}
-	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "cool-uni",

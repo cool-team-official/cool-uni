@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import { useApp, useCool } from "/@/cool";
 import { onReady } from "@dcloudio/uni-app";
 

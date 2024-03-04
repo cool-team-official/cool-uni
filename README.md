@@ -15,7 +15,7 @@
 ```html
 <script lang="ts" setup>
 	import { useCool } from "/@/cool";
-	import { useUi } from "/@/ui";
+	import { useUi } from "/$/cool-ui";
 
 	const { service, router, mitt, storage, upload } = useCool();
 	const ui = useUi();

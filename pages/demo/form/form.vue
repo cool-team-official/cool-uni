@@ -69,7 +69,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import { onPageScroll } from "@dcloudio/uni-app";
 
 onPageScroll((e) => {});

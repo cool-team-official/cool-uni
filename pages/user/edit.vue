@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import { onReady } from "@dcloudio/uni-app";
 
 const { router } = useCool();

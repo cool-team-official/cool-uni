@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import { useApp, useCool } from "/@/cool";
 
 const { router } = useCool();

@@ -21,7 +21,7 @@ import { Canvas } from "/@/cool/utils";
 
 import Bg from "./static/images/share-bg.png";
 import Logo from "/@/static/logo.png";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const app = useApp();
 const ui = useUi();

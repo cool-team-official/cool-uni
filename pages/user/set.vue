@@ -82,7 +82,7 @@
 <script lang="ts" setup>
 import { onReady } from "@dcloudio/uni-app";
 import { useCool, useStore } from "/@/cool";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const { router, upload } = useCool();
 const { user } = useStore();

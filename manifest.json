@@ -57,8 +57,7 @@
                 "idfa" : true,
                 "privacyDescription" : {
                     "NSUserTrackingUsageDescription" : "请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验"
-                },
-                "dSYMs" : false
+                }
             },
             "sdkConfigs" : {
                 "payment" : {
@@ -145,7 +144,8 @@
     "mp-weixin" : {
         "appid" : "wx8651c4868edbd649",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : true
         },
         "usingComponents" : true
     },

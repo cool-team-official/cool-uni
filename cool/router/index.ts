@@ -8,6 +8,9 @@ type PushOptions =
 	| {
 			path: string;
 			mode?: "navigateTo" | "redirectTo" | "reLaunch" | "switchTab" | "preloadPage";
+			events?: {
+				[key: string]: (data: any) => void;
+			};
 			query?: {
 				[key: string]: any;
 			};
@@ -145,6 +148,7 @@ const router = {
 			mode = "navigateTo",
 			animationType,
 			animationDuration,
+			events,
 			success,
 			fail,
 			complete,
@@ -173,6 +177,7 @@ const router = {
 			url: path,
 			animationType,
 			animationDuration,
+			events,
 			success,
 			fail,
 			complete,

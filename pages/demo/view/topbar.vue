@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const ui = useUi();
 

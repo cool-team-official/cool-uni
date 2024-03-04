@@ -44,7 +44,7 @@
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
 import { useCool, useStore } from "/@/cool";
 import Tabbar from "./components/tabbar.vue";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const { router } = useCool();
 const { user } = useStore();

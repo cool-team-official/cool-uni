@@ -98,7 +98,7 @@
 import { computed, ref } from "vue";
 import { onReady } from "@dcloudio/uni-app";
 import { useApp, useCool, useStore, useWx } from "/@/cool";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 import SmsBtn from "/@/components/sms-btn.vue";
 import AgreeBtn from "/@/components/agree-btn.vue";
 

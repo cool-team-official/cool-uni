@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useCool } from "/@/cool";
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const { router } = useCool();
 const ui = useUi();

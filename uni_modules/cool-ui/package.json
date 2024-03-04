@@ -1,0 +1,13 @@
+{
+	"id": "cool-ui",
+	"displayName": "cool-ui",
+	"version": "7.1.0",
+	"description": "结合 cool-admin 开发的组件库",
+	"keywords": [
+		"cool",
+		"cool-admin",
+		"ui",
+		"组件库"
+	],
+	"repository": "https://cool-js.com/uni/introduce.html"
+}

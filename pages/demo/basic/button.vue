@@ -45,9 +45,9 @@
 			</cl-card>
 
 			<cl-card label="不同尺寸">
-				<cl-button size="large">大</cl-button>
-				<cl-button size="default">默认</cl-button>
 				<cl-button size="small">小</cl-button>
+				<cl-button size="default">默认</cl-button>
+				<cl-button size="large">大</cl-button>
 				<cl-button :height="80" :width="200" :font-size="30">80*200</cl-button>
 			</cl-card>
 
@@ -122,7 +122,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useUi } from "/@/ui";
+import { useUi } from "/$/cool-ui";
 
 const ui = useUi();
 
