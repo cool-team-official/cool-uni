@@ -10,6 +10,7 @@
 			:style="{
 				backgroundColor,
 				visibility: height != '0px' ? 'visible' : 'hidden',
+				bottom: parseRpx(bottom),
 			}"
 		>
 			<view
@@ -51,6 +52,10 @@ export default defineComponent({
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
+		bottom: {
+			type: [String, Number],
+			default: 0,
+		},
 		border: Boolean,
 		flex: {
 			type: Boolean,
@@ -76,7 +81,7 @@ export default defineComponent({
 			},
 			{
 				deep: true,
-			}
+			},
 		);
 
 		const vh = computed(() => {
