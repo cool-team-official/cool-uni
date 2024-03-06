@@ -57,7 +57,6 @@
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { isNumber, isArray, isString, isNaN } from "lodash-es";
-import { useTap } from "../../hooks";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -85,8 +84,6 @@ export default defineComponent({
 	},
 
 	setup(props, { emit }) {
-		const { tap } = useTap(emit);
-
 		// 是否加载失败
 		const isError = ref(false);
 
@@ -155,11 +152,9 @@ export default defineComponent({
 					urls: props.previewList || [],
 					current: props.previewCurrent || props.src,
 				});
+
+				e.stopPropagation();
 			}
-
-			e.stopPropagation();
-
-			tap();
 		}
 
 		watch(
