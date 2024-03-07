@@ -92,29 +92,13 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 选项卡
- * @property {String, Number} modelValue 绑定值
- * @property {String, Number} height 高度，默认80
- * @property {Array} list 标签列表
- * @property {Boolean} loop 是否循环显示，默认true
- * @property {Boolean} fill 标签是否填充
- * @property {String} justify 水平布局
- * @property {Boolean} border 是否带有下边框，默认true
- * @property {Number} gutter 标签间隔，默认20
- * @property {String} color 字体及浮标颜色，默认主色
- * @property {String} unColor 未选中字体及浮标颜色
- * @property {String} backgroundColor 背景颜色
- * @property {Boolean} showDropdown 是否显示下拉按钮
- */
-
 import {
+	type PropType,
 	computed,
 	defineComponent,
 	getCurrentInstance,
 	nextTick,
 	onMounted,
-	type PropType,
 	reactive,
 	ref,
 	watch,
@@ -125,50 +109,65 @@ export default defineComponent({
 	name: "cl-tabs",
 
 	props: {
+		// 绑定值
 		modelValue: [String, Number],
+		// 高度
 		height: {
 			type: [String, Number],
 			default: 80,
 		},
+		// 标签列表
 		list: {
 			type: Array as PropType<{ label: string; value: any; [key: string]: any }[]>,
 			default: [],
 		},
+		// 是否循环显示
 		loop: {
 			type: Boolean,
 			default: true,
 		},
+		// 标签是否填充
 		fill: Boolean,
+		// 水平布局
 		justify: {
 			type: String as PropType<"start" | "center" | "end">,
 			default: "start",
 		},
+		// 是否带有下边框
 		border: {
 			type: Boolean,
 			default: true,
 		},
+		// 标签间隔
 		gutter: {
 			type: Number,
 			default: 30,
 		},
+		// 选中颜色
 		color: {
 			type: String,
 			default: "",
 		},
+		// 未选中颜色
 		unColor: {
 			type: String,
 			default: "",
 		},
+		// 背景色
 		backgroundColor: {
 			type: String,
 			default: "#fff",
 		},
+		// 是否显示下拉按钮
 		showDropdown: Boolean,
+		// 显示下划线
 		showLine: {
 			type: Boolean,
 			default: true,
 		},
+		// 是否可选
 		checkable: Boolean,
+		// 是否禁用
 		disabled: Boolean,
 	},
 
@@ -290,7 +289,7 @@ export default defineComponent({
 					? props.loop
 						? 0
 						: tabs.value.length - 1
-					: index + 1
+					: index + 1,
 			);
 		}
 
@@ -340,7 +339,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		// 监听列表改变

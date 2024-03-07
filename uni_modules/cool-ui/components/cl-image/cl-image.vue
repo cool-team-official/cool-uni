@@ -1,7 +1,7 @@
 <template>
 	<view
 		class="cl-image"
-		:style="imgStyle"
+		:style="[imgStyle, baseStyle]"
 		:class="[
 			{
 				'is-round': round,
@@ -58,21 +58,27 @@ import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { isNumber, isArray, isString, isNaN } from "lodash-es";
 import { parseRpx } from "/@/cool/utils";
+import { useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-image",
 	props: {
+		// 图片地址
 		src: String,
+		// 图片裁剪、缩放的模式
 		mode: String,
+		// 图片大小
 		size: {
 			type: [String, Number, Array],
 			default: "100%",
 		},
+		// 是否圆角
 		round: Boolean,
-		radius: [Number, String],
-		margin: [Number, String, Array],
+		// 当前预览值
 		previewCurrent: String,
+		// 预览列表
 		previewList: Array as PropType<string[]>,
+		// 懒加载
 		lazyLoad: Boolean,
 		fadeShow: {
 			type: Boolean,
@@ -80,7 +86,6 @@ export default defineComponent({
 		},
 		webp: Boolean,
 		showMenuByLongpress: Boolean,
-		customStyle: Object,
 	},
 
 	setup(props, { emit }) {
@@ -112,9 +117,6 @@ export default defineComponent({
 				width,
 				minWidth,
 				minHeight,
-				margin: parseRpx(props.margin),
-				borderRadius: parseRpx(props.radius),
-				...props.customStyle,
 			};
 		});
 
@@ -132,21 +134,21 @@ export default defineComponent({
 		});
 
 		// 加载失败
-		function handleError(e: any) {
+		function handleError(e: Event) {
 			isError.value = true;
 			isLoading.value = false;
 			emit("error", e);
 		}
 
 		// 加载成功
-		function handleLoad(e: any) {
+		function handleLoad(e: Event) {
 			isError.value = false;
 			isLoading.value = false;
 			emit("load", e);
 		}
 
 		// 点击是否预览图片
-		function onPreview(e: any) {
+		function onPreview(e: Event) {
 			if (props.previewList) {
 				uni.previewImage({
 					urls: props.previewList || [],
@@ -175,9 +177,8 @@ export default defineComponent({
 			handleError,
 			handleLoad,
 			onPreview,
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

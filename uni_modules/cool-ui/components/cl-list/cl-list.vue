@@ -1,44 +1,33 @@
 <template>
-    <view
-        class="cl-list"
-        :style="{
-            'border-radius': parseRpx(radius)
-        }"
-    >
-        <slot></slot>
-    </view>
+	<view class="cl-list" :style="[baseStyle]">
+		<slot></slot>
+	</view>
 </template>
 
 <script lang="ts">
-/**
- * @description 列表
- * @property {String} justify 水平布局方式
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} border 是否带有下边框，默认true
- * @property {Number} radius 圆角大小
- */
-
-import { defineComponent } from "vue"
-import type { PropType } from "vue"
-import { parseRpx } from "/@/cool/utils"
+import { defineComponent } from "vue";
+import { type PropType } from "vue";
+import { useStyle } from "../../hooks";
 
 export default defineComponent({
-    name: "cl-list",
+	name: "cl-list",
 
-    props: {
-        justify: String as PropType<"start" | "end" | "center">,
-        disabled: Boolean,
-        border: {
-            type: Boolean,
-            default: true
-        },
-        radius: Number
-    },
+	props: {
+		// 水平布局方式
+		justify: String as PropType<"start" | "end" | "center">,
+		// 是否禁用
+		disabled: Boolean,
+		// 是否带有下边框
+		border: {
+			type: Boolean,
+			default: true,
+		},
+	},
 
-    setup() {
-        return {
-            parseRpx
-        }
-    }
-})
+	setup() {
+		return {
+			...useStyle(),
+		};
+	},
+});
 </script>

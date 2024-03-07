@@ -26,54 +26,44 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 加载更多
- * @property {Object} loading 是否加载中
- * @property {Boolean} finish 是否加载完成
- * @property {Boolean} divider 是否显示分割符，默认true
- * @property {String} color 字体颜色，默认#666
- * @property {String} iconColor 图标颜色
- * @property {String} backgroundColor 背景颜色，默认f6f7fa
- * @property {String} text 普通状态下显示内容，默认“上拉加载更多”
- * @property {String} loadingText 加载中显示内容，默认“加载中”
- * @property {String} loadingTheme 加载图标主题
- * @property {String} finishText 加载完成显示内容，默认“没有更多了”
- */
-
 import { computed, defineComponent, type PropType } from "vue";
 
 export default defineComponent({
 	name: "cl-loadmore",
 
 	props: {
+		// 是否加载中
 		loading: Boolean,
+		// 是否加载完成
 		finish: Boolean,
+		// 是否显示分割符
 		divider: {
 			type: Boolean,
 			default: true,
 		},
-		color: {
-			type: String,
-			default: "#666",
-		},
+		// 字体颜色
+		color: String,
+		// 图标颜色
 		iconColor: String,
-		backgroundColor: {
-			type: String,
-			default: "#f6f7fa",
-		},
+		// 背景颜色
+		backgroundColor: String,
+		// 普通状态下显示内容
 		text: {
 			type: String,
 			default: "上拉加载更多",
 		},
-		loadingText: {
-			type: String,
-			default: "加载中",
-		},
-		loadingTheme: String as PropType<"default" | "spin">,
+		// 加载完成显示内容
 		finishText: {
 			type: String,
 			default: "没有更多了",
 		},
+		// 加载中显示内容
+		loadingText: {
+			type: String,
+			default: "加载中",
+		},
+		// 加载图标主题
+		loadingTheme: String as PropType<"default" | "spin">,
 	},
 
 	setup(props) {

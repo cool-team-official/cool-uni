@@ -13,14 +13,6 @@
 		display: block;
 	}
 
-	&.is-price {
-		top: 2rpx;
-	}
-
-	&.is-phone {
-		top: 1rpx;
-	}
-
 	&.is-line-through {
 		text-decoration: line-through;
 	}
@@ -40,10 +32,6 @@
 
 	&.is-copy {
 		user-select: text;
-	}
-
-	&.is-flex1 {
-		flex: 1;
 	}
 
 	&.is-color-primary {
@@ -76,10 +64,12 @@
 
 	&__prefix-icon {
 		margin-right: 10rpx;
+		line-height: 0;
 	}
 
 	&__suffix-icon {
 		margin-left: 10rpx;
+		line-height: 0;
 	}
 
 	&__value {

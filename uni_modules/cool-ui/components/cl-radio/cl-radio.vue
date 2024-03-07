@@ -24,16 +24,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 单选框
- * @property {String, Number} value 绑定值
- * @property {String, Number} label 标识
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} border 是否边框样式
- * @property {Boolean} fill 是否宽度填充
- * @event {Function} change 绑定值改变时触发
- */
-
 import { computed, defineComponent, ref, watch } from "vue";
 import { useForm } from "../../hooks";
 import { isBoolean } from "lodash-es";
@@ -43,21 +33,28 @@ export default defineComponent({
 	name: "cl-radio",
 
 	props: {
+		// 绑定值
 		modelValue: [String, Number],
+		// 标识
 		label: [String, Number],
+		// 是否禁用
 		disabled: {
 			type: Boolean,
-			default: undefined,
+			default: null,
 		},
+		// 是否边框样式
 		border: {
 			type: Boolean,
-			default: undefined,
+			default: null,
 		},
+		// 是否宽度填充
 		fill: {
 			type: Boolean,
-			default: undefined,
+			default: null,
 		},
+		// 高度
 		height: [String, Number],
+		// 大小
 		size: [String, Number],
 	},
 
@@ -107,8 +104,8 @@ export default defineComponent({
 		const classList = computed(() => {
 			return [
 				{
-					"is-border": props.border ?? parent.value?.border,
-					"is-fill": props.fill ?? parent.value?.fill,
+					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
+					"is-fill": isBoolean(props.fill) ? props.fill : parent.value?.fill,
 					"is-disabled": isDisabled.value,
 					"is-checked": checked.value,
 				},
@@ -123,7 +120,7 @@ export default defineComponent({
 
 			checked.value = true;
 
-			// 更新 cl-checkbox-group
+			// 更新 <cl-checkbox-group />
 			if (parent.value) {
 				parent.value.change(props.label);
 			} else {
@@ -142,4 +139,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

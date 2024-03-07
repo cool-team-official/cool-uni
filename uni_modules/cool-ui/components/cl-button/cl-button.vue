@@ -15,15 +15,15 @@
 				'is-custom': custom,
 			},
 		]"
-		:style="{
-			color,
-			backgroundColor,
-			height: parseRpx(height),
-			width: parseRpx(width),
-			fontSize: parseRpx(fontSize),
-			margin: parseRpx(margin),
-			borderRadius: parseRpx(borderRadius),
-		}"
+		:style="[
+			baseStyle,
+			{
+				color,
+				height: parseRpx(height),
+				width: parseRpx(width),
+				fontSize: parseRpx(fontSize),
+			},
+		]"
 		:size="size"
 		:disabled="disabled || loading"
 		:form-type="formType"
@@ -64,45 +64,60 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+import { type PropType } from "vue";
 import { useTap } from "../../hooks";
-import { parseRpx } from "/@/cool/utils";
+import { useStyle } from "../../hooks/style";
 
 export default defineComponent({
 	name: "cl-button",
 
 	props: {
+		// 按钮大小
 		size: String as PropType<"large" | "default" | "small">,
+		// 按钮类型
 		type: {
 			type: String as PropType<
 				"default" | "primary" | "success" | "danger" | "warning" | "info"
 			>,
 			default: "default",
 		},
+		// 是否朴素
 		plain: Boolean,
+		// 是否禁用
 		disabled: Boolean,
+		// 是否加载
 		loading: Boolean,
+		// 加载图标主题
 		loadingTheme: {
 			type: String as PropType<"default" | "spin">,
 			default: "default",
 		},
+		// 加载图标演示
+		loadingColor: String,
+		// 是否圆角
 		round: Boolean,
+		// 是否带有边框
 		border: {
 			type: Boolean,
 			default: true,
 		},
-		borderRadius: Number,
-		bold: Boolean,
-		margin: [String, Number, Array],
+		// 图标
 		icon: String,
-		loadingColor: String,
+		// 水平填充
 		fill: Boolean,
+		// 按钮高度
 		height: Number,
+		// 按钮宽度
 		width: Number,
+		// 字体颜色
 		color: String,
-		backgroundColor: String,
+		// 是否粗字体
+		bold: Boolean,
+		// 字体大小
 		fontSize: Number,
+		// 是否自定义
 		custom: Boolean,
+		// 以下查看 uniapp 文档：https://uniapp.dcloud.net.cn/component/button.html
 		formType: String,
 		openType: String,
 		hoverClass: {
@@ -160,7 +175,7 @@ export default defineComponent({
 			emit("launchapp", e);
 		}
 
-		function click(e: any) {
+		function click(e: Event) {
 			tap(e);
 		}
 
@@ -171,11 +186,10 @@ export default defineComponent({
 			openSetting,
 			launchApp,
 			click,
-			parseRpx,
 			isImg,
 			loadingColor,
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

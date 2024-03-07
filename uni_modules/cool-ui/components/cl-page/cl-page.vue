@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, getCurrentInstance, onMounted, ref } from "vue";
+import { computed, defineComponent, reactive, getCurrentInstance, onMounted } from "vue";
 import { useApp, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 import { isString } from "lodash-es";

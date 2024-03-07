@@ -187,4 +187,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

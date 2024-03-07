@@ -55,76 +55,67 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { type PropType, computed, defineComponent, ref, watch } from "vue";
 import { parseRpx, uuid } from "/@/cool/utils";
 import { isArray } from "lodash-es";
 import { upload } from "/@/cool";
 import { useForm } from "../../hooks";
 
-/**
- * @description 图片上传，支持单图和多图
- * @property {String, Array} value 绑定值，图片链接
- * @property {String} sizeType 压缩方式，original | compressed
- * @property {String} sourceType 选择方式，album | camera
- * @property {Array} size 图片大小，默认["200rpx", "200rpx"]
- * @property {String} imageMode 图片裁剪、缩放模式，默认aspectFill
- * @property {Boolean} multiple 是否支持多选文件
- * @property {Number} limit 最大允许上传个数，默认9
- * @property {String} action 上传的地址
- * @property {Object} headers 设置上传的请求头部
- * @property {Object} data 上传时附带的额外参数
- * @property {String} name 上传的文件字段名，默认file
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} autoUpload 是否自动上传
- * @event {Function} success 上传成功时触发，function(response)
- * @event {Function} error 上传失败时触发，function(error)
- * @event {Function} upload 自定义上传时触发，function(file)
- * @event {Function} remove 移除时触发，function(index)
- * @example <cl-upload action="http://" />
- */
-
 export default defineComponent({
 	name: "cl-upload",
 
 	props: {
+		// 绑定值
 		modelValue: [String, Array],
+		// 文本
 		text: {
 			type: String,
 			default: "上传/拍摄",
 		},
+		// 压缩方式
 		sizeType: {
 			type: [String, Array] as PropType<string[] | string>,
 			default: () => ["original", "compressed"],
 		},
+		// 选择方式
 		sourceType: {
 			type: Array as PropType<string[]>,
 			default: () => ["album", "camera"],
 		},
+		// 大小
 		size: {
 			type: Array,
 			default: () => [200, 200],
 		},
+		// 裁剪模式
 		imageMode: {
 			type: String,
 			default: "aspectFill",
 		},
+		// 是否多选
 		multiple: Boolean,
+		// 最大允许上传个数
 		limit: {
 			type: Number,
 			default: 9,
 		},
+		// 上传的地址
 		action: String,
+		// 设置上传的请求头部
 		headers: Object,
+		// 上传时附带的额外参数
 		data: Object,
+		// 上传的文件字段名
 		name: {
 			type: String,
 			default: "file",
 		},
+		// 是否禁用
 		disabled: {
 			type: Boolean,
 			default: null,
 		},
+		// 是否自动上传
 		autoUpload: {
 			type: Boolean,
 			default: true,
@@ -345,4 +336,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

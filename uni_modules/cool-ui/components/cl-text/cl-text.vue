@@ -11,7 +11,6 @@
 				'is-underline': underline,
 				'is-ellipsis': ellipsis > 0,
 				'is-copy': copy,
-				'is-flex1': flex1,
 			},
 		]"
 		:style="{
@@ -46,83 +45,80 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+import { type PropType, computed, defineComponent } from "vue";
 import { useTap } from "../../hooks";
 import { parseRpx } from "/@/cool/utils";
-
-/**
- * @description 文本
- * @property {String, Number} value 内容
- * @property {String} type 类型
- * @property {Boolean} encrypt 手机号是否加密，默认true
- * @property {Boolean} bold 是否粗体
- * @property {Boolean} block 是否块状
- * @property {Number} ellipsis 文本超出省略
- * @property {String} color 字体颜色，默认#444
- * @property {Number, String} size 字体大小，默认24
- * @property {Boolean} precision 价格小数点，默认true
- * @property {Boolean} lineThrough 穿过文本下的一条线
- * @property {Boolean} underline 文本下的一条线
- * @property {String, Number} letterSpacing 文本水平间隔
- * @property {String, Number, Array} margin 外间距
- * @property {String} prefixIcon 前缀图标
- * @property {String} suffixIcon 后缀图标
- * @property {String} copy 是否长按复制
- */
 
 export default defineComponent({
 	name: "cl-text",
 
 	props: {
+		// 内容
 		value: {
 			type: [String, Number],
 			default: "",
 		},
+		// 类型
 		type: {
 			type: String as PropType<"text" | "price" | "phone">,
 			default: "text",
 		},
+		// 手机号是否加密
 		encrypt: {
 			type: Boolean,
 			default: true,
 		},
+		// 是否粗体
 		bold: Boolean,
+		// 是否块状
 		block: Boolean,
+		// 文本超出省略
 		ellipsis: {
 			type: Number,
 			default: 0,
 		},
+		// 字体颜色
 		color: {
 			type: String,
 			default: "#444",
 		},
+		// 字体大小
 		size: [String, Number],
+		// 文字对齐
 		align: {
 			type: String as PropType<
 				"start" | "end" | "left" | "right" | "center" | "justify" | "match-parent"
 			>,
 			default: "left",
 		},
+		// 价格小数点
 		precision: {
 			type: Boolean,
 			default: true,
 		},
+		// 穿过文本下的一条线
 		lineThrough: Boolean,
+		// 行高
 		lineHeight: {
 			type: [String, Number],
 			default: 1,
 		},
+		// 文本下的一条线
 		underline: Boolean,
+		// 文本水平间隔
 		letterSpacing: {
 			type: [String, Number],
 			default: 0,
 		},
+		// 外间距
 		margin: [String, Number, Array],
+		// 顶部图标
 		prefixIcon: String,
+		// 尾部图标
 		suffixIcon: String,
+		// 是否能复制
 		copy: Boolean,
-		flex1: Boolean,
+		// 宽度
 		width: [String, Number],
 	},
 
@@ -166,4 +162,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

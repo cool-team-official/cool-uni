@@ -44,28 +44,36 @@ export default defineComponent({
 	name: "cl-footer",
 
 	props: {
+		// 背景色
 		backgroundColor: {
 			type: String,
 			default: "#fff",
 		},
+		// 內间距
 		padding: {
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
+		// 距离底部多少
 		bottom: {
 			type: [String, Number],
 			default: 0,
 		},
+		// 是否带上边框
 		border: Boolean,
+		// 是否 flex 布局
 		flex: {
 			type: Boolean,
 			default: true,
 		},
+		// 延迟获取
 		delay: {
 			type: Number,
 			default: 0,
 		},
+		// 监听对象
 		vt: null,
+		// 监听高度
 		vh: Number,
 	},
 

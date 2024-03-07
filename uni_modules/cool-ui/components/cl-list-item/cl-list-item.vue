@@ -1,8 +1,8 @@
 <template>
 	<view
 		class="cl-list-item"
-		:class="itemClass"
-		:style="customStyle"
+		:class="[itemClass]"
+		:style="[baseStyle]"
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
@@ -32,7 +32,7 @@
 				</view>
 			</view>
 
-			<template v-if="swipe != 'none'">
+			<template v-if="swipe">
 				<view :class="[`cl-list-item__menu-${swipe}`]">
 					<slot name="menu"></slot>
 				</view>
@@ -42,45 +42,35 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 列表项,自定义内容,支持滑动
- * @property {String} label 标签内容
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} border 是否带有下边框，默认true
- * @property {Boolean} type 类型 primary | success | error | warning | info
- * @property {Boolean} justify 水平布局方式，默认end
- * @property {Boolean} swipe 是否滑动 none | left | right，默认none
- * @property {Object} customStyle 自定义样式
- * @property {Boolean} arrowIcon 是否显示右侧箭头，默认true
- * @event {Function} tap 点击时触发
- */
-
 import { computed, defineComponent, getCurrentInstance, onMounted, reactive, watch } from "vue";
-import type { PropType } from "vue";
+import { type PropType } from "vue";
 import { isBoolean } from "lodash-es";
-import { useTap } from "../../hooks";
+import { useTap, useStyle } from "../../hooks";
 import { getParent } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-list-item",
 
 	props: {
+		// 标签内容
 		label: String,
+		// 类型
+		type: String as PropType<"primary" | "success" | "error" | "warning" | "info">,
+		// 水平排序
+		justify: String as PropType<"start" | "end" | "center">,
+		// 是否滑动
+		swipe: String as PropType<"left" | "right">,
+		// 是否禁用
 		disabled: {
 			type: Boolean,
 			default: null,
 		},
+		// 是否带有下边框
 		border: {
 			type: Boolean,
 			default: null,
 		},
-		type: String as PropType<"primary" | "success" | "error" | "warning" | "info">,
-		justify: String as PropType<"start" | "end" | "center">,
-		swipe: {
-			type: String as PropType<"none" | "left" | "right">,
-			default: "none",
-		},
-		customStyle: Object,
+		// 是否显示右侧箭头
 		arrowIcon: {
 			type: Boolean,
 			default: true,
@@ -88,10 +78,9 @@ export default defineComponent({
 	},
 
 	setup(props, { slots, emit }) {
-		const { proxy }: any = getCurrentInstance();
-		const { tap } = useTap(emit);
+		const instance = getCurrentInstance();
 
-		// cl-list
+		// <cl-list />
 		const parent = getParent("cl-list", ["justify", "border", "disabled"]);
 
 		// 是否禁用
@@ -103,16 +92,17 @@ export default defineComponent({
 		const itemClass = computed(() => {
 			return [
 				{
-					"is-append": slots.append,
-					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
 					"is-disabled": isDisabled.value,
+					"is-append": !!slots.append,
+					"is-swipe": !!props.swipe,
+					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
 				},
 			];
 		});
 
 		// 内容样式
 		const contentClass = computed(() => {
-			let list: string[] = [];
+			const list: string[] = [];
 
 			if (props.type) {
 				list.push(`is-color-${props.type}`);
@@ -140,15 +130,15 @@ export default defineComponent({
 		});
 
 		// 滑动开始
-		function onTouchStart(e: any) {
-			if (props.swipe != "none") {
+		function onTouchStart(e: TouchEvent) {
+			if (props.swipe) {
 				touch.start = e.touches[0].pageX;
 				touch.lock = false;
 			}
 		}
 
 		// 滑动中
-		function onTouchMove(e: any) {
+		function onTouchMove(e: TouchEvent) {
 			const { start, end, lock, maxX } = touch;
 
 			if (!lock) {
@@ -210,13 +200,12 @@ export default defineComponent({
 		// 设置菜单宽度
 		function setMenu() {
 			if (props.swipe != "none") {
-				const query = uni.createSelectorQuery().in(proxy);
+				const query = uni.createSelectorQuery().in(instance?.proxy);
 
 				query
 					.select(`.cl-list-item__menu-${props.swipe}`)
 					.boundingClientRect((data) => {
 						if (data) {
-							//@ts-ignore
 							menu.width = data.width || 0;
 							touch.maxX = menu.width * (props.swipe === "right" ? -1 : 1);
 						}
@@ -226,7 +215,7 @@ export default defineComponent({
 		}
 
 		// 滑动后还原位置的方法
-		function restore(cb: Function) {
+		function restore(cb: () => void) {
 			touch.start = 0;
 			touch.end = 0;
 			touch.lock = true;
@@ -255,9 +244,9 @@ export default defineComponent({
 			onTouchStart,
 			onTouchMove,
 			onTouchEnd,
-			tap,
+			...useTap(emit),
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

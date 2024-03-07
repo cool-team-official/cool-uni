@@ -1,7 +1,7 @@
 <template>
 	<view
 		:class="['cl-avatar', `cl-avatar--${shape}`]"
-		:style="{ height: parseRpx(size), width: parseRpx(size), backgroundColor }"
+		:style="[{ height: parseRpx(size), width: parseRpx(size) }, baseStyle]"
 		@click="tap"
 	>
 		<slot v-if="$slots.default || $slots.$default"> </slot>
@@ -24,51 +24,47 @@
 			</slot>
 
 			<image
-				v-else
 				class="cl-avatar__target"
 				:src="src"
 				:mode="mode"
 				:lazy-load="lazyLoad"
 				@error="handleError"
 				@load="handleLoad"
-			></image>
+				v-else
+			/>
 		</template>
 	</view>
 </template>
 
 <script lang="ts">
-/**
- * @description 头像
- * @property {String} src 图片链接
- * @property {Boolean} lazyLoad 懒加载
- * @property {Number} size 头像大小，默认80
- * @property {String} shape 头像的形状，默认circle
- * @property {String} mode 裁剪，缩放模式
- */
-
-import { computed, defineComponent, ref } from "vue";
-import type { PropType } from "vue";
-import { parseRpx } from "/@/cool/utils";
-import { useTap } from "../../hooks";
+import { defineComponent, ref } from "vue";
+import { type PropType } from "vue";
+import { useStyle, useTap } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-avatar",
 
 	props: {
+		// 图片地址
 		src: String,
+		// 名称
 		name: {
 			type: String,
 			default: "",
 		},
+		// 懒加载
 		lazyLoad: Boolean,
+		// 头像大小
 		size: {
 			type: Number,
 			default: 80,
 		},
+		// 形状
 		shape: {
 			type: String as PropType<"circle" | "square">,
 			default: "circle",
 		},
+		// 裁剪模式
 		mode: {
 			type: String,
 			default: "scaleToFill",
@@ -77,34 +73,29 @@ export default defineComponent({
 
 	emits: ["error", "load"],
 
-	setup(props, { emit }) {
-		const { tap } = useTap(emit);
-
+	setup(_, { emit }) {
 		// 是否加载失败
 		const isError = ref(false);
 
-		// 背景色
-		const backgroundColor = computed(() => (props.src ? "" : "#c0c4cc"));
-
-		function handleLoad(e: any) {
+		// 处理加载
+		function handleLoad(e: Event) {
 			isError.value = false;
-			emit("error", e);
+			emit("load", e);
 		}
 
-		function handleError(e: any) {
+		// 处理错误
+		function handleError(e: Event) {
 			isError.value = true;
-			emit("load", e);
+			emit("error", e);
 		}
 
 		return {
 			isError,
-			backgroundColor,
-			parseRpx,
-			tap,
 			handleLoad,
 			handleError,
+			...useTap(emit),
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

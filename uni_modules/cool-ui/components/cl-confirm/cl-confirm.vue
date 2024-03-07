@@ -39,10 +39,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 确认框
- */
-
 import { defineComponent, nextTick, ref } from "vue";
 
 export default defineComponent({

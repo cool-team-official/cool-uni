@@ -41,20 +41,7 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 弹出框
- * @property {Boolean} modelValue 是否可见
- * @property {String} direction 弹出方向，默认center
- * @property {Boolean} closeOnClickModal 点击遮罩层是否关闭，默认true
- * @property {String, Number} size 弹出框大小，默认auto
- * @property {String} backgroundColor 背景颜色，默认#fff
- * @property {String, Number} borderRadius 内容圆角
- * @property {String, Number} padding 内容内间据，默认20
- * @property {Boolean} modal 是否显示遮罩层
- */
-
-import { computed, defineComponent, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { computed, defineComponent, ref, watch, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
 import { router } from "/@/cool";
 
@@ -66,37 +53,48 @@ export default defineComponent({
 	name: "cl-popup",
 
 	props: {
+		// 是否可见
 		modelValue: Boolean,
+		// 弹出方向
 		direction: {
 			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
 			default: "center",
 		},
+		// 弹出框宽度
 		size: {
 			type: [String, Number],
 			default: "auto",
 		},
-		borderRadius: [String, Number],
+		// 內间距
 		padding: {
 			type: [String, Number],
 			default: 32,
 		},
+		// 弹出框圆角
+		borderRadius: [Number, Array, String],
+		// 显示关闭按钮
 		showCloseBtn: Boolean,
+		// 背景色
 		backgroundColor: {
 			type: String,
 			default: "#fff",
 		},
+		// 是否显示遮罩层
 		modal: {
 			type: Boolean,
 			default: true,
 		},
+		// 遮罩层背景色
 		modalBackground: {
 			type: String,
 			default: "rgba(0, 0, 0, 0.4)",
 		},
+		// 点击遮罩层是否关闭
 		closeOnClickModal: {
 			type: Boolean,
 			default: true,
 		},
+		// 层级
 		zIndex: {
 			type: Number,
 			default: 600,
@@ -238,7 +236,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		return {

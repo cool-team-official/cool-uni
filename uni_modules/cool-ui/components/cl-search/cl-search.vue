@@ -65,13 +65,7 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 搜索框，可自定义前后内容
- * @example <cl-search v-model="val" />
- */
-
-import { defineComponent, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { defineComponent, ref, watch, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -151,7 +145,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		// 是否聚焦
@@ -164,7 +158,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		function onChange(e: any) {

@@ -1,28 +1,27 @@
 .cl-noticebar {
 	display: flex;
 	align-items: center;
-	padding: 10rpx;
 
 	&__icon,
 	&__close {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0 10rpx;
+		margin-right: 10rpx;
 	}
 
 	&__close {
-		color: #999;
+		color: $cl-color-info;
 	}
 
 	&__box {
 		flex: 1;
-		margin: 0 10rpx;
 		overflow: hidden;
 	}
 
 	&__scroller {
 		position: relative;
+		line-height: 1;
 
 		&.is-vertical {
 			transition: top 0.3s;

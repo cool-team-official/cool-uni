@@ -29,22 +29,27 @@ export default defineComponent({
 	name: "cl-empty",
 
 	props: {
+		// 图标
 		icon: {
 			type: String as PropType<"comm">,
 			default: "comm",
 		},
+		// 暂无数据文案
 		text: {
 			type: String,
 			default: "暂无数据",
 		},
+		// 是否固定
 		fixed: {
 			type: Boolean,
 			default: true,
 		},
+		// 高度
 		height: {
 			type: String,
 			default: "100%",
 		},
+		// 是否显示图标
 		showIcon: {
 			type: Boolean,
 			default: true,

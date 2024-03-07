@@ -32,32 +32,30 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 加载区域
- * @property {String} text 加载时文本，默认不显示
- * @property {Boolean} loading 是否加载中
- * @property {String} loadingTheme 加载图标主题
- * @property {Boolean} fullscreen 是否全屏显示
- * @property {String} color 加载图标颜色
- * @property {String} background 背景颜色，默认rgba(255,255,255,0.7)
- */
-
 import { defineComponent } from "vue";
 
 export default defineComponent({
 	name: "cl-loading-mask",
 
 	props: {
+		// 加载时文本
 		text: String,
+		// 是否加载中
 		loading: Boolean,
+		// 加载图标主题
 		loadingTheme: String,
+		// 是否全屏显示
 		fullscreen: Boolean,
+		// 加载图标颜色
 		color: String,
+		// 是否显示静态库
 		modal: {
 			type: Boolean,
 			default: true,
 		},
+		// 是否带边框
 		border: Boolean,
+		// 背景颜色
 		background: {
 			type: String,
 			default: "rgba(255, 255, 255, 0.7)",

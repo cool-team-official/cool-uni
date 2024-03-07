@@ -64,19 +64,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 该组件基于官方的 swiper, 参数与官方一致, 同时添加新的支持
- * @property {Number} value 绑定值
- * @property {String} type 类型 '' | chain | card
- * @property {Boolean} arrow 是否显示切换箭头
- * @property {String} imageMode 图片裁剪, 缩放模式
- * @property {String} height 高度，默认300rpx
- * @property {String} radius 圆角，默认10rpx
- * @property {Array} margin 外间距
- * @property {String} dotType 指示器类型 round | circle | square
- * @event {Function} change 绑定值改变时触发
- */
-
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
@@ -87,24 +74,30 @@ export default defineComponent({
 	props: {
 		// 绑定值
 		modelValue: Number,
+		// 类型
 		type: String as PropType<"chain" | "card" | "">,
+		// 是否显示切换箭头
 		arrow: Boolean,
 		list: {
 			type: Array as PropType<{ url: string }[]>,
 			default: () => [],
 		},
+		// 图片裁剪, 缩放模式
 		imageMode: {
 			type: String,
 			default: "aspectFill",
 		},
+		// 高
 		height: {
 			type: [String, Number],
 			default: 300,
 		},
+		// 圆角
 		radius: {
 			type: [String, Number],
 			default: 10,
 		},
+		// 间距
 		margin: {
 			type: Array,
 			default: () => [],
@@ -118,6 +111,7 @@ export default defineComponent({
 			type: String,
 			default: "#000000",
 		},
+		// 指示器类型
 		dotType: {
 			type: String as PropType<"round" | "circle" | "square">,
 			default: "round",

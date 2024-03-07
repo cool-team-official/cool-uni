@@ -112,10 +112,10 @@
 			</cl-card>
 
 			<cl-card label="自定义颜色">
-				<cl-button :border="false" color="#ffffff" background-color="#626aef"
+				<cl-button :border="false" color="#ffffff" background-color="#008000"
 					>默认</cl-button
 				>
-				<cl-button color="#626aef" plain>朴素</cl-button>
+				<cl-button color="#008000" plain>朴素</cl-button>
 			</cl-card>
 		</view>
 	</cl-page>

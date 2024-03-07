@@ -18,18 +18,13 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 过滤栏：字段升序降序, 下拉框，自定义筛选
- * @property {Object} modelValue 绑定值
- * @event {Function} change cl-filter-item 数据发生改变时触发
- */
-
 import { defineComponent, getCurrentInstance, ref, watch } from "vue";
 
 export default defineComponent({
 	name: "cl-filter-bar",
 
 	props: {
+		// 绑定值
 		modelValue: {
 			type: Object,
 			default: () => {

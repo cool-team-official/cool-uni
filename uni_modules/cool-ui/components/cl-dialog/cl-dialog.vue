@@ -38,35 +38,33 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 对话框
- * @property {Boolean} modelValue 是否可见
- * @property {String} title 标题
- * @property {String} width 宽度，默认80%
- * @property {Boolean} closeOnClickModal 点击遮罩层是否关闭，默认true
- * @property {Boolean} showCloseBtn 显示关闭按钮
- */
-
 import { defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
+
 export default defineComponent({
 	name: "cl-dialog",
 
 	props: {
+		// 是否可见
 		modelValue: Boolean,
+		// 标题
 		title: String,
+		// 文字对齐
 		textAlign: {
 			type: String as PropType<"left" | "center" | "right">,
 			default: "left",
 		},
+		// 宽度
 		width: {
 			type: String,
 			default: "80%",
 		},
+		// 点击遮罩层是否关闭
 		closeOnClickModal: {
 			type: Boolean,
 			default: true,
 		},
+		// 显示关闭按钮
 		showCloseBtn: Boolean,
 	},
 
@@ -80,7 +78,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		function open() {

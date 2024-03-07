@@ -1,7 +1,7 @@
 {
 	"id": "cool-ui",
 	"displayName": "cool-ui",
-	"version": "7.1.0",
+	"version": "7.1.1",
 	"description": "结合 cool-admin 开发的组件库",
 	"keywords": [
 		"cool",

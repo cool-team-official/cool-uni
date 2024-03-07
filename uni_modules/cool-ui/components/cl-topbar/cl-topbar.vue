@@ -49,42 +49,39 @@ import { isIos } from "/@/cool/utils";
 
 const { statusBarHeight } = uni.getSystemInfoSync();
 
-/**
- * @description 自定义顶部导航，弥补原生的不足
- * @property {String} title 绑定值
- * @property {String} description 描述
- * @property {Boolean} border 是否带有下边框，默认true
- * @property {Boolean} showBack 是否显示返回按钮
- * @property {String} backgroundColor 背景颜色，默认#fff
- * @property {String} color 字体颜色，默认#000
- * @property {String} backPath 返回路径
- * @property {Number} zIndex 层级
- */
-
 export default defineComponent({
 	name: "cl-topbar",
 
 	props: {
+		// 标题
 		title: String,
+		// 描述
 		description: String,
+		// 是否显示下边框
 		border: {
 			type: Boolean,
 			default: true,
 		},
+		// 是否固定
 		fixed: Boolean,
+		// 是否显示返回按钮
 		showBack: {
 			type: Boolean,
 			default: true,
 		},
+		// 背景色
 		backgroundColor: {
 			type: String,
 			default: "#fff",
 		},
+		// 字体颜色
 		color: {
 			type: String,
 			default: "#000",
 		},
+		// 返回页面路径
 		backPath: String,
+		// 层级
 		zIndex: {
 			type: Number,
 			default: 99,

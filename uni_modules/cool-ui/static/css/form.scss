@@ -95,7 +95,7 @@
 			align-items: center;
 			font-size: 26rpx;
 
-			i {
+			text {
 				display: inline-block;
 			}
 		}
@@ -112,7 +112,7 @@
 			padding: 0 0 20rpx 0;
 
 			.cl-form-item__label {
-				padding: 20rpx 0 20rpx 0;
+				padding: 20rpx 0 0 0;
 				float: none;
 				text-align: left;
 			}

@@ -19,6 +19,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: $cl-color-disabled;
 	}
 
 	&__error {
@@ -26,8 +27,8 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		background-color: #eee;
-		color: #666;
+		background-color: $cl-color-placeholder;
+		color: $cl-color-info;
 	}
 
 	&__target,

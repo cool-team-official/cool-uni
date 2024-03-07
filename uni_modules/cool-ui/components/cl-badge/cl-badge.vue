@@ -13,10 +13,12 @@
 		<slot></slot>
 		<text
 			class="cl-badge__content"
-			:style="{
-				backgroundColor: color,
-				margin: parseRpx(offset),
-			}"
+			:style="[
+				baseStyle,
+				{
+					backgroundColor: color,
+				},
+			]"
 			v-if="!hidden && ((content && content != 0) || isDot)"
 			>{{ content }}</text
 		>
@@ -24,36 +26,31 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 位于右上角的角标
- * @property {Boolean} value 文本内容
- * @property {Number} max 最大值
- * @property {Boolean} isDot 是否点状
- * @property {Boolean} hidden 是否隐藏
- * @property {String} type 类型 primary | success | warning | error
- * @property {String} color 颜色
- * @example <cl-badge :value="10">Hello !</cl-badge>
- */
-
 import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+import { type PropType } from "vue";
 import { isNumber } from "lodash-es";
-import { parseRpx } from "/@/cool/utils";
+import { useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-badge",
 
 	props: {
+		// 文本内容
 		value: [String, Number],
+		// 最大值
 		max: Number,
+		// 是否点状
 		isDot: Boolean,
+		// 是否隐藏
 		hidden: Boolean,
+		// 类型
 		type: {
 			type: String as PropType<"primary" | "success" | "warning" | "error">,
 			default: "error",
 		},
+		// 颜色
 		color: String,
-		offset: Number,
+		// 朴素
 		plain: Boolean,
 	},
 
@@ -73,7 +70,7 @@ export default defineComponent({
 
 		return {
 			content,
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });

@@ -9,15 +9,15 @@
 				'is-wrap': wrap,
 			},
 		]"
-		:style="{
-			height: parseRpx(height),
-			width: parseRpx(width),
-			padding: parseRpx(padding),
-			borderRadius: parseRpx(borderRadius),
-			margin,
-			border,
-			backgroundColor,
-		}"
+		:style="[
+			baseStyle,
+			{
+				height: parseRpx(height),
+				width: parseRpx(width),
+				margin,
+				border,
+			},
+		]"
 		@click="tap"
 	>
 		<slot></slot>
@@ -25,43 +25,41 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 行
- * @property {Object} type 类型
- * @property {Object} wrap 是否换行
- * @example <cl-col :span="12"></cl-col>
- */
-
-import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
-import { useTap } from "../../hooks";
+import { computed, defineComponent, type PropType } from "vue";
+import { useStyle, useTap } from "../../hooks";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-row",
 
 	props: {
+		// 类型
 		type: String,
+		// 是否换行
 		wrap: Boolean,
-		backgroundColor: String,
+		// 带边框
 		border: String,
+		// 列间距
 		gutter: {
 			type: Number,
 			default: 0,
 		},
+		// 高度
+		height: [String, Number],
+		// 宽度
+		width: [String, Number],
+		// 外间距
+		margin: [String, Number, Array],
+		// 水平对齐
 		justify: {
 			type: String as PropType<"start" | "center" | "end">,
 			default: "start",
 		},
+		// 垂直对齐
 		align: {
 			type: String as PropType<"top" | "center" | "bottom">,
 			default: "center",
 		},
-		height: [String, Number],
-		width: [String, Number],
-		padding: [String, Number, Array],
-		margin: [String, Number, Array],
-		borderRadius: [String, Number],
 	},
 
 	setup(props, { emit }) {
@@ -72,11 +70,10 @@ export default defineComponent({
 		});
 
 		return {
-			parseRpx,
 			margin,
 			tap,
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

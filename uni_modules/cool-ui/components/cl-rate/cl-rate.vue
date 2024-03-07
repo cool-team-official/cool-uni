@@ -20,20 +20,7 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 评分，可自定义图标
- * @property {Number, String} value 绑定值
- * @property {String} icon 评分图标，默认cl-icon-favor-fill
- * @property {String, Array} color 选中颜色，Array下为多色。默认主色
- * @property {String} voidColor 未选中颜色，默认#C6D1DE
- * @property {Number} size 图标大小，默认40
- * @property {Number, String} max 最大值，默认5
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} showText 是否显示分数
- * @event {Function} change 绑定值改变时触发
- */
-
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch, type PropType } from "vue";
 import { useForm } from "../../hooks";
 import { getCurrentColor } from "../../utils";
 import { isEmpty } from "lodash-es";
@@ -42,38 +29,47 @@ export default defineComponent({
 	name: "cl-rate",
 
 	props: {
+		// 绑定值
 		modelValue: {
 			type: Number,
 			default: 0,
 		},
+		// 评分图标
 		icon: {
 			type: String,
 			default: "cl-icon-favor-fill",
 		},
+		// 选中颜色，Array下为多色
 		color: {
-			type: [String, Array],
+			type: [String, Array] as PropType<string | string[]>,
 			default: "",
 		},
+		// 空的颜色
 		voidColor: {
 			type: String,
 			default: "#C6D1DE",
 		},
+		// 图标大小
 		size: {
 			type: [Number, String],
 			default: 40,
 		},
+		// 最大值
 		max: {
-			type: [Number, String],
+			type: Number,
 			default: 5,
 		},
+		// 是否禁用
 		disabled: {
 			type: Boolean,
 			default: null,
 		},
+		// 显示文本
 		showText: {
 			type: Boolean,
 			default: null,
 		},
+		// 文本组
 		texts: {
 			type: Array,
 			default: () => [],
@@ -88,7 +84,7 @@ export default defineComponent({
 
 		watch(
 			() => props.modelValue,
-			(val: number) => {
+			(val) => {
 				value.value = Number(val);
 			},
 			{
@@ -140,4 +136,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

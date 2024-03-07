@@ -7,7 +7,6 @@
 		display: flex;
 		align-items: center;
 		position: relative;
-		overflow: hidden;
 		background-color: #fff;
 
 		&.is-append {
@@ -17,23 +16,26 @@
 		}
 
 		&.is-disabled {
-			background-color: #eee;
-			color: #999;
+			background-color: $cl-color-disabled-bg;
+			color: $cl-color-disabled;
 
 			&:after {
 				display: block;
 				content: "";
-				background-color: rgba(0, 0, 0, 0.1);
 				position: absolute;
 				left: 0;
 				top: 0;
-				right: 0;
-				bottom: 0;
+				height: 100%;
+				width: 100%;
 			}
 		}
 
 		&.is-border {
 			border-bottom: $cl-border-width solid #f6f7fa;
+		}
+
+		&.is-swipe {
+			overflow: hidden;
 		}
 
 		&__icon,
@@ -62,7 +64,7 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
-			padding: 0 20rpx;
+			padding: 0 $cl-padding;
 			box-sizing: border-box;
 		}
 
@@ -138,6 +140,7 @@
 
 			[class^="cl-icon-"] {
 				font-size: 30rpx;
+				margin-left: 10rpx;
 			}
 		}
 
@@ -158,7 +161,10 @@
 
 		&__menu-left,
 		&__menu-right {
-			cl-button,
+			cl-button {
+				margin: 0;
+			}
+
 			.cl-button {
 				height: 100% !important;
 				border-radius: 0 !important;

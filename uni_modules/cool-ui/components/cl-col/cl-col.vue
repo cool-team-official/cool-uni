@@ -13,15 +13,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 布局组件
- * @property {Number} span 栅格占据的列数
- * @property {Number} offset 栅格左侧的间隔格数
- * @property {Number} pull 栅格向右移动格数
- * @property {Number} push 栅格向左移动格数
- * @example <cl-col :span="12"></cl-col>
- */
-
 import { computed, defineComponent } from "vue";
 import { useTap } from "../../hooks";
 import { getParent } from "/@/cool/utils";
@@ -30,19 +21,21 @@ export default defineComponent({
 	name: "cl-col",
 
 	props: {
+		// 栅格占据的列数
 		span: {
 			type: Number,
 			default: 24,
 		},
+		// 栅格左侧的间隔格数
 		offset: Number,
+		// 栅格向右移动格数
 		pull: Number,
+		// 栅格向左移动格数
 		push: Number,
 	},
 
 	setup(props, { emit }) {
-		const { tap } = useTap(emit);
-
-		// cl-row
+		// <cl-row />
 		const parent = getParent("cl-row", ["gutter"]);
 
 		// 间距
@@ -65,9 +58,8 @@ export default defineComponent({
 			classList,
 			parent,
 			padding,
-			tap,
+			...useTap(emit),
 		};
 	},
 });
 </script>
-../../hooks

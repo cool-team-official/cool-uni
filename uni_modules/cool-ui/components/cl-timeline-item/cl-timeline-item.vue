@@ -51,23 +51,20 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { getParent } from "/@/cool/utils";
-/**
- * @description 时间线
- * @property {String} timestamp 时间
- * @property {String} content 内容
- * @property {Boolean} showLine 是否显示竖线
- * @property {String} icon 图标
- * @property {String} color 图标颜色，默认#999
- */
 
 export default defineComponent({
 	name: "cl-timeline",
 
 	props: {
+		// 时间
 		timestamp: String,
+		// 内容
 		content: String,
+		// 是否显示竖线
 		showLine: Boolean,
+		// 图标
 		icon: String,
+		// 图标颜色
 		color: {
 			type: String,
 			default: "#999",

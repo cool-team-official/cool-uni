@@ -7,41 +7,38 @@
 				'is-primary': color == 'primary',
 			},
 		]"
-		:style="{
-			fontSize: parseRpx(size),
-			margin: parseRpx(margin),
-			color,
-		}"
+		:style="[
+			{
+				fontSize: parseRpx(size),
+				color,
+			},
+			baseStyle,
+		]"
 	></text>
 </template>
 
 <script lang="ts">
-/**
- * @description 字体图标
- * @property {String} name 图标名称
- * @property {String} className 自定义图标名称
- * @property {String, Number} size 图标大小
- * @property {String} color 图标颜色
- */
-
 import { defineComponent } from "vue";
-import { parseRpx } from "/@/cool/utils";
+import { useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-icon",
 	props: {
+		// 图标名称
 		name: String,
+		// 自定义图标名称
 		className: String,
+		// 图标大小
 		size: {
 			type: [String, Number],
 			default: 30,
 		},
+		// 图标颜色
 		color: String,
-		margin: [String, Number, Array],
 	},
 	setup() {
 		return {
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });

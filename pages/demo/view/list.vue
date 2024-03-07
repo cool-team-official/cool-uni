@@ -54,7 +54,7 @@
 		</cl-card>
 
 		<cl-card label="按钮组">
-			<cl-list>
+			<cl-list :radius="20">
 				<cl-list-item label="A"></cl-list-item>
 				<cl-list-item label="B"></cl-list-item>
 				<cl-list-item label="C"></cl-list-item>

@@ -15,59 +15,56 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { defineComponent, getCurrentInstance, ref, watch, type PropType } from "vue";
 import { cloneDeep, isArray, isEmpty } from "lodash-es";
 import { useCool } from "/@/cool";
 import AsyncValidator from "../../utils/async-validator";
-
-/**
- * @description 表单，基于 async-validator 的验证
- * @property {Object} modelValue 表单数据对象
- * @property {Object} rules 表单验证规则
- * @property {Boolean} border 是否带有边框
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} tips 消息提示方式
- * @property {String, Number} labelWidth 表单域标签的宽度，默认150rpx
- * @property {String} labelPosition 表单域标签的位置，默认right
- * @property {String} justify 水平布局，默认start
- * @property {Boolean} validateOnRuleChange 是否在 rules 属性改变后立即触发一次验证，默认true
- */
 
 export default defineComponent({
 	name: "cl-form",
 
 	props: {
+		// 表单数据对象
 		modelValue: {
 			type: Object,
 			default: () => {
 				return {};
 			},
 		},
+		// 表单验证规则
 		rules: Object,
+		// 是否带有边框
 		border: Boolean,
+		// 是否禁用
 		disabled: Boolean,
+		// 水平布局
 		justify: String as PropType<"start" | "center" | "end">,
+		// 消息提示方式
 		tips: {
 			type: String as PropType<"toast" | "inner" | "none">,
 			default: "toast",
 		},
+		// 标签的高度
 		labelHeight: {
 			type: [String, Number],
 			default: 64,
 		},
+		// 标签的宽度
 		labelWidth: {
 			type: [String, Number],
 			default: 150,
 		},
+		// 标签的位置
 		labelPosition: {
 			type: String,
 			default: "left",
 		},
+		// 是否在 rules 属性改变后立即触发一次验证
 		validateOnRuleChange: {
 			type: Boolean,
 			default: false,
 		},
+		// 是否滚动到错误项
 		scrollToError: {
 			type: Boolean,
 			default: true,
@@ -97,7 +94,7 @@ export default defineComponent({
 			{
 				immediate: true,
 				deep: true,
-			}
+			},
 		);
 
 		// 规则

@@ -114,8 +114,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { computed, defineComponent, nextTick, reactive, ref, watch, type PropType } from "vue";
 import py from "js-pinyin";
 import { groupBy, isEmpty } from "lodash-es";
 
@@ -123,25 +122,32 @@ export default defineComponent({
 	name: "cl-list-index",
 
 	props: {
+		// 数据列表
 		data: {
 			type: Array as PropType<ClListIndex.Group>,
 			required: true,
 			default: () => [],
 		},
+		// 字典
 		dict: Object,
+		// 是否可选
 		selectable: Boolean,
+		// 已选列表
 		selection: {
 			type: Array,
 			default: () => [],
 		},
+		// 是否组
 		isGroup: {
 			type: Boolean,
 			default: true,
 		},
+		// 序号栏
 		indexBar: {
 			type: Boolean,
 			default: true,
 		},
+		// 搜索占位内容
 		placeholder: {
 			type: String,
 			default: "搜索关键字",
@@ -291,7 +297,7 @@ export default defineComponent({
 								{
 									rect: true,
 								},
-								() => {}
+								() => {},
 							)
 							.exec((d) => {
 								tops.value = d[0].map((e: any) => e.top - res.top);
@@ -387,7 +393,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			}
+			},
 		);
 
 		return {

@@ -1,68 +1,64 @@
 <template>
-    <view
-        class="cl-status-bar__wrap"
-        :class="[
-            {
-                'is-sticky': sticky
-            }
-        ]"
-        :style="{
-            height
-        }"
-    >
-        <view
-            class="cl-status-bar"
-            :style="{
-                backgroundColor
-            }"
-        ></view>
-    </view>
+	<view
+		class="cl-status-bar__wrap"
+		:class="[
+			{
+				'is-sticky': sticky,
+			},
+		]"
+		:style="{
+			height,
+		}"
+	>
+		<view
+			class="cl-status-bar"
+			:style="{
+				backgroundColor,
+			}"
+		></view>
+	</view>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue"
-import { useCool } from "/@/cool"
-
-const { statusBarHeight } = uni.getSystemInfoSync()
-
-/**
- * @description 状态栏
- * @property {String} backgroundColor 背景颜色，默认#fff
- */
+import { computed, defineComponent } from "vue";
+import { useCool } from "/@/cool";
 
 export default defineComponent({
-    name: "cl-status-bar",
+	name: "cl-status-bar",
 
-    props: {
-        backgroundColor: String,
-        sticky: {
-            type: Boolean,
-            default: true
-        }
-    },
+	props: {
+		// 背景颜色
+		backgroundColor: String,
+		// 是否吸顶
+		sticky: {
+			type: Boolean,
+			default: true,
+		},
+	},
 
-    setup(props) {
-        const { router } = useCool()
+	setup(props) {
+		const { statusBarHeight } = uni.getSystemInfoSync();
+		const { router } = useCool();
 
-        // 状态栏高度
-        const height = computed(() => {
-            return `${statusBarHeight}px`
-        })
+		// 状态栏高度
+		const height = computed(() => {
+			return `${statusBarHeight}px`;
+		});
 
-        // 背景色
-        const backgroundColor = computed(() => {
-            return (
-                props.backgroundColor ||
-                router.info()?.style?.navigationBarBackgroundColor ||
-                router.globalStyle?.navigationBarBackgroundColor ||
-                "#ffffff"
-            )
-        })
+		// 背景色
+		const backgroundColor = computed(() => {
+			return (
+				props.backgroundColor ||
+				router.info()?.style?.navigationBarBackgroundColor ||
+				router.globalStyle?.navigationBarBackgroundColor ||
+				"#ffffff"
+			);
+		});
 
-        return {
-            height,
-            backgroundColor
-        }
-    }
-})
+		return {
+			height,
+			backgroundColor,
+		};
+	},
+});
 </script>

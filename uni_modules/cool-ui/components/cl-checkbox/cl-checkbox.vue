@@ -24,18 +24,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 多选框
- * @property {Boolean} modelValue 绑定值
- * @property {String, Number} label 标识
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} border 是否边框样式
- * @property {Boolean} round 是否圆角
- * @property {Boolean} fill 是否宽度填充
- * @property {String, Number} size 尺寸
- * @event {Function} change 绑定值改变时触发
- */
-
 import { computed, defineComponent, ref, watch } from "vue";
 import { isArray, isBoolean } from "lodash-es";
 import { getParent, parseRpx } from "/@/cool/utils";
@@ -45,21 +33,28 @@ export default defineComponent({
 	name: "cl-checkbox",
 
 	props: {
+		// 绑定值
 		modelValue: [String, Number, Boolean],
+		// 标识
 		label: [String, Number, Boolean],
+		// 是否禁用
 		disabled: {
 			type: Boolean,
 			default: null,
 		},
+		// 是否边框样式
 		border: {
 			type: Boolean,
 			default: null,
 		},
+		// 是否圆角
 		round: {
 			type: Boolean,
 			default: null,
 		},
+		// 高度
 		height: [String, Number],
+		// 尺寸
 		size: [String, Number],
 	},
 
@@ -68,7 +63,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		const { disabled } = useForm();
 
-		// cl-checkbox-group
+		// <cl-checkbox-group />
 		const parent = getParent("cl-checkbox-group", [
 			"modelValue",
 			"round",
@@ -150,4 +145,3 @@ export default defineComponent({
 	},
 });
 </script>
-../../hooks

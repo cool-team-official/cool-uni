@@ -31,31 +31,7 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 下拉选择，基于 picker 组件的封装
- * @property {null} modelValue 绑定值
- * @property {Number} height 高
- * @property {String, Number} mode 选择器模式，selector | multiSelector
- * @property {String} placeholder 占位内容
- * @property {Array<Object>} options 数据列表
- * @property {String} labelKey 内容关键字，默认label
- * @property {String} valueKey 值关键字，默认value
- * @property {String} separator 分隔符，默认 /
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} border 是否带有边框
- * @property {Boolean} round 是否圆角
- * @property {Boolean} fields 日期字段，有效值 year | month | day
- * @property {Boolean} start 有效日期的开始
- * @property {Boolean} end 有效日期的结束
- * @property {Boolean} defaultFirstOption 默认选中第一个
- * @event {Function} change 绑定值改变时触发
- * @event {Function} confirm 绑定值改变时触发，返回完整数据
- * @event {Function} cancel 取消时触发
- * @event {Function} column-change 列发生改变时触发
- */
-
-import { computed, defineComponent, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { computed, defineComponent, ref, watch, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
 import { isArray, isEmpty } from "lodash-es";
 import { Props } from "../cl-select-inner/config";
@@ -64,11 +40,14 @@ export default defineComponent({
 	name: "cl-select",
 
 	props: {
+		// 绑定值
 		modelValue: null,
+		// 模式
 		mode: {
 			type: String as PropType<"selector" | "multiSelector" | "region" | "time" | "date">,
 			default: "selector",
 		},
+		// 选项列表
 		options: {
 			type: Array as PropType<{ label: string; value: any }[]>,
 			default: () => [],
@@ -89,12 +68,16 @@ export default defineComponent({
 			type: String as PropType<"year" | "month" | "day">,
 			default: "day",
 		},
+		// 开始时间
 		start: String,
+		// 结束时间
 		end: String,
+		// 默认选中第一个
 		defaultFirstOption: {
 			type: Boolean,
 			default: true,
 		},
+		// 设置选项列表时是否解析值
 		setOptionsIsParseValue: Boolean,
 		...Props,
 	},

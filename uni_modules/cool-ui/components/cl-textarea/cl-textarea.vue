@@ -8,10 +8,7 @@
 				'is-border': border,
 			},
 		]"
-		:style="{
-			backgroundColor,
-			borderRadius: parseRpx(borderRadius),
-		}"
+		:style="[baseStyle]"
 	>
 		<textarea
 			v-model="value"
@@ -47,39 +44,35 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 文本域
- * @property {String} value 绑定值
- * @property {Boolean} count 是否显示统计字数
- * @property {String} placeholder 占位内容
- * @property {String} height 输入框高度，默认140rpx
- * @event {Function} change 绑定值改变时触发
- */
-
 import { computed, defineComponent, ref, watch } from "vue";
-import { useForm } from "../../hooks";
+import { useForm, useStyle } from "../../hooks";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-textarea",
 
 	props: {
+		// 绑定值
 		modelValue: {
 			type: String,
 			default: "",
 		},
+		// 是否显示统计字数
 		placeholder: {
 			type: String,
 			default: "请输入",
 		},
+		// 占位内容
 		height: {
 			type: Number,
 			default: 140,
 		},
+		// 是否禁用
 		disabled: {
 			type: Boolean,
 			default: null,
 		},
+		// 带边框
 		border: {
 			type: Boolean,
 			default: true,
@@ -115,8 +108,6 @@ export default defineComponent({
 			type: Number,
 			default: 140,
 		},
-		backgroundColor: String,
-		borderRadius: [String, Number],
 	},
 
 	emits: [
@@ -176,15 +167,14 @@ export default defineComponent({
 		return {
 			value,
 			isDisabled,
-			parseRpx,
 			onFocus,
 			onBlur,
 			onLinechange,
 			onInput,
 			onConfirm,
 			onKeyboardheightchange,
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

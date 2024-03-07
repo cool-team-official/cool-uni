@@ -19,7 +19,7 @@
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-avatar name="神仙"></cl-avatar>
+					<cl-avatar name="神仙" background-color="red"></cl-avatar>
 				</cl-col>
 			</cl-row>
 		</cl-card>

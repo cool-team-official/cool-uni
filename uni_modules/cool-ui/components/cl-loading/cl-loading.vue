@@ -34,36 +34,31 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 加载图标
- * @property {String} color 图标颜色
- * @property {String} borderColor 边框颜色
- * @property {String} borderWidth 边框大小
- * @property {String} theme 主题
- * @property {Number} size 图标大小
- */
-
-import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+import { computed, defineComponent, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-loading",
 
 	props: {
+		// 图标颜色
 		color: String,
+		// 边框颜色
 		borderColor: {
 			type: String,
 			default: "rgba(0, 0, 0, 0.1)",
 		},
+		// 边框大小
 		borderWidth: {
 			type: [String, Number],
 			default: 4,
 		},
+		// 主题
 		theme: {
 			type: String as PropType<"default" | "spin">,
 			default: "default",
 		},
+		// 图标大小
 		size: {
 			type: Number,
 			default: 25,

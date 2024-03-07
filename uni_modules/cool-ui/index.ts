@@ -15,12 +15,6 @@ export function useUi(): Ui.Page {
 
 			if (d) {
 				d[k]?.(...args);
-			} else {
-				if (ui.loaded) {
-					console.error(`[error] ui.${k}(), because <cl-page /> not added.`);
-				} else {
-					console.error(`[error] ui.${k}(), cannot be used in onLoad.`);
-				}
 			}
 		};
 	});

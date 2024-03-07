@@ -47,40 +47,46 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onUnmounted, ref, watch, getCurrentInstance } from "vue";
-import type { PropType } from "vue";
+import {
+	computed,
+	defineComponent,
+	onUnmounted,
+	ref,
+	watch,
+	getCurrentInstance,
+	type PropType,
+} from "vue";
 import { isArray, isBoolean } from "lodash-es";
 import { getParent, parseRpx } from "/@/cool/utils";
 import AsyncValidator from "../../utils/async-validator";
-
-/**
- * @description 表单项，基于 async-validator 的验证
- * @property {Boolean} border 是否带有边框
- * @property {String} labelWidth 表单域标题的宽度，默认150rpx
- * @property {String} labelPosition 表单域标题的位置，默认right
- * @property {String} justify 水平布局，默认start
- * @property {String} validateOnRuleChange 是否在 rules 属性改变后立即触发一次验证，默认true
- * @example <cl-form-item prop="name"></cl-form-item>
- */
 
 export default defineComponent({
 	name: "cl-form-item",
 
 	props: {
+		// 字段
 		prop: String,
+		// 标签内容
 		label: String,
+		// 标签的高度
 		labelHeight: [String, Number],
+		// 标签的宽度
 		labelWidth: [String, Number],
+		// 标签的位置
 		labelPosition: String as PropType<"left" | "right" | "top">,
+		// 水平布局
 		justify: String as PropType<"start" | "center" | "end">,
+		// 规则
 		rules: {
 			type: Object,
 			default: null,
 		},
+		// 是否在 rules 属性改变后立即触发一次验证
 		validateOnRuleChange: {
 			type: Boolean,
 			default: null,
 		},
+		// 是否必填
 		required: Boolean,
 	},
 

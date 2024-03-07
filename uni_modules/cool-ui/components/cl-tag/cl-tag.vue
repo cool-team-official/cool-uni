@@ -9,10 +9,12 @@
 				'is-round': round,
 			},
 		]"
-		:style="{
-			backgroundColor: color,
-			margin: parseRpx(margin),
-		}"
+		:style="[
+			baseStyle,
+			{
+				backgroundColor: color,
+			},
+		]"
 		@click="tap"
 		v-if="visible"
 	>
@@ -22,40 +24,31 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 用于标记和选择
- * @property {String} type 类型 (primary | success | error | warning | info)
- * @property {Boolean} plain 图片裁剪、缩放的模式
- * @property {String} size 图片大小 (default | small)，默认default
- * @property {Boolean} closable 是否可关闭
- * @property {Boolean} round 是否圆角
- * @property {String} color 颜色值
- * @event {Function} click 点击时触发
- * @event {Function} close 关闭时触发
- */
-
-import { defineComponent, ref } from "vue";
-import type { PropType } from "vue";
-import { useTap } from "../../hooks";
-import { parseRpx } from "/@/cool/utils";
+import { type PropType, defineComponent, ref } from "vue";
+import { useStyle, useTap } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-tag",
 
 	props: {
+		// 类型
 		type: {
 			type: String as PropType<"primary" | "success" | "error" | "warning" | "info">,
 			default: "primary",
 		},
+		// 朴素样式
 		plain: Boolean,
+		// 标签大小
 		size: {
 			type: String as PropType<"default" | "small" | "larget">,
 			default: "default",
 		},
+		// 颜色
 		color: String,
+		// 是否可关闭
 		closable: Boolean,
+		// 圆角
 		round: Boolean,
-		margin: [String, Number, Array],
 	},
 
 	setup(_, { emit }) {
@@ -80,9 +73,8 @@ export default defineComponent({
 			tap,
 			open,
 			close,
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });
 </script>
-../../hooks

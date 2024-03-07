@@ -77,19 +77,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 过滤项：字段升序降序, 下拉框，自定义筛选
- * @property {String} prop 唯一标识
- * @property {String} type 类型，dropdown | order | switch
- * @property {String} label 标题
- * @property {Boolean} disabled 是否禁用
- * @property {Boolean} multiple 下拉框是否多选
- * @property {String} theme 下拉框主题，default | grid
- * @property {Number} gridCols 格布局下的列数
- * @property {Array} options 下拉数据选项
- * @event {Function} change 绑定值发生改变时触发
- */
-
 import { computed, defineComponent, type PropType, reactive, watch } from "vue";
 import { getParent } from "/@/cool/utils";
 
@@ -104,25 +91,33 @@ export default defineComponent({
 	name: "cl-filter-item",
 
 	props: {
+		// 唯一标识
 		prop: {
 			type: String,
 			required: true,
 		},
+		// 类型
 		type: {
 			type: String as PropType<"dropdown" | "order" | "switch">,
 			default: "switch",
 		},
+		// 标题
 		label: String,
+		// 是否禁用
 		disabled: Boolean,
+		// 下拉框是否多选
 		multiple: Boolean,
+		// 下拉框主题
 		theme: {
 			type: String as PropType<"default" | "grid">,
 			default: "default",
 		},
+		// 格布局下的列数
 		gridCols: {
 			type: Number,
 			default: 4,
 		},
+		// 下拉数据选项
 		options: {
 			type: Array as PropType<Item[]>,
 			default: () => [],
@@ -132,7 +127,7 @@ export default defineComponent({
 	emits: ["change"],
 
 	setup(props, { emit }) {
-		// cl-filter-bar
+		// <cl-filter-bar />
 		const parent = getParent(
 			"cl-filter-bar",
 			["form", "setExpand", "update", "close", "collapse"],
