@@ -5,14 +5,9 @@
 		border-color: $color;
 
 		.cl-button__text,
-		.cl-button__icon {
-			color: #fff;
-		}
-
+		.cl-button__icon,
 		.cl-loading {
-			.cl-icon {
-				color: #fff;
-			}
+			color: #fff;
 		}
 
 		&.is-plain {

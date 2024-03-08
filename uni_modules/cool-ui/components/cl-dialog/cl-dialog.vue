@@ -13,14 +13,14 @@
 			<view class="cl-dialog">
 				<!-- 顶部 -->
 				<view class="cl-dialog__header" v-if="title">
-					<text class="cl-dialog__title">{{ title }}</text>
+					<slot name="header">
+						{{ title }}
+					</slot>
 				</view>
 
 				<!-- 内容 -->
-				<view class="cl-dialog__container">
-					<view class="cl-dialog__message" :style="{ textAlign }">
-						<slot></slot>
-					</view>
+				<view class="cl-dialog__container" :style="{ textAlign }">
+					<slot> </slot>
 				</view>
 
 				<!-- 底部 -->

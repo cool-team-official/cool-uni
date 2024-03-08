@@ -13,23 +13,24 @@
 				'is-copy': copy,
 			},
 		]"
-		:style="{
-			color,
-			textAlign: align,
-			'-webkit-line-clamp': ellipsis,
-			lineHeight: lineHeight,
-			margin: parseRpx(margin),
-			fontSize: parseRpx(size),
-			letterSpacing: parseRpx(letterSpacing),
-			width: parseRpx(width),
-		}"
+		:style="[
+			baseStyle,
+			{
+				color,
+				textAlign: align,
+				'-webkit-line-clamp': ellipsis,
+				lineHeight: lineHeight,
+				fontSize: parseRpx(size),
+				letterSpacing: parseRpx(letterSpacing),
+			},
+		]"
 		@click="tap"
 	>
-		<!-- 价格 -->
-		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
-
 		<!-- 前缀图标 -->
 		<text class="cl-text__prefix-icon" :class="prefixIcon" v-if="prefixIcon"> </text>
+
+		<!-- 价格 -->
+		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
 
 		<!-- 文本 -->
 		<text class="cl-text__value">{{ text.value }}</text>
@@ -46,7 +47,7 @@
 
 <script lang="ts">
 import { type PropType, computed, defineComponent } from "vue";
-import { useTap } from "../../hooks";
+import { useStyle, useTap } from "../../hooks";
 import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
@@ -110,16 +111,12 @@ export default defineComponent({
 			type: [String, Number],
 			default: 0,
 		},
-		// 外间距
-		margin: [String, Number, Array],
 		// 顶部图标
 		prefixIcon: String,
 		// 尾部图标
 		suffixIcon: String,
 		// 是否能复制
 		copy: Boolean,
-		// 宽度
-		width: [String, Number],
 	},
 
 	setup(props, { emit }) {
@@ -157,7 +154,7 @@ export default defineComponent({
 		return {
 			text,
 			tap,
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });

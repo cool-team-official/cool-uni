@@ -1,28 +1,16 @@
 .cl-textarea {
-	width: 100%;
-	box-sizing: border-box;
-	background-color: #fff;
 	position: relative;
-	line-height: 36rpx;
+	width: 100%;
+	background-color: #ffffff;
 	border-radius: $cl-border-radius;
+	padding: 10rpx $cl-padding;
+	box-sizing: border-box;
 
-	/* #ifdef MP-WEIXIN */
-	padding: 0 10rpx;
-	/* #endif */
-
-	/* #ifdef MP-ALIPAY */
-	padding: 10rpx 0;
-	/* #endif */
-
-	/* #ifndef MP */
-	padding: 10rpx 10rpx 10rpx 16rpx;
-	/* #endif */
-
-	textarea {
-		text-align: left;
+	&__inner {
+		height: 100%;
 		width: 100%;
-		box-sizing: border-box;
 		font-size: $cl-font-size;
+		line-height: 1.2;
 	}
 
 	&.is-disabled {
@@ -33,16 +21,10 @@
 	&__count {
 		position: absolute;
 		right: 10rpx;
-		bottom: 4rpx;
+		bottom: 10rpx;
 		font-size: 24rpx;
 		letter-spacing: 1rpx;
-		color: #999;
-	}
-
-	&.is-count {
-		/* #ifndef MP-ALIPAY */
-		padding-bottom: 40rpx;
-		/* #endif */
+		color: $cl-color-info;
 	}
 
 	&.is-border {

@@ -2,24 +2,33 @@
 	<view class="cl-confirm">
 		<cl-dialog
 			v-model="visible"
-			:close-on-click-modal="conf.closeOnClickModal"
+			:title="conf.title"
 			:width="conf.width"
-			:text-align="conf.message ? 'center' : 'left'"
+			:close-on-click-modal="conf.closeOnClickModal"
 			@close="onClose"
 			@closed="onClosed"
 		>
-			<view class="cl-confirm__header" v-if="conf.title">
-				<text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
-				<text class="cl-icon-toast-warning" v-else-if="conf.type == 'warning'"></text>
-				<text class="cl-icon-toast-success" v-else-if="conf.type == 'success'"></text>
-				<text class="cl-confirm__title">{{ conf.title }}</text>
+			<template #header>
+				<view class="cl-confirm__header">
+					<text class="cl-icon-toast-error" v-if="conf.type == 'error'"></text>
+					<text class="cl-icon-toast-warning" v-else-if="conf.type == 'warning'"></text>
+					<text class="cl-icon-toast-success" v-else-if="conf.type == 'success'"></text>
+					<text class="cl-confirm__title">{{ conf.title }}</text>
+				</view>
+			</template>
+
+			<view
+				class="cl-confirm__container"
+				:style="{
+					textAlign: conf.message ? 'center' : 'left',
+				}"
+			>
+				<slot>
+					<view class="cl-confirm__message">{{ conf.message }}</view>
+				</slot>
 			</view>
 
-			<slot>
-				<view class="cl-confirm__message">{{ conf.message }}</view>
-			</slot>
-
-			<template #footer>
+			<template #footer v-if="conf.showCancelButton || conf.showConfirmButton">
 				<view class="cl-confirm__footer">
 					<view class="cl-confirm__footer-item" v-if="conf.showCancelButton">
 						<cl-button fill @tap="close('cancel')">

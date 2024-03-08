@@ -60,7 +60,6 @@
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { useForm, useStyle, useTap } from "../../hooks";
-import { parseRpx } from "/@/cool/utils";
 import { keys } from "lodash-es";
 
 export default defineComponent({
@@ -145,7 +144,7 @@ export default defineComponent({
 			return form.disabled.value || props.disabled;
 		});
 
-		// 占位符
+		// 占位符样式
 		const placeholderStyle = computed(() => {
 			const d: any = {
 				lineHeight: 1,

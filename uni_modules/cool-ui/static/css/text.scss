@@ -3,7 +3,8 @@ cl-text {
 }
 
 .cl-text {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	white-space: normal;
 	word-break: break-all;
 	word-wrap: break-word;
@@ -38,6 +39,10 @@ cl-text {
 		user-select: text;
 	}
 
+	&.is-price {
+		align-items: baseline;
+	}
+
 	&.is-color-primary {
 		color: $cl-color-primary;
 	}
@@ -58,25 +63,21 @@ cl-text {
 		color: $cl-color-info;
 	}
 
-	&__symbol--price {
-		font-size: 22rpx;
-	}
-
+	&__symbol--price,
 	&__precision {
 		font-size: 24rpx;
 	}
 
 	&__prefix-icon {
 		margin-right: 10rpx;
-		line-height: 0;
 	}
 
 	&__suffix-icon {
 		margin-left: 10rpx;
-		line-height: 0;
 	}
 
-	&__value {
-		line-height: 1;
+	&__prefix-icon,
+	&__suffix-icon {
+		font-size: 30rpx;
 	}
 }

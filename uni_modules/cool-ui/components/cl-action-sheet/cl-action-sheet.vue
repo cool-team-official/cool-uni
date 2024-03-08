@@ -29,7 +29,12 @@
 				@opensetting="onEvent(item, 'opensetting')"
 				@tap="select(index, item)"
 			>
-				<text class="cl-action-sheet__icon" :class="[item.icon]"></text>
+				<cl-icon
+					:class-name="item.icon"
+					:size="34"
+					:margin="[0, 10, 0, 0]"
+					v-if="item.icon"
+				/>
 				<text class="cl-action-sheet__label">{{ item.label }}</text>
 			</button>
 

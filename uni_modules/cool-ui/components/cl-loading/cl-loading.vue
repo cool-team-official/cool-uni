@@ -1,12 +1,9 @@
 <template>
-	<view class="cl-loading" :style="{ height: parseRpx(size), width: parseRpx(size) }">
-		<cl-icon :name="`loading-${theme}`" :color="color" :size="size" />
-	</view>
+	<cl-icon :class-name="`cl-loading cl-icon-loading-${theme}`" :color="color" :size="size" />
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-loading",
@@ -16,11 +13,6 @@ export default defineComponent({
 		color: {
 			type: String,
 			default: "primary",
-		},
-		// 边框颜色
-		borderColor: {
-			type: String,
-			default: "rgba(0, 0, 0, 0.1)",
 		},
 		// 主题
 		theme: {
@@ -32,12 +24,6 @@ export default defineComponent({
 			type: [String, Number],
 			default: 50,
 		},
-	},
-
-	setup() {
-		return {
-			parseRpx,
-		};
 	},
 });
 </script>

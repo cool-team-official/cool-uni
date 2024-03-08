@@ -13,17 +13,17 @@
 		font-size: 24rpx;
 		padding: 0 46rpx;
 		height: 90rpx;
-		background-color: #f6faff;
+		background-color: $cl-color-bg;
 	}
 
 	&__item {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 100rpx;
-		line-height: normal;
+		padding: 30rpx;
+		line-height: 1.4;
 		font-size: 28rpx;
-		border-bottom: $cl-border-width solid #f6f7fa;
+		border-bottom: $cl-border-width solid $cl-color-bg;
 		background-color: #fff;
 		border-radius: 0;
 
@@ -36,20 +36,15 @@
 		}
 
 		&:not(.is-disabled):active {
-			background-color: #f9f9f9;
+			background-color: $cl-color-active;
 		}
 
 		&--cancel {
-			border-top: 10rpx solid #f6faff;
+			border-top: 10rpx solid $cl-color-bg;
 		}
 
 		&:after {
 			border: 0;
 		}
-	}
-
-	&__icon {
-		font-size: 36rpx;
-		margin-right: 10rpx;
 	}
 }

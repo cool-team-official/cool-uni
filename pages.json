@@ -188,7 +188,8 @@
 				{
 					"path": "view/topbar",
 					"style": {
-						"navigationBarTitleText": "Topbar 顶部导航栏"
+						"navigationBarTitleText": "Topbar 顶部导航栏",
+						"navigationStyle": "custom"
 					}
 				},
 				{

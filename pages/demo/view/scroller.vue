@@ -5,7 +5,8 @@
 				v-for="(item, index) in list"
 				:key="index"
 				:label="`${item + 1}`"
-			></cl-list-item>
+				:padding="[0, 20, 0, 20]"
+			/>
 		</cl-scroller>
 	</cl-page>
 </template>

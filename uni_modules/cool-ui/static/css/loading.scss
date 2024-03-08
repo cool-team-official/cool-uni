@@ -1,6 +1,4 @@
 .cl-loading {
-	display: inline-block;
-	line-height: 1;
 	animation: loading-rotate 1.2s linear infinite;
 
 	@keyframes loading-rotate {
@@ -14,6 +12,5 @@
 }
 
 cl-loading {
-	display: inline-block;
 	line-height: 0;
 }

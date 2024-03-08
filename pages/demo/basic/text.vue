@@ -63,9 +63,9 @@
 
 			<cl-card label="自定义">
 				<cl-text
-					:size="30"
 					color="green"
-					:margin="[20, 20, 20, 20]"
+					:size="30"
+					:margin="[20, 0, 20, 0]"
 					value="颜色(green)、大小(30)、间距(20)"
 				></cl-text>
 			</cl-card>

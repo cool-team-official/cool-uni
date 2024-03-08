@@ -42,8 +42,8 @@ function open2() {
 	ActionSheet.value?.open({
 		list: [
 			{
-				label: "删除好友",
-				icon: "cl-icon-close",
+				label: "微信支付",
+				icon: "cl-icon-payment",
 			},
 		],
 	});

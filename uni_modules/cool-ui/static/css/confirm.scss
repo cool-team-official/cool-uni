@@ -1,26 +1,14 @@
 .cl-confirm {
 	position: relative;
 
-	::v-deep .cl-popup {
-		overflow: hidden;
-	}
-
 	&__message {
 		word-break: break-all;
-	}
-
-	.cl-dialog {
-		&__footer {
-			padding: 0 !important;
-			margin-top: 10rpx;
-		}
 	}
 
 	&__header {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 20rpx;
 
 		.cl-icon-toast-error,
 		.cl-icon-toast-success,
@@ -34,6 +22,7 @@
 			border-radius: 100%;
 			margin-right: 10rpx;
 			font-size: 24rpx;
+			line-height: 1;
 		}
 
 		.cl-icon-toast-error {
@@ -56,13 +45,19 @@
 
 	&__footer {
 		display: flex;
-		width: 100%;
-		padding: 30rpx 40rpx;
+		justify-content: center;
+		flex: 1;
+		margin: 0 -10rpx;
+		padding-bottom: 40rpx;
 
 		&-item {
 			position: relative;
 			flex: 1;
 			margin: 0 10rpx;
 		}
+	}
+
+	.cl-dialog__footer {
+		padding-bottom: 0 !important;
 	}
 }

@@ -11,13 +11,15 @@
 		:style="[baseStyle]"
 	>
 		<textarea
+			class="cl-textarea__inner"
 			v-model="value"
-			:style="{ height: parseRpx(height) }"
 			:placeholder="placeholder"
 			:disabled="isDisabled"
+			:auto-focus="autoFocus"
 			:focus="focus"
 			:auto-height="autoHeight"
 			:fixed="fixed"
+			:placeholder-style="placeholderStyle"
 			:cursor-spacing="cursorSpacing"
 			:cursor="cursor"
 			:show-confirm-bar="showConfirmBar"
@@ -33,7 +35,7 @@
 			@input="onInput"
 			@confirm="onConfirm"
 			@keyboardheightchange="onKeyboardheightchange"
-		></textarea>
+		/>
 
 		<!-- #ifndef MP-ALIPAY -->
 		<text class="cl-textarea__count" v-if="count"
@@ -46,7 +48,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useForm, useStyle } from "../../hooks";
-import { parseRpx } from "/@/cool/utils";
+import { keys } from "lodash-es";
 
 export default defineComponent({
 	name: "cl-textarea",
@@ -62,11 +64,6 @@ export default defineComponent({
 			type: String,
 			default: "请输入",
 		},
-		// 占位内容
-		height: {
-			type: Number,
-			default: 140,
-		},
 		// 是否禁用
 		disabled: {
 			type: Boolean,
@@ -77,8 +74,13 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		// 统计数字
 		count: Boolean,
+		// 自动聚焦
+		autoFocus: Boolean,
+		// 获取焦点
 		focus: Boolean,
+		placeholderStyle: Object,
 		autoHeight: Boolean,
 		fixed: Boolean,
 		cursorSpacing: {
@@ -102,11 +104,14 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		disableDefaultPadding: Boolean,
+		disableDefaultPadding: {
+			type: Boolean,
+			default: true,
+		},
 		holdKeyboard: Boolean,
 		maxlength: {
 			type: Number,
-			default: 140,
+			default: 150,
 		},
 	},
 
@@ -129,7 +134,7 @@ export default defineComponent({
 
 		watch(
 			() => props.modelValue,
-			(val: string) => {
+			(val) => {
 				value.value = val;
 			},
 			{
@@ -139,6 +144,19 @@ export default defineComponent({
 
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);
+
+		// 占位符样式
+		const placeholderStyle = computed(() => {
+			const d: any = {
+				lineHeight: 1.2,
+				color: "#a8abb2",
+				...props.placeholderStyle,
+			};
+
+			return keys(d)
+				.map((k) => `${k}:${d[k]};`)
+				.join("");
+		});
 
 		function onFocus(e: any) {
 			emit("focus", e);
@@ -167,13 +185,16 @@ export default defineComponent({
 		return {
 			value,
 			isDisabled,
+			placeholderStyle,
 			onFocus,
 			onBlur,
 			onLinechange,
 			onInput,
 			onConfirm,
 			onKeyboardheightchange,
-			...useStyle(),
+			...useStyle({
+				height: 150,
+			}),
 		};
 	},
 });

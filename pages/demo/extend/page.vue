@@ -51,6 +51,7 @@ function openToast() {
 function openConfirm() {
 	ui.showConfirm({
 		title: "提示",
+		type: "warning",
 		message: "是否要删除该联系人？",
 	});
 }

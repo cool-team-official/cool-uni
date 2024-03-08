@@ -61,6 +61,7 @@
 
 			.cl-form-item__label {
 				margin-right: 0;
+				margin-bottom: 10rpx;
 			}
 		}
 
@@ -79,7 +80,7 @@
 
 	&--border {
 		.cl-form-item {
-			border-bottom: $cl-border-width solid #eee;
+			border-bottom: $cl-border-width solid #eeeeee;
 		}
 	}
 }

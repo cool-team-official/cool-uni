@@ -3,31 +3,29 @@
 		position: relative;
 
 		&__header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			position: relative;
-			text-align: center;
-			padding-top: 20rpx;
-		}
-
-		&__title {
+			height: 90rpx;
 			font-size: 32rpx;
 			font-weight: 500;
 		}
 
 		&__container {
 			position: relative;
-			padding: 20rpx 40rpx;
-		}
+			padding: 0 40rpx 40rpx 40rpx;
+			font-size: 28rpx;
 
-		&__message {
-			font-size: 30rpx;
-			color: #606266;
-			line-height: 40rpx;
+			&:first-child {
+				padding-top: 40rpx;
+			}
 		}
 
 		&__footer {
 			display: flex;
 			justify-content: flex-end;
-			padding: 20rpx;
+			padding: 0 40rpx 40rpx 40rpx;
 		}
 
 		&__close {
@@ -39,9 +37,9 @@
 			position: absolute;
 			bottom: -80rpx;
 			left: calc(50% - 25rpx);
-			color: #ddd;
+			color: $cl-border-color;
 			border-radius: 50rpx;
-			border: 1px solid #ddd;
+			border: 1px solid currentColor;
 
 			text {
 				font-size: 32rpx;
