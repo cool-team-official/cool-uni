@@ -203,6 +203,10 @@ const list = [
 				label: "Waterfall 瀑布流",
 				link: "/pages/demo/view/waterfall",
 			},
+			{
+				label: "Scroller 滚动条",
+				link: "/pages/demo/view/scroller",
+			},
 		],
 	},
 	{

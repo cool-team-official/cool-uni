@@ -74,7 +74,7 @@
 
 			<!-- 其他登录方式 -->
 			<view class="other" v-if="platforms.length > 0">
-				<cl-divider width="400rpx">
+				<cl-divider width="400rpx" background-color="#ffffff">
 					<cl-text color="#ccc" value="其他登录方式"></cl-text>
 				</cl-divider>
 

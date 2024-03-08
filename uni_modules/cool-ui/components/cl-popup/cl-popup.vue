@@ -45,7 +45,7 @@ import { computed, defineComponent, ref, watch, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
 import { router } from "/@/cool";
 
-const { statusBarHeight } = uni.getSystemInfoSync();
+const { statusBarHeight = 0 } = uni.getSystemInfoSync();
 
 let id = 1;
 
@@ -146,15 +146,13 @@ export default defineComponent({
 			if (["left", "right", "top"].includes(props.direction)) {
 				let h = 0;
 
-				// #ifdef H5 || APP || MP-WEIXIN
-				h += statusBarHeight || 0;
-				// #endif
-
-				// #ifdef H5
-				if (!router.info()?.isCustomNavbar) {
-					h += 44;
+				if (router.info()?.isCustomNavbar) {
+					h += statusBarHeight;
+				} else {
+					// #ifdef H5
+					h += 44 + statusBarHeight;
+					// #endif
 				}
-				// #endif
 
 				let [t] = parseRpx(props.padding).split(" ");
 

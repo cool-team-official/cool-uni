@@ -5,51 +5,51 @@
 				<cl-col :span="4">
 					<cl-loading></cl-loading>
 				</cl-col>
-
-				<cl-col :span="4">
-					<cl-loading theme="spin"></cl-loading>
-				</cl-col>
 			</cl-row>
 		</cl-card>
 
 		<cl-card label="不同大小">
 			<cl-row>
 				<cl-col :span="4">
-					<cl-loading :size="20"></cl-loading>
+					<cl-loading :size="40"></cl-loading>
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-loading :size="25"></cl-loading>
+					<cl-loading :size="50"></cl-loading>
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-loading :size="30"></cl-loading>
+					<cl-loading :size="60"></cl-loading>
 				</cl-col>
 			</cl-row>
 		</cl-card>
 
-		<cl-card label="不同类型">
+		<cl-card label="主题">
 			<cl-row>
 				<cl-col :span="4">
-					<cl-loading :border-width="10"></cl-loading>
+					<cl-loading></cl-loading>
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-loading color="red"></cl-loading>
+					<cl-loading theme="snow"></cl-loading>
+				</cl-col>
+
+				<cl-col :span="4">
+					<cl-loading theme="dot"></cl-loading>
 				</cl-col>
 			</cl-row>
 		</cl-card>
 
 		<cl-card label="加载区域">
-			<cl-loading-mask loading> 
+			<cl-loading-mask loading>
 				<view class="space">
 					<cl-form>
 						<cl-form-item label="昵称">
-							<cl-input></cl-input>
+							<cl-input />
 						</cl-form-item>
 
 						<cl-form-item label="性别">
-							<cl-select></cl-select>
+							<cl-select />
 						</cl-form-item>
 					</cl-form>
 				</view>

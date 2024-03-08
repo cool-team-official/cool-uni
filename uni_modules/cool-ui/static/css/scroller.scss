@@ -16,13 +16,6 @@
 		left: 0;
 		bottom: 100%;
 		min-height: 100rpx;
-
-		.cl-loading {
-			position: relative;
-			/* #ifdef MP-WEIXIN */
-			top: 6rpx;
-			/* #endif */
-		}
 	}
 
 	&__view {

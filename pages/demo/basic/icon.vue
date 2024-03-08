@@ -16,7 +16,7 @@
 			<cl-grid :column="4">
 				<cl-grid-item v-for="item in list" :key="item">
 					<view class="item" @tap="copy(item)">
-						<cl-icon :name="item" :size="40"></cl-icon>
+						<cl-icon :name="item" :size="44"></cl-icon>
 						<cl-text :value="item" align="center" :margin="[10, 0, 0, 0]"></cl-text>
 					</view>
 				</cl-grid-item>
@@ -29,6 +29,12 @@
 import { ref } from "vue";
 
 const list = ref([
+	"app",
+	"payment",
+	"face-auth",
+	"folder",
+	"bill",
+	"phone",
 	"share",
 	"link",
 	"back",
@@ -71,6 +77,7 @@ const list = ref([
 	"scan",
 	"pay",
 	"image",
+	"image-error",
 	"warning-border",
 	"time",
 	"meh",

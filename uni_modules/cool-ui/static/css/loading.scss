@@ -1,43 +1,7 @@
 .cl-loading {
 	display: inline-block;
 	line-height: 1;
-
-	&__inner {
-		height: 100%;
-		width: 100%;
-		border-radius: 50%;
-		border-style: solid;
-		box-sizing: border-box;
-		animation: loading-rotate 1s linear infinite;
-		color: $cl-color-primary;
-	}
-
-	&__spin {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		position: absolute;
-		top: 0;
-		height: 100%;
-
-		&-item {
-			border-radius: 5px;
-			background-color: $cl-color-primary;
-		}
-
-		&:nth-child(2) {
-			transform: rotate(45deg);
-		}
-	}
-
-	&--spin {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		animation: loading-rotate 2s linear infinite;
-	}
+	animation: loading-rotate 1.2s linear infinite;
 
 	@keyframes loading-rotate {
 		0% {

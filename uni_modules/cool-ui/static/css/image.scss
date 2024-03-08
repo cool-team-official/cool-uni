@@ -28,25 +28,21 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		.icon {
+			font-size: 50rpx;
+			color: $cl-color-info;
+		}
 	}
 
 	&__loading {
-		background-color: rgba(0, 0, 0, 0.2);
-	}
-
-	.cl-icon-image {
-		font-size: 40rpx;
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 
 	&__error {
 		text-align: center;
-		color: #909399;
-		background-color: #dcdfe6;
+		color: $cl-color-info;
 		border-radius: inherit;
-
-		.icon {
-			font-size: 70rpx;
-		}
 
 		.text {
 			font-size: 24rpx;

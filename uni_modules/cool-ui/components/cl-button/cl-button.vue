@@ -19,9 +19,6 @@
 			baseStyle,
 			{
 				color,
-				height: parseRpx(height),
-				width: parseRpx(width),
-				fontSize: parseRpx(fontSize),
 			},
 		]"
 		:size="size"
@@ -47,7 +44,7 @@
 		@click="click"
 	>
 		<!-- 加载框 -->
-		<cl-loading :size="16" :color="loadingColor" :theme="loadingTheme" v-if="loading" />
+		<cl-loading :size="32" :color="loadingColor" :theme="loadingTheme" v-if="loading" />
 
 		<!-- 图标 -->
 		<view class="cl-button__icon" v-if="icon">
@@ -88,10 +85,7 @@ export default defineComponent({
 		// 是否加载
 		loading: Boolean,
 		// 加载图标主题
-		loadingTheme: {
-			type: String as PropType<"default" | "spin">,
-			default: "default",
-		},
+		loadingTheme: String,
 		// 加载图标演示
 		loadingColor: String,
 		// 是否圆角
@@ -105,16 +99,10 @@ export default defineComponent({
 		icon: String,
 		// 水平填充
 		fill: Boolean,
-		// 按钮高度
-		height: Number,
-		// 按钮宽度
-		width: Number,
 		// 字体颜色
 		color: String,
 		// 是否粗字体
 		bold: Boolean,
-		// 字体大小
-		fontSize: Number,
 		// 是否自定义
 		custom: Boolean,
 		// 以下查看 uniapp 文档：https://uniapp.dcloud.net.cn/component/button.html
@@ -151,9 +139,6 @@ export default defineComponent({
 		// 是否图片
 		const isImg = computed(() => props.icon?.includes("/"));
 
-		// loading 颜色
-		const loadingColor = computed(() => props.loadingColor);
-
 		// 事件
 		function getPhoneNumber(e: any) {
 			emit("getphonenumber", e);
@@ -187,7 +172,6 @@ export default defineComponent({
 			launchApp,
 			click,
 			isImg,
-			loadingColor,
 			...useStyle(),
 		};
 	},

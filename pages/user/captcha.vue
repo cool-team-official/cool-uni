@@ -93,11 +93,7 @@ onReady(() => {
 });
 </script>
 
-<style lang="scss">
-page {
-	background-color: #fff;
-}
-
+<style lang="scss" scoped>
 .page-captcha {
 	.container {
 		display: flex;

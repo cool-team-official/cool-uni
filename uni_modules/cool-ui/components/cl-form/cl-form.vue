@@ -44,11 +44,6 @@ export default defineComponent({
 			type: String as PropType<"toast" | "inner" | "none">,
 			default: "toast",
 		},
-		// 标签的高度
-		labelHeight: {
-			type: [String, Number],
-			default: 64,
-		},
 		// 标签的宽度
 		labelWidth: {
 			type: [String, Number],

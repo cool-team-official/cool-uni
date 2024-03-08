@@ -48,12 +48,12 @@
 				<cl-button size="small">小</cl-button>
 				<cl-button size="default">默认</cl-button>
 				<cl-button size="large">大</cl-button>
-				<cl-button :height="80" :width="200" :font-size="30">80*200</cl-button>
+				<cl-button :height="90" :width="200" :font-size="34">90*200</cl-button>
 			</cl-card>
 
 			<cl-card label="图标">
 				<cl-button icon="cl-icon-search">搜索</cl-button>
-				<cl-button icon="cl-icon-good-fill">点赞</cl-button>
+				<cl-button icon="cl-icon-chart-bar">统计</cl-button>
 			</cl-card>
 
 			<cl-card label="圆角">

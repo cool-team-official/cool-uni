@@ -10,8 +10,13 @@
 
 		<cl-card label="禁用">
 			<view style="margin-bottom: 20rpx">
-				<cl-button size="small" type="success" @tap="disabled = false">启用</cl-button>
-				<cl-button size="small" type="error" @tap="disabled = true">禁用</cl-button>
+				<cl-button
+					size="small"
+					:type="disabled ? 'success' : 'error'"
+					@tap="disabled = !disabled"
+				>
+					{{ disabled ? "启用" : "禁用" }}
+				</cl-button>
 			</view>
 
 			<cl-input :disabled="disabled" />
@@ -38,7 +43,13 @@
 		</cl-card>
 
 		<cl-card label="自定义">
-			<cl-input :height="80" background-color="#eee" :border="false" />
+			<cl-input
+				:height="80"
+				:padding="[0, 32, 0, 32]"
+				:radius="16"
+				background-color="#eee"
+				:border="false"
+			/>
 		</cl-card>
 	</cl-page>
 </template>

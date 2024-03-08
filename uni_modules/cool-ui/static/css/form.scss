@@ -1,35 +1,33 @@
 .cl-form {
 	.cl-form-item {
-		padding: 20rpx 0;
+		display: flex;
+		margin-bottom: 32rpx;
 		position: relative;
+		font-size: 28rpx;
 
 		&.is-required {
 			.cl-form-item__label::after {
 				content: "*";
 				color: $cl-color-error;
-				margin-left: 10rpx;
+				margin-left: 6rpx;
 			}
 		}
 
 		&__container {
 			display: flex;
-
-			&:first-child {
-				padding-left: 180rpx;
-			}
+			align-items: center;
+			flex: 1;
 		}
 
 		&__label {
-			padding: 0 20rpx 0 0;
-			font-size: 28rpx;
-			text-align: right;
-			vertical-align: middle;
-			float: left;
+			height: $cl-height;
+			line-height: $cl-height;
+			flex-shrink: 0;
+			margin-right: 20rpx;
 		}
 
 		&__content {
 			flex: 1;
-			font-size: 26rpx;
 
 			&.is-justify--left {
 				text-align: left;
@@ -42,43 +40,6 @@
 			&.is-justify--end {
 				text-align: right;
 			}
-
-			picker {
-				font-size: 26rpx;
-			}
-
-			label {
-				font-size: 26rpx;
-
-				switch,
-				radio,
-				checkbox {
-					margin-right: 14rpx;
-				}
-
-				radio,
-				checkbox {
-					top: -2rpx;
-				}
-
-				switch {
-					top: -4rpx;
-				}
-			}
-
-			checkbox-group,
-			radio-group {
-				label {
-					padding-right: 30rpx;
-				}
-			}
-
-			cl-textarea,
-			cl-select-region,
-			cl-select,
-			cl-input {
-				width: 100%;
-			}
 		}
 
 		&__message {
@@ -89,32 +50,17 @@
 			margin-top: 6rpx;
 		}
 
-		&__prefix,
-		&__suffix {
+		&__append {
 			display: flex;
 			align-items: center;
-			font-size: 26rpx;
-
-			text {
-				display: inline-block;
-			}
-		}
-
-		&__prefix {
-			margin-right: 20rpx;
-		}
-
-		&__suffix {
 			margin-left: 20rpx;
 		}
 
 		&.is-top {
-			padding: 0 0 20rpx 0;
+			flex-direction: column;
 
 			.cl-form-item__label {
-				padding: 20rpx 0 0 0;
-				float: none;
-				text-align: left;
+				margin-right: 0;
 			}
 		}
 

@@ -12,33 +12,35 @@
 		}"
 		v-if="visible"
 	>
-		<view class="cl-noticebar__close" @tap="close" v-if="closeable">
-			<cl-icon name="close-border" :size="36"></cl-icon>
-		</view>
+		<cl-icon
+			name="close-border"
+			:size="34"
+			:margin="[0, 10, 0, 0]"
+			@tap="close"
+			v-if="closeable"
+		/>
 
-		<view class="cl-noticebar__icon" v-if="$slots.icon || icon">
-			<slot v-if="$slots.icon" name="icon"></slot>
-			<cl-icon v-else :class-name="icon" :size="36"></cl-icon>
-		</view>
+		<slot name="icon">
+			<cl-icon :class-name="icon" :size="34" :margin="[0, 10, 0, 0]" v-if="icon" />
+		</slot>
 
 		<view class="cl-noticebar__box">
 			<view
 				class="cl-noticebar__scroller"
 				:class="[`is-${direction}`]"
 				:style="{
+					height: parseRpx(height),
 					top: scroll.top + 'px',
 					left: scroll.left + 'px',
 					transition,
 					transform: `translateX(-${scroll.translateX}px)`,
 				}"
 			>
-				<text class="cl-noticebar__text" v-for="(item, index) in list" :key="index">{{
-					item
-				}}</text>
+				<view class="cl-noticebar__item" v-for="(item, index) in list" :key="index">
+					<text class="cl-noticebar__text">{{ item }}</text>
+				</view>
 			</view>
 		</view>
-
-		<view class="cl-noticebar__more"></view>
 	</view>
 </template>
 
@@ -54,6 +56,7 @@ import {
 	type PropType,
 } from "vue";
 import { isArray } from "lodash-es";
+import { parseRpx } from "/@/cool/utils";
 
 export default defineComponent({
 	name: "cl-noticebar",
@@ -85,6 +88,11 @@ export default defineComponent({
 		closeable: Boolean,
 		// 左侧图标
 		icon: String,
+		// 高度
+		height: {
+			type: [String, Number],
+			default: 40,
+		},
 	},
 
 	emits: ["close"],
@@ -205,6 +213,7 @@ export default defineComponent({
 			refresh,
 			close,
 			clear,
+			parseRpx,
 		};
 	},
 });

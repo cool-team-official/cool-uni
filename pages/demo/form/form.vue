@@ -2,7 +2,13 @@
 	<cl-page :padding="20">
 		<view class="page">
 			<cl-card label="基础用法">
-				<cl-form ref="Form" v-model="form" :rules="rules" :disabled="loading">
+				<cl-form
+					ref="Form"
+					v-model="form"
+					:rules="rules"
+					:disabled="loading"
+					label-position="left"
+				>
 					<cl-form-item label="活动名称" prop="name">
 						<cl-input v-model="form.name"></cl-input>
 					</cl-form-item>
@@ -52,7 +58,15 @@
 					</cl-form-item>
 
 					<cl-form-item label="活动描述" prop="remark" label-position="top">
-						<cl-textarea v-model="form.remark" />
+						<cl-textarea v-model="form.remark" count />
+					</cl-form-item>
+
+					<cl-form-item label="活动赞助商" prop="company" label-position="top">
+						<cl-input v-model="form.company" />
+
+						<template #append>
+							<cl-icon name="help-border"></cl-icon>
+						</template>
 					</cl-form-item>
 				</cl-form>
 			</cl-card>
@@ -86,6 +100,7 @@ const form = ref({
 	remark: "",
 	cover: "",
 	pics: [],
+	company: "",
 });
 
 const rules = reactive({

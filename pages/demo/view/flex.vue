@@ -42,6 +42,16 @@
 					<view class="item">6</view>
 				</cl-col>
 			</cl-row>
+
+			<cl-row :gutter="20" type="flex" justify="space-between">
+				<cl-col :span="6">
+					<view class="item">6</view>
+				</cl-col>
+
+				<cl-col :span="6">
+					<view class="item">6</view>
+				</cl-col>
+			</cl-row>
 		</cl-card>
 	</cl-page>
 </template>

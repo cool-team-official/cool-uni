@@ -12,13 +12,13 @@
 	>
 		<view class="cl-image__placeholder" v-if="!src">
 			<slot name="placeholder">
-				<text class="cl-icon-image"></text>
+				<text class="icon cl-icon-image"></text>
 			</slot>
 		</view>
 
 		<view class="cl-image__error" v-else-if="isError">
 			<slot name="error">
-				<text class="icon cl-icon-img-warning"></text>
+				<text class="icon cl-icon-image-error"></text>
 			</slot>
 		</view>
 
@@ -42,18 +42,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 该组件基于官方的 image 组件。参数与官方一致，同时添加新的支持。
- * @property {String} src 图片链接
- * @property {String} mode 图片裁剪、缩放的模式
- * @property {String, Number, Array} size 图片大小
- * @property {Boolean} round 是否圆角
- * @property {Number, String, Array} margin 外间距
- * @property {Array} previewList 预览列表
- * @event {Function} load 加载成功时触发
- * @event {Function} error 加载失败时触发
- */
-
 import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { isNumber, isArray, isString, isNaN } from "lodash-es";

@@ -217,6 +217,12 @@
 					}
 				},
 				{
+					"path": "view/scroller",
+					"style": {
+						"navigationBarTitleText": "Scroller 滚动条"
+					}
+				},
+				{
 					"path": "form/input",
 					"style": {
 						"navigationBarTitleText": "Input 输入框"

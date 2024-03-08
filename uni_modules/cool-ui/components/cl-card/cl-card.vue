@@ -9,7 +9,7 @@
 			<cl-text :size="28" bold :value="label"></cl-text>
 
 			<view class="cl-card__loading" v-if="loading">
-				<cl-loading :size="18" :loading="loading"></cl-loading>
+				<cl-loading :size="36" :loading="loading"></cl-loading>
 			</view>
 
 			<template v-else>

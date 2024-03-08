@@ -9,7 +9,7 @@
 				<cl-loading
 					:color="iconColor"
 					:theme="loadingTheme"
-					:size="20"
+					:size="40"
 					v-if="!finish && loading"
 				></cl-loading>
 				<text
@@ -63,7 +63,7 @@ export default defineComponent({
 			default: "加载中",
 		},
 		// 加载图标主题
-		loadingTheme: String as PropType<"default" | "spin">,
+		loadingTheme: String,
 	},
 
 	setup(props) {

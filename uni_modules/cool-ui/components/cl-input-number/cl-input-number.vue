@@ -29,18 +29,6 @@
 </template>
 
 <script lang="ts">
-/**
- * @description 仅允许操作标准的数字值，可定义范围
- * @property {null} value 绑定值
- * @property {Numbder} step 步进，默认1
- * @property {Numbder} max 最大值，默认100
- * @property {Numbder} min 最小值，默认0
- * @property {Numbder} precision 数值精度
- * @property {Boolean} disabled 是否禁用
- * @event {Function} change 绑定值改变时触发
- * @example <cl-input-number v-model="val" />
- */
-
 import { computed, defineComponent, ref, watch, type PropType, type StyleValue } from "vue";
 import { useForm } from "../../hooks";
 import { isDecimal, parseRpx } from "/@/cool/utils";
@@ -50,22 +38,30 @@ export default defineComponent({
 	name: "cl-input-number",
 
 	props: {
+		// 绑定值
 		modelValue: [String, Number],
+		// 步进
 		step: {
 			type: Number,
 			default: 1,
 		},
+		// 最大值
 		max: {
 			type: Number,
 			default: 100,
 		},
+		// 最小值
 		min: {
 			type: Number,
 			default: 0,
 		},
+		// 数值精度
 		precision: Number,
+		// 是否禁用
 		disabled: Boolean,
+		// 单位
 		unit: String,
+		// 输入框样式
 		inputStyle: {
 			type: Object as PropType<StyleValue>,
 			default() {

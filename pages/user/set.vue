@@ -123,6 +123,7 @@ onReady(() => {
 
 	.avatar {
 		padding: 10rpx 0;
+		height: 88rpx;
 
 		button {
 			padding: 0;

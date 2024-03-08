@@ -8,7 +8,7 @@
 			}"
 		>
 			<slot name="loading" :text="text" :status="status" :move="touch.move">
-				<cl-loading :size="20" v-if="status == 'loading'"></cl-loading>
+				<cl-loading :size="40" v-if="status == 'loading'"></cl-loading>
 				<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
 			</slot>
 		</view>
@@ -114,6 +114,8 @@ export default defineComponent({
 		},
 	},
 
+	emits: ["down", "up", "scroll"],
+
 	setup(props, { emit }) {
 		const { proxy }: any = getCurrentInstance();
 
@@ -128,7 +130,7 @@ export default defineComponent({
 
 		watch(
 			() => props.scrollTop,
-			(val: any) => {
+			(val) => {
 				scrollTop2.value = val || 0;
 			},
 			{
@@ -167,7 +169,7 @@ export default defineComponent({
 		});
 
 		// 滚动开始
-		function onTouchStart(e: any) {
+		function onTouchStart(e: TouchEvent) {
 			if (status.value == "end" && props.refresherEnabled) {
 				touch.start = e.changedTouches[0].clientY;
 				status.value = "pulling";
@@ -175,7 +177,7 @@ export default defineComponent({
 		}
 
 		// 滚动中
-		function onTouchMove(e: any) {
+		function onTouchMove(e: TouchEvent) {
 			if (status.value == "pulling" && scrollTop2.value <= 10) {
 				let offset = e.changedTouches[0].clientY - touch.start;
 
@@ -207,7 +209,6 @@ export default defineComponent({
 				.select(".cl-scroller__loading")
 				.fields({ size: true }, (d) => {
 					status.value = "loading";
-					//@ts-ignore
 					touch.move = d.height || 0;
 					emit("down");
 				})

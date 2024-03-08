@@ -1,5 +1,5 @@
 <template>
-	<cl-page>
+	<cl-page background-color="#ffffff">
 		<view class="page-about">
 			<image class="logo" src="/static/logo.png" />
 
@@ -16,11 +16,7 @@ import { config, useApp } from "/@/cool";
 const app = useApp();
 </script>
 
-<style lang="scss">
-page {
-	background-color: #fff;
-}
-
+<style lang="scss" scoped>
 .page-about {
 	padding: 64rpx 24rpx;
 

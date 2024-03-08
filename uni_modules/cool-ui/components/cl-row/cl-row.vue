@@ -52,7 +52,7 @@ export default defineComponent({
 		margin: [String, Number, Array],
 		// 水平对齐
 		justify: {
-			type: String as PropType<"start" | "center" | "end">,
+			type: String as PropType<"start" | "center" | "end" | "space-between" | "space-around">,
 			default: "start",
 		},
 		// 垂直对齐

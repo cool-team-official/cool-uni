@@ -7,7 +7,7 @@
 		<cl-card label="带图标">
 			<cl-list-item label="神仙">
 				<template #icon>
-					<image src="/pages/demo/static/avatar.png" />
+					<cl-image :size="60" src="/pages/demo/static/avatar.png" />
 				</template>
 			</cl-list-item>
 		</cl-card>

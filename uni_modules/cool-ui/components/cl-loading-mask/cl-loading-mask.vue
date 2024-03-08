@@ -19,8 +19,7 @@
 					<cl-loading
 						:theme="loadingTheme"
 						:color="border ? '#ffffff' : color"
-						:size="border ? 30 : 25"
-						:border-width="border ? 6 : 4"
+						:size="60"
 					/>
 					<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
 				</view>

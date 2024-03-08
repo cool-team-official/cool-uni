@@ -1,30 +1,75 @@
-import { computed, getCurrentInstance } from "vue";
+import { computed, getCurrentInstance, type StyleValue } from "vue";
 import { parseRpx } from "/@/cool/utils";
-import { fromPairs, isArray } from "lodash-es";
+import { fromPairs } from "lodash-es";
 
-const keys = [
-	"padding",
-	"margin",
-	["border-radius", "radius"],
-	"$background-color",
-	"$background",
-	"$custom-style",
+const styles = [
+	{
+		key: "padding",
+		rpx: true,
+	},
+	{
+		key: "margin",
+		rpx: true,
+	},
+	{
+		key: "height",
+		rpx: true,
+	},
+	{
+		key: "width",
+		rpx: true,
+	},
+	{
+		key: "font-size",
+		rpx: true,
+	},
+	{
+		key: "border-radius",
+		alias: ["radius"],
+		rpx: true,
+	},
+	{
+		key: "background-color",
+	},
+	{
+		key: "background",
+	},
+	{
+		key: "custom-style",
+	},
 ];
 
-export function useStyle() {
-	const { proxy }: any = getCurrentInstance();
+export function useStyle(data: StyleValue = {}) {
+	// 当前组件实例
+	const instance = getCurrentInstance();
 
 	// 基础样式
 	const baseStyle = computed(() => {
 		return fromPairs(
-			keys
+			styles
 				.map((e) => {
-					const ks = isArray(e) ? e : [e.replace("$", "")];
-					const v = ks.map((k) => proxy.$attrs[k]).find((e) => e !== undefined);
+					// keys
+					const keys = [e.key, ...(e.alias || [])];
 
-					return [ks[0], e[0] == "$" ? v : parseRpx(v)];
+					// val
+					const val = keys
+						.map((k) => {
+							// 标签值
+							const a = instance?.proxy?.$attrs[k];
+
+							// 默认值
+							const b = (data as any)[k];
+
+							// 判定值
+							return a !== undefined ? a : b;
+						})
+						.find((e) => e !== undefined);
+
+					// 是否需要 rpx 解析
+					return [e.key, e.rpx ? parseRpx(val) : val];
 				})
-				.filter((e) => e[1]),
+				// 过滤空值
+				.filter((e) => e[1] !== undefined),
 		);
 	});
 

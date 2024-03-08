@@ -2,50 +2,51 @@
 	display: flex;
 	align-items: center;
 
-	&__icon,
-	&__close {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-right: 10rpx;
-	}
-
-	&__close {
-		color: $cl-color-info;
-	}
-
 	&__box {
 		flex: 1;
 		overflow: hidden;
 	}
 
+	.cl-icon {
+		/* #ifdef MP */
+		position: relative;
+		top: 2rpx;
+		/* #endif */
+	}
+
 	&__scroller {
 		position: relative;
-		line-height: 1;
 
 		&.is-vertical {
 			transition: top 0.3s;
+			flex-direction: column;
 
 			.cl-noticebar__text {
 				display: block;
-				height: 40rpx;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 			}
 		}
+
+		&.is-horizontal {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		height: 100%;
 	}
 
 	&__text {
 		font-size: 26rpx;
+		line-height: 1;
 	}
 
 	&.is-scrollable {
-		.cl-noticebar__scroller {
-			height: 40rpx;
-			line-height: 40rpx;
-		}
-
 		.cl-noticebar__text {
 			white-space: nowrap;
 		}
