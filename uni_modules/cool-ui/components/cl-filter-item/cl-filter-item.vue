@@ -13,7 +13,7 @@
 
 		<!-- 排序 -->
 		<template v-else-if="type == 'order'">
-			<view class="cl-filter-item__order" :class="[`is-${value}`]" v-if="value !== undefined">
+			<view class="cl-filter-item__order" :class="[`is-${value}`]">
 				<!-- 升序，降序图标 -->
 				<text class="cl-filter-item__order-asc"></text>
 				<text class="cl-filter-item__order-desc"></text>

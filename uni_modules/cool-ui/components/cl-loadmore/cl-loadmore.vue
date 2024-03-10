@@ -11,7 +11,7 @@
 					:theme="loadingTheme"
 					:size="40"
 					v-if="!finish && loading"
-				></cl-loading>
+				/>
 				<text
 					class="cl-loadmore__text"
 					:style="{
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, type PropType } from "vue";
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
 	name: "cl-loadmore",
