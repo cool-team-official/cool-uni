@@ -30,7 +30,9 @@ export default defineComponent({
 		round: Boolean,
 		// 是否宽度填充
 		fill: Boolean,
-		// 尺寸
+		// 是否只显示文字
+		text: Boolean,
+		// 图标大小
 		size: [String, Number],
 	},
 

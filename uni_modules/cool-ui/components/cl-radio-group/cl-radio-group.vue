@@ -24,11 +24,12 @@ export default defineComponent({
 		border: Boolean,
 		// 是否宽度填充
 		fill: Boolean,
-		// 尺寸
-		size: {
-			type: [String, Number],
-			default: null,
-		},
+		// 是否只显示文字
+		text: Boolean,
+		// 是否圆角
+		round: Boolean,
+		// 图标大小
+		size: [String, Number],
 	},
 
 	emits: ["update:modelValue", "change"],

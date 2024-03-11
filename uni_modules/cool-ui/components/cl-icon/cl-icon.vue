@@ -1,18 +1,12 @@
 <template>
 	<text
-		:class="[
-			'cl-icon',
-			className || `cl-icon-${name}`,
-			{
-				'is-primary': color == 'primary',
-			},
-		]"
+		:class="['cl-icon', className || `cl-icon-${name}`, `is-${color}`]"
 		:style="[
+			baseStyle,
 			{
 				fontSize: parseRpx(size),
 				color,
 			},
-			baseStyle,
 		]"
 	></text>
 </template>

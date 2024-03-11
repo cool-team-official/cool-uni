@@ -6,4 +6,20 @@ cl-icon,
 	&.is-primary {
 		color: $cl-color-primary;
 	}
+
+	&.is-success {
+		color: $cl-color-success;
+	}
+
+	&.is-warning {
+		color: $cl-color-warning;
+	}
+
+	&.is-error {
+		color: $cl-color-error;
+	}
+
+	&.is-info {
+		color: $cl-color-info;
+	}
 }

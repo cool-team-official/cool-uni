@@ -10,11 +10,10 @@
 		align-items: center;
 		justify-content: center;
 		color: #fff;
+		position: relative;
 		box-sizing: border-box;
 		border: $cl-border-width solid $cl-border-color;
 		border-radius: $cl-border-radius;
-		position: relative;
-		transition: all 0.3s;
 		height: $cl-checkbox-size;
 		width: $cl-checkbox-size;
 
@@ -25,13 +24,8 @@
 	}
 
 	&__label {
-		display: inline;
-		margin-left: 16rpx;
 		flex: 1;
-		line-height: 1;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		margin-left: 16rpx;
 	}
 
 	&.is-checked {
@@ -39,6 +33,12 @@
 			background-color: $cl-color-primary;
 			border-color: $cl-color-primary;
 			color: #fff;
+		}
+
+		&.is-text {
+			.cl-text__value {
+				color: $cl-color-primary;
+			}
 		}
 	}
 
@@ -49,8 +49,18 @@
 			color: $cl-color-disabled;
 		}
 
-		.cl-checkbox__label {
+		.cl-text__value {
 			color: $cl-color-disabled;
+		}
+	}
+
+	&.is-text {
+		.cl-checkbox__input {
+			display: none;
+		}
+
+		.cl-checkbox__label {
+			margin-left: 0;
 		}
 	}
 
@@ -62,13 +72,13 @@
 		box-sizing: border-box;
 		line-height: normal;
 
-		.cl-checkbox__label {
-			margin-left: 16rpx;
-		}
-
 		&.is-checked {
 			color: $cl-color-primary;
 			border-color: $cl-color-primary;
+
+			.cl-text__value {
+				color: $cl-color-primary;
+			}
 		}
 	}
 
@@ -82,6 +92,8 @@
 	}
 
 	&.is-round {
+		border-radius: $cl-checkbox-size;
+
 		.cl-checkbox__input {
 			border-radius: 100%;
 		}

@@ -2,8 +2,6 @@
 	display: inline-flex;
 	align-items: center;
 	margin-right: 60rpx;
-	white-space: nowrap;
-	font-size: 28rpx;
 	height: $cl-height;
 
 	&__input {
@@ -15,9 +13,9 @@
 		position: relative;
 		background-color: #fff;
 		border: $cl-border-width solid $cl-border-color;
-		height: $cl-checkbox-size;
-		width: $cl-checkbox-size;
-		border-radius: $cl-checkbox-size;
+		height: $cl-radio-size;
+		width: $cl-radio-size;
+		border-radius: $cl-radio-size;
 
 		text {
 			display: inline-block;
@@ -29,13 +27,8 @@
 	}
 
 	&__label {
-		display: inline;
-		margin-left: 16rpx;
 		flex: 1;
-		line-height: 1;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		margin-left: 16rpx;
 	}
 
 	&.is-checked {
@@ -45,6 +38,12 @@
 
 			text {
 				background-color: #fff;
+			}
+		}
+
+		&.is-text {
+			.cl-text__value {
+				color: $cl-color-primary;
 			}
 		}
 	}
@@ -59,8 +58,18 @@
 			}
 		}
 
-		.cl-radio__label {
+		.cl-text__value {
 			color: $cl-color-disabled;
+		}
+	}
+
+	&.is-text {
+		.cl-radio__input {
+			display: none;
+		}
+
+		.cl-radio__label {
+			margin-left: 0;
 		}
 	}
 
@@ -72,23 +81,22 @@
 		box-sizing: border-box;
 		line-height: normal;
 
-		.cl-radio__label {
-			margin-left: 16rpx;
-		}
-
 		&.is-checked {
 			border-color: $cl-color-primary;
 			color: $cl-color-primary;
+
+			.cl-text__value {
+				color: $cl-color-primary;
+			}
 		}
 	}
 
-	&.is-fill {
-		justify-content: center;
-		width: 100%;
+	&.is-round {
+		border-radius: $cl-radio-size;
+	}
 
-		.cl-radio__label {
-			text-align: right;
-		}
+	&.is-fill {
+		width: 100%;
 	}
 }
 

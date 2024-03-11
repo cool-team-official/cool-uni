@@ -1,24 +1,21 @@
 <template>
-	<view
-		class="cl-checkbox"
-		:class="[classList]"
-		:style="{
-			height: parseRpx(height),
-		}"
-		@tap.stop="change"
-	>
-		<view
-			class="cl-checkbox__input"
-			:style="{
-				height: size,
-				width: size,
-			}"
-		>
-			<text class="cl-icon-toast-success" v-if="checked"></text>
-		</view>
+	<view class="cl-checkbox" :class="[classList]" :style="[baseStyle]" @tap.stop="change">
+		<slot name="icon" :checked="checked">
+			<view
+				class="cl-checkbox__input"
+				:style="{
+					height: size,
+					width: size,
+				}"
+			>
+				<text class="cl-icon-toast-success" v-if="checked"></text>
+			</view>
+		</slot>
 
 		<view class="cl-checkbox__label">
-			<slot></slot>
+			<cl-text :ellipsis="1" :size="28">
+				<slot></slot>
+			</cl-text>
 		</view>
 	</view>
 </template>
@@ -27,7 +24,7 @@
 import { computed, defineComponent, ref, watch } from "vue";
 import { isArray, isBoolean } from "lodash-es";
 import { getParent, parseRpx } from "/@/cool/utils";
-import { useForm } from "../../hooks";
+import { useForm, useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-checkbox",
@@ -52,9 +49,12 @@ export default defineComponent({
 			type: Boolean,
 			default: null,
 		},
-		// 高度
-		height: [String, Number],
-		// 尺寸
+		// 是否只显示文字
+		text: {
+			type: Boolean,
+			default: null,
+		},
+		// 图标大小
 		size: [String, Number],
 	},
 
@@ -71,6 +71,7 @@ export default defineComponent({
 			"fill",
 			"disabled",
 			"size",
+			"text",
 			"onChange",
 		]);
 
@@ -87,20 +88,22 @@ export default defineComponent({
 
 		// 大小
 		const size = computed(() => {
-			return parseRpx(parent.value?.size || props.size);
+			return parseRpx(props.size || parent.value?.size);
 		});
 
 		// 样式
 		const classList = computed(() => {
-			return [
-				{
-					"is-checked": checked.value,
-					"is-disabled": isDisabled.value,
-					"is-fill": parent.value?.fill,
-					"is-round": isBoolean(props.round) ? props.round : parent.value?.round,
-					"is-border": isBoolean(props.border) ? props.border : parent.value?.border,
-				},
-			];
+			const d = {
+				"is-disabled": isDisabled.value,
+				"is-checked": checked.value,
+			};
+
+			["border", "fill", "text", "round"].forEach((k) => {
+				// @ts-ignore
+				d[`is-${k}`] = isBoolean(props[k]) ? props[k] : parent.value?.[k];
+			});
+
+			return d;
 		});
 
 		// 绑定值改变
@@ -140,7 +143,7 @@ export default defineComponent({
 			checked,
 			classList,
 			change,
-			parseRpx,
+			...useStyle(),
 		};
 	},
 });
