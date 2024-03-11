@@ -4,9 +4,7 @@
 		:class="{
 			'is-fixed': fixed,
 		}"
-		:style="{
-			height,
-		}"
+		:style="[baseStyle]"
 	>
 		<image
 			class="cl-empty__icon"
@@ -14,7 +12,8 @@
 			mode="aspectFit"
 			v-if="showIcon"
 		/>
-		<text class="cl-empty__text">{{ text }}</text>
+
+		<text class="cl-empty__text" v-if="text">{{ text }}</text>
 
 		<view class="cl-empty__container" v-if="$slots.default">
 			<slot></slot>
@@ -24,6 +23,7 @@
 
 <script lang="ts">
 import { type PropType, defineComponent } from "vue";
+import { useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-empty",
@@ -44,16 +44,19 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		// 高度
-		height: {
-			type: String,
-			default: "100%",
-		},
 		// 是否显示图标
 		showIcon: {
 			type: Boolean,
 			default: true,
 		},
+	},
+
+	setup() {
+		return {
+			...useStyle({
+				height: "100%",
+			}),
+		};
 	},
 });
 </script>
