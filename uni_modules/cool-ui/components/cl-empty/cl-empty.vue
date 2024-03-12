@@ -9,6 +9,9 @@
 		<image
 			class="cl-empty__icon"
 			:src="`/static/empty/${icon}.png`"
+			:style="{
+				height: parseRpx(iconSize),
+			}"
 			mode="aspectFit"
 			v-if="showIcon"
 		/>
@@ -34,6 +37,8 @@ export default defineComponent({
 			type: String as PropType<"comm">,
 			default: "comm",
 		},
+		// 图标大小
+		iconSize: [String, Number],
 		// 暂无数据文案
 		text: {
 			type: String,
