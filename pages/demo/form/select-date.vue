@@ -16,9 +16,9 @@
 			<cl-select-date v-model="v4" start="2023-01-01 08:00:00" end="2025-12-12 12:00:00" />
 
 			<cl-row :margin="[20, 0, 0, 0]">
-				<cl-text value="2023-01-01 08:00:00 < "></cl-text>
-				<cl-text value="时间" color="red" :margin="[0, 10, 0, 10]"></cl-text>
-				<cl-text value=" < 2025-12-12 12:00:00"></cl-text>
+				<cl-text value="2023-01-01 08:00:00 < " />
+				<cl-text value="时间" color="red" :margin="[0, 10, 0, 10]" />
+				<cl-text value=" < 2025-12-12 12:00:00" />
 			</cl-row>
 		</cl-card>
 
@@ -44,7 +44,7 @@
 									? dayjs(value).format('YYYY年MM月DD日 HH时mm分ss秒')
 									: '请选择预约时间'
 							"
-						></cl-text>
+						/>
 					</cl-select-inner>
 				</template>
 			</cl-select-date>

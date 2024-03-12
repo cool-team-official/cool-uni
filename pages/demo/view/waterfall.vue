@@ -5,7 +5,7 @@
 				<cl-waterfall-column v-for="(item, index) in list" :key="index">
 					<view class="goods-item" v-for="(item2, index2) in item" :key="index2">
 						<image :src="item2.url" mode="widthFix"></image>
-						<cl-text :value="item2.title" :margin="20" :line-height="1.5"></cl-text>
+						<cl-text :value="item2.title" :margin="20" :line-height="1.5" />
 					</view>
 				</cl-waterfall-column>
 			</template>
@@ -78,7 +78,7 @@ function refresh(params?: any) {
 					},
 				});
 			}, 1000);
-		})
+		}),
 	);
 }
 

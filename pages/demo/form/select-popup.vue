@@ -20,7 +20,7 @@
 
 				<template #default="{ label, value }">
 					<cl-select-inner round background-color="#f7f7f7">
-						<cl-text value="你选择了" :size="24" color="info"></cl-text>
+						<cl-text value="你选择了" :size="24" color="info" />
 						<cl-tag round size="small" :margin="[0, 0, 0, 20]">{{ label }}</cl-tag>
 					</cl-select-inner>
 				</template>

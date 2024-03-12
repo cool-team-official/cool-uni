@@ -6,7 +6,7 @@
 				block
 				color="warning"
 				:margin="[0, 0, 30, 0]"
-			></cl-text>
+			/>
 
 			<cl-row>
 				<cl-button @tap="openToast">提示框</cl-button>
@@ -21,7 +21,7 @@
 				block
 				color="warning"
 				:margin="[0, 0, 30, 0]"
-			></cl-text>
+			/>
 
 			<cl-row>
 				<cl-button @tap="setTheme('default')">默认</cl-button>

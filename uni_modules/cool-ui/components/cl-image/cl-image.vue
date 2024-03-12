@@ -42,14 +42,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
-import type { PropType } from "vue";
+import { type PropType, computed, defineComponent, ref, watch } from "vue";
 import { isNumber, isArray, isString, isNaN } from "lodash-es";
 import { parseRpx } from "/@/cool/utils";
 import { useStyle } from "../../hooks";
 
 export default defineComponent({
 	name: "cl-image",
+
 	props: {
 		// 图片地址
 		src: String,

@@ -25,7 +25,7 @@
 
 		<cl-card label="弹出框选择">
 			<cl-list-item :arrow-icon="false" label="节点选择" @tap="refs.treeSelect?.open">
-				<cl-text :value="refs.treeSelect?.label || '请选择'" :ellipsis="1"></cl-text>
+				<cl-text :value="refs.treeSelect?.label || '请选择'" :ellipsis="1" />
 			</cl-list-item>
 
 			<cl-tree-select

@@ -14,7 +14,7 @@
 
 		<cl-card label="带描述">
 			<cl-list-item label="余额">
-				<cl-text type="price" :size="30" :value="159.2"></cl-text>
+				<cl-text type="price" :size="30" :value="159.2" />
 			</cl-list-item>
 		</cl-card>
 
@@ -44,7 +44,7 @@
 			<cl-list-item justify="start">
 				<cl-row type="flex" align="center">
 					<cl-avatar></cl-avatar>
-					<cl-text value="神仙都没用" :margin="[0, 0, 0, 20]"></cl-text>
+					<cl-text value="神仙都没用" :margin="[0, 0, 0, 20]" />
 				</cl-row>
 
 				<template #append>

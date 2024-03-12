@@ -17,7 +17,7 @@
 				<cl-grid-item v-for="item in list" :key="item">
 					<view class="item" @tap="copy(item)">
 						<cl-icon :name="item" :size="44"></cl-icon>
-						<cl-text :value="item" align="center" :margin="[10, 0, 0, 0]"></cl-text>
+						<cl-text :value="item" align="center" :margin="[10, 0, 0, 0]" />
 					</view>
 				</cl-grid-item>
 			</cl-grid>

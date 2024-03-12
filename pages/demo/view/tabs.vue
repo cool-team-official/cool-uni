@@ -29,7 +29,7 @@
 							:margin="20"
 							:color="active === item.value ? 'primary' : ''"
 							@tap="check(item.value)"
-						></cl-text>
+						/>
 					</view>
 				</template>
 			</cl-tabs>

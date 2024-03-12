@@ -1,7 +1,7 @@
 <template>
 	<cl-page :padding="20">
 		<cl-popup v-model="visible">
-			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-popup v-model="visible_modal" :modal="false" :padding="0">
@@ -9,23 +9,23 @@
 		</cl-popup>
 
 		<cl-popup v-model="visible_custom" background-color="#333" border-radius="20rpx">
-			<cl-text color="#fff" value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text color="#fff" value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-popup v-model="visible_left" direction="left">
-			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-popup v-model="visible_top" direction="top">
-			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-popup v-model="visible_right" direction="right">
-			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-popup v-model="visible_bottom" direction="bottom">
-			<cl-text value="云想衣裳花想容，春风拂槛露华浓。"></cl-text>
+			<cl-text value="云想衣裳花想容，春风拂槛露华浓。" />
 		</cl-popup>
 
 		<cl-card label="基础用法">

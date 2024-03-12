@@ -3,38 +3,22 @@
 		<cl-card label="裁剪模式">
 			<cl-row :gutter="20">
 				<cl-col :span="6">
-					<cl-image
-						src="/pages/demo/static/bg.png"
-						:size="140"
-						mode="scaleToFill"
-					></cl-image>
+					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="scaleToFill" />
 					<cl-text value="scaleToFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image
-						src="/pages/demo/static/bg.png"
-						:size="140"
-						mode="aspectFit"
-					></cl-image>
+					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="aspectFit" />
 					<cl-text value="aspectFit"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image
-						src="/pages/demo/static/bg.png"
-						:size="140"
-						mode="aspectFill"
-					></cl-image>
+					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="aspectFill" />
 					<cl-text value="aspectFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image
-						src="/pages/demo/static/bg.png"
-						:size="140"
-						mode="widthFix"
-					></cl-image>
+					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="widthFix" />
 					<cl-text value="widthFix"></cl-text>
 				</cl-col>
 			</cl-row>
@@ -43,15 +27,11 @@
 		<cl-card label="圆角">
 			<cl-row type="flex">
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/avatar.png" :size="140" round></cl-image>
+					<cl-image src="/pages/demo/static/avatar.png" :size="140" round />
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image
-						src="/pages/demo/static/avatar.png"
-						:size="140"
-						:radius="16"
-					></cl-image>
+					<cl-image src="/pages/demo/static/avatar.png" :size="140" :radius="16" />
 				</cl-col>
 			</cl-row>
 		</cl-card>
@@ -62,23 +42,19 @@
 					src="/pages/demo/static/avatar.png"
 					:size="[150, 280]"
 					mode="aspectFill"
-				></cl-image>
+				/>
 			</cl-row>
 		</cl-card>
 
 		<cl-card label="点击预览">
 			<cl-row type="flex">
-				<cl-image
-					src="/pages/demo/static/bg.png"
-					:size="140"
-					:preview-list="previewList"
-				></cl-image>
+				<cl-image src="/pages/demo/static/bg.png" :size="140" :preview-list="previewList" />
 			</cl-row>
 		</cl-card>
 
 		<cl-card label="插槽：地址为空">
 			<cl-row type="flex">
-				<cl-image src="" :size="150"></cl-image>
+				<cl-image src="" :size="150" />
 
 				<cl-image src="" :size="150" :margin="[0, 0, 0, 20]">
 					<template #placeholder>
@@ -89,7 +65,7 @@
 		</cl-card>
 
 		<cl-card label="插槽：加载错误">
-			<cl-image src="https://xxxx.png" :size="150"></cl-image>
+			<cl-image src="https://xxxx.png" :size="150" />
 		</cl-card>
 	</cl-page>
 </template>
