@@ -26,15 +26,16 @@
 		<template #list>
 			<view class="cl-select-city__wrap">
 				<view class="cl-select-city__tabs">
-					<cl-text
+					<cl-tag
 						v-for="(item, index) in tabs"
 						:key="index"
-						:color="index == active ? 'primary' : '#000'"
-						:ellipsis="1"
-						:padding="[0, 30]"
-						:value="item?.[labelKey] || '请选择'"
+						round
+						:type="active == index ? 'primary' : 'info'"
+						:margin="[0, 20, 20, 0]"
 						@tap="toActive(index)"
-					/>
+					>
+						{{ item?.[labelKey] || "请选择" }}
+					</cl-tag>
 				</view>
 
 				<view class="cl-select-city__list">
@@ -72,10 +73,12 @@
 <script lang="ts">
 import { computed, defineComponent, nextTick, reactive, ref, watch, type PropType } from "vue";
 import { useRefs } from "/@/cool";
-import { cloneDeep, debounce, isEmpty } from "lodash-es";
+import { cloneDeep, isEmpty } from "lodash-es";
 import { Props } from "../cl-select-inner/config";
-import CityPca from "../../data/city-pca.json";
 import { uuid } from "/@/cool/utils";
+
+import CityPca from "../../data/city-pca.json";
+// 省市区其他数据来源 https://github.com/modood/Administrative-divisions-of-China
 
 interface Item {
 	name: string;
@@ -110,7 +113,7 @@ export default defineComponent({
 		// 值关键字
 		valueKey: {
 			type: String,
-			default: "code",
+			default: "name",
 		},
 		// 占位文本
 		placeholder: {

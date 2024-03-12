@@ -1,19 +1,21 @@
 .cl-select-city {
 	&__wrap {
+		display: flex;
+		flex-direction: column;
 		height: 100%;
 	}
 
 	&__tabs {
 		display: flex;
-		align-items: center;
-		height: 80rpx;
+		flex-wrap: wrap;
+		padding: 0 30rpx;
 	}
 
 	&__list {
-		height: calc(100% - 80rpx);
 		border-top: 1rpx solid $cl-color-bg;
 		border-bottom: 1rpx solid $cl-color-bg;
 		box-sizing: border-box;
+		flex: 1;
 
 		swiper {
 			height: 100%;
