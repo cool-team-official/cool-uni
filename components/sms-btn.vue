@@ -144,7 +144,7 @@ async function send() {
 
 		captcha.sending = false;
 	} else {
-		ui.showToast("请输入验证码");
+		ui.showToast("请填写验证码");
 	}
 }
 
@@ -173,7 +173,7 @@ function open() {
 			captcha.visible = true;
 			getCaptcha();
 		} else {
-			ui.showToast("请输入正确的手机号格式");
+			ui.showToast("请填写正确的手机号格式");
 		}
 	}
 }

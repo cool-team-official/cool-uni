@@ -52,7 +52,7 @@
 			<cl-card label="图标">
 				<cl-row>
 					<cl-col :span="12">
-						<cl-text prefix-icon="cl-icon-search" value="请输入名称" />
+						<cl-text prefix-icon="cl-icon-search" value="请填写名称" />
 					</cl-col>
 
 					<cl-col :span="12">

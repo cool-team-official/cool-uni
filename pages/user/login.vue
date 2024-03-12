@@ -21,7 +21,7 @@
 							<cl-input
 								v-model="phone"
 								type="number"
-								placeholder="请输入手机号码"
+								placeholder="请填写手机号码"
 								:border="false"
 								:maxlength="11"
 								:font-size="30"

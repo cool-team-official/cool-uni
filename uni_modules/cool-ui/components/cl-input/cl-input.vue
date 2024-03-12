@@ -79,7 +79,7 @@ export default defineComponent({
 		password: Boolean,
 		placeholder: {
 			type: String,
-			default: "请输入",
+			default: "请填写",
 		},
 		clearable: {
 			type: Boolean,

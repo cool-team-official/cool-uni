@@ -10,7 +10,7 @@
 							:border="false"
 							:height="80"
 							:border-radius="12"
-							placeholder="请输入昵称"
+							placeholder="请填写昵称"
 						/>
 					</cl-form-item>
 				</cl-form>

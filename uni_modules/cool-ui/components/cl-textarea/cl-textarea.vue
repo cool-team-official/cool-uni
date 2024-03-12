@@ -62,7 +62,7 @@ export default defineComponent({
 		// 是否显示统计字数
 		placeholder: {
 			type: String,
-			default: "请输入",
+			default: "请填写",
 		},
 		// 是否禁用
 		disabled: {

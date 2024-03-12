@@ -10,7 +10,7 @@
 					label-position="left"
 				>
 					<cl-form-item label="活动名称" prop="name">
-						<cl-input v-model="form.name" placeholder="请输入活动名称"></cl-input>
+						<cl-input v-model="form.name" placeholder="请填写活动名称"></cl-input>
 					</cl-form-item>
 
 					<cl-form-item label="活动时间" prop="date">
@@ -58,11 +58,11 @@
 					</cl-form-item>
 
 					<cl-form-item label="活动描述" prop="remark" label-position="top">
-						<cl-textarea v-model="form.remark" count placeholder="请输入活动描述" />
+						<cl-textarea v-model="form.remark" count placeholder="请填写活动描述" />
 					</cl-form-item>
 
 					<cl-form-item label="活动赞助商" prop="company" label-position="top">
-						<cl-input v-model="form.company" placeholder="请输入活动赞助商" />
+						<cl-input v-model="form.company" placeholder="请填写活动赞助商" />
 
 						<template #append>
 							<cl-icon name="help-border" :size="36"></cl-icon>
