@@ -8,8 +8,6 @@
 import { onReady } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { useCool } from "/@/cool";
-// @ts-ignore
-import mpHtml from "mp-html/dist/uni-app/components/mp-html/mp-html";
 
 const { router, service } = useCool();
 
