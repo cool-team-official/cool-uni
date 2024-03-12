@@ -86,7 +86,7 @@ export default defineComponent({
 		loading: Boolean,
 		// 加载图标主题
 		loadingTheme: String,
-		// 加载图标演示
+		// 加载图标颜色
 		loadingColor: String,
 		// 是否圆角
 		round: Boolean,
