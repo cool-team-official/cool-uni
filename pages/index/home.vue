@@ -107,6 +107,10 @@ const list = [
 				link: "/pages/demo/form/select-popup",
 			},
 			{
+				label: "SelectCity 城市选择器",
+				link: "/pages/demo/form/select-city",
+			},
+			{
 				label: "Rate 评分",
 				link: "/pages/demo/form/rate",
 			},

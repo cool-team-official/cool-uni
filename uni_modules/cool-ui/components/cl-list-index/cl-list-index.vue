@@ -1,7 +1,7 @@
 <template>
 	<view class="cl-list-index">
 		<!-- 搜索栏 -->
-		<view class="cl-list-index__search">
+		<view class="cl-list-index__search" v-if="searchBar">
 			<cl-input
 				v-model="keyWord"
 				:border="false"
@@ -40,10 +40,10 @@
 					<view
 						class="header"
 						:class="{
-							'is-active': curr.label == item.label,
+							'is-active': curr?.label == item.label,
 						}"
 					>
-						<slot name="header" :item="item" :isActive="curr.label == item.label">
+						<slot name="header" :item="item" :isActive="curr?.label == item.label">
 							<text>{{ item.label }}</text>
 						</slot>
 					</view>
@@ -56,7 +56,7 @@
 								:item="item2"
 								:index="index2"
 								:group="item"
-								:isActive="curr.label == item.label"
+								:isActive="curr?.label == item.label"
 							>
 								<view
 									class="item"
@@ -69,8 +69,9 @@
 										:model-value="isChecked(item2)"
 										:disabled="item2.disabled"
 										round
+										:margin="[0, 10, 0, 0]"
 										v-if="selectable"
-									></cl-checkbox>
+									/>
 
 									<view class="avatar">
 										<cl-avatar :src="item2[dict.avatar]"></cl-avatar>
@@ -96,7 +97,7 @@
 				<view
 					class="block"
 					:class="{
-						'is-active': curr.label == item.label,
+						'is-active': curr?.label == item.label,
 					}"
 					v-for="(item, index) in flist"
 					:key="index"
@@ -109,12 +110,21 @@
 		</view>
 
 		<!-- 索引关键字 -->
-		<view class="cl-list-index__alert" v-show="alert">{{ curr.label }}</view>
+		<view class="cl-list-index__alert" v-show="alert && curr">{{ curr?.label }}</view>
 	</view>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch, type PropType } from "vue";
+import {
+	computed,
+	defineComponent,
+	getCurrentInstance,
+	nextTick,
+	reactive,
+	ref,
+	watch,
+	type PropType,
+} from "vue";
 import py from "js-pinyin";
 import { groupBy, isEmpty } from "lodash-es";
 
@@ -147,16 +157,25 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		// 显示搜索栏
+		searchBar: {
+			type: Boolean,
+			default: true,
+		},
 		// 搜索占位内容
 		placeholder: {
 			type: String,
 			default: "搜索关键字",
 		},
+		// 延迟
+		delay: Number,
 	},
 
 	emits: ["select", "selection-change", "update:selection"],
 
 	setup(props, { emit }) {
+		const { proxy }: any = getCurrentInstance();
+
 		// 列表
 		const list = ref<ClListIndex.Group>([]);
 
@@ -211,14 +230,17 @@ export default defineComponent({
 		});
 
 		// 监听滚动
-		function onScroll(e: any) {
-			let top = e.detail.scrollTop;
-			let num = tops.value.filter((e) => top >= e - 60).length - 1;
+		function onScroll(e: { detail: { scrollTop: number } }) {
+			// 对比每个高度计算
+			let num =
+				tops.value.filter((top) => e.detail.scrollTop >= top - (props.searchBar ? 60 : 0))
+					.length - 1;
 
 			if (num < 0) {
 				num = 0;
 			}
 
+			// 设置当前
 			curr.value = list.value[num];
 		}
 
@@ -251,8 +273,9 @@ export default defineComponent({
 		}
 
 		// 移动
-		function barMove(e: any) {
+		function barMove(e: TouchEvent) {
 			const max = list.value.length;
+
 			let index = parseInt(String((e.touches[0].clientY - bar.top) / bar.itemH));
 
 			if (index >= max) {
@@ -268,48 +291,59 @@ export default defineComponent({
 
 		// 离开
 		function barEnd() {
-			label.value = curr.value.label;
+			if (curr.value) {
+				label.value = curr.value.label;
+			}
+
 			alert.value = false;
 		}
 
 		// 整理布局
 		function doLayout() {
 			nextTick(() => {
-				// 获取索引栏大小
-				uni.createSelectorQuery()
-					.select(".cl-list-index__bar .list")
-					.boundingClientRect((res: any) => {
-						if (res) {
-							bar.top = res.top;
-							bar.itemH = res.height / list.value.length;
-						}
-					})
-					.exec();
+				setTimeout(() => {
+					// 获取索引栏大小
+					uni.createSelectorQuery()
+						.in(proxy)
+						.select(".cl-list-index__bar .list")
+						.boundingClientRect((res: any) => {
+							if (res) {
+								bar.top = res.top;
+								bar.itemH = res.height / list.value.length;
+							}
+						})
+						.exec();
 
-				// 获取当前距离顶部的高度
-				uni.createSelectorQuery()
-					.select(".cl-list-index")
-					.boundingClientRect((res: any) => {
-						// 获取每项距离顶部的高度
-						uni.createSelectorQuery()
-							.selectAll(".header")
-							.fields(
-								{
-									rect: true,
-								},
-								() => {},
-							)
-							.exec((d) => {
-								tops.value = d[0].map((e: any) => e.top - res.top);
-							});
-					})
-					.exec();
+					// 获取当前距离顶部的高度
+					uni.createSelectorQuery()
+						.in(proxy)
+						.select(".cl-list-index")
+						.boundingClientRect((res: any) => {
+							// 获取每项距离顶部的高度
+							uni.createSelectorQuery()
+								.in(proxy)
+								.selectAll(".header")
+								.fields(
+									{
+										rect: true,
+										size: true,
+									},
+									() => {},
+								)
+								.exec((d) => {
+									tops.value = d[0].map(
+										(e: { top: number; height: number }) => e.top - res.top,
+									);
+								});
+						})
+						.exec();
+				}, props.delay || 0);
 			});
 		}
 
 		// 是否选中
 		function isChecked(item: any) {
-			return Boolean(selection.value.find((e) => e.id == item.id));
+			return Boolean(selection.value.find((e) => e[dict.id] == item[dict.id]));
 		}
 
 		// 更新行数据
@@ -371,7 +405,7 @@ export default defineComponent({
 				return 0;
 			});
 
-			// 重组
+			// 重做
 			doLayout();
 		}
 

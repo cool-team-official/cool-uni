@@ -278,6 +278,12 @@
 					}
 				},
 				{
+					"path": "form/select-city",
+					"style": {
+						"navigationBarTitleText": "SelectCity 城市选择器"
+					}
+				},
+				{
 					"path": "form/rate",
 					"style": {
 						"navigationBarTitleText": "Rate 评分"

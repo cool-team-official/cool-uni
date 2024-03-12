@@ -6,6 +6,7 @@
 		"@dcloudio/uni-app": "3.0.0-3081220230817001",
 		"@hyoga/uni-socket.io": "^3.0.4",
 		"dayjs": "^1.11.10",
+		"js-pinyin": "^0.2.5",
 		"lodash-es": "^4.17.21",
 		"md5": "^2.3.0",
 		"mitt": "^3.0.1",

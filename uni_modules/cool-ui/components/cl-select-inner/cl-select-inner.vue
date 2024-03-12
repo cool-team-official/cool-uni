@@ -8,12 +8,7 @@
 				'is-border': border,
 			},
 		]"
-		:style="{
-			height: parseRpx(height),
-			padding: parseRpx(padding),
-			backgroundColor,
-			borderRadius: parseRpx(borderRadius),
-		}"
+		:style="[baseStyle]"
 	>
 		<slot>
 			<view class="cl-select-inner__value">
@@ -30,39 +25,15 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { parseRpx } from "/@/cool/utils";
-import { useForm } from "../../hooks";
+import { useForm, useStyle } from "../../hooks";
+import { Props } from "./config";
 
 export default defineComponent({
 	props: {
+		...Props,
+
+		// 显示文本
 		text: String,
-		height: [String, Number],
-		placeholder: {
-			type: String,
-			default: "请选择",
-		},
-		disabled: {
-			type: Boolean,
-			default: null,
-		},
-		border: {
-			type: Boolean,
-			default: true,
-		},
-		round: {
-			type: Boolean,
-			default: null,
-		},
-		backgroundColor: String,
-		borderRadius: [String, Number],
-		arrowIcon: {
-			type: String,
-			default: "cl-icon-arrow-bottom",
-		},
-		padding: {
-			type: [String, Number],
-			default: "0 20rpx",
-		},
 	},
 
 	setup(props) {
@@ -73,7 +44,9 @@ export default defineComponent({
 
 		return {
 			isDisabled,
-			parseRpx,
+			...useStyle({
+				padding: "0 20rpx",
+			}),
 		};
 	},
 });

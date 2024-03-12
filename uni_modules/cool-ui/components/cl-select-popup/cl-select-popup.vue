@@ -22,7 +22,9 @@
 		:padding="0"
 		direction="bottom"
 		border-radius="16rpx 16rpx 0 0"
+		@opened="onOpened"
 		@close="onClose"
+		@closed="onClosed"
 	>
 		<view class="cl-select-popup__wrap">
 			<!-- 标题 -->
@@ -39,7 +41,7 @@
 				:scroll-into-view="scroller.view"
 				:style="{
 					height: parseRpx(scrollerHeight),
-					maxHeight: parseRpx(scrollerMaxHeight),
+					maxHeight: parseRpx(scrollerHeight || scrollerMaxHeight),
 				}"
 			>
 				<slot name="list">
@@ -74,7 +76,7 @@
 				</slot>
 			</scroll-view>
 
-			<view class="cl-select-popup__footer">
+			<view class="cl-select-popup__footer" v-if="showFooter">
 				<slot name="confirm">
 					<cl-button
 						round
@@ -83,8 +85,9 @@
 						size="large"
 						:disabled="required ? selection.length == 0 : false"
 						@tap="confirm"
-						>确定</cl-button
 					>
+						确定
+					</cl-button>
 				</slot>
 			</view>
 		</view>
@@ -108,27 +111,41 @@ export default defineComponent({
 	name: "cl-select-popup",
 
 	props: {
+		...Props,
+
+		// 绑定值
 		modelValue: [String, Number, Array],
+		// 标题
 		title: String,
+		// 滚动高度
 		scrollerHeight: [String, Number],
+		// 最大滚动高度
 		scrollerMaxHeight: {
 			type: [String, Number],
 			default: 600,
 		},
+		// 选项列表
 		options: {
 			type: Array as PropType<Item[]>,
 			default: () => [],
 		},
+		// 是否多选
 		multiple: Boolean,
+		// 是否显示选择器
 		showPicker: {
 			type: Boolean,
 			default: true,
 		},
+		// 是否显示底部
+		showFooter: {
+			type: Boolean,
+			default: true,
+		},
+		// 是否必填
 		required: Boolean,
-		...Props,
 	},
 
-	emits: ["update:modelValue", "change", "confirm", "close"],
+	emits: ["update:modelValue", "change", "confirm", "opened", "close", "closed"],
 
 	setup(props, { emit }) {
 		const { refs, setRefs } = useRefs();
@@ -187,6 +204,11 @@ export default defineComponent({
 			selection.value = [...checked.value];
 		}
 
+		// 打开完成事件
+		function onOpened() {
+			emit("opened");
+		}
+
 		// 关闭
 		function close() {
 			refs.popup?.close();
@@ -196,6 +218,11 @@ export default defineComponent({
 		function onClose() {
 			scroller.clear();
 			emit("close");
+		}
+
+		// 关闭完成事件
+		function onClosed() {
+			emit("closed");
 		}
 
 		// 选中
@@ -262,8 +289,10 @@ export default defineComponent({
 			text,
 			scroller,
 			open,
+			onOpened,
 			close,
 			onClose,
+			onClosed,
 			confirm,
 			check,
 			isActive,

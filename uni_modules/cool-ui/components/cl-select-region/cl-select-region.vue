@@ -19,9 +19,9 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import { isEmpty } from "lodash-es";
-import Data from "./city-pca.json";
+import CityPca from "../../data/city-pca.json";
 
-let cities: any[] = Data;
+let cities: any[] = CityPca;
 
 export default defineComponent({
 	name: "cl-select-region",
@@ -54,7 +54,7 @@ export default defineComponent({
 		// 分隔符
 		separator: {
 			type: String,
-			default: "-",
+			default: " - ",
 		},
 	},
 

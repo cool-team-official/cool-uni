@@ -44,23 +44,23 @@ cl-text {
 	}
 
 	&.is-color-primary {
-		color: $cl-color-primary;
+		color: $cl-color-primary !important;
 	}
 
 	&.is-color-success {
-		color: $cl-color-success;
+		color: $cl-color-success !important;
 	}
 
 	&.is-color-error {
-		color: $cl-color-error;
+		color: $cl-color-error !important;
 	}
 
 	&.is-color-warning {
-		color: $cl-color-warning;
+		color: $cl-color-warning !important;
 	}
 
 	&.is-color-info {
-		color: $cl-color-info;
+		color: $cl-color-info !important;
 	}
 
 	&__symbol--price,

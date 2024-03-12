@@ -12,8 +12,7 @@
 				arrowIcon="cl-icon-time"
 				:padding="padding"
 				:text="text"
-			>
-			</cl-select-inner>
+			/>
 		</slot>
 	</view>
 
@@ -52,27 +51,36 @@ export default defineComponent({
 	name: "cl-select-date",
 
 	props: {
+		...Props,
+		// 绑定值
 		modelValue: String,
+		// 标题
 		title: {
 			type: String,
 			default: "选择日期",
 		},
+		// 开始年
 		startYear: {
 			type: Number,
 			default: 2000,
 		},
+		// 模式
 		mode: {
 			type: Array as PropType<("year" | "month" | "date" | "hour" | "minute" | "second")[]>,
 			default: ["year", "month", "date", "hour", "minute", "second"],
 		},
+		// 格式化值
 		format: {
 			type: String,
 			default: "YYYY-MM-DD HH:mm:ss",
 		},
+		// 格式化显示内容
 		displayFormat: Function,
+		// 开始时间
 		start: String,
+		// 结束时间
 		end: String,
-		...Props,
+		// 占位文本
 		placeholder: {
 			type: String,
 			default: "请选择时间",
