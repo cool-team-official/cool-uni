@@ -85,10 +85,6 @@ export default defineComponent({
 				case "error":
 					options.icon = "cl-icon-close-border";
 					break;
-
-				default:
-					options.icon = "";
-					break;
 			}
 
 			// 是否清除之前的
