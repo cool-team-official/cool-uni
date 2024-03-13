@@ -14,7 +14,6 @@
 		</cl-card>
 
 		<cl-card label="不同类型">
-			<cl-button @tap="open({ type: 'primary' })">主要</cl-button>
 			<cl-button @tap="open({ type: 'success' })">成功</cl-button>
 			<cl-button @tap="open({ type: 'error' })">失败</cl-button>
 			<cl-button @tap="open({ type: 'warning' })">警告</cl-button>
@@ -34,13 +33,17 @@
 							style: {
 								height: '200rpx',
 								width: '200rpx',
-								borderRadius: '16rpx',
+								borderRadius: '20rpx',
 							},
 						},
 					})
 				"
 				>带图片</cl-button
 			>
+		</cl-card>
+
+		<cl-card label="不同类型">
+			<cl-button @tap="open({ clear: true })">只显示一个</cl-button>
 		</cl-card>
 	</cl-page>
 </template>
@@ -52,7 +55,7 @@ const Toast = ref<ClToast.Ref>();
 
 function open(data?: any) {
 	Toast.value?.open({
-		message: "Toast 提示",
+		message: "请输入收货人姓名",
 		...data,
 	});
 }

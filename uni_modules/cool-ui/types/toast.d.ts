@@ -5,14 +5,15 @@ declare namespace ClToast {
 				icon?: string;
 				image?: {
 					url: string;
-					mode: string;
+					mode?: string;
 					style?: {
 						[key: string]: any;
 					};
 				};
 				message: string;
+				clear?: boolean;
 				duration?: number;
-				type?: "default" | "primary" | "success" | "error" | "warning" | "info";
+				type?: "success" | "error" | "warning" | "info";
 				position?: "bottom" | "top" | "center";
 				onClose?(): void;
 		  };

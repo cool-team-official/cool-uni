@@ -1,64 +1,36 @@
 .cl-toast {
 	display: inline-flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
-	border-radius: $cl-border-radius;
-	padding: 8rpx 16rpx;
+	border-radius: 26rpx;
+	padding: 40rpx;
 	max-width: 80%;
+	background-color: rgba(50, 50, 50, 0.9);
+	color: #ffffff;
+	line-height: 1;
 
 	&__icon {
+		margin-bottom: 20rpx;
+
 		text {
-			font-size: 80rpx;
-			color: #eee;
+			font-size: 60rpx;
 		}
 
 		image {
 			display: block;
-			height: 80rpx;
-			width: 80rpx;
+			height: 60rpx;
+			width: 60rpx;
 		}
 	}
 
 	&__content {
-		color: #fff;
-		font-size: 26rpx;
+		font-size: 28rpx;
 		text-align: center;
 	}
 
-	&--default {
-		background-color: rgba(0, 0, 0, 0.7);
-	}
-
-	&--primary {
-		background-color: $cl-color-primary;
-	}
-
-	&--success {
-		background-color: $cl-color-success;
-	}
-
-	&--error {
-		background-color: $cl-color-error;
-	}
-
-	&--warning {
-		background-color: $cl-color-warning;
-	}
-
-	&--info {
-		background-color: $cl-color-info;
-	}
-
 	&.is-icon {
-		min-height: 140rpx;
-		min-width: 140rpx;
-		padding: 30rpx;
-
-		.cl-toast__content {
-			margin-top: 20rpx;
-			line-height: 1.5;
-		}
+		min-width: 110rpx;
 	}
 }
 

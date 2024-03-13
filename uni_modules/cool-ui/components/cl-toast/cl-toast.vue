@@ -10,12 +10,9 @@
 			>
 				<view
 					class="cl-toast"
-					:class="[
-						`cl-toast--${item.type}`,
-						{
-							'is-icon': item.icon || item.image,
-						},
-					]"
+					:class="{
+						'is-icon': item.image || item.icon,
+					}"
 				>
 					<view class="cl-toast__icon" v-if="item.image || item.icon">
 						<image
@@ -40,26 +37,18 @@
 import { defineComponent, ref } from "vue";
 import { isFunction, last, has } from "lodash-es";
 
-let id = 0;
-
 export default defineComponent({
 	name: "cl-toast",
 
-	props: {
-		// 是否单个显示
-		single: {
-			type: Boolean,
-			default: null,
-		},
-	},
+	setup() {
+		let id = 0;
 
-	setup(props) {
 		// 列表
 		const list = ref<any[]>([]);
 
 		// 打开
 		function open(d: ClToast.Options) {
-			// 默认配置
+			// 默认
 			const options = {
 				id: id++,
 				visible: false,
@@ -68,19 +57,42 @@ export default defineComponent({
 				image: null,
 				message: "",
 				duration: 2000,
-				type: "default",
+				type: "",
 				position: "center",
+				clear: false,
 			};
 
-			// 合并参数
+			// 合并
 			if (has(d, "message")) {
 				Object.assign(options, d);
 			} else {
 				options.message = String(d);
 			}
 
-			// 是否同时存在多个提示
-			if (props.single) {
+			switch (options.type) {
+				case "success":
+					options.icon = "cl-icon-check-border";
+					break;
+
+				case "warning":
+					options.icon = "cl-icon-warning-border";
+					break;
+
+				case "info":
+					options.icon = "cl-icon-help-border";
+					break;
+
+				case "error":
+					options.icon = "cl-icon-close-border";
+					break;
+
+				default:
+					options.icon = "";
+					break;
+			}
+
+			// 是否清除之前的
+			if (options.clear) {
 				list.value = [options];
 			} else {
 				list.value.push(options);

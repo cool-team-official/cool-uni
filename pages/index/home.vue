@@ -140,7 +140,7 @@ const list = [
 				link: "/pages/demo/view/badge",
 			},
 			{
-				label: "Banner 轮博图",
+				label: "Banner 轮播图",
 				link: "/pages/demo/view/banner",
 			},
 			{
@@ -166,6 +166,10 @@ const list = [
 			{
 				label: "List 列表",
 				link: "/pages/demo/view/list",
+			},
+			{
+				label: "ListIndex 索引列表",
+				link: "/pages/demo/view/list-index",
 			},
 			{
 				label: "Loadmore 加载更多",

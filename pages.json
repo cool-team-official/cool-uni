@@ -218,6 +218,12 @@
 					}
 				},
 				{
+					"path": "view/list-index",
+					"style": {
+						"navigationBarTitleText": "ListIndex 索引列表"
+					}
+				},
+				{
 					"path": "view/scroller",
 					"style": {
 						"navigationBarTitleText": "Scroller 滚动条"

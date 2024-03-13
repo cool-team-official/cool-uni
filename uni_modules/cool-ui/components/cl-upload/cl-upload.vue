@@ -12,11 +12,11 @@
 			class="cl-upload"
 			v-for="(item, index) in list"
 			:key="item.uid"
-			@tap="choose(index)"
 			:style="{
 				height: parseRpx(size[0]),
 				width: parseRpx(size[1]),
 			}"
+			@tap="choose(index)"
 		>
 			<!-- 图片 -->
 			<image class="cl-upload__target" v-show="item.url" :src="item.url" :mode="imageMode" />
@@ -36,13 +36,13 @@
 
 		<!-- 添加按钮 -->
 		<view
-			v-if="isAppend"
 			class="cl-upload"
 			:style="{
 				height: parseRpx(size[0]),
 				width: parseRpx(size[1]),
 			}"
 			@tap="choose()"
+			v-if="isAppend"
 		>
 			<slot>
 				<view class="cl-upload__demo">
@@ -120,6 +120,9 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+
+		// 演示下测试使用
+		test: Boolean,
 	},
 
 	emits: [
@@ -223,6 +226,10 @@ export default defineComponent({
 						function fail(message: string | any = "图片地址错误") {
 							emit("error", message);
 							remove(list.value.findIndex((e) => e.uid == uid));
+						}
+
+						if (props.test) {
+							return done(file.path);
 						}
 
 						if (props.action) {
