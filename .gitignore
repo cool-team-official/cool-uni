@@ -1,11 +1,7 @@
 .DS_Store
 node_modules/
 unpackage/
-./dist/
-
-# local env files
-.env.local
-.env.*.local
+/dist/
 
 # Log files
 npm-debug.log*
@@ -20,12 +16,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-
-yarn.lock
-package-lock.json
-pnpm-lock.yaml
-
-
-
-types/auto-imports.d.ts
-types/components.d.ts
