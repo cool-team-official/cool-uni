@@ -68,7 +68,7 @@ export function useWx() {
 			main.startActivity(intent);
 		} else {
 			plus.runtime.openURL(
-				"itms-apps://" + "itunes.apple.com/cn/app/wechat/id414478124?mt=8"
+				"itms-apps://" + "itunes.apple.com/cn/app/wechat/id414478124?mt=8",
 			);
 		}
 		// #endif
@@ -81,15 +81,17 @@ export function useWx() {
 	function getMpConfig() {
 		// #ifdef H5
 		if (isWxBrowser()) {
-			service.user.comm.wxMpConfig().then((res) => {
-				wx.config({
-					debug: config.app.wx.mp.debug,
-					jsApiList: ["chooseWXPay"],
-					...res,
-				});
+			if (config.app.wx.mp.appid) {
+				service.user.comm.wxMpConfig().then((res) => {
+					wx.config({
+						debug: config.app.wx.mp.debug,
+						jsApiList: ["chooseWXPay"],
+						...res,
+					});
 
-				Object.assign(mpConfig, res);
-			});
+					Object.assign(mpConfig, res);
+				});
+			}
 		}
 		// #endif
 	}
@@ -97,7 +99,7 @@ export function useWx() {
 	// 微信公众号授权
 	function mpAuth() {
 		const redirect_uri = encodeURIComponent(
-			`${location.origin}${location.pathname}#/pages/user/login`
+			`${location.origin}${location.pathname}#/pages/user/login`,
 		);
 		const response_type = "code";
 		const scope = "snsapi_userinfo";
@@ -199,7 +201,7 @@ export function useWx() {
 			uni.requestPayment({
 				provider: "wxpay",
 				...orderInfo,
-				success(res) {
+				success(res: any) {
 					resolve(res);
 				},
 				fail() {

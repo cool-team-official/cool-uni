@@ -24,8 +24,15 @@
 	}
 
 	&__label {
-		flex: 1;
+		line-height: 1;
+		font-size: 28rpx;
 		margin-left: 16rpx;
+		flex: 1;
+		display: -webkit-box;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
 	}
 
 	&.is-checked {
@@ -36,7 +43,7 @@
 		}
 
 		&.is-text {
-			.cl-text__value {
+			.cl-checkbox__label {
 				color: $cl-color-primary;
 			}
 		}
@@ -49,7 +56,7 @@
 			color: $cl-color-disabled;
 		}
 
-		.cl-text__value {
+		.cl-checkbox__label {
 			color: $cl-color-disabled;
 		}
 	}
@@ -76,7 +83,7 @@
 			color: $cl-color-primary;
 			border-color: $cl-color-primary;
 
-			.cl-text__value {
+			.cl-checkbox__label {
 				color: $cl-color-primary;
 			}
 		}

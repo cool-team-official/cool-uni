@@ -25,7 +25,7 @@ export const config = {
 			},
 			// 公众号
 			mp: {
-				appid: "wxd532456e1e1ef9b9",
+				appid: "",
 				debug: false,
 			},
 			// App

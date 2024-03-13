@@ -5,7 +5,7 @@
 		<view class="page-login">
 			<!-- Logo -->
 			<view class="logo">
-				<image src="/static/logo.png" alt="" />
+				<image src="/static/logo.png" mode="aspectFill" />
 				<text>{{ app.info.name }}</text>
 			</view>
 
@@ -139,7 +139,6 @@ function getPlatforms() {
 
 	// #ifdef H5
 	if (wx.isWxBrowser()) {
-		// 显示微信登录
 		arr[1].hidden = false;
 	}
 	// #endif
@@ -148,12 +147,13 @@ function getPlatforms() {
 	arr[1].hidden = false;
 	// #endif
 
-	// 过滤
+	// 过滤隐藏的
 	arr = arr.filter((e) => !e.hidden);
 
 	// 默认第一个登录方式
 	mode.value = arr[0]?.value;
 
+	// 过滤不是当前登录方式
 	return computed(() => arr.filter((e) => e.value != mode.value));
 }
 

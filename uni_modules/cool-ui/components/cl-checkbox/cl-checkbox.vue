@@ -13,9 +13,7 @@
 		</slot>
 
 		<view class="cl-checkbox__label">
-			<cl-text :ellipsis="1" :size="28">
-				<slot></slot>
-			</cl-text>
+			<slot></slot>
 		</view>
 	</view>
 </template>
