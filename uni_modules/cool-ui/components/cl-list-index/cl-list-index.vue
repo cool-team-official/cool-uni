@@ -147,12 +147,12 @@ export default defineComponent({
 			type: Array,
 			default: () => [],
 		},
-		// 是否组
+		// 是否分组
 		isGroup: {
 			type: Boolean,
 			default: true,
 		},
-		// 序号栏
+		// 显示序号栏
 		indexBar: {
 			type: Boolean,
 			default: true,

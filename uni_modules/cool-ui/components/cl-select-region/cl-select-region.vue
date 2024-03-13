@@ -41,7 +41,7 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		// 内容关键字
+		// 显示关键字
 		labelKey: {
 			type: String,
 			default: "name",

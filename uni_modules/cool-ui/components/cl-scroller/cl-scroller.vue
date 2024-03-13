@@ -98,7 +98,7 @@ export default defineComponent({
 		},
 		// 点击回顶部
 		enableBackToTop: Boolean,
-		// 是否显示返回按钮
+		// 是否显示返回顶部按钮
 		showBackTopButton: {
 			type: Boolean,
 			default: true,
@@ -154,6 +154,7 @@ export default defineComponent({
 			return ["end", "loading"].includes(status.value) ? "transform 0.3s" : "";
 		});
 
+		// 是否可释放
 		const isReleasable = computed(() => touch.move >= props.top);
 
 		//文案
@@ -207,7 +208,7 @@ export default defineComponent({
 			uni.createSelectorQuery()
 				.in(proxy)
 				.select(".cl-scroller__loading")
-				.fields({ size: true }, (d) => {
+				.fields({ size: true }, (d: any) => {
 					status.value = "loading";
 					touch.move = d.height || 0;
 					emit("down");

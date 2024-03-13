@@ -105,7 +105,7 @@ export default defineComponent({
 			type: String,
 			default: "请选择所在地区",
 		},
-		// 内容关键字
+		// 显示关键字
 		labelKey: {
 			type: String,
 			default: "name",
