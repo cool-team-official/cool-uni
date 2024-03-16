@@ -2,6 +2,7 @@
 	flex-shrink: 0;
 	position: relative;
 	font-size: $cl-font-size;
+	overflow: hidden;
 
 	&__target {
 		display: inline-block;
@@ -36,7 +37,7 @@
 	}
 
 	&__loading {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: #f6f7fa;
 	}
 
 	&__error {
