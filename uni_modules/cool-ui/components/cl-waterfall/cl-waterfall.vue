@@ -11,6 +11,11 @@
 		<template v-else-if="direction === 'horizontal'">
 			<slot :list="list"></slot>
 		</template>
+
+		<!-- 空态 -->
+		<slot name="empty" v-if="isEmpty(list[0])">
+			<cl-empty />
+		</slot>
 	</view>
 </template>
 
@@ -184,6 +189,7 @@ export default defineComponent({
 			append,
 			update,
 			clear,
+			isEmpty,
 		};
 	},
 });
