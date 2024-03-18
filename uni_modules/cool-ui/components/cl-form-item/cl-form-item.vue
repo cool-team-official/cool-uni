@@ -141,7 +141,7 @@ export default defineComponent({
 		let validator: any = null;
 
 		// 监听规则校验
-		watch(() => parent.value?.rules, onRules, {
+		watch(() => [parent.value?.rules, props.rules], onRules, {
 			immediate: true,
 			deep: true,
 		});
