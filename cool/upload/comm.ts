@@ -5,10 +5,6 @@ function parse(rules: string[], { url, size }: any) {
 		return "";
 	}
 
-	if (!url.includes("cool-type-oss")) {
-		return url;
-	}
-
 	let h = 0;
 	let w = 0;
 

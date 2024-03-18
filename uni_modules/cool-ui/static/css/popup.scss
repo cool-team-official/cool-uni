@@ -46,14 +46,6 @@
 			height: 100%;
 			box-sizing: border-box;
 		}
-
-		&__close {
-			position: absolute;
-			bottom: -110rpx;
-			left: calc(50% - 36rpx);
-			color: #fff;
-			font-size: 60rpx;
-		}
 	}
 
 	&--left {
@@ -85,6 +77,13 @@
 			transform: translateY(100%);
 			left: 0;
 			bottom: 0;
+
+			&__close {
+				position: absolute;
+				top: 20rpx;
+				right: 20rpx;
+				font-size: 40rpx;
+			}
 		}
 	}
 
@@ -96,6 +95,14 @@
 
 		.cl-popup {
 			transform: scale(1.3);
+
+			&__close {
+				position: absolute;
+				bottom: -110rpx;
+				left: calc(50% - 36rpx);
+				color: #fff;
+				font-size: 60rpx;
+			}
 		}
 	}
 
