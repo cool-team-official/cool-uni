@@ -13,7 +13,6 @@
 	color: #fff;
 	display: inline-flex;
 	align-items: center;
-	font-size: 24rpx;
 	line-height: 1;
 
 	&__close {
@@ -24,14 +23,17 @@
 
 	&--default {
 		padding: 12rpx 20rpx;
+		font-size: 24rpx;
 	}
 
 	&--small {
 		padding: 8rpx 14rpx;
+		font-size: 22rpx;
 	}
 
 	&--large {
 		padding: 16rpx 24rpx;
+		font-size: 26rpx;
 	}
 
 	&.is-round {
