@@ -1,10 +1,5 @@
 .cl-footer {
-	padding-bottom: env(safe-area-inset-bottom);
 	width: 100%;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	z-index: 99;
 
 	&__placeholder {
 		transition: height 0.3s;
@@ -22,5 +17,13 @@
 
 	&.is-border {
 		border-top: $cl-border-width solid $cl-color-bg;
+	}
+
+	&.is-fixed {
+		padding-bottom: env(safe-area-inset-bottom);
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 99;
 	}
 }

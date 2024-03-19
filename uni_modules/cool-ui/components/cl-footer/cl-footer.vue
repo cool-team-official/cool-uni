@@ -1,11 +1,12 @@
 <template>
 	<view class="cl-footer__wrap">
-		<view class="cl-footer__placeholder" :style="{ height }"></view>
+		<view class="cl-footer__placeholder" :style="{ height }" v-if="fixed"></view>
 
 		<view
 			class="cl-footer"
 			:class="{
 				'is-border': border,
+				'is-fixed': fixed,
 			}"
 			:style="{
 				backgroundColor,
@@ -61,6 +62,11 @@ export default defineComponent({
 		},
 		// 是否带上边框
 		border: Boolean,
+		// 是否固定底部定位
+		fixed: {
+			type: Boolean,
+			default: true,
+		},
 		// 是否 flex 布局
 		flex: {
 			type: Boolean,
