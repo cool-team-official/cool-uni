@@ -199,7 +199,7 @@ export default defineComponent({
 
 		// 设置菜单宽度
 		function setMenu() {
-			if (props.swipe != "none") {
+			if (props.swipe) {
 				const query = uni.createSelectorQuery().in(instance?.proxy);
 
 				query

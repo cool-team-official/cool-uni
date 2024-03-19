@@ -55,6 +55,8 @@ export default defineComponent({
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
+		// 高
+		height: [String, Number],
 		// 距离底部多少
 		bottom: {
 			type: [String, Number],
@@ -91,6 +93,7 @@ export default defineComponent({
 		watch(
 			() => props.vt,
 			() => {
+				console.log(1);
 				update();
 			},
 			{
@@ -117,6 +120,11 @@ export default defineComponent({
 		});
 
 		async function update() {
+			if (props.height) {
+				height.value = parseRpx(props.height);
+				return false;
+			}
+
 			await sleep(props.delay);
 			await nextTick();
 
