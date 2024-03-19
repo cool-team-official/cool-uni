@@ -3,7 +3,7 @@ import { onPullDownRefresh, onReachBottom, onUnload } from "@dcloudio/uni-app";
 import { useUi } from "/$/cool-ui";
 
 interface Res {
-	list: { [key: string]: any }[];
+	list: any[];
 	pagination: {
 		total: number;
 		page: number;
@@ -13,7 +13,7 @@ interface Res {
 	[key: string]: any;
 }
 
-export function usePager() {
+export function usePager<T = any>() {
 	const { proxy }: any = getCurrentInstance();
 	const ui = useUi();
 
@@ -25,7 +25,7 @@ export function usePager() {
 			size: 20,
 			total: 0,
 		},
-		list: [] as any[],
+		list: [] as T[],
 		loading: false,
 		finished: false,
 	});
@@ -48,7 +48,7 @@ export function usePager() {
 	}
 
 	// 数据
-	function onData(cb: (list: any[]) => void) {
+	function onData(cb: (list: T[]) => void) {
 		events.onData = cb;
 	}
 
