@@ -3,6 +3,7 @@ import { computed, reactive, toRaw } from "vue";
 import { deepTree } from "../utils";
 import { service } from "../service";
 import { isDev } from "/@/config";
+import { isString } from "lodash-es";
 import type { Dict } from "../types";
 
 const useDictStore = defineStore("dict", () => {
@@ -14,12 +15,12 @@ const useDictStore = defineStore("dict", () => {
 	}
 
 	// 获取名称
-	function getLabel(name: string, value: any): string {
+	function getLabel(name: string | any[], value: any): string {
 		const arr: any[] = String(value)?.split(",") || [];
 
 		return arr
 			.map((e) => {
-				return get(name).find((a) => a.value == e)?.label;
+				return (isString(name) ? get(name) : name).find((a) => a.value == e)?.label;
 			})
 			.filter(Boolean)
 			.join(",");
