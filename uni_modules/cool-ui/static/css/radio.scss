@@ -1,8 +1,9 @@
 .cl-radio {
 	display: inline-flex;
 	align-items: center;
-	margin-right: 60rpx;
 	height: $cl-height;
+	margin-right: 60rpx;
+	position: relative;
 
 	&__input {
 		display: inline-flex;
