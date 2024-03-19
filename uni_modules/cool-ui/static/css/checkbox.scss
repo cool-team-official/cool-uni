@@ -90,12 +90,8 @@
 	}
 
 	&.is-fill {
-		justify-content: center;
+		margin-right: 0;
 		width: 100%;
-
-		.cl-checkbox__label {
-			text-align: right;
-		}
 	}
 
 	&.is-round {
