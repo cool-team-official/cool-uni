@@ -62,7 +62,7 @@ const saving = ref(false);
 // 表单
 const form = reactive({
 	smsCode: "",
-	phone: router.query.phone || "",
+	phone: "",
 });
 
 // 下一步
@@ -89,6 +89,7 @@ function next() {
 }
 
 onReady(() => {
+	form.phone = router.query.phone || "";
 	refs.smsBtn.startCountdown();
 });
 </script>
