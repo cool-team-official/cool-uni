@@ -9,7 +9,7 @@
 		]"
 		:style="{
 			padding: parseRpx(padding),
-			height: fullscreen ? `${height}px` : 'auto',
+			height,
 		}"
 	>
 		<!-- 加载框 -->
@@ -79,7 +79,12 @@ export default defineComponent({
 		const { refs, setRefs, router } = useCool();
 		const app = useApp();
 		const info = router.info();
-		const { statusBarHeight = 0, screenHeight, safeAreaInsets } = uni.getSystemInfoSync();
+		const {
+			statusBarHeight = 0,
+			screenHeight,
+			windowHeight,
+			safeAreaInsets,
+		} = uni.getSystemInfoSync();
 
 		const { proxy }: any = getCurrentInstance();
 
@@ -96,15 +101,27 @@ export default defineComponent({
 			);
 		});
 
-		// 屏幕高
+		// 全屏高
 		const height = computed(() => {
-			let h = screenHeight - statusBarHeight;
+			if (!props.fullscreen) {
+				return "auto";
+			}
+
+			let h = 0;
+
+			// #ifdef H5
+			h = windowHeight;
+			// #endif
+
+			// #ifndef H5
+			h = screenHeight - statusBarHeight;
 
 			if (!info?.isCustomNavbar) {
 				h -= 44;
 			}
+			// #endif
 
-			return h - (safeAreaInsets?.bottom || 0);
+			return h - (safeAreaInsets?.bottom || 0) + "px";
 		});
 
 		// 加载框配置

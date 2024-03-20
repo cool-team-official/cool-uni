@@ -13,6 +13,7 @@
 		text-align: center;
 		white-space: nowrap;
 		font-size: 16rpx;
+		font-weight: bold;
 		color: #fff;
 		position: absolute;
 		top: -12rpx;
@@ -33,37 +34,25 @@
 		}
 	}
 
-	&.is-plain {
-		.cl-badge__content {
-			background-color: #fff;
-			color: $cl-color-primary;
-			border: 2rpx solid currentColor;
+	@mixin set-color($type, $color) {
+		&--#{$type} {
+			.cl-badge__content {
+				background-color: $color;
+			}
+
+			&.is-plain {
+				.cl-badge__content {
+					background-color: #fff;
+					color: $color;
+					border: $cl-border-width solid currentColor;
+				}
+			}
 		}
 	}
 
-	&--primary {
-		.cl-badge__content {
-			background-color: $cl-color-primary;
-		}
-	}
-	&--success {
-		.cl-badge__content {
-			background-color: $cl-color-success;
-		}
-	}
-	&--warning {
-		.cl-badge__content {
-			background-color: $cl-color-warning;
-		}
-	}
-	&--info {
-		.cl-badge__content {
-			background-color: $cl-color-info;
-		}
-	}
-	&--error {
-		.cl-badge__content {
-			background-color: $cl-color-error;
-		}
-	}
+	@include set-color(primary, $cl-color-primary);
+	@include set-color(success, $cl-color-success);
+	@include set-color(error, $cl-color-error);
+	@include set-color(warning, $cl-color-warning);
+	@include set-color(info, $cl-color-info);
 }
