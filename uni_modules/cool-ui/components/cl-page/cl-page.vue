@@ -9,7 +9,7 @@
 		]"
 		:style="{
 			padding: parseRpx(padding),
-			height: fullscreen ? `${windowHeight}px` : 'auto',
+			height: fullscreen ? `${height}px` : 'auto',
 		}"
 	>
 		<!-- 加载框 -->
@@ -79,11 +79,12 @@ export default defineComponent({
 		const { refs, setRefs, router } = useCool();
 		const app = useApp();
 		const info = router.info();
-		const { statusBarHeight = 0, windowHeight } = uni.getSystemInfoSync();
+		const { statusBarHeight = 0, screenHeight, safeAreaInsets } = uni.getSystemInfoSync();
+
 		const { proxy }: any = getCurrentInstance();
 
 		// 是否显示导航栏
-		const statusBar = router.info()?.isCustomNavbar ? props.statusBar : false;
+		const statusBar = info?.isCustomNavbar ? props.statusBar : false;
 
 		// 背景色
 		const background = computed(() => {
@@ -93,6 +94,17 @@ export default defineComponent({
 				router.globalStyle.backgroundColor ||
 				"#ffffff"
 			);
+		});
+
+		// 屏幕高
+		const height = computed(() => {
+			let h = screenHeight - statusBarHeight;
+
+			if (!info?.isCustomNavbar) {
+				h -= 44;
+			}
+
+			return h - (safeAreaInsets?.bottom || 0);
 		});
 
 		// 加载框配置
@@ -190,7 +202,7 @@ export default defineComponent({
 		return {
 			app,
 			background,
-			windowHeight,
+			height,
 			refs,
 			setRefs,
 			loader,

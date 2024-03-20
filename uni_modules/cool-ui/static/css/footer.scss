@@ -6,15 +6,13 @@
 		transition: height 0.3s;
 	}
 
-	&__wrap {
-		&__inner {
-			& > :deep(cl-button) {
-				width: 100%;
-			}
+	&__inner {
+		& > :deep(cl-button) {
+			width: 100%;
+		}
 
-			&.is-flex {
-				display: flex;
-			}
+		&.is-flex {
+			display: flex;
 		}
 	}
 
