@@ -21,14 +21,16 @@
 		>
 			<view
 				class="cl-footer__wrap"
-				:class="{
-					'is-flex': flex,
-				}"
 				:style="{
 					padding: parseRpx(padding),
 				}"
 			>
-				<view class="cl-footer__inner">
+				<view
+					class="cl-footer__inner"
+					:class="{
+						'is-flex': flex,
+					}"
+				>
 					<slot> </slot>
 				</view>
 			</view>
@@ -62,7 +64,7 @@ export default defineComponent({
 			type: [String, Number],
 			default: "24rpx 36rpx",
 		},
-		// 高
+		// 固定高
 		height: [String, Number],
 		// 层级
 		zIndex: {
