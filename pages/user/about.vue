@@ -1,54 +1,63 @@
 <template>
-	<cl-page background-color="#ffffff">
+	<cl-page>
 		<view class="page-about">
-			<image class="logo" src="/static/logo.png" />
+			<view class="logo">
+				<image src="/static/logo.png" />
+			</view>
 
-			<text class="name">{{ app.info.name }}</text>
-			<text class="version">v{{ config.version }}</text>
-			<view class="desc">{{ app.info.desc }}</view>
+			<cl-list>
+				<cl-list-item label="当前版本" :arrow-icon="false">
+					<cl-text color="info">{{ config.version }}</cl-text>
+				</cl-list-item>
+
+				<!-- 新版本 -->
+				<version-list-item />
+			</cl-list>
+
+			<cl-list>
+				<cl-list-item label="联系我们" />
+				<cl-list-item label="给软件评分" />
+			</cl-list>
+
+			<cl-text
+				block
+				align="center"
+				:size="24"
+				color="info"
+				:line-height="1.2"
+				:margin="[80, 0, 0, 0]"
+				>{{ app.info.desc }}</cl-text
+			>
 		</view>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
+import { onReady } from "@dcloudio/uni-app";
 import { config, useApp } from "/@/cool";
 
 const app = useApp();
+
+onReady(() => {
+	uni.setNavigationBarTitle({
+		title: `关于${app.info.name}`,
+	});
+});
 </script>
 
 <style lang="scss" scoped>
 .page-about {
-	padding: 64rpx 24rpx;
-
-	.name {
-		display: block;
-		font-size: 32rpx;
-		margin-top: 20rpx;
-		text-align: center;
-		letter-spacing: 1rpx;
-	}
-
-	.desc {
-		margin-top: 30rpx;
-		font-size: 26rpx;
-		color: #666;
-		text-align: center;
-	}
-
 	.logo {
-		display: block;
-		height: 140rpx;
-		width: 140rpx;
-		margin: 10rpx auto;
-		border-radius: 100%;
-	}
+		display: flex;
+		justify-content: center;
+		padding: 100rpx 0;
 
-	.version {
-		display: block;
-		text-align: center;
-		font-size: 26rpx;
-		margin-top: 10rpx;
-		color: #666;
+		image {
+			height: 160rpx;
+			width: 160rpx;
+			border-radius: 24rpx;
+			box-shadow: 0 25rpx 30rpx -25rpx #666666;
+		}
 	}
 }
 </style>

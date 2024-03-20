@@ -64,9 +64,6 @@
 						})
 					"
 				/>
-
-				<!-- 版本更新 -->
-				<version-list-item />
 			</cl-list>
 
 			<cl-list :radius="16">
