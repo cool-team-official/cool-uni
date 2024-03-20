@@ -1,6 +1,10 @@
 <template>
 	<view class="cl-footer__wrap">
-		<view class="cl-footer__placeholder" :style="{ height }" v-if="fixed"></view>
+		<view
+			class="cl-footer__placeholder"
+			:style="{ height, padding: parseRpx(padding) }"
+			v-if="fixed && visible"
+		></view>
 
 		<view
 			class="cl-footer"
@@ -10,12 +14,12 @@
 			}"
 			:style="{
 				backgroundColor,
-				visibility: height != '0px' ? 'visible' : 'hidden',
+				visibility: visible ? 'visible' : 'hidden',
 				bottom: parseRpx(bottom),
 			}"
 		>
 			<view
-				class="cl-footer__inner"
+				class="cl-footer__wrap"
 				:class="{
 					'is-flex': flex,
 				}"
@@ -23,7 +27,9 @@
 					padding: parseRpx(padding),
 				}"
 			>
-				<slot> </slot>
+				<view class="cl-footer__inner">
+					<slot> </slot>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -81,44 +87,20 @@ export default defineComponent({
 		},
 		// 监听对象
 		vt: null,
-		// 监听高度
-		vh: Number,
 	},
 
 	setup(props) {
 		const instance = getCurrentInstance();
 
+		// 底部高度
 		const height = ref();
 
-		watch(
-			() => props.vt,
-			() => {
-				console.log(1);
-				update();
-			},
-			{
-				deep: true,
-			},
-		);
-
-		const vh = computed(() => {
-			let v = 0;
-
-			if (props.vh) {
-				v = props.vh;
-			} else {
-				const [top, right, bottom, left] = parseRpx(props.padding).split(" ");
-
-				if (top && bottom) {
-					v = parseInt(top) + parseInt(bottom);
-				} else if (top) {
-					v = parseInt(top) * 2;
-				}
-			}
-
-			return uni.upx2px(v);
+		// 是否可见
+		const visible = computed(() => {
+			return parseInt(height.value) != 0;
 		});
 
+		// 重新计算
 		async function update() {
 			if (props.height) {
 				height.value = parseRpx(props.height);
@@ -130,17 +112,24 @@ export default defineComponent({
 
 			uni.createSelectorQuery()
 				.in(instance?.proxy)
-				.select(".cl-footer")
+				.select(".cl-footer__inner")
 				.boundingClientRect((rect) => {
 					if (rect) {
-						const a = Math.floor(rect.height || 0);
-						const b = Math.floor(vh.value);
-
-						height.value = a > b ? `${rect.height}px` : "0px";
+						height.value = Math.floor(rect.height || 0) + "px";
 					}
 				})
 				.exec();
 		}
+
+		watch(
+			() => props.vt,
+			() => {
+				update();
+			},
+			{
+				deep: true,
+			},
+		);
 
 		onMounted(() => {
 			update();
@@ -148,6 +137,7 @@ export default defineComponent({
 
 		return {
 			height,
+			visible,
 			update,
 			parseRpx,
 		};

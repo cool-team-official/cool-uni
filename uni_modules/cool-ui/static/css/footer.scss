@@ -1,13 +1,16 @@
 .cl-footer {
 	width: 100%;
+	position: relative;
 
 	&__placeholder {
 		transition: height 0.3s;
 	}
 
-	&__inner {
-		& > :deep(cl-button) {
-			width: 100%;
+	&__wrap {
+		&__inner {
+			& > :deep(cl-button) {
+				width: 100%;
+			}
 		}
 
 		&.is-flex {
@@ -16,7 +19,16 @@
 	}
 
 	&.is-border {
-		border-top: $cl-border-width solid $cl-color-bg;
+		&::before {
+			content: "";
+			display: block;
+			height: $cl-border-width;
+			width: 100%;
+			background-color: $cl-color-bg;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 	}
 
 	&.is-fixed {

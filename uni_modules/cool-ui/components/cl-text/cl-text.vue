@@ -33,9 +33,9 @@
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
 
 		<!-- 文本 -->
-		<text class="cl-text__value">
+		<view class="cl-text__value">
 			<slot>{{ text.value }}</slot>
-		</text>
+		</view>
 
 		<!-- 小数 -->
 		<text class="cl-text__precision" v-if="type == 'price' && precision"
