@@ -16,6 +16,7 @@
 				backgroundColor,
 				visibility: visible ? 'visible' : 'hidden',
 				bottom: parseRpx(bottom),
+				zIndex,
 			}"
 		>
 			<view
@@ -63,6 +64,11 @@ export default defineComponent({
 		},
 		// 高
 		height: [String, Number],
+		// 层级
+		zIndex: {
+			type: Number,
+			default: 99,
+		},
 		// 距离底部多少
 		bottom: {
 			type: [String, Number],

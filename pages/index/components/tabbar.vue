@@ -1,6 +1,6 @@
 <template>
-	<view class="tabbar">
-		<view class="tabbar__inner">
+	<cl-footer :flex="false" border :z-index="399" :padding="0">
+		<view class="tabbar">
 			<view
 				class="item"
 				v-for="(item, index) in list"
@@ -25,7 +25,7 @@
 				</template>
 			</view>
 		</view>
-	</view>
+	</cl-footer>
 </template>
 
 <script lang="ts" setup>
@@ -37,9 +37,7 @@ const { router } = useCool();
 const list = computed(() => {
 	const arr = [...router.tabs];
 
-	arr.splice(1, 0, {
-		pagePath: "custom",
-	});
+	arr.splice(1, 0, { pagePath: "custom" });
 
 	return arr.map((e) => {
 		const active = router.path?.includes(e.pagePath);
@@ -68,87 +66,75 @@ uni.hideTabBar();
 
 <style lang="scss" scoped>
 .tabbar {
-	padding-bottom: env(safe-area-inset-bottom);
+	display: flex;
 	height: 120rpx;
+	width: 100%;
 
-	&__inner {
-		padding-bottom: inherit;
-		height: inherit;
-		width: 100%;
+	.item {
 		display: flex;
-		background-color: #fff;
-		position: fixed;
-		left: 0;
-		bottom: 0;
-		z-index: 399;
-		border-top: $cl-border-width solid #eee;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		position: relative;
 
-		.item {
+		.icon {
+			height: 46rpx;
+			width: 46rpx;
+
+			image {
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		.label {
+			font-size: 24rpx;
+			color: #bfbfbf;
+		}
+
+		.badge {
 			display: flex;
-			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			flex: 1;
-			position: relative;
+			position: absolute;
+			top: 20rpx;
+			transform: translateX(20rpx);
+			font-size: 20rpx;
+			height: 36rpx;
+			min-width: 36rpx;
+			padding: 0 6rpx;
+			background-color: #f56c6c;
+			border: 4rpx solid #fff;
+			color: #fff;
+			border-radius: 18rpx;
+			font-weight: bold;
+			box-sizing: border-box;
+		}
+
+		&.is-active {
+			.label {
+				color: $cl-color-primary;
+			}
+		}
+
+		.custom {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
 
 			.icon {
-				height: 46rpx;
-				width: 46rpx;
-
-				image {
-					height: 100%;
-					width: 100%;
-				}
-			}
-
-			.label {
-				font-size: 24rpx;
-				color: #bfbfbf;
-			}
-
-			.badge {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				position: absolute;
-				top: 20rpx;
-				transform: translateX(20rpx);
-				font-size: 20rpx;
-				height: 36rpx;
-				min-width: 36rpx;
-				padding: 0 6rpx;
-				background-color: #f56c6c;
-				border: 4rpx solid #fff;
-				color: #fff;
-				border-radius: 18rpx;
-				font-weight: bold;
-				box-sizing: border-box;
-			}
-
-			&.is-active {
-				.label {
-					color: $cl-color-primary;
-				}
-			}
-
-			.custom {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				height: 100%;
-
-				.icon {
-					background: linear-gradient(
-						to bottom right,
-						#408fff,
-						#6b69f8,
-						#a35df2,
-						#d14bd8,
-						#e9388a
-					);
-					border-radius: 100%;
-					padding: 16rpx;
-				}
+				background: linear-gradient(
+					to bottom right,
+					#408fff,
+					#6b69f8,
+					#a35df2,
+					#d14bd8,
+					#e9388a
+				);
+				border-radius: 100%;
+				padding: 16rpx;
 			}
 		}
 	}
