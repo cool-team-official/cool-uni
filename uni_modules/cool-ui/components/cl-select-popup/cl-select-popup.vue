@@ -20,20 +20,15 @@
 	<cl-popup
 		:ref="setRefs('popup')"
 		:padding="0"
+		:title="title"
 		direction="bottom"
-		border-radius="16rpx 16rpx 0 0"
+		border-radius="24rpx 24rpx 0 0"
+		show-close-btn
 		@opened="onOpened"
 		@close="onClose"
 		@closed="onClosed"
 	>
 		<view class="cl-select-popup__wrap">
-			<!-- 标题 -->
-			<view class="cl-select-popup__header">
-				{{ title }}
-				<text class="cl-icon-close" @tap="close"></text>
-			</view>
-
-			<!-- 滚动区域 -->
 			<scroll-view
 				class="cl-select-popup__container"
 				:ref="setRefs('scroller')"

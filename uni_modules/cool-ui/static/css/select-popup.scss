@@ -1,20 +1,4 @@
 .cl-select-popup {
-	&__header {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 30rpx;
-		height: 90rpx;
-		position: relative;
-		letter-spacing: 1rpx;
-
-		.cl-icon-close {
-			position: absolute;
-			right: 20rpx;
-			font-size: 36rpx;
-		}
-	}
-
 	&__list {
 		padding: 10rpx 30rpx;
 	}

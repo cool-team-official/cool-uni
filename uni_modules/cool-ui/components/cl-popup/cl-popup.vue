@@ -29,12 +29,16 @@
 			class="cl-popup"
 			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
 		>
+			<view class="cl-popup__header" v-if="title && showHeader">
+				<slot name="header">{{ title }}</slot>
+			</view>
+
 			<view class="cl-popup__container" :style="{ padding: parseRpx(padding), paddingTop }">
 				<slot></slot>
 			</view>
 
 			<view class="cl-popup__close" v-if="status && showCloseBtn" @tap="close">
-				<text class="cl-icon-close-border"></text>
+				<text class="cl-icon-close"></text>
 			</view>
 		</view>
 	</view>
@@ -55,6 +59,13 @@ export default defineComponent({
 	props: {
 		// 是否可见
 		modelValue: Boolean,
+		// 标题
+		title: String,
+		// 是否显示头部
+		showHeader: {
+			type: Boolean,
+			default: true,
+		},
 		// 弹出方向
 		direction: {
 			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
