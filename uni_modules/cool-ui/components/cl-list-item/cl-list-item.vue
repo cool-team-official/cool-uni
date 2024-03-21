@@ -11,7 +11,7 @@
 		<view
 			class="cl-list-item__swiper"
 			:style="{
-				transform: `translateX(${touch.x}px)`,
+				transform,
 			}"
 		>
 			<view class="cl-list-item__container">
@@ -129,6 +129,11 @@ export default defineComponent({
 			width: 0,
 		});
 
+		// 横向位置移动
+		const transform = computed(() => {
+			return props.swipe ? `translateX(${touch.x}px)` : "none";
+		});
+
 		// 滑动开始
 		function onTouchStart(e: TouchEvent) {
 			if (props.swipe) {
@@ -240,6 +245,7 @@ export default defineComponent({
 			contentClass,
 			touch,
 			menu,
+			transform,
 			restore,
 			onTouchStart,
 			onTouchMove,
