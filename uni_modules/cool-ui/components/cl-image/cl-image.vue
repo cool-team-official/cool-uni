@@ -37,6 +37,8 @@
 				@error="handleError"
 				@load="handleLoad"
 			/>
+
+			<slot></slot>
 		</template>
 	</view>
 </template>

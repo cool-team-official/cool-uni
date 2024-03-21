@@ -18,7 +18,6 @@
 			{
 				color,
 				textAlign: align,
-				'-webkit-line-clamp': ellipsis,
 				lineHeight: lineHeight,
 				fontSize: parseRpx(size),
 				letterSpacing: parseRpx(letterSpacing),
@@ -33,7 +32,12 @@
 		<text class="cl-text__symbol--price" v-if="type == 'price'">￥</text>
 
 		<!-- 文本 -->
-		<view class="cl-text__value">
+		<view
+			class="cl-text__value"
+			:style="{
+				'-webkit-line-clamp': ellipsis,
+			}"
+		>
 			<slot>{{ text.value }}</slot>
 		</view>
 

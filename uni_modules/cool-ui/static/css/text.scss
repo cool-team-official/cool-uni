@@ -29,10 +29,12 @@ cl-text {
 	}
 
 	&.is-ellipsis {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
+		.cl-text__value {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}
 	}
 
 	&.is-copy {
