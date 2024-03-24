@@ -35,7 +35,7 @@
 		<cl-card label="基础用法2">
 			<cl-banner :list="list" type="card" :height="300">
 				<template #item="{ item }">
-					<cl-skeleton :radius="12">
+					<cl-skeleton :radius="12" height="100%">
 						<image
 							class="cl-banner-item__image"
 							:src="item.bg"
