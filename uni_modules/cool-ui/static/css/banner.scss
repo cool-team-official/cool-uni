@@ -14,6 +14,7 @@
 		height: 100%;
 		width: 100%;
 
+		& > view,
 		scoped-slots-default {
 			height: 100%;
 			width: 100%;
@@ -22,7 +23,7 @@
 		&__image {
 			height: 100%;
 			width: 100%;
-			border-radius: 10rpx;
+			border-radius: 12rpx;
 		}
 
 		&__video {
@@ -34,7 +35,6 @@
 	&--card {
 		.cl-banner-item {
 			width: 100%;
-			background-color: #f6f7fa;
 			transform: scale(0.95, 0.9);
 			transition: all 0.2s ease-in 0s;
 
@@ -48,7 +48,6 @@
 	&--chain {
 		.cl-banner-item {
 			width: calc(100% - 20rpx);
-			background-color: #f6f7fa;
 			margin: 0 10rpx;
 		}
 	}

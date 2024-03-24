@@ -6,6 +6,7 @@
 				:key="index"
 				:label="`${item + 1}`"
 				:padding="[0, 20, 0, 20]"
+				border
 			/>
 		</cl-scroller>
 	</cl-page>

@@ -3,22 +3,22 @@
 		<cl-card label="裁剪模式">
 			<cl-row :gutter="20">
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="scaleToFill" />
+					<cl-image src="/pages/demo/static/bg1.png" :size="140" mode="scaleToFill" />
 					<cl-text value="scaleToFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="aspectFit" />
+					<cl-image src="/pages/demo/static/bg1.png" :size="140" mode="aspectFit" />
 					<cl-text value="aspectFit"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="aspectFill" />
+					<cl-image src="/pages/demo/static/bg1.png" :size="140" mode="aspectFill" />
 					<cl-text value="aspectFill"></cl-text>
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/bg.png" :size="140" mode="widthFix" />
+					<cl-image src="/pages/demo/static/bg1.png" :size="140" mode="widthFix" />
 					<cl-text value="widthFix"></cl-text>
 				</cl-col>
 			</cl-row>
@@ -27,11 +27,11 @@
 		<cl-card label="圆角">
 			<cl-row type="flex">
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/avatar.png" :size="140" round />
+					<cl-image src="/pages/demo/static/avatar1.png" :size="140" round />
 				</cl-col>
 
 				<cl-col :span="6">
-					<cl-image src="/pages/demo/static/avatar.png" :size="140" :radius="16" />
+					<cl-image src="/pages/demo/static/avatar1.png" :size="140" :radius="16" />
 				</cl-col>
 			</cl-row>
 		</cl-card>
@@ -39,7 +39,7 @@
 		<cl-card label="自定义大小">
 			<cl-row type="flex">
 				<cl-image
-					src="/pages/demo/static/avatar.png"
+					src="/pages/demo/static/avatar1.png"
 					:size="[150, 280]"
 					mode="aspectFill"
 				/>
@@ -48,7 +48,11 @@
 
 		<cl-card label="点击预览">
 			<cl-row type="flex">
-				<cl-image src="/pages/demo/static/bg.png" :size="140" :preview-list="previewList" />
+				<cl-image
+					src="/pages/demo/static/bg1.png"
+					:size="140"
+					:preview-list="previewList"
+				/>
 			</cl-row>
 		</cl-card>
 
@@ -72,8 +76,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Bg from "/pages/demo/static/bg.png";
-import Avatar from "/pages/demo/static/avatar.png";
+import Bg from "/pages/demo/static/bg1.png";
+import Avatar from "/pages/demo/static/avatar1.png";
 
 const previewList = ref([Bg, Avatar]);
 </script>

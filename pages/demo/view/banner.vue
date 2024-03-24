@@ -19,7 +19,7 @@ import { ref } from "vue";
 
 const urls = ref([
 	{
-		url: "/pages/demo/static/bg.png",
+		url: "/pages/demo/static/bg1.png",
 	},
 	{
 		url: "/pages/demo/static/bg2.png",

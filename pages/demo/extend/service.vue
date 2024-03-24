@@ -26,13 +26,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useUi } from "/$/cool-ui";
-import { useApp, useCool } from "/@/cool";
-import { onReady } from "@dcloudio/uni-app";
-
-const { service } = useCool();
-
 // 模拟 service 请求，实际使用示例：service.test.page()
 function get() {
 	return new Promise((resolve) => {

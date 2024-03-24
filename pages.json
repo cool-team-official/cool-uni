@@ -230,6 +230,12 @@
 					}
 				},
 				{
+					"path": "view/skeleton",
+					"style": {
+						"navigationBarTitleText": "Skeleton 骨架图"
+					}
+				},
+				{
 					"path": "form/input",
 					"style": {
 						"navigationBarTitleText": "Input 输入框"

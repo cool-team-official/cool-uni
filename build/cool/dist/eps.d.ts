@@ -77,10 +77,6 @@ declare namespace Eps {
 			proxy?: boolean;
 			[key: string]: any;
 		}): Promise<any>;
-		base: {};
-		open: { demo: {} };
-		dict: {};
-		user: {};
 		test: Test;
 	};
 }

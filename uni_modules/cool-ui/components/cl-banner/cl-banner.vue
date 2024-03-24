@@ -38,7 +38,7 @@
 						},
 					]"
 				>
-					<slot :item="item" :index="index">
+					<slot name="item" :item="item" :index="index">
 						<image
 							class="cl-banner-item__image"
 							:style="{

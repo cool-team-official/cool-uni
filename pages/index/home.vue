@@ -215,6 +215,10 @@ const list = [
 				label: "Scroller 滚动条",
 				link: "/pages/demo/view/scroller",
 			},
+			{
+				label: "Skeleton 骨架图",
+				link: "/pages/demo/view/skeleton",
+			},
 		],
 	},
 	{
