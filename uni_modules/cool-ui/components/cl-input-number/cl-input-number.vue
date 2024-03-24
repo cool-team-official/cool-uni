@@ -1,5 +1,8 @@
 <template>
-	<view class="cl-input-number" :class="{ 'is-disabled': isDisabled }">
+	<view
+		class="cl-input-number"
+		:class="{ 'is-disabled': isDisabled, 'disabled-plus': !isPlus, 'disabled-minus': !isMinus }"
+	>
 		<!-- 减 -->
 		<view class="cl-input-number__minus" @tap="onMinus">
 			<text class="cl-icon-minus"></text>
@@ -89,6 +92,16 @@ export default defineComponent({
 		// 是否禁用
 		const isDisabled = computed(() => disabled.value || props.disabled);
 
+		// 可以加
+		const isPlus = computed(() => {
+			return props.max === undefined ? true : value.value < props.max;
+		});
+
+		// 可以减
+		const isMinus = computed(() => {
+			return props.min === undefined ? true : value.value > props.min;
+		});
+
 		// 验证值
 		function check(val?: any) {
 			if (val === undefined) {
@@ -135,7 +148,7 @@ export default defineComponent({
 			if (!isDisabled.value) {
 				value.value += props.step;
 
-				if (value.value > props.max && props.max !== Infinity) {
+				if (value.value > props.max) {
 					value.value = props.max;
 				}
 
@@ -148,7 +161,7 @@ export default defineComponent({
 			if (!isDisabled.value) {
 				value.value -= props.step;
 
-				if (value.value < props.min && props.min !== Infinity) {
+				if (value.value < props.min) {
 					value.value = props.min;
 				}
 
@@ -173,6 +186,8 @@ export default defineComponent({
 		return {
 			value,
 			isDisabled,
+			isPlus,
+			isMinus,
 			onPlus,
 			onMinus,
 			onBlur,

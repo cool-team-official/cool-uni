@@ -76,4 +76,18 @@
 			color: $cl-color-disabled;
 		}
 	}
+
+	&.disabled-plus {
+		.cl-input-number__plus {
+			background-color: $cl-color-disabled-bg;
+			color: $cl-color-disabled;
+		}
+	}
+
+	&.disabled-minus {
+		.cl-input-number__minus {
+			background-color: $cl-color-disabled-bg;
+			color: $cl-color-disabled;
+		}
+	}
 }
