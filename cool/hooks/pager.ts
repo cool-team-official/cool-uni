@@ -38,6 +38,10 @@ export function usePager<T = any>() {
 
 	// 刷新
 	async function refresh(params?: any) {
+		if (pager.loading) {
+			return false;
+		}
+
 		if (proxy.refresh) {
 			await proxy.refresh(params);
 		} else if (proxy.$.exposed.refresh) {
