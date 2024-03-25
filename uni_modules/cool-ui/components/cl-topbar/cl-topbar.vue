@@ -5,6 +5,7 @@
 			'is-border': border,
 			'is-fixed': fixed,
 			'is-ios': isIos,
+			'with-mp': withMp,
 		}"
 		:style="{
 			backgroundColor,
@@ -64,6 +65,8 @@ export default defineComponent({
 		},
 		// 是否固定
 		fixed: Boolean,
+		// 是否兼容小程序
+		withMp: Boolean,
 		// 是否显示返回按钮
 		showBack: {
 			type: Boolean,
