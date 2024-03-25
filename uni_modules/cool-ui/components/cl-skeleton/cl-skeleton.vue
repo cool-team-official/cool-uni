@@ -4,9 +4,11 @@
 		:class="{
 			'is-loading': loading,
 		}"
-		:style="[baseStyle, loading && customStyle]"
+		:style="[baseStyle, loading && loadingStyle]"
 	>
-		<slot></slot>
+		<view class="cl-skeleton__inner" v-show="!loading">
+			<slot></slot>
+		</view>
 	</view>
 </template>
 
@@ -22,9 +24,9 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		customStyle: {
+		loadingStyle: {
 			type: Object as PropType<StyleValue>,
-			default: 0,
+			default: () => ({}),
 		},
 	},
 

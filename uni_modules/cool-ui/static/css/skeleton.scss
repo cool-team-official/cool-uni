@@ -1,5 +1,11 @@
 .cl-skeleton {
+	&__inner {
+		height: 100%;
+		width: 100%;
+	}
+
 	&.is-loading {
+		border-radius: $cl-border-radius;
 		background: linear-gradient(90deg, #f0f2f5 25%, #e6e8eb 37%, #f0f2f5 63%);
 		background-size: 400% 100%;
 		animation: cl-skeleton-loading 1.4s ease infinite;
