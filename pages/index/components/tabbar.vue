@@ -34,13 +34,17 @@ import { useCool } from "/@/cool";
 
 const { router } = useCool();
 
+// 当前页面路径
+const pagePath = router.path;
+
 const list = computed(() => {
 	const arr = [...router.tabs];
 
+	// 添加自定义
 	arr.splice(1, 0, { pagePath: "custom" });
 
 	return arr.map((e) => {
-		const active = router.path?.includes(e.pagePath);
+		const active = pagePath?.includes(e.pagePath);
 
 		return {
 			icon: "/" + (active ? e.selectedIconPath : e.iconPath),
