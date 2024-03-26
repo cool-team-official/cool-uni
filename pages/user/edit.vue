@@ -17,9 +17,7 @@
 			</view>
 
 			<cl-footer>
-				<cl-button size="large" fill round type="primary" :loading="loading" @tap="save">
-					保存
-				</cl-button>
+				<cl-button custom type="primary" :loading="loading" @tap="save"> 保存 </cl-button>
 			</cl-footer>
 		</view>
 	</cl-page>
