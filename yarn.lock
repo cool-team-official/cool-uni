@@ -1837,7 +1837,7 @@ vue@^3.4.21:
     "@vue/server-renderer" "3.4.21"
     "@vue/shared" "3.4.21"
 
-weixin-js-sdk@^1.6.0:
+weixin-js-sdk@^1.6.5:
   version "1.6.5"
   resolved "https://registry.yarnpkg.com/weixin-js-sdk/-/weixin-js-sdk-1.6.5.tgz#01fe5220b91dbfe089fc0730d061be0e68271e6a"
   integrity sha512-Gph1WAWB2YN/lMOFB/ymb+hbU/wYazzJgu6PMMktCy9cSCeW5wA6Zwt0dpahJbJ+RJEwtTv2x9iIu0U4enuVSQ==

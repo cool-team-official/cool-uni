@@ -186,7 +186,7 @@ export default defineComponent({
 		// 检验
 		function validate() {
 			if (isRequired.value) {
-				validator.validate({ [props.prop as any]: value.value }, (errors: any) => {
+				validator?.validate({ [props.prop as any]: value.value }, (errors: any) => {
 					message.value = errors ? errors[0].message : "";
 				});
 			} else {

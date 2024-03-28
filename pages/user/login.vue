@@ -280,8 +280,9 @@ onReady(() => {
 			display: block;
 			height: 150rpx;
 			width: 150rpx;
-			border-radius: 100%;
+			border-radius: 24rpx;
 			margin-bottom: 30rpx;
+			box-shadow: 0 25rpx 30rpx -25rpx #666666;
 		}
 
 		text {

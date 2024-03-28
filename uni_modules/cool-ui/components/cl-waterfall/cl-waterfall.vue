@@ -105,12 +105,12 @@ export default defineComponent({
 		async function append(arr: any[]) {
 			data = arr;
 
-			for (let i in arr) {
+			for (let i = 0; i < arr.length; i++) {
 				const next = async () => {
 					const rects = await getRect();
 
 					// 获取不到的时候阻断掉
-					if (isEmpty(rects)) {
+					if (isEmpty(rects) && i !== 0) {
 						return false;
 					}
 

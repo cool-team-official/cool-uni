@@ -9,9 +9,11 @@ export const config = {
 	// 版本号
 	version: "0.0.0",
 
-	// 项目信息
+	// 应用信息
 	app: {
+		// 应用名称
 		name: "COOL-UNI",
+		// 应用描述
 		desc: "基于 Ts + Vue3 + Pinia 构建。",
 		// 页面配置
 		pages: {
@@ -19,19 +21,7 @@ export const config = {
 		},
 		// 微信配置
 		wx: {
-			// 小程序
-			mini: {
-				appid: "",
-			},
-			// 公众号
-			mp: {
-				appid: "",
-				debug: false,
-			},
-			// App
-			app: {
-				appid: "",
-			},
+			debug: false,
 		},
 	},
 
@@ -44,7 +34,7 @@ export const config = {
 
 	// 忽略
 	ignore: {
-		token: ["/app/user/login/wxMiniLogin"],
+		token: [],
 	},
 
 	// 当前环境
