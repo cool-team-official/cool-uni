@@ -167,6 +167,8 @@ export default defineComponent({
 							};
 						})
 						.filter((e) => e.url);
+				} else {
+					list.value = [];
 				}
 			},
 			{

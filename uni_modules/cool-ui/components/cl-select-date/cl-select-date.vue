@@ -85,6 +85,8 @@ export default defineComponent({
 			type: String,
 			default: "请选择时间",
 		},
+		// 是否禁用
+		disabled: Boolean,
 	},
 
 	emits: ["update:modelValue", "change"],
@@ -252,6 +254,10 @@ export default defineComponent({
 
 		// 打开
 		function open() {
+			if (props.disabled) {
+				return;
+			}
+
 			setDate(props.modelValue);
 			refs.popup.open();
 		}

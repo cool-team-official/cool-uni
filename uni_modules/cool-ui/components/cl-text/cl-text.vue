@@ -17,7 +17,7 @@
 			baseStyle,
 			{
 				color,
-				textAlign: align,
+				justifyContent: align,
 				lineHeight,
 				fontSize: parseRpx(size),
 				letterSpacing: parseRpx(letterSpacing),
@@ -93,9 +93,7 @@ export default defineComponent({
 		size: [String, Number],
 		// 文字对齐
 		align: {
-			type: String as PropType<
-				"start" | "end" | "left" | "right" | "center" | "justify" | "match-parent"
-			>,
+			type: String as PropType<"start" | "end" | "left" | "right" | "center">,
 			default: "left",
 		},
 		// 价格小数点
@@ -157,9 +155,23 @@ export default defineComponent({
 			}
 		});
 
+		const align = computed(() => {
+			switch (props.align) {
+				case "start":
+				case "left":
+					return "flex-start";
+				case "end":
+				case "right":
+					return "flex-end";
+				case "center":
+					return "center";
+			}
+		});
+
 		return {
 			text,
 			tap,
+			align,
 			...useStyle(),
 		};
 	},
