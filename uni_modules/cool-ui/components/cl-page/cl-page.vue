@@ -52,6 +52,7 @@ import { computed, defineComponent, reactive, getCurrentInstance, onMounted } fr
 import { useApp, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 import { isString } from "lodash-es";
+import { ref } from "vue";
 
 export default defineComponent({
 	name: "cl-page",
@@ -101,10 +102,15 @@ export default defineComponent({
 			);
 		});
 
-		// 全屏高
-		const height = computed(() => {
+		// 屏幕高
+		const height = ref("auto");
+
+		function onHeight() {
+			const { screenHeight, windowHeight, safeAreaInsets } = uni.getSystemInfoSync();
+
 			if (!props.fullscreen) {
-				return "auto";
+				height.value = "auto";
+				return;
 			}
 
 			let h = 0;
@@ -121,8 +127,8 @@ export default defineComponent({
 			}
 			// #endif
 
-			return h - (safeAreaInsets?.bottom || 0) + "px";
-		});
+			height.value = h - (safeAreaInsets?.bottom || 0) + "px";
+		}
 
 		// 加载框配置
 		const loader = reactive({
@@ -215,6 +221,10 @@ export default defineComponent({
 				})
 				.exec();
 		};
+
+		onMounted(() => {
+			onHeight();
+		});
 
 		return {
 			app,
