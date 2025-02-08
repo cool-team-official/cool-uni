@@ -14,14 +14,14 @@
 				<view class="mode" :class="[`is-${mode}`]">
 					<!-- 手机号 -->
 					<template v-if="mode == 'phone'">
-						<text class="label">手机号登录</text>
+						<text class="label">{{ t("手机号登录") }}</text>
 
 						<view class="phone">
 							<text>+86</text>
 							<cl-input
 								v-model="phone"
 								type="number"
-								placeholder="请填写手机号码"
+								:placeholder="t('请填写手机号码')"
 								:border="false"
 								:maxlength="11"
 								:font-size="30"
@@ -59,7 +59,7 @@
 							:loading="loading"
 							@tap="wxLogin"
 						>
-							微信一键登录
+							{{ t("微信一键登录") }}
 						</cl-button>
 					</template>
 
@@ -73,7 +73,7 @@
 			<!-- 其他登录方式 -->
 			<view class="other" v-if="!isEmpty(platformsEnv)">
 				<cl-divider width="400rpx" background-color="#ffffff">
-					<cl-text color="#ccc" value="其他登录方式" />
+					<cl-text color="#ccc" :value="t('其他登录方式')" />
 				</cl-divider>
 
 				<view class="platform">
@@ -99,13 +99,13 @@
 			@close="edit.onClose"
 		>
 			<div class="edit-popup">
-				<cl-text block bold :size="32">获取你的头像、昵称</cl-text>
+				<cl-text block bold :size="32">{{ t("获取你的头像、昵称") }}</cl-text>
 				<cl-text block :margin="[24, 0, 50, 0]" color="info">
-					用于向用户提供有辨识度的界面
+					{{ t("用于向用户提供有辨识度的界面") }}
 				</cl-text>
 
 				<cl-list :margin="[0, -12, 60, -12]" :border="false">
-					<cl-list-item label="头像" :arrow-icon="false">
+					<cl-list-item :label="t('头像')" :arrow-icon="false">
 						<button
 							class="avatar"
 							open-type="chooseAvatar"
@@ -120,19 +120,19 @@
 						</button>
 					</cl-list-item>
 
-					<cl-list-item label="昵称" :arrow-icon="false">
+					<cl-list-item :label="t('昵称')" :arrow-icon="false">
 						<input
 							class="name"
 							v-model="edit.form.nickName"
 							type="nickname"
-							placeholder="请填写昵称、限16个字符或汉字"
+							:placeholder="t('请填写昵称、限16个字符或汉字')"
 							maxlength="16"
 						/>
 					</cl-list-item>
 				</cl-list>
 
 				<cl-button fill type="primary" :height="90" :font-size="30" @tap="edit.save">
-					保存
+					{{ t("保存") }}
 				</cl-button>
 			</div>
 		</cl-popup>
@@ -147,6 +147,7 @@ import { useApp, useCool, useStore, useWx } from "/@/cool";
 import { useUi } from "/$/cool-ui";
 import { config } from "/@/config";
 import { cloneDeep, isEmpty } from "lodash-es";
+import { useI18n } from "vue-i18n";
 import SmsBtn from "/@/components/sms-btn.vue";
 import AgreeBtn from "/@/components/agree-btn.vue";
 
@@ -165,7 +166,7 @@ const { user } = useStore();
 const app = useApp();
 const ui = useUi();
 const wx = useWx();
-
+const { t } = useI18n();
 // 登录中
 const loading = ref(false);
 
@@ -181,13 +182,14 @@ const mode = ref();
 // 登录平台
 const platforms = ref<Platform[]>([
 	{
-		label: "通过手机登录",
+		label: t("通过手机登录"),
 		value: "phone",
 		icon: "/pages/user/static/icon/phone.png",
 		hidden: false,
 	},
+
 	{
-		label: "通过微信登录",
+		label: t("通过微信登录"),
 		value: "wx",
 		icon: "/pages/user/static/icon/wx.png",
 		hidden: true,
@@ -283,10 +285,10 @@ function wxLogin() {
 			});
 		} else {
 			ui.showConfirm({
-				title: "温馨提示",
-				message: "您还未安装微信~",
+				title: t("温馨提示"),
+				message: t("您还未安装微信~"),
 				showCancelButton: false,
-				confirmButtonText: "去下载",
+				confirmButtonText: t("去下载"),
 				callback(action) {
 					if (action == "confirm") {
 						wx.downloadApp();
@@ -347,7 +349,7 @@ const univerify = reactive({
 			provider: "univerify",
 			success() {
 				platforms.value.push({
-					label: "手机号一键登录",
+					label: t("手机号一键登录"),
 					value: "univerify",
 					onClick() {
 						univerify.login();
@@ -355,7 +357,8 @@ const univerify = reactive({
 				});
 			},
 			fail(err) {
-				univerify.error = err.metadata?.msg || "当前环境不支持一键登录，请切换至验证码登录";
+				univerify.error =
+					err.metadata?.msg || t("当前环境不支持一键登录，请切换至验证码登录");
 			},
 		});
 		// #endif
@@ -370,24 +373,26 @@ const univerify = reactive({
 					highlightColor: "#6b69f8",
 					disabledColor: "#73aaf5",
 					textColor: "#ffffff",
-					title: "一键登录",
+					title: t("一键登录"),
 					borderRadius: "12px",
 				},
 				privacyTerms: {
 					defaultCheckBoxState: true, // 条款勾选框初始状态
 					textColor: "#BBBBBB",
 					termsColor: "#5496E3",
-					prefix: "我已阅读并同意",
-					suffix: "并使用本机号码登录",
+					prefix: t("我已阅读并同意"),
+					suffix: t("并使用本机号码登录"),
+
 					privacyItems: [
 						// 自定义协议条款，最大支持2个，需要同时设置url和title. 否则不生效
 						{
 							url: `${config.baseUrl}/app/base/comm/html?key=userAgreement`,
-							title: "用户协议",
+							title: t("用户协议"),
 						},
+
 						{
 							url: `${config.baseUrl}/app/base/comm/html?key=privacyPolicy`,
-							title: "隐私政策",
+							title: t("隐私政策"),
 						},
 					],
 				},
@@ -454,11 +459,11 @@ const edit = reactive({
 
 	save() {
 		if (!edit.form.avatarUrl) {
-			return ui.showToast("请上传头像");
+			return ui.showToast(t("请上传头像"));
 		}
 
 		if (!edit.form.nickName) {
-			return ui.showToast("请输入昵称");
+			return ui.showToast(t("请输入昵称"));
 		}
 
 		user.update(edit.form);
@@ -488,6 +493,9 @@ onReady(() => {
 			border-radius: 24rpx;
 			margin-bottom: 30rpx;
 			box-shadow: 0 25rpx 30rpx -25rpx #666666;
+			background-color: #2c3142;
+			padding: 20rpx;
+			box-sizing: border-box;
 		}
 
 		text {

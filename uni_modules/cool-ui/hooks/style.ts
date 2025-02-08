@@ -1,6 +1,6 @@
 import { computed, getCurrentInstance, type StyleValue } from "vue";
 import { parseRpx } from "/@/cool/utils";
-import { fromPairs } from "lodash-es";
+import { assign, fromPairs } from "lodash-es";
 
 const styles = [
 	{
@@ -21,21 +21,24 @@ const styles = [
 	},
 	{
 		key: "font-size",
+		alias: ["fontSize"],
 		rpx: true,
 	},
 	{
 		key: "border-radius",
-		alias: ["radius"],
+		alias: ["radius", "borderRadius"],
 		rpx: true,
 	},
 	{
 		key: "background-color",
+		alias: ["backgroundColor"],
 	},
 	{
 		key: "background",
 	},
 	{
 		key: "custom-style",
+		alias: ["customStyle"],
 	},
 ];
 
@@ -55,7 +58,9 @@ export function useStyle(data: StyleValue = {}) {
 					const val = keys
 						.map((k) => {
 							// 标签值
-							const a = instance?.proxy?.$attrs[k];
+							const a = assign({}, instance?.proxy?.$attrs, instance?.proxy?.$props)[
+								k
+							];
 
 							// 默认值
 							const b = (data as any)[k];
@@ -69,7 +74,7 @@ export function useStyle(data: StyleValue = {}) {
 					return [e.key, e.rpx ? parseRpx(val) : val];
 				})
 				// 过滤空值
-				.filter((e) => e[1] !== undefined),
+				.filter((e) => e[1] !== undefined)
 		);
 	});
 

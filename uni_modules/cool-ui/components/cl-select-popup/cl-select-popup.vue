@@ -79,7 +79,7 @@
 						:disabled="required ? selection.length == 0 : false"
 						@tap="confirm"
 					>
-						确定
+						{{ $t("确定") }}
 					</cl-button>
 				</slot>
 			</view>
@@ -182,7 +182,7 @@ export default defineComponent({
 					{
 						immediate: true,
 						deep: true,
-					},
+					}
 				);
 			},
 		});
@@ -277,7 +277,7 @@ export default defineComponent({
 			{
 				deep: true,
 				immediate: true,
-			},
+			}
 		);
 
 		return {

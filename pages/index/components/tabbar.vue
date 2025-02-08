@@ -10,19 +10,11 @@
 				}"
 				@tap="toLink(item.pagePath)"
 			>
-				<template v-if="item.pagePath == 'custom'">
-					<view class="icon">
-						<image src="https://cool-js.com/logo.png" mode="aspectFit" />
-					</view>
-				</template>
-
-				<template v-else>
-					<view class="icon">
-						<image :src="item.icon" mode="aspectFit" />
-					</view>
-					<text class="label">{{ item.text }}</text>
-					<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
-				</template>
+				<view class="icon">
+					<image :src="item.icon" mode="aspectFit" />
+				</view>
+				<text class="label">{{ item.text }}</text>
+				<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
 			</view>
 		</view>
 	</cl-footer>
@@ -31,8 +23,10 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useCool } from "/@/cool";
+import { useI18n } from "vue-i18n";
 
 const { router } = useCool();
+const { t } = useI18n();
 
 // 当前页面路径
 const pagePath = router.path;
@@ -40,28 +34,42 @@ const pagePath = router.path;
 const list = computed(() => {
 	const arr = [...router.tabs];
 
-	// 添加自定义
-	arr.splice(1, 0, { pagePath: "custom" });
-
 	return arr.map((e) => {
 		const active = pagePath?.includes(e.pagePath);
 
 		return {
+			...e,
 			icon: "/" + (active ? e.selectedIconPath : e.iconPath),
 			active,
 			number: 0,
-			...e,
+			text: t(e.text?.replaceAll("%", "")!),
 		};
 	});
 });
 
 function toLink(pagePath: string) {
-	if (pagePath == "custom") {
+	const to = (link: string) => {
 		// #ifdef H5
-		location.href = "https://cool-js.com/";
+		location.href = link;
 		// #endif
-	} else {
-		router.push("/" + pagePath);
+
+		// #ifdef APP-PLUS
+		plus.runtime.openURL(link);
+		// #endif
+	};
+
+	switch (pagePath) {
+		case "cool":
+			to("https://cool-js.com");
+			break;
+
+		case "admin":
+			to("https://show.cool-admin.com");
+			break;
+
+		default:
+			router.push("/" + pagePath);
+			break;
 	}
 }
 
@@ -121,27 +129,6 @@ $icon-size: 56rpx;
 		&.is-active {
 			.label {
 				color: $cl-color-primary;
-			}
-		}
-
-		.custom {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 100%;
-			position: relative;
-
-			.icon {
-				background: linear-gradient(
-					to bottom right,
-					#408fff,
-					#6b69f8,
-					#a35df2,
-					#d14bd8,
-					#e9388a
-				);
-				border-radius: 18rpx;
 			}
 		}
 	}

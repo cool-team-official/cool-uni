@@ -38,19 +38,19 @@
 					<view class="cl-guide__op is-left">
 						<!-- 上一步按钮 -->
 						<button @tap="toPrev" v-if="isPrev && step.showPrev">
-							{{ step.prevText || "上一步" }}
+							{{ step.prevText || $t("上一步") }}
 						</button>
 						<!-- 下一步按钮 -->
 						<button @tap="toNext" v-if="isNext && step.showNext">
-							{{ step.nextText || "下一步" }}
+							{{ step.nextText || $t("下一步") }}
 						</button>
 						<!-- 跳过按钮 -->
 						<button @tap="toSkip" v-if="step.showSkip">
-							{{ step.skipText || "跳过" }}
+							{{ step.skipText || $t("跳过") }}
 						</button>
 						<!-- 完成按钮 -->
 						<button @tap="toDone" v-if="!isNext">
-							{{ step.doneText || "完成" }}
+							{{ step.doneText || $t("完成") }}
 						</button>
 					</view>
 				</slot>
@@ -101,7 +101,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 是否可见
@@ -181,7 +181,7 @@ export default defineComponent({
 							})
 							.exec();
 					});
-				}),
+				})
 			).then(() => {
 				updateStyle();
 			});

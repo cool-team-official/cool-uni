@@ -19,7 +19,7 @@
 					<cl-loading
 						:theme="loadingTheme"
 						:color="border ? '#ffffff' : color"
-						:size="60"
+						:size="50"
 					/>
 					<text v-if="text" class="cl-loading-mask__text">{{ text }}</text>
 				</view>

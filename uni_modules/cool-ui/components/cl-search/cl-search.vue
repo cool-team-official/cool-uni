@@ -67,6 +67,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch, type PropType } from "vue";
 import { parseRpx } from "/@/cool/utils";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-search",
@@ -128,7 +129,7 @@ export default defineComponent({
 		},
 		searchButtonText: {
 			type: String,
-			default: "搜索",
+			default: t("搜索"),
 		},
 	},
 
@@ -145,7 +146,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 是否聚焦
@@ -158,7 +159,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		function onChange(e: any) {

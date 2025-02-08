@@ -29,6 +29,8 @@ export namespace User {
 }
 
 export namespace Dict {
+	type Key = Eps.DictKey | (string & {});
+
 	interface Item {
 		id: string;
 		label: string;

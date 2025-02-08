@@ -7,7 +7,7 @@
 		@closed="onClosed"
 	>
 		<div class="cl-slider-verify">
-			<text class="cl-slider-verify__title">{{ title }}</text>
+			<text class="cl-slider-verify__title">{{ title || $t("拖动验证") }}</text>
 
 			<!-- 填充 -->
 			<view class="cl-slider-verify__fill" v-if="type == 'fill'">
@@ -91,6 +91,7 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { ref, defineComponent, computed, reactive, nextTick } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
 	name: "cl- slider-verify",
@@ -109,16 +110,15 @@ export default defineComponent({
 			type: Number,
 			default: 5,
 		},
-		title: {
-			type: String,
-			default: "拖动验证",
-		},
+		title: String,
 		placeholder: String,
 	},
 
 	emits: ["success", "fail"],
 
 	setup(props, { emit }) {
+		const { t } = useI18n();
+
 		const visible = ref(false);
 		const show = ref(false);
 		const lock = ref(true);
@@ -127,7 +127,9 @@ export default defineComponent({
 			if (props.placeholder) {
 				return props.placeholder;
 			} else {
-				return props.type == "fill" ? "请向右拖动滑块完成拼图" : "请拖动滑块旋转至正确位置";
+				return props.type == "fill"
+					? t("请向右拖动滑块完成拼图")
+					: t("请拖动滑块旋转至正确位置");
 			}
 		});
 

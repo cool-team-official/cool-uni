@@ -44,7 +44,7 @@
 		@click="click"
 	>
 		<!-- 加载框 -->
-		<cl-loading :size="32" :color="loadingColor" :theme="loadingTheme" v-if="loading" />
+		<cl-loading :size="30" :color="loadingColor" :theme="loadingTheme" v-if="loading" />
 
 		<!-- 图标 -->
 		<view class="cl-button__icon" v-if="icon">

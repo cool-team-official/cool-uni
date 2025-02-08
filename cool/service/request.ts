@@ -2,6 +2,7 @@ import { useStore } from "../store";
 import { router } from "../router";
 import { isDev, config } from "../../config";
 import { storage } from "../utils";
+import { getLocale, t } from "/@/locale";
 
 // 请求队列
 let requests: any[] = [];
@@ -10,7 +11,6 @@ let requests: any[] = [];
 let isRefreshing = false;
 
 export default function request(options: any) {
-	// 缓存信息
 	const { user } = useStore();
 
 	// 标识
@@ -35,10 +35,11 @@ export default function request(options: any) {
 
 				header: {
 					Authorization,
+					language: getLocale(),
 					...options.header,
 				},
 
-				success(res) {
+				success(res: any) {
 					const { code, data, message } = res.data as {
 						code: number;
 						message: string;
@@ -57,7 +58,7 @@ export default function request(options: any) {
 					// 服务异常
 					if (res.statusCode === 502) {
 						return reject({
-							message: "服务异常",
+							message: t("服务异常"),
 						});
 					}
 
@@ -78,11 +79,11 @@ export default function request(options: any) {
 								reject({ message, code });
 						}
 					} else {
-						reject({ message: "服务异常" });
+						reject({ message: t("服务异常") });
 					}
 				},
 
-				fail(err) {
+				fail(err: any) {
 					reject({ message: err.errMsg });
 				},
 			});

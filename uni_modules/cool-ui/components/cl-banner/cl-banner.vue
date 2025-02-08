@@ -33,7 +33,7 @@
 				<view
 					class="cl-banner-item"
 					:style="{
-						transform: type == 'card' ? transform : null,
+						transform: type == 'card' ? transform : "",
 					}"
 					:class="[
 						{

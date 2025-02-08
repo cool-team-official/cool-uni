@@ -4,8 +4,8 @@
 			<cl-topbar :border="false"> </cl-topbar>
 
 			<view class="container">
-				<text class="label">输入验证码</text>
-				<text class="tips">已发送至 +86 {{ form.phone }}</text>
+				<text class="label">{{ t("输入验证码") }}</text>
+				<text class="tips">{{ t("已发送至") }} +86 {{ form.phone }}</text>
 
 				<view class="code">
 					<cl-captcha
@@ -26,7 +26,7 @@
 					:font-size="30"
 					@tap="next"
 				>
-					确定
+					{{ t("确定") }}
 				</cl-button>
 
 				<view class="send">
@@ -48,15 +48,18 @@ import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
 import { useUi } from "/$/cool-ui";
 import SmsBtn from "/@/components/sms-btn.vue";
+import { useI18n } from "vue-i18n";
 
 const { service, router, refs, setRefs } = useCool();
 const { user } = useStore();
 const ui = useUi();
+const { t } = useI18n();
 
 // 验证码长度
 const len = 4;
 
 // 保存状态
+
 const saving = ref(false);
 
 // 表单
@@ -82,7 +85,7 @@ function next() {
 			router.nextLogin();
 		})
 		.catch((err) => {
-			ui.showTips(err.message || "登录失效，请重试~");
+			ui.showTips(err.message || t("登录失效，请重试~"));
 			saving.value = false;
 			form.smsCode = "";
 		});

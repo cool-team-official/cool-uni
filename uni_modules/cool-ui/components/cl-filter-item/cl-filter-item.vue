@@ -52,13 +52,13 @@
 						<view class="cl-filter-item__dropdown-box__btn" v-if="multiple">
 							<cl-row :gutter="30">
 								<cl-col :span="12">
-									<cl-button fill round @tap="clear">清空</cl-button>
+									<cl-button fill round @tap="clear">{{ $t("清空") }}</cl-button>
 								</cl-col>
 
 								<cl-col :span="12">
-									<cl-button fill round type="primary" @tap="confirm"
-										>确认</cl-button
-									>
+									<cl-button fill round type="primary" @tap="confirm">{{
+										$t("确认")
+									}}</cl-button>
 								</cl-col>
 							</cl-row>
 						</view>
@@ -67,7 +67,9 @@
 					<!-- 空态 -->
 					<template v-else>
 						<slot name="empty">
-							<view class="cl-filter-item__dropdown-box__empty"> 暂无数据 </view>
+							<view class="cl-filter-item__dropdown-box__empty">
+								{{ $t("暂无数据") }}
+							</view>
 						</slot>
 					</template>
 				</template>
@@ -79,6 +81,7 @@
 <script lang="ts">
 import { computed, defineComponent, type PropType, reactive, watch } from "vue";
 import { getParent } from "/@/cool/utils";
+import { useI18n } from "vue-i18n";
 
 declare interface Item {
 	label: string;
@@ -127,11 +130,13 @@ export default defineComponent({
 	emits: ["change"],
 
 	setup(props, { emit }) {
+		const { t } = useI18n();
+
 		// <cl-filter-bar />
 		const parent = getParent(
 			"cl-filter-bar",
 			["form", "setExpand", "update", "close", "collapse"],
-			["collapse", "clear"],
+			["collapse", "clear"]
 		);
 
 		// 下拉框
@@ -148,7 +153,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 绑定值

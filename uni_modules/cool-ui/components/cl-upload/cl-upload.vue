@@ -60,6 +60,8 @@ import { parseRpx, uuid } from "/@/cool/utils";
 import { isArray } from "lodash-es";
 import { upload } from "/@/cool";
 import { useForm } from "../../hooks";
+import { useI18n } from "vue-i18n";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-upload",
@@ -70,7 +72,7 @@ export default defineComponent({
 		// 文本
 		text: {
 			type: String,
-			default: "上传/拍摄",
+			default: t("上传/拍摄"),
 		},
 		// 压缩方式
 		sizeType: {
@@ -137,6 +139,7 @@ export default defineComponent({
 	],
 
 	setup(props, { emit }) {
+		const { t } = useI18n();
 		const { disabled } = useForm();
 
 		// 图片列表
@@ -173,7 +176,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 能否追加
@@ -225,7 +228,7 @@ export default defineComponent({
 						}
 
 						// 失败
-						function fail(message: string | any = "图片地址错误") {
+						function fail(message: string | any = t("图片地址错误")) {
 							emit("error", message);
 							remove(list.value.findIndex((e) => e.uid == uid));
 						}

@@ -1,80 +1,41 @@
-// @ts-nocheck
-import { has } from "lodash-es";
-import { isDev, config } from "../../config";
+import { config } from "../../config";
 import request from "./request";
 
-export function Service(
-	value:
-		| {
-				namespace?: string;
-				url?: string;
-				mock?: boolean;
-		  }
-		| string
-) {
-	return function (target: any) {
-		// 命名
-		if (typeof value == "string") {
-			target.prototype.namespace = value;
-		}
-
-		// 复杂项
-		if (has(value, "namespace")) {
-			target.prototype.namespace = value.namespace;
-			target.prototype.mock = value.mock;
-
-			if (value.url) {
-				target.prototype.url = value.url;
-			}
-		}
-	};
-}
-
 export class BaseService {
-	constructor(
-		options = {} as {
-			namespace?: string;
-		}
-	) {
-		if (options?.namespace) {
-			this.namespace = options.namespace;
+	namespace?: string;
+
+	constructor(namespace?: string) {
+		if (namespace) {
+			this.namespace = namespace;
 		}
 	}
 
-	request(options: any = {}) {
-		if (!options.params) options.params = {};
+	// 发送请求
+	async request(options: any = {}) {
+		let url = options.url;
 
-		let ns = "";
-
-		// 是否 mock 模式
-		if (this.mock || config.test.mock) {
-			// 测试
-		} else {
-			if (isDev) {
-				ns = this.proxy || config.baseUrl;
-			} else {
-				ns = this.proxy ? this.url : config.baseUrl;
+		if (url && url.indexOf("http") < 0) {
+			if (this.namespace) {
+				url = this.namespace + url;
 			}
-		}
 
-		// 拼接前缀
-		if (this.namespace) {
-			ns += "/" + this.namespace;
-		}
-
-		// 处理地址
-		if (options.proxy === undefined || options.proxy) {
-			options.url = ns + options.url;
+			if (options.proxy !== false) {
+				url = config.baseUrl + "/" + url;
+			}
 		}
 
 		// 处理参数
 		options.data =
 			options.method?.toLocaleUpperCase() == "POST" ? options.data : options.params;
 
-		return request(options);
+		return request({
+			...options,
+			url,
+		});
 	}
 
-	list(data: any) {
+	// 获取列表
+	async list(data: any) {
 		return this.request({
 			url: "/list",
 			method: "POST",
@@ -82,7 +43,8 @@ export class BaseService {
 		});
 	}
 
-	page(data: any) {
+	// 分页查询
+	async page(data: any) {
 		return this.request({
 			url: "/page",
 			method: "POST",
@@ -90,14 +52,16 @@ export class BaseService {
 		});
 	}
 
-	info(params: any) {
+	// 获取信息
+	async info(params: any) {
 		return this.request({
 			url: "/info",
 			params,
 		});
 	}
 
-	update(data: any) {
+	// 更新数据
+	async update(data: any) {
 		return this.request({
 			url: "/update",
 			method: "POST",
@@ -105,7 +69,8 @@ export class BaseService {
 		});
 	}
 
-	delete(data: any) {
+	// 删除数据
+	async delete(data: any) {
 		return this.request({
 			url: "/delete",
 			method: "POST",
@@ -113,7 +78,8 @@ export class BaseService {
 		});
 	}
 
-	add(data: any) {
+	// 添加数据
+	async add(data: any) {
 		return this.request({
 			url: "/add",
 			method: "POST",

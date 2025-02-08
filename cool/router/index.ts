@@ -266,7 +266,7 @@ const router = {
 				mode: "switchTab",
 			});
 		} else {
-			console.error("不存在Tab页", name);
+			console.error("Not found tab", name);
 		}
 	},
 

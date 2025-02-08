@@ -43,12 +43,6 @@ export function getParent(name: string, k1: string[], k2?: string[]) {
 			}
 		}
 
-		// if (!d.value && n-- > 0) {
-		// 	setTimeout(() => {
-		// 		d.value = next();
-		// 	}, 50);
-		// }
-
 		return parent || d.value;
 	};
 

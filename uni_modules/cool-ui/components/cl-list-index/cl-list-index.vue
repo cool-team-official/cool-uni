@@ -127,6 +127,7 @@ import {
 } from "vue";
 import py from "js-pinyin";
 import { groupBy, isEmpty } from "lodash-es";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-list-index",
@@ -165,7 +166,7 @@ export default defineComponent({
 		// 搜索占位内容
 		placeholder: {
 			type: String,
-			default: "搜索关键字",
+			default: t("搜索关键字"),
 		},
 		// 延迟
 		delay: Number,
@@ -328,11 +329,11 @@ export default defineComponent({
 										rect: true,
 										size: true,
 									},
-									() => {},
+									() => {}
 								)
 								.exec((d) => {
 									tops.value = d[0].map(
-										(e: { top: number; height: number }) => e.top - res.top,
+										(e: { top: number; height: number }) => e.top - res.top
 									);
 								});
 						})
@@ -428,7 +429,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		return {

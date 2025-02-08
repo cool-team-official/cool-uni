@@ -25,15 +25,14 @@
 			<cl-loading-mask :loading="captcha.loading">
 				<view class="sms-popup">
 					<view class="head">
-						<cl-text bold :size="28" value="获取短信验证码"></cl-text>
+						<cl-text bold :size="28" :value="$t('获取短信验证码')"></cl-text>
 						<cl-icon :size="32" name="close" @tap="close"></cl-icon>
 					</view>
 
 					<view class="row">
 						<cl-input
-							type="number"
 							v-model="form.code"
-							placeholder="验证码"
+							:placeholder="$t('验证码')"
 							:maxlength="4"
 							:height="70"
 							:clearable="false"
@@ -54,7 +53,7 @@
 						:height="70"
 						@tap="send"
 					>
-						发送短信
+						{{ $t("发送短信") }}
 					</cl-button>
 				</view>
 			</cl-loading-mask>
@@ -66,6 +65,7 @@
 import { computed, type PropType, reactive, ref } from "vue";
 import { useCool } from "../cool";
 import { useUi } from "/$/cool-ui";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps({
 	phone: String,
@@ -84,6 +84,7 @@ const emit = defineEmits(["success"]);
 
 const { service, refs, setRefs } = useCool();
 const ui = useUi();
+const { t } = useI18n();
 
 // 验证码
 const captcha = reactive({
@@ -101,7 +102,7 @@ const isDisabled = computed(() => countdown.value > 0 || !props.phone);
 
 // 按钮文案
 const btnText = computed(() =>
-	countdown.value > 0 ? `${countdown.value}s后重新获取` : "获取验证码",
+	countdown.value > 0 ? t("{n}s后重新获取", { n: countdown.value }) : t("获取验证码")
 );
 
 // 表单
@@ -137,11 +138,12 @@ async function send() {
 				...form,
 			})
 			.then(() => {
-				ui.showToast("短信已发送，请查收");
+				ui.showToast(t("短信已发送，请查收"));
 				startCountdown();
 				close();
 				emit("success");
 			})
+
 			.catch((err) => {
 				ui.showToast(err.message);
 				getCaptcha();
@@ -149,7 +151,7 @@ async function send() {
 
 		captcha.sending = false;
 	} else {
-		ui.showToast("请填写验证码");
+		ui.showToast(t("请填写验证码"));
 	}
 }
 
@@ -159,7 +161,7 @@ async function getCaptcha() {
 	captcha.loading = true;
 
 	await service.user.login
-		.captcha({ type: "png", color: "#000000", phone: props.phone })
+		.captcha({ color: "#2c3142", phone: props.phone })
 		.then((res) => {
 			form.captchaId = res.captchaId;
 			captcha.img = res.data;
@@ -178,7 +180,7 @@ function open() {
 			captcha.visible = true;
 			getCaptcha();
 		} else {
-			ui.showToast("请填写正确的手机号格式");
+			ui.showToast(t("请填写正确的手机号格式"));
 		}
 	}
 }

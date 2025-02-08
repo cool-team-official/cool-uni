@@ -27,6 +27,7 @@
 <script lang="ts">
 import { type PropType, defineComponent } from "vue";
 import { useStyle } from "../../hooks";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-empty",
@@ -42,7 +43,7 @@ export default defineComponent({
 		// 暂无数据文案
 		text: {
 			type: String,
-			default: "暂无数据",
+			default: t("暂无数据"),
 		},
 		// 是否固定
 		fixed: {

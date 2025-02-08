@@ -26,38 +26,42 @@
 
 				<view class="det">
 					<cl-text :size="32" block :margin="[0, 0, 8, 0]">{{
-						user.info?.nickName || "未登录"
+						user.info?.nickName || t("未登录")
 					}}</cl-text>
-					<cl-text :size="24" color="info">写签名会更容易获得别人的关注哦～</cl-text>
+					<cl-text :size="24" color="info">{{
+						t("写签名会更容易获得别人的关注哦～")
+					}}</cl-text>
 				</view>
 			</view>
 
 			<view class="count">
 				<view class="item">
 					<text>171</text>
-					<text>总点击</text>
+					<text>{{ t("总点击") }}</text>
 				</view>
 
 				<view class="item">
 					<text>24</text>
-					<text>赞</text>
+					<text>{{ t("赞") }}</text>
 				</view>
 
 				<view class="item">
 					<text>89</text>
-					<text>关注</text>
+					<text>{{ t("关注") }}</text>
 				</view>
 
 				<view class="item">
 					<text>653</text>
-					<text>粉丝</text>
+					<text>{{ t("粉丝") }}</text>
 				</view>
 			</view>
 
 			<view class="switch">
 				<view class="item">
-					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">接单模式</cl-text>
-					<cl-text :size="24" color="info">已关闭</cl-text>
+					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">{{
+						t("接单模式")
+					}}</cl-text>
+					<cl-text :size="24" color="info">{{ t("已关闭") }}</cl-text>
 
 					<view class="inner">
 						<cl-switch />
@@ -65,8 +69,10 @@
 				</view>
 
 				<view class="item">
-					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">消息通知</cl-text>
-					<cl-text :size="24" color="info">已开启</cl-text>
+					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">{{
+						t("消息通知")
+					}}</cl-text>
+					<cl-text :size="24" color="info">{{ t("已开启") }}</cl-text>
 
 					<view class="inner">
 						<cl-switch />
@@ -75,7 +81,7 @@
 			</view>
 
 			<view class="status">
-				<cl-text block :size="30" bold>我的订单</cl-text>
+				<cl-text block :size="30" bold>{{ t("我的订单") }}</cl-text>
 
 				<view class="list">
 					<view
@@ -86,7 +92,7 @@
 					>
 						<cl-icon :name="item.icon" :size="50" />
 						<cl-text :margin="[18, 0, 0, 0]" :size="24" color="info">
-							{{ item.label }}
+							{{ t(item.label) }}
 						</cl-text>
 					</view>
 				</view>
@@ -94,25 +100,25 @@
 
 			<view class="menu">
 				<cl-list :radius="24" :border="false">
-					<cl-list-item label="我的账单" @tap="toBill">
+					<cl-list-item :label="t('我的账单')" @tap="toBill">
 						<template #icon>
 							<cl-icon name="bill" :size="40" />
 						</template>
 					</cl-list-item>
 
-					<cl-list-item label="观看历史">
+					<cl-list-item :label="t('观看历史')">
 						<template #icon>
 							<cl-icon name="time" :size="40" />
 						</template>
 					</cl-list-item>
 
-					<cl-list-item label="数据看板">
+					<cl-list-item :label="t('数据看板')">
 						<template #icon>
 							<cl-icon name="chart-bar" :size="40" />
 						</template>
 					</cl-list-item>
 
-					<cl-list-item label="邀请好友">
+					<cl-list-item :label="t('邀请好友')">
 						<template #icon>
 							<cl-icon name="share" :size="40" />
 						</template>
@@ -120,7 +126,7 @@
 				</cl-list>
 
 				<cl-list :radius="24" :border="false">
-					<cl-list-item label="设置" @tap="toSet">
+					<cl-list-item :label="t('设置')" @tap="toSet">
 						<template #icon>
 							<cl-icon name="set" :size="40" />
 						</template>
@@ -136,19 +142,21 @@
 <script lang="ts" setup>
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
 import { useCool, useStore, module } from "/@/cool";
-import Tabbar from "./components/tabbar.vue";
 import { useUi } from "/$/cool-ui";
 import { reactive } from "vue";
+import { useI18n } from "vue-i18n";
+import Tabbar from "./components/tabbar.vue";
 
 const { router } = useCool();
 const { user } = useStore();
 const ui = useUi();
+const { t } = useI18n();
 
 async function refresh() {
 	if (user.token) {
 		await user.get();
 	} else {
-		// user.logout();
+		user.logout();
 	}
 }
 
@@ -156,37 +164,33 @@ const order = reactive({
 	list: [
 		{
 			icon: "order-paid",
-			label: "待支付",
+			label: t("待支付"),
 			value: 1,
 		},
 		{
 			icon: "order-not-shipped",
-			label: "未发货",
+			label: t("未发货"),
 			value: 2,
 		},
 		{
 			icon: "order-received",
-			label: "已发货",
+			label: t("已发货"),
 			value: 3,
 		},
 		{
 			icon: "order-refund",
-			label: "售后 / 退款",
+			label: t("售后 / 退款"),
 			value: 4,
 		},
 	],
 
 	toLink(value: number) {
-		ui.showToast("订单模块不存在，请在插件市场中下载");
+		ui.showToast(t("订单模块不存在，请在插件市场中下载"));
 	},
 });
 
-function toDev() {
-	ui.showToast("开发中");
-}
-
 function toBill() {
-	ui.showToast("财务模块不存在，请在插件市场中下载");
+	ui.showToast(t("财务模块不存在，请在插件市场中下载"));
 }
 
 function toSet() {
@@ -201,7 +205,7 @@ function toMsg() {
 	if (module.get("cool-msg")) {
 		router.push("/uni_modules/cool-msg/pages/list");
 	} else {
-		ui.showToast("消息模块不存在，请在插件市场中下载");
+		ui.showToast(t("消息模块不存在，请在插件市场中下载"));
 	}
 }
 

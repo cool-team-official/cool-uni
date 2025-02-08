@@ -1,29 +1,30 @@
 {
 	"name": "cool-uni",
-	"version": "7.3.0",
+	"version": "8.0.0",
 	"license": "MIT",
 	"dependencies": {
 		"@dcloudio/uni-app": "3.0.0-3081220230817001",
 		"@hyoga/uni-socket.io": "^3.0.4",
-		"dayjs": "^1.11.10",
+		"dayjs": "^1.11.13",
 		"js-pinyin": "^0.2.5",
 		"lodash-es": "^4.17.21",
 		"md5": "^2.3.0",
 		"pinia": "^2.1.7",
-		"vue": "^3.4.21",
+		"vue": "^3.5.13",
+		"vue-i18n": "9.1.9",
 		"weixin-js-sdk": "^1.6.5"
 	},
 	"engines": {
 		"node": ">= 16"
 	},
 	"devDependencies": {
-		"@cool-vue/vite-plugin": "7.2.1",
-		"@dcloudio/types": "^3.4.8",
+		"@cool-vue/vite-plugin": "^8.0.0-beta.2",
+		"@dcloudio/types": "^3.4.14",
 		"@types/lodash-es": "^4.17.12",
 		"@types/md5": "^2.3.2",
 		"@types/node": "^20.11.26",
 		"@vue/tsconfig": "^0.5.1",
-		"typescript": "^5.2.2",
-		"vite": "^5.1.6"
+		"typescript": "~5.5.4",
+		"vite": "^5.4.14"
 	}
 }

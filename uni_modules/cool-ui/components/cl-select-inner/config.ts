@@ -1,12 +1,16 @@
+import { t } from "/@/locale";
+
 export const Props = {
 	// 组件高
 	height: [String, Number],
 	// 占位文本
 	placeholder: {
 		type: String,
-		default: "请选择",
+
+		default: t("请选择"),
 	},
 	// 是否禁用
+
 	disabled: {
 		type: Boolean,
 		default: null,

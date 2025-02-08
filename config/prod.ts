@@ -1,8 +1,8 @@
-import { proxy } from "./proxy";
+import { host } from "./proxy";
 
 export default {
 	// 根地址
-	host: proxy["/prod/"].target,
+	host,
 
 	// 请求地址
 	get baseUrl() {

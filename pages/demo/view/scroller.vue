@@ -34,7 +34,7 @@ function refresh() {
 
 	setTimeout(() => {
 		refs.scroller.end();
-	}, 500);
+	}, 50000);
 }
 
 onReady(() => {

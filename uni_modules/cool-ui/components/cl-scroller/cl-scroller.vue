@@ -8,7 +8,7 @@
 			}"
 		>
 			<slot name="loading" :text="text" :status="status" :move="touch.move">
-				<cl-loading :size="40" v-if="status == 'loading'"></cl-loading>
+				<cl-loading :size="35" v-if="status == 'loading'"></cl-loading>
 				<cl-text :size="26" :margin="[0, 0, 0, 14]" :value="text"></cl-text>
 			</slot>
 		</view>
@@ -52,13 +52,14 @@
 			v-if="showBackTopButton"
 		>
 			<cl-icon name="top" color="#666"></cl-icon>
-			<text class="cl-scroller__back-top-text">顶部</text>
+			<text class="cl-scroller__back-top-text">{{ $t("顶部") }}</text>
 		</view>
 	</view>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, reactive, ref, watch } from "vue";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	props: {
@@ -75,22 +76,25 @@ export default defineComponent({
 		// 正在刷新文案
 		loadingText: {
 			type: String,
-			default: "正在刷新",
+			default: t("正在刷新"),
 		},
 		// 下拉刷新文案
+
 		pullingText: {
 			type: String,
-			default: "下拉刷新",
+			default: t("下拉刷新"),
 		},
 		// 释放刷新文案
+
 		releaseText: {
 			type: String,
-			default: "释放刷新",
+			default: t("释放刷新"),
 		},
 		// 滚动条距离顶部位置
 		scrollTop: Number,
 		// 滚动到对应元素id
 		scrollIntoView: String,
+
 		// 滚动是否动画
 		scrollWithAnimation: {
 			type: Boolean,
@@ -135,7 +139,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 回到顶部

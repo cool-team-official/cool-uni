@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-loadmore",
@@ -50,17 +51,19 @@ export default defineComponent({
 		// 普通状态下显示内容
 		text: {
 			type: String,
-			default: "上拉加载更多",
+			default: t("上拉加载更多"),
 		},
 		// 加载完成显示内容
+
 		finishText: {
 			type: String,
-			default: "没有更多了",
+			default: t("没有更多了"),
 		},
 		// 加载中显示内容
+
 		loadingText: {
 			type: String,
-			default: "加载中",
+			default: t("加载中"),
 		},
 		// 加载图标主题
 		loadingTheme: String,

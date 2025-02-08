@@ -62,6 +62,7 @@ import { computed, defineComponent, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { useForm, useStyle, useTap } from "../../hooks";
 import { keys } from "lodash-es";
+import { t } from "/@/locale";
 
 export default defineComponent({
 	name: "cl-input",
@@ -80,8 +81,9 @@ export default defineComponent({
 		password: Boolean,
 		placeholder: {
 			type: String,
-			default: "请填写",
+			default: t("请填写"),
 		},
+
 		clearable: {
 			type: Boolean,
 			default: true,
@@ -134,7 +136,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 是否聚焦

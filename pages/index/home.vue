@@ -1,23 +1,15 @@
 <template>
-	<cl-page background-color="#fff">
+	<cl-page>
 		<view class="page-home">
-			<cl-sticky>
-				<cl-topbar :border="false" :show-back="false">
-					<text
-						class="title"
-						:class="{
-							show: scrollTop > 40,
-						}"
-					>
-						{{ app.info.name }} 快速开发脚手架
-					</text>
-				</cl-topbar>
-			</cl-sticky>
-
 			<view class="logo">
+				<view class="icon">
+					<image src="/static/logo.png" mode="aspectFit" />
+				</view>
+
 				<text class="name">{{ app.info.name }}</text>
-				<text class="version">v7.3.0</text>
 			</view>
+
+			<view class="desc">{{ t("uniapp快速开发脚手架") }}</view>
 
 			<view class="container">
 				<view class="group" v-for="(item, index) in list" :key="index">
@@ -44,41 +36,40 @@
 </template>
 
 <script lang="ts" setup>
-import { useApp, useCool, module } from "/@/cool";
+import { useApp, useCool, module, useStore } from "/@/cool";
 import { useUi } from "/$/cool-ui";
-import Tabbar from "./components/tabbar.vue";
-import { onPageScroll, onReady } from "@dcloudio/uni-app";
+import { onReady } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { isEmpty } from "lodash-es";
+import { useI18n } from "vue-i18n";
+import Tabbar from "./components/tabbar.vue";
 
 const { router, service } = useCool();
 const ui = useUi();
 const app = useApp();
-
-const scrollTop = ref(0);
-
-onPageScroll((e) => {
-	scrollTop.value = e.scrollTop;
-});
+const { t } = useI18n();
+const { dict } = useStore();
 
 const list = ref([
 	{
-		label: "基础组件",
+		label: t("基础组件"),
 		value: "basic",
 		children: [] as any[],
 	},
 	{
-		label: "表单组件",
+		label: t("表单组件"),
 		value: "form",
 		children: [],
 	},
+
 	{
-		label: "视图组件",
+		label: t("视图组件"),
 		value: "view",
 		children: [],
 	},
+
 	{
-		label: "高级组件",
+		label: t("高级组件"),
 		value: "extend",
 		children: [],
 	},
@@ -113,7 +104,7 @@ onReady(() => {
 
 	if (!isEmpty(children)) {
 		list.value.unshift({
-			label: "插件 / 模块",
+			label: t("插件 / 模块"),
 			value: "plugin",
 			children,
 		});
@@ -122,58 +113,39 @@ onReady(() => {
 </script>
 
 <style lang="scss" scoped>
-@mixin title {
-	background: linear-gradient(to right, #6b69f8, #a35df2, #d14bd8);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	font-weight: bold;
-}
-
 .page-home {
-	.title {
-		font-size: 32rpx;
-		padding: 0 24rpx;
-		opacity: 0;
-		transition: opacity 0.5s ease-in-out;
-		@include title();
+	.logo {
+		padding: 80rpx 0 32rpx 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		user-select: none;
 
-		&.show {
-			opacity: 1;
+		.icon {
+			border-radius: 16rpx;
+			padding: 10rpx;
+			margin-right: 20rpx;
+			background-color: #2c3142;
+
+			image {
+				display: block;
+				height: 66rpx;
+				width: 66rpx;
+			}
+		}
+
+		text {
+			font-size: 60rpx;
+			font-weight: bold;
+			letter-spacing: 3rpx;
 		}
 	}
 
-	.logo {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 20rpx 0 100rpx 0;
-		font-weight: bold;
-
-		.name {
-			font-size: 80rpx;
-			animation: showName 2.5s forwards;
-			@include title();
-		}
-
-		.desc,
-		.version {
-			font-size: 28rpx;
-			margin-top: 10rpx;
-			animation: showV 2.5s forwards;
-		}
-
-		.desc {
-			color: #444;
-		}
-
-		.version {
-			background-color: $cl-color-primary;
-			color: #fff;
-			padding: 4rpx 10rpx;
-			border-radius: 10rpx;
-			margin-top: 20rpx;
-		}
+	.desc {
+		font-size: 28rpx;
+		text-align: center;
+		margin-bottom: 80rpx;
+		letter-spacing: 2rpx;
 	}
 
 	.dd {
@@ -185,31 +157,9 @@ onReady(() => {
 		}
 	}
 
-	@keyframes showName {
-		from {
-			letter-spacing: -40rpx;
-			filter: blur(20rpx);
-		}
-
-		to {
-			letter-spacing: 6rpx;
-		}
-	}
-
-	@keyframes showV {
-		from {
-			letter-spacing: -10rpx;
-			filter: blur(20rpx);
-		}
-
-		to {
-			letter-spacing: 1rpx;
-		}
-	}
-
 	.container {
-		border-radius: 64rpx 64rpx 0 0;
-		background-color: $cl-color-bg;
+		border-radius: 32rpx 32rpx 0 0;
+		background-color: #fff;
 	}
 
 	.group {
@@ -231,8 +181,8 @@ onReady(() => {
 				padding: 0 30rpx;
 				margin-bottom: 25rpx;
 				background-color: #fff;
-				border-radius: 80rpx;
-				box-shadow: 0 1rpx 8rpx #6666660f;
+				border-radius: 20rpx;
+				border: 1rpx solid #ddd;
 
 				.name {
 					flex: 1;

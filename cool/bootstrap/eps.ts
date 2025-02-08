@@ -1,7 +1,7 @@
 import { merge } from "lodash-es";
 import { BaseService, service } from "../service";
 import { path2Obj } from "../utils";
-import { config, isDev } from "/@/config";
+import { isDev } from "/@/config";
 import { eps } from "virtual:eps";
 
 // 读取本地所有 service
@@ -22,8 +22,7 @@ for (const i in files) {
 	}
 }
 
-// 更新事件
-function onUpdate() {
+export function createEps() {
 	// 设置 request 方法
 	function set(d: any) {
 		if (d.namespace) {
@@ -70,60 +69,14 @@ function onUpdate() {
 					path: (e.namespace || "").replace("app/", ""),
 					value: e,
 				};
-			}),
-		),
+			})
+		)
 	);
 
 	// 提示
 	if (isDev) {
 		console.log("[cool-eps] updated");
 	}
-}
-
-export function createEps() {
-	// 更新 eps
-	onUpdate();
-
-	// #ifdef H5
-	// 开发环境下，生成本地 service 的类型描述文件
-	if (isDev && config.test.eps) {
-		const list = services.map((s) => {
-			const api = Array.from(
-				new Set([
-					...Object.getOwnPropertyNames(s.constructor.prototype),
-					"page",
-					"list",
-					"info",
-					"delete",
-					"update",
-					"add",
-				]),
-			)
-				.filter((e) => !["constructor", "namespace"].includes(e))
-				.map((e) => {
-					return {
-						path: `/${e}`,
-					};
-				});
-
-			return {
-				api,
-				module: s.namespace.split("/")[0],
-				name: s.constructor.name + "Entity",
-				prefix: `/app/${s.namespace}`,
-			};
-		});
-
-		service.request({
-			url: "/__cool_eps",
-			method: "POST",
-			proxy: false,
-			data: {
-				list,
-			},
-		});
-	}
-	// #endif
 }
 
 // 监听 vite 触发事件
@@ -133,6 +86,6 @@ if (import.meta.hot) {
 			eps.service = service;
 		}
 
-		onUpdate();
+		createEps();
 	});
 }

@@ -49,11 +49,14 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
 	name: "cl-confirm",
 
 	setup() {
+		const { t } = useI18n();
+
 		// 是否可见
 		const visible = ref(false);
 
@@ -88,8 +91,8 @@ export default defineComponent({
 						width: "500rpx",
 						showCancelButton: true,
 						showConfirmButton: true,
-						confirmButtonText: "确认",
-						cancelButtonText: "取消",
+						confirmButtonText: t("确认"),
+						cancelButtonText: t("取消"),
 						closeOnClickModal: true,
 						...options,
 					};

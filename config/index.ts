@@ -4,6 +4,9 @@ import prod from "./prod";
 // 是否开发模式
 export const isDev = import.meta.env.MODE === "development";
 
+// 代理环境
+const proxy = isDev ? dev : prod;
+
 // 配置
 export const config = {
 	// 应用信息
@@ -11,7 +14,7 @@ export const config = {
 		// 应用名称
 		name: "COOL-UNI",
 		// 应用描述
-		desc: "基于 Ts + Vue3 + Pinia 构建。",
+		desc: "uniapp快速开发脚手架",
 		// 页面配置
 		pages: {
 			login: "/pages/user/login",
@@ -22,20 +25,12 @@ export const config = {
 		},
 	},
 
-	// 调试
-	test: {
-		token: "",
-		mock: false,
-		eps: true,
-	},
-
 	// 忽略
 	ignore: {
 		token: [],
 	},
 
-	// 当前环境
-	...(isDev ? dev : prod),
+	...proxy,
 };
 
 export * from "./proxy";

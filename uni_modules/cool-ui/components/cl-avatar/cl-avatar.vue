@@ -4,7 +4,7 @@
 		:style="[{ height: parseRpx(size), width: parseRpx(size) }, baseStyle]"
 		@click="tap"
 	>
-		<slot v-if="$slots.default || $slots.$default"> </slot>
+		<slot v-if="$slots.default"> </slot>
 
 		<template v-else>
 			<slot name="placeholder" v-if="!src">

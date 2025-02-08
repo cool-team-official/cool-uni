@@ -35,7 +35,7 @@
 		</template>
 
 		<template #confirm>
-			<cl-button type="primary" custom @tap="confirm">选择</cl-button>
+			<cl-button type="primary" custom @tap="confirm">{{ $t("选择") }}</cl-button>
 		</template>
 	</cl-select-popup>
 </template>
@@ -46,7 +46,8 @@ import dayjs from "dayjs";
 import { type PropType, computed, defineComponent, ref, nextTick } from "vue";
 import { useRefs } from "/@/cool";
 import { Props } from "../cl-select-inner/config";
-
+import { t } from "/@/locale";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
 	name: "cl-select-date",
 
@@ -57,9 +58,10 @@ export default defineComponent({
 		// 标题
 		title: {
 			type: String,
-			default: "选择日期",
+			default: t("选择日期"),
 		},
 		// 开始年
+
 		startYear: {
 			type: Number,
 			default: 2000,
@@ -83,7 +85,7 @@ export default defineComponent({
 		// 占位文本
 		placeholder: {
 			type: String,
-			default: "请选择时间",
+			default: t("请选择时间"),
 		},
 		// 是否禁用
 		disabled: Boolean,
@@ -93,6 +95,7 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		const { refs, setRefs } = useRefs();
+		const { t } = useI18n();
 
 		// 选中日期
 		const date = ref();
@@ -122,27 +125,32 @@ export default defineComponent({
 			const d = {
 				year: {
 					list: years,
-					unit: "年",
+					unit: t("年"),
 				},
+
 				month: {
 					list: months,
-					unit: "月",
+					unit: t("月"),
 				},
+
 				date: {
 					list: days,
-					unit: "日",
+					unit: t("日"),
 				},
+
 				hour: {
 					list: hours,
-					unit: "时",
+					unit: t("时"),
 				},
+
 				minute: {
 					list: minutes,
-					unit: "分",
+					unit: t("分"),
 				},
+
 				second: {
 					list: seconds,
-					unit: "秒",
+					unit: t("秒"),
 				},
 			};
 

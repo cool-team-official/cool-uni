@@ -11,12 +11,12 @@ const useDictStore = defineStore("dict", () => {
 	const data = reactive<Dict.Data>({});
 
 	// 获取数据列表
-	function get(name: string) {
+	function get(name: Dict.Key) {
 		return computed(() => data[name]).value || [];
 	}
 
 	// 获取名称
-	function getLabel(name: string | any[], value: any): string {
+	function getLabel(name: Dict.Key | any[], value: any): string {
 		const arr: any[] = String(value)?.split(",") || [];
 
 		return arr
@@ -28,7 +28,7 @@ const useDictStore = defineStore("dict", () => {
 	}
 
 	// 刷新
-	async function refresh(types?: string[]) {
+	async function refresh(types?: Dict.Key[]) {
 		return service.dict.info
 			.data({
 				types,

@@ -9,7 +9,7 @@
 			<cl-version-about />
 
 			<cl-list>
-				<cl-list-item label="联系我们" />
+				<cl-list-item :label="t('联系我们')" />
 			</cl-list>
 
 			<cl-text
@@ -29,12 +29,14 @@
 <script lang="ts" setup>
 import { onReady } from "@dcloudio/uni-app";
 import { useApp } from "/@/cool";
+import { useI18n } from "vue-i18n";
 
 const app = useApp();
+const { t } = useI18n();
 
 onReady(() => {
 	uni.setNavigationBarTitle({
-		title: `关于${app.info.name}`,
+		title: `${t("关于")} ${app.info.name}`,
 	});
 });
 </script>

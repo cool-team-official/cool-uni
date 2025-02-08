@@ -3,21 +3,23 @@
 		<view class="page">
 			<view class="form">
 				<cl-form label-position="top">
-					<cl-form-item label="昵称">
+					<cl-form-item :label="t('昵称')">
 						<cl-input
 							v-model="form.nickName"
 							type="nickname"
 							:border="false"
 							:height="80"
 							:border-radius="12"
-							placeholder="请填写昵称"
+							:placeholder="t('请填写昵称')"
 						/>
 					</cl-form-item>
 				</cl-form>
 			</view>
 
 			<cl-footer>
-				<cl-button custom type="primary" :loading="loading" @tap="save"> 保存 </cl-button>
+				<cl-button custom type="primary" :loading="loading" @tap="save">
+					{{ t("保存") }}
+				</cl-button>
 			</cl-footer>
 		</view>
 	</cl-page>
@@ -28,10 +30,12 @@ import { reactive, ref } from "vue";
 import { useCool, useStore } from "/@/cool";
 import { useUi } from "/$/cool-ui";
 import { onReady } from "@dcloudio/uni-app";
+import { useI18n } from "vue-i18n";
 
 const { router } = useCool();
 const { user } = useStore();
 const ui = useUi();
+const { t } = useI18n();
 
 const loading = ref(false);
 
@@ -48,7 +52,7 @@ async function save() {
 
 	loading.value = false;
 
-	ui.showTips("用户信息保存成功", () => {
+	ui.showTips(t("用户信息保存成功"), () => {
 		router.back();
 	});
 }

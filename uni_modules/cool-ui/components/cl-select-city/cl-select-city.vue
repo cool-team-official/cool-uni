@@ -34,7 +34,7 @@
 						:margin="[0, 20, 20, 0]"
 						@tap="toActive(index)"
 					>
-						{{ item?.[labelKey] || "请选择" }}
+						{{ item?.[labelKey] || $t("请选择") }}
 					</cl-tag>
 				</view>
 
@@ -76,7 +76,7 @@ import { useRefs } from "/@/cool";
 import { cloneDeep, isEmpty } from "lodash-es";
 import { Props } from "../cl-select-inner/config";
 import { uuid } from "/@/cool/utils";
-
+import { t } from "/@/locale";
 import CityPca from "../../data/city-pca.json";
 // 省市区其他数据来源 https://github.com/modood/Administrative-divisions-of-China
 
@@ -103,9 +103,10 @@ export default defineComponent({
 		// 标题
 		title: {
 			type: String,
-			default: "请选择所在地区",
+			default: t("请选择所在地区"),
 		},
 		// 显示关键字
+
 		labelKey: {
 			type: String,
 			default: "name",
@@ -118,9 +119,10 @@ export default defineComponent({
 		// 占位文本
 		placeholder: {
 			type: String,
-			default: "请选择所在地区",
+			default: t("请选择所在地区"),
 		},
 		// 分隔符
+
 		separator: {
 			type: String,
 			default: " - ",

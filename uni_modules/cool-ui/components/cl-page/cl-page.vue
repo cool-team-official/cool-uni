@@ -52,7 +52,7 @@ import { computed, defineComponent, reactive, getCurrentInstance, onMounted } fr
 import { useApp, useCool } from "/@/cool";
 import { parseRpx } from "/@/cool/utils";
 import { isString } from "lodash-es";
-import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
 	name: "cl-page",
@@ -80,6 +80,7 @@ export default defineComponent({
 		const { refs, setRefs, router } = useCool();
 		const app = useApp();
 		const info = router.info();
+		const { t } = useI18n();
 		const {
 			statusBarHeight = 0,
 			screenHeight,
@@ -102,15 +103,10 @@ export default defineComponent({
 			);
 		});
 
-		// 屏幕高
-		const height = ref("auto");
-
-		function onHeight() {
-			const { screenHeight, windowHeight, safeAreaInsets } = uni.getSystemInfoSync();
-
+		// 全屏高
+		const height = computed(() => {
 			if (!props.fullscreen) {
-				height.value = "auto";
-				return;
+				return "auto";
 			}
 
 			let h = 0;
@@ -127,14 +123,14 @@ export default defineComponent({
 			}
 			// #endif
 
-			height.value = h - (safeAreaInsets?.bottom || 0) + "px";
-		}
+			return h - (safeAreaInsets?.bottom || 0) + "px";
+		});
 
 		// 加载框配置
 		const loader = reactive({
 			loading: false,
 			border: false,
-			text: "加载中",
+			text: t("加载中"),
 		});
 
 		// 显示加载框
@@ -166,7 +162,7 @@ export default defineComponent({
 		// 提示框
 		function showTips(message: string, callback?: () => void) {
 			refs.confirm?.open({
-				title: "提示",
+				title: t("提示"),
 				message,
 				showCancelButton: false,
 				callback,
@@ -221,10 +217,6 @@ export default defineComponent({
 				})
 				.exec();
 		};
-
-		onMounted(() => {
-			onHeight();
-		});
 
 		return {
 			app,

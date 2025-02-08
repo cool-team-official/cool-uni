@@ -3,13 +3,14 @@ import { onReady, onShow } from "@dcloudio/uni-app";
 import { config } from "/@/config";
 import { getUrlParam, storage } from "../utils";
 import { service } from "../service";
-
+import { useI18n } from "vue-i18n";
 // #ifdef H5
 import wx from "weixin-js-sdk";
 // #endif
 
 export function useWx() {
 	const { platform } = uni.getSystemInfoSync();
+	const { t } = useI18n();
 
 	// 授权码
 	const code = ref("");
@@ -68,7 +69,7 @@ export function useWx() {
 			main.startActivity(intent);
 		} else {
 			plus.runtime.openURL(
-				"itms-apps://" + "itunes.apple.com/cn/app/wechat/id414478124?mt=8",
+				"itms-apps://" + "itunes.apple.com/cn/app/wechat/id414478124?mt=8"
 			);
 		}
 		// #endif
@@ -103,7 +104,7 @@ export function useWx() {
 	// 微信公众号授权
 	function mpAuth() {
 		const redirect_uri = encodeURIComponent(
-			`${location.origin}${location.pathname}#/pages/user/login`,
+			`${location.origin}${location.pathname}#/pages/user/login`
 		);
 		const response_type = "code";
 		const scope = "snsapi_userinfo";
@@ -138,7 +139,7 @@ export function useWx() {
 		return new Promise((resolve, reject) => {
 			if (!isWxBrowser()) {
 				return reject({
-					message: "请在微信浏览器中打开",
+					message: t("请在微信浏览器中打开"),
 				});
 			}
 
@@ -151,11 +152,11 @@ export function useWx() {
 				complete(e: { errMsg: string }) {
 					switch (e.errMsg) {
 						case "chooseWXPay:cancel":
-							reject({ message: "已取消支付" });
+							reject({ message: t("已取消支付") });
 							break;
 
 						default:
-							reject({ message: "支付失败" });
+							reject({ message: t("支付失败") });
 					}
 				},
 			});
@@ -198,7 +199,7 @@ export function useWx() {
 					resolve();
 				},
 				fail() {
-					reject({ message: "已取消支付" });
+					reject({ message: t("已取消支付") });
 				},
 			});
 		});
@@ -212,7 +213,7 @@ export function useWx() {
 
 			uni[k]({
 				lang: "zh_CN",
-				desc: "授权信息仅用于用户登录",
+				desc: t("授权信息仅用于用户登录"),
 				success({ iv, encryptedData, signature, rawData }) {
 					function next() {
 						resolve({
@@ -239,7 +240,7 @@ export function useWx() {
 					getCode();
 
 					reject({
-						message: "登录授权失败",
+						message: t("登录授权失败"),
 					});
 				},
 			});
@@ -256,7 +257,7 @@ export function useWx() {
 					resolve();
 				},
 				fail() {
-					reject({ message: "已取消支付" });
+					reject({ message: t("已取消支付") });
 				},
 			});
 		});

@@ -1,13 +1,13 @@
-import { proxy } from "./proxy";
+import { host, value } from "./proxy";
 
 export default {
 	// 根地址
-	host: proxy["/dev/"].target,
+	host,
 
 	// 请求地址
 	get baseUrl() {
 		// #ifdef H5
-		return "/dev";
+		return `/${value}`;
 		// #endif
 
 		// #ifndef H5

@@ -11,31 +11,11 @@
 		<cl-card label="不同大小">
 			<cl-row>
 				<cl-col :span="4">
-					<cl-loading :size="40"></cl-loading>
-				</cl-col>
-
-				<cl-col :span="4">
-					<cl-loading :size="50"></cl-loading>
-				</cl-col>
-
-				<cl-col :span="4">
-					<cl-loading :size="60"></cl-loading>
-				</cl-col>
-			</cl-row>
-		</cl-card>
-
-		<cl-card label="主题">
-			<cl-row>
-				<cl-col :span="4">
 					<cl-loading></cl-loading>
 				</cl-col>
 
 				<cl-col :span="4">
-					<cl-loading theme="snow"></cl-loading>
-				</cl-col>
-
-				<cl-col :span="4">
-					<cl-loading theme="dot"></cl-loading>
+					<cl-loading :size="60"></cl-loading>
 				</cl-col>
 			</cl-row>
 		</cl-card>
