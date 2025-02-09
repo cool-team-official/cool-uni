@@ -95,7 +95,7 @@ const { t } = useI18n();
 function uploadAvatar(e?: { detail: { avatarUrl: string } }) {
 	function next(path: string) {
 		upload({ path }).then((url) => {
-			ui.showToast("头像更新成功");
+			ui.showToast(t("头像更新成功"));
 
 			user.update({
 				avatarUrl: url,

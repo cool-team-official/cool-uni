@@ -26,13 +26,13 @@
 				{
 					"path": "set",
 					"style": {
-						"navigationBarTitleText": "%设置%"
+						"navigationBarTitleText": "%page.设置%"
 					}
 				},
 				{
 					"path": "edit",
 					"style": {
-						"navigationBarTitleText": "%编辑%"
+						"navigationBarTitleText": "%page.编辑%"
 					}
 				},
 				{
@@ -50,7 +50,7 @@
 				{
 					"path": "about",
 					"style": {
-						"navigationBarTitleText": "%关于我们%"
+						"navigationBarTitleText": "%page.关于我们%"
 					}
 				}
 			]

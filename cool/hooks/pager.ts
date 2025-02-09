@@ -131,23 +131,33 @@ export function usePager<T = any>(data: T[] = []) {
 		ui.hideLoading();
 	}
 
+	// 下拉刷新
+	async function onDown(end?: () => void) {
+		await refresh({ page: 1 });
+		end?.();
+	}
+
+	// 上拉加载
+	function onUp() {
+		if (!pager.finished) {
+			refresh({ page: pager.pagination.page + 1 });
+		}
+	}
+
 	// 是否注册，避免在组件中重复注入事件问题
 	let isReg = true;
 
 	// 上拉加载
 	onReachBottom(() => {
 		if (isReg) {
-			if (!pager.finished) {
-				refresh({ page: pager.pagination.page + 1 });
-			}
+			onUp();
 		}
 	});
 
 	// 下拉刷新
-	onPullDownRefresh(async () => {
+	onPullDownRefresh(() => {
 		if (isReg) {
-			await refresh({ page: 1 });
-			uni.stopPullDownRefresh();
+			onDown(uni.stopPullDownRefresh);
 		}
 	});
 
@@ -164,5 +174,7 @@ export function usePager<T = any>(data: T[] = []) {
 		onRefresh,
 		onPullDownRefresh,
 		onReachBottom,
+		onDown,
+		onUp,
 	};
 }

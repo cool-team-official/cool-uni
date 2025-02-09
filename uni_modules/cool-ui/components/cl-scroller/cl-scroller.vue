@@ -215,7 +215,7 @@ export default defineComponent({
 				.fields({ size: true }, (d: any) => {
 					status.value = "loading";
 					touch.move = d.height || 0;
-					emit("down");
+					emit("down", end);
 				})
 				.exec();
 		}
