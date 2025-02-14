@@ -16,8 +16,16 @@ const i18n = createI18n({
 	globalInjection: true,
 });
 
+// 小程序、APP不支持{}占位符，用该方法替换 useI18n.t
 function t(name: string, data?: any) {
-	return i18n.global.t(name, data);
+	let d = i18n.global.t(name, data);
+
+	if (data) {
+		for (const i in data) {
+			d = d.replace(`{${i}}`, data[i]);
+		}
+	}
+	return d;
 }
 
 function getLocale(): string {
