@@ -2,8 +2,6 @@
 
 ## 简介
 
-7.0 携带 vue3、vite、ts、pinia 等众多新特性细节曝光！！[文档地址](https://cool-js.com/uni/introduce.html)
-
 [演示地址](https://cool-js.com/uni/index.html#/)
 
 <img src="https://cool-js.com/demo/uniapp/cover1.jpg" height="300px" />
@@ -38,7 +36,7 @@
 
     <img src="https://cool-js.com/admin/show.png" width="500px" />
 
--   ✔ ai编码
+-   ✔ ai 编码
 
     <img src="https://cool-js.com/ai/show/AI%E7%BC%96%E7%A0%81.gif" width="500px" />
 
@@ -111,7 +109,7 @@
 
 #### 丰富的插件
 
--   [Ai智能模块](https://cool-js.com/plugin/detail.html?id=58)
+-   [Ai 智能模块](https://cool-js.com/plugin/detail.html?id=58)
 
 -   [客服聊天模块](https://cool-js.com/plugin/detail.html?id=56)
 
@@ -121,6 +119,6 @@
 
 -   [云存储](https://cool-js.com/plugin/detail.html?id=36)
 
--   [PDF打印](https://cool-js.com/plugin/detail.html?id=44)
+-   [PDF 打印](https://cool-js.com/plugin/detail.html?id=44)
 
 -   [更多](https://cool-js.com/plugin/list.html)
