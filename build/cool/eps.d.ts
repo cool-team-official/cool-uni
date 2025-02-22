@@ -350,6 +350,30 @@ declare namespace Eps {
 		request: Service["request"];
 	}
 
+	interface OpenDemoI18n {
+		/**
+		 * 翻译成英文
+		 */
+		en(data?: any): Promise<any>;
+
+		/**
+		 * 翻译成繁体
+		 */
+		tw(data?: any): Promise<any>;
+
+		/**
+		 * 权限标识
+		 */
+		permission: { en: string; tw: string };
+
+		/**
+		 * 权限状态
+		 */
+		_permission: { en: boolean; tw: boolean };
+
+		request: Service["request"];
+	}
+
 	interface OpenDemoPlugin {
 		/**
 		 * 调用插件
@@ -542,6 +566,25 @@ declare namespace Eps {
 		 * 权限状态
 		 */
 		_permission: { types: boolean; data: boolean };
+
+		request: Service["request"];
+	}
+
+	interface ShopComment {
+		/**
+		 * 提交商品评价
+		 */
+		submit(data?: any): Promise<any>;
+
+		/**
+		 * 权限标识
+		 */
+		permission: { submit: string };
+
+		/**
+		 * 权限状态
+		 */
+		_permission: { submit: boolean };
 
 		request: Service["request"];
 	}
@@ -821,6 +864,7 @@ declare namespace Eps {
 				cache: OpenDemoCache;
 				event: OpenDemoEvent;
 				goods: OpenDemoGoods;
+				i18n: OpenDemoI18n;
 				plugin: OpenDemoPlugin;
 				queue: OpenDemoQueue;
 				rpc: OpenDemoRpc;
@@ -830,9 +874,10 @@ declare namespace Eps {
 			};
 		};
 		dict: { info: DictInfo };
+		shop: { comment: ShopComment };
 		swagger: Swagger;
 		user: { address: UserAddress; comm: UserComm; info: UserInfo; login: UserLogin };
 	};
 
-	type DictKey = "brand" | "occupation";
+	type DictKey = "1";
 }

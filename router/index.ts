@@ -2,6 +2,8 @@ import { router, useStore } from "/@/cool";
 
 const ignoreToken = [
 	"/pages/index/home",
+	"/pages/index/website",
+	"/pages/index/admin",
 	"/pages/index/my",
 	"/pages/user/login",
 	"/pages/user/captcha",

@@ -32,6 +32,25 @@
 		</view>
 
 		<tabbar />
+
+		<cl-popup
+			v-model="i18n.visible"
+			:title="t('选择语言')"
+			direction="bottom"
+			border-radius="32rpx 32rpx 0 0"
+		>
+			<view class="list">
+				<cl-tag
+					v-for="item in i18n.list"
+					:key="item.value"
+					:type="item.value == i18n.active ? 'success' : 'info'"
+					:margin="[0, 20, 20, 0]"
+					@tap="i18n.change(item.value)"
+				>
+					{{ item.label }}
+				</cl-tag>
+			</view>
+		</cl-popup>
 	</cl-page>
 </template>
 
@@ -39,47 +58,100 @@
 import { useApp, useCool, module, useStore } from "/@/cool";
 import { useUi } from "/$/cool-ui";
 import { onReady } from "@dcloudio/uni-app";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { isEmpty } from "lodash-es";
-import { useI18n } from "vue-i18n";
+import { setLocale } from "/@/locale";
 import Tabbar from "./components/tabbar.vue";
+import { useI18n } from "vue-i18n";
 
 const { router, service } = useCool();
 const ui = useUi();
 const app = useApp();
-const { t } = useI18n();
 const { dict } = useStore();
+const { t } = useI18n();
 
 const list = ref([
 	{
-		label: t("基础组件"),
-		value: "basic",
-		children: [] as any[],
+		label: "v8.x",
+		value: "v8",
+		children: [
+			{
+				label: "多语言",
+				path: "i18n",
+			},
+		] as any[],
 	},
 	{
-		label: t("表单组件"),
+		label: "基础组件",
+		value: "basic",
+		children: [],
+	},
+	{
+		label: "表单组件",
 		value: "form",
 		children: [],
 	},
 
 	{
-		label: t("视图组件"),
+		label: "视图组件",
 		value: "view",
 		children: [],
 	},
 
 	{
-		label: t("高级组件"),
+		label: "高级组件",
 		value: "extend",
 		children: [],
 	},
 ]);
 
+const i18n = reactive({
+	active: "zh-Hans",
+	visible: false,
+
+	list: [
+		{
+			label: "简体中文",
+			value: "zh-Hans",
+		},
+		{
+			label: "繁体中文",
+			value: "zh-Hant",
+		},
+		{
+			label: "English",
+			value: "en",
+		},
+		{
+			label: "Spanish",
+			value: "es",
+		},
+	],
+
+	open() {
+		i18n.active = uni.getLocale();
+		this.visible = true;
+	},
+
+	close() {
+		this.visible = false;
+	},
+
+	change(value: string) {
+		setLocale(value);
+		i18n.close();
+	},
+});
+
 function toLink(path: string) {
-	router.push({
-		path,
-		isGuard: false,
-	});
+	if (path == "i18n") {
+		i18n.open();
+	} else {
+		router.push({
+			path,
+			isGuard: false,
+		});
+	}
 }
 
 onReady(() => {
@@ -144,17 +216,10 @@ onReady(() => {
 	.desc {
 		font-size: 28rpx;
 		text-align: center;
-		margin-bottom: 80rpx;
+		margin-bottom: 50rpx;
 		letter-spacing: 2rpx;
-	}
-
-	.dd {
-		display: flex;
-		padding: 50rpx;
-
-		.a {
-			flex: 1;
-		}
+		height: 80rpx;
+		padding: 0 50rpx;
 	}
 
 	.container {
@@ -167,10 +232,10 @@ onReady(() => {
 
 		.label {
 			display: block;
-			margin-bottom: 20rpx;
 			margin-left: 10rpx;
 			font-size: 26rpx;
 			color: #999;
+			height: 50rpx;
 		}
 
 		.list {

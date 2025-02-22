@@ -40,8 +40,8 @@ importers:
         version: 1.6.5
     devDependencies:
       '@cool-vue/vite-plugin':
-        specifier: ^8.0.0-beta.2
-        version: 8.0.0-beta.2
+        specifier: ^8.0.3
+        version: 8.0.3
       '@dcloudio/types':
         specifier: ^3.4.14
         version: 3.4.14
@@ -133,8 +133,8 @@ packages:
     resolution: {integrity: sha512-eUuWapzEGWFEpHFxgEaBG8e3n6S8L3MSu0oda755rOfabWPnh0Our1AozNFVUxGFIhbKgd1ksprsoDGMinTOTA==}
     engines: {node: '>=6.9.0'}
 
-  '@cool-vue/vite-plugin@8.0.0-beta.2':
-    resolution: {integrity: sha512-JuuqDaMwZW1zwpdp4gGO2y1w3gsAQH3ttFD7nRG0uaQu0av/NIF8kD+Ssl5dhlnd0toaN6nPsOBBrNo6/vuwng==}
+  '@cool-vue/vite-plugin@8.0.3':
+    resolution: {integrity: sha512-5vxH/EyPXOJvKClllhaTZUeWh9XRJZwZJxyRlHuK2nAuD+pQxTXZ85WB4QPociMrJcOC8uZ/97EdrS4yG2Jv3Q==}
 
   '@dcloudio/types@3.4.14':
     resolution: {integrity: sha512-VolQeZfTh8pQFsr2IlfIVX93blfvGTuBoJuZUc7iWOqtHV8gDrq6fXLhzsVlgZyuhhRZLOxlo33rkEqnY+ucAw==}
@@ -1555,13 +1555,13 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@cool-vue/vite-plugin@8.0.0-beta.2':
+  '@cool-vue/vite-plugin@8.0.3':
     dependencies:
       '@vue/compiler-sfc': 3.5.13
       axios: 1.7.9
       glob: 10.4.5
       lodash: 4.17.21
-      lodash-es: 4.17.21
+      magic-string: 0.30.17
       prettier: 3.4.2
       svgo: 3.3.2
     transitivePeerDependencies:

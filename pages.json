@@ -11,6 +11,18 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/index/website",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/admin",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"subPackages": [
@@ -387,14 +399,14 @@
 				"visible": false
 			},
 			{
-				"pagePath": "cool",
+				"pagePath": "pages/index/website",
 				"iconPath": "static/icon/tabbar/cool.png",
 				"selectedIconPath": "static/icon/tabbar/cool2.png",
 				"text": "%官网%",
 				"visible": false
 			},
 			{
-				"pagePath": "admin",
+				"pagePath": "pages/index/admin",
 				"iconPath": "static/icon/tabbar/admin.png",
 				"selectedIconPath": "static/icon/tabbar/admin2.png",
 				"text": "%系统%",

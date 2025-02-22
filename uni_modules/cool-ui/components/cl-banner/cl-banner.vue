@@ -33,7 +33,7 @@
 				<view
 					class="cl-banner-item"
 					:style="{
-						transform: type == 'card' ? transform : "",
+						transform: type == 'card' ? transform : '',
 					}"
 					:class="[
 						{
@@ -166,7 +166,7 @@ export default defineComponent({
 			},
 			{
 				immediate: true,
-			},
+			}
 		);
 
 		// 上一个间距
@@ -230,7 +230,7 @@ export default defineComponent({
 
 		// 当前选中的指示点颜色
 		const indicatorActiveColor = computed(() =>
-			props.dotType ? "" : props.indicatorActiveColor,
+			props.dotType ? "" : props.indicatorActiveColor
 		);
 
 		// 是否有上一个

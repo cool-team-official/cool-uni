@@ -7,16 +7,21 @@ import fr from "./fr.json";
 
 const i18n = createI18n({
 	locale: uni.getLocale(),
+
+	// 配置后，使用命令 cool-i18n create 翻译，会自动更新 locale 目录
 	messages: {
 		"zh-Hans": zhHans,
 		"zh-Hant": zhHant,
 		en,
+		es,
 	},
-	legacy: false,
-	globalInjection: true,
 });
 
-// 小程序、APP不支持{}占位符，用该方法替换 useI18n.t
+const localeMap: { [key: string]: string } = {
+	"zh-Hans": "zh-cn",
+	"zh-Hant": "zh-tw",
+};
+
 function t(name: string, data?: any) {
 	let d = i18n.global.t(name, data);
 
@@ -28,13 +33,13 @@ function t(name: string, data?: any) {
 	return d;
 }
 
+function setLocale(locale: string) {
+	uni.setLocale(locale);
+	i18n.global.locale = locale;
+}
+
 function getLocale(): string {
 	const locale = uni.getLocale();
-
-	const localeMap: any = {
-		"zh-Hans": "zh-cn",
-		"zh-Hant": "zh-tw",
-	};
 
 	for (const i in localeMap) {
 		if (i == locale) {
@@ -45,4 +50,4 @@ function getLocale(): string {
 	return locale;
 }
 
-export { i18n, t, getLocale };
+export { i18n, t, setLocale, getLocale };
