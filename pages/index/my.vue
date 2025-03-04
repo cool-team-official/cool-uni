@@ -156,7 +156,7 @@ async function refresh() {
 	if (user.token) {
 		await user.get();
 	} else {
-		user.logout();
+		// user.logout();
 	}
 }
 

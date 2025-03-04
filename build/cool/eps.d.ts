@@ -570,25 +570,6 @@ declare namespace Eps {
 		request: Service["request"];
 	}
 
-	interface ShopComment {
-		/**
-		 * 提交商品评价
-		 */
-		submit(data?: any): Promise<any>;
-
-		/**
-		 * 权限标识
-		 */
-		permission: { submit: string };
-
-		/**
-		 * 权限状态
-		 */
-		_permission: { submit: boolean };
-
-		request: Service["request"];
-	}
-
 	interface Swagger {
 		/**
 		 * 获得Swagger JSON数据
@@ -874,10 +855,9 @@ declare namespace Eps {
 			};
 		};
 		dict: { info: DictInfo };
-		shop: { comment: ShopComment };
 		swagger: Swagger;
 		user: { address: UserAddress; comm: UserComm; info: UserInfo; login: UserLogin };
 	};
 
-	type DictKey = "1";
+	type DictKey = "brand" | "occupation";
 }

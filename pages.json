@@ -390,26 +390,13 @@
 	"tabBar": {
 		"backgroundColor": "#ffffff",
 		"borderStyle": "white",
+		"height": 0,
 		"list": [
 			{
 				"pagePath": "pages/index/home",
 				"iconPath": "static/icon/tabbar/home.png",
 				"selectedIconPath": "static/icon/tabbar/home2.png",
 				"text": "%演示%",
-				"visible": false
-			},
-			{
-				"pagePath": "pages/index/website",
-				"iconPath": "static/icon/tabbar/cool.png",
-				"selectedIconPath": "static/icon/tabbar/cool2.png",
-				"text": "%官网%",
-				"visible": false
-			},
-			{
-				"pagePath": "pages/index/admin",
-				"iconPath": "static/icon/tabbar/admin.png",
-				"selectedIconPath": "static/icon/tabbar/admin2.png",
-				"text": "%系统%",
 				"visible": false
 			},
 			{
