@@ -42,7 +42,7 @@ const list = computed(() => {
 			icon: "/" + (active ? e.selectedIconPath : e.iconPath),
 			active,
 			number: 0,
-			text: t(e.text?.replaceAll("%", "")!),
+			text: t((e.text || "")?.replace(/%/g, "")!),
 		};
 	});
 });
