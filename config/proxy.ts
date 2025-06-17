@@ -12,7 +12,7 @@ const proxy = {
 	},
 };
 
-const value = "dev";
+const value = process.env.NODE_ENV === "production" ? "prod" : "dev";
 const host = proxy[`/${value}/`]?.target;
 
 export { proxy, host, value };
